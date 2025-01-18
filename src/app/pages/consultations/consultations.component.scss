@@ -1,6 +1,6 @@
 .consultations {
   width: 100%;
-  padding: 40px 0;
+  padding: 40px 8px;
   color: #fff;
 
   @media screen and (min-width: 764px) {
@@ -11,12 +11,18 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
+    flex-direction: column;
+
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px;
+    @media screen and (min-width: 764px) {
+      gap: 30px;
+      flex-direction: row;
+    }
   }
 
   .consultations-content {
-    max-width: 600px;
+    max-width: 550px;
 
     .section-title {
       font-size: 18px;
@@ -24,7 +30,7 @@
       margin-bottom: 20px;
       color: #ff9800;
       @media screen and (min-width: 764px) {
-        font-size: 36px;
+        font-size: 28px;
       }
     }
 
@@ -60,11 +66,15 @@
   }
 
   .consultations-image {
-    max-width: 500px;
+    max-width: 400px;
     img {
       width: 100%;
+      max-width: 300px;
       border-radius: 12px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      @media screen and (min-width: 764px) {
+        max-width: 450px;
+      }
     }
   }
 }
