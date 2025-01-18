@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>🔥 Готовы к прорыву?</h2>
+<mat-dialog-content>
+  <p>
+    Получите персональную консультацию и узнайте, как достичь лучших
+    результатов!
+  </p>
+  <mat-form-field>
+    <mat-label>Что вас интересует?</mat-label>
+    <input
+      matInput
+      [(ngModel)]="interest"
+      placeholder="Например: маркетинг, IT, финансы"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ваша почта</mat-label>
+    <input
+      matInput
+      [(ngModel)]="email"
+      placeholder="Например: myemeil@gmail.com"
+    />
+  </mat-form-field>
+  <p class="offer">📢 Только сегодня: 20-минутная бесплатная консультация!</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="no-btn">Нет, спасибо</button>
+  <button
+    mat-button
+    [mat-dialog-close]="interest"
+    class="yes-btn"
+    cdkFocusInitial
+  >
+    🚀 Получить консультацию
+  </button>
+</mat-dialog-actions>

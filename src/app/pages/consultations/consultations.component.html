@@ -6,7 +6,9 @@
         Наши эксперты помогут вам разобраться в сложных вопросах и дадут
         персональные рекомендации. Запишитесь на консультацию прямо сейчас!
       </p>
-      <a routerLink="/contact" class="btn">Записаться</a>
+      <button class="btn" mat-raised-button (click)="openDialog()">
+        Записаться
+      </button>
     </div>
     <div class="consultations-image">
       <img src="assets/avatar-consultations.jpg" alt="Консультации" />

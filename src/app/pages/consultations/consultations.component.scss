@@ -1,8 +1,8 @@
 .consultations {
   width: 100%;
-  padding: 40px 8px;
+  padding: 40px 0;
   color: #fff;
-
+  box-sizing: border-box;
   @media screen and (min-width: 764px) {
     padding: 80px 20px;
   }
@@ -60,7 +60,7 @@
         transform: scale(1.05);
       }
       @media screen and (min-width: 764px) {
-        padding: 12px 20px;
+        padding: 8px 20px;
       }
     }
   }
