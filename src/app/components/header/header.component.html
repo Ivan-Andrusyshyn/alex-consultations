@@ -1,0 +1,30 @@
+<header class="header">
+  <div class="container">
+    <div routerLink="/" class="logo"></div>
+    <nav class="nav">
+      <a routerLink="/tests" routerLinkActive="active">Тесты</a>
+      <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
+        >Курсы</a
+      >
+
+      <a routerLink="/contact" routerLinkActive="active">Контакты</a>
+      <a routerLink="/about" routerLinkActive="active">О нас</a>
+    </nav>
+    <button class="menu-btn" (click)="toggleMenu()">☰</button>
+  </div>
+  <div class="mobile-menu" *ngIf="isMenuOpen">
+    <a routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()"
+      >Тесты</a
+    >
+    <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
+      >Курсы</a
+    >
+
+    <a routerLink="/about" routerLinkActive="active" (click)="toggleMenu()"
+      >О нас</a
+    >
+    <a routerLink="/contact" routerLinkActive="active" (click)="toggleMenu()"
+      >Контакты</a
+    >
+  </div>
+</header>

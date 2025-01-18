@@ -1,0 +1,41 @@
+<section class="contact">
+  <div class="container">
+    <h2>Свяжитесь с нами</h2>
+    <p>Есть вопросы? Напишите нам!</p>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+      <div class="input-group">
+        <input
+          type="text"
+          formControlName="name"
+          name="name"
+          ngModel
+          required
+          placeholder="Ваше имя"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="email"
+          formControlName="email"
+          name="email"
+          ngModel
+          required
+          placeholder="Ваш email"
+        />
+      </div>
+      <div class="input-group">
+        <textarea
+          name="message"
+          formControlName="message"
+          ngModel
+          required
+          placeholder="Ваше сообщение"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn" [disabled]="!contactForm.valid">
+        Отправить
+      </button>
+    </form>
+  </div>
+</section>
