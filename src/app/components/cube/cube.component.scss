@@ -1,8 +1,8 @@
 .cube {
-  top: 50%;
-  left: 50%;
-  width: 50px;
-  height: 50px;
+  left: 5%;
+  top: 30%;
+  width: 30px;
+  height: 30px;
   z-index: 999;
 
   cursor: pointer;
@@ -17,11 +17,11 @@
 }
 
 .face {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background: rgba(255, 165, 0, 0.8);
   border: 2px solid #fff;
-  font-size: 12px;
+  font-size: 8px;
 
   position: absolute;
   display: flex;
@@ -30,32 +30,32 @@
 }
 
 .front {
-  transform: translateZ(25px);
+  transform: translateZ(15px);
   background: #ffcc00;
   color: #000;
 }
 .back {
-  transform: rotateY(180deg) translateZ(25px);
+  transform: rotateY(180deg) translateZ(15px);
   background: #4caf50;
   color: #fff;
 }
 .left {
-  transform: rotateY(-90deg) translateZ(25px);
+  transform: rotateY(-90deg) translateZ(15px);
   background: #2196f3;
   color: #fff;
 }
 .right {
-  transform: rotateY(90deg) translateZ(25px);
+  transform: rotateY(90deg) translateZ(15px);
   background: #ff5722;
   color: #fff;
 }
 .top {
-  transform: rotateX(90deg) translateZ(25px);
+  transform: rotateX(90deg) translateZ(15px);
   background: #e91e63;
   color: #fff;
 }
 .bottom {
-  transform: rotateX(-90deg) translateZ(25px);
+  transform: rotateX(-90deg) translateZ(15px);
   background: #ff007f;
   color: #fff;
 }
@@ -69,28 +69,6 @@
   }
 }
 
-@keyframes moveCube {
-  0% {
-    top: 10%;
-    left: 10%;
-  }
-  25% {
-    top: 10%;
-    left: 80%;
-  }
-  50% {
-    top: 80%;
-    left: 80%;
-  }
-  75% {
-    top: 80%;
-    left: 10%;
-  }
-  100% {
-    top: 10%;
-    left: 10%;
-  }
-}
 .freeze {
   animation: rotateCube 4s infinite linear !important;
 }
