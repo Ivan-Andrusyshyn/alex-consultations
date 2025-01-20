@@ -1,10 +1,13 @@
 .mat-dialog-container {
-  background: #ffffff;
   border-radius: 12px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
   padding: 24px;
   max-width: 400px;
   width: 90%;
+  z-index: 9999;
+
+  background: #ffffff;
+
   text-align: center;
   font-family: "Inter", sans-serif;
   animation: fadeIn 0.3s ease-in-out;
