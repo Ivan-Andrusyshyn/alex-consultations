@@ -1,12 +1,3 @@
-.cube-wrapper {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  @media screen and (min-width: 764px) {
-    display: none;
-  }
-}
-
 .cube {
   top: 50%;
   left: 50%;
@@ -20,6 +11,9 @@
   transform-style: preserve-3d;
   animation: rotateCube 4s infinite linear,
     moveCube 6s infinite alternate ease-in-out;
+  @media screen and (min-width: 764px) {
+    display: none;
+  }
 }
 
 .face {
