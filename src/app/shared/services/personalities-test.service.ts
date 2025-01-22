@@ -46,6 +46,7 @@ export class PersonalitiesTestService {
 
       if (question) {
         scores[question.dichotomy] += Number(answer);
+        console.log((scores[question.dichotomy] += Number(answer)));
       }
     }
 
@@ -70,7 +71,6 @@ export class PersonalitiesTestService {
       TF: { T: 'Логіка', F: 'Почуття' },
       JP: { J: 'Судження', P: 'Сприйняття' },
     };
-    console.log(descriptions[score]);
 
     return descriptions[score];
   }

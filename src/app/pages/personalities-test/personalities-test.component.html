@@ -62,14 +62,14 @@
         </button>
         <button
           type="button"
-          *ngIf="(currentQuestionNumber$ | async) !== 90"
+          *ngIf="personalityForm.invalid"
           (click)="nextQuestion()"
           class="btn"
         >
           Наступне питання
         </button>
         <button
-          *ngIf="(currentQuestionNumber$ | async) === 90"
+          *ngIf="this.personalityForm.valid"
           type="submit"
           class="btn"
           [disabled]="personalityForm.invalid"

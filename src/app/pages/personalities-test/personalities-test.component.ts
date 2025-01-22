@@ -68,17 +68,8 @@ export class PersonalitiesTestComponent implements OnInit {
       this.personalitiesService.isShowResults.next(true);
       console.log(results);
     } else {
-      console.log('invalid form');
+      console.error('invalid form');
     }
-  }
-
-  createFormGroup(questions: Question[]) {
-    const formControls: { [key: string]: any } = {};
-
-    questions.slice().forEach((q: Question, i: number) => {
-      formControls[(i + 1).toString()] = ['', Validators.required];
-    });
-    this.personalityForm = this.fb.group(formControls);
   }
 
   nextQuestion() {
@@ -105,6 +96,15 @@ export class PersonalitiesTestComponent implements OnInit {
       key,
       value,
     }));
+  }
+
+  private createFormGroup(questions: Question[]) {
+    const formControls: { [key: string]: any } = {};
+
+    questions.slice().forEach((q: Question, i: number) => {
+      formControls[(i + 1).toString()] = ['', Validators.required];
+    });
+    this.personalityForm = this.fb.group(formControls);
   }
   private scrollToTop(): void {
     window.scrollTo({
