@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://pokemon-api-server.vercel.app',
+  apiUrl: 'https://alex-consultations-server.vercel.app',
 };
