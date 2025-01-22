@@ -11,7 +11,7 @@
 /node_modules
 npm-debug.log
 yarn-error.log
-/server
+/server/src
 /server/node_modules
 # IDEs and editors
 .idea/
