@@ -2,10 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
   OnInit,
 } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+
 import {
   FormBuilder,
   FormGroup,

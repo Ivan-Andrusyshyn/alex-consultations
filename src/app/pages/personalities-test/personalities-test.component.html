@@ -36,8 +36,9 @@
           <div *ngIf="q">
             <h3>{{ q.id }}.{{ q.question }}</h3>
             <div class="answers">
-              <label *ngFor="let answer of answers">
+              <label class="radio-label" *ngFor="let answer of answers">
                 <input
+                  class="radio-btn"
                   [formControlName]="q.id.toString()"
                   type="radio"
                   [value]="answer.point"

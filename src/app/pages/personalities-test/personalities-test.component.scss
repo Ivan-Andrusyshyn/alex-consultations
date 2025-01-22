@@ -132,25 +132,71 @@
 }
 
 .answers {
+  gap: 8px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
 
-.answers label {
-  font-size: 1rem;
-  color: #fff;
-  margin: 8px 0;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
+  label {
+    gap: 12px;
+    padding-left: 40px;
+    transition: color 0.3s ease;
+    font-size: 1.2rem;
 
-.answers input {
-  margin-right: 10px;
-}
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    &::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
 
-.answers label:hover {
-  color: #4caf50;
+      border: 3px solid #fff;
+      position: absolute;
+      background-color: transparent;
+      transition: all 0.3s ease, border-color 0.3s ease;
+    }
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      position: absolute;
+      background-color: transparent;
+      transition: background-color 0.3s ease;
+    }
+  }
+  .radio-label:has(.radio-btn:checked)::before {
+    border-color: #4caf50;
+    background-color: #4caf50;
+  }
+
+  .radio-label:has(.radio-btn:checked)::after {
+    background-color: #fff;
+  }
+
+  .radio-label:hover {
+    color: #4caf50;
+  }
+  input {
+    margin-right: 10px;
+  }
+
+  input {
+    display: none;
+  }
 }
 
 // =========================
