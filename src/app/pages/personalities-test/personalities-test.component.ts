@@ -112,4 +112,9 @@ export class PersonalitiesTestComponent implements OnInit {
       behavior: 'smooth',
     });
   }
+  isNextDisabled(currentQuestion: number): boolean {
+    return (
+      this.personalityForm.get(currentQuestion.toString())?.invalid ?? false
+    );
+  }
 }

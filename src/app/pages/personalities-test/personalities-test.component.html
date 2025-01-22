@@ -48,6 +48,7 @@
           </div>
         </div>
       </ng-container>
+
       <div class="btn-wrapper">
         <button
           type="button"
@@ -63,6 +64,7 @@
         <button
           type="button"
           *ngIf="personalityForm.invalid"
+          [disabled]="isNextDisabled((currentQuestionNumber$ | async) ?? 1)"
           (click)="nextQuestion()"
           class="btn"
         >
