@@ -7,17 +7,12 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
-const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const tests_1 = __importDefault(require("./routes/tests"));
+const cors_1 = __importDefault(require("./utils/cors"));
 const server = (0, express_1.default)();
 server.use((0, helmet_1.default)());
-server.use((0, cors_1.default)({
-    origin: ['http://localhost:4200', 'https://alex-consultations.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-}));
+server.use((0, cors_1.default)());
 const port = 3000;
 server.use(body_parser_1.default.urlencoded({ extended: true, limit: '50mb' }));
 server.use(body_parser_1.default.json({ limit: '50mb' }));

@@ -83,7 +83,7 @@ export class PersonalitiesTestComponent implements OnInit {
 
   nextQuestion() {
     const currentValue = this.personalitiesService.counterQuestion.value; // Получаем текущее значение
-
+    this.scrollToTop();
     this.personalitiesService.counterQuestion.next(currentValue + 1);
   }
 
@@ -105,5 +105,11 @@ export class PersonalitiesTestComponent implements OnInit {
       key,
       value,
     }));
+  }
+  private scrollToTop(): void {
+    window.scrollTo({
+      top: 100,
+      behavior: 'smooth',
+    });
   }
 }
