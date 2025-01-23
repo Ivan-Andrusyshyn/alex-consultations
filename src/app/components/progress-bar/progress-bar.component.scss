@@ -1,0 +1,32 @@
+// PROGRESS BAR
+
+.progress-bar {
+  height: 8px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+
+  box-sizing: border-box;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+
+  .progress-bg {
+    border-radius: 8px;
+    height: 100%;
+    max-width: 100%;
+    top: 0;
+    left: 0;
+
+    transition: all 0.4s linear;
+    background-color: #ff9800;
+    position: absolute;
+  }
+  .progress-content {
+    z-index: 999;
+  }
+}

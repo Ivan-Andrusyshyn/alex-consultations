@@ -16,11 +16,19 @@ import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 
 import { Question, Answer } from '../../shared/types/test';
 import { PersonalitiesTestService } from '../../shared/services/personalities-test.service';
+import { ProgressBarComponent } from '../../components/progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-personalities-test',
   standalone: true,
-  imports: [NgClass, ReactiveFormsModule, NgFor, NgIf, AsyncPipe],
+  imports: [
+    NgClass,
+    ProgressBarComponent,
+    ReactiveFormsModule,
+    NgFor,
+    NgIf,
+    AsyncPipe,
+  ],
   templateUrl: './personalities-test.component.html',
   styleUrl: './personalities-test.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -99,6 +107,7 @@ export class PersonalitiesTestComponent implements OnInit {
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
   }
+
   isNextDisabled(currentQuestion: number): boolean {
     return (
       this.personalityForm.get(currentQuestion.toString())?.invalid ?? false

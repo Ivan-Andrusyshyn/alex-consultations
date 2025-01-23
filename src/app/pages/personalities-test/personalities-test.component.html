@@ -22,7 +22,12 @@
   </div>
 
   <div class="container" *ngIf="!(isShowResults$ | async)">
-    <h2 class="section-title">Тест на особистість</h2>
+    <app-progress-bar
+      [currentProgress]="
+        parseIntProc((((currentQuestionNumber$ | async) ?? 0) / 90) * 100)
+      "
+    ></app-progress-bar>
+
     <form
       [formGroup]="personalityForm"
       (ngSubmit)="onSubmit()"
