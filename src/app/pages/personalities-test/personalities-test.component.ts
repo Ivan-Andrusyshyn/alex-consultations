@@ -61,7 +61,7 @@ export class PersonalitiesTestComponent implements OnInit {
         map((r) => {
           this.answersArray = r.answers;
           this.createFormGroup(r.questions.slice());
-          this.setCurrentAnswersFromBuffer();
+          this.setCurrentAnswers();
           return r.questions.slice();
         })
       );
@@ -79,14 +79,13 @@ export class PersonalitiesTestComponent implements OnInit {
           this.personalityForm.reset();
         });
       this.personalitiesService.isShowResults.next(true);
-
-      this.personalitiesService
-        .postAnswerInBuffer({
+      sessionStorage.setItem(
+        'answers',
+        JSON.stringify({
           answers: this.personalityForm.value,
           currentQuestion: 1,
         })
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+      );
     } else {
       console.error('Invalid form');
     }
@@ -94,15 +93,15 @@ export class PersonalitiesTestComponent implements OnInit {
 
   nextQuestion() {
     const currentValue = this.personalitiesService.counterQuestion.value;
-    this.scrollToTop();
-    this.personalitiesService
-      .postAnswerInBuffer({
-        answers: this.personalityForm.value,
-        currentQuestion: currentValue,
-      })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
     this.personalitiesService.counterQuestion.next(currentValue + 1);
+    this.scrollToTop();
+    sessionStorage.setItem(
+      'answers',
+      JSON.stringify({
+        answers: this.personalityForm.value,
+        currentQuestion: currentValue + 1,
+      })
+    );
   }
 
   previousQuestion() {
@@ -133,18 +132,16 @@ export class PersonalitiesTestComponent implements OnInit {
       this.personalityForm.get(currentQuestion.toString())?.invalid ?? false
     );
   }
-  private setCurrentAnswersFromBuffer() {
-    this.personalitiesService
-      .getCurrentAnswersFromBuffer()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((r) => {
-        if (r.bufferData) {
-          this.personalityForm.setValue(r.bufferData.answers);
-          this.personalitiesService.counterQuestion.next(
-            r.bufferData.currentQuestion
-          );
-        }
-      });
+  private setCurrentAnswers() {
+    const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
+    const parsedAnswers = JSON.parse(stringAnswers);
+    if (parsedAnswers) {
+      this.personalityForm.setValue(parsedAnswers.answers);
+
+      this.personalitiesService.counterQuestion.next(
+        parsedAnswers.currentQuestion
+      );
+    }
   }
   private createFormGroup(questions: Question[]) {
     const formControls: { [key: string]: any } = {};

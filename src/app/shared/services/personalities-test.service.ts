@@ -40,25 +40,6 @@ export class PersonalitiesTestService {
         })
       );
   }
-  postAnswerInBuffer(answer: {
-    answers: any;
-    currentQuestion: number;
-  }): Observable<any> {
-    return this.http.post<{
-      bufferData: { answers: any; currentQuestion: number };
-      message: string;
-    }>(this.testsUrl + '/16-personalities/buffer-answers', answer);
-  }
-
-  getCurrentAnswersFromBuffer(): Observable<{
-    bufferData: { answers: any; currentQuestion: number };
-    message: string;
-  }> {
-    return this.http.get<{
-      bufferData: { answers: any; currentQuestion: number };
-      message: string;
-    }>(this.testsUrl + '/16-personalities/buffer-answers');
-  }
 
   getIsShowResult(): Observable<boolean> {
     return this.isShowResults.asObservable();
