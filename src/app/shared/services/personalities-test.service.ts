@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
-import { AnswerPoint, Question, TestResult } from '../types/test';
+import { Answer, AnswerPoint, Question, TestResult } from '../types/test';
+import { environment } from '../../environment/environment';
+
+interface Personalities {
+  message: string;
+  answers: Answer[];
+  questions: Question[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +25,21 @@ export class PersonalitiesTestService {
   isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
 
-  constructor() {}
+  readonly testsUrl = environment.apiUrl + '/tests';
+  questions!: Question[];
+
+  constructor(private http: HttpClient) {}
+
+  getPersonalitiesTest(): Observable<any> {
+    return this.http
+      .get<Personalities>(this.testsUrl + '/16-personalities')
+      .pipe(
+        map((r) => {
+          this.questions = r.questions.slice();
+          return r;
+        })
+      );
+  }
 
   getIsShowResult(): Observable<boolean> {
     return this.isShowResults.asObservable();
@@ -40,14 +62,10 @@ export class PersonalitiesTestService {
     const scores: TestResult = { EI: 0, SN: 0, TF: 0, JP: 0 };
 
     for (const [questionId, answer] of Object.entries(answers)) {
-      const question = questions.find((q) => {
-        return q.id === Number(questionId);
-      });
+      const index = Number(questionId) - 1;
 
-      if (question) {
-        scores[question.dichotomy] += Number(answer);
-        console.log((scores[question.dichotomy] += Number(answer)));
-      }
+      const dichotomy = questions[index].dichotomy;
+      scores[dichotomy] += Number(answer);
     }
 
     return scores;

@@ -14,7 +14,6 @@ import {
 } from '@angular/forms';
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 
-import { TestService } from '../../shared/services/test.service';
 import { Question, Answer } from '../../shared/types/test';
 import { PersonalitiesTestService } from '../../shared/services/personalities-test.service';
 
@@ -27,13 +26,12 @@ import { PersonalitiesTestService } from '../../shared/services/personalities-te
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonalitiesTestComponent implements OnInit {
-  private readonly testService = inject(TestService);
   private readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly fb = inject(FormBuilder);
 
   personalitiesTest$!: Observable<Question[]>;
   personalityForm!: FormGroup;
-  answers!: Answer[];
+  answersArray!: Answer[];
   scores$!: Observable<{ [key: string]: number }>;
   scoreKeys!: string[];
   isShowResults$!: Observable<boolean>;
@@ -45,30 +43,31 @@ export class PersonalitiesTestComponent implements OnInit {
     this.isShowResults$ = this.personalitiesService.getIsShowResult();
     this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
-    this.personalitiesTest$ = this.testService.getPersonalitiesTest().pipe(
-      map((r) => {
-        console.log(r);
-        this.answers = r.answers;
-        this.createFormGroup(r.questions);
-        return r.questions.slice();
-      })
-    );
+    this.personalitiesTest$ = this.personalitiesService
+      .getPersonalitiesTest()
+      .pipe(
+        map((r) => {
+          this.answersArray = r.answers;
+          this.createFormGroup(r.questions.slice());
+          return r.questions.slice();
+        })
+      );
   }
 
   onSubmit(): void {
     if (this.personalityForm.valid) {
-      const allAnswers = this.personalityForm.value;
-      const questionList = this.testService.questions;
+      const answers = this.personalityForm.value;
+      const questionList = this.personalitiesService.questions;
 
       const results = this.personalitiesService.calculateMBTIScores(
-        allAnswers,
+        answers,
         questionList
       );
-      this.personalitiesService.scoresSubject.next({ ...results });
+
+      this.personalitiesService.scoresSubject.next(results);
       this.personalitiesService.isShowResults.next(true);
-      console.log(results);
     } else {
-      console.error('invalid form');
+      console.error('Invalid form');
     }
   }
 
@@ -97,13 +96,22 @@ export class PersonalitiesTestComponent implements OnInit {
       value,
     }));
   }
+  parseIntProc(proc: number) {
+    return parseInt(proc.toString());
+  }
+  isNextDisabled(currentQuestion: number): boolean {
+    return (
+      this.personalityForm.get(currentQuestion.toString())?.invalid ?? false
+    );
+  }
 
   private createFormGroup(questions: Question[]) {
     const formControls: { [key: string]: any } = {};
 
-    questions.slice().forEach((q: Question, i: number) => {
-      formControls[(i + 1).toString()] = ['', Validators.required];
+    questions.forEach((q: Question, i: number) => {
+      formControls[q.id.toString()] = ['', Validators.required];
     });
+
     this.personalityForm = this.fb.group(formControls);
   }
   private scrollToTop(): void {
@@ -111,10 +119,5 @@ export class PersonalitiesTestComponent implements OnInit {
       top: 100,
       behavior: 'smooth',
     });
-  }
-  isNextDisabled(currentQuestion: number): boolean {
-    return (
-      this.personalityForm.get(currentQuestion.toString())?.invalid ?? false
-    );
   }
 }

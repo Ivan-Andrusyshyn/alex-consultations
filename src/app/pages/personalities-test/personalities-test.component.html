@@ -11,11 +11,11 @@
       </div>
       <div class="score">
         <div
-          [style.width]="scores[key] * 10 + 'px'"
+          [style.width]="(scores[key] / 45) * 300 + 'px'"
           class="bg-score"
           [ngClass]="useColorByResult(key)"
         >
-          <p>{{ scores[key] }} балів</p>
+          <p>{{ parseIntProc((scores[key] / 45) * 100) }} %</p>
         </div>
       </div>
     </ng-container>
@@ -36,7 +36,7 @@
           <div *ngIf="q">
             <h3>{{ q.id }}.{{ q.question }}</h3>
             <div class="answers">
-              <label class="radio-label" *ngFor="let answer of answers">
+              <label class="radio-label" *ngFor="let answer of answersArray">
                 <input
                   class="radio-btn"
                   [formControlName]="q.id.toString()"
