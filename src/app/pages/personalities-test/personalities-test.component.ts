@@ -72,13 +72,13 @@ export class PersonalitiesTestComponent implements OnInit {
       const answers = this.personalityForm.value;
 
       this.personalitiesService
-        .getPersonalitiesResultOfTest({ answers: this.personalityForm.value })
+        .getPersonalitiesResultOfTest({ answers })
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((r) => {
           this.personalitiesService.scoresSubject.next(r);
           this.personalityForm.reset();
+          this.personalitiesService.isShowResults.next(true);
         });
-      this.personalitiesService.isShowResults.next(true);
       sessionStorage.setItem(
         'answers',
         JSON.stringify({
