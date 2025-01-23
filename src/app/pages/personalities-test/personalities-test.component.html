@@ -1,5 +1,8 @@
 <section class="test">
-  <div class="score-wrapper" *ngIf="scores$ | async as scores">
+  <div
+    class="score-wrapper"
+    *ngIf="(isShowResults$ | async) && (scores$ | async) as scores"
+  >
     <ng-container *ngFor="let key of scoreKeys">
       <div class="dsc-wrapper">
         <div *ngFor="let desc of getDescriptionsArray(key)">
