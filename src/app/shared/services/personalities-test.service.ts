@@ -40,6 +40,25 @@ export class PersonalitiesTestService {
         })
       );
   }
+  postAnswerInBuffer(answer: {
+    answers: any;
+    currentQuestion: number;
+  }): Observable<any> {
+    return this.http.post<{
+      bufferData: { answers: any; currentQuestion: number };
+      message: string;
+    }>(this.testsUrl + '/16-personalities/buffer-answers', answer);
+  }
+
+  getCurrentAnswersFromBuffer(): Observable<{
+    bufferData: { answers: any; currentQuestion: number };
+    message: string;
+  }> {
+    return this.http.get<{
+      bufferData: { answers: any; currentQuestion: number };
+      message: string;
+    }>(this.testsUrl + '/16-personalities/buffer-answers');
+  }
 
   getIsShowResult(): Observable<boolean> {
     return this.isShowResults.asObservable();
@@ -54,21 +73,13 @@ export class PersonalitiesTestService {
   getScoreKeys() {
     return Object.keys(this.scoresSubject.value);
   }
-
-  calculateMBTIScores(
-    answers: Record<number, AnswerPoint>,
-    questions: Question[]
-  ): TestResult {
-    const scores: TestResult = { EI: 0, SN: 0, TF: 0, JP: 0 };
-
-    for (const [questionId, answer] of Object.entries(answers)) {
-      const index = Number(questionId) - 1;
-
-      const dichotomy = questions[index].dichotomy;
-      scores[dichotomy] += Number(answer);
-    }
-
-    return scores;
+  getPersonalitiesResultOfTest(answers: any): Observable<TestResult> {
+    return this.http
+      .post<{
+        results: { scores: TestResult };
+        message: string;
+      }>(this.testsUrl + '/16-personalities/results', answers)
+      .pipe(map((r) => r.results.scores));
   }
 
   setResultsColors(score: string): string {

@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { map, Observable } from 'rxjs';
-
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormGroup,
@@ -36,6 +38,7 @@ import { ProgressBarComponent } from '../../components/progress-bar/progress-bar
 export class PersonalitiesTestComponent implements OnInit {
   private readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly fb = inject(FormBuilder);
+  private readonly destroyRef = inject(DestroyRef);
 
   personalitiesTest$!: Observable<Question[]>;
   personalityForm!: FormGroup;
@@ -44,10 +47,11 @@ export class PersonalitiesTestComponent implements OnInit {
   scoreKeys!: string[];
   isShowResults$!: Observable<boolean>;
   currentQuestionNumber$!: Observable<number>;
-
+  scoresSubject!: Observable<any>;
   ngOnInit(): void {
     this.currentQuestionNumber$ =
       this.personalitiesService.getObservableCurrentQuestion();
+
     this.isShowResults$ = this.personalitiesService.getIsShowResult();
     this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
@@ -57,6 +61,7 @@ export class PersonalitiesTestComponent implements OnInit {
         map((r) => {
           this.answersArray = r.answers;
           this.createFormGroup(r.questions.slice());
+          this.setCurrentAnswersFromBuffer();
           return r.questions.slice();
         })
       );
@@ -65,28 +70,43 @@ export class PersonalitiesTestComponent implements OnInit {
   onSubmit(): void {
     if (this.personalityForm.valid) {
       const answers = this.personalityForm.value;
-      const questionList = this.personalitiesService.questions;
 
-      const results = this.personalitiesService.calculateMBTIScores(
-        answers,
-        questionList
-      );
-
-      this.personalitiesService.scoresSubject.next(results);
+      this.personalitiesService
+        .getPersonalitiesResultOfTest({ answers: this.personalityForm.value })
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((r) => {
+          this.personalitiesService.scoresSubject.next(r);
+          this.personalityForm.reset();
+        });
       this.personalitiesService.isShowResults.next(true);
+
+      this.personalitiesService
+        .postAnswerInBuffer({
+          answers: this.personalityForm.value,
+          currentQuestion: 1,
+        })
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe();
     } else {
       console.error('Invalid form');
     }
   }
 
   nextQuestion() {
-    const currentValue = this.personalitiesService.counterQuestion.value; // Получаем текущее значение
+    const currentValue = this.personalitiesService.counterQuestion.value;
     this.scrollToTop();
+    this.personalitiesService
+      .postAnswerInBuffer({
+        answers: this.personalityForm.value,
+        currentQuestion: currentValue,
+      })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
     this.personalitiesService.counterQuestion.next(currentValue + 1);
   }
 
   previousQuestion() {
-    const currentValue = this.personalitiesService.counterQuestion.value; // Получаем текущее значение
+    const currentValue = this.personalitiesService.counterQuestion.value;
 
     this.personalitiesService.counterQuestion.next(currentValue - 1);
   }
@@ -113,7 +133,19 @@ export class PersonalitiesTestComponent implements OnInit {
       this.personalityForm.get(currentQuestion.toString())?.invalid ?? false
     );
   }
-
+  private setCurrentAnswersFromBuffer() {
+    this.personalitiesService
+      .getCurrentAnswersFromBuffer()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((r) => {
+        if (r.bufferData) {
+          this.personalityForm.setValue(r.bufferData.answers);
+          this.personalitiesService.counterQuestion.next(
+            r.bufferData.currentQuestion
+          );
+        }
+      });
+  }
   private createFormGroup(questions: Question[]) {
     const formControls: { [key: string]: any } = {};
 
