@@ -1,21 +1,18 @@
 <section class="test">
-  <div
-    class="score-wrapper"
-    *ngIf="(isShowResults$ | async) && (scores$ | async) as scores"
-  >
+  <div class="score-wrapper" *ngIf="scores$ | async as scores">
     <ng-container *ngFor="let key of scoreKeys">
       <div class="dsc-wrapper">
         <div *ngFor="let desc of getDescriptionsArray(key)">
-          <div>{{ desc.value }}</div>
+          {{ desc.value }}
         </div>
       </div>
       <div class="score">
         <div
-          [style.width]="(scores[key] / 45) * 300 + 'px'"
+          [style.width]="10 + (scores[key] / 120) * 300 + 'px'"
           class="bg-score"
           [ngClass]="useColorByResult(key)"
         >
-          <p>{{ parseIntProc((scores[key] / 45) * 100) }} %</p>
+          <p>{{ parseIntProc((scores[key] / 120) * 100) + "%" }}</p>
         </div>
       </div>
     </ng-container>

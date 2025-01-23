@@ -48,8 +48,8 @@ export class PersonalitiesTestComponent implements OnInit {
       .pipe(
         map((r) => {
           this.answersArray = r.answers;
-          this.createFormGroup(r.questions.slice());
-          return r.questions.slice();
+          this.createFormGroup(r.questions.slice(0, 4));
+          return r.questions.slice(0, 4);
         })
       );
   }
