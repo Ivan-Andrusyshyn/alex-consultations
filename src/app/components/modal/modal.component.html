@@ -1,35 +1,35 @@
-<h2 mat-dialog-title>🔥 Готовы к прорыву?</h2>
+<h2 mat-dialog-title>🔥 Готові до прориву?</h2>
 <mat-dialog-content>
   <p>
-    Получите персональную консультацию и узнайте, как достичь лучших
-    результатов!
+    Отримайте персональну консультацію та дізнайтеся, як досягти кращих
+    результатів!
   </p>
   <mat-form-field>
-    <mat-label>Что вас интересует?</mat-label>
+    <mat-label>Що вас цікавить?</mat-label>
     <input
       matInput
       [(ngModel)]="interest"
-      placeholder="Например: маркетинг, IT, финансы"
+      placeholder="Наприклад: маркетинг, IT, фінанси"
     />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Ваша почта</mat-label>
+    <mat-label>Ваша пошта</mat-label>
     <input
       matInput
       [(ngModel)]="email"
-      placeholder="Например: myemeil@gmail.com"
+      placeholder="Наприклад: myemail@gmail.com"
     />
   </mat-form-field>
-  <p class="offer">📢 Только сегодня: 20-минутная бесплатная консультация!</p>
+  <p class="offer">📢 Лише сьогодні: 20-хвилинна безкоштовна консультація!</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" class="no-btn">Нет, спасибо</button>
+  <button mat-button (click)="onNoClick()" class="no-btn">Ні, дякую</button>
   <button
     mat-button
     [mat-dialog-close]="interest"
     class="yes-btn"
     cdkFocusInitial
   >
-    🚀 Получить консультацию
+    🚀 Отримати консультацію
   </button>
 </mat-dialog-actions>

@@ -24,3 +24,4 @@ const addTypesInTestQuestions = () => _16_personality_1.questionsPersonality.map
     }
 });
 exports.default = addTypesInTestQuestions;
+const answers = [{ 3: 'T' }, { 2: 'T' }, { 0: 'F, T' }, { 3: 'F' }, { 2: 'F' }];

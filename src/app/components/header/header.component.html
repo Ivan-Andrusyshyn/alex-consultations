@@ -4,29 +4,29 @@
     <app-cube></app-cube>
 
     <nav class="nav">
-      <a routerLink="/tests" routerLinkActive="active">Тесты</a>
+      <a routerLink="/tests" routerLinkActive="active">Тести</a>
       <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
-        >Курсы</a
+        >Курси</a
       >
 
-      <a routerLink="/contacts" routerLinkActive="active">Контакты</a>
-      <a routerLink="/about" routerLinkActive="active">О нас</a>
+      <a routerLink="/contacts" routerLinkActive="active">Контакти</a>
+      <a routerLink="/about" routerLinkActive="active">Про нас</a>
     </nav>
     <button class="menu-btn" (click)="toggleMenu()">☰</button>
   </div>
   <div class="mobile-menu" *ngIf="isMenuOpen">
     <a routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()"
-      >Тесты</a
+      >Тести</a
     >
     <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
-      >Курсы</a
+      >Курси</a
     >
 
     <a routerLink="/about" routerLinkActive="active" (click)="toggleMenu()"
-      >О нас</a
+      >Про нас</a
     >
     <a routerLink="/contacts" routerLinkActive="active" (click)="toggleMenu()"
-      >Контакты</a
+      >Контакти</a
     >
   </div>
 </header>
