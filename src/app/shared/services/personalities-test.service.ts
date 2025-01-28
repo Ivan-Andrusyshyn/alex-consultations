@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
-import { Answer, AnswerPoint, Question, TestResult } from '../types/test';
+import { Answer, Question, TestResult } from '../types/test';
 import { environment } from '../../environment/environment';
 
 interface Personalities {
@@ -16,14 +17,20 @@ interface Personalities {
 })
 export class PersonalitiesTestService {
   scoresSubject = new BehaviorSubject({
-    EI: 0,
-    SN: 0,
-    TF: 0,
-    JP: 0,
+    E: 0,
+    I: 0,
+    S: 0,
+    N: 0,
+    T: 0,
+    F: 0,
+    J: 0,
+    P: 0,
   });
-
+  isShowSendForm = new BehaviorSubject(false);
+  isShowSendFormMessage = new BehaviorSubject(false);
   isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
+  personalityForm!: FormGroup;
 
   readonly testsUrl = environment.apiUrl + '/tests';
   questions!: Question[];
@@ -40,7 +47,9 @@ export class PersonalitiesTestService {
         })
       );
   }
-
+  getIsShowSendForm(): Observable<boolean> {
+    return this.isShowSendForm.asObservable();
+  }
   getIsShowResult(): Observable<boolean> {
     return this.isShowResults.asObservable();
   }
@@ -50,36 +59,50 @@ export class PersonalitiesTestService {
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();
   }
-
+  getIsShowSendFormMessage(): Observable<boolean> {
+    return this.isShowSendFormMessage.asObservable();
+  }
   getScoreKeys() {
     return Object.keys(this.scoresSubject.value);
   }
-  getPersonalitiesResultOfTest(answers: any): Observable<TestResult> {
-    return this.http
-      .post<{
-        results: { scores: TestResult };
-        message: string;
-      }>(this.testsUrl + '/16-personalities/results', answers)
-      .pipe(map((r) => r.results.scores));
+  getPersonalitiesResultOfTest(
+    answers: any
+  ): Observable<{ results: TestResult; message: string }> {
+    return this.http.post<{
+      results: TestResult;
+      message: string;
+    }>(this.testsUrl + '/16-personalities/results', answers);
   }
 
   setResultsColors(score: string): string {
-    if (score === 'EI') {
-      return 'EI';
-    } else if (score === 'SN') {
-      return 'SN';
-    } else if (score === 'TF') {
-      return 'TF';
+    if (score === 'E') {
+      return 'E';
+    } else if (score === 'S') {
+      return 'S';
+    } else if (score === 'T') {
+      return 'T';
+    } else if (score === 'N') {
+      return 'N';
+    } else if (score === 'I') {
+      return 'I';
+    } else if (score === 'J') {
+      return 'J';
+    } else if (score === 'P') {
+      return 'P';
     } else {
-      return 'JP';
+      return 'F';
     }
   }
-  getResultsDescriptions(score: string): { [key: string]: string } {
-    const descriptions: { [key: string]: { [key: string]: string } } = {
-      EI: { E: 'Екстраверсія', I: 'Інтроверсія' },
-      SN: { S: 'Сенсорика', N: 'Інтуїція' },
-      TF: { T: 'Логіка', F: 'Почуття' },
-      JP: { J: 'Судження', P: 'Сприйняття' },
+  getResultsDescriptions(score: string): string {
+    const descriptions: { [key: string]: string } = {
+      E: 'Екстраверсія',
+      I: 'Інтроверсія',
+      S: 'Сенсорика',
+      N: 'Інтуїція',
+      T: 'Логіка',
+      F: 'Почуття',
+      J: 'Судження',
+      P: 'Сприйняття',
     };
 
     return descriptions[score];

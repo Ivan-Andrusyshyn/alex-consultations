@@ -15,16 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = __importDefault(require("../utils/test"));
 const getPersonalitiesResultOfTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questionsWithDichotomy = (0, test_1.default)();
-        const scores = { EI: 0, SN: 0, TF: 0, JP: 0 };
+        const questionsWithDichotomy = (0, test_1.default)().slice(0, 4);
+        const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
         const answers = req.body.answers;
         for (const [questionId, answer] of Object.entries(answers)) {
             const index = Number(questionId) - 1;
-            const dichotomy = questionsWithDichotomy[index].dichotomy;
-            scores[dichotomy] += Number(answer);
+            const [points, letter] = answer.split('-');
+            if (scores.hasOwnProperty(letter)) {
+                scores[letter] += Number(points);
+            }
         }
+        console.log(scores);
         res.status(200).send({
-            results: { scores },
+            results: scores,
             message: 'Success get scores operation.',
         });
     }

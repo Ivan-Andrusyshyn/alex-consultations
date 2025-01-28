@@ -19,9 +19,14 @@ const dichotomyMap = {
 const addTypesInTestQuestions = () => _16_personality_1.questionsPersonality.map((q) => {
     for (const [type, ids] of Object.entries(dichotomyMap)) {
         if (ids.includes(q.id)) {
-            return Object.assign(Object.assign({}, q), { dichotomy: type });
+            return Object.assign(Object.assign({}, q), { answers: [
+                    { point: 3, text: 'Зовсім не погоджуюсь', type: 'P' },
+                    { point: 2, text: 'Скоріше не погоджуюсь', type: 'P' },
+                    { point: 0, text: 'Нейтрально (не можу вирішити)', type: 'P, J' },
+                    { point: 2, text: 'Скоріше погоджуюсь', type: 'J' },
+                    { point: 3, text: 'Повністю погоджуюсь', type: 'J' },
+                ] });
         }
     }
 });
 exports.default = addTypesInTestQuestions;
-const answers = [{ 3: 'T' }, { 2: 'T' }, { 0: 'F, T' }, { 3: 'F' }, { 2: 'F' }];

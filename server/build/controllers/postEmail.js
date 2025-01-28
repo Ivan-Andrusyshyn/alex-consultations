@@ -8,19 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = __importDefault(require("../utils/test"));
-const answers_1 = require("../content/16-personality/answers");
-const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questionsWithdichotomy = (0, test_1.default)();
-        res.status(200).send({
-            questions: questionsWithdichotomy,
-            answers: answers_1.answers,
-            message: 'Succesfull get all questions!',
+        const results = req.body;
+        console.log(results);
+        res.status(201).send({
+            message: 'Succesfull post email!',
         });
     }
     catch (error) {
@@ -28,4 +22,4 @@ const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, fun
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = getPersonalitiesTest;
+exports.default = postEmail;

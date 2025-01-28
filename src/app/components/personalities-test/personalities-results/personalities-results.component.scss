@@ -1,0 +1,100 @@
+// ======================================
+// SCORE
+
+.dsc-wrapper {
+  margin-bottom: 14px;
+
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
+
+.odd-descriptions {
+  position: absolute;
+  color: red;
+  right: 0;
+  bottom: 22px;
+}
+.score {
+  padding: 4px;
+  border-radius: 1rem;
+  width: 100%;
+
+  box-sizing: border-box;
+  position: relative;
+  &.E {
+    background-color: #f44336;
+  }
+
+  &.I {
+    background-color: #673ab7;
+  }
+
+  &.S {
+    background-color: #ff9800;
+  }
+
+  &.N {
+    background-color: #2196f3;
+  }
+
+  &.T {
+    background-color: #4caf50;
+  }
+
+  &.F {
+    background-color: #e91e63;
+  }
+
+  &.J {
+    background-color: #ffeb3b;
+  }
+
+  &.P {
+    background-color: #795548;
+  }
+}
+
+.bg-score {
+  width: 16px;
+  height: 16px;
+  top: -50%;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(29, 36, 50, 0.15);
+  border: 3px solid white;
+  position: absolute;
+
+  box-sizing: border-box;
+  background-color: inherit;
+}
+.E {
+  color: #f44336;
+}
+
+.I {
+  color: #673ab7;
+}
+
+.S {
+  color: #ff9800;
+}
+
+.N {
+  color: #2196f3;
+}
+
+.T {
+  color: #4caf50;
+}
+
+.F {
+  color: #e91e63;
+}
+
+.J {
+  color: #ffeb3b;
+}
+
+.P {
+  color: #795548;
+}

@@ -1,0 +1,27 @@
+<ng-container *ngFor="let key of scoreKeys; let i = index">
+  <div *ngIf="scores$ | async as scores">
+    <div class="dsc-wrapper">
+      <div [ngClass]="useColorByResult(key)" *ngIf="i % 2 === 0">
+        {{
+          getDescriptions(key) +
+            " " +
+            parseIntProc((scores[key] / 90) * 100) +
+            "%"
+        }}
+      </div>
+      <div
+        [ngClass]="useColorByResult(key)"
+        class="odd-descriptions"
+        *ngIf="i % 2 === 1"
+      >
+        {{ getDescriptions(key) }}
+      </div>
+    </div>
+    <div [ngClass]="useColorByResult(key)" class="score" *ngIf="i % 2 === 0">
+      <div
+        [style.left]="1 + (scores[key] / 90) * 300 + 'px'"
+        class="bg-score"
+      ></div>
+    </div>
+  </div>
+</ng-container>

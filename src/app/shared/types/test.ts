@@ -3,14 +3,19 @@ type Dichotomy = 'EI' | 'SN' | 'TF' | 'JP';
 interface Question {
   id: number;
   question: string;
+  answers: any[];
   dichotomy: Dichotomy;
 }
 
 interface TestResult {
-  EI: number;
-  SN: number;
-  TF: number;
-  JP: number;
+  E: number;
+  I: number;
+  S: number;
+  N: number;
+  T: number;
+  F: number;
+  J: number;
+  P: number;
 }
 
 type Answer = { point: number; text: string };
