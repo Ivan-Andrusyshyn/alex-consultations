@@ -30,14 +30,17 @@ export class QuestionsComponent implements OnInit {
   @Output() nextQues = new EventEmitter();
   @Output() submitResults = new EventEmitter();
   @Output() prevQuestion = new EventEmitter();
+
   ngOnInit(): void {
     this.personalitiesTest$ = this.personalitiesService
       .getPersonalitiesTest()
       .pipe(
         map((r) => {
-          this.createFormGroup(r.questions.slice(0, 4));
+          this.createFormGroup(r.questions.slice());
           this.setCurrentAnswers();
-          return r.questions.slice(0, 4);
+          this.personalitiesService.amountQuestionsInOnType =
+            r.amountQuestionsInOnType;
+          return r.questions.slice();
         })
       );
   }

@@ -31,6 +31,7 @@ export class PersonalitiesTestService {
   isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
   personalityForm!: FormGroup;
+  amountQuestionsInOnType!: Record<string, number>;
 
   readonly testsUrl = environment.apiUrl + '/tests';
   questions!: Question[];
@@ -62,15 +63,18 @@ export class PersonalitiesTestService {
   getIsShowSendFormMessage(): Observable<boolean> {
     return this.isShowSendFormMessage.asObservable();
   }
-  getScoreKeys() {
+  getScoreKeys(): string[] {
     return Object.keys(this.scoresSubject.value);
   }
-  getPersonalitiesResultOfTest(
-    answers: any
-  ): Observable<{ results: TestResult; message: string }> {
+  getPersonalitiesResultOfTest(answers: any): Observable<{
+    results: TestResult;
+    message: string;
+    amountQuestionsInOnType: Record<string, number>;
+  }> {
     return this.http.post<{
       results: TestResult;
       message: string;
+      amountQuestionsInOnType: Record<string, number>;
     }>(this.testsUrl + '/16-personalities/results', answers);
   }
 
@@ -106,5 +110,23 @@ export class PersonalitiesTestService {
     };
 
     return descriptions[score];
+  }
+
+  countPercentage(scores: { [key: string]: number }, type: string): number {
+    let totalQuestionsInOneType = 0;
+    const maxScoreOnOneAnswer = 3;
+    let types = '';
+    if (type === 'E') types = 'EI';
+    if (type === 'S') types = 'SN';
+    if (type === 'T') types = 'TF';
+    if (type === 'J') types = 'JP';
+
+    totalQuestionsInOneType += this.amountQuestionsInOnType[types];
+
+    return (
+      Math.round(
+        (scores[type] / (totalQuestionsInOneType * maxScoreOnOneAnswer)) * 100
+      ) || 0
+    );
   }
 }

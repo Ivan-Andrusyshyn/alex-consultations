@@ -12,14 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = __importDefault(require("../utils/test"));
-const answers_1 = require("../content/16-personality/answers");
+const test_1 = __importDefault(require("../utils/personalities/test"));
+const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/amountQuestionsInType"));
 const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questionsWithdichotomy = (0, test_1.default)();
+        const questionsWithAnswers = (0, test_1.default)().slice(0, 4);
+        const amountQuestions = (0, amountQuestionsInType_1.default)((0, test_1.default)());
+        console.log(amountQuestions);
         res.status(200).send({
-            questions: questionsWithdichotomy,
-            answers: answers_1.answers,
+            questions: questionsWithAnswers,
+            amountQuestionsInOnType: amountQuestions,
             message: 'Succesfull get all questions!',
         });
     }

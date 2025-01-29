@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const _16_personality_1 = require("../content/16-personality/16-personality");
+const _16_personality_1 = require("../../content/16-personality/16-personality");
 const addTypesInTestQuestions = () => _16_personality_1.questionsPersonality.map((q, i) => {
     return Object.assign(Object.assign({}, q), { answers: answersTypes(q.id) });
 });

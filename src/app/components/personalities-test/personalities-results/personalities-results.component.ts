@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { Observable } from 'rxjs';
 
@@ -11,12 +11,14 @@ import { Observable } from 'rxjs';
   styleUrl: './personalities-results.component.scss',
 })
 export class PersonalitiesResultsComponent implements OnInit {
-  scoreKeys: any;
+  scoreKeys!: string[];
   scores$!: Observable<{ [key: string]: number }>;
-
+  amountQuestionsInOnType!: Record<string, number>;
   private readonly personalitiesService = inject(PersonalitiesTestService);
 
   ngOnInit(): void {
+    this.amountQuestionsInOnType =
+      this.personalitiesService.amountQuestionsInOnType;
     this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
   }
@@ -31,5 +33,8 @@ export class PersonalitiesResultsComponent implements OnInit {
 
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
+  }
+  countPercentage(scores: { [key: string]: number }, type: string) {
+    return this.personalitiesService.countPercentage(scores, type);
   }
 }
