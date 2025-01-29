@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Answer } from '../../shared/types/test';
 import { PersonalitiesTestService } from '../../shared/services/personalities-test.service';
@@ -18,13 +19,13 @@ import { MailerService } from '../../shared/services/mailer.service';
 import { PersonalitiesResultsComponent } from '../../components/personalities-test/personalities-results/personalities-results.component';
 import { QuestionsComponent } from '../../components/personalities-test/questions/questions.component';
 import { RefreshButtonComponent } from '../../components/refresh-button/refresh-button.component';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
   selector: 'app-personalities-test',
   standalone: true,
   imports: [
     ProgressBarComponent,
-    ReactiveFormsModule,
     SendResultsFormComponent,
     PersonalitiesResultsComponent,
     QuestionsComponent,
@@ -39,8 +40,8 @@ import { RefreshButtonComponent } from '../../components/refresh-button/refresh-
 export class PersonalitiesTestComponent implements OnInit {
   private readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly mailerService = inject(MailerService);
-  private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
+  readonly dialog = inject(MatDialog);
 
   answersArray!: Answer[];
   scores$!: Observable<{ [key: string]: number }>;
@@ -100,16 +101,7 @@ export class PersonalitiesTestComponent implements OnInit {
   }
 
   refreshTest() {
-    this.personalitiesService.personalityForm.reset();
-    this.personalitiesService.counterQuestion.next(1);
-    this.scrollToTop();
-    sessionStorage.setItem(
-      'answers',
-      JSON.stringify({
-        answers: this.personalitiesService.personalityForm.value,
-        currentQuestion: 1,
-      })
-    );
+    this.openDialog();
   }
 
   toggleSendForm() {
@@ -124,7 +116,37 @@ export class PersonalitiesTestComponent implements OnInit {
       behavior: 'smooth',
     });
   }
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        contentType: 'confirm',
+        title: 'Ви впевнені що хочете почати з початку ?',
+        btn: {
+          cancel: 'Ні',
+          confirm: 'Так',
+        },
+      },
+    });
 
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result) => {
+        console.log('The dialog was closed');
+        if (result !== undefined) {
+          this.personalitiesService.personalityForm.reset();
+          this.personalitiesService.counterQuestion.next(1);
+          this.scrollToTop();
+          sessionStorage.setItem(
+            'answers',
+            JSON.stringify({
+              answers: this.personalitiesService.personalityForm.value,
+              currentQuestion: 1,
+            })
+          );
+        }
+      });
+  }
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
   }

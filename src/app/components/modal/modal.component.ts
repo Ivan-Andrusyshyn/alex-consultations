@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,6 +34,7 @@ export interface DialogData {
     MatDialogContent,
     MatDialogActions,
     MatInputModule,
+    NgIf,
     MatButtonModule,
     FormsModule,
     MatDialogClose,
@@ -42,11 +44,11 @@ export interface DialogData {
 })
 export class ModalComponent {
   readonly dialogRef = inject(MatDialogRef<ModalComponent>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly data: any = inject<DialogData>(MAT_DIALOG_DATA);
   readonly animal = model(this.data.animal);
   interest: string = '';
   email: string = '';
-  onNoClick(): void {
+  cancel(): void {
     this.dialogRef.close();
   }
 }

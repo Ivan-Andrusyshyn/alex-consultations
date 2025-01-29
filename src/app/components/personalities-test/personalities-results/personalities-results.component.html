@@ -14,7 +14,9 @@
     </div>
     <div [ngClass]="useColorByResult(key)" class="score" *ngIf="i % 2 === 0">
       <div
-        [style.left]="countPercentage(scores, key) * 301 + 'px'"
+        [style.left]="
+          (countPercentage(scores, key) / 100) * 314 - 16 / 2 + 'px'
+        "
         class="bg-score"
       ></div>
     </div>

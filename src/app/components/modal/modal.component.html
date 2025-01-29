@@ -1,35 +1,40 @@
-<h2 mat-dialog-title>🔥 Готові до прориву?</h2>
-<mat-dialog-content>
-  <p>
-    Отримайте персональну консультацію та дізнайтеся, як досягти кращих
-    результатів!
-  </p>
-  <mat-form-field>
-    <mat-label>Що вас цікавить?</mat-label>
-    <input
-      matInput
-      [(ngModel)]="interest"
-      placeholder="Наприклад: маркетинг, IT, фінанси"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Ваша пошта</mat-label>
-    <input
-      matInput
-      [(ngModel)]="email"
-      placeholder="Наприклад: myemail@gmail.com"
-    />
-  </mat-form-field>
-  <p class="offer">📢 Лише сьогодні: 20-хвилинна безкоштовна консультація!</p>
-</mat-dialog-content>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<ng-container *ngIf="data.contentType === 'form-consultation'">
+  <mat-dialog-content>
+    <p>
+      Отримайте персональну консультацію та дізнайтеся, як досягти кращих
+      результатів!
+    </p>
+    <mat-form-field>
+      <mat-label>Що вас цікавить?</mat-label>
+      <input
+        matInput
+        [(ngModel)]="interest"
+        placeholder="Наприклад: маркетинг, IT, фінанси"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ваша пошта</mat-label>
+      <input
+        matInput
+        [(ngModel)]="email"
+        placeholder="Наприклад: myemail@gmail.com"
+      />
+    </mat-form-field>
+    <p class="offer">📢 Лише сьогодні: 20-хвилинна безкоштовна консультація!</p>
+  </mat-dialog-content>
+</ng-container>
+
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" class="no-btn">Ні, дякую</button>
+  <button mat-button (click)="cancel()" class="no-btn">
+    {{ data.btn["cancel"] }}
+  </button>
   <button
     mat-button
     [mat-dialog-close]="interest"
     class="yes-btn"
     cdkFocusInitial
   >
-    🚀 Отримати консультацію
+    {{ data.btn["confirm"] }}
   </button>
 </mat-dialog-actions>
