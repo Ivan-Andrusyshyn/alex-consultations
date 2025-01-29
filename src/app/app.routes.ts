@@ -19,6 +19,13 @@ export const routes: Routes = [
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),
   },
   {
+    path: 'tests/test-information/:testId',
+    loadComponent: () =>
+      import('./pages/test-information/test-information.component').then(
+        (m) => m.TestInformationComponent
+      ),
+  },
+  {
     path: 'tests/16-personalities',
     loadComponent: () =>
       import('./pages/personalities-test/personalities-test.component').then(

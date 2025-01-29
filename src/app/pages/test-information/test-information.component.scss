@@ -1,0 +1,56 @@
+.test-information {
+  width: 100%;
+  padding: 40px 0;
+  color: #fff;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  box-sizing: border-box;
+  @media screen and (min-width: 764px) {
+    padding: 60px 20px;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-size: 16px;
+
+    color: #ffcc00;
+    @media screen and (min-width: 764px) {
+      font-size: 24px;
+    }
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 1.5;
+    @media screen and (min-width: 764px) {
+      font-size: 16px;
+    }
+  }
+  ul {
+    padding: 0;
+
+    text-align: left;
+    list-style: none;
+  }
+
+  li {
+    margin: 8px 0;
+    font-size: 12px;
+
+    @media screen and (min-width: 764px) {
+      font-size: 16px;
+    }
+  }
+  .link-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    margin-top: 15px;
+    background: darken(#ffcc00, 10%);
+    color: #334155;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+}

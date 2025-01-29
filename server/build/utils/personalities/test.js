@@ -52,7 +52,7 @@ const answersTypes = (id) => {
             { point: 3, text: 'Повністю погоджуюсь', type: 'S' },
         ];
     }
-    if ([52, 58, 16, 40, 6, 10, 76].includes(id)) {
+    if ([52, 58, 16, 33, 40, 6, 10, 76].includes(id)) {
         return [
             { point: 3, text: 'Зовсім не погоджуюсь', type: 'F' },
             { point: 2, text: 'Скоріше не погоджуюсь', type: 'F' },
@@ -70,8 +70,7 @@ const answersTypes = (id) => {
             { point: 3, text: 'Повністю погоджуюсь', type: 'F' },
         ];
     }
-    // 33+++++++++++++++++
-    if ([83, 33, 47, 8, 25, 36].includes(id)) {
+    if ([83, 47, 8, 25, 36].includes(id)) {
         return [
             { point: 3, text: 'Зовсім не погоджуюсь', type: 'E' },
             { point: 2, text: 'Скоріше не погоджуюсь', type: 'E' },

@@ -10,7 +10,14 @@
         <div class="test-card">
           <h3>Тест 16 типів особистості</h3>
           <p>Дізнайся більше про себе, свої сильні та слабкі сторони.</p>
-          <a routerLink="/tests/16-personalities" class="btn">Пройти тест</a>
+          <a routerLink="/tests/16-personalities" class="link-btn"
+            >Пройти тест</a
+          >
+          <a
+            [routerLink]="['/tests/test-information', '16-personalities']"
+            class="link-btn"
+            >Дізнатися більше</a
+          >
         </div>
       </div>
     </div>
