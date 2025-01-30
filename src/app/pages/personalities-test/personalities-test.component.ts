@@ -3,9 +3,10 @@ import {
   Component,
   DestroyRef,
   inject,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgIf } from '@angular/common';
@@ -37,7 +38,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
   styleUrl: './personalities-test.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PersonalitiesTestComponent implements OnInit {
+export class PersonalitiesTestComponent implements OnInit, OnDestroy {
   private readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly mailerService = inject(MailerService);
   private readonly destroyRef = inject(DestroyRef);
@@ -51,42 +52,58 @@ export class PersonalitiesTestComponent implements OnInit {
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
 
+  //
+  answers: any = new BehaviorSubject(null);
+  answers$: Observable<any> = this.answers.asObservable();
+  timeout: any;
+  //
   ngOnInit(): void {
     this.currentQuestionNumber$ =
       this.personalitiesService.getObservableCurrentQuestion();
     this.isShowFormRespMessage$ =
       this.personalitiesService.getIsShowSendFormMessage();
+
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
     this.isShowResults$ = this.personalitiesService.getIsShowResult();
+
     this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
-  }
 
-  onSubmit(answers: any): void {
-    this.personalitiesService
-      .getPersonalitiesResultOfTest({ answers })
-      .pipe(
-        map((r) => r.results),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe((r) => {
-        this.personalitiesService.scoresSubject.next(r);
-        this.personalitiesService.isShowResults.next(true);
-      });
+    const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
+    const parsedAnswers = JSON.parse(stringAnswers);
+    if (parsedAnswers) {
+      this.answers.next(parsedAnswers.answers[parsedAnswers.currentQuestion]);
+    }
+  }
+  ngOnDestroy(): void {
+    clearTimeout(this.timeout);
+    this.personalitiesService.isShowResults.next(false);
+    sessionStorage.clear();
   }
 
   nextQuestion(answers: any) {
     const currentValue = this.personalitiesService.counterQuestion.value;
-    this.personalitiesService.counterQuestion.next(currentValue + 1);
-    this.scrollToTop();
 
-    sessionStorage.setItem(
-      'answers',
-      JSON.stringify({
-        answers,
-        currentQuestion: currentValue + 1,
-      })
-    );
+    const increaseValue = currentValue + 1;
+
+    this.timeout = setTimeout(() => {
+      if (increaseValue > 90) {
+        this.getResults(answers);
+      } else {
+        this.scrollToTop();
+        this.personalitiesService.counterQuestion.next(increaseValue);
+
+        sessionStorage.setItem(
+          'answers',
+          JSON.stringify({
+            answers,
+            currentQuestion: currentValue + 1,
+          })
+        );
+
+        this.answers.next(answers[currentValue]);
+      }
+    }, 500);
   }
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
@@ -109,7 +126,37 @@ export class PersonalitiesTestComponent implements OnInit {
       !this.personalitiesService.isShowSendForm.value
     );
   }
+  private getResults(answers: Answer) {
+    this.personalitiesService
+      .getPersonalitiesResultOfTest({ answers })
+      .pipe(
+        map((r) => {
+          sessionStorage.setItem(
+            'personality-test',
+            JSON.stringify({
+              results: r.results,
+              amountQuestionsInOneType:
+                this.personalitiesService.amountQuestionsInOneType,
+            })
+          );
+          this.personalitiesService.personalityForm.reset();
 
+          sessionStorage.setItem(
+            'answers',
+            JSON.stringify({
+              answers: this.personalitiesService.personalityForm.value,
+              currentQuestion: 1,
+            })
+          );
+          return r.results;
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((r) => {
+        this.personalitiesService.scoresSubject.next(r);
+        this.personalitiesService.isShowResults.next(true);
+      });
+  }
   private scrollToTop(): void {
     window.scrollTo({
       top: 100,
@@ -132,11 +179,13 @@ export class PersonalitiesTestComponent implements OnInit {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
-        console.log('The dialog was closed');
         if (result !== undefined) {
           this.personalitiesService.personalityForm.reset();
           this.personalitiesService.counterQuestion.next(1);
           this.scrollToTop();
+          this.answers.next([]);
+
+          sessionStorage.removeItem('personality-test');
           sessionStorage.setItem(
             'answers',
             JSON.stringify({
@@ -151,8 +200,10 @@ export class PersonalitiesTestComponent implements OnInit {
     return parseInt(proc.toString());
   }
   previousQuestion() {
-    const currentValue = this.personalitiesService.counterQuestion.value;
+    this.timeout = setTimeout(() => {
+      const currentValue = this.personalitiesService.counterQuestion.value;
 
-    this.personalitiesService.counterQuestion.next(currentValue - 1);
+      this.personalitiesService.counterQuestion.next(currentValue - 1);
+    }, 500);
   }
 }

@@ -32,13 +32,7 @@ export const routes: Routes = [
         (m) => m.PersonalitiesTestComponent
       ),
   },
-  {
-    path: 'consultations',
-    loadComponent: () =>
-      import('./pages/consultations/consultations.component').then(
-        (m) => m.ConsultationsComponent
-      ),
-  },
+
   {
     path: 'about',
     loadComponent: () =>

@@ -1,5 +1,6 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   inject,
@@ -19,6 +20,7 @@ import { PersonalitiesTestService } from '../../../shared/services/personalities
   imports: [NgIf, NgFor, AsyncPipe, ReactiveFormsModule],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
@@ -26,9 +28,9 @@ export class QuestionsComponent implements OnInit {
 
   personalitiesTest$!: Observable<Question[]>;
 
+  @Input() answers!: any[];
   @Input() currentQuestionNumber: number = 1;
   @Output() nextQues = new EventEmitter();
-  @Output() submitResults = new EventEmitter();
   @Output() prevQuestion = new EventEmitter();
 
   ngOnInit(): void {
@@ -36,49 +38,37 @@ export class QuestionsComponent implements OnInit {
       .getPersonalitiesTest()
       .pipe(
         map((r) => {
-          this.createFormGroup(r.questions.slice());
+          this.createFormGroup(r.questions);
+
           this.setCurrentAnswers();
-          this.personalitiesService.amountQuestionsInOnType =
+          this.personalitiesService.amountQuestionsInOneType =
             r.amountQuestionsInOnType;
-          return r.questions.slice();
+          return r.questions;
         })
       );
   }
+  forceChangeControl(questionId: number, value: string) {
+    const control = this.personalitiesService.personalityForm.get(
+      questionId.toString()
+    );
 
-  onSubmit() {
-    if (this.personalitiesService.personalityForm.valid) {
-      const answers = this.personalitiesService.personalityForm.value;
-      this.submitResults.emit(answers);
-      this.personalitiesService.personalityForm.reset();
-      sessionStorage.setItem(
-        'answers',
-        JSON.stringify({
-          answers: this.personalitiesService.personalityForm.value,
-          currentQuestion: 1,
-        })
-      );
-    } else {
-      console.error('Invalid form');
+    if (control?.value === value) {
+      control.setValue(null, { emitEvent: false });
     }
-  }
-  previousQuestion() {
-    this.prevQuestion.emit();
-  }
-  nextQuestion() {
-    const answers = this.personalitiesService.personalityForm.value;
 
+    control?.setValue(value, { emitEvent: true });
+    const answers = this.personalitiesService.personalityForm.value;
     this.nextQues.emit(answers);
   }
 
-  isNextDisabled(currentQuestion: number): boolean {
-    return (
-      this.personalitiesService.personalityForm.get(currentQuestion.toString())
-        ?.invalid ?? false
-    );
+  previousQuestion() {
+    this.prevQuestion.emit();
   }
+
   private setCurrentAnswers() {
     const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
     const parsedAnswers = JSON.parse(stringAnswers);
+
     if (parsedAnswers) {
       this.personalitiesService.personalityForm.setValue(parsedAnswers.answers);
 

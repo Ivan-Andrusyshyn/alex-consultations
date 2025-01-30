@@ -1,10 +1,14 @@
 <form
   [formGroup]="personalitiesService.personalityForm"
-  (ngSubmit)="onSubmit()"
   *ngIf="personalitiesTest$ | async as questions"
 >
   <ng-container *ngFor="let q of questions; let i = index">
     <div class="question-card" [hidden]="currentQuestionNumber !== i + 1">
+      <p class="test-score" *ngIf="answers && q.id - 1">
+        Відповідь попереднього питання
+        <span>{{ q.id - 1 }}. {{ answers }}</span>
+      </p>
+
       <div *ngIf="q">
         <h3>{{ q.id }}.{{ q.question }}</h3>
         <div class="answers">
@@ -15,6 +19,9 @@
             <input
               class="radio-btn"
               [formControlName]="q.id.toString()"
+              (click)="
+                forceChangeControl(q.id, answer.point + '-' + answer.type)
+              "
               type="radio"
               [value]="answer.point + '-' + answer.type"
             />
@@ -28,28 +35,11 @@
   <div class="btn-wrapper">
     <button
       type="button"
-      *ngIf="currentQuestionNumber !== 1 && currentQuestionNumber !== 90"
+      *ngIf="currentQuestionNumber !== 1"
       (click)="previousQuestion()"
-      class="btn"
+      class="form-btn"
     >
       Назад
-    </button>
-    <button
-      type="button"
-      *ngIf="personalitiesService.personalityForm.invalid"
-      [disabled]="isNextDisabled(currentQuestionNumber)"
-      (click)="nextQuestion()"
-      class="btn"
-    >
-      Наступне питання
-    </button>
-    <button
-      *ngIf="personalitiesService.personalityForm.valid"
-      type="submit"
-      class="btn"
-      [disabled]="personalitiesService.personalityForm.invalid"
-    >
-      Завершити тест
     </button>
   </div>
 </form>

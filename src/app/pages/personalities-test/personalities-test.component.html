@@ -39,10 +39,11 @@
       "
     ></app-progress-bar>
     <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+
     <app-questions
       [currentQuestionNumber]="(currentQuestionNumber$ | async) ?? 1"
       (nextQues)="nextQuestion($event)"
-      (submitResults)="onSubmit($event)"
+      [answers]="answers$ | async"
       (prevQuestion)="previousQuestion()"
     ></app-questions>
   </div>

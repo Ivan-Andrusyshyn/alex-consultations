@@ -1,7 +1,13 @@
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 
 @Component({
   selector: 'app-personalities-results',
@@ -9,16 +15,18 @@ import { Observable } from 'rxjs';
   imports: [NgFor, NgIf, NgClass, AsyncPipe],
   templateUrl: './personalities-results.component.html',
   styleUrl: './personalities-results.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonalitiesResultsComponent implements OnInit {
-  scoreKeys!: string[];
-  scores$!: Observable<{ [key: string]: number }>;
-  amountQuestionsInOnType!: Record<string, number>;
   private readonly personalitiesService = inject(PersonalitiesTestService);
 
+  scoreKeys!: string[];
+  scores$!: Observable<{ [key: string]: number }>;
+  amountQuestionsInOneType!: Record<string, number>;
+
   ngOnInit(): void {
-    this.amountQuestionsInOnType =
-      this.personalitiesService.amountQuestionsInOnType;
+    this.amountQuestionsInOneType =
+      this.personalitiesService.amountQuestionsInOneType;
     this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
   }

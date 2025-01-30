@@ -31,12 +31,21 @@ export class PersonalitiesTestService {
   isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
   personalityForm!: FormGroup;
-  amountQuestionsInOnType!: Record<string, number>;
+  amountQuestionsInOneType!: Record<string, number>;
 
   readonly testsUrl = environment.apiUrl + '/tests';
   questions!: Question[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const score = JSON.parse(
+      sessionStorage.getItem('personality-test') ?? 'null'
+    );
+    if (score) {
+      this.scoresSubject.next(score.results);
+      this.amountQuestionsInOneType = score.amountQuestionsInOneType;
+      this.isShowResults.next(true);
+    }
+  }
 
   getPersonalitiesTest(): Observable<any> {
     return this.http
@@ -121,7 +130,7 @@ export class PersonalitiesTestService {
     if (type === 'T') types = 'TF';
     if (type === 'J') types = 'JP';
 
-    totalQuestionsInOneType += this.amountQuestionsInOnType[types];
+    totalQuestionsInOneType += this.amountQuestionsInOneType[types];
 
     return (
       Math.round(

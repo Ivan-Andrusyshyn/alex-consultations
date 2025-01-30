@@ -17,7 +17,7 @@ const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/
 const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const questionsWithAnswers = (0, test_1.default)();
-        const amountQuestions = (0, amountQuestionsInType_1.default)((0, test_1.default)());
+        const amountQuestions = (0, amountQuestionsInType_1.default)(questionsWithAnswers);
         console.log(amountQuestions);
         res.status(200).send({
             questions: questionsWithAnswers,
