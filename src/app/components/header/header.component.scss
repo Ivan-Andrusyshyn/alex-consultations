@@ -1,12 +1,11 @@
 .header {
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: #fff;
-  padding: 1rem 0;
+  padding: 8px 0;
   position: relative;
   z-index: 888;
   width: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-
+  background-color: rgba(0, 0, 0, 0.171);
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -15,21 +14,36 @@
     align-items: center;
     padding: 0 1rem;
   }
-
+  .logo-wrapper {
+    padding: 8px;
+  }
   .logo {
     font-size: 1.5rem;
-    width: 60px;
-    height: 40px;
-    border-radius: 8px;
+    width: 150px;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px 28px 0 0;
 
+    box-sizing: border-box;
     cursor: pointer;
     display: none;
     align-items: center;
     font-weight: bold;
-    background-image: url("https://tse2.mm.bing.net/th?id=OIP.zClTcXaFYpmlBiFl-7QJeQHaHa&pid=Api&P=0&h=80");
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position: center;
+    &::after {
+      content: " ";
+      width: 260px;
+      height: 100px;
+      top: -35px;
+      left: -55px;
+      background-size: cover;
+
+      background-image: url("https://tse3.mm.bing.net/th?id=OIP.XHQhSMlOCdcA-7xqCFEa0wHaHa&pid=Api&P=0&h=380");
+      background-repeat: no-repeat;
+      background-position: center 1px;
+
+      position: absolute;
+    }
     @media screen and (min-width: 764px) {
       display: flex;
     }
