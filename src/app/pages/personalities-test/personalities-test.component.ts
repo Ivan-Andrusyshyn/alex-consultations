@@ -21,6 +21,8 @@ import { PersonalitiesResultsComponent } from '../../components/personalities-te
 import { QuestionsComponent } from '../../components/personalities-test/questions/questions.component';
 import { RefreshButtonComponent } from '../../components/refresh-button/refresh-button.component';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { SendFormOnEmailBtnComponent } from '../../components/send-form-on-email-btn/send-form-on-email-btn.component';
+import { PersonalitiesTypeInformationComponent } from '../../components/personalities-type-information/personalities-type-information.component';
 
 @Component({
   selector: 'app-personalities-test',
@@ -33,6 +35,8 @@ import { ModalComponent } from '../../components/modal/modal.component';
     RefreshButtonComponent,
     NgIf,
     AsyncPipe,
+    SendFormOnEmailBtnComponent,
+    PersonalitiesTypeInformationComponent,
   ],
   templateUrl: './personalities-test.component.html',
   styleUrl: './personalities-test.component.scss',
@@ -51,6 +55,7 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
   currentQuestionNumber$!: Observable<number>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
+  personInformation$!: Observable<any>;
 
   //
   answers: any = new BehaviorSubject(null);
@@ -74,10 +79,24 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
     if (parsedAnswers) {
       this.answers.next(parsedAnswers.answers[parsedAnswers.currentQuestion]);
     }
+
+    const scorePercentages = this.personalitiesService.scorePercentages.value;
+
+    this.personInformation$ = this.personalitiesService
+      .getPersonTypeByResults(scorePercentages)
+      .pipe(
+        map((r) => {
+          return {
+            personType: r.personType,
+            personInformation: r.personInformation,
+          };
+        })
+      );
   }
   ngOnDestroy(): void {
     clearTimeout(this.timeout);
     this.personalitiesService.isShowResults.next(false);
+    this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
   }
 
@@ -134,13 +153,29 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
           sessionStorage.setItem(
             'personality-test',
             JSON.stringify({
-              results: r.results,
-              amountQuestionsInOneType:
-                this.personalitiesService.amountQuestionsInOneType,
+              results: r.results.scores,
+              scorePercentages: r.results.percentages,
             })
           );
-          this.personalitiesService.personalityForm.reset();
 
+          this.personalitiesService.scorePercentages.next(
+            r.results.percentages
+          );
+          const scorePercentages =
+            this.personalitiesService.scorePercentages.value;
+
+          this.personInformation$ = this.personalitiesService
+            .getPersonTypeByResults(scorePercentages)
+            .pipe(
+              map((r) => {
+                return {
+                  personType: r.personType,
+                  personInformation: r.personInformation,
+                };
+              })
+            );
+          this.personalitiesService.personalityForm.reset();
+          this.personalitiesService.counterQuestion.next(1);
           sessionStorage.setItem(
             'answers',
             JSON.stringify({
@@ -153,7 +188,7 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.personalitiesService.scoresSubject.next(r);
+        this.personalitiesService.scoresSubject.next(r.scores);
         this.personalitiesService.isShowResults.next(true);
       });
   }

@@ -14,39 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/amountQuestionsInType"));
 const test_1 = __importDefault(require("../utils/personalities/test"));
+const countPersonPercentages_1 = __importDefault(require("../utils/personalities/countPersonPercentages"));
 const postPersonalitiesResultOfTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
         const answers = req.body.answers;
+        const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
         const amountQuestions = (0, amountQuestionsInType_1.default)((0, test_1.default)());
-        console.log(amountQuestions);
-        for (const [questionId, answer] of Object.entries(answers)) {
-            const index = Number(questionId) - 1;
-            const [points, letter] = answer.split('-');
-            if (scores.hasOwnProperty(letter)) {
-                scores[letter] += Number(points);
-            }
-        }
-        const typePairs = [
-            ['E', 'I'],
-            ['S', 'N'],
-            ['T', 'F'],
-            ['J', 'P'],
-        ];
-        const maxScoreOnOneAnswer = 3;
-        const percentages = {};
-        for (const [type1, type2] of typePairs) {
-            const totalQuestions = amountQuestions[`${type1}${type2}`] || 0;
-            if (totalQuestions > 0) {
-                const maxScore = totalQuestions * maxScoreOnOneAnswer;
-                percentages[type1] = Math.round((scores[type1] / maxScore) * 100) || 0;
-                percentages[type2] = Math.round((scores[type2] / maxScore) * 100) || 0;
-            }
-        }
+        const percentages = (0, countPersonPercentages_1.default)(scores, answers, amountQuestions);
         console.log(percentages);
         res.status(200).send({
             results: { scores, percentages },
-            message: 'Success get scores operation.',
+            message: 'Success post scores operation.',
         });
     }
     catch (error) {

@@ -1,0 +1,106 @@
+<div class="personality-info-container">
+  <div class="info-card">
+    <div class="card-header">
+      <h2>
+        {{ personInformation.type }}
+
+        <span>({{ personType }})</span>
+      </h2>
+      <hr />
+      <h3>{{ personInformation.description }}</h3>
+    </div>
+    <div class="card-content">
+      <div class="info-section">
+        <h3>Сильні сторони</h3>
+        <ul>
+          <li *ngFor="let strength of personInformation.strengths">
+            {{ strength }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>Слабкі сторони</h3>
+        <ul>
+          <li *ngFor="let weakness of personInformation.weaknesses">
+            {{ weakness }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>Сприйняття</h3>
+        <div class="perception-group">
+          <div>
+            <h4>Інтуїція</h4>
+            <ul>
+              <li *ngFor="let item of personInformation.perception.intuition">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>Почуття</h4>
+            <ul>
+              <li *ngFor="let item of personInformation.perception.feelings">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>Спонтанність</h4>
+            <ul>
+              <li *ngFor="let item of personInformation.perception.spontaneity">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>Логіка</h4>
+            <ul>
+              <li *ngFor="let item of personInformation.perception.logic">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Взаємовідносини</h3>
+        <ul>
+          <li *ngFor="let trait of personInformation.relationships.traits">
+            {{ trait }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>Кар'єра</h3>
+        <div class="career-group">
+          <div>
+            <h4>Уподобання</h4>
+            <ul>
+              <li
+                *ngFor="let preference of personInformation.career.preferences"
+              >
+                {{ preference }}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>Найкращі сфери</h4>
+            <ul>
+              <li *ngFor="let field of personInformation.career.bestFields">
+                {{ field }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <p>{{ personInformation.conclusion }}</p>
+    </div>
+  </div>
+</div>

@@ -37,33 +37,6 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
-// ===
-.btn-send {
-  margin: 4px;
-  padding: 4px;
-
-  cursor: pointer;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  background-color: transparent;
-  transition: all 0.3s linear;
-  svg {
-    width: 18px;
-    height: 18px;
-    margin-left: 8px;
-
-    fill: #f1f1f173;
-  }
-  &:hover {
-    color: #f1f1f173;
-  }
-}
-
-// =========================
-// btn
 
 // ======================================
 @media (max-width: 768px) {

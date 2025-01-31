@@ -41,8 +41,7 @@ export class QuestionsComponent implements OnInit {
           this.createFormGroup(r.questions);
 
           this.setCurrentAnswers();
-          this.personalitiesService.amountQuestionsInOneType =
-            r.amountQuestionsInOnType;
+
           return r.questions;
         })
       );

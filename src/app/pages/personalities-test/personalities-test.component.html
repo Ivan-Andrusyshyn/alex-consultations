@@ -4,24 +4,11 @@
     *ngIf="(isShowResults$ | async) && (scores$ | async)"
   >
     <app-personalities-results></app-personalities-results>
-    <div
-      (click)="toggleSendForm()"
-      class="btn-send"
+
+    <app-send-form-on-email-btn
       *ngIf="!(isShowSendForm$ | async)"
-    >
-      Отримати результати
-      <svg
-        viewBox="0 0 48 48"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        class=""
-      >
-        <path
-          d="M42.231 4.566 16.272 32.522 2.997 26.991 42.231 4.566zm-13.95 32.962-9.056-3.778L44.444 6.6l-5.447 35.391-10.706-4.463h-.01zm-4.04 1.566-4.406 5.513a1.041 1.041 0 0 1-.807.384c-.572 0-1.03-.46-1.03-1.031v-7.472l6.243 2.606zM47.96 3.45A2.991 2.991 0 0 0 46.694.525a3.01 3.01 0 0 0-3.188-.13l-42 24a2.969 2.969 0 0 0-1.5 2.783 3.018 3.018 0 0 0 1.838 2.588l13.153 5.475v8.719a4.031 4.031 0 0 0 4.031 4.031 4.032 4.032 0 0 0 3.15-1.51l4.95-6.187h.01l10.706 4.463a3.005 3.005 0 0 0 4.125-2.307l6-39h-.01z"
-          aria-hidden="true"
-        ></path>
-      </svg>
-    </div>
+      (sendForm)="toggleSendForm()"
+    ></app-send-form-on-email-btn>
     <app-send-results-form
       *ngIf="isShowSendForm$ | async"
       (toggleSendForm)="toggleSendForm()"
@@ -30,6 +17,19 @@
     <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
       Ми відправили результати тесту на пошту!
     </div>
+  </div>
+
+  <div
+    class="person-info"
+    *ngIf="
+      (isShowResults$ | async) &&
+      (personInformation$ | async) as personInformation
+    "
+  >
+    <app-personalities-type-information
+      [personType]="personInformation.personType"
+      [personInformation]="personInformation.personInformation"
+    ></app-personalities-type-information>
   </div>
 
   <div class="container" *ngIf="!(isShowResults$ | async)">

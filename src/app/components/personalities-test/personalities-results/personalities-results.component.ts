@@ -5,7 +5,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 
@@ -22,11 +22,12 @@ export class PersonalitiesResultsComponent implements OnInit {
 
   scoreKeys!: string[];
   scores$!: Observable<{ [key: string]: number }>;
-  amountQuestionsInOneType!: Record<string, number>;
+  scorePercentages$!: Observable<any>;
 
   ngOnInit(): void {
-    this.amountQuestionsInOneType =
-      this.personalitiesService.amountQuestionsInOneType;
+    this.scorePercentages$ =
+      this.personalitiesService.getObservableScorePercentages();
+
     this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
   }
@@ -41,8 +42,5 @@ export class PersonalitiesResultsComponent implements OnInit {
 
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
-  }
-  countPercentage(scores: { [key: string]: number }, type: string) {
-    return this.personalitiesService.countPercentage(scores, type);
   }
 }

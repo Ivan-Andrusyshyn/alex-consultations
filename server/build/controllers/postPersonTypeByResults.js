@@ -12,16 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = __importDefault(require("../utils/personalities/test"));
-const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/amountQuestionsInType"));
-const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getPersonalityType_1 = __importDefault(require("../utils/personalities/getPersonalityType"));
+const getInformationByType_1 = __importDefault(require("../utils/personalities/getInformationByType"));
+const postPersonTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questionsWithAnswers = (0, test_1.default)();
-        const amountQuestions = (0, amountQuestionsInType_1.default)(questionsWithAnswers);
-        console.log(amountQuestions);
+        const results = req.body;
+        console.log(results);
+        const personType = (0, getPersonalityType_1.default)(results);
+        const personInformation = (0, getInformationByType_1.default)(personType);
         res.status(200).send({
-            questions: questionsWithAnswers,
-            message: 'Succesfull get all questions!',
+            personType,
+            personInformation,
+            message: 'Success post person type .',
         });
     }
     catch (error) {
@@ -29,4 +31,4 @@ const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, fun
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = getPersonalitiesTest;
+exports.default = postPersonTypeByResults;

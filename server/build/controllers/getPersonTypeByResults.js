@@ -8,25 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = __importDefault(require("../utils/personalities/test"));
-const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/amountQuestionsInType"));
-const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getPersonTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questionsWithAnswers = (0, test_1.default)();
-        const amountQuestions = (0, amountQuestionsInType_1.default)(questionsWithAnswers);
-        console.log(amountQuestions);
-        res.status(200).send({
-            questions: questionsWithAnswers,
-            message: 'Succesfull get all questions!',
-        });
+        const results = req.body;
+        console.log(results);
     }
     catch (error) {
         console.log(error);
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = getPersonalitiesTest;
+exports.default = getPersonTypeByResults;

@@ -3,7 +3,13 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 
-import { Answer, Question, TestResult } from '../types/test';
+import {
+  Answer,
+  PersonalityResult,
+  Question,
+  TestResult,
+  TypeInformation,
+} from '../types/test';
 import { environment } from '../../environment/environment';
 
 interface Personalities {
@@ -11,7 +17,10 @@ interface Personalities {
   answers: Answer[];
   questions: Question[];
 }
-
+interface PersonalitiesResults {
+  results: { scores: TestResult; percentages: PersonalityResult };
+  message: string;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -31,10 +40,10 @@ export class PersonalitiesTestService {
   isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
   personalityForm!: FormGroup;
-  amountQuestionsInOneType!: Record<string, number>;
 
   readonly testsUrl = environment.apiUrl + '/tests';
   questions!: Question[];
+  scorePercentages = new BehaviorSubject<PersonalityResult>(null);
 
   constructor(private http: HttpClient) {
     const score = JSON.parse(
@@ -42,7 +51,7 @@ export class PersonalitiesTestService {
     );
     if (score) {
       this.scoresSubject.next(score.results);
-      this.amountQuestionsInOneType = score.amountQuestionsInOneType;
+      this.scorePercentages.next(score.scorePercentages);
       this.isShowResults.next(true);
     }
   }
@@ -52,10 +61,25 @@ export class PersonalitiesTestService {
       .get<Personalities>(this.testsUrl + '/16-personalities')
       .pipe(
         map((r) => {
-          this.questions = r.questions.slice();
+          this.questions = r.questions;
           return r;
         })
       );
+  }
+  getPersonTypeByResults(scorePercentages: PersonalityResult): Observable<{
+    personInformation: TypeInformation;
+    message: string;
+    personType: string;
+  }> {
+    return this.http.post<{
+      personInformation: TypeInformation;
+      message: string;
+      personType: string;
+    }>(this.testsUrl + '/16-personalities/person-type', scorePercentages);
+  }
+
+  getObservableScorePercentages(): Observable<PersonalityResult> {
+    return this.scorePercentages.asObservable();
   }
   getIsShowSendForm(): Observable<boolean> {
     return this.isShowSendForm.asObservable();
@@ -75,16 +99,11 @@ export class PersonalitiesTestService {
   getScoreKeys(): string[] {
     return Object.keys(this.scoresSubject.value);
   }
-  getPersonalitiesResultOfTest(answers: any): Observable<{
-    results: TestResult;
-    message: string;
-    amountQuestionsInOnType: Record<string, number>;
-  }> {
-    return this.http.post<{
-      results: TestResult;
-      message: string;
-      amountQuestionsInOnType: Record<string, number>;
-    }>(this.testsUrl + '/16-personalities/results', answers);
+  getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
+    return this.http.post<PersonalitiesResults>(
+      this.testsUrl + '/16-personalities/results',
+      answers
+    );
   }
 
   setResultsColors(score: string): string {
@@ -119,23 +138,5 @@ export class PersonalitiesTestService {
     };
 
     return descriptions[score];
-  }
-
-  countPercentage(scores: { [key: string]: number }, type: string): number {
-    let totalQuestionsInOneType = 0;
-    const maxScoreOnOneAnswer = 3;
-    let types = '';
-    if (type === 'E') types = 'EI';
-    if (type === 'S') types = 'SN';
-    if (type === 'T') types = 'TF';
-    if (type === 'J') types = 'JP';
-
-    totalQuestionsInOneType += this.amountQuestionsInOneType[types];
-
-    return (
-      Math.round(
-        (scores[type] / (totalQuestionsInOneType * maxScoreOnOneAnswer)) * 100
-      ) || 0
-    );
   }
 }
