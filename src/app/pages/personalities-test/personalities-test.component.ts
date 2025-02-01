@@ -60,7 +60,6 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
   //
   private answers: any = new BehaviorSubject(null);
   answers$: Observable<any> = this.answers.asObservable();
-  timeout!: ReturnType<typeof setTimeout>;
   //
   ngOnInit(): void {
     this.currentQuestionNumber$ =
@@ -91,7 +90,6 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
       );
   }
   ngOnDestroy(): void {
-    clearTimeout(this.timeout);
     this.personalitiesService.isShowResults.next(false);
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
@@ -102,24 +100,22 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
 
     const increaseValue = currentValue + 1;
 
-    this.timeout = setTimeout(() => {
-      if (increaseValue > 90) {
-        this.getResults(answers);
-      } else {
-        this.scrollToTop();
-        this.personalitiesService.counterQuestion.next(increaseValue);
+    if (increaseValue > 90) {
+      this.getResults(answers);
+    } else {
+      this.scrollToTop();
+      this.personalitiesService.counterQuestion.next(increaseValue);
 
-        sessionStorage.setItem(
-          'answers',
-          JSON.stringify({
-            answers,
-            currentQuestion: currentValue + 1,
-          })
-        );
+      sessionStorage.setItem(
+        'answers',
+        JSON.stringify({
+          answers,
+          currentQuestion: currentValue + 1,
+        })
+      );
 
-        this.answers.next(answers[currentValue]);
-      }
-    }, 500);
+      this.answers.next(answers[currentValue]);
+    }
   }
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
@@ -231,10 +227,8 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
     return parseInt(proc.toString());
   }
   previousQuestion() {
-    this.timeout = setTimeout(() => {
-      const currentValue = this.personalitiesService.counterQuestion.value;
+    const currentValue = this.personalitiesService.counterQuestion.value;
 
-      this.personalitiesService.counterQuestion.next(currentValue - 1);
-    }, 500);
+    this.personalitiesService.counterQuestion.next(currentValue - 1);
   }
 }

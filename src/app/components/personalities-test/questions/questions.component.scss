@@ -125,13 +125,8 @@ ul {
       transition: background-color 0.3s ease;
     }
   }
-  .radio-label:has(.radio-btn:checked)::before {
-    border-color: #4caf50;
+  .radio-label:has(.radio-btn:hover)::before {
     background-color: #4caf50;
-  }
-
-  .radio-label:has(.radio-btn:checked)::after {
-    background-color: #fff;
   }
 
   .radio-label:hover {
