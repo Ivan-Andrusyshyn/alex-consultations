@@ -159,7 +159,6 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
         map((r) => {
           this.setSessionStorage(
             'personality-test',
-
             JSON.stringify({
               results: r.results.scores,
               scorePercentages: r.results.percentages,
@@ -242,7 +241,7 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
     return parseInt(proc.toString());
   }
   private setSessionStorage(key: string, value: any) {
-    sessionStorage.setItem('answers', value);
+    sessionStorage.setItem(key, value);
   }
 
   previousQuestion() {
