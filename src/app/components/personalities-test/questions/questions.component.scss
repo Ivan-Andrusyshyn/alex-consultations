@@ -126,9 +126,19 @@ ul {
     }
   }
   .radio-label:has(.radio-btn:hover)::before {
+    border-color: #4caf50;
     background-color: #4caf50;
   }
 
+  .radio-label:has(.radio-btn:checked)::after {
+    background-color: #fff;
+  }
+  @media screen and (min-width: 764px) {
+    .radio-label:has(.radio-btn:hover)::before {
+      border-color: #fff;
+      background-color: #4caf50;
+    }
+  }
   .radio-label:hover {
     color: #4caf50;
   }

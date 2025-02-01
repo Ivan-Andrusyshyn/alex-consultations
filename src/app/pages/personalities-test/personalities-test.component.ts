@@ -21,7 +21,7 @@ import { QuestionsComponent } from '../../components/personalities-test/question
 import { RefreshButtonComponent } from '../../components/refresh-button/refresh-button.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { SendFormOnEmailBtnComponent } from '../../components/send-form-on-email-btn/send-form-on-email-btn.component';
-import { PersonalitiesTypeInformationComponent } from '../../components/personalities-type-information/personalities-type-information.component';
+import { PersonalitiesTypeInformationComponent } from '../../components/personalities-test/personalities-type-information/personalities-type-information.component';
 
 @Component({
   selector: 'app-personalities-test',
@@ -56,7 +56,7 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
     personType: string;
     personInformation: TypeInformation;
   }>;
-
+  timer: any;
   //
   private answers: any = new BehaviorSubject(null);
   answers$: Observable<any> = this.answers.asObservable();
@@ -90,12 +90,23 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
       );
   }
   ngOnDestroy(): void {
+    clearTimeout(this.timer);
     this.personalitiesService.isShowResults.next(false);
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
   }
 
   nextQuestion(answers: any) {
+    if (window.innerWidth <= 764) {
+      this.timer = setTimeout(() => {
+        this.addNextQuestion(answers);
+      }, 200);
+    } else {
+      this.addNextQuestion(answers);
+    }
+  }
+
+  private addNextQuestion(answers: any) {
     const currentValue = this.personalitiesService.counterQuestion.value;
 
     const increaseValue = currentValue + 1;

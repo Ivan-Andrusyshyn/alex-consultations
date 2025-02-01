@@ -9,8 +9,9 @@
       <hr />
       <h3>{{ personInformation.description }}</h3>
     </div>
+
     <div class="card-content">
-      <div class="info-section">
+      <div class="info-section" id="strengths">
         <h3>Сильні сторони</h3>
         <ul>
           <li *ngFor="let strength of personInformation.strengths">
@@ -21,7 +22,7 @@
 
       <div class="info-section">
         <h3>Слабкі сторони</h3>
-        <ul>
+        <ul id="weaknesses">
           <li *ngFor="let weakness of personInformation.weaknesses">
             {{ weakness }}
           </li>
@@ -30,7 +31,7 @@
 
       <div class="info-section">
         <h3>Сприйняття</h3>
-        <div class="perception-group">
+        <div class="perception-group" id="perception">
           <div>
             <h4>Інтуїція</h4>
             <ul>
@@ -68,7 +69,7 @@
 
       <div class="info-section">
         <h3>Взаємовідносини</h3>
-        <ul>
+        <ul id="relationships">
           <li *ngFor="let trait of personInformation.relationships.traits">
             {{ trait }}
           </li>
@@ -77,7 +78,7 @@
 
       <div class="info-section">
         <h3>Кар'єра</h3>
-        <div class="career-group">
+        <div class="career-group" id="career">
           <div>
             <h4>Уподобання</h4>
             <ul>
@@ -98,6 +99,14 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="mobile-navigation">
+      <button
+        *ngFor="let section of sectionList"
+        (click)="scrollToSection(section.id)"
+      >
+        {{ section.label }}
+      </button>
     </div>
     <div class="card-footer">
       <p>{{ personInformation.conclusion }}</p>
