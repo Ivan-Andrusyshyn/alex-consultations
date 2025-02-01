@@ -21,19 +21,13 @@ export class PersonalitiesResultsComponent implements OnInit {
   private readonly personalitiesService = inject(PersonalitiesTestService);
 
   scoreKeys!: string[];
-  scores$!: Observable<{ [key: string]: number }>;
   scorePercentages$!: Observable<any>;
 
   ngOnInit(): void {
     this.scorePercentages$ =
       this.personalitiesService.getObservableScorePercentages();
 
-    this.scores$ = this.personalitiesService.getObservableScores();
     this.scoreKeys = this.personalitiesService.getScoreKeys();
-  }
-
-  useColorByResult(score: string): string {
-    return this.personalitiesService.setResultsColors(score);
   }
 
   getDescriptions(score: string): string {

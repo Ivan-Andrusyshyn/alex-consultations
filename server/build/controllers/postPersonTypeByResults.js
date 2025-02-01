@@ -17,7 +17,6 @@ const getInformationByType_1 = __importDefault(require("../utils/personalities/g
 const postPersonTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const results = req.body;
-        console.log(results);
         const personType = (0, getPersonalityType_1.default)(results);
         const personInformation = (0, getInformationByType_1.default)(personType);
         res.status(200).send({

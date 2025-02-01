@@ -25,16 +25,6 @@ interface PersonalitiesResults {
   providedIn: 'root',
 })
 export class PersonalitiesTestService {
-  scoresSubject = new BehaviorSubject({
-    E: 0,
-    I: 0,
-    S: 0,
-    N: 0,
-    T: 0,
-    F: 0,
-    J: 0,
-    P: 0,
-  });
   isShowSendForm = new BehaviorSubject(false);
   isShowSendFormMessage = new BehaviorSubject(false);
   isShowResults = new BehaviorSubject(false);
@@ -50,7 +40,6 @@ export class PersonalitiesTestService {
       sessionStorage.getItem('personality-test') ?? 'null'
     );
     if (score) {
-      this.scoresSubject.next(score.results);
       this.scorePercentages.next(score.scorePercentages);
       this.isShowResults.next(true);
     }
@@ -87,9 +76,7 @@ export class PersonalitiesTestService {
   getIsShowResult(): Observable<boolean> {
     return this.isShowResults.asObservable();
   }
-  getObservableScores(): Observable<{ [key: string]: number }> {
-    return this.scoresSubject.asObservable();
-  }
+
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();
   }
@@ -97,7 +84,16 @@ export class PersonalitiesTestService {
     return this.isShowSendFormMessage.asObservable();
   }
   getScoreKeys(): string[] {
-    return Object.keys(this.scoresSubject.value);
+    return Object.keys({
+      E: 0,
+      I: 0,
+      S: 0,
+      N: 0,
+      T: 0,
+      F: 0,
+      J: 0,
+      P: 0,
+    });
   }
   getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
     return this.http.post<PersonalitiesResults>(
@@ -106,25 +102,6 @@ export class PersonalitiesTestService {
     );
   }
 
-  setResultsColors(score: string): string {
-    if (score === 'E') {
-      return 'E';
-    } else if (score === 'S') {
-      return 'S';
-    } else if (score === 'T') {
-      return 'T';
-    } else if (score === 'N') {
-      return 'N';
-    } else if (score === 'I') {
-      return 'I';
-    } else if (score === 'J') {
-      return 'J';
-    } else if (score === 'P') {
-      return 'P';
-    } else {
-      return 'F';
-    }
-  }
   getResultsDescriptions(score: string): string {
     const descriptions: { [key: string]: string } = {
       E: 'Екстраверсія',

@@ -23,7 +23,6 @@ const amountQuestionsInType = (qlist) => {
             letterCount[type] += 1;
         });
     });
-    console.log('Final letter count:', letterCount);
     return letterCount;
 };
 exports.default = amountQuestionsInType;

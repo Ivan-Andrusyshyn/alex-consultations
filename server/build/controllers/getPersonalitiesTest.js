@@ -18,7 +18,6 @@ const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, fun
     try {
         const questionsWithAnswers = (0, test_1.default)();
         const amountQuestions = (0, amountQuestionsInType_1.default)(questionsWithAnswers);
-        console.log(amountQuestions);
         res.status(200).send({
             questions: questionsWithAnswers,
             message: 'Succesfull get all questions!',

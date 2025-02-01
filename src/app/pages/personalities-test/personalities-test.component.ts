@@ -8,11 +8,10 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Answer } from '../../shared/types/test';
+import { Answer, TypeInformation } from '../../shared/types/test';
 import { PersonalitiesTestService } from '../../shared/services/personalities-test.service';
 import { ProgressBarComponent } from '../../components/progress-bar/progress-bar.component';
 import { SendResultsFormComponent } from '../../components/send-results-form/send-results-form.component';
@@ -49,18 +48,19 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
   readonly dialog = inject(MatDialog);
 
   answersArray!: Answer[];
-  scores$!: Observable<{ [key: string]: number }>;
-  scoreKeys!: string[];
   isShowResults$!: Observable<boolean>;
   currentQuestionNumber$!: Observable<number>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
-  personInformation$!: Observable<any>;
+  personInformation$!: Observable<{
+    personType: string;
+    personInformation: TypeInformation;
+  }>;
 
   //
-  answers: any = new BehaviorSubject(null);
+  private answers: any = new BehaviorSubject(null);
   answers$: Observable<any> = this.answers.asObservable();
-  timeout: any;
+  timeout!: ReturnType<typeof setTimeout>;
   //
   ngOnInit(): void {
     this.currentQuestionNumber$ =
@@ -70,9 +70,6 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
 
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
     this.isShowResults$ = this.personalitiesService.getIsShowResult();
-
-    this.scores$ = this.personalitiesService.getObservableScores();
-    this.scoreKeys = this.personalitiesService.getScoreKeys();
 
     const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
     const parsedAnswers = JSON.parse(stringAnswers);
@@ -188,7 +185,6 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.personalitiesService.scoresSubject.next(r.scores);
         this.personalitiesService.isShowResults.next(true);
       });
   }

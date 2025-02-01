@@ -1,8 +1,5 @@
 <section class="test">
-  <div
-    class="score-wrapper"
-    *ngIf="(isShowResults$ | async) && (scores$ | async)"
-  >
+  <div class="score-wrapper" *ngIf="isShowResults$ | async">
     <app-personalities-results></app-personalities-results>
 
     <app-send-form-on-email-btn

@@ -18,9 +18,9 @@ const countPersonPercentages_1 = __importDefault(require("../utils/personalities
 const postPersonalitiesResultOfTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
-        const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
         const amountQuestions = (0, amountQuestionsInType_1.default)((0, test_1.default)());
-        const percentages = (0, countPersonPercentages_1.default)(scores, answers, amountQuestions);
+        const { scores, percentages } = (0, countPersonPercentages_1.default)(answers, amountQuestions);
+        console.log(scores);
         console.log(percentages);
         res.status(200).send({
             results: { scores, percentages },
