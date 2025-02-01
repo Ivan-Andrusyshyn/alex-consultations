@@ -1,0 +1,10 @@
+<div class="invalid-control" *ngIf="errorList?.length && formIsSubmitted">
+  <p>Перевірте відоповіді на ці запитання:</p>
+  <ul>
+    <ng-container *ngFor="let e of errorList">
+      <li (click)="navigateToQuestion(e)">
+        {{ e }}
+      </li>
+    </ng-container>
+  </ul>
+</div>

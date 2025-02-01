@@ -30,7 +30,7 @@ export class PersonalitiesTestService {
   isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
   personalityForm!: FormGroup;
-
+  errors$!: Observable<any[] | null>;
   readonly testsUrl = environment.apiUrl + '/tests';
   questions!: Question[];
   scorePercentages = new BehaviorSubject<PersonalityResult>(null);

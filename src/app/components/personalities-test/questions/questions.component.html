@@ -43,3 +43,8 @@
     </button>
   </div>
 </form>
+<app-error-list
+  [errorList]="this.personalitiesService.errors$ | async"
+  [formIsSubmitted]="formIsSubmitted"
+  (navigateQuestion)="navigateToQuestion($event)"
+></app-error-list>

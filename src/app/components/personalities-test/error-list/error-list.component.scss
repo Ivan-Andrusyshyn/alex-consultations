@@ -1,0 +1,50 @@
+// error
+
+.invalid-control {
+  border: 2px solid #e74c3c; /* Use a more defined red color for errors */
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #f8d7da; /* Light red background for better visibility */
+  color: #721c24; /* Dark red color for text to improve readability */
+
+  box-sizing: border-box;
+
+  p {
+    margin: 0;
+    font-weight: bold; /* Highlight the error message */
+    font-size: 14px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 12px 0 0 0; /* Adjust margin for better spacing */
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between error items */
+
+    li {
+      border: 1px solid #e74c3c; /* Consistent red border color */
+      border-radius: 8px;
+      padding: 6px 12px; /* More padding for better spacing */
+      background-color: #fff; /* White background for items */
+      color: #e74c3c; /* Red color for the error text */
+      font-size: 14px;
+      font-weight: normal;
+
+      transition: background-color 0.3s, transform 0.3s;
+
+      /* Hover effect to improve UX */
+      &:hover {
+        background-color: #f1c6c6;
+        transform: scale(1.05); /* Slightly enlarge the error item */
+      }
+    }
+  }
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+}

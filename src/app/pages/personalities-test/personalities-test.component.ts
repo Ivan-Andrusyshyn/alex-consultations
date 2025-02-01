@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -111,13 +111,16 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
 
     const increaseValue = currentValue + 1;
 
-    if (increaseValue > 90) {
+    if (this.personalitiesService.personalityForm.valid) {
       this.getResults(answers);
-    } else {
+    } else if (
+      this.personalitiesService.personalityForm.invalid &&
+      increaseValue <= 90
+    ) {
       this.scrollToTop();
       this.personalitiesService.counterQuestion.next(increaseValue);
 
-      sessionStorage.setItem(
+      this.setSessionStorage(
         'answers',
         JSON.stringify({
           answers,
@@ -154,14 +157,14 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
         map((r) => {
-          sessionStorage.setItem(
+          this.setSessionStorage(
             'personality-test',
+
             JSON.stringify({
               results: r.results.scores,
               scorePercentages: r.results.percentages,
             })
           );
-
           this.personalitiesService.scorePercentages.next(
             r.results.percentages
           );
@@ -180,7 +183,7 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
             );
           this.personalitiesService.personalityForm.reset();
           this.personalitiesService.counterQuestion.next(1);
-          sessionStorage.setItem(
+          this.setSessionStorage(
             'answers',
             JSON.stringify({
               answers: this.personalitiesService.personalityForm.value,
@@ -224,19 +227,24 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
           this.answers.next([]);
 
           sessionStorage.removeItem('personality-test');
-          sessionStorage.setItem(
+          this.setSessionStorage(
             'answers',
             JSON.stringify({
               answers: this.personalitiesService.personalityForm.value,
               currentQuestion: 1,
             })
           );
+          this.personalitiesService.errors$ = of([]);
         }
       });
   }
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
   }
+  private setSessionStorage(key: string, value: any) {
+    sessionStorage.setItem('answers', value);
+  }
+
   previousQuestion() {
     const currentValue = this.personalitiesService.counterQuestion.value;
 

@@ -25,6 +25,8 @@ form {
     }
   }
 }
+
+// ========================
 // test ul
 ul {
   gap: 1rem;
@@ -140,10 +142,11 @@ ul {
       border-color: #fff;
       background-color: #4caf50;
     }
+    .radio-label:hover {
+      color: #4caf50;
+    }
   }
-  .radio-label:hover {
-    color: #4caf50;
-  }
+
   input {
     margin-right: 10px;
   }
