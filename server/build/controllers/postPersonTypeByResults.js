@@ -12,13 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const getPersonalityType_1 = __importDefault(require("../utils/personalities/getPersonalityType"));
-const getInformationByType_1 = __importDefault(require("../utils/personalities/getInformationByType"));
+const _16_personality_1 = __importDefault(require("../services/16-personality"));
 const postPersonTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const results = req.body;
-        const personType = (0, getPersonalityType_1.default)(results);
-        const personInformation = (0, getInformationByType_1.default)(personType);
+        const personType = _16_personality_1.default.getPersonalityType(results);
+        const personInformation = _16_personality_1.default.getInformationByType(personType);
         res.status(200).send({
             personType,
             personInformation,

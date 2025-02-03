@@ -1,5 +1,8 @@
 <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
-<mat-tab-group [(selectedIndex)]="currentQuestionNumber">
+<mat-tab-group
+  animationDuration="0ms"
+  [(selectedIndex)]="currentQuestionNumber"
+>
   <form
     [formGroup]="personalitiesService.personalityForm"
     *ngIf="personalitiesTest$ | async as questions"

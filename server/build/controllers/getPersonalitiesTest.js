@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = __importDefault(require("../utils/personalities/test"));
-const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/amountQuestionsInType"));
+const _16_personality_1 = __importDefault(require("../services/16-personality"));
 const getPersonalitiesTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const questionsWithAnswers = (0, test_1.default)();
-        const amountQuestions = (0, amountQuestionsInType_1.default)(questionsWithAnswers);
+        const amountQuestions = _16_personality_1.default.amountQuestionsInType(questionsWithAnswers);
         res.status(200).send({
             questions: questionsWithAnswers,
             message: 'Succesfull get all questions!',

@@ -12,14 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const amountQuestionsInType_1 = __importDefault(require("../utils/personalities/amountQuestionsInType"));
 const test_1 = __importDefault(require("../utils/personalities/test"));
-const countPersonPercentages_1 = __importDefault(require("../utils/personalities/countPersonPercentages"));
+const _16_personality_1 = __importDefault(require("../services/16-personality"));
 const postPersonalitiesResultOfTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
-        const amountQuestions = (0, amountQuestionsInType_1.default)((0, test_1.default)());
-        const { scores, percentages } = (0, countPersonPercentages_1.default)(answers, amountQuestions);
+        const amountQuestions = _16_personality_1.default.amountQuestionsInType((0, test_1.default)());
+        const { scores, percentages } = _16_personality_1.default.countPersonPercentages(answers, amountQuestions);
         console.log(scores);
         console.log(percentages);
         res.status(200).send({
