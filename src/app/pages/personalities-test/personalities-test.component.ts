@@ -13,13 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Answer, TypeInformation } from '../../shared/types/test';
 import { PersonalitiesTestService } from '../../shared/services/personalities-test.service';
-import { ProgressBarComponent } from '../../components/progress-bar/progress-bar.component';
 import { SendResultsFormComponent } from '../../components/send-results-form/send-results-form.component';
 import { MailerService } from '../../shared/services/mailer.service';
 import { PersonalitiesResultsComponent } from '../../components/personalities-test/personalities-results/personalities-results.component';
 import { QuestionsComponent } from '../../components/personalities-test/questions/questions.component';
-import { RefreshButtonComponent } from '../../components/refresh-button/refresh-button.component';
-import { ModalComponent } from '../../components/modal/modal.component';
 import { SendFormOnEmailBtnComponent } from '../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { PersonalitiesTypeInformationComponent } from '../../components/personalities-test/personalities-type-information/personalities-type-information.component';
 
@@ -27,11 +24,9 @@ import { PersonalitiesTypeInformationComponent } from '../../components/personal
   selector: 'app-personalities-test',
   standalone: true,
   imports: [
-    ProgressBarComponent,
     SendResultsFormComponent,
     PersonalitiesResultsComponent,
     QuestionsComponent,
-    RefreshButtonComponent,
     NgIf,
     AsyncPipe,
     SendFormOnEmailBtnComponent,
@@ -45,11 +40,9 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
   private readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly mailerService = inject(MailerService);
   private readonly destroyRef = inject(DestroyRef);
-  readonly dialog = inject(MatDialog);
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
-  currentQuestionNumber$!: Observable<number>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
   personInformation$!: Observable<{
@@ -58,23 +51,13 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
   }>;
   timer: any;
   //
-  private answers: any = new BehaviorSubject(null);
-  answers$: Observable<any> = this.answers.asObservable();
-  //
+
   ngOnInit(): void {
-    this.currentQuestionNumber$ =
-      this.personalitiesService.getObservableCurrentQuestion();
     this.isShowFormRespMessage$ =
       this.personalitiesService.getIsShowSendFormMessage();
 
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
     this.isShowResults$ = this.personalitiesService.getIsShowResult();
-
-    const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
-    const parsedAnswers = JSON.parse(stringAnswers);
-    if (parsedAnswers) {
-      this.answers.next(parsedAnswers.answers[parsedAnswers.currentQuestion]);
-    }
 
     const scorePercentages = this.personalitiesService.scorePercentages.value;
 
@@ -106,29 +89,28 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addNextQuestion(answers: any) {
-    const currentValue = this.personalitiesService.counterQuestion.value;
-
-    const increaseValue = currentValue + 1;
-
+  private addNextQuestion({
+    answers,
+    currentQuestionNumber,
+  }: {
+    answers: Answer[];
+    currentQuestionNumber: number;
+  }) {
     if (this.personalitiesService.personalityForm.valid) {
       this.getResults(answers);
     } else if (
       this.personalitiesService.personalityForm.invalid &&
-      increaseValue <= 90
+      currentQuestionNumber <= 90
     ) {
       this.scrollToTop();
-      this.personalitiesService.counterQuestion.next(increaseValue);
 
       this.setSessionStorage(
         'answers',
         JSON.stringify({
           answers,
-          currentQuestion: currentValue + 1,
+          currentQuestion: currentQuestionNumber,
         })
       );
-
-      this.answers.next(answers[currentValue]);
     }
   }
   sendResultsOnEmail(results: { email: string }) {
@@ -143,16 +125,12 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
     }
   }
 
-  refreshTest() {
-    this.openDialog();
-  }
-
   toggleSendForm() {
     this.personalitiesService.isShowSendForm.next(
       !this.personalitiesService.isShowSendForm.value
     );
   }
-  private getResults(answers: Answer) {
+  private getResults(answers: Answer[]) {
     this.personalitiesService
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
@@ -203,50 +181,8 @@ export class PersonalitiesTestComponent implements OnInit, OnDestroy {
       behavior: 'smooth',
     });
   }
-  private openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      data: {
-        contentType: 'confirm',
-        title: 'Ви впевнені що хочете почати з початку ?',
-        btn: {
-          cancel: 'Ні',
-          confirm: 'Так',
-        },
-      },
-    });
 
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        if (result !== undefined) {
-          this.personalitiesService.personalityForm.reset();
-          this.personalitiesService.counterQuestion.next(1);
-          this.scrollToTop();
-          this.answers.next([]);
-
-          sessionStorage.removeItem('personality-test');
-          this.setSessionStorage(
-            'answers',
-            JSON.stringify({
-              answers: this.personalitiesService.personalityForm.value,
-              currentQuestion: 1,
-            })
-          );
-          this.personalitiesService.errors$ = of([]);
-        }
-      });
-  }
-  parseIntProc(proc: number) {
-    return parseInt(proc.toString());
-  }
   private setSessionStorage(key: string, value: any) {
     sessionStorage.setItem(key, value);
-  }
-
-  previousQuestion() {
-    const currentValue = this.personalitiesService.counterQuestion.value;
-
-    this.personalitiesService.counterQuestion.next(currentValue - 1);
   }
 }

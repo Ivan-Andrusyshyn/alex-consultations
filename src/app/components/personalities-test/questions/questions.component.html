@@ -1,50 +1,46 @@
-<form
-  [formGroup]="personalitiesService.personalityForm"
-  *ngIf="personalitiesTest$ | async as questions"
->
-  <ng-container *ngFor="let q of questions; let i = index">
-    <div class="question-card" [hidden]="currentQuestionNumber !== i + 1">
-      <p class="test-score" *ngIf="answers && q.id - 1">
-        Відповідь попереднього питання
-        <span>{{ q.id - 1 }}. {{ answers }}</span>
-      </p>
-
-      <div *ngIf="q">
-        <h3>{{ q.id }}.{{ q.question }}</h3>
-        <div class="answers">
-          <label
-            class="radio-label"
-            *ngFor="let answer of questions[i].answers; let answerIndex = index"
-          >
-            <input
-              class="radio-btn"
-              [formControlName]="q.id.toString()"
-              (click)="
-                forceChangeControl(q.id, answer.point + '-' + answer.type)
-              "
-              type="radio"
-              [value]="answer.point + '-' + answer.type"
-            />
-            {{ answer.text }}
-          </label>
+<app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+<mat-tab-group [(selectedIndex)]="currentQuestionNumber">
+  <form
+    [formGroup]="personalitiesService.personalityForm"
+    *ngIf="personalitiesTest$ | async as questions"
+  >
+    <ng-container *ngFor="let q of questions; let i = index">
+      <mat-tab [label]="q.id.toString()">
+        <div class="question-card">
+          <div *ngIf="q">
+            <h3>{{ q.question }}</h3>
+            <div class="answers">
+              <label
+                class="radio-label"
+                *ngFor="
+                  let answer of questions[i].answers;
+                  let answerIndex = index
+                "
+              >
+                <input
+                  class="radio-btn"
+                  [formControlName]="q.id.toString()"
+                  (click)="
+                    forceChangeControl(q.id, answer.point + '-' + answer.type)
+                  "
+                  type="radio"
+                  [value]="answer.point + '-' + answer.type"
+                />
+                {{ answer.text }}
+              </label>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </ng-container>
-
-  <div class="btn-wrapper">
-    <button
-      type="button"
-      *ngIf="currentQuestionNumber !== 1"
-      (click)="previousQuestion()"
-      class="form-btn"
-    >
-      Назад
-    </button>
-  </div>
-</form>
-<app-error-list
-  [errorList]="this.personalitiesService.errors$ | async"
-  [formIsSubmitted]="formIsSubmitted"
-  (navigateQuestion)="navigateToQuestion($event)"
-></app-error-list>
+      </mat-tab>
+    </ng-container>
+  </form>
+</mat-tab-group>
+<div
+  class="error-message"
+  *ngIf="getInvalidControls()?.length && currentQuestionNumber > 89"
+>
+  Будь ласка, дайте відповідь на всі питання.
+  <!-- <ul>
+    <li *ngFor="let control of getInvalidControls()">{{ control }}</li>
+  </ul> -->
+</div>

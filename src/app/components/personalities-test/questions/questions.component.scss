@@ -27,6 +27,37 @@ form {
 }
 
 // ========================
+// error
+
+.error-message {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  max-height: 200px;
+  font-weight: 500;
+  border: 1px solid #d32f2f;
+  margin-top: 10px;
+  overflow-y: auto;
+  color: #d32f2f;
+  ul {
+    padding: 12px;
+    margin: 8px 0 0;
+    padding-left: 20px;
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+  }
+
+  li {
+    padding-left: 8px;
+    margin-bottom: 4px;
+
+    list-style-type: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+}
 // test ul
 ul {
   gap: 1rem;
@@ -60,18 +91,47 @@ ul {
 }
 
 .question-card {
-  margin-bottom: 25px;
+  margin-bottom: 16px;
+  margin-top: 16px;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border-bottom: 2px solid #ddd;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
 }
 
-.question-card:hover {
-  border: 1px solid #e4bc0b;
+.mat-mdc-tab-header,
+.mat-mdc-tab-group,
+.mat-mdc-tab-labels,
+.mat-mdc-tab-header-pagination,
+.mat-mdc-tab-header-pagination-controls-enabled,
+.mat-mdc-tab-body-wrapper,
+.mat-mdc-tab,
+.mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: #ffffff;
+  --mat-tab-header-active-label-text-color: #ffffff;
+  --mat-tab-header-inactive-label-text-color: #f0f0f0;
+  --mat-mdc-tab-header-pagination-chevron-color: #ffffff !important;
+
+  --mat-full-pseudo-checkbox-selected-checkmark-color: #ffffff;
+  --mdc-tab-text-label-color: #ffffff;
+  --mdc-tab-text-label-color-default: #f5f5f5;
 }
 
+::ng-deep .mat-mdc-tab-header-pagination-chevron,
+.mat-mdc-tab-header-pagination-before .mat-mdc-tab-header-pagination-chevron,
+.mat-mdc-tab-header-rtl
+  .mat-mdc-tab-header-pagination-after
+  .mat-mdc-tab-header-pagination-chevron {
+  border-color: #ddd !important;
+}
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #ddd !important;
+}
+.mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+  color: #ddd !important;
+}
+
+//
 .question-card h3 {
   font-size: 1.4rem;
   color: #fff;

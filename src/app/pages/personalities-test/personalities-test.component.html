@@ -30,18 +30,6 @@
   </div>
 
   <div class="container" *ngIf="!(isShowResults$ | async)">
-    <app-progress-bar
-      [currentProgress]="
-        parseIntProc((((currentQuestionNumber$ | async) ?? 1) / 90) * 100)
-      "
-    ></app-progress-bar>
-    <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
-
-    <app-questions
-      [currentQuestionNumber]="(currentQuestionNumber$ | async) ?? 1"
-      (nextQues)="nextQuestion($event)"
-      [answers]="answers$ | async"
-      (prevQuestion)="previousQuestion()"
-    ></app-questions>
+    <app-questions (nextQues)="nextQuestion($event)"></app-questions>
   </div>
 </section>

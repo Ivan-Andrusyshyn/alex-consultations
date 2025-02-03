@@ -1,7 +1,9 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  DestroyRef,
   EventEmitter,
   inject,
   Input,
@@ -9,16 +11,27 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { map, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Question } from '../../../shared/types/test';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
-import { ErrorListComponent } from '../error-list/error-list.component';
+import { RefreshButtonComponent } from '../../refresh-button/refresh-button.component';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [NgIf, ErrorListComponent, NgFor, AsyncPipe, ReactiveFormsModule],
+  imports: [
+    NgIf,
+    RefreshButtonComponent,
+    MatTabsModule,
+    NgFor,
+    AsyncPipe,
+    ReactiveFormsModule,
+  ],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,17 +39,13 @@ import { ErrorListComponent } from '../error-list/error-list.component';
 export class QuestionsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   readonly personalitiesService = inject(PersonalitiesTestService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly cdr = inject(ChangeDetectorRef);
+  readonly dialog = inject(MatDialog);
+  @Output() nextQues = new EventEmitter();
 
   personalitiesTest$!: Observable<Question[]>;
-  @Input() answers!: any[];
-  @Input() currentQuestionNumber: number = 1;
-  @Output() nextQues = new EventEmitter();
-  @Output() prevQuestion = new EventEmitter();
-
-  // error
-  formIsSubmitted: boolean = false;
-  questionErrors: { [key: number]: string[] } = {};
-
+  currentQuestionNumber: number = 1;
   ngOnInit(): void {
     this.personalitiesTest$ = this.personalitiesService
       .getPersonalitiesTest()
@@ -58,56 +67,66 @@ export class QuestionsComponent implements OnInit {
     if (control?.value === value) {
       control.setValue(null, { emitEvent: false });
     }
-
     control?.setValue(value, { emitEvent: true });
     const answers = this.personalitiesService.personalityForm.value;
-    if (this.currentQuestionNumber > 89) {
-      this.formIsSubmitted = true;
-    }
-    this.personalitiesService.errors$ = this.getInvalidControls();
-    this.nextQues.emit(answers);
+
+    this.currentQuestionNumber += 1;
+    this.nextQues.emit({
+      answers,
+      currentQuestionNumber: this.currentQuestionNumber,
+    });
+  }
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        contentType: 'confirm',
+        title: 'Ви впевнені що хочете почати з початку ?',
+        btn: {
+          cancel: 'Ні',
+          confirm: 'Так',
+        },
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result) => {
+        if (result !== undefined) {
+          this.personalitiesService.personalityForm.reset();
+          this.currentQuestionNumber = 0;
+          sessionStorage.removeItem('personality-test');
+          sessionStorage.setItem(
+            'answers',
+            JSON.stringify({
+              answers: this.personalitiesService.personalityForm.value,
+              currentQuestion: this.currentQuestionNumber,
+            })
+          );
+          this.cdr.markForCheck();
+        }
+      });
   }
 
-  getInvalidControls() {
-    const invalidControls = this.personalitiesService.personalityForm.invalid;
-    if (invalidControls) {
-      const controls = this.personalitiesService.personalityForm.controls;
-      const errors = Object.keys(controls).filter(
-        (key) => controls[key].invalid
-      );
-
-      this.questionErrors = errors.reduce((acc, key) => {
-        const questionId = parseInt(key, 10);
-        acc[questionId] = acc[questionId] || [];
-        acc[questionId].push('Invalid answer');
-        return acc;
-      }, {} as { [key: number]: string[] });
-
-      return of(errors);
-    } else {
-      return of(null);
-    }
+  refreshTest() {
+    this.openDialog();
   }
 
-  previousQuestion() {
-    this.prevQuestion.emit();
-  }
   navigateToQuestion(errorKey: string) {
     const questionId = parseInt(errorKey, 10);
     this.currentQuestionNumber = questionId;
     window.scrollTo(0, 0);
   }
-
+  parseIntProc(proc: number) {
+    return parseInt(proc.toString());
+  }
   private setCurrentAnswers() {
     const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
     const parsedAnswers = JSON.parse(stringAnswers);
 
     if (parsedAnswers) {
+      this.currentQuestionNumber = parsedAnswers.currentQuestion;
       this.personalitiesService.personalityForm.setValue(parsedAnswers.answers);
-
-      this.personalitiesService.counterQuestion.next(
-        parsedAnswers.currentQuestion
-      );
     }
   }
   private createFormGroup(questions: Question[]) {
@@ -118,5 +137,17 @@ export class QuestionsComponent implements OnInit {
     });
 
     this.personalitiesService.personalityForm = this.fb.group(formControls);
+  }
+
+  getInvalidControls(): string[] {
+    if (!this.personalitiesService.personalityForm) {
+      return [];
+    }
+
+    return Object.keys(
+      this.personalitiesService.personalityForm.controls
+    ).filter(
+      (key) => this.personalitiesService.personalityForm.controls[key].invalid
+    );
   }
 }
