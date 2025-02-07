@@ -93,9 +93,9 @@
       text-decoration: none;
       transition: all 0.3s ease, transform 0.2s ease;
       box-sizing: border-box;
-      &:hover {
-        background: #ff2e63;
-        transform: scale(1.05);
+      &:hover,
+      &:focus {
+        background: #e94560d0;
       }
 
       @media screen and (min-width: 768px) {
@@ -104,8 +104,13 @@
       }
     }
 
-    &:hover {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    .start-test {
+      background: #30720a;
+
+      &:hover,
+      &:focus {
+        background: #30720acc;
+      }
     }
   }
 }
