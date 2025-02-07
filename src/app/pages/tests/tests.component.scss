@@ -58,6 +58,7 @@
     gap: 8px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     @media screen and (min-width: 768px) {
+      max-width: 400px;
       padding: 24px;
     }
     h3 {
@@ -81,6 +82,7 @@
     .link-btn {
       padding: 8px 12px;
       border-radius: 8px;
+      width: 124px;
       font-size: 12px;
 
       display: inline-block;
@@ -97,12 +99,12 @@
       }
 
       @media screen and (min-width: 768px) {
+        width: 160px;
         font-size: 14px;
       }
     }
 
     &:hover {
-      transform: translateY(-5px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
   }

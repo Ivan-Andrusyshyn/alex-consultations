@@ -160,8 +160,8 @@ ul {
     position: relative;
     &::before {
       content: "";
-      width: 12px;
-      height: 12px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       left: 0;
       top: 50%;
@@ -175,8 +175,8 @@ ul {
 
     &::after {
       content: "";
-      width: 10px;
-      height: 10px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       left: 4px;
       top: 50%;
@@ -186,16 +186,18 @@ ul {
       background-color: transparent;
       transition: background-color 0.3s ease;
     }
+    @media screen and (min-width: 764px) {
+      font-size: 1.4rem;
+    }
   }
 
   .radio-label:has(.radio-btn:checked)::after {
-    background-color: #fff;
+    background-color: #4caf50;
   }
 
   .radio-label:has(.radio-btn:focus)::before,
   .radio-label:has(.radio-btn:checked)::before {
-    border-color: #4caf50;
-    background-color: #4caf50;
+    border-color: #fff;
   }
   @media screen and (min-width: 764px) {
     .radio-label:has(.radio-btn:hover)::before {
@@ -245,10 +247,6 @@ ul {
 
   .question-card {
     padding: 15px;
-  }
-
-  .answers label {
-    font-size: 0.9rem;
   }
 
   button {

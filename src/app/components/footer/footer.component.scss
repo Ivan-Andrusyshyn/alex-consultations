@@ -2,7 +2,7 @@
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: #fff;
   text-align: center;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   margin-top: auto;
 
   .container {
@@ -16,6 +16,11 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
   }
 
   .footer-nav {
@@ -32,12 +37,13 @@
         color: #fff;
       }
     }
-  }
-
-  @media (max-width: 768px) {
-    .footer-nav {
+    @media (min-width: 768px) {
       flex-direction: column;
       gap: 10px;
     }
+  }
+
+  @media (min-width: 768px) {
+    padding: 40px 0;
   }
 }

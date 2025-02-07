@@ -1,8 +1,5 @@
 @use "@angular/material" as mat;
-html,
-body {
-  height: 100%;
-}
+
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
@@ -10,9 +7,60 @@ body {
 html,
 body {
   height: 100%;
+  margin: 0;
 }
 body {
   background-color: #073136;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  border: none;
+  outline: none;
+  background: none;
+  font: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+textarea {
+  resize: none;
+}
+
+html {
+  scroll-behavior: smooth;
 }
