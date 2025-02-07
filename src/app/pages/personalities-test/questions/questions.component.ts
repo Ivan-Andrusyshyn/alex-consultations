@@ -150,7 +150,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }
   private scrollToTop(): void {
     window.scrollTo({
-      top: 100,
+      top: 40,
       behavior: 'smooth',
     });
   }
