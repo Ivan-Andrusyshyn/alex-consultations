@@ -138,6 +138,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         testName: '16-personalities',
         results: personType,
         timestamp: this.timestamp ?? '',
+        device: this.googleSheetService.getDeviceType(),
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef),

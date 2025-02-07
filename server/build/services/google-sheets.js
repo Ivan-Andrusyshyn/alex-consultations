@@ -16,6 +16,7 @@ class GoogleSheetsService {
             body.set('testName', data.testName);
             body.set('results', data.results);
             body.set('timestamp', data.timestamp);
+            body.set('device', data.device);
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbw9GKtfB1tKJ-gx_YuqcmuongHOOOfhOka8vmUUfW6UPDimQni-26qksFehGv7cyUkf/exec';
             try {
                 const response = yield fetch(scriptUrl, {
