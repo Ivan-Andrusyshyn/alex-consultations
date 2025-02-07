@@ -81,35 +81,50 @@
 
     .link-btn {
       padding: 8px 12px;
-      border-radius: 8px;
       width: 124px;
       font-size: 12px;
 
       display: inline-block;
-      background: #e94560;
       color: #fff;
 
       font-weight: bold;
+      border-bottom: 0 solid #30720a;
       text-decoration: none;
       transition: all 0.3s ease, transform 0.2s ease;
       box-sizing: border-box;
-      &:hover,
-      &:focus {
-        background: #e94560d0;
-      }
 
       @media screen and (min-width: 768px) {
         width: 160px;
         font-size: 14px;
       }
     }
+    .info-test {
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background-color: #e94560;
+        transition: width 0.3s ease-in-out;
+      }
+
+      &:hover::after,
+      &:focus::after {
+        width: 100%;
+      }
+    }
 
     .start-test {
-      background: #30720a;
+      border-bottom: 2px solid #30720a;
 
       &:hover,
       &:focus {
-        background: #30720acc;
+        border-color: #30720a9d;
       }
     }
   }
