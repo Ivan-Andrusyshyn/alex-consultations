@@ -5,24 +5,25 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
+import { PersonalityResult, TestResult } from '../../../shared/types/test';
 
 @Component({
-  selector: 'app-personalities-results',
+  selector: 'app-results-indicator',
   standalone: true,
   imports: [NgFor, NgIf, NgClass, AsyncPipe],
-  templateUrl: './personalities-results.component.html',
-  styleUrl: './personalities-results.component.scss',
+  templateUrl: './results-indicator.component.html',
+  styleUrl: './results-indicator.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PersonalitiesResultsComponent implements OnInit {
+export class ResultsIndicatorComponent implements OnInit {
   private readonly personalitiesService = inject(PersonalitiesTestService);
 
-  scoreKeys!: string[];
-  scorePercentages$!: Observable<any>;
+  scoreKeys!: Array<keyof TestResult>;
 
+  scorePercentages$!: Observable<PersonalityResult>;
   ngOnInit(): void {
     this.scorePercentages$ =
       this.personalitiesService.getObservableScorePercentages();

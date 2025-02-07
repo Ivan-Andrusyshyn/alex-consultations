@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = __importDefault(require("../utils/personalities/test"));
 const _16_personality_1 = __importDefault(require("../services/16-personality"));
-const processPersonalityTestResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postPersonalityPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
         const amountQuestions = _16_personality_1.default.amountQuestionsInType((0, test_1.default)());
@@ -29,4 +29,4 @@ const processPersonalityTestResult = (req, res) => __awaiter(void 0, void 0, voi
         return res.status(400).send('Internal server error');
     }
 });
-exports.default = processPersonalityTestResult;
+exports.default = postPersonalityPercentages;

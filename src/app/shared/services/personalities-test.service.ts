@@ -27,7 +27,6 @@ interface PersonalitiesResults {
 export class PersonalitiesTestService {
   isShowSendForm = new BehaviorSubject(false);
   isShowSendFormMessage = new BehaviorSubject(false);
-  isShowResults = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
   personalityForm!: FormGroup;
   errors$!: Observable<any[] | null>;
@@ -41,7 +40,6 @@ export class PersonalitiesTestService {
     );
     if (score) {
       this.scorePercentages.next(score.scorePercentages);
-      this.isShowResults.next(true);
     }
   }
 
@@ -55,8 +53,18 @@ export class PersonalitiesTestService {
         })
       );
   }
-  getPersonTypeByResults(scorePercentages: PersonalityResult): Observable<{
+  getPersonTypeByResults(personType: string): Observable<{
     personInformation: TypeInformation;
+    message: string;
+    personType: string;
+  }> {
+    return this.http.get<{
+      personInformation: TypeInformation;
+      message: string;
+      personType: string;
+    }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);
+  }
+  getPersonType(scorePercentages: PersonalityResult): Observable<{
     message: string;
     personType: string;
   }> {
@@ -64,7 +72,7 @@ export class PersonalitiesTestService {
       personInformation: TypeInformation;
       message: string;
       personType: string;
-    }>(this.testsUrl + '/16-personalities/person-type', scorePercentages);
+    }>(this.testsUrl + '/16-personalities/get-type', scorePercentages);
   }
 
   getObservableScorePercentages(): Observable<PersonalityResult> {
@@ -73,9 +81,6 @@ export class PersonalitiesTestService {
   getIsShowSendForm(): Observable<boolean> {
     return this.isShowSendForm.asObservable();
   }
-  getIsShowResult(): Observable<boolean> {
-    return this.isShowResults.asObservable();
-  }
 
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();
@@ -83,8 +88,8 @@ export class PersonalitiesTestService {
   getIsShowSendFormMessage(): Observable<boolean> {
     return this.isShowSendFormMessage.asObservable();
   }
-  getScoreKeys(): string[] {
-    return Object.keys({
+  getScoreKeys(): Array<keyof TestResult> {
+    const keys = Object.keys({
       E: 0,
       I: 0,
       S: 0,
@@ -93,7 +98,9 @@ export class PersonalitiesTestService {
       F: 0,
       J: 0,
       P: 0,
-    });
+    }) as (keyof TestResult)[];
+
+    return keys;
   }
   getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
     return this.http.post<PersonalitiesResults>(

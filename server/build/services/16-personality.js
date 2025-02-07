@@ -65,30 +65,33 @@ class PersonalitiesService {
             const thirdLetter = scores.F > scores.T ? 'F' : 'T';
             const fourthLetter = scores.J > scores.P ? 'J' : 'P';
             const personalityType = `${firstLetter}${secondLetter}${thirdLetter}${fourthLetter}`;
-            const personalities = {
-                ISFJ: 'Захисник',
-                ISTJ: 'Адміністратор',
-                INFJ: 'Адвокат',
-                INTJ: 'Архітектор',
-                ISFP: 'Авантюрист',
-                ISTP: 'Віртуоз',
-                INFP: 'Посередник',
-                INTP: 'Вчений',
-                ESFJ: 'Консул',
-                ESTJ: 'Керівник',
-                ENFJ: 'Протагоніст',
-                ENTJ: 'Командир',
-                ESFP: 'Шоумен',
-                ESTP: 'Підприємець',
-                ENFP: 'Борець',
-                ENTP: 'Полеміст',
-            };
-            return personalities[personalityType] || 'Невідомий тип';
+            return this.getPersonNameByType(personalityType);
         };
         this.getInformationByType = (type) => {
             var _a;
             return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
+    }
+    getPersonNameByType(personalityType) {
+        const personalities = {
+            ISFJ: 'Захисник',
+            ISTJ: 'Адміністратор',
+            INFJ: 'Адвокат',
+            INTJ: 'Архітектор',
+            ISFP: 'Авантюрист',
+            ISTP: 'Віртуоз',
+            INFP: 'Посередник',
+            INTP: 'Вчений',
+            ESFJ: 'Консул',
+            ESTJ: 'Керівник',
+            ENFJ: 'Протагоніст',
+            ENTJ: 'Командир',
+            ESFP: 'Шоумен',
+            ESTP: 'Підприємець',
+            ENFP: 'Борець',
+            ENTP: 'Полеміст',
+        };
+        return personalities[personalityType] || 'Невідомий тип';
     }
 }
 const personalitiesService = new PersonalitiesService();

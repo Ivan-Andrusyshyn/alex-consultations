@@ -1,9 +1,10 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Location, NgFor, NgIf } from '@angular/common';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { TypeInformation } from '../../../shared/types/test';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-personalities-type-information',
@@ -12,9 +13,21 @@ import { TypeInformation } from '../../../shared/types/test';
   templateUrl: './personalities-type-information.component.html',
   styleUrl: './personalities-type-information.component.scss',
 })
-export class PersonalitiesTypeInformationComponent {
+export class PersonalitiesTypeInformationComponent implements OnInit {
   @Input() personInformation!: TypeInformation;
   @Input() personType!: string;
+
+  private readonly location = inject(Location);
+  notificationService = inject(NotificationService);
+
+  ngOnInit(): void {
+    if (!this.personInformation) {
+      this.location.back();
+      this.notificationService.setNotification(
+        'Такого типу особистості не знайдено.'
+      );
+    }
+  }
 
   sectionList = [
     { id: 'strengths', label: 'Сильні сторони' },

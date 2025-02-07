@@ -1,35 +1,3 @@
 <section class="test">
-  <div class="score-wrapper" *ngIf="isShowResults$ | async">
-    <app-personalities-results></app-personalities-results>
-
-    <app-send-form-on-email-btn
-      *ngIf="!(isShowSendForm$ | async)"
-      (sendForm)="toggleSendForm()"
-    ></app-send-form-on-email-btn>
-    <app-send-results-form
-      *ngIf="isShowSendForm$ | async"
-      (toggleSendForm)="toggleSendForm()"
-      (sendResultsOnEmail)="sendResultsOnEmail($event)"
-    ></app-send-results-form>
-    <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
-      Ми відправили результати тесту на пошту!
-    </div>
-  </div>
-
-  <div
-    class="person-info"
-    *ngIf="
-      (isShowResults$ | async) &&
-      (personInformation$ | async) as personInformation
-    "
-  >
-    <app-personalities-type-information
-      [personType]="personInformation.personType"
-      [personInformation]="personInformation.personInformation"
-    ></app-personalities-type-information>
-  </div>
-
-  <div class="container" *ngIf="!(isShowResults$ | async)">
-    <app-questions (nextQues)="nextQuestion($event)"></app-questions>
-  </div>
+  <router-outlet></router-outlet>
 </section>

@@ -22,7 +22,7 @@ import { RefreshButtonComponent } from '../../refresh-button/refresh-button.comp
 import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
-  selector: 'app-questions',
+  selector: 'app-form-questions',
   standalone: true,
   imports: [
     NgIf,
@@ -32,20 +32,22 @@ import { ModalComponent } from '../../modal/modal.component';
     AsyncPipe,
     ReactiveFormsModule,
   ],
-  templateUrl: './questions.component.html',
-  styleUrl: './questions.component.scss',
+  templateUrl: './form-questions.component.html',
+  styleUrl: './form-questions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionsComponent implements OnInit {
+export class FormQuestionsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
   readonly dialog = inject(MatDialog);
+
   @Output() nextQues = new EventEmitter();
 
   personalitiesTest$!: Observable<Question[]>;
   currentQuestionNumber: number = 1;
+
   ngOnInit(): void {
     this.personalitiesTest$ = this.personalitiesService
       .getPersonalitiesTest()
@@ -59,6 +61,7 @@ export class QuestionsComponent implements OnInit {
         })
       );
   }
+
   forceChangeControl(questionId: number, value: string) {
     const control = this.personalitiesService.personalityForm.get(
       questionId.toString()
@@ -67,6 +70,7 @@ export class QuestionsComponent implements OnInit {
     if (control?.value === value) {
       control.setValue(null, { emitEvent: false });
     }
+
     control?.setValue(value, { emitEvent: true });
     const answers = this.personalitiesService.personalityForm.value;
 
@@ -76,6 +80,7 @@ export class QuestionsComponent implements OnInit {
       currentQuestionNumber: this.currentQuestionNumber,
     });
   }
+
   private openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: {
@@ -117,9 +122,11 @@ export class QuestionsComponent implements OnInit {
     this.currentQuestionNumber = questionId;
     window.scrollTo(0, 0);
   }
+
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
   }
+
   private setCurrentAnswers() {
     const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
     const parsedAnswers = JSON.parse(stringAnswers);
@@ -129,6 +136,7 @@ export class QuestionsComponent implements OnInit {
       this.personalitiesService.personalityForm.setValue(parsedAnswers.answers);
     }
   }
+
   private createFormGroup(questions: Question[]) {
     const formControls: { [key: string]: any } = {};
 

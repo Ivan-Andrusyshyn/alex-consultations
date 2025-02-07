@@ -8,20 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const _16_personality_1 = __importDefault(require("../services/16-personality"));
-const postPersonTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const personType = req.body.personType;
-        const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
-        const personInformation = _16_personality_1.default.getInformationByType(personNameByType);
-        res.status(200).send({
-            personType: personNameByType,
-            personInformation,
-            message: 'Success post person type .',
+        const results = req.body;
+        console.log(results);
+        res.status(201).send({
+            message: 'Succesfull post email!',
         });
     }
     catch (error) {
@@ -29,4 +22,4 @@ const postPersonTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, 
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = postPersonTypeByResults;
+exports.default = postEmail;

@@ -1,4 +1,9 @@
 <app-header></app-header>
+<mat-progress-bar *ngIf="loading$ | async" mode="indeterminate">
+</mat-progress-bar>
+<div class="backdrop" *ngIf="(loading$ | async) && !(isReqMethodGet$ | async)">
+  <mat-spinner></mat-spinner>
+</div>
 <main>
   <router-outlet />
 </main>
