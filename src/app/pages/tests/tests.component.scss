@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: center;
@@ -47,24 +47,21 @@
     padding: 0.5rem;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    max-width: 300px;
     width: 100%;
     gap: 8px;
 
     border: 2px solid #16213e;
     text-align: center;
-    display: flex;
     position: relative;
     justify-content: center;
     flex-wrap: wrap;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     @media screen and (min-width: 768px) {
-      max-width: 450px;
       padding: 24px;
     }
 
     ::ng-deep app-test-card-start-btn {
-      width: 100%;
+      max-width: 50%;
     }
 
     h3 {
