@@ -49,18 +49,24 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     max-width: 300px;
     width: 100%;
+    gap: 8px;
 
     border: 2px solid #16213e;
     text-align: center;
     display: flex;
+    position: relative;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     @media screen and (min-width: 768px) {
-      max-width: 400px;
+      max-width: 450px;
       padding: 24px;
     }
+
+    ::ng-deep app-test-card-start-btn {
+      width: 100%;
+    }
+
     h3 {
       font-size: 16px;
       margin-bottom: 10px;
@@ -76,54 +82,6 @@
       color: #f1f1f1;
       @media screen and (min-width: 768px) {
         font-size: 16px;
-      }
-    }
-
-    .link-btn {
-      padding: 8px 12px;
-      width: 124px;
-      font-size: 12px;
-
-      display: inline-block;
-      color: #fff;
-
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease, transform 0.2s ease;
-      box-sizing: border-box;
-
-      @media screen and (min-width: 768px) {
-        width: 160px;
-        font-size: 14px;
-      }
-    }
-    .info-test {
-      position: relative;
-      display: inline-block;
-
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 2px;
-        width: 0;
-        background-color: #e94560;
-        transition: width 0.3s ease-in-out;
-      }
-
-      &:hover::after,
-      &:focus::after {
-        width: 100%;
-      }
-    }
-
-    .start-test {
-      border-bottom: 2px solid #e94560;
-
-      &:hover,
-      &:focus {
-        border-color: #e94560c2;
       }
     }
   }

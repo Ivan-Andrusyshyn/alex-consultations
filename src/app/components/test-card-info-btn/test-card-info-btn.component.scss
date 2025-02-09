@@ -1,0 +1,30 @@
+.info-test-btn {
+  right: 16px;
+  top: 24px;
+
+  position: absolute;
+  display: inline-block;
+  cursor: pointer;
+
+  .info-title {
+    border-radius: 8px;
+    border: 1px solid #333;
+    padding: 8px;
+    width: 150px;
+    top: 28px;
+
+    color: #433333;
+    position: absolute;
+    background-color: #ffff;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s linear;
+  }
+  @media screen and (min-width: 764px) {
+    &:hover > .info-title,
+    &:focus > .info-title {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

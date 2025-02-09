@@ -1,25 +1,14 @@
 <section class="tests">
   <div class="container">
     <div>
-      <h2 class="section-title">Тести на особистість!</h2>
-      <p class="section-description">
-        Пройди тест, щоб краще пізнати свою особистість і призначення.
-      </p>
+      <h2 [hidden]="true" class="section-title">Тести на особистість!</h2>
 
       <ul class="test-list">
         <li class="test-card">
           <h3>Тест 16 типів особистості</h3>
           <p>Дізнайся більше про себе, свої сильні та слабкі сторони.</p>
-          <a
-            routerLink="/tests/16-personalities/questions"
-            class="link-btn start-test"
-            >Пройти тест</a
-          >
-          <a
-            [routerLink]="['/tests/16-personalities/test-information']"
-            class="link-btn info-test"
-            >Дізнатися більше</a
-          >
+          <app-test-card-start-btn></app-test-card-start-btn>
+          <app-test-card-info-btn></app-test-card-info-btn>
         </li>
       </ul>
     </div>
