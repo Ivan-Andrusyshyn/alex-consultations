@@ -1,18 +1,25 @@
 .start-test {
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 0;
+  min-width: 164px;
+  max-height: 48px;
+  font-weight: 400;
   font-size: 14px;
-
-  display: inline-block;
-  background: #e94560;
-  color: #fff;
-
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease, transform 0.2s ease;
-
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-bottom: 0 !important;
+  max-width: max-content;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4ea524;
   &:hover {
-    background: #ff2e63;
+    background: #4ea524;
+  }
+  &:focus {
+    box-shadow: none;
+    outline: 2px solid #53b125 !important;
+    text-decoration: none;
   }
 
   @media screen and (min-width: 768px) {
