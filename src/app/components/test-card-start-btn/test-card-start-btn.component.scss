@@ -1,7 +1,7 @@
 .start-test {
   padding: 0;
   min-width: 164px;
-  max-height: 48px;
+  height: 38px;
   font-weight: 400;
   font-size: 14px;
   border-radius: 8px;
@@ -24,6 +24,7 @@
 
   @media screen and (min-width: 768px) {
     padding: 12px 20px;
+    height: 48px;
     font-size: 16px;
   }
 }
