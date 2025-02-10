@@ -9,6 +9,7 @@ const corsOptions = () => (0, cors_1.default)({
         'http://localhost:4200',
         'http://vidchuttia.com.ua',
         'https://alex-consultations.vercel.app',
+      '*'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
