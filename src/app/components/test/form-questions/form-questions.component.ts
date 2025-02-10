@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -7,16 +7,22 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Question } from '../../../shared/types/test';
+import { Question } from '../../../shared/types/16-personalities';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { RefreshButtonComponent } from '../../refresh-button/refresh-button.component';
 import { ModalComponent } from '../../modal/modal.component';
@@ -29,7 +35,6 @@ import { ModalComponent } from '../../modal/modal.component';
     RefreshButtonComponent,
     MatTabsModule,
     NgFor,
-    AsyncPipe,
     ReactiveFormsModule,
   ],
   templateUrl: './form-questions.component.html',
@@ -37,42 +42,27 @@ import { ModalComponent } from '../../modal/modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormQuestionsComponent implements OnInit {
-  private readonly fb = inject(FormBuilder);
   readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
   readonly dialog = inject(MatDialog);
 
   @Output() nextQues = new EventEmitter();
-
-  personalitiesTest$!: Observable<Question[]>;
-  currentQuestionNumber: number = 1;
-
-  ngOnInit(): void {
-    this.personalitiesTest$ = this.personalitiesService
-      .getPersonalitiesTest()
-      .pipe(
-        map((r) => {
-          this.createFormGroup(r.questions);
-
-          this.setCurrentAnswers();
-
-          return r.questions;
-        })
-      );
-  }
+  @Input() questions!: Question[];
+  @Input() formGroup!: FormGroup;
+  @Input() currentQuestionNumber: number = 1;
+  @Input() currentTestName: string = '';
+  ngOnInit(): void {}
 
   forceChangeControl(questionId: number, value: string) {
-    const control = this.personalitiesService.personalityForm.get(
-      questionId.toString()
-    );
+    const control = this.formGroup.get(questionId.toString());
 
     if (control?.value === value) {
       control.setValue(null, { emitEvent: false });
     }
 
     control?.setValue(value, { emitEvent: true });
-    const answers = this.personalitiesService.personalityForm.value;
+    const answers = this.formGroup.value;
 
     this.currentQuestionNumber += 1;
     this.nextQues.emit({
@@ -98,13 +88,13 @@ export class FormQuestionsComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if (result !== undefined) {
-          this.personalitiesService.personalityForm.reset();
+          this.formGroup.reset();
           this.currentQuestionNumber = 0;
-          sessionStorage.removeItem('personality-test');
+          sessionStorage.removeItem(this.currentTestName);
           sessionStorage.setItem(
-            'answers',
+            this.currentTestName + '-answers',
             JSON.stringify({
-              answers: this.personalitiesService.personalityForm.value,
+              answers: this.formGroup.value,
               currentQuestion: this.currentQuestionNumber,
             })
           );
@@ -127,35 +117,13 @@ export class FormQuestionsComponent implements OnInit {
     return parseInt(proc.toString());
   }
 
-  private setCurrentAnswers() {
-    const stringAnswers = sessionStorage.getItem('answers') ?? 'null';
-    const parsedAnswers = JSON.parse(stringAnswers);
-
-    if (parsedAnswers) {
-      this.currentQuestionNumber = parsedAnswers.currentQuestion;
-      this.personalitiesService.personalityForm.setValue(parsedAnswers.answers);
-    }
-  }
-
-  private createFormGroup(questions: Question[]) {
-    const formControls: { [key: string]: any } = {};
-
-    questions.forEach((q: Question, i: number) => {
-      formControls[q.id.toString()] = ['', Validators.required];
-    });
-
-    this.personalitiesService.personalityForm = this.fb.group(formControls);
-  }
-
   getInvalidControls(): string[] {
-    if (!this.personalitiesService.personalityForm) {
+    if (!this.formGroup) {
       return [];
     }
 
-    return Object.keys(
-      this.personalitiesService.personalityForm.controls
-    ).filter(
-      (key) => this.personalitiesService.personalityForm.controls[key].invalid
+    return Object.keys(this.formGroup.controls).filter(
+      (key) => this.formGroup.controls[key].invalid
     );
   }
 }

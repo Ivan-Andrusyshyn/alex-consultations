@@ -1,9 +1,9 @@
 <div class="questions">
   <app-form-questions
     [formGroup]="formGroup"
-    [questions]="(personalitiesTest$ | async) ?? []"
-    [currentTestName]="'16-personalities'"
+    [questions]="(traumaticSensitivityTest$ | async) ?? []"
     [currentQuestionNumber]="currentQuestionNumber"
+    [currentTestName]="'traumatic-sensitivity'"
     (nextQues)="nextQuestion($event)"
   ></app-form-questions>
 </div>

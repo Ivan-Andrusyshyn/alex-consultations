@@ -31,23 +31,22 @@ form {
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    color: #fff;
     cursor: pointer;
     transition: all 0.3s, transform 0.2s;
   }
 
-  button:not(:disabled) {
+  .submit-btn:not(:disabled) {
     background: #4caf50;
-    color: fff;
     transition: all 0.3s, transform 0.2s;
   }
 
-  button:not(:disabled):hover {
+  .submit-btn:not(:disabled):hover {
     background: #45a049;
   }
 
   button:last-child {
     background: #f44336;
-    color: fff;
   }
 
   button:last-child:hover {

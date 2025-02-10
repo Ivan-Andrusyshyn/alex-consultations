@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,4 +8,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './test-card-start-btn.component.html',
   styleUrl: './test-card-start-btn.component.scss',
 })
-export class TestCardStartBtnComponent {}
+export class TestCardStartBtnComponent {
+  @Input() route!: string;
+}

@@ -3,8 +3,8 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { TypeInformation } from '../../../shared/types/test';
-import { NotificationService } from '../../../shared/services/notification.service';
+import { TypeInformation } from '../../../../shared/types/16-personalities';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-personalities-type-information',

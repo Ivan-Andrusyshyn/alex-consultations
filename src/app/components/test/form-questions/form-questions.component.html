@@ -3,10 +3,7 @@
   animationDuration="0ms"
   [(selectedIndex)]="currentQuestionNumber"
 >
-  <form
-    [formGroup]="personalitiesService.personalityForm"
-    *ngIf="personalitiesTest$ | async as questions"
-  >
+  <form [formGroup]="formGroup" *ngIf="questions">
     <ng-container *ngFor="let q of questions; let i = index">
       <mat-tab [label]="q.id.toString()">
         <div class="question-card">
@@ -15,10 +12,7 @@
             <div class="answers">
               <label
                 class="radio-label"
-                *ngFor="
-                  let answer of questions[i].answers;
-                  let answerIndex = index
-                "
+                *ngFor="let answer of q.answers; let answerIndex = index"
               >
                 <input
                   class="radio-btn"

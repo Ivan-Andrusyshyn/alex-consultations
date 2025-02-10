@@ -11,13 +11,16 @@ import { map, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { PersonalitiesTypeInformationComponent } from '../../../components/personalities-test/personalities-type-information/personalities-type-information.component';
+import { PersonalitiesTypeInformationComponent } from '../../../components/test/personalities-test/personalities-type-information/personalities-type-information.component';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
-import { PersonalityResult, TypeInformation } from '../../../shared/types/test';
+import {
+  TestResult,
+  TypeInformation,
+} from '../../../shared/types/16-personalities';
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
-import { ResultsIndicatorComponent } from '../../../components/personalities-test/results-indicator/results-indicator.component';
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
+import { ResultsIndicatorComponent } from '../../../components/test/personalities-test/results-indicator/results-indicator.component';
 
 @Component({
   selector: 'app-test-results',
@@ -44,7 +47,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     personType: string;
     personInformation: TypeInformation;
   }>;
-  scorePercentages$!: Observable<PersonalityResult>;
+  scorePercentages$!: Observable<TestResult | null>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
 

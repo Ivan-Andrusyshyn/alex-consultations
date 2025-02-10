@@ -1,0 +1,31 @@
+<section class="person-info">
+  <div class="test-results">
+    <h2>{{ sensitivityType$ | async }}</h2>
+    <hr />
+    <br />
+    <h3 class="min-score">Найменше балів: {{ minScoreNumber$ | async }}</h3>
+    <h3 class="max-score">Найбільше балів: {{ maxScoreNumber$ | async }}</h3>
+    <div *ngIf="scores$ | async as scores">
+      <ul>
+        <li *ngFor="let score of scoresKeys">
+          {{ score }}:{{ scores[score] }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="score-wrapper" *ngIf="scorePercentages$ | async">
+    <app-traumatic-indicator></app-traumatic-indicator>
+    <app-send-form-on-email-btn
+      *ngIf="!(isShowSendForm$ | async)"
+      (sendForm)="toggleSendForm()"
+    ></app-send-form-on-email-btn>
+    <app-send-results-form
+      *ngIf="isShowSendForm$ | async"
+      (toggleSendForm)="toggleSendForm()"
+      (sendResultsOnEmail)="sendResultsOnEmail($event)"
+    ></app-send-results-form>
+    <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
+      Ми відправили результати тесту на пошту!
+    </div>
+  </div>
+</section>

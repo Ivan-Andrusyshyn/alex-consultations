@@ -12,16 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const _16_personality_1 = __importDefault(require("../../services/16-personality"));
+const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = req.body;
-        res.status(200).send({ message: 'Successfull add new row' });
-        yield google_sheets_1.default.postTestResultsOnSheet(data);
+        const personType = req.params.personType;
+        console.log(personType);
+        const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
+        const personInformation = _16_personality_1.default.getInformationByType(personNameByType);
+        res.status(200).send({
+            personType: personNameByType,
+            personInformation,
+            message: 'Success post person type .',
+        });
     }
     catch (error) {
         console.log(error);
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = postOnGoogleSheet;
+exports.default = getTypeByResults;

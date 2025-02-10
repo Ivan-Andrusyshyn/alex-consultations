@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
 
 import {
   Answer,
-  PersonalityResult,
   Question,
   TestResult,
   TypeInformation,
-} from '../types/test';
+} from '../types/16-personalities';
 import { environment } from '../../environment/environment';
 
 interface Personalities {
@@ -18,7 +16,7 @@ interface Personalities {
   questions: Question[];
 }
 interface PersonalitiesResults {
-  results: { scores: TestResult; percentages: PersonalityResult };
+  results: { scores: TestResult; percentages: TestResult };
   message: string;
 }
 @Injectable({
@@ -28,11 +26,10 @@ export class PersonalitiesTestService {
   isShowSendForm = new BehaviorSubject(false);
   isShowSendFormMessage = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
-  personalityForm!: FormGroup;
   errors$!: Observable<any[] | null>;
   readonly testsUrl = environment.apiUrl + '/tests';
   questions!: Question[];
-  scorePercentages = new BehaviorSubject<PersonalityResult>(null);
+  scorePercentages = new BehaviorSubject<TestResult | null>(null);
 
   constructor(private http: HttpClient) {
     const score = JSON.parse(
@@ -64,7 +61,7 @@ export class PersonalitiesTestService {
       personType: string;
     }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);
   }
-  getPersonType(scorePercentages: PersonalityResult): Observable<{
+  getPersonType(scorePercentages: TestResult | null): Observable<{
     message: string;
     personType: string;
   }> {
@@ -74,8 +71,13 @@ export class PersonalitiesTestService {
       personType: string;
     }>(this.testsUrl + '/16-personalities/get-type', scorePercentages);
   }
-
-  getObservableScorePercentages(): Observable<PersonalityResult> {
+  getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
+    return this.http.post<PersonalitiesResults>(
+      this.testsUrl + '/16-personalities/results',
+      answers
+    );
+  }
+  getObservableScorePercentages(): Observable<TestResult | null> {
     return this.scorePercentages.asObservable();
   }
   getIsShowSendForm(): Observable<boolean> {
@@ -101,12 +103,6 @@ export class PersonalitiesTestService {
     }) as (keyof TestResult)[];
 
     return keys;
-  }
-  getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
-    return this.http.post<PersonalitiesResults>(
-      this.testsUrl + '/16-personalities/results',
-      answers
-    );
   }
 
   getResultsDescriptions(score: string): string {

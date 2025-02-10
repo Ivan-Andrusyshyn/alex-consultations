@@ -12,16 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const traumatic_sensitivity_1 = __importDefault(require("../../services/traumatic-sensitivity"));
+const getDataAndPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = req.body;
-        res.status(200).send({ message: 'Successfull add new row' });
-        yield google_sheets_1.default.postTestResultsOnSheet(data);
+        const answers = req.body.answers;
+        const { percentages, scores, sensitivityRate, minScoreNumber, maxScoreNumber, } = traumatic_sensitivity_1.default.countPersonPercentages(answers);
+        res.status(200).send({
+            results: { percentages, scores, sensitivityRate },
+            message: 'Success post scores operation.',
+        });
     }
     catch (error) {
         console.log(error);
-        return res.status(400).send({ message: 'Internal server Error' });
+        return res.status(400).send('Internal server error');
     }
 });
-exports.default = postOnGoogleSheet;
+exports.default = getDataAndPercentages;

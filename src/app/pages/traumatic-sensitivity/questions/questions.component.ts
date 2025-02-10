@@ -7,16 +7,16 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
+import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
+import { Answer, Question } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
+import { TraumaticSensitivityService } from '../../../shared/services/traumatic-sensitivity.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
-import { Question, Answer } from '../../../shared/types/16-personalities';
 
 @Component({
   selector: 'app-questions',
@@ -27,10 +27,12 @@ import { Question, Answer } from '../../../shared/types/16-personalities';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionsComponent implements OnDestroy, OnInit {
-  private readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly googleSheetService = inject(GoogleSheetsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
+  private readonly traumaticSensitivityService = inject(
+    TraumaticSensitivityService
+  );
   private readonly fb = inject(FormBuilder);
 
   answersArray!: Answer[];
@@ -39,16 +41,18 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     .setZone('Europe/Kyiv')
     .toFormat('yyyy-MM-dd HH:mm:ss');
   currentQuestionNumber: number = 1;
-  personalitiesTest$!: Observable<Question[]>;
+
   timer: any;
+  //
+  traumaticSensitivityTest$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
 
-  //
   ngOnInit(): void {
-    this.personalitiesTest$ = this.personalitiesService
-      .getPersonalitiesTest()
+    this.traumaticSensitivityTest$ = this.traumaticSensitivityService
+      .getTraumaticSensitivityTest()
       .pipe(
         map((r) => {
+          console.log(r);
           this.createFormGroup(r.questions);
           this.setCurrentAnswers();
 
@@ -56,6 +60,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         })
       );
   }
+
   ngOnDestroy(): void {
     clearTimeout(this.timer);
   }
@@ -67,25 +72,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       }, 200);
     } else {
       this.addNextQuestion(answers);
-    }
-  }
-  private createFormGroup(questions: Question[]) {
-    const formControls: { [key: string]: any } = {};
-
-    questions.forEach((q: Question, i: number) => {
-      formControls[q.id.toString()] = ['', Validators.required];
-    });
-
-    this.formGroup = this.fb.group(formControls);
-  }
-  private setCurrentAnswers() {
-    const stringAnswers =
-      sessionStorage.getItem('16-personalities-answers') ?? 'null';
-    const parsedAnswers = JSON.parse(stringAnswers);
-
-    if (parsedAnswers) {
-      this.currentQuestionNumber = parsedAnswers.currentQuestion;
-      this.formGroup.setValue(parsedAnswers.answers);
     }
   }
 
@@ -102,7 +88,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       this.scrollToTop();
 
       this.setSessionStorage(
-        '16-personalities-answers',
+        'traumatic-sensitivity-answers',
         JSON.stringify({
           answers,
           currentQuestion: currentQuestionNumber,
@@ -110,54 +96,78 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       );
     }
   }
+  private createFormGroup(questions: Question[]) {
+    const formControls: { [key: string]: any } = {};
 
+    questions.forEach((q: Question, i: number) => {
+      formControls[q.id.toString()] = ['', Validators.required];
+    });
+
+    this.formGroup = this.fb.group(formControls);
+  }
+  private setCurrentAnswers() {
+    const stringAnswers =
+      sessionStorage.getItem('traumatic-sensitivity-answers') ?? 'null';
+    const parsedAnswers = JSON.parse(stringAnswers);
+
+    if (parsedAnswers) {
+      this.currentQuestionNumber = parsedAnswers.currentQuestion;
+      this.formGroup.setValue(parsedAnswers.answers);
+    }
+  }
   private getResults(answers: Answer[]) {
-    this.personalitiesService
+    this.traumaticSensitivityService
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
         map((r) => {
           this.setSessionStorage(
-            'personality-test',
+            'traumatic-sensitivity',
             JSON.stringify({
               results: r.results.scores,
               scorePercentages: r.results.percentages,
+              sensitivityRate: r.results.sensitivityType,
+              maxScoreNumber: r.results.maxScoreNumber,
+              minScoreNumber: r.results.minScoreNumber,
             })
           );
 
-          this.personalitiesService.scorePercentages.next(
+          this.traumaticSensitivityService.scorePercentages.next(
             r.results.percentages
+          );
+          this.traumaticSensitivityService.sensitivityType.next(
+            r.results.sensitivityType
+          );
+          this.traumaticSensitivityService.scores.next(r.results.scores);
+          this.traumaticSensitivityService.minScoreNumber.next(
+            r.results.minScoreNumber
+          );
+          this.traumaticSensitivityService.maxScoreNumber.next(
+            r.results.maxScoreNumber
           );
           return r.results.percentages;
         }),
 
-        switchMap((percentages) =>
-          this.personalitiesService
-            .getPersonType(percentages)
-            .pipe(
-              switchMap((r) =>
-                this.sendDataToGoogleSheet(r.personType).pipe(
-                  map(() => r.personType)
-                )
-              )
-            )
-        ),
-
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.handlePersonType(r);
+        this.handlePersonType(r.E.toString());
       });
   }
 
   private handlePersonType(personType: string) {
-    this.router.navigate(['tests', '16-personalities', 'details', personType]);
+    this.router.navigate([
+      'tests',
+      'traumatic-sensitivity',
+      'details',
+      personType,
+    ]);
 
     this.formGroup.reset();
-    this.personalitiesService.counterQuestion.next(1);
+    this.traumaticSensitivityService.counterQuestion.next(1);
 
     const answers = this.formGroup.value;
     this.setSessionStorage(
-      '16-personalities-answers',
+      'traumatic-sensitivity-answers',
       JSON.stringify({
         answers,
         currentQuestion: 1,
@@ -168,7 +178,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private sendDataToGoogleSheet(personType: string) {
     return this.googleSheetService
       .postDataInSheet({
-        testName: '16-personalities',
+        testName: 'traumatic-sensitivity',
         results: personType,
         timestamp: this.timestamp ?? '',
         device: this.googleSheetService.getDeviceType(),

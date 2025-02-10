@@ -1,0 +1,22 @@
+<div class="results-container">
+  <ng-container *ngFor="let key of scoreKeys; let i = index">
+    <div *ngIf="scorePercentages$ | async as scorePercentages">
+      <div>
+        <div class="dsc-wrapper">
+          <div [ngClass]="key" *ngIf="i % 2 === 0">
+            {{ getDescriptions(key) + " " + scorePercentages[key] + "%" }}
+          </div>
+          <div [ngClass]="key" class="odd-descriptions" *ngIf="i % 2 === 1">
+            {{ getDescriptions(key) }}
+          </div>
+        </div>
+        <div [ngClass]="key" class="score" *ngIf="i % 2 === 0">
+          <div
+            [style.left]="(scorePercentages[key] * 314) / 100 - 16 / 2 + 'px'"
+            class="bg-score"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

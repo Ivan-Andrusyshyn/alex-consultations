@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const personalitiesName_1 = __importDefault(require("../utils/personalities/personalitiesName"));
+const personalitiesName_1 = __importDefault(require("../utils/16-personalities/personalitiesName"));
 class PersonalitiesService {
     constructor() {
         this.amountQuestionsInType = (qlist) => {

@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
-import { PersonalityResult, TestResult } from '../../../shared/types/test';
+import { TestResult } from '../../../../shared/types/16-personalities';
+import { PersonalitiesTestService } from '../../../../shared/services/personalities-test.service';
 
 @Component({
   selector: 'app-results-indicator',
@@ -23,7 +23,7 @@ export class ResultsIndicatorComponent implements OnInit {
 
   scoreKeys!: Array<keyof TestResult>;
 
-  scorePercentages$!: Observable<PersonalityResult>;
+  scorePercentages$!: Observable<TestResult | null>;
   ngOnInit(): void {
     this.scorePercentages$ =
       this.personalitiesService.getObservableScorePercentages();

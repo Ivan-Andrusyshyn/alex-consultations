@@ -8,20 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = req.body;
-        res.status(200).send({ message: 'Successfull add new row' });
-        yield google_sheets_1.default.postTestResultsOnSheet(data);
+        const results = req.body;
+        console.log(results);
+        res.status(201).send({
+            message: 'Succesfull post email!',
+        });
     }
     catch (error) {
         console.log(error);
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = postOnGoogleSheet;
+exports.default = postEmail;

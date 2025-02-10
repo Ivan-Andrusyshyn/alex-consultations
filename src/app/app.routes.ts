@@ -18,7 +18,29 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),
   },
-
+  {
+    path: 'tests/traumatic-sensitivity',
+    loadComponent: () =>
+      import(
+        './pages/traumatic-sensitivity/traumatic-sensitivity.component'
+      ).then((m) => m.TraumaticSensitivityComponent),
+    children: [
+      {
+        path: 'questions',
+        loadComponent: () =>
+          import(
+            './pages/traumatic-sensitivity/questions/questions.component'
+          ).then((m) => m.QuestionsComponent),
+      },
+      {
+        path: 'details/:traumaticSensitivity',
+        loadComponent: () =>
+          import(
+            './pages/traumatic-sensitivity/test-results/test-results.component'
+          ).then((m) => m.TestResultsComponent),
+      },
+    ],
+  },
   {
     path: 'tests/16-personalities',
     loadComponent: () =>

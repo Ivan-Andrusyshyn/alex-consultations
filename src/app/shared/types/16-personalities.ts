@@ -4,7 +4,6 @@ interface Question {
   id: number;
   question: string;
   answers: any[];
-  dichotomy: Dichotomy;
 }
 
 interface TestResult {
@@ -37,12 +36,10 @@ interface TypeInformation {
   };
   conclusion: string;
 }
-type PersonalityResult = TestResult | null;
 type Answer = { point: number; text: string };
 type AnswerPoint = 1 | 2 | 3 | 4 | 5;
 export {
   Answer,
-  PersonalityResult,
   Question,
   AnswerPoint,
   TestResult,

@@ -4,11 +4,19 @@
       <h2 [hidden]="true" class="section-title">Тести на особистість!</h2>
 
       <ul class="test-list">
-        <li class="test-card">
-          <h3>Тест 16 типів особистості</h3>
-          <p>Дізнайся більше про себе, свої сильні та слабкі сторони.</p>
-          <app-test-card-start-btn></app-test-card-start-btn>
-          <app-test-card-info-btn></app-test-card-info-btn>
+        <li class="test-card" *ngFor="let test of testData">
+          <h3>{{ test.title }}</h3>
+          <p>{{ test.description }}</p>
+          <div class="test-card-buttons">
+            <app-test-card-start-btn
+              [route]="test.routeStart"
+              class="btn-start"
+            ></app-test-card-start-btn>
+            <app-test-card-info-btn
+              [route]="test.routeInfo"
+              class="btn-info"
+            ></app-test-card-info-btn>
+          </div>
         </li>
       </ul>
     </div>
