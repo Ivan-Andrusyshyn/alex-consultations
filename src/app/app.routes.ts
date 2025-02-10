@@ -39,6 +39,13 @@ export const routes: Routes = [
             './pages/traumatic-sensitivity/test-results/test-results.component'
           ).then((m) => m.TestResultsComponent),
       },
+      {
+        path: 'test-information',
+        loadComponent: () =>
+          import(
+            './pages/traumatic-sensitivity/test-information/test-information.component'
+          ).then((m) => m.TestInformationComponent),
+      },
     ],
   },
   {
