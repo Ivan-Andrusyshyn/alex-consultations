@@ -1,6 +1,6 @@
 .info-test-btn {
   right: 16px;
-  top: 24px;
+  top: 8px;
 
   position: absolute;
   display: inline-block;
@@ -22,6 +22,8 @@
     transition: all 0.3s linear;
   }
   @media screen and (min-width: 764px) {
+    top: 24px;
+
     &:hover > .info-title,
     &:focus > .info-title {
       opacity: 1;
