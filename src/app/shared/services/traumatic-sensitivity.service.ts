@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environment/environment';
 import { TestResult } from '../types/traumatic-sensitivity';
-import { TypeInformation } from '../types/16-personalities';
+import { Answer, TypeInformation } from '../types/16-personalities';
 
 interface PersonalitiesResults {
   results: {
@@ -54,10 +54,17 @@ export class TraumaticSensitivityService {
     );
   }
 
-  getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
+  getPersonalitiesResultOfTest(data: {
+    answers: Answer[];
+    userInformation: {
+      testName: string;
+      timestamp: string;
+      device: string;
+    };
+  }): Observable<PersonalitiesResults> {
     return this.http.post<PersonalitiesResults>(
       this.testsUrl + '/traumatic-sensitivity/results',
-      answers
+      data
     );
   }
   getEmotionsTypeInfoByResults(personType: string): Observable<{

@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
@@ -17,6 +17,7 @@ import { PersonalitiesTestService } from '../../../shared/services/personalities
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { Question, Answer } from '../../../shared/types/16-personalities';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-questions',
@@ -32,6 +33,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
+  private loadingService = inject(LoadingService);
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
@@ -42,9 +44,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   personalitiesTest$!: Observable<Question[]>;
   timer: any;
   formGroup: FormGroup = this.fb.group({});
-
+  loading$!: Observable<boolean>;
   //
   ngOnInit(): void {
+    this.loading$ = this.loadingService.isLoading();
     this.personalitiesTest$ = this.personalitiesService
       .getPersonalitiesTest()
       .pipe(
@@ -118,7 +121,14 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     if (storage) return;
 
     this.personalitiesService
-      .getPersonalitiesResultOfTest({ answers })
+      .getPersonalitiesResultOfTest({
+        answers,
+        userInformation: {
+          testName: 'traumatic-sensitivity',
+          timestamp: this.timestamp ?? '',
+          device: this.googleSheetService.getDeviceType(),
+        },
+      })
       .pipe(
         map((r) => {
           this.setSessionStorage(
@@ -135,16 +145,11 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           return r.results;
         }),
 
-        switchMap((results) =>
-          this.sendDataToGoogleSheet(results.personType).pipe(
-            tap(() => this.handlePersonType(results.personType))
-          )
-        ),
-
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((r) => {
-        console.log(r);
+      .subscribe((results) => {
+        console.log(results);
+        this.handlePersonType(results.personType);
       });
   }
 

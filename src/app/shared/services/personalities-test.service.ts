@@ -71,10 +71,17 @@ export class PersonalitiesTestService {
       personType: string;
     }>(this.testsUrl + '/16-personalities/get-type', scorePercentages);
   }
-  getPersonalitiesResultOfTest(answers: any): Observable<PersonalitiesResults> {
+  getPersonalitiesResultOfTest(data: {
+    answers: Answer[];
+    userInformation: {
+      testName: string;
+      timestamp: string;
+      device: string;
+    };
+  }): Observable<PersonalitiesResults> {
     return this.http.post<PersonalitiesResults>(
       this.testsUrl + '/16-personalities/results',
-      answers
+      data
     );
   }
   getObservableScorePercentages(): Observable<TestResult | null> {

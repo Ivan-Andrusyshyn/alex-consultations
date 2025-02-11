@@ -9,14 +9,12 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
 
   let timer: ReturnType<typeof setTimeout>;
 
-  loadingService.setRequestMethod(req.method);
-
   loadingService.showLoadingSpinner();
   return next(req).pipe(
     finalize(() => {
       timer = setTimeout(() => {
         loadingService.hideLoadingSpinner();
-      }, 3000);
+      }, 1000);
       return () => clearTimeout(timer);
     }),
 

@@ -17,6 +17,7 @@ import { Answer, Question } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { TraumaticSensitivityService } from '../../../shared/services/traumatic-sensitivity.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-questions',
@@ -34,6 +35,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     TraumaticSensitivityService
   );
   private readonly fb = inject(FormBuilder);
+  private loadingService = inject(LoadingService);
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
@@ -46,8 +48,9 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   //
   traumaticSensitivityTest$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
-
+  loading$!: Observable<boolean>;
   ngOnInit(): void {
+    this.loading$ = this.loadingService.isLoading();
     this.traumaticSensitivityTest$ = this.traumaticSensitivityService
       .getTraumaticSensitivityTest()
       .pipe(
@@ -121,7 +124,14 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
     if (storage) return;
     this.traumaticSensitivityService
-      .getPersonalitiesResultOfTest({ answers })
+      .getPersonalitiesResultOfTest({
+        answers,
+        userInformation: {
+          testName: 'traumatic-sensitivity',
+          timestamp: this.timestamp ?? '',
+          device: this.googleSheetService.getDeviceType(),
+        },
+      })
       .pipe(
         map((r) => {
           this.setSessionStorage(
@@ -149,9 +159,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
           return r.results;
         }),
-        switchMap((r) =>
-          this.sendDataToGoogleSheet(r.sensitivityType).pipe(map(() => r))
-        ),
+
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
@@ -180,22 +188,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  private sendDataToGoogleSheet(emotionType: string) {
-    return this.googleSheetService
-      .postDataInSheet({
-        testName: 'traumatic-sensitivity',
-        results: emotionType,
-        timestamp: this.timestamp ?? '',
-        device: this.googleSheetService.getDeviceType(),
-      })
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        catchError((err) => {
-          console.log(err.message);
-          return throwError(() => err);
-        })
-      );
-  }
   private scrollToTop(): void {
     window.scrollTo({
       top: 40,

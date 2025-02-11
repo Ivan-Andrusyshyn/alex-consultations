@@ -36,9 +36,9 @@ export class AppComponent implements OnInit {
   private loadingService = inject(LoadingService);
 
   loading$!: Observable<boolean>;
-  isReqMethodGet$!: Observable<boolean>;
+  currentReqMethod$!: Observable<string>;
+
   ngOnInit(): void {
     this.loading$ = this.loadingService.isLoading();
-    this.isReqMethodGet$ = this.loadingService.getReqMethIsGet();
   }
 }

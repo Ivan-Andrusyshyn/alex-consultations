@@ -6,20 +6,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class LoadingService {
   private loading = new BehaviorSubject<boolean>(false);
-  private isReqMethodGet = new BehaviorSubject<boolean>(true);
+  currentReqMethod = new BehaviorSubject<string | null>(null);
 
   showLoadingSpinner() {
     this.loading.next(true);
   }
 
   hideLoadingSpinner() {
+    this.currentReqMethod.next(null);
     this.loading.next(false);
   }
-  getReqMethIsGet(): Observable<boolean> {
-    return this.isReqMethodGet.asObservable();
-  }
-  setRequestMethod(method: string) {
-    this.isReqMethodGet.next(method === 'GET');
+  getReqMeth(): Observable<string | null> {
+    return this.currentReqMethod.asObservable();
   }
 
   isLoading(): Observable<boolean> {

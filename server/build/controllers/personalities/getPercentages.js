@@ -14,12 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = __importDefault(require("../../utils/16-personalities/test"));
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
+const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const postPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
+        const userInformation = req.body.userInformation;
         const amountQuestions = _16_personality_1.default.amountQuestionsInType((0, test_1.default)());
         const { scores, percentages } = _16_personality_1.default.countPersonPercentages(answers, amountQuestions);
         const personType = _16_personality_1.default.getCodedTypeName(scores);
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: personType }));
         res.status(200).send({
             results: { scores, percentages, personType },
             message: 'Success post scores operation.',
