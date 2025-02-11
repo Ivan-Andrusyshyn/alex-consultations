@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -75,6 +75,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         );
     });
   }
+
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService

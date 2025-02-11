@@ -14,15 +14,9 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   loadingService.showLoadingSpinner();
   return next(req).pipe(
     finalize(() => {
-      if (req.method === 'POST') {
-        timer = setTimeout(() => {
-          loadingService.hideLoadingSpinner();
-        }, 4000);
-      } else {
-        timer = setTimeout(() => {
-          loadingService.hideLoadingSpinner();
-        }, 1000);
-      }
+      timer = setTimeout(() => {
+        loadingService.hideLoadingSpinner();
+      }, 3000);
       return () => clearTimeout(timer);
     }),
 
