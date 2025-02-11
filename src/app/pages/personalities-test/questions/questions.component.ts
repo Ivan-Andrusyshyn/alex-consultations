@@ -61,9 +61,14 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }
 
   nextQuestion(answers: any) {
-    this.addNextQuestion(answers);
+    if (window.innerWidth <= 764) {
+      this.timer = setTimeout(() => {
+        this.addNextQuestion(answers);
+      }, 200);
+    } else {
+      this.addNextQuestion(answers);
+    }
   }
-
   private createFormGroup(questions: Question[]) {
     const formControls: { [key: string]: any } = {};
 
@@ -129,14 +134,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           return r.results;
         }),
 
-        switchMap((r) =>
-          this.sendDataToGoogleSheet(r.personType).pipe(map(() => r.personType))
-        ),
+        switchMap((r) => this.sendDataToGoogleSheet(r.personType)),
 
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.handlePersonType(r);
+        this.handlePersonType(r.personType);
       });
   }
 
