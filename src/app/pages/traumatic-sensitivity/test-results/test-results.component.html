@@ -1,14 +1,14 @@
 <section class="person-info">
-  <div class="test-results">
+  <div class="test-results" *ngIf="scores$ | async as scores">
     <h2>{{ sensitivityType$ | async }}</h2>
     <hr />
     <br />
-    <h3 class="min-score">Найменше балів: {{ minScoreNumber$ | async }}</h3>
-    <h3 class="max-score">Найбільше балів: {{ maxScoreNumber$ | async }}</h3>
-    <div *ngIf="scores$ | async as scores">
+    <h3 class="min-score">Найменше балів: {{ scores.minScoreNumber }}</h3>
+    <h3 class="max-score">Найбільше балів: {{ scores.maxScoreNumber }}</h3>
+    <div>
       <ul>
         <li *ngFor="let score of scoresKeys">
-          {{ score }}:{{ scores[score] }}
+          {{ score }}:{{ scores.scores[score] }}
         </li>
       </ul>
     </div>

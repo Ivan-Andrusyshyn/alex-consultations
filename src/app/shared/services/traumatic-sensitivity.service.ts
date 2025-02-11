@@ -16,14 +16,17 @@ interface PersonalitiesResults {
   };
   message: string;
 }
+interface Scores {
+  scores: TestResult;
+  minScoreNumber: string;
+  maxScoreNumber: string;
+}
 @Injectable({ providedIn: 'root' })
 export class TraumaticSensitivityService {
   private readonly testsUrl = environment.apiUrl + '/tests';
   scorePercentages = new BehaviorSubject<TestResult | null>(null);
-  scores = new BehaviorSubject<TestResult | null>(null);
+  scores = new BehaviorSubject<Scores | null>(null);
   sensitivityType = new BehaviorSubject<string>('');
-  minScoreNumber = new BehaviorSubject<string>('');
-  maxScoreNumber = new BehaviorSubject<string>('');
   counterQuestion = new BehaviorSubject(1);
   isShowSendForm = new BehaviorSubject(false);
   isShowSendFormMessage = new BehaviorSubject(false);
@@ -32,12 +35,15 @@ export class TraumaticSensitivityService {
     const results = JSON.parse(
       sessionStorage.getItem('traumatic-sensitivity') ?? 'null'
     );
+
     if (results) {
       this.scorePercentages.next(results.scorePercentages);
       this.sensitivityType.next(results.sensitivityRate);
-      this.minScoreNumber.next(results.minScoreNumber);
-      this.maxScoreNumber.next(results.maxScoreNumber);
-      this.scores.next(results.results);
+      this.scores.next({
+        scores: results.scores,
+        minScoreNumber: results.minScoreNumber,
+        maxScoreNumber: results.maxScoreNumber,
+      });
     }
   }
   getTraumaticSensitivityTest(): Observable<any> {
@@ -68,12 +74,6 @@ export class TraumaticSensitivityService {
     );
   }
 
-  getObservableMaxScoreNumber(): Observable<string> {
-    return this.maxScoreNumber.asObservable();
-  }
-  getObservableMinScoreNumber(): Observable<string> {
-    return this.minScoreNumber.asObservable();
-  }
   getObservableSensitivityType(): Observable<string> {
     return this.sensitivityType.asObservable();
   }
@@ -83,7 +83,7 @@ export class TraumaticSensitivityService {
   getIsShowSendForm(): Observable<boolean> {
     return this.isShowSendForm.asObservable();
   }
-  getObservableScore(): Observable<TestResult | null> {
+  getObservableScore(): Observable<Scores | null> {
     return this.scores.asObservable();
   }
   getObservableCurrentQuestion(): Observable<number> {

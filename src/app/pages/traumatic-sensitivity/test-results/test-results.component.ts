@@ -18,6 +18,12 @@ import { TraumaticSensitivityService } from '../../../shared/services/traumatic-
 import { TestResult } from '../../../shared/types/traumatic-sensitivity';
 import { TraumaticResultsIndicatorComponent } from '../../../components/test/traumatic-sensitivity/traumatic-indicator/traumatic-indicator.component';
 
+interface Scores {
+  scores: TestResult;
+  minScoreNumber: string;
+  maxScoreNumber: string;
+}
+
 @Component({
   selector: 'app-test-results',
   standalone: true,
@@ -43,13 +49,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     personInformation: TypeInformation;
   }>;
   scorePercentages$!: Observable<TestResult | null>;
-  scores$!: Observable<TestResult | null>;
+  scores$!: Observable<Scores | null>;
   scoresKeys!: Array<keyof TestResult>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
   sensitivityType$!: Observable<string>;
-  minScoreNumber$!: Observable<string>;
-  maxScoreNumber$!: Observable<string>;
 
   ngOnDestroy(): void {
     this.traumaticSensitivityService.scorePercentages.next(null);
@@ -59,10 +63,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.scoresKeys = this.traumaticSensitivityService.getScoreKeys();
     this.scores$ = this.traumaticSensitivityService.getObservableScore();
-    this.minScoreNumber$ =
-      this.traumaticSensitivityService.getObservableMinScoreNumber();
-    this.maxScoreNumber$ =
-      this.traumaticSensitivityService.getObservableMaxScoreNumber();
     this.sensitivityType$ =
       this.traumaticSensitivityService.getObservableSensitivityType();
     this.isShowFormRespMessage$ =

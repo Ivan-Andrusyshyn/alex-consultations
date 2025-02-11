@@ -16,8 +16,10 @@ const google_sheets_1 = __importDefault(require("../../services/google-sheets"))
 const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
-        res.status(200).send({ message: 'Successfull add new row' });
-        yield google_sheets_1.default.postTestResultsOnSheet(data);
+        if (data) {
+            res.status(200).send({ message: 'Successfull add new row' });
+            yield google_sheets_1.default.postTestResultsOnSheet(data);
+        }
     }
     catch (error) {
         console.log(error);

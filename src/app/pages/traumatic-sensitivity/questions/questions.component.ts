@@ -123,7 +123,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           this.setSessionStorage(
             'traumatic-sensitivity',
             JSON.stringify({
-              results: r.results.scores,
+              scores: r.results.scores,
               scorePercentages: r.results.percentages,
               sensitivityRate: r.results.sensitivityType,
               maxScoreNumber: r.results.maxScoreNumber,
@@ -137,16 +137,19 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           this.traumaticSensitivityService.sensitivityType.next(
             r.results.sensitivityType
           );
-          this.traumaticSensitivityService.scores.next(r.results.scores);
-          this.traumaticSensitivityService.minScoreNumber.next(
-            r.results.minScoreNumber
-          );
-          this.traumaticSensitivityService.maxScoreNumber.next(
-            r.results.maxScoreNumber
-          );
-          return r.results.percentages;
-        }),
+          this.traumaticSensitivityService.scores.next({
+            scores: r.results.scores,
+            minScoreNumber: r.results.minScoreNumber,
+            maxScoreNumber: r.results.maxScoreNumber,
+          });
 
+          return r.results;
+        }),
+        switchMap((r) =>
+          this.sendDataToGoogleSheet(r.sensitivityType).pipe(
+            map(() => r.percentages)
+          )
+        ),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
@@ -175,11 +178,11 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  private sendDataToGoogleSheet(personType: string) {
+  private sendDataToGoogleSheet(emotionType: string) {
     return this.googleSheetService
       .postDataInSheet({
         testName: 'traumatic-sensitivity',
-        results: personType,
+        results: emotionType,
         timestamp: this.timestamp ?? '',
         device: this.googleSheetService.getDeviceType(),
       })
