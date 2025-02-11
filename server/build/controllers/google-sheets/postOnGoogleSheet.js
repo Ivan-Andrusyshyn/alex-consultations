@@ -17,8 +17,8 @@ const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, functi
     try {
         const data = req.body;
         if (data) {
-            res.status(200).send({ message: 'Successfull add new row' });
             yield google_sheets_1.default.postTestResultsOnSheet(data);
+            res.status(200).send({ message: 'Successfull add new row' });
         }
     }
     catch (error) {

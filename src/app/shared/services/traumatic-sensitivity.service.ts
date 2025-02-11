@@ -33,7 +33,7 @@ export class TraumaticSensitivityService {
 
   constructor(private http: HttpClient) {
     const results = JSON.parse(
-      sessionStorage.getItem('traumatic-sensitivity') ?? 'null'
+      sessionStorage.getItem('traumatic-sensitivity-results') ?? 'null'
     );
 
     if (results) {

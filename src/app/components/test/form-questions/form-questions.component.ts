@@ -90,7 +90,7 @@ export class FormQuestionsComponent implements OnInit {
         if (result !== undefined) {
           this.formGroup.reset();
           this.currentQuestionNumber = 0;
-          sessionStorage.removeItem(this.currentTestName);
+          sessionStorage.removeItem(this.currentTestName + '-results');
           sessionStorage.setItem(
             this.currentTestName + '-answers',
             JSON.stringify({

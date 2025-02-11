@@ -33,7 +33,7 @@ export class PersonalitiesTestService {
 
   constructor(private http: HttpClient) {
     const score = JSON.parse(
-      sessionStorage.getItem('personality-test') ?? 'null'
+      sessionStorage.getItem('16-personalities-results') ?? 'null'
     );
     if (score) {
       this.scorePercentages.next(score.scorePercentages);

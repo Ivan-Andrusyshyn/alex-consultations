@@ -125,7 +125,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       .pipe(
         map((r) => {
           this.setSessionStorage(
-            'traumatic-sensitivity',
+            'traumatic-sensitivity-results',
             JSON.stringify({
               scores: r.results.scores,
               scorePercentages: r.results.percentages,

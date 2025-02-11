@@ -7,7 +7,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  map,
+  Observable,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
@@ -17,6 +25,7 @@ import { PersonalitiesTestService } from '../../../shared/services/personalities
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { Question, Answer } from '../../../shared/types/16-personalities';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-questions',
@@ -113,15 +122,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
   private getResults(answers: Answer[]) {
     const storage = JSON.parse(
-      sessionStorage.getItem('personality-test') || 'null'
+      sessionStorage.getItem('16-personalities-results') || 'null'
     );
     if (storage) return;
+
     this.personalitiesService
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
         map((r) => {
           this.setSessionStorage(
-            'personality-test',
+            '16-personalities-results',
             JSON.stringify({
               results: r.results.scores,
               scorePercentages: r.results.percentages,
@@ -134,12 +144,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           return r.results;
         }),
 
-        switchMap((r) => this.sendDataToGoogleSheet(r.personType)),
+        switchMap((results) =>
+          this.sendDataToGoogleSheet(results.personType).pipe(
+            tap(() => this.handlePersonType(results.personType))
+          )
+        ),
 
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.handlePersonType(r.personType);
+        console.log(r);
       });
   }
 
@@ -159,7 +173,9 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  private sendDataToGoogleSheet(personType: string) {
+  private sendDataToGoogleSheet(
+    personType: string
+  ): Observable<{ message: string }> {
     return this.googleSheetService
       .postDataInSheet({
         testName: '16-personalities',
