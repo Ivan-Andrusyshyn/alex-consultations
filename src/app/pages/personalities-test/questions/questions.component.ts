@@ -110,7 +110,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     const storage = JSON.parse(
       sessionStorage.getItem('personality-test') || 'null'
     );
-    if (storage.results) return;
+    if (storage) return;
     this.personalitiesService
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
