@@ -61,14 +61,9 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }
 
   nextQuestion(answers: any) {
-    if (window.innerWidth <= 764) {
-      this.timer = setTimeout(() => {
-        this.addNextQuestion(answers);
-      }, 200);
-    } else {
-      this.addNextQuestion(answers);
-    }
+    this.addNextQuestion(answers);
   }
+
   private createFormGroup(questions: Question[]) {
     const formControls: { [key: string]: any } = {};
 
@@ -112,6 +107,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }
 
   private getResults(answers: Answer[]) {
+    const storage = JSON.parse(
+      sessionStorage.getItem('personality-test') || 'null'
+    );
+    if (storage.results) return;
     this.personalitiesService
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
@@ -127,19 +126,11 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           this.personalitiesService.scorePercentages.next(
             r.results.percentages
           );
-          return r.results.percentages;
+          return r.results;
         }),
 
-        switchMap((percentages) =>
-          this.personalitiesService
-            .getPersonType(percentages)
-            .pipe(
-              switchMap((r) =>
-                this.sendDataToGoogleSheet(r.personType).pipe(
-                  map(() => r.personType)
-                )
-              )
-            )
+        switchMap((r) =>
+          this.sendDataToGoogleSheet(r.personType).pipe(map(() => r.personType))
         ),
 
         takeUntilDestroyed(this.destroyRef)

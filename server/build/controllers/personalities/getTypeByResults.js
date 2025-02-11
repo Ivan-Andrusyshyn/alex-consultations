@@ -16,7 +16,6 @@ const _16_personality_1 = __importDefault(require("../../services/16-personality
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
-        console.log(personType);
         const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
         const personInformation = _16_personality_1.default.getInformationByType(personNameByType);
         res.status(200).send({

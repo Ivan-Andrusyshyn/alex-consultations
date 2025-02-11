@@ -16,7 +16,7 @@ interface Personalities {
   questions: Question[];
 }
 interface PersonalitiesResults {
-  results: { scores: TestResult; percentages: TestResult };
+  results: { scores: TestResult; percentages: TestResult; personType: string };
   message: string;
 }
 @Injectable({

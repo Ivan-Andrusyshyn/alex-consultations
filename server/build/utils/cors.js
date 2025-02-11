@@ -1,21 +1,18 @@
 "use strict";
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const cors_1 = __importDefault(require("cors"));
-const corsOptions = () =>
-  (0, cors_1.default)({
+const corsOptions = () => (0, cors_1.default)({
     origin: [
-      "http://localhost:4200",
-      "http://www.vidchuttia.com.ua",
-      "http://vidchuttia.com.ua",
-      "https://alex-consultations.vercel.app",
+        'http://localhost:4200',
+        'http://www.vidchuttia.com.ua',
+        'http://vidchuttia.com.ua',
+        'https://alex-consultations.vercel.app',
     ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-  });
+});
 exports.default = corsOptions;

@@ -116,6 +116,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     }
   }
   private getResults(answers: Answer[]) {
+    const storage = JSON.parse(
+      sessionStorage.getItem('traumatic-sensitivity') || 'null'
+    );
+    if (storage) return;
     this.traumaticSensitivityService
       .getPersonalitiesResultOfTest({ answers })
       .pipe(
@@ -146,14 +150,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           return r.results;
         }),
         switchMap((r) =>
-          this.sendDataToGoogleSheet(r.sensitivityType).pipe(
-            map(() => r.percentages)
-          )
+          this.sendDataToGoogleSheet(r.sensitivityType).pipe(map(() => r))
         ),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.handlePersonType(r.E.toString());
+        this.handlePersonType(r.sensitivityType);
       });
   }
 

@@ -60,17 +60,20 @@ class PersonalitiesService {
             return { percentages, scores };
         };
         this.getPersonalityType = (scores) => {
-            const firstLetter = scores.E > scores.I ? 'E' : 'I';
-            const secondLetter = scores.N > scores.S ? 'N' : 'S';
-            const thirdLetter = scores.F > scores.T ? 'F' : 'T';
-            const fourthLetter = scores.J > scores.P ? 'J' : 'P';
-            const personalityType = `${firstLetter}${secondLetter}${thirdLetter}${fourthLetter}`;
-            return this.getPersonNameByType(personalityType);
+            const typeName = this.getCodedTypeName(scores);
+            return this.getPersonNameByType(typeName);
         };
         this.getInformationByType = (type) => {
             var _a;
             return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
+    }
+    getCodedTypeName(scores) {
+        const firstLetter = scores.E > scores.I ? 'E' : 'I';
+        const secondLetter = scores.N > scores.S ? 'N' : 'S';
+        const thirdLetter = scores.F > scores.T ? 'F' : 'T';
+        const fourthLetter = scores.J > scores.P ? 'J' : 'P';
+        return `${firstLetter}${secondLetter}${thirdLetter}${fourthLetter}`;
     }
     getPersonNameByType(personalityType) {
         const personalities = {

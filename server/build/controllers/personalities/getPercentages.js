@@ -19,8 +19,9 @@ const postPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function
         const answers = req.body.answers;
         const amountQuestions = _16_personality_1.default.amountQuestionsInType((0, test_1.default)());
         const { scores, percentages } = _16_personality_1.default.countPersonPercentages(answers, amountQuestions);
+        const personType = _16_personality_1.default.getCodedTypeName(scores);
         res.status(200).send({
-            results: { scores, percentages },
+            results: { scores, percentages, personType },
             message: 'Success post scores operation.',
         });
     }
