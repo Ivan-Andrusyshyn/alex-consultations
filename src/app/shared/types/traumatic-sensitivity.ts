@@ -13,7 +13,8 @@ interface PersonalitiesResults {
     sensitivityType: string;
     minScoreNumber: string;
     maxScoreNumber: string;
-    sensitivityGradation: string;
+    gradationHeight: string;
+    gradationLow: string;
   };
 }
 

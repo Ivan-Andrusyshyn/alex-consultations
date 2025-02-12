@@ -21,22 +21,41 @@ class TraumaticSensitivityService {
                 ['W', 'B'],
                 ['F', 'R'],
             ];
+            const dominantLetters = {};
             const percentages = {};
+            const nonDominantLetters = {};
             for (const [type1, type2] of typePairs) {
                 const totalScore = scores[type1] + scores[type2];
                 percentages[type1] =
                     totalScore > 0 ? Math.round((scores[type1] / totalScore) * 100) : 50;
-                percentages[type2] = 100 - percentages[type1];
+                percentages[type2] = (100 - percentages[type1]);
+                if (scores[type1] > scores[type2]) {
+                    dominantLetters[type1] = this.getBlockGradation(scores[type1]);
+                    nonDominantLetters[type2] = this.getBlockGradation(scores[type2]);
+                }
+                else {
+                    dominantLetters[type2] = this.getBlockGradation(scores[type2]);
+                    nonDominantLetters[type1] = this.getBlockGradation(scores[type1]);
+                }
             }
+            console.log(dominantLetters);
+            console.log(nonDominantLetters);
             const { minScoreNumber, maxScoreNumber } = this.findTheSmallestAndBiggestNumber(scores);
             const sensitivityType = this.getTypeByAllScoresNumber(sensitivityRate);
             const sensitivityRateGrade = this.getSensitivityRateGrade(sensitivityRate);
-            const blocksGradation = this.getBlockGradation(scores);
-            const sensitivityGradation = `C${sensitivityRateGrade} – E${blocksGradation.E} – W${blocksGradation.W} – F${blocksGradation.F} – T${blocksGradation.T} – B${blocksGradation.B} – R${blocksGradation.R}`;
+            let gradationHeight = `C${sensitivityRateGrade}`;
+            let gradationLow = `C${sensitivityRateGrade}`;
+            for (let l in dominantLetters) {
+                gradationHeight += `-${l}${dominantLetters[l]}`;
+            }
+            for (let l in nonDominantLetters) {
+                gradationLow += `-${l}${nonDominantLetters[l]}`;
+            }
             return {
                 percentages,
                 scores,
-                sensitivityGradation,
+                gradationHeight,
+                gradationLow,
                 sensitivityType,
                 minScoreNumber,
                 maxScoreNumber,
@@ -47,24 +66,19 @@ class TraumaticSensitivityService {
             return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
     }
-    getBlockGradation(scores) {
-        const sensitivityGradation = {};
-        for (const key in scores) {
-            const score = scores[key];
-            if (score >= 0 && score <= 4) {
-                sensitivityGradation[key] = 1;
-            }
-            else if (score >= 5 && score <= 9) {
-                sensitivityGradation[key] = 2;
-            }
-            else if (score >= 10 && score <= 14) {
-                sensitivityGradation[key] = 3;
-            }
-            else if (score >= 15 && score <= 18) {
-                sensitivityGradation[key] = 4;
-            }
+    getBlockGradation(score) {
+        if (score >= 0 && score <= 4) {
+            return 1;
         }
-        return sensitivityGradation;
+        else if (score >= 5 && score <= 9) {
+            return 2;
+        }
+        else if (score >= 10 && score <= 14) {
+            return 3;
+        }
+        else if (score >= 15 && score <= 18) {
+            return 4;
+        }
     }
     getSensitivityRateGrade(sensitivityRate) {
         let sensitivityRateGrade;
