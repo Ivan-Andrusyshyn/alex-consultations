@@ -15,7 +15,10 @@ import { SendResultsFormComponent } from '../../../components/send-results-form/
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
 import { TraumaticSensitivityService } from '../../../shared/services/traumatic-sensitivity.service';
-import { TestResult } from '../../../shared/types/traumatic-sensitivity';
+import {
+  PersonalitiesResults,
+  TestResult,
+} from '../../../shared/types/traumatic-sensitivity';
 import { TraumaticResultsIndicatorComponent } from '../../../components/test/traumatic-sensitivity/traumatic-indicator/traumatic-indicator.component';
 
 interface Scores {
@@ -49,7 +52,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     personInformation: TypeInformation;
   }>;
   scorePercentages$!: Observable<TestResult | null>;
-  scores$!: Observable<Scores | null>;
+  sensitivityResults$!: Observable<PersonalitiesResults | null>;
   scoresKeys!: Array<keyof TestResult>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
@@ -62,13 +65,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.scoresKeys = this.traumaticSensitivityService.getScoreKeys();
-    this.scores$ = this.traumaticSensitivityService.getObservableScore();
-    this.sensitivityType$ =
-      this.traumaticSensitivityService.getObservableSensitivityType();
+    this.sensitivityResults$ =
+      this.traumaticSensitivityService.getObservableSensitivityResults();
+
     this.isShowFormRespMessage$ =
       this.traumaticSensitivityService.getIsShowSendFormMessage();
-    this.scorePercentages$ =
-      this.traumaticSensitivityService.getObservableScorePercentages();
+
     this.isShowSendForm$ = this.traumaticSensitivityService.getIsShowSendForm();
   }
 

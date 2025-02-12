@@ -1,0 +1,24 @@
+<div class="container">
+  <button class="scroll-btn prev" (click)="scroll('prev')">&#10094;</button>
+  <button class="scroll-btn next" (click)="scroll('next')">&#10095;</button>
+  <ul class="test-list" #testList>
+    <li class="test-card" *ngFor="let test of testData">
+      <h3>{{ test.title }}</h3>
+      <p>{{ test.description }}</p>
+      <svg class="test-svg">
+        <use [attr.xlink:href]="test.testSvg"></use>
+      </svg>
+
+      <div class="test-card-buttons">
+        <app-test-card-start-btn
+          [route]="test.routeStart"
+          class="btn-start"
+        ></app-test-card-start-btn>
+        <app-test-card-info-btn
+          [route]="test.routeInfo"
+          class="btn-info"
+        ></app-test-card-info-btn>
+      </div>
+    </li>
+  </ul>
+</div>

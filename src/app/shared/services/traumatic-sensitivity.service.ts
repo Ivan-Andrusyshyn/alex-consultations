@@ -3,19 +3,13 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environment/environment';
-import { TestResult } from '../types/traumatic-sensitivity';
+import {
+  PersonalitiesResponse,
+  PersonalitiesResults,
+  TestResult,
+} from '../types/traumatic-sensitivity';
 import { Answer, TypeInformation } from '../types/16-personalities';
 
-interface PersonalitiesResults {
-  results: {
-    scores: TestResult;
-    percentages: TestResult;
-    sensitivityType: string;
-    minScoreNumber: string;
-    maxScoreNumber: string;
-  };
-  message: string;
-}
 interface Scores {
   scores: TestResult;
   minScoreNumber: string;
@@ -25,8 +19,7 @@ interface Scores {
 export class TraumaticSensitivityService {
   private readonly testsUrl = environment.apiUrl + '/tests';
   scorePercentages = new BehaviorSubject<TestResult | null>(null);
-  scores = new BehaviorSubject<Scores | null>(null);
-  sensitivityType = new BehaviorSubject<string>('');
+  sensitivityResults = new BehaviorSubject<PersonalitiesResults | null>(null);
   counterQuestion = new BehaviorSubject(1);
   isShowSendForm = new BehaviorSubject(false);
   isShowSendFormMessage = new BehaviorSubject(false);
@@ -35,14 +28,12 @@ export class TraumaticSensitivityService {
     const results = JSON.parse(
       sessionStorage.getItem('traumatic-sensitivity-results') ?? 'null'
     );
+    console.log(results);
 
     if (results) {
       this.scorePercentages.next(results.scorePercentages);
-      this.sensitivityType.next(results.sensitivityRate);
-      this.scores.next({
-        scores: results.scores,
-        minScoreNumber: results.minScoreNumber,
-        maxScoreNumber: results.maxScoreNumber,
+      this.sensitivityResults.next({
+        results: { ...results },
       });
     }
   }
@@ -54,15 +45,15 @@ export class TraumaticSensitivityService {
     );
   }
 
-  getPersonalitiesResultOfTest(data: {
+  getTraumaticSensitivityResults(data: {
     answers: Answer[];
     userInformation: {
       testName: string;
       timestamp: string;
       device: string;
     };
-  }): Observable<PersonalitiesResults> {
-    return this.http.post<PersonalitiesResults>(
+  }): Observable<PersonalitiesResponse> {
+    return this.http.post<PersonalitiesResponse>(
       this.testsUrl + '/traumatic-sensitivity/results',
       data
     );
@@ -81,17 +72,14 @@ export class TraumaticSensitivityService {
     );
   }
 
-  getObservableSensitivityType(): Observable<string> {
-    return this.sensitivityType.asObservable();
-  }
   getObservableScorePercentages(): Observable<TestResult | null> {
     return this.scorePercentages.asObservable();
   }
   getIsShowSendForm(): Observable<boolean> {
     return this.isShowSendForm.asObservable();
   }
-  getObservableScore(): Observable<Scores | null> {
-    return this.scores.asObservable();
+  getObservableSensitivityResults(): Observable<PersonalitiesResults | null> {
+    return this.sensitivityResults.asObservable();
   }
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();

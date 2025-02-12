@@ -1,0 +1,113 @@
+.container {
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  h2 {
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 16px;
+
+    font-style: italic;
+    color: #f1f1f1;
+  }
+
+  .test-list {
+    padding: 16px;
+    gap: 16px;
+    margin: 0 auto;
+    min-width: 100%;
+
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  ::ng-deep app-test-card-start-btn {
+    max-width: 50%;
+  }
+  .test-card {
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    min-width: 101%;
+    gap: 8px;
+
+    border: 2px solid #16213e;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    @media screen and (min-width: 768px) {
+      min-width: 101%;
+
+      padding: 16px;
+    }
+    .test-svg {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      bottom: 8px;
+      left: 8px;
+      @media screen and (min-width: 764px) {
+        top: 8px;
+        left: 8px;
+        width: 84px;
+        height: 84px;
+      }
+    }
+    h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+
+      position: relative;
+      color: #ff2e63;
+      @media screen and (min-width: 768px) {
+        font-size: 22px;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #f1f1f1;
+      @media screen and (min-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+  .scroll-btn {
+    padding: 8px;
+    top: 50%;
+    z-index: 999;
+    transform: translateY(-50%);
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    transition: all 0.3s ease;
+    @media screen and (min-width: 768px) {
+      padding: 12px;
+    }
+    &:hover {
+      background: #1a1a2e;
+    }
+
+    &.prev {
+      left: 0;
+    }
+
+    &.next {
+      right: 0;
+    }
+  }
+}

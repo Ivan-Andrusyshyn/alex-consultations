@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  Input,
   OnInit,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,22 +14,17 @@ import { TestResult } from '../../../../shared/types/traumatic-sensitivity';
 @Component({
   selector: 'app-traumatic-indicator',
   standalone: true,
-  imports: [NgFor, NgIf, NgClass, AsyncPipe],
+  imports: [NgFor, NgIf, NgClass],
   templateUrl: './traumatic-indicator.component.html',
   styleUrl: './traumatic-indicator.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TraumaticResultsIndicatorComponent implements OnInit {
   private traumaticSensitivityService = inject(TraumaticSensitivityService);
-
+  @Input() scorePercentages: any;
   scoreKeys!: Array<keyof TestResult>;
 
-  scorePercentages$!: Observable<TestResult | null>;
-
   ngOnInit(): void {
-    this.scorePercentages$ =
-      this.traumaticSensitivityService.getObservableScorePercentages();
-
     this.scoreKeys = this.traumaticSensitivityService.getScoreKeys();
   }
 

@@ -33,7 +33,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
-  private loadingService = inject(LoadingService);
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
@@ -44,10 +43,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   personalitiesTest$!: Observable<Question[]>;
   timer: any;
   formGroup: FormGroup = this.fb.group({});
-  loading$!: Observable<boolean>;
   //
   ngOnInit(): void {
-    this.loading$ = this.loadingService.isLoading();
     this.personalitiesTest$ = this.personalitiesService
       .getPersonalitiesTest()
       .pipe(
@@ -124,7 +121,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       .getPersonalitiesResultOfTest({
         answers,
         userInformation: {
-          testName: 'traumatic-sensitivity',
+          testName: '16-personalities',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),
         },

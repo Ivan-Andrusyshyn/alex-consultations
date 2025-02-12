@@ -1,31 +1,43 @@
 <section class="person-info">
-  <div class="test-results" *ngIf="scores$ | async as scores">
-    <h2>{{ sensitivityType$ | async }}</h2>
-    <hr />
-    <br />
-    <h3 class="min-score">Найменше балів: {{ scores.minScoreNumber }}</h3>
-    <h3 class="max-score">Найбільше балів: {{ scores.maxScoreNumber }}</h3>
-    <div>
-      <ul>
-        <li *ngFor="let score of scoresKeys">
-          {{ score }}:{{ scores.scores[score] }}
-        </li>
-      </ul>
+  <ng-container *ngIf="sensitivityResults$ | async as sensitivityResults">
+    <div class="test-results">
+      <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
+      <p>{{ sensitivityResults.results.sensitivityGradation }}</p>
+      <hr />
+      <br />
+      <h3 class="min-score">
+        Найменше балів: {{ sensitivityResults.results.minScoreNumber }}
+      </h3>
+      <h3 class="max-score">
+        Найбільше балів: {{ sensitivityResults.results.maxScoreNumber }}
+      </h3>
+      <div>
+        <ul>
+          <li *ngFor="let score of scoresKeys">
+            {{ score }}:{{ sensitivityResults.results.scores[score] }}
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="score-wrapper" *ngIf="scorePercentages$ | async">
-    <app-traumatic-indicator></app-traumatic-indicator>
-    <app-send-form-on-email-btn
-      *ngIf="!(isShowSendForm$ | async)"
-      (sendForm)="toggleSendForm()"
-    ></app-send-form-on-email-btn>
-    <app-send-results-form
-      *ngIf="isShowSendForm$ | async"
-      (toggleSendForm)="toggleSendForm()"
-      (sendResultsOnEmail)="sendResultsOnEmail($event)"
-    ></app-send-results-form>
-    <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
-      Ми відправили результати тесту на пошту!
+    <div
+      class="score-wrapper"
+      *ngIf="sensitivityResults.results.percentages as percentages"
+    >
+      <app-traumatic-indicator
+        [scorePercentages]="percentages"
+      ></app-traumatic-indicator>
+      <app-send-form-on-email-btn
+        *ngIf="!(isShowSendForm$ | async)"
+        (sendForm)="toggleSendForm()"
+      ></app-send-form-on-email-btn>
+      <app-send-results-form
+        *ngIf="isShowSendForm$ | async"
+        (toggleSendForm)="toggleSendForm()"
+        (sendResultsOnEmail)="sendResultsOnEmail($event)"
+      ></app-send-results-form>
+      <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
+        Ми відправили результати тесту на пошту!
+      </div>
     </div>
-  </div>
+  </ng-container>
 </section>

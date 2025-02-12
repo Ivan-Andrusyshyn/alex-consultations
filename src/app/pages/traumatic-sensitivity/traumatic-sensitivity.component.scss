@@ -5,8 +5,20 @@
   text-align: center;
   font-family: "Arial", sans-serif;
   box-sizing: border-box;
+  position: relative;
   @media screen and (min-width: 764px) {
-    padding: 60px 20px;
+    padding: 40px 20px;
+  }
+  .test-svg {
+    width: 80%;
+    height: 80%;
+    top: 30%;
+    opacity: 0.6;
+    z-index: -1;
+    left: 50%;
+    transform: translate(-50%);
+
+    position: absolute;
   }
 }
 // ERROR

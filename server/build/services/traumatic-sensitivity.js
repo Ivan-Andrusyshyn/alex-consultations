@@ -30,10 +30,13 @@ class TraumaticSensitivityService {
             }
             const { minScoreNumber, maxScoreNumber } = this.findTheSmallestAndBiggestNumber(scores);
             const sensitivityType = this.getTypeByAllScoresNumber(sensitivityRate);
-            console.log(percentages, scores, sensitivityType);
+            const sensitivityRateGrade = this.getSensitivityRateGrade(sensitivityRate);
+            const blocksGradation = this.getBlockGradation(scores);
+            const sensitivityGradation = `C${sensitivityRateGrade} – E${blocksGradation.E} – W${blocksGradation.W} – F${blocksGradation.F} – T${blocksGradation.T} – B${blocksGradation.B} – R${blocksGradation.R}`;
             return {
                 percentages,
                 scores,
+                sensitivityGradation,
                 sensitivityType,
                 minScoreNumber,
                 maxScoreNumber,
@@ -43,6 +46,47 @@ class TraumaticSensitivityService {
             var _a;
             return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
+    }
+    getBlockGradation(scores) {
+        const sensitivityGradation = {};
+        for (const key in scores) {
+            const score = scores[key];
+            if (score >= 0 && score <= 4) {
+                sensitivityGradation[key] = 1;
+            }
+            else if (score >= 5 && score <= 9) {
+                sensitivityGradation[key] = 2;
+            }
+            else if (score >= 10 && score <= 14) {
+                sensitivityGradation[key] = 3;
+            }
+            else if (score >= 15 && score <= 18) {
+                sensitivityGradation[key] = 4;
+            }
+        }
+        return sensitivityGradation;
+    }
+    getSensitivityRateGrade(sensitivityRate) {
+        let sensitivityRateGrade;
+        if (sensitivityRate >= 0 && sensitivityRate <= 17) {
+            sensitivityRateGrade = 1;
+        }
+        else if (sensitivityRate >= 18 && sensitivityRate <= 35) {
+            sensitivityRateGrade = 2;
+        }
+        else if (sensitivityRate >= 36 && sensitivityRate <= 53) {
+            sensitivityRateGrade = 3;
+        }
+        else if (sensitivityRate >= 54 && sensitivityRate <= 71) {
+            sensitivityRateGrade = 4;
+        }
+        else if (sensitivityRate >= 72 && sensitivityRate <= 89) {
+            sensitivityRateGrade = 5;
+        }
+        else {
+            sensitivityRateGrade = 6;
+        }
+        return sensitivityRateGrade;
     }
     getTypeByAllScoresNumber(allNumber) {
         if (allNumber <= 17) {

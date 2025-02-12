@@ -1,6 +1,6 @@
 <div class="results-container">
   <ng-container *ngFor="let key of scoreKeys; let i = index">
-    <div *ngIf="scorePercentages$ | async as scorePercentages">
+    <div *ngIf="scorePercentages">
       <div>
         <div class="dsc-wrapper">
           <div [ngClass]="key" *ngIf="i % 2 === 0">

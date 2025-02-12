@@ -6,5 +6,18 @@ interface TestResult {
   F: number;
   B: number;
 }
+interface PersonalitiesResults {
+  results: {
+    scores: TestResult;
+    percentages: TestResult;
+    sensitivityType: string;
+    minScoreNumber: string;
+    maxScoreNumber: string;
+    sensitivityGradation: string;
+  };
+}
 
-export { TestResult };
+interface PersonalitiesResponse extends PersonalitiesResults {
+  message: string;
+}
+export { TestResult, PersonalitiesResults, PersonalitiesResponse };

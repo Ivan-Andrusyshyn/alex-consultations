@@ -1,7 +1,8 @@
 <app-header></app-header>
-<mat-progress-bar *ngIf="loading$ | async" mode="indeterminate">
-</mat-progress-bar>
-
+@if (loading$|async) {
+<mat-progress-bar mode="indeterminate"> </mat-progress-bar>
+<div class="backdrop"></div>
+}
 <main>
   <router-outlet />
 </main>

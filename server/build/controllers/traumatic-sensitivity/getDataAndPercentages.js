@@ -18,12 +18,13 @@ const getDataAndPercentages = (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const answers = req.body.answers;
         const userInformation = req.body.userInformation;
-        const { percentages, scores, sensitivityType, minScoreNumber, maxScoreNumber, } = traumatic_sensitivity_1.default.countPersonPercentages(answers);
+        const { percentages, scores, sensitivityGradation, sensitivityType, minScoreNumber, maxScoreNumber, } = traumatic_sensitivity_1.default.countPersonPercentages(answers);
         yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: sensitivityType }));
         res.status(200).send({
             results: {
                 percentages,
                 scores,
+                sensitivityGradation,
                 sensitivityType,
                 minScoreNumber,
                 maxScoreNumber,

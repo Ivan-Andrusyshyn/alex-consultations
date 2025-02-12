@@ -17,7 +17,6 @@ import { Answer, Question } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { TraumaticSensitivityService } from '../../../shared/services/traumatic-sensitivity.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
-import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-questions',
@@ -35,7 +34,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     TraumaticSensitivityService
   );
   private readonly fb = inject(FormBuilder);
-  private loadingService = inject(LoadingService);
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
@@ -48,9 +46,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   //
   traumaticSensitivityTest$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
-  loading$!: Observable<boolean>;
   ngOnInit(): void {
-    this.loading$ = this.loadingService.isLoading();
     this.traumaticSensitivityTest$ = this.traumaticSensitivityService
       .getTraumaticSensitivityTest()
       .pipe(
@@ -124,7 +120,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
     if (storage) return;
     this.traumaticSensitivityService
-      .getPersonalitiesResultOfTest({
+      .getTraumaticSensitivityResults({
         answers,
         userInformation: {
           testName: 'traumatic-sensitivity',
@@ -137,24 +133,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           this.setSessionStorage(
             'traumatic-sensitivity-results',
             JSON.stringify({
-              scores: r.results.scores,
-              scorePercentages: r.results.percentages,
-              sensitivityRate: r.results.sensitivityType,
-              maxScoreNumber: r.results.maxScoreNumber,
-              minScoreNumber: r.results.minScoreNumber,
+              ...r.results,
             })
           );
 
           this.traumaticSensitivityService.scorePercentages.next(
             r.results.percentages
           );
-          this.traumaticSensitivityService.sensitivityType.next(
-            r.results.sensitivityType
-          );
-          this.traumaticSensitivityService.scores.next({
-            scores: r.results.scores,
-            minScoreNumber: r.results.minScoreNumber,
-            maxScoreNumber: r.results.maxScoreNumber,
+
+          this.traumaticSensitivityService.sensitivityResults.next({
+            results: r.results,
           });
 
           return r.results;

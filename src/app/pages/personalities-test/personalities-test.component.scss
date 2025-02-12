@@ -3,10 +3,22 @@
   padding: 40px 0;
   color: #fff;
   text-align: center;
+  position: relative;
   font-family: "Arial", sans-serif;
   box-sizing: border-box;
   @media screen and (min-width: 764px) {
-    padding: 60px 20px;
+    padding: 40px 20px;
+  }
+  .test-svg {
+    width: 60%;
+    height: 60%;
+    top: 30%;
+    opacity: 0.6;
+    z-index: -1;
+    left: 50%;
+    transform: translate(-50%);
+
+    position: absolute;
   }
 }
 // ERROR

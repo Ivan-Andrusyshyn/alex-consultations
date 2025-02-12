@@ -1,5 +1,5 @@
 .info-test-btn {
-  right: 16px;
+  right: 8px;
   top: 8px;
 
   position: absolute;
@@ -11,13 +11,13 @@
     border: 1px solid #333;
     padding: 8px;
     width: 150px;
+    opacity: 0;
     top: 28px;
     right: 0;
 
     color: #433333;
     position: absolute;
     background-color: #ffff;
-    opacity: 0;
     visibility: hidden;
     transition: all 0.3s linear;
   }
