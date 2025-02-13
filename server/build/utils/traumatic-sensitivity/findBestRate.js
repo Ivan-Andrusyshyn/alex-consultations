@@ -11,9 +11,11 @@ const findBestRate = (gradatedOrders, resultsArray) => {
         });
         return resultMap;
     };
-    let bestMatch = null;
-    let bestMatchScore = 0;
-    for (const result of resultsArray) {
+    const findMaxMatch = (index = 0, bestMatch = null, bestMatchScore = 0) => {
+        if (index >= resultsArray.length) {
+            return bestMatch;
+        }
+        const result = resultsArray[index];
         const resultMap = parseResult(result);
         let matchCount = 0;
         const totalLetters = Object.keys(gradatedOrders).length;
@@ -22,12 +24,14 @@ const findBestRate = (gradatedOrders, resultsArray) => {
                 matchCount++;
             }
         }
-        const matchPercentage = (matchCount / totalLetters) * 100;
-        if (matchPercentage > 50 && matchPercentage > bestMatchScore) {
+        const matchPercentage = Math.round((matchCount / totalLetters) * 100);
+        if (matchPercentage > bestMatchScore) {
             bestMatch = result;
             bestMatchScore = matchPercentage;
         }
-    }
-    return bestMatch;
+        console.log(index + 1, bestMatch, bestMatchScore);
+        return findMaxMatch(index + 1, bestMatch, bestMatchScore);
+    };
+    return findMaxMatch();
 };
 exports.default = findBestRate;
