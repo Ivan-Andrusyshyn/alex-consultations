@@ -2,8 +2,7 @@
   <ng-container *ngIf="sensitivityResults$ | async as sensitivityResults">
     <div class="test-results">
       <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
-      <p>Домінуюча:{{ sensitivityResults.results.gradationHeight }}</p>
-      <p>Пригнічена:{{ sensitivityResults.results.gradationLow }}</p>
+      <p>{{ sensitivityResults.results.matchResults }}</p>
 
       <hr />
       <br />

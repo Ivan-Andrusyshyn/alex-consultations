@@ -4,10 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const personalitiesName_1 = __importDefault(require("../utils/16-personalities/personalitiesName"));
+const findBestRate_1 = __importDefault(require("../utils/traumatic-sensitivity/findBestRate"));
 class TraumaticSensitivityService {
     constructor() {
         this.countPersonPercentages = (answers) => {
-            const scores = { E: 0, T: 0, W: 0, R: 0, F: 0, B: 0 };
+            const scores = { E: 0, T: 0, W: 0, B: 0, R: 0, F: 0 };
             let sensitivityRate = 0;
             for (const [questionId, answer] of Object.entries(answers)) {
                 const [points, letter] = answer.split('-');
@@ -21,41 +22,37 @@ class TraumaticSensitivityService {
                 ['W', 'B'],
                 ['F', 'R'],
             ];
-            const dominantLetters = {};
+            const sensitivityRateGrade = this.getSensitivityRateGrade(sensitivityRate);
+            const gradatedLetters = { C: sensitivityRateGrade };
             const percentages = {};
-            const nonDominantLetters = {};
+            const resultsArray = [
+                'C1 – E1 – T4 – W2 – B3 – F2 – R3',
+                'C2 – E3 – T2 – W4 – B1 – F3 – R2',
+                'C3 – E4 – T1 – W3 – B2 – F1 – R4',
+                'C3 – E2 – T3 – W1 – B4 – F4 – R1',
+                'C4 – E4 – T2 – W4 – B1 – F3 – R2',
+                'C4 – E1 – T4 – W2 – B3 – F1 – R4',
+                'C5 – E3 – T3 – W3 – B2 – F4 – R1',
+                'C5 – E4 – T1 – W4 – B1 – F2 – R3',
+                'C6 – E2 – T4 – W1 – B4 – F3 – R2',
+                'C6 – E4 – T1 – W3 – B2 – F1 – R4',
+            ];
             for (const [type1, type2] of typePairs) {
                 const totalScore = scores[type1] + scores[type2];
                 percentages[type1] =
                     totalScore > 0 ? Math.round((scores[type1] / totalScore) * 100) : 50;
                 percentages[type2] = (100 - percentages[type1]);
-                if (scores[type1] > scores[type2]) {
-                    dominantLetters[type1] = this.getBlockGradation(scores[type1]);
-                    nonDominantLetters[type2] = this.getBlockGradation(scores[type2]);
-                }
-                else {
-                    dominantLetters[type2] = this.getBlockGradation(scores[type2]);
-                    nonDominantLetters[type1] = this.getBlockGradation(scores[type1]);
-                }
+                gradatedLetters[type1] = this.getBlockGradation(scores[type1]);
+                gradatedLetters[type2] = this.getBlockGradation(scores[type2]);
             }
-            console.log(dominantLetters);
-            console.log(nonDominantLetters);
             const { minScoreNumber, maxScoreNumber } = this.findTheSmallestAndBiggestNumber(scores);
             const sensitivityType = this.getTypeByAllScoresNumber(sensitivityRate);
-            const sensitivityRateGrade = this.getSensitivityRateGrade(sensitivityRate);
-            let gradationHeight = `C${sensitivityRateGrade}`;
-            let gradationLow = `C${sensitivityRateGrade}`;
-            for (let l in dominantLetters) {
-                gradationHeight += `-${l}${dominantLetters[l]}`;
-            }
-            for (let l in nonDominantLetters) {
-                gradationLow += `-${l}${nonDominantLetters[l]}`;
-            }
+            const matchResults = (0, findBestRate_1.default)(gradatedLetters, resultsArray);
+            console.log(matchResults);
             return {
                 percentages,
                 scores,
-                gradationHeight,
-                gradationLow,
+                matchResults,
                 sensitivityType,
                 minScoreNumber,
                 maxScoreNumber,
