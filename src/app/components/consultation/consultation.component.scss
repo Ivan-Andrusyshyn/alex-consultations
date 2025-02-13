@@ -1,9 +1,16 @@
 .consultations {
   width: 100%;
   padding: 40px 0;
+
   color: #fff;
   box-sizing: border-box;
+  background-image: url("../../../assets/svg/tests/person-computer.svg");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: calc(50% + 50px) bottom;
+
   @media screen and (min-width: 764px) {
+    background-size: 130px;
     padding: 60px 20px;
   }
 
