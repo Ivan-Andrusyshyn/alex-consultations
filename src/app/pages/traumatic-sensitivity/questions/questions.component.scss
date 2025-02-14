@@ -1,3 +1,16 @@
 .questions {
   min-height: 500px;
+  position: relative;
+
+  .test-svg {
+    width: 80%;
+    height: 80%;
+    top: 30%;
+    opacity: 0.6;
+    z-index: 0;
+    left: 50%;
+    transform: translate(-50%);
+
+    position: absolute;
+  }
 }

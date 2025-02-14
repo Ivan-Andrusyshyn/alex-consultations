@@ -4,21 +4,15 @@
   color: #fff;
   text-align: center;
   position: relative;
-  font-family: "Arial", sans-serif;
   box-sizing: border-box;
-  @media screen and (min-width: 764px) {
-    padding: 40px 20px;
-  }
-  .test-svg {
-    width: 60%;
-    height: 60%;
-    top: 30%;
-    opacity: 0.6;
-    z-index: 0;
-    left: 50%;
-    transform: translate(-50%);
+  background-image: url("../../../assets/svg/tests/moulding.svg");
+  background-repeat: no-repeat;
+  background-size: 150px;
+  background-position: center;
 
-    position: absolute;
+  @media screen and (min-width: 764px) {
+    background-size: 200px;
+    padding: 40px 20px;
   }
 }
 // ERROR

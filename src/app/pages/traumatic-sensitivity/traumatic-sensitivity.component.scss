@@ -3,22 +3,16 @@
   padding: 40px 0;
   color: #fff;
   text-align: center;
-  font-family: "Arial", sans-serif;
   box-sizing: border-box;
   position: relative;
-  @media screen and (min-width: 764px) {
-    padding: 40px 20px;
-  }
-  .test-svg {
-    width: 80%;
-    height: 80%;
-    top: 30%;
-    opacity: 0.6;
-    z-index: 0;
-    left: 50%;
-    transform: translate(-50%);
 
-    position: absolute;
+  background-image: url("../../../assets/svg/tests/moulding.svg");
+  background-repeat: no-repeat;
+  background-size: 150px;
+  background-position: center;
+  @media screen and (min-width: 764px) {
+    background-size: 200px;
+    padding: 40px 20px;
   }
 }
 // ERROR
