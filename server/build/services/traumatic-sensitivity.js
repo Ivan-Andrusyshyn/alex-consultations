@@ -48,11 +48,12 @@ class TraumaticSensitivityService {
             const { minScoreNumber, maxScoreNumber } = this.findTheSmallestAndBiggestNumber(scores);
             const sensitivityType = this.getTypeByAllScoresNumber(sensitivityRate);
             const matchResults = (0, findBestRate_1.default)(gradatedLetters, resultsArray);
-            console.log(matchResults);
+            const originMatchResults = `C${sensitivityRateGrade} - E${gradatedLetters.E} - T${gradatedLetters.T} - W${gradatedLetters.W} - B${gradatedLetters.B} - F${gradatedLetters.F} - R${gradatedLetters.R}`;
             return {
                 percentages,
                 scores,
                 matchResults,
+                originMatchResults,
                 sensitivityType,
                 minScoreNumber,
                 maxScoreNumber,

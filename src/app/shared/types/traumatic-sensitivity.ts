@@ -14,6 +14,7 @@ interface PersonalitiesResults {
     minScoreNumber: string;
     maxScoreNumber: string;
     matchResults: string;
+    originMatchResults: string;
   };
 }
 

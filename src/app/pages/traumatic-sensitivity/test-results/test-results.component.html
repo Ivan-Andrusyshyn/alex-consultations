@@ -1,9 +1,26 @@
 <section class="person-info">
   <ng-container *ngIf="sensitivityResults$ | async as sensitivityResults">
+    <div class="score">
+      <div>1️⃣ C1 – E1 – T4 – W2 – B3 – F2 – R3</div>
+      <div>2️⃣ C2 – E3 – T2 – W4 – B1 – F3 – R2</div>
+      <div>3️⃣ C3 – E4 – T1 – W3 – B2 – F1 – R4</div>
+      <div>4️⃣ C3 – E2 – T3 – W1 – B4 – F4 – R1</div>
+      <div>5️⃣ C4 – E4 – T2 – W4 – B1 – F3 – R2</div>
+      <div>6️⃣ C4 – E1 – T4 – W2 – B3 – F1 – R4</div>
+      <div>7️⃣ C5 – E3 – T3 – W3 – B2 – F4 – R1</div>
+      <div>8️⃣ C5 – E4 – T1 – W4 – B1 – F2 – R3</div>
+      <div>9️⃣ C6 – E2 – T4 – W1 – B4 – F3 – R2</div>
+      <div>🔟 C6 – E4 – T1 – W3 – B2 – F1 – R4</div>
+    </div>
     <div class="test-results">
       <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
+      <p>Оригінальна градація від 1 до 4:</p>
+      <p>
+        {{ sensitivityResults.results.originMatchResults }}
+      </p>
+      <hr />
+      <p>Найбільш схожий до 1 з 10:</p>
       <p>{{ sensitivityResults.results.matchResults }}</p>
-
       <hr />
       <br />
       <h3 class="min-score">
