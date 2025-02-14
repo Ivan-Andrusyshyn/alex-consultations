@@ -1,37 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const findBestRate = (gradatedOrders, resultsArray) => {
-    const parseResult = (result) => {
-        const resultMap = {};
-        result.split(' – ').forEach((pair) => {
-            const [letter, value] = pair.match(/[A-Z]+|\d+/g) || [];
-            if (letter && value) {
-                resultMap[letter] = Number(value);
-            }
-        });
-        return resultMap;
-    };
-    const findMaxMatch = (index = 0, bestMatch = null, bestMatchScore = 0) => {
-        if (index >= resultsArray.length) {
-            return bestMatch;
-        }
-        const result = resultsArray[index];
-        const resultMap = parseResult(result);
-        let matchCount = 0;
-        const totalLetters = Object.keys(gradatedOrders).length;
-        for (const letter in gradatedOrders) {
-            if (gradatedOrders[letter] === resultMap[letter]) {
-                matchCount++;
+    let bestMatch = null;
+    let bestMatchScore = -Infinity;
+    resultsArray.forEach((result) => {
+        let matchScore = 0;
+        let totalDifference = 0;
+        const totalKeys = Object.keys(gradatedOrders).length;
+        for (const key in gradatedOrders) {
+            if (result[key] !== undefined) {
+                const difference = Math.abs(gradatedOrders[key] - result[key]);
+                totalDifference += difference;
+                if (difference === 0) {
+                    matchScore++;
+                }
             }
         }
-        const matchPercentage = Math.round((matchCount / totalLetters) * 100);
-        if (matchPercentage > bestMatchScore) {
+        const exactMatchPercentage = (matchScore / totalKeys) * 100;
+        const differencePenalty = totalDifference / totalKeys;
+        const finalScore = exactMatchPercentage - differencePenalty;
+        if (finalScore > bestMatchScore) {
             bestMatch = result;
-            bestMatchScore = matchPercentage;
+            bestMatchScore = finalScore;
         }
-        console.log(index + 1, bestMatch, bestMatchScore);
-        return findMaxMatch(index + 1, bestMatch, bestMatchScore);
-    };
-    return findMaxMatch();
+    });
+    if (!bestMatch)
+        return null;
+    return `C${gradatedOrders.C} - E${bestMatch.E} - T${bestMatch.T} - W${bestMatch.W} - B${bestMatch.B} - F${bestMatch.F} - R${bestMatch.R}`;
 };
 exports.default = findBestRate;

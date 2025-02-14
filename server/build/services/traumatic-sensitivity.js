@@ -5,6 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const personalitiesName_1 = __importDefault(require("../utils/16-personalities/personalitiesName"));
 const findBestRate_1 = __importDefault(require("../utils/traumatic-sensitivity/findBestRate"));
+const possibleVariablesArray = [
+    { C: 1, E: 1, T: 4, W: 2, B: 3, F: 2, R: 3 },
+    { C: 2, E: 3, T: 2, W: 4, B: 1, F: 3, R: 2 },
+    { C: 3, E: 4, T: 1, W: 3, B: 2, F: 1, R: 4 },
+    { C: 3, E: 2, T: 3, W: 1, B: 4, F: 4, R: 1 },
+    { C: 4, E: 4, T: 2, W: 4, B: 1, F: 3, R: 2 },
+    { C: 4, E: 1, T: 4, W: 2, B: 3, F: 1, R: 4 },
+    { C: 5, E: 3, T: 3, W: 3, B: 2, F: 4, R: 1 },
+    { C: 5, E: 4, T: 1, W: 4, B: 1, F: 2, R: 3 },
+    { C: 6, E: 2, T: 4, W: 1, B: 4, F: 3, R: 2 },
+    { C: 6, E: 4, T: 1, W: 3, B: 2, F: 1, R: 4 },
+];
 class TraumaticSensitivityService {
     constructor() {
         this.countPersonPercentages = (answers) => {
@@ -25,18 +37,6 @@ class TraumaticSensitivityService {
             const sensitivityRateGrade = this.getSensitivityRateGrade(sensitivityRate);
             const gradatedLetters = { C: sensitivityRateGrade };
             const percentages = {};
-            const resultsArray = [
-                'C1 – E1 – T4 – W2 – B3 – F2 – R3',
-                'C2 – E3 – T2 – W4 – B1 – F3 – R2',
-                'C3 – E4 – T1 – W3 – B2 – F1 – R4',
-                'C3 – E2 – T3 – W1 – B4 – F4 – R1',
-                'C4 – E4 – T2 – W4 – B1 – F3 – R2',
-                'C4 – E1 – T4 – W2 – B3 – F1 – R4',
-                'C5 – E3 – T3 – W3 – B2 – F4 – R1',
-                'C5 – E4 – T1 – W4 – B1 – F2 – R3',
-                'C6 – E2 – T4 – W1 – B4 – F3 – R2',
-                'C6 – E4 – T1 – W3 – B2 – F1 – R4',
-            ];
             for (const [type1, type2] of typePairs) {
                 const totalScore = scores[type1] + scores[type2];
                 percentages[type1] =
@@ -47,7 +47,7 @@ class TraumaticSensitivityService {
             }
             const { minScoreNumber, maxScoreNumber } = this.findTheSmallestAndBiggestNumber(scores);
             const sensitivityType = this.getTypeByAllScoresNumber(sensitivityRate);
-            const matchResults = (0, findBestRate_1.default)(gradatedLetters, resultsArray);
+            const matchResults = (0, findBestRate_1.default)(gradatedLetters, possibleVariablesArray);
             const originMatchResults = `C${sensitivityRateGrade} - E${gradatedLetters.E} - T${gradatedLetters.T} - W${gradatedLetters.W} - B${gradatedLetters.B} - F${gradatedLetters.F} - R${gradatedLetters.R}`;
             return {
                 percentages,
