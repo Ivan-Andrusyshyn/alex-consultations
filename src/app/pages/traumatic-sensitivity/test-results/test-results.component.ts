@@ -58,6 +58,19 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   isShowFormRespMessage$!: Observable<boolean>;
   sensitivityType$!: Observable<string>;
 
+  possibleVariablesArray: string[] = [
+    'C1 - E1 - T4 - W2 - B3 - F2 - R3',
+    'C2 - E3 - T2 - W4 - B1 - F3 - R2',
+    'C3 - E4 - T1 - W3 - B2 - F1 - R4',
+    'C3 - E2 - T3 - W1 - B4 - F4 - R1',
+    'C4 - E4 - T2 - W4 - B1 - F3 - R2',
+    'C4 - E1 - T4 - W2 - B3 - F1 - R4',
+    'C5 - E3 - T3 - W3 - B2 - F4 - R1',
+    'C5 - E4 - T1 - W4 - B1 - F2 - R3',
+    'C6 - E2 - T4 - W1 - B4 - F3 - R2',
+    'C6 - E4 - T1 - W3 - B2 - F1 - R4',
+  ];
+
   ngOnDestroy(): void {
     this.traumaticSensitivityService.scorePercentages.next(null);
     sessionStorage.clear();
@@ -90,5 +103,9 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.traumaticSensitivityService.isShowSendForm.next(
       !this.traumaticSensitivityService.isShowSendForm.value
     );
+  }
+
+  compare(r: string, b: string) {
+    return r === b;
   }
 }
