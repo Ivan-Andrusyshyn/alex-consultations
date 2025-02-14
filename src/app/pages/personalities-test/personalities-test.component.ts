@@ -10,4 +10,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './personalities-test.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PersonalitiesTestComponent {}
+export class PersonalitiesTestComponent {
+  svgName = { url: 'assets/svg/tests/icons-tests.svg#stretching' };
+}
