@@ -7,20 +7,8 @@
       <app-traumatic-indicator
         [scorePercentages]="percentages"
       ></app-traumatic-indicator>
-      <app-send-form-on-email-btn
-        *ngIf="!(isShowSendForm$ | async)"
-        (sendForm)="toggleSendForm()"
-      ></app-send-form-on-email-btn>
-      <app-send-results-form
-        *ngIf="isShowSendForm$ | async"
-        (toggleSendForm)="toggleSendForm()"
-        (sendResultsOnEmail)="sendResultsOnEmail($event)"
-      ></app-send-results-form>
-      <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
-        Ми відправили результати тесту на пошту!
-      </div>
     </div>
-
+    <br />
     <div class="title-wrapper">
       <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
       <div class="score">
@@ -43,4 +31,16 @@
     </div>
   </ng-container>
   <app-type-information [typeInfo]="typeInfo$ | async"></app-type-information>
+  <app-send-form-on-email-btn
+    *ngIf="!(isShowSendForm$ | async)"
+    (sendForm)="toggleSendForm()"
+  ></app-send-form-on-email-btn>
+  <app-send-results-form
+    *ngIf="isShowSendForm$ | async"
+    (toggleSendForm)="toggleSendForm()"
+    (sendResultsOnEmail)="sendResultsOnEmail($event)"
+  ></app-send-results-form>
+  <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
+    Ми відправили результати тесту на пошту!
+  </div>
 </section>
