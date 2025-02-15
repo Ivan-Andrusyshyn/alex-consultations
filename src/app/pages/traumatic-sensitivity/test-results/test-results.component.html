@@ -1,39 +1,5 @@
 <section class="results">
   <ng-container *ngIf="userResults$ | async as sensitivityResults">
-    <div class="score">
-      <div
-        *ngFor="let r of possibleVariablesArray; let i = index"
-        [class.matchResult]="
-          compare(sensitivityResults.results.matchResults, r)
-        "
-      >
-        {{ i + 1 }}. {{ r }}
-      </div>
-    </div>
-    <div class="test-results">
-      <p>Оригінальна градація від 1 до 4:</p>
-      <p>
-        {{ sensitivityResults.results.originMatchResults }}
-      </p>
-      <hr />
-      <p>Найбільш схожий до 1 з 10:</p>
-      <p>{{ sensitivityResults.results.matchResults }}</p>
-      <hr />
-      <br />
-      <h3 class="min-score">
-        Найменше балів: {{ sensitivityResults.results.minScoreNumber }}
-      </h3>
-      <h3 class="max-score">
-        Найбільше балів: {{ sensitivityResults.results.maxScoreNumber }}
-      </h3>
-      <div>
-        <ul>
-          <li *ngFor="let score of scoresKeys">
-            {{ score }}:{{ sensitivityResults.results.scores[score] }}
-          </li>
-        </ul>
-      </div>
-    </div>
     <div
       class="score-wrapper"
       *ngIf="sensitivityResults.results.percentages as percentages"
@@ -54,7 +20,27 @@
         Ми відправили результати тесту на пошту!
       </div>
     </div>
-    <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
+
+    <div class="title-wrapper">
+      <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
+      <div class="score">
+        <div
+          *ngFor="let r of possibleVariablesArray; let i = index"
+          [class.matchResult]="
+            compare(sensitivityResults.results.matchResults, r)
+          "
+        >
+          @if (compare(sensitivityResults.results.matchResults, r)) { >
+          {{ i + 1 }}. {{ r }}
+
+          }@else {
+
+          {{ i + 1 }}. {{ r }}
+
+          }
+        </div>
+      </div>
+    </div>
   </ng-container>
   <app-type-information [typeInfo]="typeInfo$ | async"></app-type-information>
 </section>

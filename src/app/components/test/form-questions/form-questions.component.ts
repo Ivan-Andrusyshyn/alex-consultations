@@ -7,22 +7,15 @@ import {
   EventEmitter,
   inject,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Question } from '../../../shared/types/16-personalities';
+import { Answer, Question } from '../../../shared/types/16-personalities';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { RefreshButtonComponent } from '../../refresh-button/refresh-button.component';
 import { ModalComponent } from '../../modal/modal.component';
@@ -48,6 +41,7 @@ export class FormQuestionsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   @Output() nextQues = new EventEmitter();
+  @Output() onSubmit = new EventEmitter<Answer[]>();
   @Input() questions!: Question[];
   @Input() formGroup!: FormGroup;
   @Input() currentQuestionNumber: number = 1;
@@ -69,6 +63,11 @@ export class FormQuestionsComponent implements OnInit {
       answers,
       currentQuestionNumber: this.currentQuestionNumber,
     });
+  }
+
+  getSubmit() {
+    const answers = this.formGroup.value;
+    this.onSubmit.emit(answers);
   }
 
   private openDialog(): void {

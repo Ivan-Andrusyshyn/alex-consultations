@@ -96,9 +96,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     answers: Answer[];
     currentQuestionNumber: number;
   }) {
-    if (this.formGroup.valid) {
-      this.getResults(answers);
-    } else if (this.formGroup.invalid && currentQuestionNumber <= 90) {
+    if (this.formGroup.invalid) {
       this.scrollToTop();
 
       this.setSessionStorage(
@@ -111,7 +109,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     }
   }
 
-  private getResults(answers: Answer[]) {
+  getResults(answers: Answer[]) {
+    if (this.formGroup.invalid) return;
     const storage = JSON.parse(
       sessionStorage.getItem('16-personalities-results') || 'null'
     );

@@ -1,6 +1,6 @@
 .main-wrapper {
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 
   position: relative;
   display: flex;
@@ -9,15 +9,12 @@
 
 .dsc-wrapper {
   width: 100%;
+  margin-bottom: 12px;
 }
-.even-descriptions {
+.descriptions {
   text-align: left;
-  margin-bottom: 10px;
 }
-.odd-descriptions {
-  color: red;
-  text-align: right;
-}
+
 .score {
   padding: 4px;
   border-radius: 1rem;
@@ -58,6 +55,7 @@
   width: 16px;
   height: 16px;
   top: -50%;
+  left: -5px;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(29, 36, 50, 0.15);
   border: 3px solid white;

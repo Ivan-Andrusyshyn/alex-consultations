@@ -1,10 +1,9 @@
 .score-wrapper {
   gap: 8px;
-  max-width: 350px;
-  margin: 12px auto;
+  width: 100%;
+  margin: 12px 0;
   padding: 1rem;
   z-index: 999;
-  border: 2px solid #f1f1f1;
   border-radius: 1rem;
 
   box-sizing: border-box;
@@ -13,21 +12,39 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+
+.title-wrapper {
+  gap: 12px;
+
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .score {
   font-size: 12px;
-}
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  font-style: oblique;
 
+  @media screen and (min-width: 764px) {
+    font-size: 14px;
+  }
+}
 h2 {
-  color: #fff;
-  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  font-weight: 100;
+
+  text-align: left;
+  color: red;
+  border-bottom: 2px solid red;
   text-transform: uppercase;
   display: inline-block;
-
-  font-size: 24px;
-  padding: 10px;
-  border-radius: 8px;
 }
-
+.matchResult {
+  color: red;
+}
 .test-results {
   max-width: 500px;
   margin: 20px auto;
@@ -88,7 +105,4 @@ h2 {
       }
     }
   }
-}
-.matchResult {
-  color: red;
 }

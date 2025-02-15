@@ -55,7 +55,30 @@ form {
     }
   }
 }
+.results-btn {
+  width: 150px;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ffd700;
+  margin: 0 auto;
+  font-size: 14px;
+  gap: 8px;
 
+  color: #ffd700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s linear;
+
+  &:hover {
+    border: 1px solid #ffd90086;
+  }
+
+  @media screen and (min-width: 764px) {
+    width: 200px;
+    font-size: 16px;
+  }
+}
 // ========================
 // error
 

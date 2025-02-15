@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +6,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { TraumaticSensitivityService } from '../../../../shared/services/traumatic-sensitivity.service';
 import { TestResult } from '../../../../shared/types/traumatic-sensitivity';
@@ -23,7 +22,6 @@ export class TraumaticResultsIndicatorComponent implements OnInit {
   private traumaticSensitivityService = inject(TraumaticSensitivityService);
   @Input() scorePercentages: any;
   scoreKeys!: Array<keyof TestResult>;
-
   ngOnInit(): void {
     this.scoreKeys = this.traumaticSensitivityService.getScoreKeys();
   }

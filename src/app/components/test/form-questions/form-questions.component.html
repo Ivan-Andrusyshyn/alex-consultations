@@ -28,6 +28,14 @@
             </div>
           </div>
         </div>
+        <button
+          (click)="getSubmit()"
+          class="results-btn"
+          *ngIf="formGroup.valid"
+          type="button"
+        >
+          Результати <span class="arrow">➜</span>
+        </button>
       </mat-tab>
     </ng-container>
   </form>
@@ -37,7 +45,4 @@
   *ngIf="getInvalidControls()?.length && currentQuestionNumber > 89"
 >
   Будь ласка, дайте відповідь на всі питання.
-  <!-- <ul>
-    <li *ngFor="let control of getInvalidControls()">{{ control }}</li>
-  </ul> -->
 </div>

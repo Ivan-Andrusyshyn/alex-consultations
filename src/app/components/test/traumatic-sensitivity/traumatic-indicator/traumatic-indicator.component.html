@@ -3,16 +3,13 @@
     <div *ngIf="scorePercentages">
       <div class="main-wrapper">
         <div class="dsc-wrapper">
-          <div [ngClass]="key" class="even-descriptions" *ngIf="i % 2 === 0">
+          <div [ngClass]="key" class="descriptions">
             {{ getDescriptions(key) + " " + scorePercentages[key] + "%" }}
           </div>
-          <div [ngClass]="key" class="odd-descriptions" *ngIf="i % 2 === 1">
-            {{ getDescriptions(key) }}
-          </div>
         </div>
-        <div [ngClass]="key" class="score" *ngIf="i % 2 === 0">
+        <div [ngClass]="key" class="score">
           <div
-            [style.left]="(scorePercentages[key] * 314) / 100 - 16 / 2 + 'px'"
+            [style.left]="scorePercentages[key] + '%'"
             class="bg-score"
           ></div>
         </div>
