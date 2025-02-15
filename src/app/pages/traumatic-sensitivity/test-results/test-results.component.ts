@@ -6,8 +6,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TypeInformation } from '../../../shared/types/16-personalities';
@@ -20,13 +21,20 @@ import {
   TestResult,
 } from '../../../shared/types/traumatic-sensitivity';
 import { TraumaticResultsIndicatorComponent } from '../../../components/test/traumatic-sensitivity/traumatic-indicator/traumatic-indicator.component';
+import { TypeInformationComponent } from '../../../components/test/traumatic-sensitivity/type-information/type-information.component';
 
-interface Scores {
-  scores: TestResult;
-  minScoreNumber: string;
-  maxScoreNumber: string;
-}
-
+const types: string[] = [
+  'C1-E1-T4-W2-B3-F2-R3',
+  'C2-E3-T2-W4-B1-F3-R2',
+  'C3-E4-T1-W3-B2-F1-R4',
+  'C3-E2-T3-W1-B4-F4-R1',
+  'C4-E4-T2-W4-B1-F3-R2',
+  'C4-E1-T4-W2-B3-F1-R4',
+  'C5-E3-T3-W3-B2-F4-R1',
+  'C5-E4-T1-W4-B1-F2-R3',
+  'C6-E2-T4-W1-B4-F3-R2',
+  'C6-E4-T1-W3-B2-F1-R4',
+];
 @Component({
   selector: 'app-test-results',
   standalone: true,
@@ -37,6 +45,7 @@ interface Scores {
     AsyncPipe,
     NgIf,
     NgFor,
+    TypeInformationComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -46,39 +55,40 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private traumaticSensitivityService = inject(TraumaticSensitivityService);
   private mailerService = inject(MailerService);
   private destroyRef = inject(DestroyRef);
+  private activeRoute = inject(ActivatedRoute);
 
   personInformation$!: Observable<{
     personType: string;
     personInformation: TypeInformation;
   }>;
   scorePercentages$!: Observable<TestResult | null>;
-  sensitivityResults$!: Observable<PersonalitiesResults | null>;
+  userResults$!: Observable<PersonalitiesResults | null>;
   scoresKeys!: Array<keyof TestResult>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
   sensitivityType$!: Observable<string>;
 
-  possibleVariablesArray: string[] = [
-    'C1 - E1 - T4 - W2 - B3 - F2 - R3',
-    'C2 - E3 - T2 - W4 - B1 - F3 - R2',
-    'C3 - E4 - T1 - W3 - B2 - F1 - R4',
-    'C3 - E2 - T3 - W1 - B4 - F4 - R1',
-    'C4 - E4 - T2 - W4 - B1 - F3 - R2',
-    'C4 - E1 - T4 - W2 - B3 - F1 - R4',
-    'C5 - E3 - T3 - W3 - B2 - F4 - R1',
-    'C5 - E4 - T1 - W4 - B1 - F2 - R3',
-    'C6 - E2 - T4 - W1 - B4 - F3 - R2',
-    'C6 - E4 - T1 - W3 - B2 - F1 - R4',
-  ];
-
+  possibleVariablesArray = types;
+  typeInfo$!: Observable<any>;
   ngOnDestroy(): void {
     this.traumaticSensitivityService.scorePercentages.next(null);
     sessionStorage.clear();
   }
 
   ngOnInit(): void {
+    this.activeRoute.params.subscribe((r) => {
+      this.typeInfo$ = this.typeInfo$ = this.traumaticSensitivityService
+        .getEmotionsTypeInfoByResults(r['traumaticSensitivity'])
+        .pipe(
+          map((info) => {
+            console.log(info);
+            return info.information;
+          })
+        );
+    });
+
     this.scoresKeys = this.traumaticSensitivityService.getScoreKeys();
-    this.sensitivityResults$ =
+    this.userResults$ =
       this.traumaticSensitivityService.getObservableSensitivityResults();
 
     this.isShowFormRespMessage$ =

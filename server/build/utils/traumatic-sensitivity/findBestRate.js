@@ -27,6 +27,6 @@ const findBestRate = (gradatedOrders, resultsArray) => {
     if (!bestMatch)
         return null;
     console.log(bestMatch);
-    return `C${bestMatch.C} - E${bestMatch.E} - T${bestMatch.T} - W${bestMatch.W} - B${bestMatch.B} - F${bestMatch.F} - R${bestMatch.R}`;
+    return `C${bestMatch.C}-E${bestMatch.E}-T${bestMatch.T}-W${bestMatch.W}-B${bestMatch.B}-F${bestMatch.F}-R${bestMatch.R}`;
 };
 exports.default = findBestRate;

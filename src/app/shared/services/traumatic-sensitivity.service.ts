@@ -8,7 +8,8 @@ import {
   PersonalitiesResults,
   TestResult,
 } from '../types/traumatic-sensitivity';
-import { Answer, TypeInformation } from '../types/16-personalities';
+import { Answer } from '../types/16-personalities';
+import { TypeInformation } from '../../../../server/src/types/traumatic-sensitivity';
 
 interface Scores {
   scores: TestResult;
@@ -58,17 +59,18 @@ export class TraumaticSensitivityService {
       data
     );
   }
-  getEmotionsTypeInfoByResults(personType: string): Observable<{
-    personInformation: TypeInformation;
+  getEmotionsTypeInfoByResults(personCodeType: string): Observable<{
+    information: TypeInformation;
     message: string;
-    personType: string;
   }> {
     return this.http.get<{
-      personInformation: TypeInformation;
+      information: TypeInformation;
       message: string;
-      personType: string;
     }>(
-      this.testsUrl + '/traumatic-sensitivity/emotion-type' + '/' + personType
+      this.testsUrl +
+        '/traumatic-sensitivity/emotion-type' +
+        '/' +
+        personCodeType
     );
   }
 

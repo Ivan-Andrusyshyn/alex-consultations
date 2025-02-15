@@ -151,16 +151,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((r) => {
-        this.handlePersonType(r.sensitivityType);
+        this.handlePersonType(r.matchResults);
       });
   }
 
-  private handlePersonType(personType: string) {
+  private handlePersonType(matchResults: string) {
     this.router.navigate([
       'tests',
       'traumatic-sensitivity',
       'details',
-      personType,
+      matchResults,
     ]);
 
     this.formGroup.reset();

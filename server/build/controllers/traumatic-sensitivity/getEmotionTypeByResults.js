@@ -12,17 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const _16_personality_1 = __importDefault(require("../../services/16-personality"));
+const traumatic_sensitivity_1 = __importDefault(require("../../services/traumatic-sensitivity"));
 const getEmotionTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const emotionType = req.params.emotionType;
         console.log(emotionType);
-        const personNameByType = _16_personality_1.default.getPersonNameByType(emotionType);
-        const personInformation = _16_personality_1.default.getInformationByType(personNameByType);
+        const result = traumatic_sensitivity_1.default.getReults(emotionType);
         res.status(200).send({
-            emotionType: personNameByType,
-            personInformation,
-            message: 'Success post person type .',
+            information: result,
+            message: 'Success post person type.',
         });
     }
     catch (error) {

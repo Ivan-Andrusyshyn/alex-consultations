@@ -1,9 +1,9 @@
 <div class="results-container">
   <ng-container *ngFor="let key of scoreKeys; let i = index">
     <div *ngIf="scorePercentages">
-      <div>
+      <div class="main-wrapper">
         <div class="dsc-wrapper">
-          <div [ngClass]="key" *ngIf="i % 2 === 0">
+          <div [ngClass]="key" class="even-descriptions" *ngIf="i % 2 === 0">
             {{ getDescriptions(key) + " " + scorePercentages[key] + "%" }}
           </div>
           <div [ngClass]="key" class="odd-descriptions" *ngIf="i % 2 === 1">

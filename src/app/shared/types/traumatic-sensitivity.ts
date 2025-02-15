@@ -21,4 +21,43 @@ interface PersonalitiesResults {
 interface PersonalitiesResponse extends PersonalitiesResults {
   message: string;
 }
-export { TestResult, PersonalitiesResults, PersonalitiesResponse };
+interface TypeInformation {
+  resultCode: string;
+  description: string;
+
+  insights: {
+    title: string;
+    text: string[];
+  };
+
+  strengths: {
+    title: string;
+    list: string[];
+  };
+
+  challenges: {
+    title: string;
+    list: string[];
+  };
+
+  recommendations: {
+    title: string;
+    list: string[];
+  };
+
+  retakeConditions: {
+    title: string;
+    list: string[];
+  };
+
+  summary: {
+    title: string;
+    text: string;
+  };
+}
+export {
+  TestResult,
+  PersonalitiesResults,
+  TypeInformation,
+  PersonalitiesResponse,
+};

@@ -1,0 +1,50 @@
+<div class="container" *ngIf="typeInfo">
+  <p>{{ typeInfo.resultCode }}</p>
+  <p class="description">{{ typeInfo.description }}</p>
+
+  <div class="section">
+    <h3>{{ typeInfo.insights.title }}</h3>
+    <ul>
+      <li *ngFor="let insight of typeInfo.insights.text">{{ insight }}</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>{{ typeInfo.strengths.title }}</h3>
+    <ul>
+      <li *ngFor="let strength of typeInfo.strengths.list">{{ strength }}</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>{{ typeInfo.challenges.title }}</h3>
+    <ul>
+      <li *ngFor="let challenge of typeInfo.challenges.list">
+        {{ challenge }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>{{ typeInfo.recommendations.title }}</h3>
+    <ul>
+      <li *ngFor="let recommendation of typeInfo.recommendations.list">
+        {{ recommendation }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>{{ typeInfo.retakeConditions.title }}</h3>
+    <ul>
+      <li *ngFor="let condition of typeInfo.retakeConditions.list">
+        {{ condition }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="summary">
+    <h3>{{ typeInfo.summary.title }}</h3>
+    <p>{{ typeInfo.summary.text }}</p>
+  </div>
+</div>
