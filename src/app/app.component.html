@@ -1,7 +1,7 @@
 <app-header></app-header>
 @if (loading$|async) {
 <mat-progress-bar mode="indeterminate"> </mat-progress-bar>
-<div class="backdrop"></div>
+<div class="backdrop">Завантажуємо</div>
 }
 <main>
   <router-outlet />

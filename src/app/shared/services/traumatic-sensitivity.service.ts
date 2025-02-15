@@ -7,9 +7,9 @@ import {
   PersonalitiesResponse,
   PersonalitiesResults,
   TestResult,
+  TypeInformation,
 } from '../types/traumatic-sensitivity';
 import { Answer } from '../types/16-personalities';
-import { TypeInformation } from '../../../../server/src/types/traumatic-sensitivity';
 
 interface Scores {
   scores: TestResult;
