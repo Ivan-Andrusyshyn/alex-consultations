@@ -28,14 +28,11 @@
             </div>
           </div>
         </div>
-        <button
-          (click)="getSubmit()"
-          class="results-btn"
+        <app-btn-shine
           *ngIf="formGroup.valid"
-          type="button"
-        >
-          Результати <span class="arrow">➜</span>
-        </button>
+          [btnTitle]="'Результати'"
+          (onClick)="getSubmit()"
+        ></app-btn-shine>
       </mat-tab>
     </ng-container>
   </form>
