@@ -1,13 +1,13 @@
 .score-wrapper {
   gap: 8px;
   width: 100%;
-  margin: 12px 0;
   z-index: 999;
   border-radius: 1rem;
 
   box-sizing: border-box;
   display: flex;
 
+  position: relative;
   flex-wrap: wrap;
   flex-direction: column;
 }
@@ -20,12 +20,25 @@
   justify-content: center;
   align-items: center;
 }
+.bg-results {
+  width: 100px;
+  height: 80px;
+  background-position: right;
+  background-size: 80px;
+  margin-top: 8px;
+  background-repeat: no-repeat;
+  @media screen and (min-width: 480px) {
+    height: 150px;
+    width: 200px;
+    margin-top: 0;
+    background-size: 150px;
+  }
+}
 .score {
   font-size: 10px;
   font-weight: 100;
   letter-spacing: 0.1em;
   font-style: oblique;
-
   @media screen and (min-width: 764px) {
     font-size: 14px;
   }
@@ -40,6 +53,8 @@ h2 {
   border-bottom: 2px solid red;
   text-transform: uppercase;
   display: inline-block;
+  display: flex;
+  align-items: center;
 
   @media screen and (min-width: 764px) {
     font-size: 16px;

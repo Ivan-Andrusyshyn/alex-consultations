@@ -4,33 +4,46 @@
       class="score-wrapper"
       *ngIf="sensitivityResults.results.percentages as percentages"
     >
+      <div class="title-wrapper">
+        <h2>
+          {{ sensitivityResults.results.sensitivityType }}
+        </h2>
+        <div class="score">
+          <div
+            *ngFor="let r of possibleVariablesArray; let i = index"
+            [class.matchResult]="
+              compare(sensitivityResults.results.matchResults, r)
+            "
+          >
+            @if (compare(sensitivityResults.results.matchResults, r)) { >
+            {{ i + 1 }}. {{ r }}
+
+            }@else {
+
+            {{ i + 1 }}. {{ r }}
+
+            }
+          </div>
+        </div>
+        <div
+          class="bg-results"
+          [ngStyle]="{
+            'background-image':
+              'url(assets/svg/tests/traumatic-sensitivity/' +
+              sensitivityResults.results.matchResults +
+              '.svg)'
+          }"
+        ></div>
+      </div>
+      <br />
       <app-traumatic-indicator
         [scorePercentages]="percentages"
       ></app-traumatic-indicator>
     </div>
     <br />
-    <div class="title-wrapper">
-      <h2>{{ sensitivityResults.results.sensitivityType }}</h2>
-      <div class="score">
-        <div
-          *ngFor="let r of possibleVariablesArray; let i = index"
-          [class.matchResult]="
-            compare(sensitivityResults.results.matchResults, r)
-          "
-        >
-          @if (compare(sensitivityResults.results.matchResults, r)) { >
-          {{ i + 1 }}. {{ r }}
-
-          }@else {
-
-          {{ i + 1 }}. {{ r }}
-
-          }
-        </div>
-      </div>
-    </div>
   </ng-container>
   <app-type-information [typeInfo]="typeInfo$ | async"></app-type-information>
+
   <app-send-form-on-email-btn
     *ngIf="!(isShowSendForm$ | async)"
     (sendForm)="toggleSendForm()"

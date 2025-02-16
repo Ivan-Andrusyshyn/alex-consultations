@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
 import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -46,6 +46,7 @@ const types: string[] = [
     NgIf,
     NgFor,
     TypeInformationComponent,
+    NgStyle,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
