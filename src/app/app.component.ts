@@ -8,13 +8,14 @@ import { RouterOutlet } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { LoadingService } from './shared/services/loading.service';
+import { LoaderSquareComponent } from './components/loader-square/loader-square.component';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ import { LoadingService } from './shared/services/loading.service';
     MatProgressBarModule,
     HeaderComponent,
     MatProgressSpinnerModule,
-    NgIf,
+    LoaderSquareComponent,
     AsyncPipe,
     FooterComponent,
   ],
