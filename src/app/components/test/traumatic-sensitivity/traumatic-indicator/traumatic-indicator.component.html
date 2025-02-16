@@ -5,6 +5,13 @@
         <div class="dsc-wrapper">
           <div [ngClass]="key" class="descriptions">
             {{ getDescriptions(key) + " " + scorePercentages[key] + "%" }}
+            <div
+              class="btn-show-more"
+              title="Детальніше"
+              (click)="togglePanel(key)"
+            >
+              ❔
+            </div>
           </div>
         </div>
         <div [ngClass]="key" class="score">
@@ -14,6 +21,29 @@
           ></div>
         </div>
       </div>
+
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="panelOpenStates[key]">
+          <mat-expansion-panel-header (click)="togglePanel(key)">
+            <p class="expansion-title">
+              {{ panelOpenStates[key] ? "Згорнути" : "" }}
+            </p>
+          </mat-expansion-panel-header>
+          <div class="sensitivity-container">
+            <div class="category">
+              <h3>{{ sensitivityCategory[key].name }}</h3>
+              <p>{{ sensitivityCategory[key].description }}</p>
+
+              <ul>
+                <li *ngFor="let level of sensitivityCategory[key]?.levels">
+                  <strong>{{ level.range }}</strong
+                  >: {{ level.meaning }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </ng-container>
 </div>
