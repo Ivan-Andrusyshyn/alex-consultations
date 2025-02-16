@@ -29,7 +29,7 @@
 .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
   color: #ddd !important;
 }
-
+// ------------------------------------------
 form {
   .form-btn {
     width: 100%;
@@ -171,7 +171,7 @@ ul {
 }
 
 .answers {
-  gap: 12px;
+  gap: 18px;
 
   display: flex;
   flex-direction: column;
@@ -182,6 +182,7 @@ ul {
     padding-left: 40px;
     transition: color 0.3s ease;
     font-size: 1rem;
+    letter-spacing: 0.1em;
 
     color: #fff;
     cursor: pointer;

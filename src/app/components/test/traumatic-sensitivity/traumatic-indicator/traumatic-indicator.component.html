@@ -1,10 +1,9 @@
 <div class="results-container">
   <ng-container *ngFor="let key of scoreKeys; let i = index">
-    <div *ngIf="scorePercentages">
+    <div class="indicator-content" *ngIf="scorePercentages">
       <div class="main-wrapper">
         <div class="dsc-wrapper">
           <div [ngClass]="key" class="descriptions">
-            {{ getDescriptions(key) + " " + scorePercentages[key] + "%" }}
             <div
               class="btn-show-more"
               title="Детальніше"
@@ -12,6 +11,7 @@
             >
               ❔
             </div>
+            {{ getDescriptions(key) + " " + scorePercentages[key] + "%" }}
           </div>
         </div>
         <div [ngClass]="key" class="score">
@@ -24,11 +24,6 @@
 
       <mat-accordion>
         <mat-expansion-panel [expanded]="panelOpenStates[key]">
-          <mat-expansion-panel-header (click)="togglePanel(key)">
-            <p class="expansion-title">
-              {{ panelOpenStates[key] ? "Згорнути" : "" }}
-            </p>
-          </mat-expansion-panel-header>
           <div class="sensitivity-container">
             <div class="category">
               <h3>{{ sensitivityCategory[key].name }}</h3>
@@ -41,6 +36,9 @@
                 </li>
               </ul>
             </div>
+            <button class="expansion-btn" (click)="togglePanel(key)">
+              {{ panelOpenStates[key] ? "Згорнути" : "" }}
+            </button>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
