@@ -19,6 +19,13 @@
 
     position: absolute;
   }
+  .price-title {
+    gap: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   h2 {
     margin-bottom: 10px;
     margin-top: 0;
