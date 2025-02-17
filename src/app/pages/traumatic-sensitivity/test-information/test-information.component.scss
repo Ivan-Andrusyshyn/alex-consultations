@@ -1,11 +1,10 @@
 .test-information {
   width: 100%;
-  padding: 40px 0;
   color: #fff;
   text-align: center;
   box-sizing: border-box;
   @media screen and (min-width: 764px) {
-    padding: 60px 20px;
+    padding: 0 20px;
   }
   .test-svg {
     width: 80%;
@@ -24,6 +23,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    p {
+      color: #ffcc00;
+    }
   }
   h2 {
     margin-bottom: 10px;
@@ -52,11 +54,12 @@
     font-weight: 200;
     line-height: 1.5;
 
-    color: #ffcc00;
+    color: #ccc;
     @media screen and (min-width: 764px) {
       font-size: 16px;
     }
   }
+
   ul {
     padding: 0;
     gap: 12px;

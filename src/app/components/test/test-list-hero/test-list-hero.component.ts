@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TestCardInfoBtnComponent } from '../test-card-info-btn/test-card-info-btn.component';
 import { TestCardStartBtnComponent } from '../test-card-start-btn/test-card-start-btn.component';
-import { testButtonData } from '../../content/tests-content/test-btn-data';
+import { testButtonData } from '../../../content/tests-content/test-btn-data';
 
 @Component({
   selector: 'app-test-list-hero',

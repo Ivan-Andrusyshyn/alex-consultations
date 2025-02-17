@@ -1,8 +1,11 @@
 <section class="tests">
   <div class="container">
     <div>
-      <h2 [hidden]="true" class="section-title">Тести на особистість!</h2>
-
+      <app-title-card
+        [imgUrl]="imgUrl"
+        [titleText]="titleText"
+        [subtitleText]="subtitleText"
+      ></app-title-card>
       <ul class="test-list">
         <li class="test-card" *ngFor="let test of testData">
           <h3>{{ test.title }}</h3>

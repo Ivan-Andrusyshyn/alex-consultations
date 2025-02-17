@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { ConsultationComponent } from '../../components/consultation/consultation.component';
-import { TestListHeroComponent } from '../../components/test-list-hero/test-list-hero.component';
+import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
 
 @Component({
   selector: 'app-home',

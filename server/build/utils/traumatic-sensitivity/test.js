@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const traumatic_sensitivity_1 = require("../../content/traumatic-sensitivity/traumatic-sensitivity");
-const createTraumaticSensitivityTest = () => traumatic_sensitivity_1.traumaticSensitivity.map((q, i) => {
+const createTraumaticSensitivityTest = () => traumatic_sensitivity_1.traumaticSensitivityQu.map((q, i) => {
     return Object.assign(Object.assign({}, q), { id: i + 1, answers: q.answers.map((answ, i) => ({
-            text: answ,
-            point: 4 - (i + 1),
+            text: q.answers[q.answers.length - 1 - i],
+            point: i,
             type: getTypeByQuestionBlock(q.block),
         })) });
 });

@@ -12,16 +12,6 @@
     margin: 0 auto;
   }
 
-  .section-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #e94560;
-    @media screen and (min-width: 768px) {
-      font-size: 36px;
-    }
-  }
-
   .section-description {
     font-size: 16px;
     margin-bottom: 24px;
@@ -42,19 +32,7 @@
       align-items: center;
     }
   }
-  .test-svg {
-    position: absolute;
-    width: 54px;
-    height: 54px;
-    bottom: 8px;
-    left: 8px;
-    @media screen and (min-width: 764px) {
-      top: 8px;
-      left: 8px;
-      width: 84px;
-      height: 84px;
-    }
-  }
+
   .test-card {
     padding: 0.5rem;
     border-radius: 12px;
@@ -68,6 +46,7 @@
     justify-content: center;
     flex-wrap: wrap;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
     @media screen and (min-width: 768px) {
       padding: 24px;
     }
@@ -75,22 +54,38 @@
     ::ng-deep app-test-card-start-btn {
       max-width: 50%;
     }
-
+    .test-svg {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      bottom: 8px;
+      left: 8px;
+      @media screen and (min-width: 764px) {
+        top: 8px;
+        left: 8px;
+        width: 84px;
+        height: 84px;
+      }
+    }
     h3 {
       font-size: 16px;
       margin-bottom: 10px;
-      color: #ff2e63;
+      font-weight: 400;
+
+      color: #ccc;
       @media screen and (min-width: 768px) {
         font-size: 22px;
       }
     }
 
     p {
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: 100;
       margin-bottom: 20px;
+
       color: #f1f1f1;
       @media screen and (min-width: 768px) {
-        font-size: 16px;
+        font-size: 18px;
       }
     }
   }

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.traumaticSensitivity = void 0;
-exports.traumaticSensitivity = [
+exports.traumaticSensitivityQu = void 0;
+exports.traumaticSensitivityQu = [
     {
         block: 'Емоційна чутливість',
         question: 'Ти відчув(-ла) сильну емоцію (радість, смуток, злість). Що відбувається далі?',
