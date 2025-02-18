@@ -1,11 +1,11 @@
 .consultations {
   width: 100%;
   padding: 40px 0;
+  background-size: 100px;
 
   color: #fff;
   box-sizing: border-box;
   background-image: url("../../../assets/svg/tests/person-computer.svg");
-  background-size: 100px;
   background-repeat: no-repeat;
   background-position: calc(50% + 50px) bottom;
   font-family: "Roboto", serif;
@@ -33,12 +33,18 @@
     margin-bottom: 10px;
     margin-top: 0;
     font-size: 16px;
-    font-family: "Roboto", serif;
 
-    color: #ffcc00;
+    font-family: "Roboto", serif;
+    color: #ff2e63;
+    font-style: italic;
     @media screen and (min-width: 764px) {
       font-size: 24px;
     }
+  }
+
+  h3 {
+    font-style: italic;
+    color: #ff2e63;
   }
   .list-img-wrapper {
     gap: 8px;
