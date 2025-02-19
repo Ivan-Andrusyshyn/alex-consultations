@@ -20,6 +20,8 @@ import { RouterLink } from '@angular/router';
 export class MobComponent implements OnInit {
   private headerService = inject(HeaderService);
   isMenuOpen$!: Observable<boolean>;
+  hiddenRoutes: boolean = true;
+
   ngOnInit(): void {
     this.isMenuOpen$ = this.headerService.isMobMenuOpen$;
   }

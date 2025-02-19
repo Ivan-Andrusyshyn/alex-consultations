@@ -5,7 +5,9 @@
 
     <nav class="nav">
       <a routerLink="/tests" routerLinkActive="active">Тести</a>
-      <a routerLink="/courses" routerLinkActive="active">Курси</a>
+      <a [hidden]="hiddenRoutes" routerLink="/courses" routerLinkActive="active"
+        >Курси</a
+      >
 
       <a routerLink="/contacts" routerLinkActive="active">Контакти</a>
       <a routerLink="/about" routerLinkActive="active">Про нас</a>

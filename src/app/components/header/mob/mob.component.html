@@ -18,7 +18,11 @@
   <a routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()"
     >Тести</a
   >
-  <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
+  <a
+    [hidden]="hiddenRoutes"
+    routerLink="/courses"
+    routerLinkActive="active"
+    (click)="toggleMenu()"
     >Курси</a
   >
 

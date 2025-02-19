@@ -12,4 +12,6 @@ import { MobComponent } from './mob/mob.component';
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  hiddenRoutes = true;
+}
