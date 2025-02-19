@@ -5,6 +5,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
+
+  @media screen and (min-width: 764px) {
+    font-size: 18px;
+  }
 }
 
 .dsc-wrapper {

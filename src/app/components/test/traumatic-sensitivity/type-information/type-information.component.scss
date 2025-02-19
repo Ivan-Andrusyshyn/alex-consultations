@@ -4,7 +4,7 @@
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
 
   color: #f1f1f1;
@@ -12,10 +12,11 @@ h2 {
 }
 
 .description {
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.1em;
 
+  text-align: center;
   color: #ddd;
 }
 
@@ -42,7 +43,7 @@ ul {
 
 li {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   letter-spacing: 0.1em;
   line-height: 177%;
   font-weight: 400;
@@ -50,6 +51,9 @@ li {
   font-style: normal;
   text-align: left;
   color: #fff;
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+  }
 }
 
 li:last-child {
@@ -68,16 +72,23 @@ li:last-child {
   font-size: 1.5rem;
   font-weight: 600;
 
-  color: #fff;
+  text-align: center;
+  color: #ddd;
+  @media screen and (min-width: 764px) {
+    text-align: left;
+  }
 }
 
 .summary p {
   font-size: 1rem;
   font-weight: 100;
-  line-height: 1.6;
+  line-height: 2;
   letter-spacing: 0.1em;
+  text-align: center;
 
-  text-align: left;
+  @media screen and (min-width: 764px) {
+    text-align: left;
+  }
 }
 
 @media (min-width: 768px) {
