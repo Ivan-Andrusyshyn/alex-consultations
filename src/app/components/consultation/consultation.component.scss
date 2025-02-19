@@ -50,21 +50,13 @@
     color: #ff2e63;
   }
   .list-img-wrapper {
-    gap: 8px;
-    flex-wrap: wrap;
-
-    display: flex;
-    justify-content: center;
-    @media screen and (min-width: 764px) {
-      justify-content: baseline;
-      flex-wrap: nowrap;
-    }
   }
   p {
-    font-weight: 300;
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 8px;
+
+    font-family: "Roboto", serif;
     color: #ccc;
     @media screen and (min-width: 764px) {
       font-size: 18px;
@@ -83,10 +75,9 @@
   li {
     margin: 8px 0;
     font-size: 16px;
-
-    color: #ddd;
     font-family: "Roboto", serif;
     font-style: normal;
+    color: #ccc;
     @media screen and (min-width: 764px) {
       font-size: 18px;
     }
