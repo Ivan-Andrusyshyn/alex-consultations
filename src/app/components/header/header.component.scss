@@ -51,7 +51,7 @@
   }
 
   .nav {
-    display: flex;
+    display: none;
     gap: 20px;
 
     a {
@@ -64,52 +64,8 @@
         color: #ffcc00;
       }
     }
-  }
-
-  .menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-  }
-
-  .mobile-menu {
-    box-sizing: border-box;
-    display: none;
-    a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-      max-width: 50%;
-
-      &:hover,
-      &.active {
-        color: #ffcc00;
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .nav {
-      display: none;
-    }
-    .menu-btn {
-      display: block;
-    }
-    .mobile-menu {
+    @media screen and (min-width: 764px) {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
-      background: rgba(30, 60, 114, 0.9);
-      position: absolute;
-      z-index: 9999;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      padding: 1rem;
     }
   }
 }

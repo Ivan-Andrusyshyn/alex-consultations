@@ -1,0 +1,79 @@
+.menu-btn {
+  display: block;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  .hamburger {
+    cursor: pointer;
+  }
+
+  .hamburger input {
+    display: none;
+  }
+
+  .hamburger svg {
+    height: 2em;
+    transition: transform 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .line {
+    fill: none;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    transition: stroke-dasharray 800ms cubic-bezier(0.4, 0, 0.2, 1),
+      stroke-dashoffset 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .line-top-bottom {
+    stroke-dasharray: 12 63;
+  }
+
+  .hamburger input:checked + svg {
+    transform: rotate(-45deg);
+  }
+
+  .hamburger input:checked + svg .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+  }
+  @media screen and (min-width: 764px) {
+    display: none;
+  }
+}
+
+.mobile-menu {
+  gap: 15px;
+  background: #073136d5;
+  z-index: 9999;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0 0 12px 12px;
+  border-bottom: 1px solid #fff;
+
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    max-width: 50%;
+
+    &:hover,
+    &.active {
+      color: #ffcc00;
+    }
+  }
+  @media screen and (min-width: 764px) {
+    display: none;
+  }
+}

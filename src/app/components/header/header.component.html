@@ -5,28 +5,11 @@
 
     <nav class="nav">
       <a routerLink="/tests" routerLinkActive="active">Тести</a>
-      <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
-        >Курси</a
-      >
+      <a routerLink="/courses" routerLinkActive="active">Курси</a>
 
       <a routerLink="/contacts" routerLinkActive="active">Контакти</a>
       <a routerLink="/about" routerLinkActive="active">Про нас</a>
     </nav>
-    <button class="menu-btn" (click)="toggleMenu()">☰</button>
-  </div>
-  <div class="mobile-menu" *ngIf="isMenuOpen">
-    <a routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()"
-      >Тести</a
-    >
-    <a routerLink="/courses" routerLinkActive="active" (click)="toggleMenu()"
-      >Курси</a
-    >
-
-    <a routerLink="/about" routerLinkActive="active" (click)="toggleMenu()"
-      >Про нас</a
-    >
-    <a routerLink="/contacts" routerLinkActive="active" (click)="toggleMenu()"
-      >Контакти</a
-    >
+    <app-mob></app-mob>
   </div>
 </header>
