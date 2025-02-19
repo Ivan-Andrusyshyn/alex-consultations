@@ -88,16 +88,17 @@
   }
 
   .subtitle {
-    font-size: 1em;
+    font-size: 16px;
     opacity: 0.8;
     letter-spacing: 0.1em;
     margin-top: 5px;
-    color: #bdbdbd;
+    font-style: italic;
+    color: #fff;
 
     text-align: left;
 
     @media screen and (min-width: 764px) {
-      font-size: 1.2em;
+      font-size: 18px;
     }
   }
   @media screen and (min-width: 764px) {
@@ -111,21 +112,23 @@
   .info-section {
     margin-bottom: 30px;
     h3 {
-      font-size: 1.5em;
-      color: #e0e0e0;
+      font-size: 18px;
+      color: #ffffff;
       text-align: left;
 
       margin-bottom: 15px;
       border-bottom: 2px solid #e0e0e0;
       padding-bottom: 10px;
+      @media screen and (min-width: 764px) {
+        font-size: 22px;
+      }
     }
     h4 {
-      font-size: 1.2em;
+      font-size: 18px;
       letter-spacing: 0.1em;
-      margin-bottom: 8px;
       margin-left: 8px;
 
-      color: #f1f1f1;
+      color: #ffffff;
       text-align: left;
     }
     ul {
@@ -134,15 +137,15 @@
     }
 
     li {
-      font-size: 0.9em;
+      font-size: 16px;
       padding: 8px 0;
       letter-spacing: 0.1em;
       text-align: left;
-      color: #f1f1f1;
+      color: #ffffff;
 
       transition: color 0.3s ease;
       @media screen and (min-width: 764px) {
-        font-size: 1.1em;
+        font-size: 18px;
       }
     }
   }
@@ -152,10 +155,11 @@
 .career-group div {
   flex: 1;
 }
-
+.perception-types {
+}
 .card-footer {
   text-align: center;
-  color: #f1f1f1;
+  color: #ffffff;
   font-style: italic;
   border-radius: 0 0 12px 12px;
   p {

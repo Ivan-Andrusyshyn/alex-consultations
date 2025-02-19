@@ -1,4 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -7,11 +13,17 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [ReactiveFormsModule],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   contactForm!: FormGroup;
+  isClicked = signal(false);
+
+  setByClick() {
+    this.isClicked.set(true);
+  }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({

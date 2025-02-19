@@ -6,7 +6,6 @@
 
         <span>({{ personType }})</span>
       </h2>
-      <hr />
       <p class="subtitle">{{ personInformation.description }}</p>
     </div>
 
@@ -15,7 +14,7 @@
         <h3>Сильні сторони</h3>
         <ul>
           <li *ngFor="let strength of personInformation.strengths">
-            {{ strength }}
+            📌 {{ strength }}
           </li>
         </ul>
       </div>
@@ -24,7 +23,7 @@
         <h3>Слабкі сторони</h3>
         <ul id="weaknesses">
           <li *ngFor="let weakness of personInformation.weaknesses">
-            {{ weakness }}
+            📌{{ weakness }}
           </li>
         </ul>
       </div>
@@ -32,35 +31,35 @@
       <div class="info-section">
         <h3>Сприйняття</h3>
         <div class="perception-group" id="perception">
-          <div>
-            <h4>Інтуїція</h4>
+          <div class="perception-types">
+            <h4>Інтуїція:</h4>
             <ul>
               <li *ngFor="let item of personInformation.perception.intuition">
-                {{ item }}
+                📌 {{ item }}
               </li>
             </ul>
           </div>
-          <div>
-            <h4>Почуття</h4>
+          <div class="perception-types">
+            <h4>Почуття:</h4>
             <ul>
               <li *ngFor="let item of personInformation.perception.feelings">
-                {{ item }}
+                📌 {{ item }}
               </li>
             </ul>
           </div>
-          <div>
-            <h4>Спонтанність</h4>
+          <div class="perception-types">
+            <h4>Спонтанність:</h4>
             <ul>
               <li *ngFor="let item of personInformation.perception.spontaneity">
-                {{ item }}
+                📌 {{ item }}
               </li>
             </ul>
           </div>
-          <div>
-            <h4>Логіка</h4>
+          <div class="perception-types">
+            <h4>Логіка:</h4>
             <ul>
               <li *ngFor="let item of personInformation.perception.logic">
-                {{ item }}
+                📌 {{ item }}
               </li>
             </ul>
           </div>
@@ -80,20 +79,20 @@
         <h3>Кар'єра</h3>
         <div class="career-group" id="career">
           <div>
-            <h4>Уподобання</h4>
+            <h4>Уподобання:</h4>
             <ul>
               <li
                 *ngFor="let preference of personInformation.career.preferences"
               >
-                {{ preference }}
+                📌 {{ preference }}
               </li>
             </ul>
           </div>
           <div>
-            <h4>Найкращі сфери</h4>
+            <h4>Найкращі сфери:</h4>
             <ul>
               <li *ngFor="let field of personInformation.career.bestFields">
-                {{ field }}
+                📌 {{ field }}
               </li>
             </ul>
           </div>

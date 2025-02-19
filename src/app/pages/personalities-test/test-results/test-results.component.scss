@@ -1,13 +1,11 @@
 .score-wrapper {
   gap: 8px;
-  max-width: 350px;
   margin: 12px auto;
   padding: 1rem;
   border-radius: 1rem;
 
   box-sizing: border-box;
   display: flex;
-  border: 2px solid #f1f1f1;
   flex-wrap: wrap;
   flex-direction: column;
 }

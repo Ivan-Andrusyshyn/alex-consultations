@@ -20,7 +20,7 @@
 
   .line {
     fill: none;
-    stroke: white;
+    stroke: #fff;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 3;
@@ -47,7 +47,7 @@
 
 .mobile-menu {
   gap: 15px;
-  background: #073136d5;
+  background: #0d464d;
   z-index: 9999;
   top: 100%;
   left: 0;
@@ -64,7 +64,7 @@
   a {
     color: #fff;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 16px;
     transition: color 0.3s ease;
     max-width: 50%;
 

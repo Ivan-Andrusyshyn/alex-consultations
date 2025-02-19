@@ -5,6 +5,10 @@
   <div class="score-wrapper" *ngIf="scorePercentages$ | async">
     <app-results-indicator></app-results-indicator>
 
+    <app-personalities-type-information
+      [personType]="personInformation.personType"
+      [personInformation]="personInformation.personInformation"
+    ></app-personalities-type-information>
     <app-send-form-on-email-btn
       *ngIf="!(isShowSendForm$ | async)"
       (sendForm)="toggleSendForm()"
@@ -18,8 +22,4 @@
       Ми відправили результати тесту на пошту!
     </div>
   </div>
-  <app-personalities-type-information
-    [personType]="personInformation.personType"
-    [personInformation]="personInformation.personInformation"
-  ></app-personalities-type-information>
 </section>

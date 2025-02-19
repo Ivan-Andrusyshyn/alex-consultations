@@ -1,9 +1,29 @@
 <section class="contact">
-  <div class="container">
-    <h2>Зв'яжіться з нами</h2>
-    <p>Є питання? Напишіть нам!</p>
+  <h2>Є питання? Напишіть нам!</h2>
+  <div class="container" (click)="setByClick()" [class.glass]="isClicked()">
+    <div data-text="Telegram" style="--r: -15" class="glass">
+      <a href="https://t.me/@alex_andrusishin" target="_blank">
+        <img src="../../../assets/svg/media/telegram.svg" alt="" />
+      </a>
+    </div>
+    <div data-text="Tik tok" style="--r: 5" class="glass">
+      <a
+        href="https://www.tiktok.com/@alex_white_light?_t=ZM-8u3NPohrWXn&_r=1"
+        target="_blank"
+      >
+        <img src="../../../assets/svg/media/tiktok.svg" alt="" />
+      </a>
+    </div>
+    <div data-text="Instagram" style="--r: 25" class="glass">
+      <a
+        href="https://www.instagram.com/depth_seekerr?igsh=MTZuNGxudnNrNWYzeg%3D%3D&utm_source=qr"
+        target="_blank"
+      >
+        <img src="../../../assets/svg/media/instagram.svg" alt="" />
+      </a>
+    </div>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+    <!-- <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
       <div class="input-group">
         <input
           type="text"
@@ -36,6 +56,6 @@
       <button type="submit" class="btn" [disabled]="!contactForm.valid">
         Відправити
       </button>
-    </form>
+    </form> -->
   </div>
 </section>

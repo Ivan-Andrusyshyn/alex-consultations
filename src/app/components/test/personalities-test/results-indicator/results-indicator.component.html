@@ -12,7 +12,7 @@
         </div>
         <div [ngClass]="key" class="score" *ngIf="i % 2 === 0">
           <div
-            [style.left]="(scorePercentages[key] * 314) / 100 - 16 / 2 + 'px'"
+            [style.left]="scorePercentages[key] - 1 + '%'"
             class="bg-score"
           ></div>
         </div>

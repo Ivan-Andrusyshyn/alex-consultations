@@ -7,7 +7,7 @@ h2 {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 
-  color: #f1f1f1;
+  color: #ffffff;
   font-style: italic;
 }
 
@@ -17,7 +17,7 @@ h2 {
   letter-spacing: 0.1em;
 
   text-align: center;
-  color: #ddd;
+  color: #fff;
 }
 
 .section {
@@ -33,7 +33,7 @@ h3 {
   line-height: 177%;
 
   text-align: left;
-  color: #ccc;
+  color: #fff;
 }
 
 ul {
@@ -73,7 +73,7 @@ li:last-child {
   font-weight: 600;
 
   text-align: center;
-  color: #ddd;
+  color: #fff;
   @media screen and (min-width: 764px) {
     text-align: left;
   }
