@@ -10,9 +10,8 @@
         <li class="test-card" *ngFor="let test of testData">
           <h3>{{ test.title }}</h3>
           <p>{{ test.description }}</p>
-          <svg class="test-svg">
-            <use [attr.xlink:href]="test.testSvg"></use>
-          </svg>
+
+          <img class="test-img" [src]="test.testSvg" alt="" />
           <div class="test-card-buttons">
             <app-test-card-start-btn
               [route]="test.routeStart"
