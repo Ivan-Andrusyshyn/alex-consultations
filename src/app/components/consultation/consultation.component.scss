@@ -51,11 +51,23 @@
 
   h3 {
     font-weight: 400;
-
+    margin-bottom: 8px;
     font-style: italic;
     color: #ff2e63;
   }
+  h4 {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 18px;
+
+    font-style: italic;
+    color: #ccc;
+  }
   .list-img-wrapper {
+  }
+  .list-link {
+    text-decoration: underline;
+    cursor: pointer;
   }
   p {
     font-size: 16px;
@@ -72,6 +84,7 @@
   ul {
     padding: 0;
     gap: 8px;
+    margin-bottom: 8px;
 
     display: flex;
     flex-direction: column;
@@ -98,60 +111,28 @@
     transition: 0.5s;
     z-index: 1;
     font-weight: 300;
+    width: 164px;
     margin: 0 auto;
     font-size: 17px;
 
     display: block;
-    --color: #1ecea2;
-    --color2: rgb(10, 25, 30);
-    background-color: transparent;
-    border: 0.3px solid #1ecea2;
+    color: #fff;
+    background-color: #43b02a;
     position: relative;
     overflow: hidden;
+    border: 1px solid #43b02a;
     cursor: pointer;
 
     font-family: "Roboto", "Segoe UI", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
+    font-size: 16px;
     color: var(--color);
-  }
 
-  .dialog-btn::after,
-  .dialog-btn::before {
-    content: "";
-    display: block;
-    height: 100%;
-    width: 100%;
-    transform: skew(90deg) translate(-50%, -50%);
-    position: absolute;
-    inset: 50%;
-    left: 25%;
-    z-index: -1;
-    transition: 0.4s ease-out;
-    background-color: var(--color);
-  }
-
-  .dialog-btn::before {
-    top: -50%;
-    left: -25%;
-    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
-  }
-
-  .dialog-btn:hover::before {
-    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
-  }
-
-  .dialog-btn:hover::after {
-    transform: skew(45deg) translate(-50%, -50%);
-  }
-
-  .dialog-btn:hover {
-    color: var(--color2);
-  }
-
-  .dialog-btn:active {
-    filter: brightness(0.7);
-    transform: scale(0.98);
+    &:hover {
+      background-color: #31811f;
+      border: 1px solid #31811f;
+    }
   }
 
   .consultations-image {
