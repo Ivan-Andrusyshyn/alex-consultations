@@ -5,13 +5,8 @@ import { TitleCardComponent } from '../../components/title-card/title-card.compo
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [RouterLink, TitleCardComponent],
+  imports: [RouterLink],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })
-export class AboutComponent {
-  imgUrl = '';
-  subtitleText =
-    'Коли я почав працювати з підлітками, мені здавалося, що проблема в тому, як вчителі подають матеріал — нудно, без натхнення. Але швидко стало ясно: основна причина не у викладанні. Підлітки просто не розуміли, навіщо їм цепотрібно.';
-  titleText = 'Моя історія';
-}
+export class AboutComponent {}

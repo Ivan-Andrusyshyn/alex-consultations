@@ -6,7 +6,25 @@
   @media screen and (min-width: 764px) {
     padding: 40px 20px;
   }
+  h2 {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 8px;
 
+    word-spacing: 4px;
+    word-wrap: break-word;
+
+    font-style: oblique;
+    text-align: center;
+    color: #ccc;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 12px;
+      font-size: 32px;
+
+      text-align: left;
+    }
+  }
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -22,6 +40,7 @@
   }
   .img-wrapper {
     gap: 1rem;
+    margin-bottom: 16px;
 
     display: flex;
     flex-wrap: wrap;
