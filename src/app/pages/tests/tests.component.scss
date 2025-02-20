@@ -15,7 +15,9 @@
   .section-description {
     font-size: 16px;
     margin-bottom: 24px;
-    color: #f5f5f5;
+    font-weight: 500;
+
+    color: #ccc;
     @media screen and (min-width: 768px) {
       margin-bottom: 40px;
       font-size: 18px;
@@ -80,7 +82,7 @@
 
     p {
       font-size: 16px;
-      font-weight: 100;
+      font-weight: 400;
       margin-bottom: 20px;
 
       color: #f1f1f1;
