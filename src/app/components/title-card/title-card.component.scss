@@ -29,8 +29,8 @@
     }
   }
   .tests-title {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 300;
     margin-bottom: 8px;
 
     word-spacing: 4px;
@@ -38,7 +38,7 @@
 
     font-style: oblique;
     text-align: center;
-    color: #ffffff;
+    color: #ccc;
 
     @media screen and (min-width: 768px) {
       margin-bottom: 12px;
@@ -49,7 +49,7 @@
   }
   .tests-subtitle {
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.1em;
     word-spacing: 4px;
 
@@ -63,14 +63,12 @@
 
   img {
     height: auto;
-    width: 200px;
+    width: 180px;
     margin: 0 auto;
     border-radius: 12px;
     object-fit: cover;
 
     @media screen and (min-width: 764px) {
-      width: 180px;
-      height: 180px;
       margin: 0;
     }
   }

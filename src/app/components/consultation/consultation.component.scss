@@ -5,16 +5,23 @@
 
   color: #fff;
   box-sizing: border-box;
-  background-image: url("../../../assets/svg/tests/person-computer.svg");
-  background-repeat: no-repeat;
-  background-position: calc(50% + 50px) bottom;
+
   font-family: "Roboto", serif;
 
   @media screen and (min-width: 764px) {
     background-size: 130px;
     padding: 60px 20px;
   }
+  .img-wrapper {
+    gap: 8px;
 
+    display: flex;
+    align-items: center;
+    img {
+      width: 100px;
+      height: auto;
+    }
+  }
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -83,18 +90,66 @@
       font-size: 18px;
     }
   }
-
-  .link-btn {
-    border-radius: 8px;
-    padding: 12px 20px;
-    margin-top: 15px;
-
-    display: inline-block;
-    background: darken(#ffcc00, 10%);
-    color: #334155;
-    font-weight: bold;
+  // ===================
+  // BUTTON
+  .dialog-btn {
+    padding: 0.8em 1.75em;
+    border-radius: 6px;
+    transition: 0.5s;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 17px;
+    display: block;
+    margin: 0 auto;
+    --color: #00a97f;
+    --color2: rgb(10, 25, 30);
+    background-color: transparent;
+    border: 0.3px solid var(--color);
+    position: relative;
+    overflow: hidden;
     cursor: pointer;
-    transition: all 0.3s;
+
+    font-family: "Roboto", "Segoe UI", sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+  }
+
+  .dialog-btn::after,
+  .dialog-btn::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: 0.5s ease-out;
+    background-color: var(--color);
+  }
+
+  .dialog-btn::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+  }
+
+  .dialog-btn:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+  }
+
+  .dialog-btn:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+  }
+
+  .dialog-btn:hover {
+    color: var(--color2);
+  }
+
+  .dialog-btn:active {
+    filter: brightness(0.7);
+    transform: scale(0.98);
   }
 
   .consultations-image {

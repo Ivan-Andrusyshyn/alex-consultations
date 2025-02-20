@@ -1,7 +1,10 @@
 <div class="tests-card">
   <div class="title-wrapper">
     <div class="img-wrapper">
+      @if (imgUrl) {
+
       <img [src]="imgUrl" alt="" />
+      }
       <div>
         <h2 class="tests-title">{{ titleText }}</h2>
         <p class="tests-subtitle">

@@ -10,7 +10,7 @@ import { TitleCardComponent } from '../../components/title-card/title-card.compo
   styleUrl: './about.component.scss',
 })
 export class AboutComponent {
-  imgUrl = 'assets/imgs/avatar-about.jpg';
+  imgUrl = '';
   subtitleText =
     'Коли я почав працювати з підлітками, мені здавалося, що проблема в тому, як вчителі подають матеріал — нудно, без натхнення. Але швидко стало ясно: основна причина не у викладанні. Підлітки просто не розуміли, навіщо їм цепотрібно.';
   titleText = 'Моя історія';

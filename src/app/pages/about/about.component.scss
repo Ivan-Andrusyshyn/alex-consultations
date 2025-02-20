@@ -20,7 +20,24 @@
       flex-direction: row;
     }
   }
+  .img-wrapper {
+    gap: 1rem;
 
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (min-width: 764px) {
+      flex-wrap: nowrap;
+    }
+    img {
+      border-radius: 12px;
+      width: 300px;
+      margin: 0 auto;
+      height: 300px;
+      @media screen and (min-width: 764px) {
+        margin: 0;
+      }
+    }
+  }
   .about__text {
     font-size: 1.2rem;
     line-height: 1.6;
