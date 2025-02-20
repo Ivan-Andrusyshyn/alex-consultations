@@ -14,7 +14,7 @@
     </svg>
   </label>
 </button>
-<div class="mobile-menu" *ngIf="isMenuOpen$ | async">
+<div class="mobile-menu" [class.open]="isMenuOpen$ | async">
   <a routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()"
     >Тести</a
   >
@@ -33,3 +33,8 @@
     >Контакти</a
   >
 </div>
+<div
+  class="menu-backdrop"
+  [class.open]="isMenuOpen$ | async"
+  (click)="toggleMenu()"
+></div>

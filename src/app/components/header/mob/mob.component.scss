@@ -47,6 +47,21 @@
     display: none;
   }
 }
+.menu-backdrop {
+  width: 100vh;
+  height: 100vh;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.5);
+
+  position: absolute;
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
 
 .mobile-menu {
   gap: 15px;
@@ -54,6 +69,7 @@
   z-index: 9999;
   top: 100%;
   left: 0;
+  top: 56px;
   width: 100%;
   padding: 1rem;
   border-radius: 0 0 12px 12px;
@@ -62,8 +78,17 @@
   box-sizing: border-box;
   position: absolute;
   display: flex;
+  transform: translateY(-20px);
+  opacity: 0;
+  visibility: hidden;
   flex-direction: column;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
   a {
     color: #fff;
     text-decoration: none;
