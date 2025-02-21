@@ -29,11 +29,10 @@
   .container .glass {
     position: relative;
 
-    width: 140px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 
     border-radius: 10px;
-    margin: 0 -45px;
 
     background: linear-gradient(#fff2, transparent);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -41,11 +40,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 10px;
     transition: 0.5s;
     cursor: pointer;
     backdrop-filter: blur(10px);
-    transform: rotate(calc(var(--r) * 1deg));
-
+    @media screen and (min-width: 374px) {
+      width: 120px;
+      height: 120px;
+    }
+    @media screen and (min-width: 764px) {
+      width: 140px;
+      height: 150px;
+    }
     img {
       transition: 0.4s;
       display: block;
@@ -55,16 +61,6 @@
     }
   }
 
-  .container:hover .glass,
-  .container:focus .glass,
-  .container:active .glass {
-    transform: rotate(0deg);
-    height: 90px;
-    margin: 0 10px;
-    @media screen and (min-width: 764px) {
-      height: 150px;
-    }
-  }
   .glass {
     transform: rotate(0deg);
     margin: 0 10px;

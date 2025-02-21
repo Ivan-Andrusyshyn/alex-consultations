@@ -19,18 +19,8 @@ export class ContactsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   contactForm!: FormGroup;
-  isClicked = signal(false);
-
-  setByClick() {
-    this.isClicked.set(true);
-  }
 
   ngOnInit(): void {
-    if (window.innerWidth < 764) {
-      this.isClicked.set(true);
-    } else {
-      this.isClicked.set(false);
-    }
     this.contactForm = this.fb.group({
       name: [''],
       email: [''],
