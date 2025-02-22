@@ -5,6 +5,38 @@
     padding: 40px 20px;
   }
 }
+.hero-bg {
+  height: 200px;
+  border-radius: 15px;
+  gap: 8px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  background-image: url("/assets/imgs/feeling-affection.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  @media screen and (min-width: 764px) {
+    height: 250px;
+    flex-wrap: nowrap;
+  }
+  .bg-text {
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    line-height: 200%;
+    font-size: 16px;
+    padding-left: 64px;
+
+    font-style: italic;
+    font-family: "Pacifico", cursive;
+    @media screen and (min-width: 764px) {
+      letter-spacing: 0.5em;
+      font-size: 20px;
+    }
+  }
+}
 .success-message {
   border-radius: 5px;
   border: 1px solid #c3e6cb;

@@ -1,8 +1,14 @@
 <section class="home">
   <app-test-list-hero></app-test-list-hero>
+  <div class="hero-bg">
+    <div>
+      <div class="bg-text">Полюби себе!</div>
+      <div class="bg-text">Цінуй себе!</div>
+      <div class="bg-text">Будь собою!</div>
+    </div>
+  </div>
   <app-hero></app-hero>
   <app-consultation (openDialog)="openDialog()"></app-consultation>
-
   @if (successRegistration()) {
 
   <div class="success-message">✅ Ви успішно записалися!</div>
