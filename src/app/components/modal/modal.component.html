@@ -1,26 +1,58 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
+
 <ng-container *ngIf="data.contentType === 'form-consultation'">
   <mat-dialog-content>
     <p>
       Отримайте персональну консультацію та дізнайтеся, як досягти кращих
       результатів!
     </p>
-    <mat-form-field>
-      <mat-label>Що вас цікавить?</mat-label>
-      <input
-        matInput
-        [(ngModel)]="interest"
-        placeholder="Наприклад: маркетинг, IT, фінанси"
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Ваша пошта</mat-label>
-      <input
-        matInput
-        [(ngModel)]="email"
-        placeholder="Наприклад: myemail@gmail.com"
-      />
-    </mat-form-field>
+
+    <form [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-label>Ваше ім'я</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="Наприклад: Олександр"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ваш телефон</mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          placeholder="Наприклад: +380961234567"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            formGroup.get('phone')?.errors?.['pattern'] ||
+            formGroup.get('phone')?.errors?.['maxlength'] ||
+            formGroup.get('phone')?.errors?.['minlength']
+          "
+        >
+          Номер має містити 13 цифр (+380961234567)
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ваша пошта</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Наприклад: myemail@gmail.com"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Що вас цікавить?</mat-label>
+        <input
+          matInput
+          formControlName="interest"
+          placeholder="Наприклад: маркетинг, IT, фінанси"
+        />
+      </mat-form-field>
+    </form>
+
     <p class="offer">📢 Лише сьогодні: 20-хвилинна безкоштовна консультація!</p>
   </mat-dialog-content>
 </ng-container>
@@ -31,9 +63,10 @@
   </button>
   <button
     mat-button
-    [mat-dialog-close]="interest"
+    [mat-dialog-close]="confirm()"
     class="yes-btn"
     cdkFocusInitial
+    [disabled]="formGroup.invalid"
   >
     {{ data.btn["confirm"] }}
   </button>

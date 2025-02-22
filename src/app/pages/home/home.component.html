@@ -2,4 +2,9 @@
   <app-test-list-hero></app-test-list-hero>
   <app-hero></app-hero>
   <app-consultation (openDialog)="openDialog()"></app-consultation>
+
+  @if (successRegistration()) {
+
+  <div class="success-message">✅ Ви успішно записалися!</div>
+  }
 </section>

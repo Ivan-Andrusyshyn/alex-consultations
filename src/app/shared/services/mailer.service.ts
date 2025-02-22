@@ -11,9 +11,20 @@ import { environment } from '../../environment/environment';
 export class MailerService {
   constructor(private http: HttpClient) {}
 
-  postEmail(value: any): Observable<any> {
-    return this.http.post(environment.apiUrl + '/send-email', {
-      userEmail: value,
-    });
+  postEmailPersonalities(value: any): Observable<any> {
+    return this.http.post(
+      environment.apiUrl + '/send-email' + '/16-personalities',
+      {
+        value,
+      }
+    );
+  }
+  postEmailTraumatic(value: any): Observable<any> {
+    return this.http.post(
+      environment.apiUrl + '/send-email' + '/traumatic-sensitivity',
+      {
+        value,
+      }
+    );
   }
 }

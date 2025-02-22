@@ -2,8 +2,10 @@
   class="person-info"
   *ngIf="personInformation$ | async as personInformation"
 >
-  <div class="score-wrapper" *ngIf="scorePercentages$ | async">
-    <app-results-indicator></app-results-indicator>
+  <div class="score-wrapper">
+    <app-results-indicator
+      *ngIf="scorePercentages$ | async"
+    ></app-results-indicator>
 
     <app-personalities-type-information
       [personType]="personInformation.personType"

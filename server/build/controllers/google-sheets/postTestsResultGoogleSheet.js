@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postTestsResultGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
         if (data) {
@@ -26,4 +26,4 @@ const postOnGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = postOnGoogleSheet;
+exports.default = postTestsResultGoogleSheet;

@@ -7,8 +7,8 @@ const cors_1 = __importDefault(require("cors"));
 const corsOptions = () => (0, cors_1.default)({
     origin: [
         'http://localhost:4200',
-        'https://www.vidchuttia.com.ua',
         'https://vidchuttia.com.ua',
+        'http://vidchuttia.com.ua',
         'https://alex-consultations.vercel.app',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

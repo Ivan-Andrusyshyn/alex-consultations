@@ -4,11 +4,18 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../environment/environment';
 
-interface GoogleSheetTest {
+interface GoogleSheetTestResults {
   results: string;
   timestamp: string;
   testName: string;
   device: string;
+}
+
+interface GoogleSheetRegistration {
+  name: string;
+  email: string;
+  phone: string;
+  interest: string;
 }
 
 @Injectable({
@@ -18,8 +25,12 @@ export class GoogleSheetsService {
   private readonly BASE_URL: string = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  postDataInSheet(data: GoogleSheetTest): Observable<any> {
+  postTestResultsInSheet(data: GoogleSheetTestResults): Observable<any> {
     const scriptUrl: string = '/google/tests-results/send';
+    return this.http.post(this.BASE_URL + scriptUrl, data);
+  }
+  postRegistrationInSheet(data: GoogleSheetRegistration): Observable<any> {
+    const scriptUrl: string = '/google/registration/send';
     return this.http.post(this.BASE_URL + scriptUrl, data);
   }
 

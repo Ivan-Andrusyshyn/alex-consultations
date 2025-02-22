@@ -3,14 +3,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  model,
-  signal,
+  OnInit,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -36,19 +39,45 @@ export interface DialogData {
     MatInputModule,
     NgIf,
     MatButtonModule,
-    FormsModule,
     MatDialogClose,
+    ReactiveFormsModule,
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<ModalComponent>);
   readonly data: any = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
-  interest: string = '';
-  email: string = '';
+  private readonly fb = inject(FormBuilder);
+  formGroup!: FormGroup;
+
+  ngOnInit(): void {
+    this.formGroup = this.fb.group({
+      name: ['', Validators.required],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\+380\d{9}$/),
+          Validators.minLength(13),
+          Validators.maxLength(13),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      interest: ['', Validators.required],
+    });
+  }
+
   cancel(): void {
     this.dialogRef.close();
+  }
+
+  confirm() {
+    if (this.formGroup.valid) {
+      return this.formGroup.value;
+    } else {
+      return null;
+    }
   }
 }

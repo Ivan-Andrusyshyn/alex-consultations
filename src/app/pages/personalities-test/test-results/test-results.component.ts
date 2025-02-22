@@ -50,7 +50,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   scorePercentages$!: Observable<TestResult | null>;
   isShowSendForm$!: Observable<boolean>;
   isShowFormRespMessage$!: Observable<boolean>;
-
+  sendObject!: any;
   ngOnDestroy(): void {
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
@@ -67,6 +67,13 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         .getPersonTypeByResults(r['personalitiesName'])
         .pipe(
           map((r) => {
+            this.sendObject = {
+              personType: r.personType,
+              personInformation: r.personInformation,
+            } as {
+              personType: string;
+              personInformation: TypeInformation;
+            };
             return {
               personType: r.personType,
               personInformation: r.personInformation,
@@ -79,11 +86,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService
-        .postEmail(results.email)
+        .postEmailPersonalities({ email: results.email, ...this.sendObject })
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((r) => {
           this.toggleSendForm();
-          this.personalitiesService.isShowSendFormMessage.next(true);
         });
     }
   }

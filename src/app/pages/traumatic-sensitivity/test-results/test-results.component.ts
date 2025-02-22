@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TypeInformation } from '../../../shared/types/16-personalities';
@@ -71,6 +71,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   possibleVariablesArray = types;
   typeInfo$!: Observable<any>;
+
+  sendObject!: any;
   ngOnDestroy(): void {
     this.traumaticSensitivityService.scorePercentages.next(null);
     sessionStorage.clear();
@@ -82,18 +84,19 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         .getEmotionsTypeInfoByResults(r['traumaticSensitivity'])
         .pipe(
           map((info) => {
-            console.log(info);
             return info.information;
           })
         );
     });
 
     this.scoresKeys = this.traumaticSensitivityService.getScoreKeys();
-    this.userResults$ =
-      this.traumaticSensitivityService.getObservableSensitivityResults();
-
-    this.isShowFormRespMessage$ =
-      this.traumaticSensitivityService.getIsShowSendFormMessage();
+    this.userResults$ = this.traumaticSensitivityService
+      .getObservableSensitivityResults()
+      .pipe(
+        tap((r) => {
+          this.sendObject = { ...r?.results } as PersonalitiesResults;
+        })
+      );
 
     this.isShowSendForm$ = this.traumaticSensitivityService.getIsShowSendForm();
   }
@@ -101,11 +104,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService
-        .postEmail(results.email)
+        .postEmailTraumatic({ email: results.email, ...this.sendObject })
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((r) => {
           this.toggleSendForm();
-          this.traumaticSensitivityService.isShowSendFormMessage.next(true);
         });
     }
   }

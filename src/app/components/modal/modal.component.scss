@@ -2,3 +2,39 @@ mat-dialog-actions {
   display: flex;
   justify-content: center;
 }
+::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+form {
+  padding: 16px 0;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  input {
+    width: 90%;
+  }
+}
+.error-message {
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+
+  color: #d32f2f;
+
+  display: block;
+  text-align: left;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

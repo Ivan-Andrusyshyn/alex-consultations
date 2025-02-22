@@ -169,7 +169,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     personType: string
   ): Observable<{ message: string }> {
     return this.googleSheetService
-      .postDataInSheet({
+      .postTestResultsInSheet({
         testName: '16-personalities',
         results: personType,
         timestamp: this.timestamp ?? '',

@@ -4,7 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const postOnGoogleSheet_1 = __importDefault(require("../controllers/google-sheets/postOnGoogleSheet"));
+const postTestsResultGoogleSheet_1 = __importDefault(require("../controllers/google-sheets/postTestsResultGoogleSheet"));
+const postRegistrationGoogleSheet_1 = __importDefault(require("../controllers/google-sheets/postRegistrationGoogleSheet"));
 const googleSheetRouer = (0, express_1.default)();
-googleSheetRouer.post('/tests-results/send', postOnGoogleSheet_1.default);
+googleSheetRouer.post('/tests-results/send', postTestsResultGoogleSheet_1.default);
+googleSheetRouer.post('/registration/send', postRegistrationGoogleSheet_1.default);
 exports.default = googleSheetRouer;

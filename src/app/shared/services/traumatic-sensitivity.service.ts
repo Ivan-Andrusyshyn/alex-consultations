@@ -86,9 +86,7 @@ export class TraumaticSensitivityService {
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();
   }
-  getIsShowSendFormMessage(): Observable<boolean> {
-    return this.isShowSendFormMessage.asObservable();
-  }
+
   getScoreKeys(): Array<keyof TestResult> {
     const keys = Object.keys({
       E: 0,
