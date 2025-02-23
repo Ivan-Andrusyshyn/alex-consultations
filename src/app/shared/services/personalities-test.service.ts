@@ -24,7 +24,6 @@ interface PersonalitiesResults {
 })
 export class PersonalitiesTestService {
   isShowSendForm = new BehaviorSubject(false);
-  isShowSendFormMessage = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
   errors$!: Observable<any[] | null>;
   readonly testsUrl = environment.apiUrl + '/tests';
@@ -94,9 +93,7 @@ export class PersonalitiesTestService {
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();
   }
-  getIsShowSendFormMessage(): Observable<boolean> {
-    return this.isShowSendFormMessage.asObservable();
-  }
+
   getScoreKeys(): Array<keyof TestResult> {
     const keys = Object.keys({
       E: 0,

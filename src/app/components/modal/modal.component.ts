@@ -64,7 +64,7 @@ export class ModalComponent implements OnInit {
           Validators.maxLength(13),
         ],
       ],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.maxLength(13)]],
       interest: ['', Validators.required],
     });
   }

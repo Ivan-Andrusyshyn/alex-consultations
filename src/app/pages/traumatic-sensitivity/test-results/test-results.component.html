@@ -50,7 +50,7 @@
     (toggleSendForm)="toggleSendForm()"
     (sendResultsOnEmail)="sendResultsOnEmail($event)"
   ></app-send-results-form>
-  <div *ngIf="isShowFormRespMessage$ | async" class="response-message">
+  <div *ngIf="successMessage()" class="success-message">
     Ми відправили результати тесту на пошту!
   </div>
 </section>

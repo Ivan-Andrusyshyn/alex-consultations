@@ -5,6 +5,7 @@ import {
   inject,
   OnDestroy,
   OnInit,
+  signal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
@@ -66,8 +67,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   userResults$!: Observable<PersonalitiesResults | null>;
   scoresKeys!: Array<keyof TestResult>;
   isShowSendForm$!: Observable<boolean>;
-  isShowFormRespMessage$!: Observable<boolean>;
   sensitivityType$!: Observable<string>;
+  successMessage = signal(false);
 
   possibleVariablesArray = types;
   typeInfo$!: Observable<any>;
@@ -105,7 +106,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     if (results.email) {
       this.mailerService
         .postEmailTraumatic({ email: results.email, ...this.sendObject })
-        .pipe(takeUntilDestroyed(this.destroyRef))
+        .pipe(
+          tap((r) => {
+            this.successMessage.set(true);
+          }),
+          takeUntilDestroyed(this.destroyRef)
+        )
         .subscribe((r) => {
           this.toggleSendForm();
         });

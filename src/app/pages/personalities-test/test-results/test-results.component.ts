@@ -5,9 +5,10 @@ import {
   inject,
   OnDestroy,
   OnInit,
+  signal,
 } from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -49,15 +50,14 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }>;
   scorePercentages$!: Observable<TestResult | null>;
   isShowSendForm$!: Observable<boolean>;
-  isShowFormRespMessage$!: Observable<boolean>;
   sendObject!: any;
+  successMessage = signal(false);
+
   ngOnDestroy(): void {
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
   }
   ngOnInit(): void {
-    this.isShowFormRespMessage$ =
-      this.personalitiesService.getIsShowSendFormMessage();
     this.scorePercentages$ =
       this.personalitiesService.getObservableScorePercentages();
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
@@ -87,7 +87,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     if (results.email) {
       this.mailerService
         .postEmailPersonalities({ email: results.email, ...this.sendObject })
-        .pipe(takeUntilDestroyed(this.destroyRef))
+        .pipe(
+          tap((r) => this.successMessage.set(true)),
+          takeUntilDestroyed(this.destroyRef)
+        )
         .subscribe((r) => {
           this.toggleSendForm();
         });

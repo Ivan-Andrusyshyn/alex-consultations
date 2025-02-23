@@ -23,13 +23,11 @@ export class TraumaticSensitivityService {
   sensitivityResults = new BehaviorSubject<PersonalitiesResults | null>(null);
   counterQuestion = new BehaviorSubject(1);
   isShowSendForm = new BehaviorSubject(false);
-  isShowSendFormMessage = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
     const results = JSON.parse(
       sessionStorage.getItem('traumatic-sensitivity-results') ?? 'null'
     );
-    console.log(results);
 
     if (results) {
       this.scorePercentages.next(results.scorePercentages);
