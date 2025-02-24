@@ -1,7 +1,7 @@
-<mat-card class="example-card" appearance="outlined">
+<div class="container" *ngIf="questions">
   <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
   <mat-tab-group [(selectedIndex)]="currentQuestionNumber">
-    <form [formGroup]="formGroup" *ngIf="questions">
+    <form [formGroup]="formGroup">
       <ng-container *ngFor="let q of questions; let i = index">
         <mat-tab [label]="q.id.toString()">
           <div class="question-card">
@@ -26,13 +26,19 @@
                       answer.point + (answer.type ? '-' + answer.type : '')
                     "
                   />
-                  <span>
-                    {{ answer.text }}
-                  </span>
-                  <div class="button" [ngClass]="'button-' + answerIndex">
+                  <div
+                    class="button"
+                    [ngClass]="
+                      'button-' +
+                      (q.answers.length - (answerIndex + 1)).toString()
+                    "
+                  >
                     <span class="edge"></span>
                     <span class="front text"> </span>
                   </div>
+                  <span>
+                    {{ answer.text }}
+                  </span>
                 </label>
               </div>
             </div>
@@ -52,4 +58,4 @@
   >
     Будь ласка, дайте відповідь на всі питання.
   </div>
-</mat-card>
+</div>

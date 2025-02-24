@@ -14,7 +14,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
 
 import { Answer, Question } from '../../../shared/types/16-personalities';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
@@ -33,7 +32,6 @@ import { BtnShineComponent } from '../../btn-shine/btn-shine.component';
     ReactiveFormsModule,
     BtnShineComponent,
     NgClass,
-    MatCardModule,
   ],
   templateUrl: './form-questions.component.html',
   styleUrl: './form-questions.component.scss',

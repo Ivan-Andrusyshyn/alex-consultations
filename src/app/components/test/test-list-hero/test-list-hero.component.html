@@ -7,7 +7,10 @@
       [ngClass]="test.cardClass"
       *ngFor="let test of testData"
     >
-      <h3>{{ test.title }}</h3>
+      <h3>
+        {{ test.title }}
+        <span>{{ test.time }}</span>
+      </h3>
       <p>{{ test.description }}</p>
       <img class="test-img" [src]="test.testSvg" alt="feelings" />
 

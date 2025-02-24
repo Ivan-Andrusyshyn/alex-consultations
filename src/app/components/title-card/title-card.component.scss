@@ -31,9 +31,9 @@
   .tests-title {
     font-size: 18px;
     font-weight: 300;
+    letter-spacing: 0.01em;
     margin-bottom: 8px;
 
-    word-spacing: 4px;
     word-wrap: break-word;
 
     font-style: oblique;
@@ -42,7 +42,7 @@
 
     @media screen and (min-width: 768px) {
       margin-bottom: 12px;
-      font-size: 32px;
+      font-size: 28px;
 
       text-align: left;
     }
@@ -50,6 +50,7 @@
   .tests-subtitle {
     font-size: 16px;
     font-weight: 400;
+    letter-spacing: 0.01em;
     margin-bottom: 20px;
 
     color: #f1f1f1;

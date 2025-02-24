@@ -6,6 +6,7 @@
 h2 {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
 
   color: #ffffff;
   font-style: italic;
@@ -14,7 +15,7 @@ h2 {
   font-size: 1.2rem;
   margin-bottom: 20px;
   line-height: 1.6;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
 
   color: #ffffff;
   text-align: left;
@@ -23,7 +24,8 @@ h2 {
 .description {
   font-size: 1.2rem;
   line-height: 1.6;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.01em;
+
   margin-bottom: 20px;
 
   text-align: left;
@@ -40,6 +42,7 @@ h3 {
   font-size: 1.4rem;
   margin-bottom: 0.75rem;
   font-weight: 300;
+  letter-spacing: 0.01em;
   line-height: 177%;
 
   text-align: left;
@@ -54,13 +57,13 @@ ul {
 li {
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.01em;
   line-height: 177%;
   font-weight: 400;
   font-family: Montserrat, sans-serif;
   font-style: normal;
   text-align: left;
-  color: #fff;
+  color: #f5f5f5;
   @media screen and (min-width: 764px) {
     font-size: 1.2rem;
   }
@@ -73,6 +76,7 @@ li:last-child {
 .summary {
   padding: 1.5rem 0;
   border-radius: 8px;
+  letter-spacing: 0.01em;
 
   font-style: italic;
   color: #f1f1f1;
@@ -81,6 +85,7 @@ li:last-child {
 .summary h3 {
   font-size: 1.5rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
 
   text-align: center;
   color: #fff;
@@ -93,7 +98,8 @@ li:last-child {
   font-size: 1.3rem;
   font-weight: 100;
   line-height: 2;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.01em;
+
   margin-bottom: 12px;
   text-align: left;
 
