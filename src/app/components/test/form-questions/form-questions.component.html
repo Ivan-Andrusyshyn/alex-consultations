@@ -1,54 +1,56 @@
-<app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
-<mat-tab-group [(selectedIndex)]="currentQuestionNumber">
-  <form [formGroup]="formGroup" *ngIf="questions">
-    <ng-container *ngFor="let q of questions; let i = index">
-      <mat-tab [label]="q.id.toString()">
-        <div class="question-card">
-          <div *ngIf="q">
-            <h3>{{ q.question }}</h3>
-            <div class="answers">
-              <div class="line"></div>
-              <label
-                class="label"
-                *ngFor="let answer of q.answers; let answerIndex = index"
-              >
-                <input
-                  [formControlName]="q.id.toString()"
-                  (click)="
-                    forceChangeControl(
-                      q.id,
+<mat-card class="example-card" appearance="outlined">
+  <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+  <mat-tab-group [(selectedIndex)]="currentQuestionNumber">
+    <form [formGroup]="formGroup" *ngIf="questions">
+      <ng-container *ngFor="let q of questions; let i = index">
+        <mat-tab [label]="q.id.toString()">
+          <div class="question-card">
+            <div *ngIf="q">
+              <h3>{{ q.question }}</h3>
+              <div class="answers">
+                <div class="line"></div>
+                <label
+                  class="label"
+                  *ngFor="let answer of q.answers; let answerIndex = index"
+                >
+                  <input
+                    [formControlName]="q.id.toString()"
+                    (click)="
+                      forceChangeControl(
+                        q.id,
+                        answer.point + (answer.type ? '-' + answer.type : '')
+                      )
+                    "
+                    type="radio"
+                    [value]="
                       answer.point + (answer.type ? '-' + answer.type : '')
-                    )
-                  "
-                  type="radio"
-                  [value]="
-                    answer.point + (answer.type ? '-' + answer.type : '')
-                  "
-                />
-                <span>
-                  {{ answer.text }}
-                </span>
-                <div class="button">
-                  <span class="shadow"></span>
-                  <span class="edge"></span>
-                  <span class="front text"> </span>
-                </div>
-              </label>
+                    "
+                  />
+                  <span>
+                    {{ answer.text }}
+                  </span>
+                  <div class="button">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front text"> </span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <app-btn-shine
-          *ngIf="formGroup.valid"
-          [btnTitle]="'Результати'"
-          (onClick)="getSubmit()"
-        ></app-btn-shine>
-      </mat-tab>
-    </ng-container>
-  </form>
-</mat-tab-group>
-<div
-  class="error-message"
-  *ngIf="getInvalidControls()?.length && currentQuestionNumber > 89"
->
-  Будь ласка, дайте відповідь на всі питання.
-</div>
+          <app-btn-shine
+            *ngIf="formGroup.valid"
+            [btnTitle]="'Результати'"
+            (onClick)="getSubmit()"
+          ></app-btn-shine>
+        </mat-tab>
+      </ng-container>
+    </form>
+  </mat-tab-group>
+  <div
+    class="error-message"
+    *ngIf="getInvalidControls()?.length && currentQuestionNumber > 89"
+  >
+    Будь ласка, дайте відповідь на всі питання.
+  </div>
+</mat-card>
