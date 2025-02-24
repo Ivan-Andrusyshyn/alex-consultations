@@ -27,4 +27,12 @@ export class MailerService {
       }
     );
   }
+  postEmailToxicalRelationship(value: any): Observable<any> {
+    return this.http.post(
+      environment.apiUrl + '/send-email' + '/toxical-relationship',
+      {
+        value,
+      }
+    );
+  }
 }

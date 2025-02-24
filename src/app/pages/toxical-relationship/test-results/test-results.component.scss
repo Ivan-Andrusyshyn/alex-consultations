@@ -1,0 +1,151 @@
+.container {
+  padding: 1rem 0 2rem 0;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+
+  color: #ffffff;
+  font-style: italic;
+}
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+
+  color: #ffffff;
+  text-align: left;
+  font-style: italic;
+}
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+
+  text-align: left;
+  color: #fff;
+}
+
+.section {
+  margin-top: 1.5rem;
+  border-top: 1px solid #34495e;
+  padding-top: 1.5rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  font-weight: 300;
+  line-height: 177%;
+
+  text-align: left;
+  color: #fff;
+}
+
+ul {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+li {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+  line-height: 177%;
+  font-weight: 400;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  text-align: left;
+  color: #fff;
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+  }
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+.summary {
+  padding: 1.5rem 0;
+  border-radius: 8px;
+
+  font-style: italic;
+  color: #f1f1f1;
+}
+
+.summary h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  text-align: center;
+  color: #fff;
+  @media screen and (min-width: 764px) {
+    text-align: left;
+  }
+}
+
+.summary p {
+  font-size: 1.3rem;
+  font-weight: 100;
+  line-height: 2;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-align: left;
+
+  @media screen and (min-width: 764px) {
+    text-align: left;
+  }
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  .section h3 {
+    font-size: 1.5rem;
+  }
+
+  ul {
+    padding-left: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .summary h3 {
+    font-size: 1.75rem;
+  }
+}
+.btns-wrapper {
+  gap: 20px;
+  border-radius: 12px;
+  padding: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  @media screen and (min-width: 764px) {
+    flex-wrap: nowrap;
+  }
+}
+.success-message {
+  border-radius: 5px;
+  border: 1px solid #c3e6cb;
+  margin-top: 10px;
+  padding: 15px;
+
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  text-align: center;
+}

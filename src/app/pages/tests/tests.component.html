@@ -7,7 +7,11 @@
         [subtitleText]="subtitleText"
       ></app-title-card>
       <ul class="test-list">
-        <li class="test-card" *ngFor="let test of testData">
+        <li
+          class="test-card"
+          [ngClass]="test.cardClass"
+          *ngFor="let test of testData"
+        >
           <h3>{{ test.title }}</h3>
           <p>{{ test.description }}</p>
 

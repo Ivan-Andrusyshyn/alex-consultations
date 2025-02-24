@@ -27,11 +27,10 @@ const postEmailPersonalitiesResults = (req, res) => __awaiter(void 0, void 0, vo
         if (!personInformation) {
             return res.status(400).send({ message: 'No type information found' });
         }
-        // oleksandrandrusyshyn@gmail.com
         const mailOptions = {
-            from: `"Ivan Dev 🧑‍💻"<${process.env.EMAIL_USER}>`,
+            from: `"Vidchuttia"<${process.env.EMAIL_USER}>`,
             to: value.email,
-            subject: 'Your Test Results',
+            subject: 'Туст 16 типів особистості',
             html: (0, createResultsTemplate_1.getPersonalitiesTemplate)(personInformation),
         };
         const respone = yield nodemailer_1.default.sendMail(mailOptions);

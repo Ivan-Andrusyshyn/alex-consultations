@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -31,6 +31,7 @@ import { BtnShineComponent } from '../../btn-shine/btn-shine.component';
     NgFor,
     ReactiveFormsModule,
     BtnShineComponent,
+    NgClass,
   ],
   templateUrl: './form-questions.component.html',
   styleUrl: './form-questions.component.scss',
@@ -65,6 +66,10 @@ export class FormQuestionsComponent implements OnInit {
       answers,
       currentQuestionNumber: this.currentQuestionNumber,
     });
+  }
+  isAnswered(questionId: number): boolean | null {
+    const control = this.formGroup.get(questionId.toString());
+    return control && control.value != null;
   }
 
   getSubmit() {

@@ -9,11 +9,17 @@ import { HeroComponent } from '../../components/hero/hero.component';
 import { ConsultationComponent } from '../../components/consultation/consultation.component';
 import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
+import { PrimaryBtnComponent } from '../../components/primary-btn/primary-btn.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, TestListHeroComponent, ConsultationComponent],
+  imports: [
+    HeroComponent,
+    PrimaryBtnComponent,
+    TestListHeroComponent,
+    ConsultationComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

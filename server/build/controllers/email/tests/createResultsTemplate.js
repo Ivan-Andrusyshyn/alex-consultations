@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPersonalitiesTemplate = exports.getTraumaticTemplate = void 0;
+exports.getPersonalitiesTemplate = exports.getToxicalRelTemplate = exports.getTraumaticTemplate = void 0;
 const getTraumaticTemplate = (typeInformation) => `
         <h3>Your Test Results:</h3>
         <p><strong>Description:</strong> ${typeInformation.description}</p>
@@ -134,4 +134,27 @@ const getPersonalitiesTemplate = (typeInformation) => `
   </div>
 `;
 exports.getPersonalitiesTemplate = getPersonalitiesTemplate;
-exports.default = getTraumaticTemplate;
+const getToxicalRelTemplate = (result) => `
+  <h3>Результати тесту:</h3>
+  <p><strong></strong> ${result.description}</p>
+  
+  <h4>${result.category}</h4>
+  
+  <h4>Рекомендації:</h4>
+  <ul>
+    ${result.recommendations
+    .map((rec) => `<li>✅ ${rec}</li>`)
+    .join('')}
+  </ul>
+  
+  <h4>Головне:</h4>
+  <p>${result.conclusion}</p>
+  
+  <h4>Consultation:</h4>
+  <p>${result.consultation.text}</p>
+  
+ >
+ 
+ 
+`;
+exports.getToxicalRelTemplate = getToxicalRelTemplate;

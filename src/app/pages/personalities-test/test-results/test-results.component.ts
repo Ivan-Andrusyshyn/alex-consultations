@@ -8,7 +8,15 @@ import {
   signal,
 } from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import {
+  catchError,
+  filter,
+  map,
+  Observable,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -22,6 +30,10 @@ import { SendResultsFormComponent } from '../../../components/send-results-form/
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
 import { ResultsIndicatorComponent } from '../../../components/test/personalities-test/results-indicator/results-indicator.component';
+import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../../components/modal/modal.component';
+import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 
 @Component({
   selector: 'app-test-results',
@@ -31,6 +43,7 @@ import { ResultsIndicatorComponent } from '../../../components/test/personalitie
     SendResultsFormComponent,
     ResultsIndicatorComponent,
     SendFormOnEmailBtnComponent,
+    PrimaryBtnComponent,
     AsyncPipe,
     NgIf,
   ],
@@ -43,6 +56,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private activeRoute = inject(ActivatedRoute);
   private mailerService = inject(MailerService);
   private destroyRef = inject(DestroyRef);
+  readonly dialog = inject(MatDialog);
+  private readonly googleService = inject(GoogleSheetsService);
 
   personInformation$!: Observable<{
     personType: string;
@@ -52,6 +67,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   isShowSendForm$!: Observable<boolean>;
   sendObject!: any;
   successMessage = signal(false);
+  successRegistration = signal(false);
 
   ngOnDestroy(): void {
     this.personalitiesService.scorePercentages.next(null);
@@ -81,6 +97,38 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           })
         );
     });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      height: '500px',
+      width: '400px',
+      data: {
+        contentType: 'form-consultation',
+        title: '🔥 Готові до прориву?',
+        btn: {
+          cancel: 'Ні, дякую',
+          confirm: '🚀 Отримати консультацію',
+        },
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((r) => !!r),
+        switchMap((r) =>
+          this.googleService.postRegistrationInSheet(r).pipe(
+            tap(() => this.successRegistration.set(true)),
+            catchError((error) => {
+              this.successRegistration.set(false);
+              return throwError(() => error);
+            })
+          )
+        )
+      )
+      .subscribe();
   }
 
   sendResultsOnEmail(results: { email: string }) {

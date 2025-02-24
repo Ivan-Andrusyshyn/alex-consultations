@@ -1,0 +1,10 @@
+<div class="questions">
+  <app-form-questions
+    [formGroup]="formGroup"
+    [questions]="(traumaticSensitivityTest$ | async) ?? []"
+    [currentQuestionNumber]="currentQuestionNumber"
+    [currentTestName]="'traumatic-sensitivity'"
+    (nextQues)="nextQuestion($event)"
+    (onSubmit)="getResults($event)"
+  ></app-form-questions>
+</div>

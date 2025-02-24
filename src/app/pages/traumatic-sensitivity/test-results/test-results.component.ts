@@ -9,7 +9,15 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
-import { map, Observable, tap } from 'rxjs';
+import {
+  catchError,
+  filter,
+  map,
+  Observable,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TypeInformation } from '../../../shared/types/16-personalities';
@@ -23,6 +31,10 @@ import {
 } from '../../../shared/types/traumatic-sensitivity';
 import { TraumaticResultsIndicatorComponent } from '../../../components/test/traumatic-sensitivity/traumatic-indicator/traumatic-indicator.component';
 import { TypeInformationComponent } from '../../../components/test/traumatic-sensitivity/type-information/type-information.component';
+import { MatDialog } from '@angular/material/dialog';
+import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
+import { ModalComponent } from '../../../components/modal/modal.component';
+import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -43,6 +55,7 @@ const types: string[] = [
     SendResultsFormComponent,
     TraumaticResultsIndicatorComponent,
     SendFormOnEmailBtnComponent,
+    PrimaryBtnComponent,
     AsyncPipe,
     NgIf,
     NgFor,
@@ -58,6 +71,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private mailerService = inject(MailerService);
   private destroyRef = inject(DestroyRef);
   private activeRoute = inject(ActivatedRoute);
+  readonly dialog = inject(MatDialog);
+  private readonly googleService = inject(GoogleSheetsService);
 
   personInformation$!: Observable<{
     personType: string;
@@ -69,6 +84,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   isShowSendForm$!: Observable<boolean>;
   sensitivityType$!: Observable<string>;
   successMessage = signal(false);
+  successRegistration = signal(false);
 
   possibleVariablesArray = types;
   typeInfo$!: Observable<any>;
@@ -126,5 +142,36 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   compare(r: string, b: string) {
     return r === b;
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      height: '500px',
+      width: '400px',
+      data: {
+        contentType: 'form-consultation',
+        title: '🔥 Готові до прориву?',
+        btn: {
+          cancel: 'Ні, дякую',
+          confirm: '🚀 Отримати консультацію',
+        },
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((r) => !!r),
+        switchMap((r) =>
+          this.googleService.postRegistrationInSheet(r).pipe(
+            tap(() => this.successRegistration.set(true)),
+            catchError((error) => {
+              this.successRegistration.set(false);
+              return throwError(() => error);
+            })
+          )
+        )
+      )
+      .subscribe();
   }
 }

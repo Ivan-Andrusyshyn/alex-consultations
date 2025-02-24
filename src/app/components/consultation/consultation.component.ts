@@ -8,10 +8,4 @@ import { RouterLink } from '@angular/router';
   templateUrl: './consultation.component.html',
   styleUrl: './consultation.component.scss',
 })
-export class ConsultationComponent {
-  @Output() openDialog = new EventEmitter();
-
-  openDialogConflations() {
-    this.openDialog.emit();
-  }
-}
+export class ConsultationComponent {}

@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { LoadingService } from './shared/services/loading.service';
 import { LoaderSquareComponent } from './components/loader-square/loader-square.component';
+import { SocialLinksComponent } from './components/social-links/social-links.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { LoaderSquareComponent } from './components/loader-square/loader-square.
     HeaderComponent,
     MatProgressSpinnerModule,
     LoaderSquareComponent,
+
     AsyncPipe,
     FooterComponent,
   ],

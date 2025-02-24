@@ -37,6 +37,19 @@
     display: block;
   }
 }
+.btns-wrapper {
+  gap: 20px;
+  border-radius: 12px;
+  padding: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  @media screen and (min-width: 764px) {
+    flex-wrap: nowrap;
+  }
+}
 .score {
   font-size: 10px;
   font-weight: 100;

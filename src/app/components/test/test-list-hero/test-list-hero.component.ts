@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,20 +7,26 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+
 import { TestCardInfoBtnComponent } from '../test-card-info-btn/test-card-info-btn.component';
 import { TestCardStartBtnComponent } from '../test-card-start-btn/test-card-start-btn.component';
-import { testButtonData } from '../../../content/tests-content/test-btn-data';
+import { testCardsData } from '../../../content/tests-content/test-cards-data';
 
 @Component({
   selector: 'app-test-list-hero',
   standalone: true,
-  imports: [NgFor, TestCardInfoBtnComponent, TestCardStartBtnComponent],
+  imports: [
+    NgFor,
+    NgClass,
+    TestCardInfoBtnComponent,
+    TestCardStartBtnComponent,
+  ],
   templateUrl: './test-list-hero.component.html',
   styleUrl: './test-list-hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestListHeroComponent implements OnInit, OnDestroy {
-  testData = testButtonData;
+  testData = testCardsData;
 
   @ViewChild('testList', { static: false }) testList!: ElementRef;
 

@@ -49,6 +49,36 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'tests/toxical-relationship',
+    loadComponent: () =>
+      import(
+        './pages/toxical-relationship/toxical-relationship.component'
+      ).then((m) => m.ToxicalRelationshipComponent),
+    children: [
+      {
+        path: 'questions',
+        loadComponent: () =>
+          import(
+            './pages/toxical-relationship/questions/questions.component'
+          ).then((m) => m.QuestionsComponent),
+      },
+      {
+        path: 'details/:traumaticSensitivity',
+        loadComponent: () =>
+          import(
+            './pages/toxical-relationship/test-results/test-results.component'
+          ).then((m) => m.TestResultsComponent),
+      },
+      {
+        path: 'test-information',
+        loadComponent: () =>
+          import(
+            './pages/toxical-relationship/test-information/test-information.component'
+          ).then((m) => m.TestInformationComponent),
+      },
+    ],
+  },
+  {
     path: 'tests/16-personalities',
     loadComponent: () =>
       import('./pages/personalities-test/personalities-test.component').then(

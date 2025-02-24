@@ -11,11 +11,6 @@ import {
 } from '../types/traumatic-sensitivity';
 import { Answer } from '../types/16-personalities';
 
-interface Scores {
-  scores: TestResult;
-  minScoreNumber: string;
-  maxScoreNumber: string;
-}
 @Injectable({ providedIn: 'root' })
 export class TraumaticSensitivityService {
   private readonly testsUrl = environment.apiUrl + '/tests';

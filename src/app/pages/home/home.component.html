@@ -8,7 +8,9 @@
     </div>
   </div>
   <app-hero></app-hero>
-  <app-consultation (openDialog)="openDialog()"></app-consultation>
+  <app-consultation></app-consultation>
+  <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
+
   @if (successRegistration()) {
 
   <div class="success-message">✅ Ви успішно записалися!</div>

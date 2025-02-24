@@ -1,0 +1,26 @@
+.test {
+  width: 100%;
+  padding: 20px 0;
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+
+  @media screen and (min-width: 764px) {
+    padding: 40px 20px;
+  }
+}
+// ERROR
+.test-error {
+  border: 1px solid red;
+  padding: 6px;
+  border-radius: 8px;
+}
+.response-message {
+  padding: 8px;
+  border-radius: 1rem;
+
+  border: 1px solid green;
+
+  box-sizing: border-box;
+}

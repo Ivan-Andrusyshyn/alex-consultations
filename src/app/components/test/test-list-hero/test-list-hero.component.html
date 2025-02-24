@@ -2,7 +2,11 @@
   <button class="scroll-btn prev" (click)="scroll('prev')">&#10094;</button>
   <button class="scroll-btn next" (click)="scroll('next')">&#10095;</button>
   <ul class="test-list" #testList>
-    <li class="test-card" *ngFor="let test of testData">
+    <li
+      class="test-card"
+      [ngClass]="test.cardClass"
+      *ngFor="let test of testData"
+    >
       <h3>{{ test.title }}</h3>
       <p>{{ test.description }}</p>
       <img class="test-img" [src]="test.testSvg" alt="feelings" />

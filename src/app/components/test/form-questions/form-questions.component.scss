@@ -29,6 +29,7 @@
 .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
   color: #ddd !important;
 }
+
 // ------------------------------------------
 form {
   .form-btn {
@@ -172,81 +173,139 @@ ul {
 }
 
 .answers {
-  gap: 18px;
+  gap: 8px;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-
+  @media screen and (min-width: 764px) {
+    gap: 18px;
+  }
   label {
-    gap: 12px;
-    padding-left: 40px;
-    transition: color 0.3s ease;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
+    margin: 0 10px;
+    gap: 20px;
 
-    color: #fff;
-    cursor: pointer;
+    position: relative;
+    flex-direction: row-reverse;
     text-align: left;
+    cursor: pointer;
     display: flex;
     align-items: center;
+    span {
+      letter-spacing: 0.1em;
+      font-weight: 300;
+      font-size: 1.4rem;
+    }
+  }
+
+  .button {
     position: relative;
-    &::before {
-      content: "";
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-
-      border: 3px solid #fff;
-      position: absolute;
-      background-color: transparent;
-      transition: all 0.3s ease, border-color 0.3s ease;
-    }
-
-    &::after {
-      content: "";
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      left: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-
-      position: absolute;
-      background-color: transparent;
-      transition: background-color 0.3s ease;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #42be46 0%, #81c784 100%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
     @media screen and (min-width: 764px) {
-      font-size: 1.3rem;
+      width: 28px;
+      height: 28px;
     }
   }
 
-  .radio-label:has(.radio-btn:checked)::after {
-    background-color: #4caf50;
+  .button::before,
+  .button::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: all 0.3s ease;
   }
 
-  .radio-label:has(.radio-btn:focus)::before,
-  .radio-label:has(.radio-btn:checked)::before {
-    border-color: #fff;
+  .button::before {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(0.9);
+    opacity: 0;
   }
-  @media screen and (min-width: 764px) {
-    .radio-label:has(.radio-btn:hover)::before {
-      border-color: #fff;
-      background-color: #4caf50;
+
+  .button::after {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+    opacity: 0;
+  }
+
+  .label input {
+    display: none;
+  }
+
+  .label input:checked ~ .button {
+    background: linear-gradient(135deg, #20db29 0%, #0bf013 100%);
+
+    box-shadow: 0 10px 20px rgba(122, 255, 34, 0.4);
+  }
+  .label:hover .button::after {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  .label:hover .button {
+    background: linear-gradient(135deg, #66bb6a 0%, #a5d6a7 100%);
+    box-shadow: 0 10px 20px rgba(102, 187, 106, 0.4);
+    transform: scale(1.1);
+  }
+  .label input:checked ~ .button::before {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  .label input:checked ~ .button::after {
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1.1);
+      opacity: 1;
     }
-    .radio-label:hover {
-      color: #4caf50;
+
+    50% {
+      transform: scale(1.5);
+      opacity: 0;
     }
+
+    100% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  .shadow {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .front {
+    position: relative;
+    z-index: 1;
   }
 
   input {
     margin-right: 10px;
   }
+}
+.validBtn {
+  height: 8px;
+  margin-top: 8px;
+  margin-left: 35px;
 
-  input {
-    display: none;
-  }
+  transition: all 0.4s linear;
+  border: 1px solid #0bf013;
+  background-color: #0bf013c5;
 }

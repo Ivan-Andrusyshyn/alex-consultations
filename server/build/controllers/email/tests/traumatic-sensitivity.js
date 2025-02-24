@@ -27,11 +27,10 @@ const postEmailTraumaticResults = (req, res) => __awaiter(void 0, void 0, void 0
         if (!typeInformation) {
             return res.status(400).send({ message: 'No type information found' });
         }
-        // oleksandrandrusyshyn@gmail.com
         const mailOptions = {
-            from: `"Ivan Dev 🧑‍💻"<${process.env.EMAIL_USER}>`,
+            from: `"Vidchuttia"<${process.env.EMAIL_USER}>`,
             to: value.email,
-            subject: 'Your Test Results',
+            subject: 'Тест на травматичну чуттєвість',
             html: (0, createResultsTemplate_1.getTraumaticTemplate)(typeInformation),
         };
         const respone = yield nodemailer_1.default.sendMail(mailOptions);
