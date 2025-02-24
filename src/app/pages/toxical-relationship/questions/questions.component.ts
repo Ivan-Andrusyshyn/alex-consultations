@@ -17,11 +17,12 @@ import { Answer, Question } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { ToxicalRelationshipService } from '../../../shared/services/toxical-relationship.service';
+import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [FormQuestionsComponent, AsyncPipe],
+  imports: [FormQuestionsComponent, TitleCardComponent, AsyncPipe],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -82,8 +83,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     currentQuestionNumber: number;
   }) {
     if (this.formGroup.invalid) {
-      this.scrollToTop();
-
       this.setSessionStorage(
         'toxical-relationship-answers',
         JSON.stringify({
@@ -172,12 +171,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  private scrollToTop(): void {
-    window.scrollTo({
-      top: 40,
-      behavior: 'smooth',
-    });
-  }
+  // private scrollToTop(): void {
+  //   window.scrollTo({
+  //     top: 40,
+  //     behavior: 'smooth',
+  //   });
+  // }
 
   private setSessionStorage(key: string, value: any) {
     sessionStorage.setItem(key, value);

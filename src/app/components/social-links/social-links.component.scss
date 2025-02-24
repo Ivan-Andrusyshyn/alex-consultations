@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 12px;
   p {
     margin: 0;
     font-size: 16px;
@@ -16,8 +17,6 @@
   }
 }
 .container {
-  min-height: 100px;
-
   position: relative;
   display: flex;
   justify-content: center;
@@ -27,8 +26,8 @@
 .container .glass {
   position: relative;
 
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 
   border-radius: 10px;
 
@@ -44,8 +43,8 @@
   backdrop-filter: blur(10px);
 
   @media screen and (min-width: 764px) {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
   }
   img {
     transition: 0.4s;
@@ -63,7 +62,7 @@
 
   img {
     height: auto;
-    width: 36px;
+    width: 32px;
   }
 }
 .container .glass::before {

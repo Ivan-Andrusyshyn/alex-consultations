@@ -4,7 +4,7 @@
   text-decoration: none;
   transition: 1s;
   transform: skewX(-15deg);
-  margin: 0 auto;
+  margin: 16px auto;
   box-shadow: 6px 6px 0 #333;
 
   background: #43b02a;
@@ -16,6 +16,7 @@
 
   @media screen and (min-width: 764px) {
     padding: 8px 16px;
+    margin: 22px auto;
     font-size: 22px;
   }
 }

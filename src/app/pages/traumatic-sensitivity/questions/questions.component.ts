@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
@@ -82,8 +82,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     currentQuestionNumber: number;
   }) {
     if (this.formGroup.invalid) {
-      this.scrollToTop();
-
       this.setSessionStorage(
         'traumatic-sensitivity-answers',
         JSON.stringify({
@@ -176,12 +174,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  private scrollToTop(): void {
-    window.scrollTo({
-      top: 40,
-      behavior: 'smooth',
-    });
-  }
+  // private scrollToTop(): void {
+  //   window.scrollTo({
+  //     top: 40,
+  //     behavior: 'smooth',
+  //   });
+  // }
 
   private setSessionStorage(key: string, value: any) {
     sessionStorage.setItem(key, value);

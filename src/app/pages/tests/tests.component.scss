@@ -62,6 +62,10 @@
       height: 54px;
       bottom: 8px;
       left: 8px;
+      display: none;
+      @media screen and (min-width: 350px) {
+        display: block;
+      }
       @media screen and (min-width: 764px) {
         top: 8px;
         left: 8px;

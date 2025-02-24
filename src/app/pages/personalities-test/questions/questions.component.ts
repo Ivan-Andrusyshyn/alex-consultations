@@ -34,6 +34,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
 
+  imgUrl = 'assets/imgs/yoga-love.jpg';
+  subtitleText =
+    'Цей тест допоможе тобі краще зрозуміти свої природні схильності.';
+  titleText = 'Тест 16 типів особистості';
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
   timestamp = DateTime.now()
@@ -97,8 +101,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     currentQuestionNumber: number;
   }) {
     if (this.formGroup.invalid) {
-      this.scrollToTop();
-
       this.setSessionStorage(
         '16-personalities-answers',
         JSON.stringify({
@@ -183,12 +185,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         })
       );
   }
-  private scrollToTop(): void {
-    window.scrollTo({
-      top: 40,
-      behavior: 'smooth',
-    });
-  }
+  // private scrollToTop(): void {
+  //   window.scrollTo({
+  //     top: 40,
+  //     behavior: 'smooth',
+  //   });
+  // }
 
   private setSessionStorage(key: string, value: any) {
     sessionStorage.setItem(key, value);
