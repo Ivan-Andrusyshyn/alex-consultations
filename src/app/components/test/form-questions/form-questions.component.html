@@ -29,8 +29,7 @@
                   <span>
                     {{ answer.text }}
                   </span>
-                  <div class="button">
-                    <span class="shadow"></span>
+                  <div class="button" [ngClass]="'button-' + answerIndex">
                     <span class="edge"></span>
                     <span class="front text"> </span>
                   </div>
