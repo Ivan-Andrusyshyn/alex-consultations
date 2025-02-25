@@ -19,7 +19,7 @@ import { Answer, Question } from '../../../shared/types/16-personalities';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { RefreshButtonComponent } from '../../refresh-button/refresh-button.component';
 import { ModalComponent } from '../../modal/modal.component';
-import { BtnShineComponent } from '../../btn-shine/btn-shine.component';
+import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.component';
 
 @Component({
   selector: 'app-form-questions',
@@ -30,7 +30,7 @@ import { BtnShineComponent } from '../../btn-shine/btn-shine.component';
     MatTabsModule,
     NgFor,
     ReactiveFormsModule,
-    BtnShineComponent,
+    SecondaryBtnComponent,
     NgClass,
   ],
   templateUrl: './form-questions.component.html',

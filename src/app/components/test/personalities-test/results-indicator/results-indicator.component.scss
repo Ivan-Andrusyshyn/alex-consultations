@@ -1,7 +1,7 @@
 // SCORE
 
 .main-wrapper {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 10px;
 
   position: relative;
@@ -13,12 +13,18 @@
   width: 100%;
 }
 .even-descriptions {
+  font-size: 18px;
   margin-bottom: 10px;
+  font-weight: 400;
+  line-height: 150%;
 
   text-align: left;
 }
 .odd-descriptions {
+  font-size: 18px;
   margin-top: 10px;
+  font-weight: 400;
+  line-height: 150%;
 
   color: red;
   text-align: right;
@@ -64,7 +70,7 @@
   }
 
   &.P {
-    background-color: #795548;
+    background-color: #d43434;
   }
 }
 
@@ -114,5 +120,5 @@
 }
 
 .P {
-  color: #795548;
+  color: #da3214;
 }

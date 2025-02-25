@@ -6,13 +6,18 @@
     <app-results-indicator
       *ngIf="scorePercentages$ | async"
     ></app-results-indicator>
+    <br />
+    <br />
+    <app-personalities-type-information
+      [personType]="personInformation.personType"
+      [personInformation]="personInformation.personInformation"
+    ></app-personalities-type-information>
+    <br />
+    <br />
 
     <div class="btns-wrapper">
       <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
-      <app-personalities-type-information
-        [personType]="personInformation.personType"
-        [personInformation]="personInformation.personInformation"
-      ></app-personalities-type-information>
+
       <app-send-form-on-email-btn
         *ngIf="!(isShowSendForm$ | async)"
         (sendForm)="toggleSendForm()"

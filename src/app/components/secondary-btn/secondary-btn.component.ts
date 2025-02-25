@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-btn-shine',
+  selector: 'app-secondary-btn',
   standalone: true,
   imports: [],
-  templateUrl: './btn-shine.component.html',
-  styleUrl: './btn-shine.component.scss',
+  templateUrl: './secondary-btn.component.html',
+  styleUrl: './secondary-btn.component.scss',
 })
-export class BtnShineComponent {
+export class SecondaryBtnComponent {
   @Output() onClick = new EventEmitter<void>();
   @Input() btnTitle: string = 'Результати';
 

@@ -43,11 +43,12 @@
               </div>
             </div>
           </div>
-          <app-btn-shine
+
+          <app-secondary-btn
             *ngIf="formGroup.valid"
             [btnTitle]="'Результати'"
             (onClick)="getSubmit()"
-          ></app-btn-shine>
+          ></app-secondary-btn>
         </mat-tab>
       </ng-container>
     </form>

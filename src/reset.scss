@@ -1,5 +1,4 @@
 body {
-  font-family: "Roboto", serif;
   margin: 0;
 }
 *,
@@ -40,6 +39,7 @@ ol {
   list-style: none;
   font-family: inherit;
   font-weight: 300;
+  font-family: "Roboto", serif;
   font-style: italic;
 }
 h1,
@@ -50,17 +50,19 @@ h5,
 p,
 label {
   font-weight: 400;
-  font-family: "Montserrat", serif;
+  font-family: "Roboto", serif;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  font-family: "Roboto", serif;
   font-family: inherit;
   font-weight: 300;
 }
 
 button {
+  font-family: "Roboto", serif;
   cursor: pointer;
 }
 
