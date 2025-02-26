@@ -32,9 +32,11 @@ form {
     width: 100%;
     height: 40px;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     font-size: 16px;
-    color: #fff;
+
+    background-color: #45a04921;
+    color: var(--textColor);
     cursor: pointer;
     transition: all 0.3s, transform 0.2s;
   }

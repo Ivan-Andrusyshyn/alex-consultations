@@ -2,7 +2,7 @@
   padding: 1rem;
   min-height: 100vh;
   box-shadow: var(--boxShadow);
-
+  border-radius: 12px;
   background-color: var(--bgColorBox);
 }
 
@@ -14,7 +14,8 @@
 }
 .info-section {
   margin-top: 16px;
-  border-radius: 8px;
+  border-radius: 12px;
+
   transition: all 0.3s ease-in-out;
 }
 // MOB NAV
@@ -171,6 +172,7 @@
 .card-footer {
   text-align: center;
   color: var(--textColor);
+  background-color: var(--bgColorBox);
 
   font-style: italic;
   border-radius: 0 0 12px 12px;

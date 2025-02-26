@@ -32,8 +32,9 @@
 
 // ------------------------------------------
 .container {
-  padding: 8px;
+  padding: 16px 8px;
   box-shadow: var(--boxShadow);
+  border-radius: 12px;
 
   background-color: var(--bgColorBox);
 }

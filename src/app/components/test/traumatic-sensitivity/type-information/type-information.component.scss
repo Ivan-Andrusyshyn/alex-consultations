@@ -1,5 +1,5 @@
 .container {
-  padding: 1rem 0 2rem 0;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: var(--boxShadow);
 
@@ -80,10 +80,9 @@ li:last-child {
 .summary h3 {
   font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
 
   text-align: center;
-  color: var(--textColor);
+  color: var(--textColorTitle);
 
   @media screen and (min-width: 764px) {
     text-align: left;
@@ -92,11 +91,10 @@ li:last-child {
 
 .summary p {
   font-size: 1rem;
-  font-weight: 100;
   line-height: 2;
-  letter-spacing: 0.01em;
 
   text-align: center;
+  color: var(--textColor);
 
   @media screen and (min-width: 764px) {
     text-align: left;

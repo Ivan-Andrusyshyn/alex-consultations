@@ -39,7 +39,10 @@
     </div>
     <br />
   </ng-container>
+
   <app-type-information [typeInfo]="typeInfo$ | async"></app-type-information>
+  <br />
+  <br />
   <div class="btns-wrapper">
     <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
     <app-send-form-on-email-btn
