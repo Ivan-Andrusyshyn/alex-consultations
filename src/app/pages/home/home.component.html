@@ -11,7 +11,9 @@
   <app-consultation></app-consultation>
   <br />
   <br />
-  <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
+  <div class="btns-wrapper">
+    <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
+  </div>
 
   @if (successRegistration()) {
 
