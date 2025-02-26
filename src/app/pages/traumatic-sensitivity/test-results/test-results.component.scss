@@ -43,8 +43,8 @@
   padding: 8px;
 
   display: flex;
+  box-shadow: var(--boxShadow);
   align-items: center;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.493);
   background-color: var(--bgColorBox);
   justify-content: center;
   flex-wrap: wrap;
