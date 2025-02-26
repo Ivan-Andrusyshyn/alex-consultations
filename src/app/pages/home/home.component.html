@@ -2,17 +2,19 @@
   <app-test-list-hero></app-test-list-hero>
   <div class="hero-bg">
     <div>
+      <img src="assets/svg/heart.svg" alt="" />
       <div class="bg-text">Полюби себе!</div>
       <div class="bg-text">Цінуй себе!</div>
       <div class="bg-text">Будь собою!</div>
     </div>
+    <app-side-btn (onClick)="openDialog()"></app-side-btn>
   </div>
-  <app-consultation></app-consultation>
+
+  <div class="consultation-wrapper">
+    <app-consultation></app-consultation>
+  </div>
   <br />
   <br />
-  <div class="btns-wrapper">
-    <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
-  </div>
 
   @if (successRegistration()) {
 
