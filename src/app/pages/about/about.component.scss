@@ -1,8 +1,9 @@
 .about {
   width: 100%;
   padding: 20px 0;
-  color: #f1f1f1;
 
+  color: var(--textColor);
+  background-color: var(--bgColorBox);
   @media screen and (min-width: 764px) {
     padding: 40px 20px;
   }
@@ -16,7 +17,7 @@
 
     font-style: oblique;
     text-align: center;
-    color: #ccc;
+    color: var(--textColorTitle);
 
     @media screen and (min-width: 768px) {
       margin-bottom: 12px;
@@ -28,6 +29,7 @@
   .container {
     max-width: 1200px;
     margin: 0 auto;
+
     flex-direction: column;
     text-align: center;
     display: flex;
@@ -61,7 +63,8 @@
     font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 2rem;
-    color: #f1f1f1;
+
+    color: var(--textColor);
     a {
       font-size: 1.4rem;
       text-decoration: underline;

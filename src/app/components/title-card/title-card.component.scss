@@ -4,6 +4,7 @@
   padding: 12px;
   gap: 16px;
 
+  background-color: var(--bgColorBox);
   @media screen and (min-width: 764px) {
     padding: 16px;
   }
@@ -38,7 +39,7 @@
 
     font-style: oblique;
     text-align: center;
-    color: #ccc;
+    color: var(--textColorTitle);
 
     @media screen and (min-width: 768px) {
       margin-bottom: 12px;
@@ -53,7 +54,8 @@
     letter-spacing: 0.01em;
     margin-bottom: 20px;
 
-    color: #f1f1f1;
+    color: var(--textColor);
+
     font-style: italic;
     @media screen and (min-width: 768px) {
       text-align: left;
@@ -62,10 +64,11 @@
   }
 
   img {
-    height: auto;
     width: 100px;
-    margin: 0 auto;
     border-radius: 12px;
+    margin: 0 auto;
+
+    height: auto;
     object-fit: cover;
 
     @media screen and (min-width: 764px) {

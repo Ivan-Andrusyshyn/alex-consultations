@@ -8,11 +8,12 @@ import {
 import { HeaderService } from '../../../shared/services/header.service';
 import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { ToggleBtnComponent } from '../../toggle-btn/toggle-btn.component';
 
 @Component({
   selector: 'app-mob',
   standalone: true,
-  imports: [NgIf, AsyncPipe, RouterLink],
+  imports: [NgIf, ToggleBtnComponent, AsyncPipe, RouterLink],
   templateUrl: './mob.component.html',
   styleUrl: './mob.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

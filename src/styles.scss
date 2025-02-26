@@ -1,12 +1,63 @@
+@use "./assets/themes.scss" as *;
 @import "./reset.scss";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  @include darken();
+}
+.light-mode {
+  @include lighten();
+}
+
+.dark-mode {
+  @include darken();
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  font-weight: 500;
+  font-style: var(--fontFamilySecondary);
+  font-style: italic;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--fontFamilySecondary);
+  font-weight: 700;
+}
+
+p,
+label {
+  font-family: var(--fontFamilyPrimary);
+  font-weight: 500;
+}
+button,
+input,
+textarea,
+select {
+  border: none;
+  outline: none;
+  background: none;
+  font-family: var(--fontFamilyPrimary);
+
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--fontFamilyPrimary);
+
+  font-weight: 400;
+}
 html,
 body {
-  height: 100%;
   margin: 0;
 
-  font-family: "Roboto", serif;
-  background-color: #073136;
+  background: var(--bgColor);
 
   ::-webkit-scrollbar {
     background-color: #f9f9f9;

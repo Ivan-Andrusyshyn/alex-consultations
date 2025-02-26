@@ -1,13 +1,14 @@
 .hero {
   border-radius: 12px;
   max-width: 1200px;
+  padding: 8px;
 
   box-sizing: border-box;
-  color: #fff;
+  color: var(--textColor);
   text-align: center;
   box-sizing: border-box;
+  background-color: var(--bgColorBox);
   position: relative;
-  // background-color: rgba(0, 0, 0, 0.5);
 }
 .hero-content {
   border-radius: 12px;

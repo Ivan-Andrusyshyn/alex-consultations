@@ -17,7 +17,8 @@
     margin-bottom: 24px;
     font-weight: 500;
 
-    color: #ccc;
+    color: var(--textColor);
+
     @media screen and (min-width: 768px) {
       margin-bottom: 40px;
       font-size: 18px;
@@ -42,6 +43,7 @@
     width: 100%;
     gap: 8px;
 
+    background-color: var(--bgColorBox);
     border: 2px solid #16213e;
     text-align: center;
     position: relative;
@@ -79,7 +81,8 @@
       font-weight: 400;
       max-width: 95%;
 
-      color: #ccc;
+      color: var(--textColor);
+
       span {
         font-size: 16px;
       }
@@ -93,22 +96,11 @@
       font-weight: 400;
       margin-bottom: 20px;
 
-      color: #f1f1f1;
+      color: var(--textColor);
+
       @media screen and (min-width: 768px) {
         font-size: 18px;
       }
     }
   }
-  // .personality-card {
-  //   background-color: #5f1d27;
-  //   box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
-  // }
-  // .traumatic-card {
-  //   background-color: #3288c5;
-  //   box-shadow: 0 4px 8px rgba(17, 66, 105, 0.3);
-  // }
-  // .toxical-card {
-  //   background-color: #1b6421;
-  //   box-shadow: 0 4px 8px rgba(48, 184, 52, 0.3);
-  // }
 }

@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   inject,
   OnInit,
@@ -16,7 +17,8 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { LoadingService } from './shared/services/loading.service';
 import { LoaderSquareComponent } from './components/loader-square/loader-square.component';
-import { SocialLinksComponent } from './components/social-links/social-links.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ThemeService } from './shared/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +29,7 @@ import { SocialLinksComponent } from './components/social-links/social-links.com
     HeaderComponent,
     MatProgressSpinnerModule,
     LoaderSquareComponent,
-
+    ReactiveFormsModule,
     AsyncPipe,
     FooterComponent,
   ],
@@ -37,11 +39,13 @@ import { SocialLinksComponent } from './components/social-links/social-links.com
 })
 export class AppComponent implements OnInit {
   private loadingService = inject(LoadingService);
+  private readonly themeService = inject(ThemeService);
 
   loading$!: Observable<boolean>;
   currentReqMethod$!: Observable<string>;
 
   ngOnInit(): void {
     this.loading$ = this.loadingService.isLoading();
+    this.themeService.initTheme();
   }
 }

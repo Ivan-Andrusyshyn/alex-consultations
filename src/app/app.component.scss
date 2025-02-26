@@ -3,7 +3,8 @@ main {
   max-width: 1200px;
   margin: 0 auto;
 
-  color: #f5f5f5;
+  color: var(--textColor);
+
   transition: all 0.3s ease-in-out;
 
   @media (max-width: 768px) {
@@ -25,7 +26,8 @@ main {
   z-index: 1000;
   font-size: 18px;
 
-  color: #f5f5f5;
+  color: var(--textColor);
+
   display: flex;
   align-items: center;
   justify-content: center;

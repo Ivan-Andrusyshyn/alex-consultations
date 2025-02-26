@@ -6,14 +6,14 @@
 .mat-mdc-tab-body-wrapper,
 .mat-mdc-tab,
 .mat-mdc-tab-nav-bar {
-  --mdc-tab-indicator-active-indicator-color: #f5f5f5;
-  --mat-tab-header-active-label-text-color: #f5f5f5;
-  --mat-tab-header-inactive-label-text-color: #f0f0f0;
-  --mat-mdc-tab-header-pagination-chevron-color: #f5f5f5 !important;
+  --mdc-tab-indicator-active-indicator-color: var(--textColor);
+  --mat-tab-header-active-label-text-color: var(--textColor);
+  --mat-tab-header-inactive-label-text-color: var(--textColor);
+  --mat-mdc-tab-header-pagination-chevron-color: var(--textColor) !important;
 
-  --mat-full-pseudo-checkbox-selected-checkmark-color: #f5f5f5;
-  --mdc-tab-text-label-color: #f5f5f5;
-  --mdc-tab-text-label-color-default: #f5f5f5;
+  --mat-full-pseudo-checkbox-selected-checkmark-color: var(--textColor);
+  --mdc-tab-text-label-color: var(--textColor);
+  --mdc-tab-text-label-color-default: var(--textColor);
 }
 
 ::ng-deep .mat-mdc-tab-header-pagination-chevron,
@@ -21,21 +21,21 @@
 .mat-mdc-tab-header-rtl
   .mat-mdc-tab-header-pagination-after
   .mat-mdc-tab-header-pagination-chevron {
-  border-color: #ddd !important;
+  border-color: var(--textColor) !important;
 }
 .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
-  color: #ddd !important;
+  color: var(--textColor) !important;
 }
 .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
-  color: #ddd !important;
+  color: var(--textColor) !important;
 }
 
 // ------------------------------------------
 .container {
   padding: 8px;
-  box-shadow: 3px 3px 2px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--boxShadow);
 
-  background-color: transparent;
+  background-color: var(--bgColorBox);
 }
 form {
   .form-btn {
@@ -46,7 +46,7 @@ form {
     font-size: 1.2rem;
     border-radius: 6px;
 
-    color: #f5f5f5;
+    color: var(--textColor);
 
     border: none;
     cursor: pointer;
@@ -63,30 +63,7 @@ form {
     }
   }
 }
-.results-btn {
-  width: 150px;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ffd700;
-  margin: 0 auto;
-  font-size: 14px;
-  gap: 8px;
 
-  color: #ffd700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s linear;
-
-  &:hover {
-    border: 1px solid #ffd90086;
-  }
-
-  @media screen and (min-width: 764px) {
-    width: 200px;
-    font-size: 16px;
-  }
-}
 // ========================
 
 // test ul
@@ -97,17 +74,10 @@ ul {
   list-style: none;
 }
 .test-score {
-  color: #fff;
+  color: var(--textColor);
 }
 // ==================
-.personality-test {
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+
 .hidden-btn {
   background-color: transparent;
   border: none;
@@ -116,7 +86,7 @@ ul {
 .section-title {
   font-size: 2rem;
   font-weight: 600;
-  color: #f5f5f5;
+  color: var(--textColor);
 
   margin-bottom: 30px;
   text-align: center;
@@ -140,7 +110,8 @@ ul {
 
   margin-bottom: 24px;
 
-  color: #f5f5f5;
+  color: var(--textColor);
+
   text-align: left;
 
   @media screen and (min-width: 764px) {
@@ -167,6 +138,7 @@ ul {
     position: relative;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.493);
     text-align: left;
+    color: var(--textColor);
     cursor: pointer;
     display: flex;
     align-items: center;

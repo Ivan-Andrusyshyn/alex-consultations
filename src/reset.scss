@@ -22,47 +22,7 @@ body {
   position: fixed;
 }
 
-button,
-input,
-textarea,
-select {
-  border: none;
-  outline: none;
-  background: none;
-
-  font-family: inherit;
-  font-weight: 300;
-}
-
-ul,
-ol {
-  list-style: none;
-  font-family: inherit;
-  font-weight: 300;
-  font-family: "Roboto", serif;
-  font-style: italic;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-label {
-  font-weight: 400;
-  font-family: "Roboto", serif;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  font-family: "Roboto", serif;
-  font-family: inherit;
-  font-weight: 300;
-}
-
 button {
-  font-family: "Roboto", serif;
   cursor: pointer;
 }
 

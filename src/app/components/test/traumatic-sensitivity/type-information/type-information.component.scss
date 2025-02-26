@@ -1,6 +1,9 @@
 .container {
   padding: 1rem 0 2rem 0;
   border-radius: 8px;
+  box-shadow: var(--boxShadow);
+
+  background-color: var(--bgColorBox);
 }
 
 h2 {
@@ -8,7 +11,8 @@ h2 {
   letter-spacing: 0.01em;
   margin-bottom: 0.5rem;
 
-  color: #ffffff;
+  color: var(--textColorTitle);
+
   font-style: italic;
 }
 
@@ -18,7 +22,7 @@ h2 {
   letter-spacing: 0.1em;
 
   text-align: center;
-  color: #f5f5f5;
+  color: var(--textColor);
 }
 
 .section {
@@ -35,7 +39,7 @@ h3 {
   line-height: 177%;
 
   text-align: left;
-  color: #f5f5f5;
+  color: var(--textColorTitle);
 }
 
 ul {
@@ -53,7 +57,7 @@ li {
   font-family: Montserrat, sans-serif;
   font-style: normal;
   text-align: left;
-  color: #f5f5f5;
+  color: var(--textColor);
 
   @media screen and (min-width: 764px) {
     font-size: 1.2rem;
@@ -70,7 +74,7 @@ li:last-child {
   letter-spacing: 0.01em;
 
   font-style: italic;
-  color: #f1f1f1;
+  color: var(--textColor);
 }
 
 .summary h3 {
@@ -79,7 +83,7 @@ li:last-child {
   letter-spacing: 0.01em;
 
   text-align: center;
-  color: #f5f5f5;
+  color: var(--textColor);
 
   @media screen and (min-width: 764px) {
     text-align: left;

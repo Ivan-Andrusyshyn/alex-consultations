@@ -9,10 +9,11 @@
   box-sizing: border-box;
   background-color: transparent;
   display: flex;
-  color: #fff;
+  color: var(--textColor);
   align-items: center;
   cursor: pointer;
   svg {
+    stroke: var(--textColor);
     width: 36px;
   }
   p {

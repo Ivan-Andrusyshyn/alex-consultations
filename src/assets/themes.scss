@@ -1,0 +1,57 @@
+// bg
+$bgColor_dark: #073136;
+$bgColor_light: #eaecef;
+$bgColor_dark_gradient: linear-gradient(135deg, #003d45, #057988);
+$bgColor_light_gradient: linear-gradient(135deg, #0f6874, #14abbe);
+$bgColor_light_box: #ffffff;
+$bgColor_dark_box: transparent;
+// =======================
+
+// fonts
+$font_primary: "Inter", sans-serif;
+$font_secondary: "Playfair Display", serif;
+
+// text-color
+$textColor_light: #333;
+$textColor_dark: #f5f5f5;
+$textColor_light__title: #222;
+$textColor_dark_title: #ccc;
+// ========================
+
+// border
+$borderColor_light: #333;
+$borderColor_dark: #f5f5f5;
+// ========================
+
+// box-shadow
+$boxShadow_light: 0 6px 15px rgba(20, 15, 15, 0.404),
+  0 1px 3px rgba(43, 9, 9, 0.08);
+$boxShadow_dark: 0 6px 15px rgba(133, 109, 109, 0.3),
+  0 1px 3px rgba(0, 0, 0, 0.25);
+$boxShadow_light_header: 0px 4px 10px rgba(0, 0, 0, 0.3);
+$boxShadow_dark_header: 0px 4px 10px rgba(0, 0, 0, 0.3);
+
+@mixin lighten() {
+  --textColorTitle: #{$textColor_light__title};
+  --bgColor: #{$bgColor_light};
+  --textColor: #{$textColor_light};
+  --borderColor: #{$borderColor_light};
+  --boxShadow: #{$boxShadow_light};
+  --bgColorGradient: #{$bgColor_light_gradient};
+  --bgColorBox: #{$bgColor_light_box};
+  --fontFamilySecondary: #{$font_secondary};
+  --fontFamilyPrimary: #{$font_primary};
+}
+
+@mixin darken() {
+  --textColorTitle: #{$textColor_dark_title};
+  --bgColor: #{$bgColor_dark};
+  --boxShadow: #{$boxShadow_dark};
+  --textColor: #{$textColor_dark};
+  --boxShadowHeader: #{$boxShadow_dark_header};
+  --bgColorGradient: #{$bgColor_dark_gradient};
+  --bgColorBox: #{$bgColor_dark_box};
+  --borderColor: #{$borderColor_dark};
+  --fontFamilyPrimary: #{$font_primary};
+  --fontFamilySecondary: #{$font_secondary};
+}

@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 @if (loading$|async) {
 <div class="backdrop">
   <app-loader-square></app-loader-square>
@@ -7,4 +8,5 @@
 <main>
   <router-outlet />
 </main>
+
 <app-footer></app-footer>
