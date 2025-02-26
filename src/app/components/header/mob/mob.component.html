@@ -14,26 +14,28 @@
     </svg>
   </label>
 </button>
-<div class="mobile-menu" [class.open]="isMenuOpen$ | async">
-  <a routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()"
-    >Тести</a
-  >
-  <a
-    [hidden]="hiddenRoutes"
+<ul class="mobile-menu" [class.open]="isMenuOpen$ | async">
+  <app-toggle-btn></app-toggle-btn>
+  <br />
+  <li routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()">
+    Тести
+  </li>
+  <li
+    style="display: none"
     routerLink="/courses"
     routerLinkActive="active"
     (click)="toggleMenu()"
-    >Курси</a
   >
+    Курси
+  </li>
 
-  <a routerLink="/about" routerLinkActive="active" (click)="toggleMenu()"
-    >Про нас</a
-  >
-  <a routerLink="/contacts" routerLinkActive="active" (click)="toggleMenu()"
-    >Контакти</a
-  >
-  <app-toggle-btn></app-toggle-btn>
-</div>
+  <li routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">
+    Про нас
+  </li>
+  <li routerLink="/contacts" routerLinkActive="active" (click)="toggleMenu()">
+    Контакти
+  </li>
+</ul>
 <div
   class="menu-backdrop"
   [class.open]="isMenuOpen$ | async"

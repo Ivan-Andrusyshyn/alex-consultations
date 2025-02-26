@@ -8,13 +8,14 @@
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   letter-spacing: 0.01em;
   margin-bottom: 0.5rem;
 
   color: var(--textColorTitle);
-
-  font-style: italic;
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+  }
 }
 
 .description {
@@ -24,6 +25,9 @@ h2 {
 
   text-align: center;
   color: var(--textColor);
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+  }
 }
 
 .section {
@@ -33,10 +37,9 @@ h2 {
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin-bottom: 0.75rem;
   letter-spacing: 0.01em;
-  font-weight: 300;
   line-height: 177%;
 
   text-align: left;
@@ -54,8 +57,6 @@ li {
   letter-spacing: 0.01em;
 
   line-height: 177%;
-  font-weight: 400;
-  font-family: Montserrat, sans-serif;
   font-style: normal;
   text-align: left;
   color: var(--textColor);
@@ -79,13 +80,13 @@ li:last-child {
 }
 
 .summary h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.2rem;
 
   text-align: center;
   color: var(--textColorTitle);
 
   @media screen and (min-width: 764px) {
+    font-size: 1.5rem;
     text-align: left;
   }
 }
@@ -99,29 +100,5 @@ li:last-child {
 
   @media screen and (min-width: 764px) {
     text-align: left;
-  }
-}
-
-@media (min-width: 768px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  .section h3 {
-    font-size: 1.5rem;
-  }
-
-  ul {
-    padding-left: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  h2 {
-    font-size: 2.5rem;
-  }
-
-  .summary h3 {
-    font-size: 1.75rem;
   }
 }

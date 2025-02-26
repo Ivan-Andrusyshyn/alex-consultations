@@ -35,7 +35,7 @@ form {
     border-radius: 12px;
     font-size: 16px;
 
-    background-color: #45a04921;
+    background-color: #4caf4f86;
     color: var(--textColor);
     cursor: pointer;
     transition: all 0.3s, transform 0.2s;
@@ -51,10 +51,10 @@ form {
   }
 
   button:last-child {
-    background: #f44336af;
+    background: #ccc;
   }
 
   button:last-child:hover {
-    background: #d32f2f;
+    background: #d32f2fc7;
   }
 }

@@ -37,10 +37,7 @@
     margin-top: 0;
     font-size: 18px;
     margin-bottom: 12px;
-    font-weight: 300;
     letter-spacing: 0.01em;
-
-    font-style: italic;
 
     color: var(--textColor);
 
@@ -50,7 +47,6 @@
   }
   p {
     font-size: 16px;
-    font-weight: 200;
     line-height: 1.5;
     letter-spacing: 0.01em;
     margin-bottom: 16px;
@@ -79,7 +75,6 @@
     margin: 8px 0;
     font-size: 16px;
     letter-spacing: 0.01em;
-    font-weight: 300;
     color: var(--textColor);
 
     @media screen and (min-width: 764px) {

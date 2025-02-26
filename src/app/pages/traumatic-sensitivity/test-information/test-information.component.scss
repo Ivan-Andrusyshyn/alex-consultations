@@ -1,7 +1,7 @@
 .test-information {
   width: 100%;
-  color: #f1f1f1;
 
+  color: var(--textColor);
   text-align: center;
   box-sizing: border-box;
   @media screen and (min-width: 764px) {
@@ -35,22 +35,19 @@
     margin-top: 0;
     letter-spacing: 0.01em;
     font-size: 18px;
-    font-weight: 300;
-    font-style: italic;
 
-    color: #ccc;
+    color: var(--textColorTitle);
     @media screen and (min-width: 764px) {
       font-size: 28px;
     }
   }
   p {
     font-size: 16px;
-    font-weight: 200;
     line-height: 1.5;
     letter-spacing: 0.01em;
     margin-bottom: 16px;
 
-    color: #f5f5f5;
+    color: var(--textColor);
 
     @media screen and (min-width: 764px) {
       font-size: 18px;

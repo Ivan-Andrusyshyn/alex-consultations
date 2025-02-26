@@ -4,29 +4,31 @@ h2 {
   letter-spacing: 0.01em;
 
   color: var(--textColorTitle);
-
-  font-style: italic;
 }
 .relationship-info {
   padding: 8px;
-  box-shadow: var(--boxShadow);
   border-radius: 8px;
   margin-bottom: 20px;
+
+  box-shadow: var(--boxShadow);
   @media screen and (min-width: 764px) {
     padding: 16px;
   }
 }
 .subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 20px;
   line-height: 1.6;
   letter-spacing: 0.01em;
 
   color: var(--textColor);
   text-align: left;
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+  }
 }
 .description {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 0.01em;
 
@@ -34,6 +36,9 @@ h2 {
 
   text-align: left;
   color: var(--textColor);
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+  }
 }
 
 .section {
@@ -43,15 +48,17 @@ h2 {
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-bottom: 0.75rem;
-  font-weight: 300;
   letter-spacing: 0.01em;
   line-height: 177%;
 
   color: var(--textColor);
 
   text-align: left;
+  @media screen and (min-width: 764px) {
+    font-size: 1.4rem;
+  }
 }
 
 ul {
@@ -60,11 +67,10 @@ ul {
 }
 
 li {
-  font-size: 1.3rem;
+  font-size: 1rem;
   margin-bottom: 1rem;
   letter-spacing: 0.01em;
   line-height: 177%;
-  font-weight: 400;
 
   font-style: normal;
   text-align: left;
@@ -90,7 +96,6 @@ li:last-child {
 
 .summary h3 {
   font-size: 1.5rem;
-  font-weight: 600;
   letter-spacing: 0.01em;
 
   text-align: center;
@@ -102,8 +107,7 @@ li:last-child {
 }
 
 .summary p {
-  font-size: 1.4rem;
-  font-weight: 300;
+  font-size: 1rem;
   line-height: 2;
   letter-spacing: 0.01em;
 
@@ -111,33 +115,11 @@ li:last-child {
   text-align: left;
 
   @media screen and (min-width: 764px) {
+    font-size: 1.3rem;
     text-align: left;
   }
 }
 
-@media (min-width: 768px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  .section h3 {
-    font-size: 1.5rem;
-  }
-
-  ul {
-    padding-left: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  h2 {
-    font-size: 2.5rem;
-  }
-
-  .summary h3 {
-    font-size: 1.75rem;
-  }
-}
 .btns-wrapper {
   gap: 20px;
   border-radius: 12px;
