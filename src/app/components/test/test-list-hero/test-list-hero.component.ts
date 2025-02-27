@@ -2,11 +2,14 @@ import { NgClass, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
-  OnDestroy,
+  inject,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { delay, Subscription, tap, timer } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TestCardInfoBtnComponent } from '../test-card-info-btn/test-card-info-btn.component';
 import { TestCardStartBtnComponent } from '../test-card-start-btn/test-card-start-btn.component';
@@ -25,30 +28,22 @@ import { testCardsData } from '../../../content/tests-content/test-cards-data';
   styleUrl: './test-list-hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TestListHeroComponent implements OnInit, OnDestroy {
+export class TestListHeroComponent implements OnInit {
   testData = testCardsData;
 
+  private destroyRef = inject(DestroyRef);
   @ViewChild('testList', { static: false }) testList!: ElementRef;
-
-  timers: any = [];
-
-  ngOnDestroy(): void {
-    for (let i = 0; i < this.timers.length; i++) {
-      clearTimeout(this.timers[i]);
-    }
-  }
+  timer$!: Subscription;
 
   ngOnInit(): void {
-    let timeTwo;
-    const timerOne = setTimeout(() => {
-      this.scroll('next');
-      timeTwo = setTimeout(() => {
-        this.scroll('prev');
-      }, 900);
-
-      this.timers.push(timerOne);
-      this.timers.push(timeTwo);
-    }, 300);
+    this.timer$ = timer(300)
+      .pipe(
+        tap(() => this.scroll('next')),
+        delay(900),
+        tap(() => this.scroll('prev')),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => {});
   }
 
   scroll(direction: 'next' | 'prev') {

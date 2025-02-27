@@ -18,8 +18,8 @@ const toxical_relationship_1 = __importDefault(require("./routes/toxical-relatio
 const server = (0, express_1.default)();
 server.set('view engine', 'pug');
 server.set('views', path_1.default.join(__dirname, 'views'));
-server.use((0, helmet_1.default)());
 server.use((0, cors_1.default)());
+server.use((0, helmet_1.default)());
 const port = 3000;
 server.use(body_parser_1.default.urlencoded({ extended: true, limit: '50mb' }));
 server.use(body_parser_1.default.json({ limit: '50mb' }));
