@@ -17,6 +17,7 @@ import { Answer, Question } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { TraumaticSensitivityService } from '../../../shared/services/traumatic-sensitivity.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-questions',
@@ -33,6 +34,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly traumaticSensitivityService = inject(
     TraumaticSensitivityService
   );
+  private seoService = inject(SeoService);
+
   private readonly fb = inject(FormBuilder);
 
   answersArray!: Answer[];
@@ -44,9 +47,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
   timer: any;
   //
+
   traumaticSensitivityTest$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
   ngOnInit(): void {
+    this.seoService.updateTitle('Запитання тесту на травматичну чутливість');
+    this.seoService.updateMetaTags(
+      'Відповідай на запитання тесту на травматичну чутливість, щоб краще зрозуміти свої реакції на стрес та рівень емоційної вразливості.',
+      'тест, травматична чутливість, психологічний тест, емоційна вразливість, запитання, психіка, самопізнання'
+    );
+
     this.traumaticSensitivityTest$ = this.traumaticSensitivityService
       .getTraumaticSensitivityTest()
       .pipe(

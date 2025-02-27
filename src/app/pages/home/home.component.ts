@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -10,6 +10,7 @@ import { TestListHeroComponent } from '../../components/test/test-list-hero/test
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
 import { PrimaryBtnComponent } from '../../components/primary-btn/primary-btn.component';
 import { SideBtnComponent } from '../../components/side-btn/side-btn.component';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -23,12 +24,21 @@ import { SideBtnComponent } from '../../components/side-btn/side-btn.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
   private readonly googleService = inject(GoogleSheetsService);
-
   successRegistration = signal(false);
+
+  private seoService = inject(SeoService);
+
+  ngOnInit(): void {
+    this.seoService.updateTitle('Тести для самопізнання та розвитку');
+    this.seoService.updateMetaTags(
+      'Дізнайся про різноманітні тести для самопізнання, розвитку особистості та оцінки стосунків. Пройди психологічні тести, щоб зрозуміти себе краще і досягти гармонії в житті.',
+      'тести,краща версія самого себе, самопізнання, розвиток особистості, психологічні тести, оцінка стосунків, тест на особистість, саморозвиток'
+    );
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {

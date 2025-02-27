@@ -18,6 +18,7 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { Question, Answer } from '../../../shared/types/16-personalities';
 import { LoadingService } from '../../../shared/services/loading.service';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-questions',
@@ -33,6 +34,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
+  private seoService = inject(SeoService);
 
   imgUrl = 'assets/imgs/yoga-love.jpg';
   subtitleText =
@@ -48,7 +50,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   timer: any;
   formGroup: FormGroup = this.fb.group({});
   //
+
   ngOnInit(): void {
+    this.seoService.updateTitle(
+      'Запитання | 16 типів особистості | vidchuttia'
+    );
+
+    this.seoService.updateMetaTags(
+      'Відповідай на запитання тесту 16 типів особистості, щоб дізнатися свій унікальний тип.',
+      'тест, 16 типів особистості, MBTI, запитання, психологія, саморозвиток'
+    );
     this.personalitiesTest$ = this.personalitiesService
       .getPersonalitiesTest()
       .pipe(

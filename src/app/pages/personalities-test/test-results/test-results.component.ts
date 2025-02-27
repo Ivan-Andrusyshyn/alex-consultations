@@ -19,6 +19,7 @@ import {
 } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
 
 import { PersonalitiesTypeInformationComponent } from '../../../components/test/personalities-test/personalities-type-information/personalities-type-information.component';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
@@ -31,9 +32,9 @@ import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-em
 import { MailerService } from '../../../shared/services/mailer.service';
 import { ResultsIndicatorComponent } from '../../../components/test/personalities-test/results-indicator/results-indicator.component';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-test-results',
@@ -58,6 +59,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private destroyRef = inject(DestroyRef);
   readonly dialog = inject(MatDialog);
   private readonly googleService = inject(GoogleSheetsService);
+  private seoService = inject(SeoService);
 
   personInformation$!: Observable<{
     personType: string;
@@ -73,7 +75,16 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
   }
+
   ngOnInit(): void {
+    this.seoService.updateTitle(
+      'Результати тесту 16 типів особистості | Дізнайся більше про свій тип'
+    );
+    this.seoService.updateMetaTags(
+      'Дізнайся результати тесту 16 типів особистості та отримай детальний опис свого типу особистості, його сильних і слабких сторін, а також рекомендації для розвитку.',
+      'результати тесту, 16 типів особистості, MBTI, психологія, саморозвиток, типи особистості, рекомендації'
+    );
+
     this.scorePercentages$ =
       this.personalitiesService.getObservableScorePercentages();
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();

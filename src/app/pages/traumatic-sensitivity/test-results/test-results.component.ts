@@ -19,6 +19,7 @@ import {
   throwError,
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TypeInformation } from '../../../shared/types/16-personalities';
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
@@ -31,10 +32,10 @@ import {
 } from '../../../shared/types/traumatic-sensitivity';
 import { TraumaticResultsIndicatorComponent } from '../../../components/test/traumatic-sensitivity/traumatic-indicator/traumatic-indicator.component';
 import { TypeInformationComponent } from '../../../components/test/traumatic-sensitivity/type-information/type-information.component';
-import { MatDialog } from '@angular/material/dialog';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -73,6 +74,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private activeRoute = inject(ActivatedRoute);
   readonly dialog = inject(MatDialog);
   private readonly googleService = inject(GoogleSheetsService);
+  private seoService = inject(SeoService);
 
   personInformation$!: Observable<{
     personType: string;
@@ -96,6 +98,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.seoService.updateTitle('Результати тесту на травматичну чутливість');
+    this.seoService.updateMetaTags(
+      'Дізнайся свої результати тесту на травматичну чутливість. Аналізуй рівень емоційної вразливості та зрозумій, як він впливає на твоє життя.',
+      'результати тесту, травматична чутливість, емоційна вразливість, психологія, психіка, самопізнання'
+    );
+
     this.activeRoute.params.subscribe((r) => {
       this.typeInfo$ = this.typeInfo$ = this.traumaticSensitivityService
         .getEmotionsTypeInfoByResults(r['traumaticSensitivity'])

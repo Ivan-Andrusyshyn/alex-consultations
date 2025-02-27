@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-toxical-relationship',
@@ -13,4 +15,16 @@ export class ToxicalRelationshipComponent {
   imgUrl = 'assets/svg/tests/worry-woman.svg';
   subtitleText = 'Дізнайтеся, чи є у ваших стосунках тривожні сигнали.';
   titleText = 'Чи токсичні ваші стосунки?';
+
+  private seoService = inject(SeoService);
+
+  ngOnInit(): void {
+    this.seoService.updateTitle(
+      'Тест на токсичні відносини з партнером | Визнач свої стосунки'
+    );
+    this.seoService.updateMetaTags(
+      "Пройди тест на токсичні відносини з партнером, щоб оцінити рівень здоров'я твоїх стосунків та зрозуміти, чи не маєш справу з маніпуляціями чи аб’юзом.",
+      'тест, токсичні відносини, партнер, стосунки, маніпуляції, аб’юз, психологія, самопізнання'
+    );
+  }
 }

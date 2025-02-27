@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
@@ -18,6 +18,7 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { ToxicalRelationshipService } from '../../../shared/services/toxical-relationship.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-questions',
@@ -34,6 +35,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly toxicalRelationshipService = inject(
     ToxicalRelationshipService
   );
+  private seoService = inject(SeoService);
+
   private readonly fb = inject(FormBuilder);
 
   answersArray!: Answer[];
@@ -47,7 +50,16 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
   traumaticSensitivityTest$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
+
   ngOnInit(): void {
+    this.seoService.updateTitle(
+      'Запитання до тесту на токсичні відносини з партнером | Оціні свої стосунки'
+    );
+    this.seoService.updateMetaTags(
+      'Пройди тест на токсичні відносини з партнером, відповідаючи на запитання, які допоможуть оцінити рівень маніпуляцій та аб’юзу у твоїх стосунках.',
+      'тест, запитання до тесту, токсичні відносини, партнер, стосунки, маніпуляції, аб’юз, психологія'
+    );
+
     this.traumaticSensitivityTest$ = this.toxicalRelationshipService
       .getQuestions()
       .pipe(

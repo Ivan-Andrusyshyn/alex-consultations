@@ -19,16 +19,18 @@ import {
   throwError,
 } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
 
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
 import { ToxicalRelationshipService } from '../../../shared/services/toxical-relationship.service';
 import { ParagraphPipe } from './paragraph.pipe';
-import { MatDialog } from '@angular/material/dialog';
+
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-test-results',
@@ -53,6 +55,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private activeRoute = inject(ActivatedRoute);
   readonly dialog = inject(MatDialog);
   private readonly googleService = inject(GoogleSheetsService);
+  private seoService = inject(SeoService);
 
   successRegistration = signal(false);
   isShowSendForm$!: Observable<boolean>;
@@ -66,6 +69,14 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.seoService.updateTitle(
+      'Результати тесту на токсичні відносини з партнером | Оцінка твоїх стосунків'
+    );
+    this.seoService.updateMetaTags(
+      "Дізнайся результати тесту на токсичні відносини з партнером та отримай рекомендації щодо здоров'я твоїх стосунків. Оціни рівень маніпуляцій чи аб’юзу в стосунках.",
+      'результати тесту, токсичні відносини, партнер, стосунки, маніпуляції, аб’юз, психологія, рекомендації'
+    );
+
     this.activeRoute.params.subscribe((r) => {
       this.testResults$ = this.toxicalRelationshipService
         .getToxicalRelationshipInfoByCategory(r['traumaticSensitivity'])
