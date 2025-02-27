@@ -20,10 +20,9 @@ const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function
         google_sheets_1.default.postTestResultsOnSheet(userInformation);
         const categoryName = toxical_relationship_1.default.getNameCategoryByScore(answers);
         console.log(categoryName);
-        const categoryNameHyphenes = addHyphens(categoryName);
         res.status(200).send({
             message: 'Success get relationship-sensitivity category!',
-            categoryName: categoryNameHyphenes,
+            categoryName,
         });
     }
     catch (error) {

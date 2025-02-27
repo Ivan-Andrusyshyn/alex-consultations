@@ -19,5 +19,11 @@ type RelationshipResult = {
     buttonText: string;
   };
 };
+type CategoryName =
+  | 'healthy-relationship'
+  | 'toxic-relationship'
+  | 'some-warning-signs'
+  | 'very-dangerous-relationship'
+  | 'unknown-type';
 
-export { Answer, Question, RelationshipResult };
+export { Answer, Question, CategoryName, RelationshipResult };

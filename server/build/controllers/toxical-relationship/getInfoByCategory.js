@@ -16,10 +16,7 @@ const toxical_relationship_1 = __importDefault(require("../../services/toxical-r
 const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const categoryName = req.params.categoryName;
-        const decodedCategory = decodeURIComponent(categoryName);
-        console.log(decodedCategory);
-        const category = removeHyphens(categoryName);
-        const results = toxical_relationship_1.default.getResults(category);
+        const results = toxical_relationship_1.default.getResults(categoryName);
         console.log(results);
         res.status(200).send({
             message: 'Success get relationship-sensitivity category by answers!',

@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Question, RelationshipResult } from '../types/toxical-relationship';
+import {
+  CategoryName,
+  Question,
+  RelationshipResult,
+} from '../types/toxical-relationship';
 
 import { environment } from '../../environment/environment';
 
@@ -27,9 +31,9 @@ export class ToxicalRelationshipService {
 
   getToxicalRelationshipCategory(answers: any): Observable<{
     message: string;
-    categoryName: string;
+    categoryName: CategoryName;
   }> {
-    return this.http.post<{ message: string; categoryName: string }>(
+    return this.http.post<{ message: string; categoryName: CategoryName }>(
       this.testsUrl + '/toxical-relationship' + '/category',
       answers
     );

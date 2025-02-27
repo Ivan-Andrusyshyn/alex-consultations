@@ -82,7 +82,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         .getToxicalRelationshipInfoByCategory(r['traumaticSensitivity'])
         .pipe(
           map((info) => {
-            console.log(info);
             this.sendObject = {
               category: info.results.category,
             };
