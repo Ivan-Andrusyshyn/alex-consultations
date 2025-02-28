@@ -7,14 +7,19 @@
   overflow: hidden;
   font-family: sans-serif;
 }
-
+.list-wrapper {
+  border: 2px solid #ccc;
+  border-radius: 12px 12px 0 0;
+  padding: 12px;
+}
 .palette {
-  display: flex;
   height: 86%;
   width: 100%;
+  border-radius: 12px;
+  border-bottom: none;
 
+  display: flex;
   overflow-x: scroll;
-  scrollbar-width: thin;
   @media screen and (min-width: 764px) {
     scrollbar-width: auto;
     overflow-x: auto;

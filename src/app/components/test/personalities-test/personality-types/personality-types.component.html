@@ -1,11 +1,13 @@
 <div class="container">
-  <div class="palette">
-    <div class="color" *ngFor="let type of personalityTypesArray">
-      <p>{{ type.type }}</p>
-      <span>({{ type.name }})</span>
+  <div class="list-wrapper">
+    <ul class="palette">
+      <li class="color" *ngFor="let type of personalityTypesArray">
+        <p>{{ type.type }}</p>
+        <span>({{ type.name }})</span>
 
-      <img [src]="type.urlImg" alt="" />
-    </div>
+        <img [src]="type.urlImg" alt="" />
+      </li>
+    </ul>
   </div>
   <div id="stats">16 типів особистості</div>
 </div>
