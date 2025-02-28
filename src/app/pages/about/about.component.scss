@@ -2,8 +2,8 @@
   width: 100%;
   padding: 20px 0;
 
-  color: var(--textColor);
   background-color: var(--bgColorBox);
+  color: var(--textColor);
   @media screen and (min-width: 764px) {
     padding: 40px 20px;
   }
@@ -26,19 +26,7 @@
       text-align: left;
     }
   }
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-
-    flex-direction: column;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    @media screen and (min-width: 764px) {
-      flex-direction: row;
-    }
+  .about__container {
   }
   .img-wrapper {
     gap: 1rem;

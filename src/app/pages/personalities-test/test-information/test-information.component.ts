@@ -8,11 +8,18 @@ import {
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { PersonalityTypesComponent } from '../../../components/test/personalities-test/personality-types/personality-types.component';
+import { PersonalitiesTestComponent } from '../personalities-test.component';
 
 @Component({
   selector: 'app-test-information',
   standalone: true,
-  imports: [TestCardStartBtnComponent, TitleCardComponent],
+  imports: [
+    TestCardStartBtnComponent,
+    TitleCardComponent,
+    PersonalityTypesComponent,
+    PersonalitiesTestComponent,
+  ],
   templateUrl: './test-information.component.html',
   styleUrl: './test-information.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
