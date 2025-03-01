@@ -14,6 +14,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'consultations',
+    loadComponent: () =>
+      import('./pages/consultations/consultations.component').then(
+        (m) => m.ConsultationsComponent
+      ),
+  },
+  {
     path: 'tests',
     loadComponent: () =>
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),

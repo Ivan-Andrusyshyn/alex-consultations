@@ -5,22 +5,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
 
 import { ModalComponent } from '../../components/modal/modal.component';
-import { ConsultationComponent } from '../../components/consultation/consultation.component';
 import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
-import { PrimaryBtnComponent } from '../../components/primary-btn/primary-btn.component';
 import { SideBtnComponent } from '../../components/side-btn/side-btn.component';
 import { SeoService } from '../../shared/services/seo.service';
+import { InfoCardComponent } from '../../components/home/info-card/info-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    PrimaryBtnComponent,
-    TestListHeroComponent,
-    ConsultationComponent,
-    SideBtnComponent,
-  ],
+  imports: [TestListHeroComponent, InfoCardComponent, SideBtnComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

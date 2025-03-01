@@ -22,6 +22,7 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SocialLinksComponent } from '../social-links/social-links.component';
 
 export interface DialogData {
   animal: string;
@@ -41,6 +42,7 @@ export interface DialogData {
     MatButtonModule,
     MatDialogClose,
     ReactiveFormsModule,
+    SocialLinksComponent,
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',

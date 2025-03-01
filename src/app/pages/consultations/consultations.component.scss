@@ -1,0 +1,76 @@
+.consultation {
+  padding: 20px 15px;
+  text-align: center;
+  box-shadow: var(--boxShadow);
+  background-color: var(--bgColorBox);
+
+  @media screen and (min-width: 768px) {
+    padding: 50px 30px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--textColorTitle);
+
+    @media screen and (min-width: 768px) {
+      font-size: 32px;
+    }
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 18px;
+
+    color: var(--textColorTitle);
+
+    text-align: center;
+    @media screen and (min-width: 768px) {
+      text-align: left;
+      font-size: 24px;
+    }
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: var(--textColor);
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+      text-align: left;
+      font-size: 18px;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: 20px;
+    max-width: 600px;
+    color: var(--textColor);
+    margin-bottom: 20px;
+    li {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      padding-left: 25px;
+
+      color: var(--textColor);
+      position: relative;
+      text-align: left;
+
+      &::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        color: #007bff;
+        font-size: 18px;
+      }
+
+      @media screen and (min-width: 768px) {
+        font-size: 18px;
+      }
+    }
+  }
+}
