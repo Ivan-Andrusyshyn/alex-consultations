@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
-<app-social-links></app-social-links>
+<app-social-links [isTheme]="false"></app-social-links>
 
 <ng-container *ngIf="data.contentType === 'form-consultation'">
   <mat-dialog-content>
