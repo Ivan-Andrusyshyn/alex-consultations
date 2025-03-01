@@ -1,8 +1,8 @@
 button {
   display: inline-block;
   background: #007bff;
-  color: white;
-  padding: 12px 18px;
+  color: #f5f5f5;
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -16,6 +16,6 @@ button {
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
-    padding: 14px 22px;
+    padding: 14px 36px;
   }
 }
