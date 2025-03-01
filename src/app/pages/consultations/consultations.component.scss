@@ -7,7 +7,9 @@
   @media screen and (min-width: 768px) {
     padding: 50px 30px;
   }
-
+  .wrapper {
+    margin-bottom: 16px;
+  }
   h2 {
     font-size: 24px;
     font-weight: 600;
@@ -31,10 +33,7 @@
       font-size: 24px;
     }
   }
-  .wrapper {
-    border-bottom: 2px solid var(--textColor);
-    margin-bottom: 16px;
-  }
+
   p {
     font-size: 16px;
     line-height: 1.6;

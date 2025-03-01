@@ -10,6 +10,7 @@ import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
 import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
+import { ColorDotsComponent } from '../../components/color-dots/color-dots.component';
 
 @Component({
   selector: 'app-consultations',
@@ -17,7 +18,8 @@ import { GoogleSheetsService } from '../../shared/services/google-sheets.service
   imports: [
     MatFormFieldModule,
     AccentBtnComponent,
-    RouterLink,
+    ColorDotsComponent,
+
     MatInputModule,
     MatButtonModule,
   ],
