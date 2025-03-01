@@ -1,14 +1,19 @@
 .consultation {
   padding: 20px 15px;
   text-align: center;
-  box-shadow: var(--boxShadow);
-  background-color: var(--bgColorBox);
 
   @media screen and (min-width: 768px) {
     padding: 50px 30px;
   }
   .wrapper {
     margin-bottom: 16px;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: var(--boxShadow);
+    background-color: var(--bgColorBox);
+    @media screen and (min-width: 764px) {
+      padding: 12px;
+    }
   }
   h2 {
     font-size: 24px;
