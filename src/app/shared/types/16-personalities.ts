@@ -38,6 +38,14 @@ interface TypeInformation {
 }
 type Answer = { point: number; text: string };
 type AnswerPoint = 1 | 2 | 3 | 4 | 5;
+
+interface PersonalityTypes {
+  type: string;
+  name: string;
+  urlImg: string;
+  route: string;
+}
+
 export {
   Answer,
   Question,
@@ -45,4 +53,5 @@ export {
   TestResult,
   Dichotomy,
   TypeInformation,
+  PersonalityTypes,
 };

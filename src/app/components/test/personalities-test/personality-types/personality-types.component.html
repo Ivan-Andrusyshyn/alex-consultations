@@ -1,7 +1,11 @@
 <div class="container">
   <div class="list-wrapper">
     <ul class="palette">
-      <li class="color" *ngFor="let type of personalityTypesArray">
+      <li
+        class="color"
+        [routerLink]="type.route"
+        *ngFor="let type of personalityTypesArray"
+      >
         <p>{{ type.type }}</p>
         <span>({{ type.name }})</span>
 

@@ -1,5 +1,4 @@
 .container {
-  height: 200px;
   width: 100%;
   border-radius: 12px;
   margin-bottom: 8px;
@@ -13,7 +12,7 @@
   padding: 12px;
 }
 .palette {
-  height: 86%;
+  height: 200px;
   width: 100%;
   border-radius: 12px;
   border-bottom: none;
@@ -22,6 +21,7 @@
   overflow-x: scroll;
   @media screen and (min-width: 764px) {
     scrollbar-width: auto;
+    height: 250px;
     overflow-x: auto;
   }
 }
@@ -44,11 +44,19 @@
   @media screen and (min-width: 764px) {
     font-size: 16px;
   }
+  &:hover img {
+    transform: scale(1.1);
+  }
   img {
-    width: 54px;
+    width: 64px;
+    transition: all 0.2s linear;
   }
   span {
     font-size: 14px;
+    margin-bottom: 12px;
+
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 
