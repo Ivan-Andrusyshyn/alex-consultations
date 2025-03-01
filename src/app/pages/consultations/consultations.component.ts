@@ -2,7 +2,6 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
@@ -12,6 +11,9 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
 import { ColorDotsComponent } from '../../components/color-dots/color-dots.component';
 import { SeoService } from '../../shared/services/seo.service';
+import { consultationData } from './consultations';
+import { ConsultationContent } from '../../shared/types/consultations';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-consultations',
@@ -20,7 +22,8 @@ import { SeoService } from '../../shared/services/seo.service';
     MatFormFieldModule,
     AccentBtnComponent,
     ColorDotsComponent,
-
+    NgIf,
+    NgFor,
     MatInputModule,
     MatButtonModule,
   ],
@@ -33,6 +36,8 @@ export class ConsultationsComponent implements OnInit {
   private readonly seoService = inject(SeoService);
   private readonly googleService = inject(GoogleSheetsService);
   successRegistration = signal(false);
+
+  consultationContent: ConsultationContent = consultationData;
 
   ngOnInit(): void {
     this.seoService.updateTitle(

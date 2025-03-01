@@ -1,105 +1,72 @@
 <div class="consultation">
   <div class="wrapper">
-    <h2 class="consultation__title">
-      Замість років пошуків – уже на першій зустрічі ти отримаєш цілісну картину
-      своєї особистості
-    </h2>
+    <h2>{{ consultationContent.title }}</h2>
   </div>
-  <div class="wrapper">
-    <app-color-dots></app-color-dots>
 
-    <h3>Що Ви отримаєте в результаті?</h3>
-    <p>
-      У тебе є талант – унікальний, тільки твій. Коли ти займаєш свою природну
-      «посадку» – місце, де твій розум, відчуття та дії працюють у гармонії –
-      життя набуває сенсу, і ти нарешті відчуваєш себе собою.
-    </p>
-    <p>
-      Звернувшись до мене, Ви можете розраховувати на такі результати і зміни:
+  <div class="wrapper">
+    <h3>{{ consultationContent.results.title }}</h3>
+    <p class="main-card-text">
+      {{ consultationContent.results.resultsDescription }}
     </p>
     <ul>
-      <li>
-        <strong>Глибоке розуміння себе:</strong> Ви дізнаєтеся свій унікальний
-        когнітивний профіль...
-      </li>
-      <li>
-        <strong>Прийняття власної особистості:</strong> Ви навчитеся приймати
-        себе такими, якими Ви є...
-      </li>
-      <li>
-        <strong>Заповнення внутрішньої пустоти:</strong> Знайшовши своє справжнє
-        "я"...
-      </li>
-      <li>
-        <strong>Поліпшення стосунків:</strong> Якщо Ви у парі, спільне
-        самопізнання допоможе краще зрозуміти один одного...
-      </li>
-      <li>
-        <strong>Чіткий план розвитку:</strong> Ви отримаєте конкретні
-        рекомендації та кроки...
+      <li *ngFor="let item of consultationContent.results.items">
+        <strong>{{ item.heading }}</strong>
+        {{ item.description }}
       </li>
     </ul>
   </div>
 
   <div class="wrapper">
-    <h3>Як проходить консультація?</h3>
-    <p>
-      Мої консультації структуровані таким чином, щоб максимально ефективно
-      привести Вас до інсайтів і рішень:
+    <h3>{{ consultationContent.consultationProcess.title }}</h3>
+    <p class="main-card-text">
+      {{ consultationContent.consultationProcess.descriptions }}
     </p>
-    <ol>
-      <li><strong>Первинний контакт:</strong> Ви залишаєте заявку...</li>
-      <li>
-        <strong>Визначення запиту:</strong> На початку сесії ми обговоримо...
+    <ul>
+      <li *ngFor="let step of consultationContent.consultationProcess.steps">
+        <strong>{{ step.stepTitle }}</strong>
+        {{ step.description }}
       </li>
-      <li>
-        <strong>Аналіз когнітивних функцій:</strong> Далі я допоможу
-        визначити...
-      </li>
-      <li>
-        <strong>Обговорення результатів:</strong> Після аналізу я поясню Вам...
-      </li>
-    </ol>
+    </ul>
+    <p>
+      <strong>Тривалість консультації:</strong>
+      {{ consultationContent.consultationProcess.sessionDuration }}
+    </p>
+    <p>
+      <strong>Конфіденційність:</strong>
+      {{ consultationContent.consultationProcess.confidentiality }}
+    </p>
   </div>
 
   <div class="wrapper">
-    <h3>Мій унікальний підхід</h3>
-    <p>
-      Моя перевага як спеціаліста – поєднання професійних знань та природної
-      емпатії. Я є ENFP за особистісною типологією Myers-Briggs (один з
-      «активних» психологічних типів), що характеризується розвиненими
-      соціальними навичками та щирою зацікавленістю в людях. Іншими словами,
-      мені притаманне вміння глибоко відчувати людину і розуміти її глибинно​
+    <h3>{{ consultationContent.uniqueApproach.title }}</h3>
+    <p>{{ consultationContent.uniqueApproach.description }}</p>
+    <p>{{ consultationContent.uniqueApproach.extraDescription }}</p>
+    <p class="main-card-text">
+      {{ consultationContent.uniqueApproach.elseDescription }}
     </p>
-    <p>
-      Завдяки цьому я легко встановлюю довірливий контакт і бачу приховані
-      причини Ваших переживань. Швидко виявляючи Ваші невикористані таланти та
-      можливості для зростання, я допомагаю Вам побачити себе з нового боку –
-      того, де Ви вже маєте ресурси для щастя.
-    </p>
-    <p>
-      Крім того, використання аналізу когнітивних функцій значно прискорює
-      процес самопізнання. Замість років пошуків – уже на першій зустрічі ти
-      отримаєш цілісну картину своєї особистості.. Мій підхід економить Ваш час
-      і зусилля, зосереджуючи їх на найважливішому – розкритті Вашого потенціалу
-      та досягненні внутрішньої гармонії.
-    </p>
+    <ul>
+      <li *ngFor="let option of consultationContent.uniqueApproach.options">
+        {{ option }}
+      </li>
+    </ul>
+    <p>{{ consultationContent.uniqueApproach.optionsDescription }}</p>
   </div>
-  <div class="wrapper">
-    <app-color-dots></app-color-dots>
-    <h3>Запишіться на консультацію</h3>
-    <p>
-      Не відкладайте себе на потім – запишіться сьогодні, і вже за тиждень ви
-      побачите перші зміни. Запишіться на консультацію з аналізом когнітивних
-      функцій і вирушайте у захопливу подорож до пізнання свого істинного "Я". Я
-      буду радий стати Вашим провідником на цьому шляху і допомогти Вам знайти
-      відповіді, яких Ви так давно шукаєте. Зверніться зараз, щоб домовитися про
-      зручний час зустрічі – і почніть змінювати своє життя на кращ
-    </p>
-    <app-accent-btn (onClickBtn)="openDialog()"></app-accent-btn>
-  </div>
-  @if (successRegistration()) {
 
-  <div class="success-message">✅ Ви успішно записалися!</div>
-  }
+  <div class="wrapper">
+    <h3>{{ consultationContent.signUp.title }}</h3>
+    <p class="main-card-text">{{ consultationContent.signUp.description }}</p>
+    <h4>{{ consultationContent.signUp.extraTitle }}</h4>
+    <ul>
+      <li *ngFor="let instruction of consultationContent.signUp.instructions">
+        {{ instruction }}
+      </li>
+    </ul>
+    <div class="btn-wrapper">
+      <app-accent-btn (onClickBtn)="openDialog()"></app-accent-btn>
+    </div>
+  </div>
+
+  <div class="success-message" *ngIf="successRegistration()">
+    <p>{{ consultationContent.successMessage }}</p>
+  </div>
 </div>

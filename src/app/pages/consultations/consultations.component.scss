@@ -1,6 +1,5 @@
 .consultation {
   padding: 20px 15px;
-  text-align: center;
 
   @media screen and (min-width: 768px) {
     padding: 50px 30px;
@@ -31,12 +30,11 @@
     border-radius: 12px;
     padding: 8px;
     margin-bottom: 16px;
-
-    text-align: center;
+    text-align: left;
 
     padding-bottom: 10px;
     @media screen and (min-width: 764px) {
-      text-align: left;
+      text-align: center;
       font-size: 22px;
     }
   }
@@ -52,39 +50,33 @@
       font-size: 18px;
     }
   }
-
-  ul,
-  ol {
+  .btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .main-card-text {
+    font-weight: bold;
+  }
+  ul {
     padding-left: 20px;
-    max-width: 600px;
-    color: var(--textColor);
     margin-bottom: 20px;
-    li {
-      font-size: 16px;
-      line-height: 1.3;
-      margin-bottom: 10px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      letter-spacing: 0.01em;
-      padding-left: 25px;
+  }
+  li {
+    font-size: 16px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    letter-spacing: 0.01em;
 
-      transition: color 0.3s ease;
-      color: var(--textColor);
-      position: relative;
-      font-style: normal;
-      text-align: left;
+    transition: color 0.3s ease;
+    color: var(--textColor);
 
-      &::before {
-        content: "✔";
-        position: absolute;
-        left: 0;
-        color: #007bff;
-        font-size: 18px;
-      }
+    font-style: normal;
+    text-align: left;
 
-      @media screen and (min-width: 768px) {
-        font-size: 18px;
-      }
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
     }
   }
 }
