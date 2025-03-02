@@ -26,6 +26,11 @@ import { PersonalitiesTestComponent } from '../personalities-test.component';
 })
 export class TestInformationComponent implements OnInit {
   routeUrl = '/tests/16-personalities/questions';
+  svgName = { url: 'assets/svg/tests/icons-tests.svg#stretching' };
+  imgUrl = 'assets/imgs/yoga-love.jpg';
+  subtitleText =
+    'Цей тест допоможе тобі краще зрозуміти свої природні схильності.';
+  titleText = 'Тест 16 типів особистості';
   private seoService = inject(SeoService);
   ngOnInit(): void {
     this.seoService.updateTitle('Інформація про тест 16 типів особистості');

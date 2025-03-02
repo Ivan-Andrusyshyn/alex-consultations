@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   DestroyRef,
   inject,
@@ -35,6 +36,8 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { TitleCardComponent } from '../../../components/title-card/title-card.component';
+import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 
 @Component({
   selector: 'app-test-results',
@@ -46,6 +49,7 @@ import { SeoService } from '../../../shared/services/seo.service';
     SendFormOnEmailBtnComponent,
     PrimaryBtnComponent,
     AsyncPipe,
+    TitleCardComponent,
     NgIf,
   ],
   templateUrl: './test-results.component.html',
@@ -67,10 +71,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }>;
   scorePercentages$!: Observable<TestResult | null>;
   isShowSendForm$!: Observable<boolean>;
+  private personalityTypes = personalityTypesContent;
+
   sendObject!: any;
   successMessage = signal(false);
   successRegistration = signal(false);
-
+  imgUrl = '';
   ngOnDestroy(): void {
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
@@ -90,6 +96,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
 
     this.activeRoute.params.subscribe((r) => {
+      this.imgUrl =
+        this.personalityTypes.find(
+          (type) => type.type === r['personalitiesName']
+        )?.urlImg ?? '';
       this.personInformation$ = this.personalitiesService
         .getPersonTypeByResults(r['personalitiesName'])
         .pipe(

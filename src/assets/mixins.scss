@@ -1,0 +1,19 @@
+$padding-mobile: 10px;
+$padding-tablet: 20px;
+$padding-desktop: 40px;
+
+$margin-mobile: 5px;
+$margin-tablet: 15px;
+$margin-desktop: 30px;
+
+@mixin adaptive-spacing($property, $mobile, $tablet, $desktop) {
+  #{$property}: $mobile;
+
+  @media (min-width: 768px) {
+    #{$property}: $tablet;
+  }
+
+  @media (min-width: 1024px) {
+    #{$property}: $desktop;
+  }
+}

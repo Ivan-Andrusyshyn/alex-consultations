@@ -17,13 +17,13 @@ import { PersonalitiesTestService } from '../../../shared/services/personalities
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { Question, Answer } from '../../../shared/types/16-personalities';
-import { LoadingService } from '../../../shared/services/loading.service';
 import { SeoService } from '../../../shared/services/seo.service';
+import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [FormQuestionsComponent, AsyncPipe],
+  imports: [FormQuestionsComponent, TitleCardComponent, AsyncPipe],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

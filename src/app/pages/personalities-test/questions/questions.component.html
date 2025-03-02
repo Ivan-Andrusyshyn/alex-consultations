@@ -1,4 +1,9 @@
 <div class="questions">
+  <app-title-card
+    [imgUrl]="imgUrl"
+    [titleText]="titleText"
+    [subtitleText]="subtitleText"
+  ></app-title-card>
   <app-form-questions
     [formGroup]="formGroup"
     [questions]="(personalitiesTest$ | async) ?? []"

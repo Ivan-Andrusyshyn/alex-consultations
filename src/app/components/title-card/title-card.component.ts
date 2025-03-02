@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-title-card',
@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   imports: [],
   templateUrl: './title-card.component.html',
   styleUrl: './title-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleCardComponent {
   @Input() titleText!: string;

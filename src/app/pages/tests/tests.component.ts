@@ -3,7 +3,7 @@ import { NgClass, NgFor } from '@angular/common';
 
 import { TestCardStartBtnComponent } from '../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { TestCardInfoBtnComponent } from '../../components/test/test-card-info-btn/test-card-info-btn.component';
-import { testCardsData } from '../../content/tests-content/test-cards-data';
+import { testCardsData } from '../../../assets/content/tests-content/test-cards-data';
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
 

@@ -2,6 +2,11 @@
   class="person-info"
   *ngIf="personInformation$ | async as personInformation"
 >
+  <app-title-card
+    [imgUrl]="imgUrl"
+    [titleText]="personInformation.personInformation.type"
+    [subtitleText]="personInformation.personInformation.description"
+  ></app-title-card>
   <div class="score-wrapper">
     <app-results-indicator
       *ngIf="scorePercentages$ | async"

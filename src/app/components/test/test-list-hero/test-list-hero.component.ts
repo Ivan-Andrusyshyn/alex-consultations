@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TestCardInfoBtnComponent } from '../test-card-info-btn/test-card-info-btn.component';
 import { TestCardStartBtnComponent } from '../test-card-start-btn/test-card-start-btn.component';
-import { testCardsData } from '../../../content/tests-content/test-cards-data';
+import { testCardsData } from '../../../../assets/content/tests-content/test-cards-data';
 
 @Component({
   selector: 'app-test-list-hero',

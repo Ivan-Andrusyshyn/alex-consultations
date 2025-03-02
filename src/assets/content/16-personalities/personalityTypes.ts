@@ -1,6 +1,6 @@
-import { PersonalityTypes } from '../../../../shared/types/16-personalities';
+import { PersonalityTypes } from '../../../app/shared/types/16-personalities';
 
-const personalityTypes: PersonalityTypes[] = [
+export const personalityTypesContent: PersonalityTypes[] = [
   {
     type: 'ISFJ',
     name: 'Захисник',
@@ -98,5 +98,3 @@ const personalityTypes: PersonalityTypes[] = [
     urlImg: 'assets/svg/tests/personalities/debater.svg',
   },
 ];
-
-export default personalityTypes;

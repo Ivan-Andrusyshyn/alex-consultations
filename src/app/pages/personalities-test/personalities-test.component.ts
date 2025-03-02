@@ -12,17 +12,12 @@ import { SeoService } from '../../shared/services/seo.service';
 @Component({
   selector: 'app-personalities-test',
   standalone: true,
-  imports: [RouterOutlet, TitleCardComponent],
+  imports: [RouterOutlet],
   templateUrl: './personalities-test.component.html',
   styleUrl: './personalities-test.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonalitiesTestComponent implements OnInit {
-  svgName = { url: 'assets/svg/tests/icons-tests.svg#stretching' };
-  imgUrl = 'assets/imgs/yoga-love.jpg';
-  subtitleText =
-    'Цей тест допоможе тобі краще зрозуміти свої природні схильності.';
-  titleText = 'Тест 16 типів особистості';
   private seoService = inject(SeoService);
   ngOnInit(): void {
     this.seoService.updateTitle(

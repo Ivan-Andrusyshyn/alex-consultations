@@ -1,9 +1,12 @@
-.home {
-  padding: 20px 0;
+@import "../../../assets/mixins.scss";
 
-  @media screen and (min-width: 764px) {
-    padding: 40px 20px;
-  }
+.home {
+  @include adaptive-spacing(
+    padding,
+    $padding-mobile,
+    $padding-tablet,
+    $padding-desktop
+  );
 }
 
 .hero-bg {
