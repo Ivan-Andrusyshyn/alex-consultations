@@ -75,5 +75,14 @@ const answersTypes = (id) => {
             { point: 3, text: 'Повністю погоджуюсь', type: 'I' },
         ];
     }
+    else {
+        return [
+            { point: 3, text: 'Зовсім не погоджуюсь', type: 'E' },
+            { point: 2, text: 'Скоріше не погоджуюсь', type: 'E' },
+            { point: 0, text: 'Нейтрально (не можу вирішити)', type: 'E, I' },
+            { point: 2, text: 'Скоріше погоджуюсь', type: 'I' },
+            { point: 3, text: 'Повністю погоджуюсь', type: 'I' },
+        ];
+    }
 };
 exports.default = answersTypes;

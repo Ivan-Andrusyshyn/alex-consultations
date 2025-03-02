@@ -34,9 +34,8 @@
     font-size: 18px;
     letter-spacing: 0.01em;
     margin-bottom: 8px;
-
-    word-wrap: break-word;
-
+    word-spacing: 1px;
+    text-overflow: ellipsis;
     font-style: oblique;
     text-align: center;
     color: var(--textColorTitle);

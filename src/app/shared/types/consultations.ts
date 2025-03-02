@@ -18,6 +18,7 @@ interface ConsultationContent {
       description: string;
     }>;
     sessionDuration: string;
+    summaryText: string;
     confidentiality: string;
   };
   uniqueApproach: {
