@@ -60,6 +60,7 @@ const addAnswersInTestQuestions = () => {
             });
         }
     }
+    console.log(cutTestsArray.length);
     return cutTestsArray;
 };
 exports.default = addAnswersInTestQuestions;
