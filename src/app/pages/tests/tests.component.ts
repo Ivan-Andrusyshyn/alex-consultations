@@ -6,6 +6,7 @@ import { TestCardInfoBtnComponent } from '../../components/test/test-card-info-b
 import { testCardsData } from '../../../assets/content/tests-content/test-cards-data';
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
+import { personalityTypesContent } from '../../../assets/content/16-personalities/personalityTypes';
 
 @Component({
   selector: 'app-tests',
@@ -29,6 +30,7 @@ export class TestsComponent {
     'Дізнайся про себе більше – швидкі тести, що відкриють твою особистість!';
 
   private seoService = inject(SeoService);
+  personalitiesTypes = personalityTypesContent;
 
   ngOnInit(): void {
     this.seoService.updateTitle(
