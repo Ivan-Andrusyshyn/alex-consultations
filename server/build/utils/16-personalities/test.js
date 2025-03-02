@@ -47,20 +47,21 @@ const addAnswersInTestQuestions = () => {
         TF: 0,
     };
     const cutTestsArray = [];
+    let numberId = 0;
     for (let i = 0; i < _16_personality_1.questionsPersonality.length; i++) {
         const qId = _16_personality_1.questionsPersonality[i].id;
         const option = (_a = (0, answersTypes_1.default)(qId)[1]) !== null && _a !== void 0 ? _a : { type: '' };
         const typeLetter = option.type;
         const finalType = custumType(typeLetter);
         if (getQuestionsByType(finalType, score)) {
+            numberId += 1;
             cutTestsArray.push({
                 question: _16_personality_1.questionsPersonality[i].question,
-                id: i + 1,
+                id: numberId,
                 answers: (0, answersTypes_1.default)(qId),
             });
         }
     }
-    console.log(cutTestsArray.length);
     return cutTestsArray;
 };
 exports.default = addAnswersInTestQuestions;
