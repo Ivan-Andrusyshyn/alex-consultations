@@ -18,11 +18,7 @@
           </h3>
           <p>{{ test.description }}</p>
           @if(test.time.includes('11')){
-          <ul>
-            <li *ngFor="let type of personalitiesTypes">
-              <img [src]="type.urlImg" alt="" />
-            </li>
-          </ul>
+          <app-icons-list></app-icons-list>
           }
 
           <img class="test-img" [src]="test.testSvg" alt="" />

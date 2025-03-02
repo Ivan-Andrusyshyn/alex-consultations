@@ -54,23 +54,6 @@
     justify-content: center;
     flex-wrap: wrap;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    ul {
-      gap: 8px;
-
-      display: flex;
-      justify-content: center;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      position: relative;
-    }
-    img {
-      min-width: 32px;
-      height: auto;
-      display: block;
-      @media screen and (min-width: 768px) {
-        width: 44px;
-      }
-    }
 
     @media screen and (min-width: 768px) {
       padding: 24px;
