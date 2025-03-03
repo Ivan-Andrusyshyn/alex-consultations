@@ -184,13 +184,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  // private scrollToTop(): void {
-  //   window.scrollTo({
-  //     top: 40,
-  //     behavior: 'smooth',
-  //   });
-  // }
-
   private setSessionStorage(key: string, value: any) {
     sessionStorage.setItem(key, value);
   }

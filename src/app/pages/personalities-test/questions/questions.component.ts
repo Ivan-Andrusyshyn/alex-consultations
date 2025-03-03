@@ -178,31 +178,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     );
   }
 
-  private sendDataToGoogleSheet(
-    personType: string
-  ): Observable<{ message: string }> {
-    return this.googleSheetService
-      .postTestResultsInSheet({
-        testName: '16-personalities',
-        results: personType,
-        timestamp: this.timestamp ?? '',
-        device: this.googleSheetService.getDeviceType(),
-      })
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        catchError((err) => {
-          console.log(err.message);
-          return throwError(() => err);
-        })
-      );
-  }
-  // private scrollToTop(): void {
-  //   window.scrollTo({
-  //     top: 40,
-  //     behavior: 'smooth',
-  //   });
-  // }
-
   private setSessionStorage(key: string, value: any) {
     sessionStorage.setItem(key, value);
   }
