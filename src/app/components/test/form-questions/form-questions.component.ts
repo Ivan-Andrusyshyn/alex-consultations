@@ -20,6 +20,7 @@ import { PersonalitiesTestService } from '../../../shared/services/personalities
 import { RefreshButtonComponent } from '../../refresh-button/refresh-button.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.component';
+import { QuestionWordPipe } from './questions.pipe';
 
 @Component({
   selector: 'app-form-questions',
@@ -31,6 +32,7 @@ import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.compone
     NgFor,
     ReactiveFormsModule,
     SecondaryBtnComponent,
+    QuestionWordPipe,
     NgClass,
   ],
   templateUrl: './form-questions.component.html',

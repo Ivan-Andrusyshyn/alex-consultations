@@ -10,7 +10,7 @@ const testCardsData = Object.freeze([
   },
   {
     title: 'Тест 16 типів особистості ',
-    time: '(11хв ⏳)',
+    time: '(5хв ⏳)',
     cardClass: 'personality-card',
     description: 'Дізнайся більше про себе, свої сильні та слабкі сторони.',
     testSvg: 'assets/svg/tests/16-personalities-card.svg',

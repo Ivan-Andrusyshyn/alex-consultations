@@ -36,11 +36,23 @@ const typeMapping = {
 };
 const custumType = (typeLetter) => { var _a; return (_a = typeMapping[typeLetter]) !== null && _a !== void 0 ? _a : ''; };
 const changeQuestionsById = (numberId) => {
+    if (numberId === 1) {
+        return 'Я часто детально розплановую свій день, перш ніж щось робити.';
+    }
     if (numberId === 3) {
         return 'Коли я дізнаюся щось нове, я більше зосереджуюся на конкретних деталях, ніж на загальному баченні.';
     }
     if (numberId === 6) {
         return 'Приймаючи важливі рішення, я більше довіряю логіці, ніж почуттям.';
+    }
+    if (numberId === 10) {
+        return 'Мені складно адаптуватися, якщо мій розклад раптово змінюється. ';
+    }
+    if (numberId === 13) {
+        return 'Якщо я проводжу цілий день без спілкування, то ввечері у мене з’являється бажання поговорити з кимось, навіть без особливої причини.';
+    }
+    if (numberId === 15) {
+        return ' Мені подобається працювати, коли є чіткий план і зрозумілі кроки, а не коли доводиться вирішувати все на ходу.';
     }
     if (numberId === 19) {
         return 'Я волію якнайшвидше ухвалити рішення, щоб закрити питання, а не залишати варіанти відкритими.';
@@ -75,7 +87,7 @@ const addAnswersInTestQuestions = () => {
         const finalType = custumType(typeLetter);
         if (getQuestionsByType(finalType, score)) {
             numberId += 1;
-            if ([3, 6, 19, 21, 24, 30].includes(numberId)) {
+            if ([1, 3, 6, 10, 13, 15, 19, 21, 24, 30].includes(numberId)) {
                 _16_personality_1.questionsPersonality[i].question = changeQuestionsById(numberId);
             }
             cutTestsArray.push({

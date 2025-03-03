@@ -1,4 +1,6 @@
 <div class="container" *ngIf="questions">
+  <div class="question-quantity">{{ questions.length | questionWord }}</div>
+
   <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
   <mat-tab-group [(selectedIndex)]="currentQuestionNumber">
     <form [formGroup]="formGroup">

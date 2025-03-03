@@ -6,7 +6,6 @@ import { TestCardInfoBtnComponent } from '../../components/test/test-card-info-b
 import { testCardsData } from '../../../assets/content/tests-content/test-cards-data';
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
-import { personalityTypesContent } from '../../../assets/content/16-personalities/personalityTypes';
 import { IconsListComponent } from '../../components/test/personalities-test/icons-list/icons-list.component';
 
 @Component({
