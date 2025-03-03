@@ -74,6 +74,14 @@ export class FormQuestionsComponent implements OnInit {
     const control = this.formGroup.get(questionId.toString());
     return control && control.value != null;
   }
+  get progressPercentage(): number {
+    const totalQuestions = this.questions.length;
+    const answeredQuestions = Object.values(this.formGroup.value).filter(
+      (value) => value !== null && value !== undefined
+    ).length;
+
+    return totalQuestions ? (answeredQuestions / totalQuestions) * 100 : 0;
+  }
 
   getSubmit() {
     const answers = this.formGroup.value;

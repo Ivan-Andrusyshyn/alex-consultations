@@ -2,6 +2,9 @@
   <div class="question-quantity">{{ questions.length | questionWord }}</div>
 
   <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+  <div class="progress-bar">
+    <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+  </div>
   <mat-tab-group [(selectedIndex)]="currentQuestionNumber">
     <form [formGroup]="formGroup">
       <ng-container *ngFor="let q of questions; let i = index">
