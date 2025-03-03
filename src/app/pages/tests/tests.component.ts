@@ -24,6 +24,7 @@ import { IconsListComponent } from '../../components/test/personalities-test/ico
 })
 export class TestsComponent {
   testData = testCardsData;
+
   imgUrl = 'assets/imgs/person-thinking-1.jpg';
   subtitleText =
     ' Заощадь роки на пошуках себе. Відкрий нові грані своєї особистостівже зараз!';
