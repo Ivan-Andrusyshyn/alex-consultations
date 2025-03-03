@@ -28,6 +28,7 @@
                   />
                   <div
                     class="button"
+                    [class.coloredLabel]="coloredLabel"
                     [ngClass]="
                       'button-' +
                       (q.answers.length - (answerIndex + 1)).toString()

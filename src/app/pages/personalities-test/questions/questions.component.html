@@ -5,6 +5,7 @@
     [subtitleText]="subtitleText"
   ></app-title-card>
   <app-form-questions
+    [coloredLabel]="false"
     [formGroup]="formGroup"
     [questions]="(personalitiesTest$ | async) ?? []"
     [currentTestName]="'16-personalities'"

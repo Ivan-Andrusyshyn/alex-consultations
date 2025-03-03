@@ -35,6 +35,26 @@ const typeMapping = {
     T: 'TF',
 };
 const custumType = (typeLetter) => { var _a; return (_a = typeMapping[typeLetter]) !== null && _a !== void 0 ? _a : ''; };
+const changeQuestionsById = (numberId) => {
+    if (numberId === 3) {
+        return 'Коли я дізнаюся щось нове, я більше зосереджуюся на конкретних деталях, ніж на загальному баченні.';
+    }
+    if (numberId === 6) {
+        return 'Приймаючи важливі рішення, я більше довіряю логіці, ніж почуттям.';
+    }
+    if (numberId === 19) {
+        return 'Я волію якнайшвидше ухвалити рішення, щоб закрити питання, а не залишати варіанти відкритими.';
+    }
+    if (numberId === 21) {
+        return 'Я відчуваю себе комфортніше, коли маю чіткий план і дотримуюся його, а не коли дію спонтанно.';
+    }
+    if (numberId === 24) {
+        return 'Мені легше працювати з загальними ідеями, можливостями та теоріями, ніж із конкретними фактами та деталями.';
+    }
+    if (numberId === 30) {
+        return 'Мені дає більше енергії працювати за чітким планом, ніж діяти на ходу.';
+    }
+};
 const addAnswersInTestQuestions = () => {
     var _a;
     const score = {
@@ -55,6 +75,9 @@ const addAnswersInTestQuestions = () => {
         const finalType = custumType(typeLetter);
         if (getQuestionsByType(finalType, score)) {
             numberId += 1;
+            if ([3, 6, 19, 21, 24, 30].includes(numberId)) {
+                _16_personality_1.questionsPersonality[i].question = changeQuestionsById(numberId);
+            }
             cutTestsArray.push({
                 question: _16_personality_1.questionsPersonality[i].question,
                 id: numberId,

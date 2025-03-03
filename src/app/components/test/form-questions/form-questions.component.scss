@@ -179,23 +179,23 @@ ul {
       height: 38px;
     }
   }
-  .button-0 {
+  .coloredLabel.button-0 {
     background: linear-gradient(135deg, #e57373 0%, #f44336 100%);
   }
 
-  .button-1 {
+  .coloredLabel.button-1 {
     background: linear-gradient(135deg, #ffb74d 0%, #ff9800 100%);
   }
 
-  .button-2 {
+  .coloredLabel.button-2 {
     background: linear-gradient(135deg, #ffeb3b 0%, #fbc02d 100%);
   }
 
-  .button-3 {
+  .coloredLabel.button-3 {
     background: linear-gradient(135deg, #81c784 0%, #388e3c 100%);
   }
 
-  .button-4 {
+  .coloredLabel.button-4 {
     background: linear-gradient(135deg, #42be46 0%, #2e7d32 100%);
   }
 
@@ -242,7 +242,7 @@ ul {
     transform: scale(1.3);
     opacity: 1;
   }
-  .label input:checked ~ .button {
+  .coloredLabel .label input:checked ~ .button {
     background: linear-gradient(135deg, #20db29 0%, #0bf013 100%);
     box-shadow: 0 10px 20px rgba(122, 255, 34, 0.4);
   }

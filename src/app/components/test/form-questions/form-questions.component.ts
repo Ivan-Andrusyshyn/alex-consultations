@@ -49,6 +49,7 @@ export class FormQuestionsComponent implements OnInit {
   @Input() formGroup!: FormGroup;
   @Input() currentQuestionNumber: number = 1;
   @Input() currentTestName: string = '';
+  @Input() coloredLabel: boolean = true;
   ngOnInit(): void {}
 
   forceChangeControl(questionId: number, value: string) {
