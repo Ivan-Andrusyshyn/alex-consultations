@@ -9,8 +9,7 @@ export const consultationData: ConsultationContent = {
     'Це не про досягнення чи зовнішні атрибути щастя. Це про усвідомлення своєї сутності.',
   results: {
     title: 'Що зміниться у вашому житті?',
-    resultsDescription:
-      'Звернувшись до мене, Ви можете розраховувати на такі результати і зміни:',
+    resultsDescription: ' ',
     items: [
       {
         heading: '✅ Глибоке розуміння себе:',
@@ -41,8 +40,7 @@ export const consultationData: ConsultationContent = {
   },
   consultationProcess: {
     title: 'Як проходить консультація?',
-    descriptions:
-      'Мої консультації структуровані таким чином, щоб максимально ефективно привести Вас до інсайтів і рішень:',
+    descriptions: ' ',
     steps: [
       {
         stepTitle: '✔ Перший крок:',
