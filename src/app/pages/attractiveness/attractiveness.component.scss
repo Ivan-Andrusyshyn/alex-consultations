@@ -1,0 +1,30 @@
+@import "../../../assets/mixins.scss";
+
+.test {
+  width: 100%;
+
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  @include adaptive-spacing(
+    padding,
+    $padding-mobile,
+    $padding-tablet,
+    $padding-desktop
+  );
+}
+// ERROR
+.test-error {
+  border: 1px solid red;
+  padding: 6px;
+  border-radius: 8px;
+}
+.response-message {
+  padding: 8px;
+  border-radius: 1rem;
+
+  border: 1px solid green;
+
+  box-sizing: border-box;
+}

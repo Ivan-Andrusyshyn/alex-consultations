@@ -26,6 +26,36 @@ export const routes: Routes = [
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),
   },
   {
+    path: 'tests/attractiveness',
+    loadComponent: () =>
+      import('./pages/attractiveness/attractiveness.component').then(
+        (m) => m.AttractivenessComponent
+      ),
+    children: [
+      {
+        path: 'questions',
+        loadComponent: () =>
+          import('./pages/attractiveness/questions/questions.component').then(
+            (m) => m.QuestionsComponent
+          ),
+      },
+      {
+        path: 'details/:categoryName',
+        loadComponent: () =>
+          import(
+            './pages/attractiveness/test-results/test-results.component'
+          ).then((m) => m.TestResultsComponent),
+      },
+      {
+        path: 'test-information',
+        loadComponent: () =>
+          import(
+            './pages/attractiveness/test-information/test-information.component'
+          ).then((m) => m.TestInformationComponent),
+      },
+    ],
+  },
+  {
     path: 'tests/traumatic-sensitivity',
     loadComponent: () =>
       import(

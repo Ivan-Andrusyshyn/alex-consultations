@@ -27,6 +27,14 @@ export class MailerService {
       }
     );
   }
+  postEmailAttractiveness(value: any): Observable<any> {
+    return this.http.post(
+      environment.apiUrl + '/send-email' + '/attractiveness',
+      {
+        value,
+      }
+    );
+  }
   postEmailToxicalRelationship(value: any): Observable<any> {
     return this.http.post(
       environment.apiUrl + '/send-email' + '/toxical-relationship',

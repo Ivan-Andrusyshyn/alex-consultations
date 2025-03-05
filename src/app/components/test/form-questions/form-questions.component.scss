@@ -248,6 +248,12 @@ ul {
   .coloredLabel.button-4 {
     background: linear-gradient(135deg, #42be46 0%, #2e7d32 100%);
   }
+  .coloredLabel.button-5 {
+    background: linear-gradient(135deg, #4570b1 0%, #4ba9ce 100%);
+  }
+  .coloredLabel.button-6 {
+    background: linear-gradient(135deg, #da50df 0%, #2e7d32 100%);
+  }
 
   .button::before,
   .button::after {
@@ -323,6 +329,14 @@ ul {
   }
 
   .button-4:checked ~ .button {
+    background: linear-gradient(135deg, #42be46 0%, #2e7d32 100%);
+    box-shadow: 0 10px 20px rgba(66, 190, 70, 0.4);
+  }
+  .button-5:checked ~ .button {
+    background: linear-gradient(135deg, #42be46 0%, #2e7d32 100%);
+    box-shadow: 0 10px 20px rgba(66, 190, 70, 0.4);
+  }
+  .button-6:checked ~ .button {
     background: linear-gradient(135deg, #42be46 0%, #2e7d32 100%);
     box-shadow: 0 10px 20px rgba(66, 190, 70, 0.4);
   }

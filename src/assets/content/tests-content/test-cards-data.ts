@@ -1,9 +1,20 @@
 const testCardsData = Object.freeze([
   {
+    title: 'Тест “Який у тебе тип привабливості?',
+    time: '(3хв ⏳)',
+    cardClass: 'attractiveness-card',
+    category: ['Всі тести', 'Для стосунків'],
+    description:
+      'Результати відкриють, що робить твою привабливість особливою.',
+    testSvg: 'assets/svg/tests/attractiveness.svg',
+    routeStart: '/tests/attractiveness/questions',
+    routeInfo: '/tests/attractiveness/test-information',
+  },
+  {
     title: 'Тест на токсичність стосунків ',
     time: '(3хв ⏳)',
     cardClass: 'toxical-card',
-    category: ['Всі тести', 'Для стосунків'],
+    category: ['Всі тести', 'Для особистого розвитку'],
     description: 'Дізнайтеся, чи є у ваших стосунках тривожні сигнали.',
     testSvg: 'assets/svg/tests/worry-woman.svg',
     routeStart: '/tests/toxical-relationship/questions',

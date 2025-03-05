@@ -1,0 +1,76 @@
+<div
+  class="attractiveness-result"
+  *ngIf="testResults$ | async as attractivenessResult"
+>
+  <div class="container">
+    <h2>{{ attractivenessResult.title }}</h2>
+
+    <div class="subtitle">
+      <p>{{ attractivenessResult.description }}</p>
+    </div>
+
+    <div class="known-traits">
+      <h3>🧲 Що ти точно знаєш про себе::</h3>
+      <ul>
+        <li *ngFor="let trait of attractivenessResult.knownTraits">
+          {{ trait }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="hidden-traits">
+      <h3>💡 Але що ти можеш про себе ще не знати?</h3>
+      <ul>
+        <li *ngFor="let trait of attractivenessResult.hiddenTraits">
+          {{ trait }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="strength-boosters">
+      <h3>🔥 Що робить твою харизматичність ще сильнішою?</h3>
+      <ul>
+        <li *ngFor="let booster of attractivenessResult.strengthBoosters">
+          {{ booster }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="key-power">
+      <h3>Головна сила твоєї привабливості:</h3>
+      <p>{{ attractivenessResult.keyPower }}</p>
+    </div>
+
+    <div class="next-step">
+      <h3>Твій наступний крок:</h3>
+      <p>{{ attractivenessResult.nextStep }}</p>
+    </div>
+
+    <div class="call-to-action">
+      <h3>Готовий(а) розкрити нові грані себе?</h3>
+      <p>{{ attractivenessResult.callToAction }}</p>
+    </div>
+  </div>
+
+  <div class="btns-wrapper">
+    <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
+
+    <app-send-form-on-email-btn
+      *ngIf="!(isShowSendForm$ | async)"
+      (sendForm)="toggleSendForm()"
+    ></app-send-form-on-email-btn>
+    <app-send-results-form
+      *ngIf="isShowSendForm$ | async"
+      (toggleSendForm)="toggleSendForm()"
+      (sendResultsOnEmail)="sendResultsOnEmail($event)"
+    ></app-send-results-form>
+  </div>
+
+  @if (successRegistration()) {
+
+  <div class="success-message">✅ Ви успішно записалися!</div>
+  }
+  <div *ngIf="successMessage()" class="success-message">
+    Ми відправили результати тесту на пошту!
+  </div>
+</div>

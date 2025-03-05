@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPersonalitiesTemplate = exports.getToxicalRelTemplate = exports.getTraumaticTemplate = void 0;
+exports.getAttractivenessResultTemplate = exports.getPersonalitiesTemplate = exports.getToxicalRelTemplate = exports.getTraumaticTemplate = void 0;
 const getTraumaticTemplate = (typeInformation) => `
         <h3>Your Test Results:</h3>
         <p><strong>Description:</strong> ${typeInformation.description}</p>
@@ -154,7 +154,43 @@ const getToxicalRelTemplate = (result) => `
   <p>${result.consultation.text}</p>
   
  >
- 
- 
 `;
 exports.getToxicalRelTemplate = getToxicalRelTemplate;
+const getAttractivenessResultTemplate = (result) => `
+  <h3>Результати тесту привабливості:</h3>
+  
+  <h4>Категорія: ${result.category}</h4>
+  
+  <p><strong>Опис:</strong> ${result.description}</p>
+  
+  <h4>Відомі риси:</h4>
+  <ul>
+    ${result.knownTraits
+    .map((trait) => `<li>✅ ${trait}</li>`)
+    .join('')}
+  </ul>
+  
+  <h4>Приховані риси:</h4>
+  <ul>
+    ${result.hiddenTraits
+    .map((trait) => `<li>✅ ${trait}</li>`)
+    .join('')}
+  </ul>
+
+  <h4>Чинники посилення привабливості:</h4>
+  <ul>
+    ${result.strengthBoosters
+    .map((booster) => `<li>✅ ${booster}</li>`)
+    .join('')}
+  </ul>
+  
+  <h4>Ключова сила:</h4>
+  <p>${result.keyPower}</p>
+  
+  <h4>Наступний крок:</h4>
+  <p>${result.nextStep}</p>
+  
+  <h4>Заклик до дії:</h4>
+  <p>${result.callToAction}</p>
+`;
+exports.getAttractivenessResultTemplate = getAttractivenessResultTemplate;

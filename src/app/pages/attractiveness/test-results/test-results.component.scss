@@ -5,7 +5,7 @@ h2 {
 
   color: var(--textColorTitle);
 }
-.relationship-info {
+.container {
   padding: 8px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -86,16 +86,7 @@ li:last-child {
   margin-bottom: 0;
 }
 
-.summary {
-  padding: 1.5rem 0;
-  border-radius: 8px;
-  letter-spacing: 0.01em;
-
-  font-style: italic;
-  color: var(--textColor);
-}
-
-.summary h3 {
+h3 {
   font-size: 1.5rem;
   letter-spacing: 0.01em;
 
@@ -107,10 +98,11 @@ li:last-child {
   }
 }
 
-.summary p {
+p {
   font-size: 1rem;
   line-height: 2;
   letter-spacing: 0.01em;
+  color: var(--textColor);
 
   margin-bottom: 12px;
   text-align: left;

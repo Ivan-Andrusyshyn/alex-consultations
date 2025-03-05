@@ -7,7 +7,6 @@ class ToxicalRelationshipService {
     }
     getNameCategoryByScore(scores) {
         let score = 0;
-        console.log(scores);
         const scoresArray = Object.keys(scores);
         for (let key of scoresArray) {
             score += Number(scores[key]);
