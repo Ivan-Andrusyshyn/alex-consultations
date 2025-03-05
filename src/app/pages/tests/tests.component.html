@@ -2,16 +2,16 @@
   <div class="container">
     <div>
       <app-title-card
-        [imgUrl]="imgUrl"
-        [titleText]="titleText"
-        [subtitleText]="subtitleText"
+        [imgUrl]="titleCardContent.imgUrl"
+        [titleText]="titleCardContent.titleText"
+        [subtitleText]="titleCardContent.subtitleText"
       ></app-title-card>
       <mat-tab-group [(selectedIndex)]="currentTopic">
         @for (category of categoryList; track $index) {
         <mat-tab [label]="category">
           <ul class="test-list">
-            @for (test of testData; track $index) {
-            @if(category===test.category){
+            @for (test of testData; track $index) { @if(
+            test.category.includes(category)){
             <li class="test-card" [ngClass]="test.cardClass">
               <h3>
                 {{ test.title }}

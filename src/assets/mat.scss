@@ -1,0 +1,24 @@
+.mat-mdc-tab-header,
+.mat-mdc-tab-group,
+.mat-mdc-tab-labels,
+.mat-mdc-tab-header-pagination,
+.mat-mdc-tab-header-pagination-controls-enabled,
+.mat-mdc-tab-body-wrapper,
+.mat-mdc-tab,
+.mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: var(--textColor);
+  --mat-tab-header-active-label-text-color: var(--textColor);
+  --mat-tab-header-inactive-label-text-color: var(--textColor);
+  --mat-mdc-tab-header-pagination-chevron-color: var(--textColor) !important;
+
+  --mat-full-pseudo-checkbox-selected-checkmark-color: var(--textColor);
+  --mdc-tab-text-label-color: var(--textColor);
+  --mdc-tab-text-label-color-default: var(--textColor);
+}
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: var(--textColor) !important;
+}
+.mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+  color: var(--textColor) !important;
+}

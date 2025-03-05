@@ -7,6 +7,7 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Answer, Question } from '../../../shared/types/16-personalities';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
@@ -21,10 +23,6 @@ import { RefreshButtonComponent } from '../../refresh-button/refresh-button.comp
 import { ModalComponent } from '../../modal/modal.component';
 import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.component';
 import { QuestionWordPipe } from './questions.pipe';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-form-questions',
@@ -37,16 +35,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     SecondaryBtnComponent,
     QuestionWordPipe,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
     NgClass,
   ],
   templateUrl: './form-questions.component.html',
   styleUrl: './form-questions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormQuestionsComponent implements OnInit {
+export class FormQuestionsComponent implements OnInit, OnDestroy {
   readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
@@ -60,13 +55,27 @@ export class FormQuestionsComponent implements OnInit {
   @Input() currentQuestionNumber: number = 1;
   @Input() currentTestName: string = '';
   @Input() coloredLabel: boolean = true;
-  ngOnInit(): void {}
 
-  openSnackBar() {
-    this._snackBar.open(
-      'Так тримати ти пройшов 50% тесту! Ти ще ближче до розуміння себе! 🎉',
-      'Закрити'
+  private isSnackBarOpened = false;
+  ngOnInit(): void {
+    this.isSnackBarOpened = JSON.parse(
+      sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
+  }
+  ngOnDestroy(): void {
+    sessionStorage.setItem('isSnackBarOpened', 'false');
+  }
+  openSnackBar() {
+    const text =
+      'Так тримати ти пройшов 50% тесту! Ти ще ближче до розуміння себе! 🎉';
+    const textBtn = 'Закрити';
+
+    this._snackBar.open(text, textBtn, {
+      verticalPosition: 'bottom',
+      duration: 6000,
+      panelClass: ['custom-snackbar'],
+      horizontalPosition: 'center',
+    });
   }
 
   forceChangeControl(questionId: number, value: string) {
@@ -98,8 +107,18 @@ export class FormQuestionsComponent implements OnInit {
       ? (answeredQuestions / totalQuestions) * 100
       : 0;
 
-    if (Math.floor(progress) > 50 && Math.floor(progress) < 53) {
+    const halfQuestions = Math.ceil(totalQuestions / 2);
+    console.log(progress);
+    console.log(this.isSnackBarOpened);
+
+    if (
+      !this.isSnackBarOpened &&
+      progress > 50 &&
+      answeredQuestions >= halfQuestions
+    ) {
       this.openSnackBar();
+      this.isSnackBarOpened = true;
+      sessionStorage.setItem('isSnackBarOpened', 'true');
     }
 
     return progress;
@@ -128,6 +147,8 @@ export class FormQuestionsComponent implements OnInit {
       .subscribe((result) => {
         if (result !== undefined) {
           this.formGroup.reset();
+          sessionStorage.setItem('isSnackBarOpened', 'false');
+          this.isSnackBarOpened = false;
           this.currentQuestionNumber = 0;
           sessionStorage.removeItem(this.currentTestName + '-results');
           sessionStorage.setItem(

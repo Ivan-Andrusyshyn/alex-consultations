@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgClass, NgFor } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 
@@ -8,6 +8,8 @@ import { testCardsData } from '../../../assets/content/tests-content/test-cards-
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
 import { IconsListComponent } from '../../components/test/personalities-test/icons-list/icons-list.component';
+import { CommonTestsService } from '../../shared/services/common-tests.service';
+import titleCardContent from './titleCard-content';
 
 @Component({
   selector: 'app-tests',
@@ -23,18 +25,18 @@ import { IconsListComponent } from '../../components/test/personalities-test/ico
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
 })
-export class TestsComponent {
-  testData = testCardsData;
-
-  imgUrl = 'assets/imgs/person-thinking-1.jpg';
-  subtitleText =
-    ' Заощадь роки на пошуках себе. Відкрий нові грані своєї особистостівже зараз!';
-  titleText =
-    'Дізнайся про себе більше – швидкі тести, що відкриють твою особистість!';
+export class TestsComponent implements OnInit {
+  readonly testData = testCardsData;
+  readonly titleCardContent = titleCardContent;
 
   private seoService = inject(SeoService);
+  private commonTestsService = inject(CommonTestsService);
 
-  categoryList = ['Для стосунків', 'Для особистого розвитку'];
+  readonly categoryList = [
+    'Всі тести',
+    'Для стосунків',
+    'Для особистого розвитку',
+  ];
   currentTopic: string = '';
 
   ngOnInit(): void {
@@ -45,5 +47,7 @@ export class TestsComponent {
       'Переглянь список доступних тестів для самопізнання, розвитку особистості та оцінки стосунків. Обери тест і дізнайся більше про себе.',
       'список тестів, самопізнання, розвиток особистості, психологічні тести, тести для стосунків, тест на особистість, саморозвиток'
     );
+
+    this.commonTestsService.testPassingCounter().subscribe((r) => console.log);
   }
 }
