@@ -1,6 +1,38 @@
 @use "./assets/themes.scss" as *;
 @use "./assets/reset.scss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+.mat-mdc-tab-header,
+.mat-mdc-tab-group,
+.mat-mdc-tab-labels,
+.mat-mdc-tab-header-pagination,
+.mat-mdc-tab-header-pagination-controls-enabled,
+.mat-mdc-tab-body-wrapper,
+.mat-mdc-tab,
+.mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: var(--textColor);
+  --mat-tab-header-active-label-text-color: var(--textColor);
+  --mat-tab-header-inactive-label-text-color: var(--textColor);
+  --mat-mdc-tab-header-pagination-chevron-color: var(--textColor) !important;
+
+  --mat-full-pseudo-checkbox-selected-checkmark-color: var(--textColor);
+  --mdc-tab-text-label-color: var(--textColor);
+  --mdc-tab-text-label-color-default: var(--textColor);
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-chevron,
+.mat-mdc-tab-header-pagination-before .mat-mdc-tab-header-pagination-chevron,
+.mat-mdc-tab-header-rtl
+  .mat-mdc-tab-header-pagination-after
+  .mat-mdc-tab-header-pagination-chevron {
+  border-color: var(--textColor) !important;
+}
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: var(--textColor) !important;
+}
+.mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+  color: var(--textColor) !important;
+}
 :root {
   @include darken();
 }

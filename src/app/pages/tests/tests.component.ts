@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgClass, NgFor } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { TestCardStartBtnComponent } from '../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { TestCardInfoBtnComponent } from '../../components/test/test-card-info-btn/test-card-info-btn.component';
@@ -15,8 +16,8 @@ import { IconsListComponent } from '../../components/test/personalities-test/ico
     TestCardStartBtnComponent,
     TitleCardComponent,
     TestCardInfoBtnComponent,
-    NgFor,
     NgClass,
+    MatTabsModule,
     IconsListComponent,
   ],
   templateUrl: './tests.component.html',
@@ -32,6 +33,9 @@ export class TestsComponent {
     'Дізнайся про себе більше – швидкі тести, що відкриють твою особистість!';
 
   private seoService = inject(SeoService);
+
+  categoryList = ['Для стосунків', 'Для особистого розвитку'];
+  currentTopic: string = '';
 
   ngOnInit(): void {
     this.seoService.updateTitle(

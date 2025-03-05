@@ -6,34 +6,39 @@
         [titleText]="titleText"
         [subtitleText]="subtitleText"
       ></app-title-card>
-      <ul class="test-list">
-        <li
-          class="test-card"
-          [ngClass]="test.cardClass"
-          *ngFor="let test of testData"
-        >
-          <h3>
-            {{ test.title }}
-            <span>{{ test.time }}</span>
-          </h3>
-          <p>{{ test.description }}</p>
-          @if(test.time.includes('5')){
-          <app-icons-list></app-icons-list>
-          }
+      <mat-tab-group [(selectedIndex)]="currentTopic">
+        @for (category of categoryList; track $index) {
+        <mat-tab [label]="category">
+          <ul class="test-list">
+            @for (test of testData; track $index) {
+            @if(category===test.category){
+            <li class="test-card" [ngClass]="test.cardClass">
+              <h3>
+                {{ test.title }}
+                <span>{{ test.time }}</span>
+              </h3>
+              <p>{{ test.description }}</p>
+              @if(test.time.includes('5')){
+              <app-icons-list></app-icons-list>
+              }
 
-          <img class="test-img" [src]="test.testSvg" alt="" />
-          <div class="test-card-buttons">
-            <app-test-card-start-btn
-              [route]="test.routeStart"
-              class="btn-start"
-            ></app-test-card-start-btn>
-            <app-test-card-info-btn
-              [route]="test.routeInfo"
-              class="btn-info"
-            ></app-test-card-info-btn>
-          </div>
-        </li>
-      </ul>
+              <img class="test-img" [src]="test.testSvg" alt="" />
+              <div class="test-card-buttons">
+                <app-test-card-start-btn
+                  [route]="test.routeStart"
+                  class="btn-start"
+                ></app-test-card-start-btn>
+                <app-test-card-info-btn
+                  [route]="test.routeInfo"
+                  class="btn-info"
+                ></app-test-card-info-btn>
+              </div>
+            </li>
+            } }
+          </ul>
+        </mat-tab>
+        }
+      </mat-tab-group>
     </div>
   </div>
 </section>

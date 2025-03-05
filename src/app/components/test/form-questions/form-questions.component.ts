@@ -21,6 +21,10 @@ import { RefreshButtonComponent } from '../../refresh-button/refresh-button.comp
 import { ModalComponent } from '../../modal/modal.component';
 import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.component';
 import { QuestionWordPipe } from './questions.pipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-form-questions',
@@ -33,6 +37,9 @@ import { QuestionWordPipe } from './questions.pipe';
     ReactiveFormsModule,
     SecondaryBtnComponent,
     QuestionWordPipe,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     NgClass,
   ],
   templateUrl: './form-questions.component.html',
@@ -44,6 +51,7 @@ export class FormQuestionsComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
   readonly dialog = inject(MatDialog);
+  private _snackBar = inject(MatSnackBar);
 
   @Output() nextQues = new EventEmitter();
   @Output() onSubmit = new EventEmitter<Answer[]>();
@@ -53,6 +61,13 @@ export class FormQuestionsComponent implements OnInit {
   @Input() currentTestName: string = '';
   @Input() coloredLabel: boolean = true;
   ngOnInit(): void {}
+
+  openSnackBar() {
+    this._snackBar.open(
+      'Так тримати ти пройшов 50% тесту! Ти ще ближче до розуміння себе! 🎉',
+      'Закрити'
+    );
+  }
 
   forceChangeControl(questionId: number, value: string) {
     const control = this.formGroup.get(questionId.toString());
@@ -79,8 +94,15 @@ export class FormQuestionsComponent implements OnInit {
     const answeredQuestions = Object.values(this.formGroup.value).filter(
       (value) => value !== null && value !== undefined && value !== ''
     ).length;
+    const progress = totalQuestions
+      ? (answeredQuestions / totalQuestions) * 100
+      : 0;
 
-    return totalQuestions ? (answeredQuestions / totalQuestions) * 100 : 0;
+    if (Math.floor(progress) > 50 && Math.floor(progress) < 53) {
+      this.openSnackBar();
+    }
+
+    return progress;
   }
 
   getSubmit() {
