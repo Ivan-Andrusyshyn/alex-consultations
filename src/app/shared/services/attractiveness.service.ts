@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Question } from '../../../../server/src/types/attractiveness';
 import { environment } from '../../environment/environment';
-import { AttractivenessResult } from '../types/attractiveness';
+import { AttractivenessResult, Question } from '../types/attractiveness';
 
 @Injectable({
   providedIn: 'root',
