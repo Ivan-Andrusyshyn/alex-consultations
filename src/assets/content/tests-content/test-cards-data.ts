@@ -14,7 +14,7 @@ const testCardsData = Object.freeze([
     time: '(5хв ⏳)',
     cardClass: 'personality-card',
     category: ['Всі тести', 'Для особистого розвитку'],
-    description: 'Дізнайся більше про себе, свої сильні та слабкі сторони.',
+    description: 'Дізнайся більше про себе, свої сильні сторони.',
     testSvg: 'assets/svg/tests/16-personalities-card.svg',
     routeStart: '/tests/16-personalities/questions',
     routeInfo: '/tests/16-personalities/test-information',
