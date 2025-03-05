@@ -1,43 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const results_1 = require("../content/attractiveness/results");
-class AttractiveneService {
+class AttractivenessService {
     getResults(typeCategory) {
         return results_1.attractivenessResults.find((r) => r.category === typeCategory);
     }
     getNameCategoryByScore(scores) {
-        let highestScore = -Infinity;
-        let categories = [];
-        const scoresArray = Object.keys(scores);
-        for (let key of scoresArray) {
-            const score = Number(scores[key]);
-            if (score > highestScore) {
-                highestScore = score;
-                categories = [key];
+        console.log(scores);
+        const categoryCount = {};
+        for (let key of Object.keys(scores)) {
+            const category = scores[key];
+            if (categoryCount[category]) {
+                categoryCount[category]++;
             }
-            else if (score === highestScore) {
-                categories.push(key);
+            else {
+                categoryCount[category] = 1;
             }
         }
-        if (categories.includes('charismatic-attractiveness')) {
-            return 'charismatic-attractiveness';
+        console.log(categoryCount);
+        let maxCount = -Infinity;
+        let mostFrequentCategory = '';
+        for (let category in categoryCount) {
+            if (categoryCount[category] > maxCount) {
+                maxCount = categoryCount[category];
+                mostFrequentCategory = category;
+            }
         }
-        else if (categories.includes('mysterious-attractiveness')) {
-            return 'mysterious-attractiveness';
-        }
-        else if (categories.includes('intellectual-attractiveness')) {
-            return 'intellectual-attractiveness';
-        }
-        else if (categories.includes('warm-attractiveness')) {
-            return 'warm-attractiveness';
-        }
-        else if (categories.includes('wild-attractiveness')) {
-            return 'wild-attractiveness';
-        }
-        else {
-            return 'gentle-attractiveness';
-        }
+        console.log(`Most frequent category: ${mostFrequentCategory.replace(/^1-/, '')}`);
+        return mostFrequentCategory.replace(/^1-/, '');
     }
 }
-const attractiveneService = new AttractiveneService();
-exports.default = attractiveneService;
+const attractivenessService = new AttractivenessService();
+exports.default = attractivenessService;
