@@ -1,4 +1,9 @@
-<header class="header">
+<header
+  class="header"
+  appStickyHeader
+  [stickyClass]="'sticky-header'"
+  [offset]="300"
+>
   <div class="container">
     <div routerLink="/" class="logo">vidchuttia</div>
     <app-cube></app-cube>

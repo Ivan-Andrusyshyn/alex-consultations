@@ -1,11 +1,27 @@
 .header {
   color: var(--textColor);
   padding: 12px 0;
-  position: relative;
   z-index: 888;
   width: 100%;
   background: var(--bgColorGradient);
   box-shadow: var(--boxShadowHeader);
+  &.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: slideDown 0.3s ease-in-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
   .container {
     max-width: 1200px;
     margin: 0 auto;
