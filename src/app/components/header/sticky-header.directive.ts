@@ -11,20 +11,23 @@ import {
   standalone: true,
 })
 export class StickyHeaderDirective {
-  @Input() stickyClass: string = 'sticky-header'; // По умолчанию класс sticky-header
-  @Input() offset: number = 100; // Высота прокрутки перед активацией липкости
+  @Input() stickyClass: string = 'sticky-header';
+  @Input() offset: number = 100;
+
+  private lastScrollTop = 0;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    const scrollPosition =
-      window.pageYOffset || document.documentElement.scrollTop;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (scrollPosition > this.offset) {
+    if (scrollTop > this.offset && scrollTop < this.lastScrollTop) {
       this.renderer.addClass(this.el.nativeElement, this.stickyClass);
     } else {
       this.renderer.removeClass(this.el.nativeElement, this.stickyClass);
     }
+
+    this.lastScrollTop = scrollTop;
   }
 }
