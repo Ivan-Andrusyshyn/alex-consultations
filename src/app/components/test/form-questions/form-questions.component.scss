@@ -63,6 +63,7 @@
 }
 .wrapper {
 }
+
 .progress-bar {
   width: 100%;
   height: 18px;
@@ -182,6 +183,12 @@ ul {
   @media screen and (min-width: 764px) {
     padding: 20px;
   }
+}
+.shadow-container {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
 }
 
 .question {

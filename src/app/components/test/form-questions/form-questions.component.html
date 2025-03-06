@@ -20,6 +20,7 @@
     <form [formGroup]="formGroup">
       <ng-container *ngFor="let q of questions; let i = index">
         <mat-tab [label]="q.id.toString()">
+          <div class="shadow-container"></div>
           <div class="question-card">
             <div *ngIf="q">
               <h3 class="question">{{ q.question }}</h3>

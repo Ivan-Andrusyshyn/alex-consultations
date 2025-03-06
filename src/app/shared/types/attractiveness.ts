@@ -7,6 +7,7 @@ interface Question {
 interface Option {
   text: string;
   type: PersonalityType;
+  point?: string | number;
 }
 interface AttractivenessResult {
   type: string;
