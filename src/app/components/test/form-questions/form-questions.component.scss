@@ -266,11 +266,11 @@ ul {
   }
 
   .coloredLabel.button-1 {
-    background: linear-gradient(135deg, #ffb74d 0%, #ff9800 100%);
+    background: linear-gradient(135deg, #ff6f00 0%, #ff9800 100%);
   }
 
   .coloredLabel.button-2 {
-    background: linear-gradient(135deg, #ffeb3b 0%, #fbc02d 100%);
+    background: linear-gradient(135deg, #cddc39 0%, #fbc02d 100%);
   }
 
   .coloredLabel.button-3 {
@@ -346,12 +346,12 @@ ul {
   }
 
   .button-1:checked ~ .button {
-    background: linear-gradient(135deg, #ffb74d 0%, #ff9800 100%);
+    background: linear-gradient(135deg, #ff6f00 0%, #ff9800 100%);
     box-shadow: 0 10px 20px rgba(255, 165, 0, 0.4);
   }
 
   .button-2:checked ~ .button {
-    background: linear-gradient(135deg, #ffeb3b 0%, #fbc02d 100%);
+    background: linear-gradient(135deg, #cddc39 0%, #fbc02d 100%);
     box-shadow: 0 10px 20px rgba(255, 235, 59, 0.4);
   }
 
