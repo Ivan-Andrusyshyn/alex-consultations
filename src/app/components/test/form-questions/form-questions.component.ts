@@ -10,6 +10,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  signal,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -57,24 +58,32 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
   @Input() coloredLabel: boolean = true;
 
   private isSnackBarOpened = false;
+
+  colorProgressBar = signal('linear-gradient(90deg, #ff7eb3, #ff758c)');
+
   ngOnInit(): void {
     this.isSnackBarOpened = JSON.parse(
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
+    if (this.isSnackBarOpened) {
+      this.colorProgressBar.set('linear-gradient(90deg, #11998e, #38ef7d)');
+    }
   }
   ngOnDestroy(): void {
     sessionStorage.setItem('isSnackBarOpened', 'false');
   }
   openSnackBar() {
-    const text =
-      'Так тримати ти пройшов 50% тесту! Ти ще ближче до розуміння себе! 🎉';
-    const textBtn = 'Закрити';
+    const text = 'Ще трохи – і ти дізнаєшся щось, що може тебе здивувати! 😉';
+    const textBtn = 'Йду далі';
 
-    this._snackBar.open(text, textBtn, {
+    const snackBarRef = this._snackBar.open(text, textBtn, {
       verticalPosition: 'bottom',
-      duration: 6000,
       panelClass: ['custom-snackbar'],
       horizontalPosition: 'center',
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.colorProgressBar.set('linear-gradient(90deg, #11998e, #38ef7d)');
     });
   }
 
@@ -108,8 +117,6 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
       : 0;
 
     const halfQuestions = Math.ceil(totalQuestions / 2);
-    console.log(progress);
-    console.log(this.isSnackBarOpened);
 
     if (
       !this.isSnackBarOpened &&
@@ -148,6 +155,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
         if (result !== undefined) {
           this.formGroup.reset();
           sessionStorage.setItem('isSnackBarOpened', 'false');
+          this.colorProgressBar.set('linear-gradient(90deg, #ff7eb3, #ff758c)');
           this.isSnackBarOpened = false;
           this.currentQuestionNumber = 0;
           sessionStorage.removeItem(this.currentTestName + '-results');

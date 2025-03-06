@@ -86,18 +86,6 @@ li:last-child {
   margin-bottom: 0;
 }
 
-h3 {
-  font-size: 1.5rem;
-  letter-spacing: 0.01em;
-
-  text-align: center;
-  color: var(--textColor);
-
-  @media screen and (min-width: 764px) {
-    text-align: left;
-  }
-}
-
 p {
   font-size: 1rem;
   line-height: 2;

@@ -1,6 +1,6 @@
 const testCardsData = Object.freeze([
   {
-    title: 'Тест “Який у тебе тип привабливості?',
+    title: ' “Який у тебе тип привабливості?',
     time: '(3хв ⏳)',
     cardClass: 'attractiveness-card',
     category: ['Всі тести', 'Для стосунків'],
@@ -11,7 +11,7 @@ const testCardsData = Object.freeze([
     routeInfo: '/tests/attractiveness/test-information',
   },
   {
-    title: 'Тест на токсичність стосунків ',
+    title: ' "На токсичність стосунків" ',
     time: '(3хв ⏳)',
     cardClass: 'toxical-card',
     category: ['Всі тести', 'Для особистого розвитку'],
@@ -21,7 +21,7 @@ const testCardsData = Object.freeze([
     routeInfo: '/tests/toxical-relationship/test-information',
   },
   {
-    title: 'Тест 16 типів особистості ',
+    title: '"16 типів особистості" ',
     time: '(5хв ⏳)',
     cardClass: 'personality-card',
     category: ['Всі тести', 'Для особистого розвитку'],
@@ -31,7 +31,7 @@ const testCardsData = Object.freeze([
     routeInfo: '/tests/16-personalities/test-information',
   },
   {
-    title: 'Тест на травматичну чуттєвість ',
+    title: '"На травматичну чуттєвість" ',
     time: '(7хв ⏳)',
     cardClass: 'traumatic-card',
     category: ['Всі тести', 'Для особистого розвитку'],

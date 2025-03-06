@@ -64,7 +64,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       .getQuestions()
       .pipe(
         map((r) => {
-          console.log(r);
           this.createFormGroup(r.questions);
           this.setCurrentAnswers();
 

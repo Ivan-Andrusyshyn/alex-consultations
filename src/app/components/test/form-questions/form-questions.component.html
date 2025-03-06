@@ -1,9 +1,17 @@
 <div class="container" *ngIf="questions">
-  <div class="question-quantity">{{ questions.length | questionWord }}</div>
+  <div class="question-quantity">
+    {{ questions.length | questionWord }}
+  </div>
 
   <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
   <div class="progress-bar">
-    <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+    <div
+      class="progress-fill"
+      [style.background]="colorProgressBar()"
+      [style.width.%]="progressPercentage"
+    >
+      <span class="percentages-text"> {{ progressPercentage }}% </span>
+    </div>
   </div>
 
   <mat-tab-group [(selectedIndex)]="currentQuestionNumber">
@@ -12,7 +20,7 @@
         <mat-tab [label]="q.id.toString()">
           <div class="question-card">
             <div *ngIf="q">
-              <h3>{{ q.question }}</h3>
+              <h3 class="question">{{ q.question }}</h3>
               <div class="answers">
                 <div class="line"></div>
                 <label
