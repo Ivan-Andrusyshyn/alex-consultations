@@ -1,16 +1,18 @@
 <div class="container" *ngIf="questions">
-  <div class="question-quantity">
-    {{ questions.length | questionWord }}
-  </div>
+  <div class="wrapper">
+    <div class="question-quantity">
+      {{ questions.length | questionWord }}
+    </div>
 
-  <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
-  <div class="progress-bar">
-    <div
-      class="progress-fill"
-      [style.background]="colorProgressBar()"
-      [style.width.%]="progressPercentage"
-    >
-      <span class="percentages-text"> {{ progressPercentage }}% </span>
+    <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        [style.background]="colorProgressBar()"
+        [style.width.%]="progressPercentage"
+      >
+        <span class="percentages-text"> {{ progressPercentage }}% </span>
+      </div>
     </div>
   </div>
 

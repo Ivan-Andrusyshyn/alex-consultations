@@ -4,8 +4,7 @@ const testCardsData = Object.freeze([
     time: '(3хв ⏳)',
     cardClass: 'attractiveness-card',
     category: ['Всі тести', 'Для стосунків'],
-    description:
-      'Результати відкриють, що робить твою привабливість особливою.',
+    description: 'Дізнайся, що робить тебе по-справжньому привабливим!',
     testSvg: 'assets/svg/tests/attractiveness.svg',
     routeStart: '/tests/attractiveness/questions',
     routeInfo: '/tests/attractiveness/test-information',
@@ -15,7 +14,7 @@ const testCardsData = Object.freeze([
     time: '(3хв ⏳)',
     cardClass: 'toxical-card',
     category: ['Всі тести', 'Для особистого розвитку'],
-    description: 'Дізнайтеся, чи є у ваших стосунках тривожні сигнали.',
+    description: 'Перевір, чи твій партнер не токсичний.',
     testSvg: 'assets/svg/tests/worry-woman.svg',
     routeStart: '/tests/toxical-relationship/questions',
     routeInfo: '/tests/toxical-relationship/test-information',
@@ -25,7 +24,8 @@ const testCardsData = Object.freeze([
     time: '(5хв ⏳)',
     cardClass: 'personality-card',
     category: ['Всі тести', 'Для особистого розвитку'],
-    description: 'Дізнайся більше про себе, свої сильні сторони.',
+    description:
+      'Дізнайся свій унікальний тип особистості та розкрий свої сильні сторони!',
     testSvg: 'assets/svg/tests/16-personalities-card.svg',
     routeStart: '/tests/16-personalities/questions',
     routeInfo: '/tests/16-personalities/test-information',
