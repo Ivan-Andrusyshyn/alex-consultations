@@ -9,6 +9,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SideBtnComponent {
   @Output() onClick = new EventEmitter();
+  titleBtn = 'Записатиcя';
 
   clickBtn() {
     this.onClick.emit();
