@@ -11,7 +11,7 @@ interface Option {
 }
 interface AttractivenessResult {
   type: string;
-  title: string;
+  subtitle: string;
   category:
     | 'gentle-attractiveness'
     | 'wild-attractiveness'

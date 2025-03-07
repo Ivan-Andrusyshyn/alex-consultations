@@ -3,7 +3,13 @@
   *ngIf="testResults$ | async as attractivenessResult"
 >
   <div class="container">
-    <h2>{{ attractivenessResult.title }}</h2>
+    <h2>
+      {{ attractivenessResult.type }}
+    </h2>
+    <br />
+    <p>
+      {{ attractivenessResult.subtitle }}
+    </p>
 
     <div class="subtitle">
       <p>{{ attractivenessResult.description }}</p>
