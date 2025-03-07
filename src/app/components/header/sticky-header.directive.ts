@@ -1,10 +1,14 @@
 import {
+  DestroyRef,
   Directive,
   ElementRef,
-  HostListener,
+  inject,
   Input,
   Renderer2,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent } from 'rxjs';
+import { debounceTime, map, pairwise, startWith } from 'rxjs/operators';
 
 @Directive({
   selector: '[appStickyHeader]',
@@ -13,46 +17,41 @@ import {
 export class StickyHeaderDirective {
   @Input() stickyClass: string = 'sticky-header';
   @Input() offset: number = 100;
+  private destroyRef = inject(DestroyRef);
+  private renderer = inject(Renderer2);
+  lastY = window.scrollY;
+  private hasSticky = false;
 
-  private lastScrollTop = 0;
-  private isScrollingDown = false;
+  constructor(private el: ElementRef<HTMLElement>) {}
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  ngOnInit() {
+    fromEvent(window, 'scroll')
+      .pipe(
+        debounceTime(20),
+        map(() => window.scrollY),
+        pairwise(),
+        map(([prev, next]) => ({
+          isScrollingUp: next < prev,
+          isAboveOffset: next > this.offset,
+        })),
+        startWith({ isScrollingUp: true, isAboveOffset: false }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(({ isScrollingUp, isAboveOffset }) => {
+        if (!isAboveOffset) {
+          this.renderer.removeClass(this.el.nativeElement, this.stickyClass);
+          this.renderer.removeClass(this.el.nativeElement, 'hidden');
+          return;
+        }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > this.lastScrollTop) {
-      this.isScrollingDown = true;
-    } else {
-      this.isScrollingDown = false;
-    }
-
-    if (scrollTop > this.offset) {
-      if (this.isScrollingDown) {
-        this.renderer.addClass(this.el.nativeElement, this.stickyClass);
-        this.renderer.setStyle(
-          this.el.nativeElement,
-          'transform',
-          'translateY(-100%)'
-        );
-      } else {
-        this.renderer.setStyle(
-          this.el.nativeElement,
-          'transform',
-          'translateY(0)'
-        );
-      }
-    } else {
-      this.renderer.removeClass(this.el.nativeElement, this.stickyClass);
-      this.renderer.setStyle(
-        this.el.nativeElement,
-        'transform',
-        'translateY(0)'
-      );
-    }
-
-    this.lastScrollTop = scrollTop;
+        if (isScrollingUp) {
+          this.renderer.addClass(this.el.nativeElement, this.stickyClass);
+          this.renderer.removeClass(this.el.nativeElement, 'hidden');
+          this.hasSticky = true;
+        } else {
+          this.renderer.addClass(this.el.nativeElement, 'hidden');
+          this.hasSticky = false;
+        }
+      });
   }
 }

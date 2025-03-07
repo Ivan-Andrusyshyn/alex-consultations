@@ -1,9 +1,7 @@
 .ui-switch {
-  /* switch */
   --switch-bg: rgb(78, 98, 117);
   --switch-width: 48px;
   --switch-height: 18px;
-  /* circle */
   --circle-diameter: 32px;
   --circle-bg: rgb(6, 62, 153);
   --circle-inset: calc((var(--circle-diameter) - var(--switch-height)) / 2);
