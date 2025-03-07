@@ -50,10 +50,11 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   attractivenessService$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
   ngOnInit(): void {
-    this.seoService.updateTitle('Запитання тесту на травматичну чутливість');
+    this.seoService.updateTitle('Запитання тесту на привабливість');
+
     this.seoService.updateMetaTags(
-      'Відповідай на запитання тесту на травматичну чутливість, щоб краще зрозуміти свої реакції на стрес та рівень емоційної вразливості.',
-      'тест, травматична чутливість, психологічний тест, емоційна вразливість, запитання, психіка, самопізнання'
+      'Відповідай на запитання тесту на привабливість, щоб дізнатися, як тебе сприймають інші. Оціни свою харизму, впевненість і чарівність!',
+      'тест, привабливість, оцінка привабливості, зовнішність, харизма, впевненість, чарівність, психологічний тест, самопізнання'
     );
 
     this.attractivenessService$ = this.attractivenessService
