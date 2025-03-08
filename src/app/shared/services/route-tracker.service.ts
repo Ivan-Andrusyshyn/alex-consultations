@@ -36,6 +36,6 @@ export class RouteTrackerService {
     this.routeMap = [];
   }
   getRoutes(): string {
-    return this.routeMap.join(', ');
+    return this.routeMap.join(' > ');
   }
 }
