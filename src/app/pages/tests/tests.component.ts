@@ -48,6 +48,6 @@ export class TestsComponent implements OnInit {
       'список тестів, самопізнання, розвиток особистості, психологічні тести, тести для стосунків, тест на особистість, саморозвиток'
     );
 
-    this.commonTestsService.testPassingCounter().subscribe((r) => console.log);
+    // this.commonTestsService.testPassingCounter().subscribe((r) => console.log);
   }
 }
