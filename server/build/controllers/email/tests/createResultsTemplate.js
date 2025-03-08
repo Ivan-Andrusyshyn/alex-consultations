@@ -1,0 +1,196 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getAttractivenessResultTemplate = exports.getPersonalitiesTemplate = exports.getToxicalRelTemplate = exports.getTraumaticTemplate = void 0;
+const getTraumaticTemplate = (typeInformation) => `
+        <h3>Your Test Results:</h3>
+        <p><strong>Description:</strong> ${typeInformation.description}</p>
+        <h4>${typeInformation.insights.title}</h4>
+        <ul>${typeInformation.insights.text
+    .map((t) => `<li>💡 ${t}</li>`)
+    .join('')}</ul>
+        <h4>${typeInformation.strengths.title}</h4>
+        <ul>${typeInformation.strengths.list
+    .map((s) => `<li>✅ ${s}</li>`)
+    .join('')}</ul>
+        <h4>${typeInformation.challenges.title}</h4>
+        <ul>${typeInformation.challenges.list
+    .map((c) => `<li>🔴 ${c}</li>`)
+    .join('')}</ul>
+        <h4>${typeInformation.recommendations.title}</h4>
+        <ul>${typeInformation.recommendations.list
+    .map((r) => `<li>📌 ${r}</li>`)
+    .join('')}</ul>
+        <p>⏳ <strong>${typeInformation.retakeConditions.title}:</strong></p>
+        <ul>${typeInformation.retakeConditions.list
+    .map((c) => `<li>${c}</li>`)
+    .join('')}</ul>
+        <h4>📜 ${typeInformation.summary.title}</h4>
+        <p>${typeInformation.summary.text}</p>
+      `;
+exports.getTraumaticTemplate = getTraumaticTemplate;
+const getPersonalitiesTemplate = (typeInformation) => `
+  <div class="personality-info-container">
+    <div class="info-card">
+      <div class="card-header">
+        <h2>
+          ${typeInformation.type}
+        </h2>
+        <p class="subtitle">${typeInformation.description}</p>
+      </div>
+
+      <div class="card-content">
+        <div class="info-section">
+          <h3>Сильні сторони</h3>
+          <ul>
+            ${typeInformation.strengths
+    .map((strength) => `<li>✅ ${strength}</li>`)
+    .join('')}
+          </ul>
+        </div>
+
+        <div class="info-section">
+          <h3>Слабкі сторони</h3>
+          <ul>
+            ${typeInformation.weaknesses
+    .map((weakness) => `<li>🔴 ${weakness}</li>`)
+    .join('')}
+          </ul>
+        </div>
+
+        <div class="info-section">
+          <h3>Сприйняття</h3>
+          <div class="perception-group">
+            <div class="perception-types">
+              <h4>Інтуїція:</h4>
+              <ul>
+                ${typeInformation.perception.intuition
+    .map((item) => `<li>📌 ${item}</li>`)
+    .join('')}
+              </ul>
+            </div>
+            <div class="perception-types">
+              <h4>Почуття:</h4>
+              <ul>
+                ${typeInformation.perception.feelings
+    .map((item) => `<li>📌 ${item}</li>`)
+    .join('')}
+              </ul>
+            </div>
+            <div class="perception-types">
+              <h4>Спонтанність:</h4>
+              <ul>
+                ${typeInformation.perception.spontaneity
+    .map((item) => `<li>📌 ${item}</li>`)
+    .join('')}
+              </ul>
+            </div>
+            <div class="perception-types">
+              <h4>Логіка:</h4>
+              <ul>
+                ${typeInformation.perception.logic
+    .map((item) => `<li>📌 ${item}</li>`)
+    .join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h3>Взаємовідносини</h3>
+          <ul>
+            ${typeInformation.relationships.traits
+    .map((trait) => `<li>💞 ${trait}</li>`)
+    .join('')}
+          </ul>
+        </div>
+
+        <div class="info-section">
+          <h3>Кар'єра</h3>
+          <div class="career-group">
+            <div>
+              <h4>Уподобання:</h4>
+              <ul>
+                ${typeInformation.career.preferences
+    .map((preference) => `<li>📌 ${preference}</li>`)
+    .join('')}
+              </ul>
+            </div>
+            <div>
+              <h4>Найкращі сфери:</h4>
+              <ul>
+                ${typeInformation.career.bestFields
+    .map((field) => `<li>🚀 ${field}</li>`)
+    .join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <p>${typeInformation.conclusion}</p>
+      </div>
+    </div>
+  </div>
+`;
+exports.getPersonalitiesTemplate = getPersonalitiesTemplate;
+const getToxicalRelTemplate = (result) => `
+  <h3>Результати тесту:</h3>
+  <p><strong></strong> ${result.description}</p>
+  
+  <h4>${result.category}</h4>
+  
+  <h4>Рекомендації:</h4>
+  <ul>
+    ${result.recommendations
+    .map((rec) => `<li>✅ ${rec}</li>`)
+    .join('')}
+  </ul>
+  
+  <h4>Головне:</h4>
+  <p>${result.conclusion}</p>
+  
+  <h4>Consultation:</h4>
+  <p>${result.consultation.text}</p>
+  
+ >
+`;
+exports.getToxicalRelTemplate = getToxicalRelTemplate;
+const getAttractivenessResultTemplate = (result) => `
+  <h3>Результати тесту привабливості:</h3>
+  
+  <h4>Категорія: ${result.category}</h4>
+  
+  <p><strong>Опис:</strong> ${result.description}</p>
+  
+  <h4>Відомі риси:</h4>
+  <ul>
+    ${result.knownTraits
+    .map((trait) => `<li>✅ ${trait}</li>`)
+    .join('')}
+  </ul>
+  
+  <h4>Приховані риси:</h4>
+  <ul>
+    ${result.hiddenTraits
+    .map((trait) => `<li>✅ ${trait}</li>`)
+    .join('')}
+  </ul>
+
+  <h4>Чинники посилення привабливості:</h4>
+  <ul>
+    ${result.strengthBoosters
+    .map((booster) => `<li>✅ ${booster}</li>`)
+    .join('')}
+  </ul>
+  
+  <h4>Ключова сила:</h4>
+  <p>${result.keyPower}</p>
+  
+  <h4>Наступний крок:</h4>
+  <p>${result.nextStep}</p>
+  
+  <h4>Заклик до дії:</h4>
+  <p>${result.callToAction}</p>
+`;
+exports.getAttractivenessResultTemplate = getAttractivenessResultTemplate;
