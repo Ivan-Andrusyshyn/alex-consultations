@@ -17,7 +17,6 @@ const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, functi
     try {
         const categoryName = req.params.categoryName;
         const results = toxical_relationship_1.default.getResults(categoryName);
-        console.log(results);
         res.status(200).send({
             message: 'Success get relationship-sensitivity category by answers!',
             results,

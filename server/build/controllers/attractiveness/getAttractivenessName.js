@@ -18,7 +18,7 @@ const getAttractivenessName = (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const { answers, userInformation } = req.body;
         const categoryName = attractiveness_1.default.getNameCategoryByScore(answers);
-        google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: categoryName }));
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: categoryName }));
         res.status(200).send({
             categoryName,
             message: 'Success post person type.',
