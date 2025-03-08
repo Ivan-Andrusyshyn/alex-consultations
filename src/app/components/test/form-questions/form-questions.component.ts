@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { DecimalPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -37,6 +37,7 @@ import { CheckboxComponent } from '../../checkbox/checkbox.component';
     ReactiveFormsModule,
     SecondaryBtnComponent,
     QuestionWordPipe,
+    DecimalPipe,
     NgClass,
     CheckboxComponent,
   ],

@@ -11,7 +11,9 @@
         [style.background]="colorProgressBar()"
         [style.width.%]="progressPercentage"
       >
-        <span class="percentages-text"> {{ progressPercentage }}% </span>
+        <span class="percentages-text"
+          >{{ progressPercentage | number : "1.0-0" }}%</span
+        >
       </div>
     </div>
   </div>
