@@ -19,6 +19,7 @@ import { FormQuestionsComponent } from '../../../components/test/form-questions/
 import { ToxicalRelationshipService } from '../../../shared/services/toxical-relationship.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-questions',
@@ -70,6 +71,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
           return r.questions;
         })
       );
+  }
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
   }
 
   ngOnDestroy(): void {
@@ -135,6 +140,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         answers,
         userInformation: {
           referrer: document.referrer,
+          routeTracker: this.routeTracker.getRoutes(),
           testName: 'toxical-relationship',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),
@@ -148,6 +154,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
               categoryName: r.categoryName,
             })
           );
+          this.routeTracker.clearRouteMap();
 
           this.toxicalRelationshipService.toxicalRelationshipResults.next(
             r.categoryName

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-test-information',
@@ -14,6 +15,11 @@ import { SeoService } from '../../../shared/services/seo.service';
 export class TestInformationComponent {
   routeUrl = '/tests/traumatic-sensitivity/questions';
   private seoService = inject(SeoService);
+
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   ngOnInit(): void {
     this.seoService.updateTitle(

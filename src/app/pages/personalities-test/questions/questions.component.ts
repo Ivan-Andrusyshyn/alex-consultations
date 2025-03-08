@@ -19,6 +19,7 @@ import { FormQuestionsComponent } from '../../../components/test/form-questions/
 import { Question, Answer } from '../../../shared/types/16-personalities';
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-questions',
@@ -35,6 +36,11 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private seoService = inject(SeoService);
+
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   imgUrl = 'assets/imgs/yoga-love.jpg';
   subtitleText =
@@ -128,13 +134,13 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('16-personalities-results') || 'null'
     );
     if (storage) return;
-    const referrer = document.referrer;
 
     this.personalitiesService
       .getPersonalitiesResultOfTest({
         answers,
         userInformation: {
-          referrer,
+          routeTracker: this.routeTracker.getRoutes(),
+          referrer: document.referrer,
           testName: '16-personalities',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),
@@ -149,6 +155,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
               scorePercentages: r.results.percentages,
             })
           );
+          this.routeTracker.clearRouteMap();
 
           this.personalitiesService.scorePercentages.next(
             r.results.percentages

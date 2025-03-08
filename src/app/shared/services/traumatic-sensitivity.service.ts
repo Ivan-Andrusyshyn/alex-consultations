@@ -43,6 +43,7 @@ export class TraumaticSensitivityService {
     answers: Answer[];
     userInformation: {
       testName: string;
+      routeTracker: string;
       referrer: string;
       timestamp: string;
       device: string;

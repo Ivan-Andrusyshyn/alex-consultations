@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
+import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-toxical-relationship',
@@ -17,6 +18,11 @@ export class ToxicalRelationshipComponent {
   titleText = 'Чи токсичні ваші стосунки?';
 
   private seoService = inject(SeoService);
+
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   ngOnInit(): void {
     this.seoService.updateTitle(

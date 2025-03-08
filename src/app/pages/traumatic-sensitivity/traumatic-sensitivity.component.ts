@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
+import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-traumatic-sensitivity',
@@ -18,6 +19,11 @@ export class TraumaticSensitivityComponent implements OnInit {
   titleText = 'Чутливість: твоя суперсила чи виклик?';
 
   private seoService = inject(SeoService);
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
+
   ngOnInit(): void {
     this.seoService.updateTitle(
       'Тест на травматичну чутливість | Дізнайся про свої почуття'

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
+import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-attractiveness',
@@ -18,6 +19,12 @@ export class AttractivenessComponent {
   titleText = 'Що робить тебе по-справжньому привабливим?';
 
   private seoService = inject(SeoService);
+
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
+
   ngOnInit(): void {
     this.seoService.updateTitle(
       'Тест: Що робить тебе по-справжньому привабливим?'

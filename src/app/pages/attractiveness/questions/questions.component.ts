@@ -19,6 +19,7 @@ import { FormQuestionsComponent } from '../../../components/test/form-questions/
 import { SeoService } from '../../../shared/services/seo.service';
 import { AttractivenessService } from '../../../shared/services/attractiveness.service';
 import { Question } from '../../../shared/types/attractiveness';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-questions',
@@ -36,6 +37,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private seoService = inject(SeoService);
 
   private readonly fb = inject(FormBuilder);
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
@@ -132,6 +137,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       .getAttractivenessCategory({
         answers,
         userInformation: {
+          routeTracker: this.routeTracker.getRoutes(),
           referrer: document.referrer,
           testName: 'attractiveness',
           timestamp: this.timestamp ?? '',
@@ -146,6 +152,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
               categoryName: r.categoryName,
             })
           );
+          this.routeTracker.clearRouteMap();
 
           return r.categoryName;
         }),

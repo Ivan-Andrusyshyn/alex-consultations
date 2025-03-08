@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { SeoService } from '../../shared/services/seo.service';
+import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-about',
@@ -12,6 +13,10 @@ import { SeoService } from '../../shared/services/seo.service';
 })
 export class AboutComponent implements OnInit {
   private seoService = inject(SeoService);
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   ngOnInit(): void {
     this.seoService.updateTitle(

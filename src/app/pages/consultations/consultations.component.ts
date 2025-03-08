@@ -14,6 +14,7 @@ import { SeoService } from '../../shared/services/seo.service';
 import { consultationData } from './consultations';
 import { ConsultationContent } from '../../shared/types/consultations';
 import { NgFor, NgIf } from '@angular/common';
+import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-consultations',
@@ -38,6 +39,10 @@ export class ConsultationsComponent implements OnInit {
   successRegistration = signal(false);
 
   consultationContent: ConsultationContent = consultationData;
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   ngOnInit(): void {
     this.seoService.updateTitle(

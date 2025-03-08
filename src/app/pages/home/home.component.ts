@@ -10,6 +10,7 @@ import { GoogleSheetsService } from '../../shared/services/google-sheets.service
 import { SideBtnComponent } from '../../components/side-btn/side-btn.component';
 import { SeoService } from '../../shared/services/seo.service';
 import { InfoCardComponent } from '../../components/home/info-card/info-card.component';
+import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,11 @@ export class HomeComponent implements OnInit {
   successRegistration = signal(false);
 
   private seoService = inject(SeoService);
+  private routeTracker = inject(RouteTrackerService);
+
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
 
   ngOnInit(): void {
     this.seoService.updateTitle('Тести для самопізнання та розвитку');

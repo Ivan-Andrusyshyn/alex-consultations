@@ -75,6 +75,7 @@ export class PersonalitiesTestService {
     userInformation: {
       testName: string;
       referrer: string;
+      routeTracker: string;
       timestamp: string;
       device: string;
     };

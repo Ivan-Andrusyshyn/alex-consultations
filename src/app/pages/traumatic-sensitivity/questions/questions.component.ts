@@ -18,6 +18,7 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { TraumaticSensitivityService } from '../../../shared/services/traumatic-sensitivity.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-questions',
@@ -50,6 +51,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
   traumaticSensitivityTest$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
+
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
+
   ngOnInit(): void {
     this.seoService.updateTitle('Запитання тесту на травматичну чутливість');
     this.seoService.updateMetaTags(
@@ -127,12 +134,13 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('traumatic-sensitivity') || 'null'
     );
     if (storage) return;
-    const referrer = document.referrer;
+
     this.traumaticSensitivityService
       .getTraumaticSensitivityResults({
         answers,
         userInformation: {
-          referrer,
+          routeTracker: this.routeTracker.getRoutes(),
+          referrer: document.referrer,
           testName: 'traumatic-sensitivity',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),
@@ -146,7 +154,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
               ...r.results,
             })
           );
-
+          this.routeTracker.clearRouteMap();
           this.traumaticSensitivityService.scorePercentages.next(
             r.results.percentages
           );

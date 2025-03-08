@@ -10,6 +10,7 @@ import { TestCardStartBtnComponent } from '../../../components/test/test-card-st
 import { SeoService } from '../../../shared/services/seo.service';
 import { PersonalityTypesComponent } from '../../../components/test/personalities-test/personality-types/personality-types.component';
 import { PersonalitiesTestComponent } from '../personalities-test.component';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-test-information',
@@ -32,6 +33,12 @@ export class TestInformationComponent implements OnInit {
     'Цей тест допоможе тобі краще зрозуміти свої природні схильності.';
   titleText = 'Тест 16 типів особистості';
   private seoService = inject(SeoService);
+
+  private routeTracker = inject(RouteTrackerService);
+  constructor() {
+    this.routeTracker.getRoutes();
+  }
+
   ngOnInit(): void {
     this.seoService.updateTitle('Інформація про тест 16 типів особистості');
     this.seoService.updateMetaTags(
