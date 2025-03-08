@@ -128,11 +128,13 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('16-personalities-results') || 'null'
     );
     if (storage) return;
+    const referrer = document.referrer;
 
     this.personalitiesService
       .getPersonalitiesResultOfTest({
         answers,
         userInformation: {
+          referrer,
           testName: '16-personalities',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),

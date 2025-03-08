@@ -129,10 +129,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('toxical-relationship') || 'null'
     );
     if (storage) return;
+    const referrer = document.referrer;
     this.toxicalRelationshipService
       .getToxicalRelationshipCategory({
         answers,
         userInformation: {
+          referrer,
           testName: 'toxical-relationship',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),

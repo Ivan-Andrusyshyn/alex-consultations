@@ -127,10 +127,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('attractiveness') || 'null'
     );
     if (storage) return;
+
     this.attractivenessService
       .getAttractivenessCategory({
         answers,
         userInformation: {
+          referrer: document.referrer,
           testName: 'attractiveness',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),

@@ -17,8 +17,8 @@ const attractiveness_1 = __importDefault(require("../../services/attractiveness"
 const getAttractivenessName = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { answers, userInformation } = req.body;
-        google_sheets_1.default.postTestResultsOnSheet(userInformation);
         const categoryName = attractiveness_1.default.getNameCategoryByScore(answers);
+        google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: categoryName }));
         res.status(200).send({
             categoryName,
             message: 'Success post person type.',

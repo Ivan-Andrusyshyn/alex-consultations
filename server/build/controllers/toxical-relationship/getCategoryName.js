@@ -17,9 +17,8 @@ const google_sheets_1 = __importDefault(require("../../services/google-sheets"))
 const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { answers, userInformation } = req.body;
-        google_sheets_1.default.postTestResultsOnSheet(userInformation);
         const categoryName = toxical_relationship_1.default.getNameCategoryByScore(answers);
-        console.log(categoryName);
+        google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: categoryName }));
         res.status(200).send({
             message: 'Success get relationship-sensitivity category!',
             categoryName,

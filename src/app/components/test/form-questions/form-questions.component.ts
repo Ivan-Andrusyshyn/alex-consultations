@@ -72,6 +72,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
+    this.isSnackBarOpened = false;
     sessionStorage.setItem('isSnackBarOpened', 'false');
   }
   openSnackBar() {
@@ -135,6 +136,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
 
   getSubmit() {
     const answers = this.formGroup.value;
+    this._snackBar.dismiss();
     this.onSubmit.emit(answers);
   }
 
@@ -157,8 +159,9 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
         if (result !== undefined) {
           this.formGroup.reset();
           sessionStorage.setItem('isSnackBarOpened', 'false');
-          this.colorProgressBar.set('linear-gradient(90deg, #ff7eb3, #ff758c)');
           this.isSnackBarOpened = false;
+
+          this.colorProgressBar.set('linear-gradient(90deg, #ff7eb3, #ff758c)');
           this.currentQuestionNumber = 0;
           sessionStorage.removeItem(this.currentTestName + '-results');
           sessionStorage.setItem(

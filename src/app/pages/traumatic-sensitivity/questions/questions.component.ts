@@ -127,10 +127,12 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('traumatic-sensitivity') || 'null'
     );
     if (storage) return;
+    const referrer = document.referrer;
     this.traumaticSensitivityService
       .getTraumaticSensitivityResults({
         answers,
         userInformation: {
+          referrer,
           testName: 'traumatic-sensitivity',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),
