@@ -45,7 +45,7 @@ class GoogleSheetsService {
             body.set('results', data.results);
             body.set('timestamp', data.timestamp);
             body.set('device', data.device);
-            body.set('device', data.referrer);
+            body.set('referrer', data.referrer);
             const scriptUrl = `${process.env.GOOGLE_SHEET_URL_TESTS}`;
             try {
                 const response = yield fetch(scriptUrl, {
