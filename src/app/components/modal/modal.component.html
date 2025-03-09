@@ -35,14 +35,14 @@
           Номер має містити 13 цифр (+380961234567)
         </div>
       </mat-form-field>
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Ваша пошта</mat-label>
         <input
           matInput
           formControlName="email"
           placeholder="Наприклад: myemail@gmail.com"
         />
-      </mat-form-field>
+      </mat-form-field> -->
 
       <mat-form-field>
         <mat-label>Що вас цікавить?</mat-label>
@@ -61,15 +61,29 @@
 </ng-container>
 
 <mat-dialog-actions>
-  <button mat-button (click)="cancel()" class="no-btn">
-    {{ data.btn["cancel"] }}
-  </button>
+  @if (data.btn['confirm']==='🚀 Отримати консультацію') {
+  <div class="emoji-pointer">👇</div>
   <button
-    mat-button
+    mat-raised-button
+    color="primary"
+    class="main-button"
     [mat-dialog-close]="confirm()"
-    class="yes-btn"
     cdkFocusInitial
   >
     {{ data.btn["confirm"] }}
   </button>
+
+  }@else {
+  <button mat-stroked-button color="#333" (click)="cancel()">
+    {{ data.btn["cancel"] }}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="confirm()"
+    cdkFocusInitial
+  >
+    {{ data.btn["confirm"] }}
+  </button>
+  }
 </mat-dialog-actions>

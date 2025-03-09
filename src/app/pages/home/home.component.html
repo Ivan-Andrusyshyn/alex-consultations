@@ -10,14 +10,14 @@
     <app-side-btn (onClick)="openDialog()"></app-side-btn>
   </div>
 
+  @if (successRegistration()) {
+
+  <div class="success-message">✅ Ви успішно записалися!</div>
+  <br />
+  }
   <div class="consultation-wrapper">
     <app-info-card></app-info-card>
   </div>
   <br />
   <br />
-
-  @if (successRegistration()) {
-
-  <div class="success-message">✅ Ви успішно записалися!</div>
-  }
 </section>
