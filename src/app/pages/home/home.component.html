@@ -7,7 +7,11 @@
       <div class="bg-text">Цінуй себе!</div>
       <div class="bg-text">Будь собою!</div>
     </div>
-    <app-side-btn (onClick)="openDialog()"></app-side-btn>
+    <app-accent-btn
+      [textBtn]="'Записатися'"
+      (onClickBtn)="openDialog()"
+      [matColor]="'primary'"
+    ></app-accent-btn>
   </div>
 
   @if (successRegistration()) {

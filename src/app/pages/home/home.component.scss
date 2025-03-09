@@ -12,7 +12,8 @@
 .hero-bg {
   border-radius: 15px;
   gap: 20px;
-  padding: 4px;
+  padding: 16px 8px;
+  margin-bottom: 20px;
 
   display: flex;
   box-shadow: var(--boxShadow);
@@ -20,7 +21,6 @@
   background-color: var(--bgColorBox);
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-bottom: 20px;
   img {
     width: 44px;
     display: block;

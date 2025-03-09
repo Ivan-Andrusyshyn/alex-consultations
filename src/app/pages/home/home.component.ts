@@ -11,11 +11,12 @@ import { SideBtnComponent } from '../../components/side-btn/side-btn.component';
 import { SeoService } from '../../shared/services/seo.service';
 import { InfoCardComponent } from '../../components/home/info-card/info-card.component';
 import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TestListHeroComponent, InfoCardComponent, SideBtnComponent],
+  imports: [TestListHeroComponent, InfoCardComponent, AccentBtnComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
