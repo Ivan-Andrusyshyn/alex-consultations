@@ -38,6 +38,7 @@ import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
+import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 
 @Component({
   selector: 'app-test-results',
@@ -47,7 +48,7 @@ import { personalityTypesContent } from '../../../../assets/content/16-personali
     SendResultsFormComponent,
     ResultsIndicatorComponent,
     SendFormOnEmailBtnComponent,
-    PrimaryBtnComponent,
+    AccentBtnComponent,
     AsyncPipe,
     TitleCardComponent,
     NgIf,

@@ -31,6 +31,7 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 
 @Component({
   selector: 'app-test-results',
@@ -42,7 +43,7 @@ import { SeoService } from '../../../shared/services/seo.service';
     NgIf,
     NgFor,
     ParagraphPipe,
-    PrimaryBtnComponent,
+    AccentBtnComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',

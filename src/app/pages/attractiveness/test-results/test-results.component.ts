@@ -30,6 +30,7 @@ import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { AttractivenessService } from '../../../shared/services/attractiveness.service';
+import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 
 @Component({
   selector: 'app-test-results',
@@ -40,7 +41,8 @@ import { AttractivenessService } from '../../../shared/services/attractiveness.s
     AsyncPipe,
     NgIf,
     NgFor,
-    PrimaryBtnComponent,
+
+    AccentBtnComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',

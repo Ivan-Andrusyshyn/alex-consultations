@@ -36,6 +36,7 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -56,10 +57,10 @@ const types: string[] = [
     SendResultsFormComponent,
     TraumaticResultsIndicatorComponent,
     SendFormOnEmailBtnComponent,
-    PrimaryBtnComponent,
     AsyncPipe,
     NgIf,
     NgFor,
+    AccentBtnComponent,
     TypeInformationComponent,
     NgStyle,
   ],

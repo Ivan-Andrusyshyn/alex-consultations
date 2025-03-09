@@ -44,7 +44,11 @@
   <br />
   <br />
   <div class="btns-wrapper">
-    <app-primary-btn (openDialog)="openDialog()"></app-primary-btn>
+    <app-accent-btn
+      [textBtn]="'Записатися'"
+      (onClickBtn)="openDialog()"
+      [matColor]="'accent'"
+    ></app-accent-btn>
     <app-send-form-on-email-btn
       *ngIf="!(isShowSendForm$ | async)"
       (sendForm)="toggleSendForm()"

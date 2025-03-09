@@ -65,7 +65,11 @@
       </li>
     </ul>
     <div class="btn-wrapper">
-      <app-accent-btn (onClickBtn)="openDialog()"></app-accent-btn>
+      <app-accent-btn
+        [textBtn]="'Записатися'"
+        (onClickBtn)="openDialog()"
+        [matColor]="'primary'"
+      ></app-accent-btn>
     </div>
   </div>
 

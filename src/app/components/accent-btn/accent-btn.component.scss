@@ -1,23 +1,19 @@
 button {
-  padding: 12px 30px;
-  border: none;
+  padding: 16px 28px;
   border-radius: 8px;
-  font-size: 18px;
-  font-weight: 500;
+  min-width: 180px;
+  font-size: 12px;
 
-  display: inline-block;
-  background: #007bff;
-  color: #f5f5f5;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  color: #f5f5f5 !important;
+  text-transform: uppercase;
+  position: relative;
+  border: none;
+  background: linear-gradient(45deg, #4caf50, #2e7d32);
 
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background: #0056b3;
-  }
-
-  @media screen and (min-width: 768px) {
-    font-size: 18px;
-    padding: 14px 40px;
+  @media screen and (min-width: 764px) {
+    font-size: 16px;
   }
 }
