@@ -73,13 +73,9 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-    this.isSnackBarOpened = false;
-    sessionStorage.setItem('isSnackBarOpened', 'false');
+    this.setSnackBar(false, 'false');
   }
-  openSnackBar() {
-    const text = 'Ще трохи – і ти дізнаєшся щось, що може тебе здивувати! 😉';
-    const textBtn = 'Йду далі';
-
+  openSnackBar(text: string, textBtn: string) {
     const snackBarRef = this._snackBar.open(text, textBtn, {
       verticalPosition: 'bottom',
       panelClass: ['custom-snackbar'],
@@ -120,16 +116,16 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
       ? (answeredQuestions / totalQuestions) * 100
       : 0;
 
-    const halfQuestions = Math.ceil(totalQuestions / 2);
-
-    if (
-      !this.isSnackBarOpened &&
-      progress > 50 &&
-      answeredQuestions >= halfQuestions
-    ) {
-      this.openSnackBar();
-      this.isSnackBarOpened = true;
-      sessionStorage.setItem('isSnackBarOpened', 'true');
+    if (!this.isSnackBarOpened && progress > 50 && progress < 80) {
+      const text = 'Ще трохи – і ти дізнаєшся щось, що може тебе здивувати! 😉';
+      const textBtn = 'Йду далі';
+      this.openSnackBar(text, textBtn);
+      this.setSnackBar(true, 'true');
+    } else if (this.isSnackBarOpened && progress > 80) {
+      const text = 'Ти молодець. Залишилось зовсім трішки до відкриття себе!';
+      const textBtn = 'Розкрити себе';
+      this.openSnackBar(text, textBtn);
+      this.setSnackBar(false, 'false');
     }
 
     return progress;
@@ -159,8 +155,8 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (result !== undefined) {
           this.formGroup.reset();
-          sessionStorage.setItem('isSnackBarOpened', 'false');
-          this.isSnackBarOpened = false;
+
+          this.setSnackBar(false, 'false');
 
           this.colorProgressBar.set('linear-gradient(90deg, #ff7eb3, #ff758c)');
           this.currentQuestionNumber = 0;
@@ -176,7 +172,10 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
         }
       });
   }
-
+  private setSnackBar(isSnack: boolean, storage: string) {
+    this.isSnackBarOpened = isSnack;
+    sessionStorage.setItem('isSnackBarOpened', storage);
+  }
   refreshTest() {
     this.openDialog();
   }
