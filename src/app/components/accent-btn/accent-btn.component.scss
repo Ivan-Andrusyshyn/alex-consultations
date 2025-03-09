@@ -1,7 +1,7 @@
 button {
-  padding: 16px 28px;
+  padding: 20px 28px;
   border-radius: 8px;
-  min-width: 180px;
+  min-width: 250px !important;
   font-size: 12px;
 
   transition: all 0.3s ease-in-out;
@@ -13,6 +13,7 @@ button {
   background: linear-gradient(45deg, #4caf50, #2e7d32);
 
   cursor: pointer;
+
   @media screen and (min-width: 764px) {
     font-size: 16px;
   }
