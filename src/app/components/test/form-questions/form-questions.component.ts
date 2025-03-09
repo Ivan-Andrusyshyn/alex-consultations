@@ -68,6 +68,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
     this.isSnackBarOpened = JSON.parse(
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
+
     if (this.isSnackBarOpened) {
       this.colorProgressBar.set('linear-gradient(90deg, #11998e, #38ef7d)');
     }
