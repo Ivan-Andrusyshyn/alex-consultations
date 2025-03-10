@@ -20,11 +20,10 @@ export class ToxicalRelationshipComponent {
   private seoService = inject(SeoService);
 
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Тест на токсичні відносини з партнером | Визнач свої стосунки'
     );

@@ -17,8 +17,11 @@ const google_sheets_1 = __importDefault(require("../../services/google-sheets"))
 const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { answers, userInformation } = req.body;
+        const ip = req.headers['x-forwarded-for']
+            ? req.headers['x-forwarded-for'].split(',')[0].trim()
+            : req.socket.remoteAddress || 'Unknown';
         const categoryName = toxical_relationship_1.default.getNameCategoryByScore(answers);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: categoryName }));
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: categoryName }));
         res.status(200).send({
             message: 'Success get relationship-sensitivity category!',
             categoryName,

@@ -21,8 +21,11 @@ const postPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function
         const userInformation = req.body.userInformation;
         const amountQuestions = _16_personality_1.default.amountQuestionsInType((0, test_1.default)());
         const { scores, percentages } = _16_personality_1.default.countPersonPercentages(answers, amountQuestions);
+        const ip = req.headers['x-forwarded-for']
+            ? req.headers['x-forwarded-for'].split(',')[0].trim()
+            : req.socket.remoteAddress || 'Unknown';
         const personType = _16_personality_1.default.getCodedTypeName(scores);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: personType }));
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: personType }));
         res.status(200).send({
             results: { scores, percentages, personType },
             message: 'Success post scores operation.',

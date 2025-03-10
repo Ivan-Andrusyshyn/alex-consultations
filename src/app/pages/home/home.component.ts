@@ -29,11 +29,9 @@ export class HomeComponent implements OnInit {
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
 
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
-
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle('Тести для самопізнання та розвитку');
     this.seoService.updateMetaTags(
       'Дізнайся про різноманітні тести для самопізнання, розвитку особистості та оцінки стосунків. Пройди психологічні тести, щоб зрозуміти себе краще і досягти гармонії в житті.',

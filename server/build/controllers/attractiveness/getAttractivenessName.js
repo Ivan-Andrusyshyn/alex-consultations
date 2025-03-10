@@ -18,7 +18,11 @@ const getAttractivenessName = (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const { answers, userInformation } = req.body;
         const categoryName = attractiveness_1.default.getNameCategoryByScore(answers);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: categoryName }));
+        const ip = req.headers['x-forwarded-for']
+            ? req.headers['x-forwarded-for'].split(',')[0].trim()
+            : req.socket.remoteAddress || 'Unknown';
+        console.log('IPHERE', ip);
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: categoryName }));
         res.status(200).send({
             categoryName,
             message: 'Success post person type.',

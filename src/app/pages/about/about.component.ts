@@ -14,11 +14,10 @@ import { RouteTrackerService } from '../../shared/services/route-tracker.service
 export class AboutComponent implements OnInit {
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Про нас | Дізнайся більше про нашу команду та місію'
     );

@@ -38,9 +38,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
   private readonly fb = inject(FormBuilder);
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
@@ -55,6 +52,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   attractivenessService$!: Observable<Question[]>;
   formGroup: FormGroup = this.fb.group({});
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle('Запитання тесту на привабливість');
 
     this.seoService.updateMetaTags(

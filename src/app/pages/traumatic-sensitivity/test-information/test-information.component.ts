@@ -17,11 +17,10 @@ export class TestInformationComponent {
   private seoService = inject(SeoService);
 
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Інформація про тест на травматичну чутливість'
     );

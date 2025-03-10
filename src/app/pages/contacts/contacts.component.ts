@@ -20,11 +20,10 @@ export class ContactsComponent implements OnInit {
 
   contactForm!: FormGroup;
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.contactForm = this.fb.group({
       name: [''],
       email: [''],

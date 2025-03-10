@@ -16,8 +16,9 @@ const google_sheets_1 = __importDefault(require("../../services/google-sheets"))
 const postTestsResultGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
         if (data) {
-            yield google_sheets_1.default.postTestResultsOnSheet(data);
+            yield google_sheets_1.default.postTestResultsOnSheet(Object.assign({ ip }, data));
             res.status(200).send({ message: 'Successfull add new row' });
         }
     }

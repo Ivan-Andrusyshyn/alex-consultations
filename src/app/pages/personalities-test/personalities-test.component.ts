@@ -21,11 +21,10 @@ import { RouteTrackerService } from '../../shared/services/route-tracker.service
 export class PersonalitiesTestComponent implements OnInit {
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Тест 16 типів особистості | Дізнайся більше про себе'
     );

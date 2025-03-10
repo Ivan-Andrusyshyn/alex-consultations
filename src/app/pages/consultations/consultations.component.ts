@@ -40,11 +40,10 @@ export class ConsultationsComponent implements OnInit {
 
   consultationContent: ConsultationContent = consultationData;
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Консультації | Отримайте цілісну картину своєї особистості за одну зустріч'
     );

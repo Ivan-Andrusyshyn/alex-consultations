@@ -19,7 +19,10 @@ const getDataAndPercentages = (req, res) => __awaiter(void 0, void 0, void 0, fu
         const answers = req.body.answers;
         const userInformation = req.body.userInformation;
         const { percentages, scores, matchResults, sensitivityType, originMatchResults, minScoreNumber, maxScoreNumber, } = traumatic_sensitivity_1.default.countPersonPercentages(answers);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { results: sensitivityType }));
+        const ip = req.headers['x-forwarded-for']
+            ? req.headers['x-forwarded-for'].split(',')[0].trim()
+            : req.socket.remoteAddress || 'Unknown';
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: sensitivityType }));
         res.status(200).send({
             results: {
                 percentages,

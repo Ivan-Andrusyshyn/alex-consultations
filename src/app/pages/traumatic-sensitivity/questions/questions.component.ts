@@ -53,11 +53,10 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   formGroup: FormGroup = this.fb.group({});
 
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle('Запитання тесту на травматичну чутливість');
     this.seoService.updateMetaTags(
       'Відповідай на запитання тесту на травматичну чутливість, щоб краще зрозуміти свої реакції на стрес та рівень емоційної вразливості.',

@@ -16,11 +16,10 @@ export class TestInformationComponent implements OnInit {
 
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Інформація про тест на токсичні відносини з партнером | Деталі та результати'
     );

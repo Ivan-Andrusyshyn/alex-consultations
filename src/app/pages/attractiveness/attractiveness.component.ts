@@ -21,11 +21,10 @@ export class AttractivenessComponent {
   private seoService = inject(SeoService);
 
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Тест: Що робить тебе по-справжньому привабливим?'
     );

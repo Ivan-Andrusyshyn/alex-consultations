@@ -34,8 +34,9 @@ export class RouteTrackerService {
   }
   clearRouteMap() {
     this.routeMap = [];
+    sessionStorage.removeItem('routeMap');
   }
   getRoutes(): string {
-    return this.routeMap.join(' > ');
+    return this.routeMap.length ? this.routeMap.join(' > ') : '';
   }
 }

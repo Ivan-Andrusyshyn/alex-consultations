@@ -38,9 +38,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   private seoService = inject(SeoService);
 
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   imgUrl = 'assets/imgs/yoga-love.jpg';
   subtitleText =
@@ -58,6 +55,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   //
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Запитання | 16 типів особистості | vidchuttia'
     );

@@ -53,6 +53,8 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   formGroup: FormGroup = this.fb.group({});
 
   ngOnInit(): void {
+    this.routeTracker.getRoutes();
+
     this.seoService.updateTitle(
       'Запитання до тесту на токсичні відносини з партнером | Оціні свої стосунки'
     );
@@ -73,9 +75,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       );
   }
   private routeTracker = inject(RouteTrackerService);
-  constructor() {
-    this.routeTracker.getRoutes();
-  }
 
   ngOnDestroy(): void {
     clearTimeout(this.timer);
