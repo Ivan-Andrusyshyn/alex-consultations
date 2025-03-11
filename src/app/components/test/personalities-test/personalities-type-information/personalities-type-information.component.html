@@ -1,123 +1,87 @@
 <div class="personality-info-container">
   <div class="info-card" *ngIf="personInformation">
-    <div class="card-header">
-      <!-- <h2>
-        {{ personInformation.type }}
-
-        <span>({{ personType }})</span>
-      </h2>
-      <p class="subtitle">{{ personInformation.description }}</p> -->
-    </div>
-
     <div class="card-content">
-      <div class="info-section" id="strengths">
+      <div class="info-section">
         <h3>Сильні сторони</h3>
         <ul>
-          <li *ngFor="let strength of personInformation.strengths">
+          <li *ngFor="let strength of personInformation.tvoyaSyla">
             📌 {{ strength }}
           </li>
         </ul>
       </div>
       <hr />
-      <br />
       <div class="info-section">
         <h3>Слабкі сторони</h3>
-        <ul id="weaknesses">
-          <li *ngFor="let weakness of personInformation.weaknesses">
+        <ul>
+          <li *ngFor="let weakness of personInformation.tvoyaTayemnytsya">
             🔴 {{ weakness }}
           </li>
         </ul>
       </div>
       <hr />
-      <br />
       <div class="info-section">
-        <h3>Сприйняття</h3>
-        <div class="perception-group" id="perception">
-          <div class="perception-types">
-            <h4>Інтуїція:</h4>
-            <ul>
-              <li *ngFor="let item of personInformation.perception.intuition">
-                📌 {{ item }}
-              </li>
-            </ul>
-          </div>
-          <hr />
-          <div class="perception-types">
-            <h4>Почуття:</h4>
-            <ul>
-              <li *ngFor="let item of personInformation.perception.feelings">
-                📌 {{ item }}
-              </li>
-            </ul>
-          </div>
-          <hr />
-
-          <div class="perception-types">
-            <h4>Спонтанність:</h4>
-            <ul>
-              <li *ngFor="let item of personInformation.perception.spontaneity">
-                📌 {{ item }}
-              </li>
-            </ul>
-          </div>
-          <hr />
-
-          <div class="perception-types">
-            <h4>Логіка:</h4>
-            <ul>
-              <li *ngFor="let item of personInformation.perception.logic">
-                📌 {{ item }}
-              </li>
-            </ul>
-          </div>
-        </div>
+        <h3>Що буде, якщо не змінюватися</h3>
+        <p>{{ personInformation.shchoBudeYakshchoNeZminyuvaty }}</p>
       </div>
       <hr />
 
       <div class="info-section">
-        <h3>Взаємовідносини</h3>
-        <ul id="relationships">
-          <li *ngFor="let trait of personInformation.relationships.traits">
-            {{ trait }}
+        <h3>Як усе зміниться, коли зрозумієш себе</h3>
+        <p>{{ personInformation.yakUseZminytsyaKolyZrozumishSebe }}</p>
+      </div>
+      <hr />
+
+      <div class="info-section">
+        <h3>Темний близнюк</h3>
+        <h4>{{ personInformation.temnyyBlyznyuk.nazva }}</h4>
+        <ul>
+          <li
+            *ngFor="let trait of personInformation.temnyyBlyznyuk.osoblyvosti"
+          >
+            📌 {{ trait }}
           </li>
         </ul>
       </div>
       <hr />
 
       <div class="info-section">
-        <h3>Кар'єра</h3>
-        <div class="career-group" id="career">
-          <div>
-            <h4>Уподобання:</h4>
-            <ul>
-              <li
-                *ngFor="let preference of personInformation.career.preferences"
-              >
-                📌 {{ preference }}
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4>Найкращі сфери:</h4>
-            <ul>
-              <li *ngFor="let field of personInformation.career.bestFields">
-                📌 {{ field }}
-              </li>
-            </ul>
-          </div>
-        </div>
+        <h3>Легендарний момент</h3>
+        <p>{{ personInformation.legendarnyyMoment }}</p>
       </div>
+      <hr />
+
+      <div class="info-section">
+        <h3>Головне</h3>
+        <ul>
+          <li *ngFor="let failure of personInformation.prohrivNaZapys">
+            📌 {{ failure }}
+          </li>
+        </ul>
+      </div>
+      @if (personInformation.offer) {
+
+      <div class="info-section benefits">
+        <h3>Записуйся на консультацію, якщо ти хочеш:</h3>
+        <ul>
+          <li *ngFor="let benefit of personInformation.offer.benefits">
+            💡 {{ benefit }}
+          </li>
+        </ul>
+        <p>{{ personInformation.offer.title }}</p>
+      </div>
+      }
     </div>
-    <div class="mobile-navigation">
-      <button
-        *ngFor="let section of sectionList"
-        (click)="scrollToSection(section.id)"
-      >
-        {{ section.label }}
-      </button>
-    </div>
-    <div class="card-footer">
-      <p>{{ personInformation.conclusion }}</p>
-    </div>
+  </div>
+
+  <!-- <div class="mobile-navigation">
+    <button
+      *ngFor="let section of sectionList"
+      (click)="scrollToSection(section.id)"
+    >
+      {{ section.label }}
+    </button>
+  </div> -->
+  <div class="card-footer">
+    <p>{{ personInformation.shchoBudeYakshchoNeZminyuvaty }}</p>
   </div>
 </div>

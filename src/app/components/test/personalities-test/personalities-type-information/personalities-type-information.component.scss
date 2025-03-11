@@ -146,7 +146,20 @@
       padding-left: 0;
       padding: 8px;
     }
+    p {
+      font-size: 16px;
+      padding: 8px 0;
+      letter-spacing: 0.01em;
 
+      text-align: left;
+      color: var(--textColor);
+
+      font-style: normal;
+      transition: color 0.3s ease;
+      @media screen and (min-width: 764px) {
+        font-size: 18px;
+      }
+    }
     li {
       font-size: 16px;
       padding: 8px 0;
@@ -163,13 +176,12 @@
     }
   }
 }
+.benefits {
+  li {
+    padding: 6px;
+  }
+}
 
-.perception-group div,
-.career-group div {
-  flex: 1;
-}
-.perception-types {
-}
 .card-footer {
   text-align: center;
   color: var(--textColor);

@@ -18,23 +18,22 @@ interface TestResult {
 }
 interface TypeInformation {
   type: string;
-  description: string;
-  strengths: string[];
-  weaknesses: string[];
-  perception: {
-    intuition: string[];
-    feelings: string[];
-    spontaneity: string[];
-    logic: string[];
+  deviz: string;
+  koronnaFraza: string;
+  tvoyaSyla: string[];
+  tvoyaTayemnytsya: string[];
+  shchoBudeYakshchoNeZminyuvaty: string;
+  yakUseZminytsyaKolyZrozumishSebe: string;
+  temnyyBlyznyuk: {
+    nazva: string;
+    osoblyvosti: string[];
   };
-  relationships: {
-    traits: string[];
+  legendarnyyMoment: string;
+  prohrivNaZapys: string[];
+  offer: {
+    benefits: string[];
+    title: string;
   };
-  career: {
-    preferences: string[];
-    bestFields: string[];
-  };
-  conclusion: string;
 }
 type Answer = { point: number; text: string };
 type AnswerPoint = 1 | 2 | 3 | 4 | 5;

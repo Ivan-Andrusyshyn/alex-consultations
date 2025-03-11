@@ -31,104 +31,106 @@ exports.getTraumaticTemplate = getTraumaticTemplate;
 const getPersonalitiesTemplate = (typeInformation) => `
   <div class="personality-info-container">
     <div class="info-card">
+      <!-- Card Header -->
       <div class="card-header">
-        <h2>
-          ${typeInformation.type}
-        </h2>
-        <p class="subtitle">${typeInformation.description}</p>
+        <h2>${typeInformation.type}</h2>
+        <p class="deviz">${typeInformation.deviz}</p>
+        <p class="koronna-fraza">${typeInformation.koronnaFraza}</p>
       </div>
 
       <div class="card-content">
+        <!-- Strengths Section -->
+        ${typeInformation.tvoyaSyla.length > 0
+    ? `
         <div class="info-section">
-          <h3>Сильні сторони</h3>
+          <h3>Твоя Сила</h3>
           <ul>
-            ${typeInformation.strengths
-    .map((strength) => `<li>✅ ${strength}</li>`)
-    .join('')}
+            ${typeInformation.tvoyaSyla
+        .map((strength) => `<li>✅ ${strength}</li>`)
+        .join('')}
           </ul>
         </div>
+        `
+    : ''}
 
+        <!-- Secrets Section -->
+        ${typeInformation.tvoyaTayemnytsya.length > 0
+    ? `
         <div class="info-section">
-          <h3>Слабкі сторони</h3>
+          <h3>Твоя Таємниця</h3>
           <ul>
-            ${typeInformation.weaknesses
-    .map((weakness) => `<li>🔴 ${weakness}</li>`)
-    .join('')}
+            ${typeInformation.tvoyaTayemnytsya
+        .map((secret) => `<li>🔒 ${secret}</li>`)
+        .join('')}
           </ul>
         </div>
+        `
+    : ''}
 
+        <!-- What Will Happen if You Don't Change Section -->
+        ${typeInformation.shchoBudeYakshchoNeZminyuvaty
+    ? `
         <div class="info-section">
-          <h3>Сприйняття</h3>
-          <div class="perception-group">
-            <div class="perception-types">
-              <h4>Інтуїція:</h4>
-              <ul>
-                ${typeInformation.perception.intuition
-    .map((item) => `<li>📌 ${item}</li>`)
-    .join('')}
-              </ul>
-            </div>
-            <div class="perception-types">
-              <h4>Почуття:</h4>
-              <ul>
-                ${typeInformation.perception.feelings
-    .map((item) => `<li>📌 ${item}</li>`)
-    .join('')}
-              </ul>
-            </div>
-            <div class="perception-types">
-              <h4>Спонтанність:</h4>
-              <ul>
-                ${typeInformation.perception.spontaneity
-    .map((item) => `<li>📌 ${item}</li>`)
-    .join('')}
-              </ul>
-            </div>
-            <div class="perception-types">
-              <h4>Логіка:</h4>
-              <ul>
-                ${typeInformation.perception.logic
-    .map((item) => `<li>📌 ${item}</li>`)
-    .join('')}
-              </ul>
-            </div>
-          </div>
+          <h3>Що буде, якщо не змінювати?</h3>
+          <p>${typeInformation.shchoBudeYakshchoNeZminyuvaty}</p>
         </div>
+        `
+    : ''}
 
+        <!-- What Will Change Once You Understand Yourself Section -->
+        ${typeInformation.yakUseZminytsyaKolyZrozumishSebe
+    ? `
         <div class="info-section">
-          <h3>Взаємовідносини</h3>
+          <h3>Що зміниться, коли зрозумієш себе?</h3>
+          <p>${typeInformation.yakUseZminytsyaKolyZrozumishSebe}</p>
+        </div>
+        `
+    : ''}
+
+        <!-- Dark Twin Section -->
+        ${typeInformation.temnyyBlyznyuk &&
+    typeInformation.temnyyBlyznyuk.osoblyvosti.length > 0
+    ? `
+        <div class="info-section">
+          <h3>Темний Близнюк: ${typeInformation.temnyyBlyznyuk.nazva}</h3>
           <ul>
-            ${typeInformation.relationships.traits
-    .map((trait) => `<li>💞 ${trait}</li>`)
-    .join('')}
+            ${typeInformation.temnyyBlyznyuk.osoblyvosti
+        .map((feature) => `<li>⚡ ${feature}</li>`)
+        .join('')}
           </ul>
         </div>
+        `
+    : ''}
 
+        <!-- Legendary Moment Section -->
+        ${typeInformation.legendarnyyMoment
+    ? `
         <div class="info-section">
-          <h3>Кар'єра</h3>
-          <div class="career-group">
-            <div>
-              <h4>Уподобання:</h4>
-              <ul>
-                ${typeInformation.career.preferences
-    .map((preference) => `<li>📌 ${preference}</li>`)
-    .join('')}
-              </ul>
-            </div>
-            <div>
-              <h4>Найкращі сфери:</h4>
-              <ul>
-                ${typeInformation.career.bestFields
-    .map((field) => `<li>🚀 ${field}</li>`)
-    .join('')}
-              </ul>
-            </div>
-          </div>
+          <h3>Легендарний Момент</h3>
+          <p>${typeInformation.legendarnyyMoment}</p>
         </div>
+        `
+    : ''}
+
+        <!-- Record Loss Section -->
+        ${typeInformation.prohrivNaZapys.length > 0
+    ? `
+        <div class="info-section">
+          <h3>Програв на запис</h3>
+          <ul>
+            ${typeInformation.prohrivNaZapys
+        .map((loss) => `<li>❌ ${loss}</li>`)
+        .join('')}
+          </ul>
+        </div>
+        `
+    : ''}
+
       </div>
 
+      <!-- Card Footer -->
       <div class="card-footer">
-        <p>${typeInformation.conclusion}</p>
+        <p>Виявляється, що в кожного є свої суперсили та слабкості! Це твоя унікальна історія, і ти її створюєш!</p>
       </div>
     </div>
   </div>
