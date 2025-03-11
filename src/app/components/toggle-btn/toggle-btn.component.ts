@@ -13,10 +13,21 @@ import { ThemeService } from '../../shared/services/theme.service';
 export class ToggleBtnComponent {
   private readonly themeService = inject(ThemeService);
 
-  favoriteColorControl = new FormControl('');
+  favoriteColorControl = new FormControl<boolean>(false);
   ngOnInit(): void {
+    this.initializeTheme();
     this.favoriteColorControl.valueChanges.subscribe((t) => {
       this.themeService.toggleMode();
     });
+  }
+
+  private initializeTheme() {
+    const savedMode = localStorage.getItem('theme');
+
+    if (savedMode === 'light-mode') {
+      this.favoriteColorControl.setValue(false);
+    } else {
+      this.favoriteColorControl.setValue(true);
+    }
   }
 }
