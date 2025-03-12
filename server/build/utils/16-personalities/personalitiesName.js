@@ -15,8 +15,10 @@ const ESFP_1 = require("../../content/16-personality/ESFP");
 const INTP_1 = require("../../content/16-personality/INTP");
 const ISTP_1 = require("../../content/16-personality/ISTP");
 const ISFJ_1 = require("../../content/16-personality/ISFJ");
+const ESTJ_1 = require("../../content/16-personality/ESTJ");
 const personalityTypes = new Map([
     ['Захисник', ISFJ_1.ISFJ],
+    ['Керівник', ESTJ_1.ESTJ],
     ['Адміністратор', ISTJ_1.ISTJ],
     ['Адвокат', INFJ_1.INFJ],
     ['Архітектор', INTJ_1.INTJ],
