@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ESTP = void 0;
 exports.ESTP = {
-    type: 'ESTP – «Живемо один раз – бери максимум»',
+    type: 'ESTP',
     deviz: 'Давай не обговорювати, а просто зробимо. Що може піти не так?',
     koronnaFraza: 'Ти миттєво приймаєш рішення і дієш, поки інші лише думають і сумніваються.',
     tvoyaSyla: [
