@@ -31,106 +31,95 @@ exports.getTraumaticTemplate = getTraumaticTemplate;
 const getPersonalitiesTemplate = (typeInformation) => `
   <div class="personality-info-container">
     <div class="info-card">
-      <!-- Card Header -->
       <div class="card-header">
         <h2>${typeInformation.type}</h2>
-        <p class="deviz">${typeInformation.deviz}</p>
-        <p class="koronna-fraza">${typeInformation.koronnaFraza}</p>
+        <p class="deviz">💡 ${typeInformation.deviz}</p>
+        <p class="koronna-fraza">✨ "${typeInformation.koronnaFraza}"</p>
       </div>
 
       <div class="card-content">
-        <!-- Strengths Section -->
         ${typeInformation.tvoyaSyla.length > 0
     ? `
-        <div class="info-section">
-          <h3>Твоя Сила</h3>
-          <ul>
-            ${typeInformation.tvoyaSyla
+          <div class="info-section">
+            <h3>Твоя Сила</h3>
+            <ul>
+              ${typeInformation.tvoyaSyla
         .map((strength) => `<li>✅ ${strength}</li>`)
         .join('')}
-          </ul>
-        </div>
+            </ul>
+          </div>
         `
     : ''}
 
-        <!-- Secrets Section -->
         ${typeInformation.tvoyaTayemnytsya.length > 0
     ? `
-        <div class="info-section">
-          <h3>Твоя Таємниця</h3>
-          <ul>
-            ${typeInformation.tvoyaTayemnytsya
+          <div class="info-section">
+            <h3>Твоя Таємниця</h3>
+            <ul>
+              ${typeInformation.tvoyaTayemnytsya
         .map((secret) => `<li>🔒 ${secret}</li>`)
         .join('')}
-          </ul>
-        </div>
+            </ul>
+          </div>
         `
     : ''}
 
-        <!-- What Will Happen if You Don't Change Section -->
         ${typeInformation.shchoBudeYakshchoNeZminyuvaty
     ? `
-        <div class="info-section">
-          <h3>Що буде, якщо не змінювати?</h3>
-          <p>${typeInformation.shchoBudeYakshchoNeZminyuvaty}</p>
-        </div>
+          <div class="info-section">
+            <h3>Що буде, якщо не змінювати?</h3>
+            <p>${typeInformation.shchoBudeYakshchoNeZminyuvaty}</p>
+          </div>
         `
     : ''}
 
-        <!-- What Will Change Once You Understand Yourself Section -->
         ${typeInformation.yakUseZminytsyaKolyZrozumishSebe
     ? `
-        <div class="info-section">
-          <h3>Що зміниться, коли зрозумієш себе?</h3>
-          <p>${typeInformation.yakUseZminytsyaKolyZrozumishSebe}</p>
-        </div>
+          <div class="info-section">
+            <h3>Що зміниться, коли зрозумієш себе?</h3>
+            <p>${typeInformation.yakUseZminytsyaKolyZrozumishSebe}</p>
+          </div>
         `
     : ''}
 
-        <!-- Dark Twin Section -->
-        ${typeInformation.temnyyBlyznyuk &&
-    typeInformation.temnyyBlyznyuk.osoblyvosti.length > 0
+        ${typeInformation.temnyyBlyznyuk.osoblyvosti.length > 0
     ? `
-        <div class="info-section">
-          <h3>Темний Близнюк: ${typeInformation.temnyyBlyznyuk.nazva}</h3>
-          <ul>
-            ${typeInformation.temnyyBlyznyuk.osoblyvosti
+          <div class="info-section">
+            <h3>Темний Близнюк: ${typeInformation.temnyyBlyznyuk.nazva}</h3>
+            <ul>
+              ${typeInformation.temnyyBlyznyuk.osoblyvosti
         .map((feature) => `<li>⚡ ${feature}</li>`)
         .join('')}
-          </ul>
-        </div>
+            </ul>
+          </div>
         `
     : ''}
 
-        <!-- Legendary Moment Section -->
         ${typeInformation.legendarnyyMoment
     ? `
-        <div class="info-section">
-          <h3>Легендарний Момент</h3>
-          <p>${typeInformation.legendarnyyMoment}</p>
-        </div>
+          <div class="info-section">
+            <h3>Легендарний Момент</h3>
+            <p>${typeInformation.legendarnyyMoment}</p>
+          </div>
         `
     : ''}
 
-        <!-- Record Loss Section -->
-        ${typeInformation.prohrivNaZapys.length > 0
+        ${typeInformation.offer.benefits.length > 0
     ? `
-        <div class="info-section">
-          <h3>Програв на запис</h3>
-          <ul>
-            ${typeInformation.prohrivNaZapys
-        .map((loss) => `<li>❌ ${loss}</li>`)
+          <div class="info-section">
+            <h3>Прогрів на запис</h3>
+            <ul>
+              ${typeInformation.offer.benefits
+        .map((item) => `<li>🔥 ${item}</li>`)
         .join('')}
-          </ul>
-        </div>
+            </ul>
+          </div>
         `
     : ''}
-
       </div>
 
-      <!-- Card Footer -->
       <div class="card-footer">
-        <p>Виявляється, що в кожного є свої суперсили та слабкості! Це твоя унікальна історія, і ти її створюєш!</p>
+        <p>Виявляється, що в кожного є свої суперсили та слабкості! Це твоя унікальна історія, і ти її створюєш! 🚀</p>
       </div>
     </div>
   </div>
