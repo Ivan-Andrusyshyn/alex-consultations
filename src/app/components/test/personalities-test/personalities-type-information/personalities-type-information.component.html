@@ -54,14 +54,19 @@
         <p>{{ personInformation.legendarnyyMoment }}</p>
       </div>
       <hr />
-
       <div class="info-section">
         <ul>
-          <li *ngFor="let failure of personInformation.prohrivNaZapys">
-            {{ failure }}
+          <li *ngFor="let trait of personInformation.offer.resume">
+            {{ trait }}
+          </li>
+        </ul>
+        <ul>
+          <li *ngFor="let question of personInformation.offer.keyQuestions">
+            {{ question }}
           </li>
         </ul>
       </div>
+      <hr />
       @if (personInformation.offer) {
 
       <div class="info-section benefits">

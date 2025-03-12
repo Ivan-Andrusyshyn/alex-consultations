@@ -29,11 +29,13 @@ interface TypeInformation {
     osoblyvosti: string[];
   };
   legendarnyyMoment: string;
-  prohrivNaZapys: string[];
+
   offer: {
+    resume: string[];
+    keyQuestions: string[];
     benefits: string[];
-    title: string;
     subtitle: string;
+    title: string;
   };
 }
 type Answer = { point: number; text: string };
