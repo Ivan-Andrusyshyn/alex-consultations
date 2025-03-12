@@ -2,6 +2,11 @@
   <div class="info-card" *ngIf="personInformation">
     <div class="card-content">
       <div class="info-section">
+        <h3>Коронна фраза</h3>
+        <p>{{ personInformation.koronnaFraza }}</p>
+      </div>
+      <hr />
+      <div class="info-section">
         <h3>Твоя сила</h3>
         <ul>
           <li *ngFor="let strength of personInformation.tvoyaSyla">
