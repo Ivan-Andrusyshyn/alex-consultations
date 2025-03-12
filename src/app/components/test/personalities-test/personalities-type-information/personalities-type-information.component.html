@@ -2,7 +2,7 @@
   <div class="info-card" *ngIf="personInformation">
     <div class="card-content">
       <div class="info-section">
-        <h3>Сильні сторони</h3>
+        <h3>Твоя сила</h3>
         <ul>
           <li *ngFor="let strength of personInformation.tvoyaSyla">
             📌 {{ strength }}
@@ -11,7 +11,7 @@
       </div>
       <hr />
       <div class="info-section">
-        <h3>Слабкі сторони</h3>
+        <h3>Твоя таємниця</h3>
         <ul>
           <li *ngFor="let weakness of personInformation.tvoyaTayemnytsya">
             🔴 {{ weakness }}
@@ -51,7 +51,6 @@
       <hr />
 
       <div class="info-section">
-        <h3>Головне</h3>
         <ul>
           <li *ngFor="let failure of personInformation.prohrivNaZapys">
             📌 {{ failure }}
@@ -61,13 +60,13 @@
       @if (personInformation.offer) {
 
       <div class="info-section benefits">
-        <h3>Записуйся на консультацію, якщо ти хочеш:</h3>
+        <h3>{{ personInformation.offer.title }}</h3>
         <ul>
           <li *ngFor="let benefit of personInformation.offer.benefits">
             💡 {{ benefit }}
           </li>
         </ul>
-        <p>{{ personInformation.offer.title }}</p>
+        <p>{{ personInformation.offer.subtitle }}</p>
       </div>
       }
     </div>

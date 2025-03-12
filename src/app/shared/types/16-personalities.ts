@@ -33,6 +33,7 @@ interface TypeInformation {
   offer: {
     benefits: string[];
     title: string;
+    subtitle: string;
   };
 }
 type Answer = { point: number; text: string };
