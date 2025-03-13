@@ -32,6 +32,7 @@ import { ModalComponent } from '../../../components/modal/modal.component';
 import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
+import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 
 @Component({
   selector: 'app-test-results',
@@ -43,6 +44,7 @@ import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.co
     NgIf,
     NgFor,
     ParagraphPipe,
+    TestListHeroComponent,
     AccentBtnComponent,
   ],
   templateUrl: './test-results.component.html',

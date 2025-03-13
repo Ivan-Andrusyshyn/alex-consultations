@@ -82,7 +82,7 @@ export const personalityTypesContent: PersonalityTypes[] = [
   {
     type: 'ESTP',
     name: 'Підприємець',
-    route: `tests/16-personalities/ESTP`,
+    route: `tests/16-personalities/details/ESTP`,
     urlImg: 'assets/svg/tests/personalities/entrep.svg',
   },
   {

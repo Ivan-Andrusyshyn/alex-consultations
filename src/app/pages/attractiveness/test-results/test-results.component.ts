@@ -31,6 +31,7 @@ import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn
 import { SeoService } from '../../../shared/services/seo.service';
 import { AttractivenessService } from '../../../shared/services/attractiveness.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
+import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 
 @Component({
   selector: 'app-test-results',
@@ -41,7 +42,7 @@ import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.co
     AsyncPipe,
     NgIf,
     NgFor,
-
+    TestListHeroComponent,
     AccentBtnComponent,
   ],
   templateUrl: './test-results.component.html',

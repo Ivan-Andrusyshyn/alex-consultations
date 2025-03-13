@@ -39,6 +39,7 @@ import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
+import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 
 @Component({
   selector: 'app-test-results',
@@ -51,6 +52,7 @@ import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.co
     AccentBtnComponent,
     AsyncPipe,
     TitleCardComponent,
+    TestListHeroComponent,
     NgIf,
   ],
   templateUrl: './test-results.component.html',

@@ -5,6 +5,7 @@ import {
   DestroyRef,
   ElementRef,
   inject,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -14,6 +15,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TestCardInfoBtnComponent } from '../test-card-info-btn/test-card-info-btn.component';
 import { TestCardStartBtnComponent } from '../test-card-start-btn/test-card-start-btn.component';
 import { testCardsData } from '../../../../assets/content/tests-content/test-cards-data';
+
+type HideTestsCard =
+  | 'attractiveness-card'
+  | 'toxical-card'
+  | 'personality-card'
+  | 'traumatic-card';
 
 @Component({
   selector: 'app-test-list-hero',
@@ -32,6 +39,7 @@ export class TestListHeroComponent implements OnInit {
   testData = testCardsData;
 
   private destroyRef = inject(DestroyRef);
+  @Input() hideTestsCard: HideTestsCard | '' = '';
   @ViewChild('testList', { static: false }) testList!: ElementRef;
   timer$!: Subscription;
 

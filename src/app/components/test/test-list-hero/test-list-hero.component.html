@@ -2,11 +2,10 @@
   <button class="scroll-btn prev" (click)="scroll('prev')">&#10094;</button>
   <button class="scroll-btn next" (click)="scroll('next')">&#10095;</button>
   <ul class="test-list" #testList>
-    <li
-      class="test-card"
-      [ngClass]="test.cardClass"
-      *ngFor="let test of testData"
-    >
+    @for (test of testData; track $index) { @if
+    (!(test.cardClass===hideTestsCard)) {
+
+    <li class="test-card" [ngClass]="test.cardClass">
       <h3>
         {{ test.title }}
         <span>{{ test.time }}</span>
@@ -25,5 +24,6 @@
         ></app-test-card-info-btn>
       </div>
     </li>
+    } }
   </ul>
 </div>
