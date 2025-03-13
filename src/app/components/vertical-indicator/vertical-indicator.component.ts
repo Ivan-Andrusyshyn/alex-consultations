@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
 })
 export class VerticalIndicatorComponent implements OnInit {
   @Input() value: number = 1;
-  @Input() height!: number;
   controller = new FormControl({ value: this.value, disabled: true });
   ngOnInit(): void {
     this.controller.setValue(this.value, { emitEvent: false });
