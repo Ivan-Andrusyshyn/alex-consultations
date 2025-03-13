@@ -30,6 +30,15 @@ h3 {
     font-size: 16px;
   }
 }
+p {
+  font-size: 10px;
+  font-weight: 400;
+
+  text-align: center;
+  color: var(--textColorTitle);
+  text-transform: uppercase;
+  display: inline-block;
+}
 .title-wrapper {
   gap: 12px;
 
@@ -83,6 +92,7 @@ h3 {
 
 .matchResult {
   color: red;
+  position: relative;
 }
 .test-results {
   max-width: 500px;

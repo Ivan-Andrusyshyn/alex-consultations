@@ -38,4 +38,23 @@ export class ResultsIndicatorComponent implements OnInit {
   parseIntProc(proc: number) {
     return parseInt(proc.toString());
   }
+  getPieChartStyle(scorePercentages: Record<string, number>): string {
+    let gradient = '';
+    let currentAngle = 0;
+    const colors: Record<string, string> = {
+      key1: '#ff5733',
+      key2: '#33ff57',
+      key3: '#3357ff',
+      key4: '#ff33a8',
+    };
+
+    Object.keys(scorePercentages).forEach((key) => {
+      const percentage = scorePercentages[key];
+      const nextAngle = currentAngle + percentage * 3.6; // 1% = 3.6 градуса
+      gradient += `${colors[key]} ${currentAngle}deg ${nextAngle}deg, `;
+      currentAngle = nextAngle;
+    });
+
+    return `conic-gradient(${gradient.slice(0, -2)})`;
+  }
 }

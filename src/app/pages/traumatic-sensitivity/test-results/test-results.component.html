@@ -4,6 +4,10 @@
       class="score-wrapper"
       *ngIf="sensitivityResults.results.percentages as percentages"
     >
+      <p>
+        Шкала від 1 до 10, де 1 означає низький рівень чутливості, а 10 — дуже
+        високий рівень чутливості.
+      </p>
       <div class="title-wrapper">
         <h3>
           {{ sensitivityResults.results.sensitivityType }}
@@ -16,12 +20,14 @@
             "
           >
             @if (compare(sensitivityResults.results.matchResults, r)) { >
-            {{ i + 1 }}. {{ r }}
+            {{ i + 1 }}.{{ r }}
+
             }@else {
             {{ i + 1 }}. {{ r }}
             }
           </div>
         </div>
+
         <div
           class="bg-results"
           [ngStyle]="{
@@ -62,5 +68,5 @@
   <div *ngIf="successMessage()" class="success-message">
     Ми відправили результати тесту на пошту!
   </div>
-  <app-test-list-hero [hideTestsCard]="'toxical-card'"></app-test-list-hero>
+  <app-test-list-hero [hideTestsCard]="'traumatic-card'"></app-test-list-hero>
 </section>

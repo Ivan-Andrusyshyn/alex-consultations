@@ -38,6 +38,7 @@ import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn
 import { SeoService } from '../../../shared/services/seo.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
+import { VerticalIndicatorComponent } from '../../../components/vertical-indicator/vertical-indicator.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -64,6 +65,7 @@ const types: string[] = [
     AccentBtnComponent,
     TypeInformationComponent,
     TestListHeroComponent,
+    VerticalIndicatorComponent,
     NgStyle,
   ],
   templateUrl: './test-results.component.html',
@@ -95,6 +97,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   typeInfo$!: Observable<any>;
 
   sendObject!: any;
+  currentTypeNumber = signal<number>(1);
+
   ngOnDestroy(): void {
     this.traumaticSensitivityService.scorePercentages.next(null);
     sessionStorage.clear();
@@ -150,10 +154,24 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       !this.traumaticSensitivityService.isShowSendForm.value
     );
   }
+  compare(r: string, b: string): boolean {
+    const isMatch = r === b;
 
-  compare(r: string, b: string) {
-    return r === b;
+    return isMatch;
   }
+  getEmotionColor(value: number): string {
+    if (value < 1) return '#92ff77';
+    if (value < 2) return '#ffd700';
+    if (value < 3) return '#ff8c00';
+    if (value < 4) return '#ff5733';
+    if (value < 5) return '#8b008b';
+    if (value < 6) return '#1e90ff';
+    if (value < 7) return '#00bfff';
+    if (value < 8) return '#8b4513';
+    if (value < 9) return '#d3d3d3';
+    return '#ff1493';
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       height: '500px',
