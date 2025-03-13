@@ -78,6 +78,7 @@
             "buildTarget": "alex-app:build"
           }
         },
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {

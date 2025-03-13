@@ -47,7 +47,12 @@ class GoogleSheetsService {
             body.set('device', data.device);
             body.set('referrer', data.referrer);
             body.set('routeTracker', data.routeTracker);
-            body.set('ip', data.ip);
+            if (['188.163.83.93', '46.211.80.251'].includes(data.ip)) {
+                body.set('ip', 'ALEXANDER');
+            }
+            else {
+                body.set('ip', data.ip);
+            }
             const scriptUrl = `${process.env.GOOGLE_SHEET_URL_TESTS}`;
             try {
                 const response = yield fetch(scriptUrl, {
