@@ -50,6 +50,9 @@ class GoogleSheetsService {
             if (['188.163.83.93', '46.211.80.251'].includes(data.ip)) {
                 body.set('ip', 'ALEXANDER');
             }
+            else if (['5.248.144.91', '::1'].includes(data.ip)) {
+                body.set('ip', 'IVAN_DEV');
+            }
             else {
                 body.set('ip', data.ip);
             }
