@@ -50,11 +50,14 @@ export class HomeComponent implements OnInit {
 
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
+  loading$!: Observable<boolean>;
+  private readonly loadingService = inject(LoadingService);
 
   usersDayPhrase$!: Observable<PersonalityDayPhrases>;
 
   ngOnInit(): void {
     this.routeTracker.getRoutes();
+    this.loading$ = this.loadingService.isLoading();
 
     this.usersDayPhrase$ = this.personalitiesPhrasesService
       .getPersonalitiesPhrases()
