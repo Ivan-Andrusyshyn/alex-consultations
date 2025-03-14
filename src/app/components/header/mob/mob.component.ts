@@ -13,7 +13,10 @@ import { HeaderService } from '../../../shared/services/header.service';
 import { ToggleBtnComponent } from '../../toggle-btn/toggle-btn.component';
 import { UserPersonalityCardComponent } from '../../user-personality-card/user-personality-card.component';
 import { PersonalitiesPhraseService } from '../../../shared/services/personalities-phrase.service';
-import { UsersPhraseSubject } from '../../../shared/types/16-personalities';
+import {
+  PersonalityDayPhrases,
+  UsersPhraseSubject,
+} from '../../../shared/types/16-personalities';
 
 @Component({
   selector: 'app-mob',
@@ -36,13 +39,17 @@ export class MobComponent implements OnInit {
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
-  usersPhrase$!: Observable<UsersPhraseSubject | null>;
+  personalitiesPhraseData$!: Observable<{
+    allPhrases: PersonalityDayPhrases[];
+    usersPhrase: UsersPhraseSubject;
+  } | null>;
 
   ngOnInit(): void {
-    this.usersPhrase$ =
+    this.personalitiesPhraseData$ =
       this.personalitiesPhrasesService.getUsersPhraseObservable();
     this.isMenuOpen$ = this.headerService.isMobMenuOpen$;
   }
+
   toggleMenu() {
     this.headerService.toggleMenu();
   }

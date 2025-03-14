@@ -2,6 +2,8 @@
   <img [src]="avatarUrl" [alt]="usersTypeName" />
   <div class="content-wrapper">
     <p>Ваш тип особистості</p>
-    <h3>{{ usersTypeName }}</h3>
+    <h3 [routerLink]="['/tests/16-personalities/details/', personalityType]">
+      {{ usersTypeName }}
+    </h3>
   </div>
 </div>

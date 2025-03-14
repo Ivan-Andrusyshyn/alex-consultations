@@ -24,15 +24,19 @@ export class PersonalitiesPhraseService {
 
   readonly storageKEY = 'personalityType';
 
-  private usersPhraseSubject = new BehaviorSubject<UsersPhraseSubject | null>(
-    null
-  );
+  private usersPhraseSubject = new BehaviorSubject<{
+    allPhrases: PersonalityDayPhrases[];
+    usersPhrase: UsersPhraseSubject;
+  } | null>(null);
 
   personalitiesContent = personalityTypesContent;
 
   constructor(private http: HttpClient) {}
 
-  getUsersPhraseObservable(): Observable<UsersPhraseSubject | null> {
+  getUsersPhraseObservable(): Observable<{
+    allPhrases: PersonalityDayPhrases[];
+    usersPhrase: UsersPhraseSubject;
+  } | null> {
     return this.usersPhraseSubject.asObservable();
   }
 
@@ -56,7 +60,10 @@ export class PersonalitiesPhraseService {
             userTypeName: r.userTypeName,
             ...this.findUsersTypePhrase(r.dayPhrases),
           };
-          this.usersPhraseSubject.next(usersPhrase);
+          this.usersPhraseSubject.next({
+            allPhrases: r.dayPhrases,
+            usersPhrase,
+          });
           return {
             allPhrases: r.dayPhrases,
             usersPhrase,

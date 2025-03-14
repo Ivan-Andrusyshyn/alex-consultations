@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   inject,
   OnInit,
 } from '@angular/core';
@@ -20,6 +21,7 @@ import { LoaderSquareComponent } from './components/loader-square/loader-square.
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ThemeService } from './shared/services/theme.service';
 import { PersonalitiesPhraseService } from './shared/services/personalities-phrase.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -41,11 +43,17 @@ import { PersonalitiesPhraseService } from './shared/services/personalities-phra
 export class AppComponent implements OnInit {
   private readonly loadingService = inject(LoadingService);
   private readonly themeService = inject(ThemeService);
-
+  private readonly personalitiesPhrasesService = inject(
+    PersonalitiesPhraseService
+  );
+  private destroyRef = inject(DestroyRef);
   loading$!: Observable<boolean>;
   currentReqMethod$!: Observable<string>;
-
   ngOnInit(): void {
+    this.personalitiesPhrasesService
+      .getPersonalitiesPhrases()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
     this.loading$ = this.loadingService.isLoading();
     this.themeService.initTheme();
   }

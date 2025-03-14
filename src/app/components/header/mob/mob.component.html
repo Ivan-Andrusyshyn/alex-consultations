@@ -16,19 +16,27 @@
 </button>
 
 <div class="mobile-menu" [class.open]="isMenuOpen$ | async">
-  <ng-container *ngIf="usersPhrase$ | async as usersPhrase">
-    @if (usersPhrase.phrase) {
+  <div class="users-card-wrapper">
+    <ng-container
+      *ngIf="personalitiesPhraseData$ | async as personalitiesPhraseData"
+    >
+      @if (personalitiesPhraseData.usersPhrase.phrase) {
+      <span (click)="toggleMenu()">
+        <app-user-personality-card
+          [usersTypeName]="personalitiesPhraseData.usersPhrase.userTypeName"
+          [avatarUrl]="personalitiesPhraseData.usersPhrase.typeAvatarUrl"
+          [personalityType]="
+            personalitiesPhraseData.usersPhrase.personalityType
+          "
+        ></app-user-personality-card>
+      </span>
+      }
+    </ng-container>
 
-    <app-user-personality-card
-      [usersTypeName]="usersPhrase.userTypeName"
-      [avatarUrl]="usersPhrase.typeAvatarUrl"
-    ></app-user-personality-card>
-    <br />
-    <br />
-    }
-  </ng-container>
-
-  <app-toggle-btn></app-toggle-btn>
+    <div class="btn-wrapper">
+      <app-toggle-btn></app-toggle-btn>
+    </div>
+  </div>
   <ul>
     <br />
     <li routerLink="/" routerLinkActive="active" (click)="toggleMenu()">
