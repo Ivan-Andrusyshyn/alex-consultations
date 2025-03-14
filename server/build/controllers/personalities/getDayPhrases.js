@@ -8,12 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const _16_personalities_phrases_1 = require("../../services/16-personalities-phrases");
+const _16_personality_1 = __importDefault(require("../../services/16-personality"));
 const getDayPhrases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const personType = req.params.personType;
         const dayPhrases = _16_personalities_phrases_1.personalitiesPhraseService.getAllDayPhrases();
-        res.send(Object.assign({ message: 'Success get phrases.' }, dayPhrases));
+        const userTypeName = _16_personality_1.default.getPersonNameByType(personType);
+        res.send(Object.assign(Object.assign({ message: 'Success get phrases.' }, dayPhrases), { userTypeName }));
     }
     catch (error) {
         console.log(error);

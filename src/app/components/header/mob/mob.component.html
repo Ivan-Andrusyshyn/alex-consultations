@@ -14,35 +14,49 @@
     </svg>
   </label>
 </button>
-<ul class="mobile-menu" [class.open]="isMenuOpen$ | async">
-  <app-toggle-btn></app-toggle-btn>
-  <br />
-  <li routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()">
-    Тести
-  </li>
-  <li
-    routerLink="/consultations"
-    routerLinkActive="active"
-    (click)="toggleMenu()"
-  >
-    Аналіз особистості
-  </li>
-  <li
-    style="display: none"
-    routerLink="/courses"
-    routerLinkActive="active"
-    (click)="toggleMenu()"
-  >
-    Курси
-  </li>
 
-  <li routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">
-    Про нас
-  </li>
-  <li routerLink="/contacts" routerLinkActive="active" (click)="toggleMenu()">
-    Контакти
-  </li>
-</ul>
+<div class="mobile-menu" [class.open]="isMenuOpen$ | async">
+  <ng-container *ngIf="usersPhrase$ | async as usersPhrase">
+    <app-user-personality-card
+      [usersTypeName]="usersPhrase.userTypeName"
+    ></app-user-personality-card>
+  </ng-container>
+  <br />
+  <br />
+  <app-toggle-btn></app-toggle-btn>
+  <ul>
+    <br />
+    <li routerLink="/" routerLinkActive="active" (click)="toggleMenu()">
+      Головна
+    </li>
+    <li routerLink="/tests" routerLinkActive="active" (click)="toggleMenu()">
+      Тести
+    </li>
+    <li
+      routerLink="/consultations"
+      routerLinkActive="active"
+      (click)="toggleMenu()"
+    >
+      Аналіз особистості
+    </li>
+    <li
+      style="display: none"
+      routerLink="/courses"
+      routerLinkActive="active"
+      (click)="toggleMenu()"
+    >
+      Курси
+    </li>
+
+    <li routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">
+      Про нас
+    </li>
+    <li routerLink="/contacts" routerLinkActive="active" (click)="toggleMenu()">
+      Контакти
+    </li>
+  </ul>
+</div>
+
 <div
   class="menu-backdrop"
   [class.open]="isMenuOpen$ | async"

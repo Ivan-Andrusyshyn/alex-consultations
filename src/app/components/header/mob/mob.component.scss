@@ -61,9 +61,14 @@
     visibility: visible;
   }
 }
+.card-wrapper {
+  gap: 12px;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .mobile-menu {
-  gap: 8px;
   background: var(--bgColorGradient);
   z-index: 9999;
   top: 100%;
@@ -76,7 +81,6 @@
 
   box-sizing: border-box;
   position: absolute;
-  display: flex;
   transform: translateY(-20px);
   opacity: 0;
   visibility: hidden;
@@ -87,6 +91,13 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+  }
+  ul {
+    padding: 4px;
+    gap: 8px;
+
+    display: flex;
+    flex-direction: column;
   }
   li {
     font-size: 18px;

@@ -52,7 +52,9 @@ interface PersonalityDayPhrases {
   personalityType: string;
   phrase: string;
 }
-
+interface UsersPhraseSubject extends PersonalityDayPhrases {
+  userTypeName: string;
+}
 export {
   Answer,
   PersonalityDayPhrases,
@@ -62,4 +64,5 @@ export {
   Dichotomy,
   TypeInformation,
   PersonalityTypes,
+  UsersPhraseSubject,
 };

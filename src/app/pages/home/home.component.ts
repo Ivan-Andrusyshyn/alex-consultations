@@ -13,6 +13,7 @@ import {
 } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DateTime } from 'luxon';
 
 import { ModalComponent } from '../../components/modal/modal.component';
 import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
@@ -22,9 +23,11 @@ import { InfoCardComponent } from '../../components/home/info-card/info-card.com
 import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
 import { PersonalitiesPhraseService } from '../../shared/services/personalities-phrase.service';
-import { PersonalityDayPhrases } from '../../shared/types/16-personalities';
+import {
+  PersonalityDayPhrases,
+  UsersPhraseSubject,
+} from '../../shared/types/16-personalities';
 import { LoadingService } from '../../shared/services/loading.service';
-import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +38,7 @@ import { DateTime } from 'luxon';
     InfoCardComponent,
     AccentBtnComponent,
     NgIf,
+
     MatProgressSpinnerModule,
   ],
   templateUrl: './home.component.html',
@@ -55,7 +59,10 @@ export class HomeComponent implements OnInit {
   loading$!: Observable<boolean>;
   private readonly loadingService = inject(LoadingService);
 
-  usersDayPhrase$!: Observable<PersonalityDayPhrases>;
+  dayPhrase$!: Observable<{
+    allPhrases: PersonalityDayPhrases[];
+    usersPhrase: UsersPhraseSubject;
+  }>;
 
   ngOnInit(): void {
     this.todayDate = DateTime.now()
@@ -64,9 +71,8 @@ export class HomeComponent implements OnInit {
     this.routeTracker.getRoutes();
     this.loading$ = this.loadingService.isLoading();
 
-    this.usersDayPhrase$ = this.personalitiesPhrasesService
-      .getPersonalitiesPhrases()
-      .pipe(map((r) => r.usersPhrase));
+    this.dayPhrase$ =
+      this.personalitiesPhrasesService.getPersonalitiesPhrases();
 
     this.seoService.updateTitle('Тести для самопізнання та розвитку');
     this.seoService.updateMetaTags(

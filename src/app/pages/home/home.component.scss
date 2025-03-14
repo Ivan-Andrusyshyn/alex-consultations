@@ -32,10 +32,18 @@
     @media screen and (min-width: 764px) {
       margin-top: 0;
     }
+    .type-description {
+      font-weight: 300;
+      font-size: 12px;
+    }
     .users-type {
       font-size: 18px;
       font-weight: 600;
       margin-left: 20px;
+      span {
+        font-weight: 3200;
+        font-size: 14px;
+      }
     }
     p {
       padding-left: 0;
