@@ -12,6 +12,7 @@ import {
   throwError,
 } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ModalComponent } from '../../components/modal/modal.component';
 import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
@@ -22,6 +23,7 @@ import { RouteTrackerService } from '../../shared/services/route-tracker.service
 import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
 import { PersonalitiesPhraseService } from '../../shared/services/personalities-phrase.service';
 import { PersonalityDayPhrases } from '../../shared/types/16-personalities';
+import { LoadingService } from '../../shared/services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,7 @@ import { PersonalityDayPhrases } from '../../shared/types/16-personalities';
     InfoCardComponent,
     AccentBtnComponent,
     NgIf,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -47,11 +50,14 @@ export class HomeComponent implements OnInit {
 
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
+  loading$!: Observable<boolean>;
+  private readonly loadingService = inject(LoadingService);
 
   usersDayPhrase$!: Observable<PersonalityDayPhrases>;
 
   ngOnInit(): void {
     this.routeTracker.getRoutes();
+    this.loading$ = this.loadingService.isLoading();
 
     this.usersDayPhrase$ = this.personalitiesPhrasesService
       .getPersonalitiesPhrases()
