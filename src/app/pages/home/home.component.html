@@ -26,15 +26,20 @@
           Привіт {{ usersDayPhrase.personalityType }}
         </div>
       </div>
+      <div class="date-container">
+        <strong>{{ todayDate }}</strong>
+      </div>
       <div class="bg-text">"{{ usersDayPhrase.phrase }}"</div>
+
       }
     </div>
-
-    <app-accent-btn
-      [textBtn]="'Записатися'"
-      (onClickBtn)="openDialog()"
-      [matColor]="'primary'"
-    ></app-accent-btn>
+    <div class="btn-wrapper">
+      <app-accent-btn
+        [textBtn]="'Записатися'"
+        (onClickBtn)="openDialog()"
+        [matColor]="'primary'"
+      ></app-accent-btn>
+    </div>
   </div>
 
   @if (successRegistration()) {

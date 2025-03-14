@@ -24,6 +24,7 @@ import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.compo
 import { PersonalitiesPhraseService } from '../../shared/services/personalities-phrase.service';
 import { PersonalityDayPhrases } from '../../shared/types/16-personalities';
 import { LoadingService } from '../../shared/services/loading.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-home',
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
     PersonalitiesPhraseService
   );
   successRegistration = signal(false);
+  todayDate!: string;
 
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
@@ -56,6 +58,9 @@ export class HomeComponent implements OnInit {
   usersDayPhrase$!: Observable<PersonalityDayPhrases>;
 
   ngOnInit(): void {
+    this.todayDate = DateTime.now()
+      .setLocale('uk')
+      .toLocaleString(DateTime.DATE_FULL);
     this.routeTracker.getRoutes();
     this.loading$ = this.loadingService.isLoading();
 
