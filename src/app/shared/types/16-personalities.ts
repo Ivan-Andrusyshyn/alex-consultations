@@ -54,6 +54,7 @@ interface PersonalityDayPhrases {
 }
 interface UsersPhraseSubject extends PersonalityDayPhrases {
   userTypeName: string;
+  typeAvatarUrl: string;
 }
 export {
   Answer,

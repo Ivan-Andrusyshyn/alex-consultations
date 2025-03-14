@@ -17,9 +17,13 @@
 
 <div class="mobile-menu" [class.open]="isMenuOpen$ | async">
   <ng-container *ngIf="usersPhrase$ | async as usersPhrase">
+    @if (usersPhrase.phrase) {
+
     <app-user-personality-card
       [usersTypeName]="usersPhrase.userTypeName"
+      [avatarUrl]="usersPhrase.typeAvatarUrl"
     ></app-user-personality-card>
+    }
   </ng-container>
   <br />
   <br />

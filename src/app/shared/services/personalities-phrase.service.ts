@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
 
 import { environment } from '../../environment/environment';
 import { PersonalityDayPhrases } from '../types/16-personalities';
+import { personalityTypesContent } from '../../../assets/content/16-personalities/personalityTypes';
 
 interface PersonalitiesPhrasesResponse {
   message: string;
@@ -13,6 +14,7 @@ interface PersonalitiesPhrasesResponse {
 }
 interface UsersPhraseSubject extends PersonalityDayPhrases {
   userTypeName: string;
+  typeAvatarUrl: string;
 }
 @Injectable({
   providedIn: 'root',
@@ -21,9 +23,12 @@ export class PersonalitiesPhraseService {
   private readonly testsUrl = environment.apiUrl + '/tests';
 
   readonly storageKEY = 'personalityType';
+
   private usersPhraseSubject = new BehaviorSubject<UsersPhraseSubject | null>(
     null
   );
+
+  personalitiesContent = personalityTypesContent;
 
   constructor(private http: HttpClient) {}
 
@@ -35,12 +40,6 @@ export class PersonalitiesPhraseService {
     allPhrases: PersonalityDayPhrases[];
     usersPhrase: UsersPhraseSubject;
   }> {
-    if (this.usersPhraseSubject.value) {
-      return of({
-        allPhrases: [],
-        usersPhrase: this.usersPhraseSubject.value,
-      });
-    }
     const usersType = localStorage.getItem(this.storageKEY);
 
     return this.http
@@ -68,12 +67,15 @@ export class PersonalitiesPhraseService {
 
   private findUsersTypePhrase(dayPhrases: PersonalityDayPhrases[]) {
     const usersType = localStorage.getItem(this.storageKEY);
-
-    return (
-      dayPhrases.find((item) => item.personalityType === usersType) ?? {
+    const typeAvatarUrl =
+      personalityTypesContent.find((item) => item.type === usersType)?.urlImg ??
+      '';
+    return {
+      typeAvatarUrl,
+      ...(dayPhrases.find((item) => item.personalityType === usersType) ?? {
         phrase: '',
         personalityType: '',
-      }
-    );
+      }),
+    };
   }
 }
