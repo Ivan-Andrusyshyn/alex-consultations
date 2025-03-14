@@ -11,14 +11,6 @@
         </div>
       </div>
       <div class="bg-text">"{{ usersDayPhrase.phrase }}"</div>
-      } @else if (loading$|async) {
-      <div class="spinner-container">
-        <mat-progress-spinner
-          mode="indeterminate"
-          color="primary"
-        ></mat-progress-spinner>
-      </div>
-
       } @else {
       <div>
         <img src="assets/svg/heart.svg" alt="Heart Icon" />
