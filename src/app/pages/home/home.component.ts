@@ -2,21 +2,37 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
+import {
+  catchError,
+  filter,
+  map,
+  Observable,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 import { ModalComponent } from '../../components/modal/modal.component';
 import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
-import { SideBtnComponent } from '../../components/side-btn/side-btn.component';
 import { SeoService } from '../../shared/services/seo.service';
 import { InfoCardComponent } from '../../components/home/info-card/info-card.component';
 import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
+import { PersonalitiesPhraseService } from '../../shared/services/personalities-phrase.service';
+import { PersonalityDayPhrases } from '../../shared/types/16-personalities';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TestListHeroComponent, InfoCardComponent, AccentBtnComponent],
+  imports: [
+    TestListHeroComponent,
+    AsyncPipe,
+    InfoCardComponent,
+    AccentBtnComponent,
+    NgIf,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -24,13 +40,22 @@ export class HomeComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
   private readonly googleService = inject(GoogleSheetsService);
+  private readonly personalitiesPhrasesService = inject(
+    PersonalitiesPhraseService
+  );
   successRegistration = signal(false);
 
   private seoService = inject(SeoService);
   private routeTracker = inject(RouteTrackerService);
 
+  usersDayPhrase$!: Observable<PersonalityDayPhrases>;
+
   ngOnInit(): void {
     this.routeTracker.getRoutes();
+
+    this.usersDayPhrase$ = this.personalitiesPhrasesService
+      .getPersonalitiesPhrases()
+      .pipe(map((r) => r.usersPhrase));
 
     this.seoService.updateTitle('Тести для самопізнання та розвитку');
     this.seoService.updateMetaTags(

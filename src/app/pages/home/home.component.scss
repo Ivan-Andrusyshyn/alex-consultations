@@ -21,6 +21,26 @@
   background-color: var(--bgColorBox);
   justify-content: space-around;
   flex-wrap: wrap;
+  .users-type-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .users-type {
+      font-size: 16px;
+      font-weight: 600;
+      margin-left: 20px;
+    }
+    p {
+      padding-left: 0;
+      @media screen and (min-width: 764px) {
+        letter-spacing: 0.5em;
+        padding-left: 64px;
+      }
+    }
+    img {
+      margin: 0;
+    }
+  }
   img {
     width: 44px;
     display: block;

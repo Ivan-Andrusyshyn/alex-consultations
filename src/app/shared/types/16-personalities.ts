@@ -48,8 +48,14 @@ interface PersonalityTypes {
   route: string;
 }
 
+interface PersonalityDayPhrases {
+  personalityType: string;
+  phrase: string;
+}
+
 export {
   Answer,
+  PersonalityDayPhrases,
   Question,
   AnswerPoint,
   TestResult,

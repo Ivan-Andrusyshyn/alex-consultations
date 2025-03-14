@@ -19,6 +19,7 @@ import { LoadingService } from './shared/services/loading.service';
 import { LoaderSquareComponent } from './components/loader-square/loader-square.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ThemeService } from './shared/services/theme.service';
+import { PersonalitiesPhraseService } from './shared/services/personalities-phrase.service';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,7 @@ import { ThemeService } from './shared/services/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  private loadingService = inject(LoadingService);
+  private readonly loadingService = inject(LoadingService);
   private readonly themeService = inject(ThemeService);
 
   loading$!: Observable<boolean>;

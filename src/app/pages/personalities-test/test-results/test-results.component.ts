@@ -99,6 +99,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
 
     this.activeRoute.params.subscribe((r) => {
+      localStorage.setItem('personalityType', r['personalitiesName']);
+
       this.imgUrl =
         this.personalityTypes.find(
           (type) => type.type === r['personalitiesName']
@@ -124,19 +126,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      height: '500px',
-      width: '400px',
-      data: {
-        contentType: 'form-consultation',
-        title: '🔥 Готові до прориву?',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: '🚀 Отримати консультацію',
-        },
-      },
-    });
-
+    const dialogRef = this.dialog.open(ModalComponent, this.dialogSettings());
     dialogRef
       .afterClosed()
       .pipe(
@@ -155,6 +145,20 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  private dialogSettings() {
+    return {
+      height: '500px',
+      width: '400px',
+      data: {
+        contentType: 'form-consultation',
+        title: '🔥 Готові до прориву?',
+        btn: {
+          cancel: 'Ні, дякую',
+          confirm: '🚀 Отримати консультацію',
+        },
+      },
+    };
+  }
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService

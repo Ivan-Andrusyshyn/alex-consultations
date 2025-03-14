@@ -1,12 +1,27 @@
 <section class="home">
   <app-test-list-hero></app-test-list-hero>
   <div class="hero-bg">
-    <div>
-      <img src="assets/svg/heart.svg" alt="" />
-      <div class="bg-text">Полюби себе!</div>
-      <div class="bg-text">Цінуй себе!</div>
-      <div class="bg-text">Будь собою!</div>
+    <div *ngIf="usersDayPhrase$ | async as usersDayPhrase">
+      @if (usersDayPhrase.phrase) {
+
+      <div class="users-type-wrapper">
+        <img src="assets/svg/heart.svg" alt="Heart Icon" />
+        <div class="users-type">
+          Привіт {{ usersDayPhrase.personalityType }}
+        </div>
+      </div>
+      <div class="bg-text">"{{ usersDayPhrase.phrase }}"</div>
+      }@else {
+      <div>
+        <img src="assets/svg/heart.svg" alt="Heart Icon" />
+
+        <div class="bg-text">Полюби себе!</div>
+        <div class="bg-text">Цінуй себе!</div>
+        <div class="bg-text">Будь собою!</div>
+      </div>
+      }
     </div>
+
     <app-accent-btn
       [textBtn]="'Записатися'"
       (onClickBtn)="openDialog()"
