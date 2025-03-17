@@ -5,6 +5,63 @@
     [subtitleText]="subtitleText"
   ></app-title-card>
   <app-personality-types></app-personality-types>
+  <!-- ============= -->
+  <div class="calculator">
+    <h3>Аналіз сумісності за типами особистості</h3>
+    <br />
+    <br />
+
+    <form action="" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="select-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Виберіть особистість</mat-label>
+          <mat-select formControlName="selectedFirstPersonality">
+            <mat-option
+              *ngFor="let option of personalities"
+              [value]="option.type"
+            >
+              <span class="option-content">
+                {{ option.type }} ({{ option.name }})
+                <img
+                  [src]="option.urlImg"
+                  [alt]="option.type"
+                  class="option-img"
+                />
+              </span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="select-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Виберіть особистість</mat-label>
+          <mat-select formControlName="selectedSecondPersonality">
+            <mat-option
+              *ngFor="let option of personalities"
+              [value]="option.type"
+            >
+              <span class="option-content">
+                {{ option.type }} ({{ option.name }})
+                <img
+                  [src]="option.urlImg"
+                  [alt]="option.type"
+                  class="option-img"
+                />
+              </span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button class="calculate-btn" type="submit">Розрахувати</button>
+    </form>
+    <br />
+    <h2 *ngIf="matchesResult$ | async as matchesResult">
+      {{ matchesResult.relationshipsType }}
+      {{ matchesResult.scoreResult }} %
+    </h2>
+  </div>
+
+  <!-- ===================== -->
   <br />
   <h3>Що ти отримаєш?</h3>
   <ul>

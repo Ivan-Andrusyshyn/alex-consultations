@@ -65,7 +65,6 @@ class PersonalitiesService {
         };
         this.getInformationByType = (type) => {
             var _a;
-            console.log(type);
             return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
     }

@@ -60,6 +60,19 @@ export class PersonalitiesTestService {
       personType: string;
     }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);
   }
+
+  getPersonalitiesCalculatorResults(
+    personsTypes: [string, string]
+  ): Observable<{
+    message: string;
+    relationshipsType: string;
+    scoreResult: number;
+  }> {
+    return this.http.post<any>(
+      this.testsUrl + '/16-personalities/personalities-love-calculator',
+      personsTypes
+    );
+  }
   getPersonType(scorePercentages: TestResult | null): Observable<{
     message: string;
     personType: string;

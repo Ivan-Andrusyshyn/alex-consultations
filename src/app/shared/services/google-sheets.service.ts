@@ -34,6 +34,11 @@ export class GoogleSheetsService {
     return this.http.post(this.BASE_URL + scriptUrl, data);
   }
 
+  getSheetsTestsData(): Observable<any> {
+    const scriptUrl: string = '/google/tests/data';
+    return this.http.get(this.BASE_URL + scriptUrl);
+  }
+
   getDeviceType(): string {
     const userAgent = navigator.userAgent.toLowerCase();
 

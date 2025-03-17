@@ -109,6 +109,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         .getPersonTypeByResults(r['personalitiesName'])
         .pipe(
           map((r) => {
+            console.log(r);
+
             this.sendObject = {
               personType: r.personType,
               personInformation: r.personInformation,

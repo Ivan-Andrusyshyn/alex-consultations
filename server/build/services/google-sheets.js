@@ -11,6 +11,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
+function cleanString(value) {
+    if (typeof value !== 'string') {
+        return value;
+    }
+    const cleanedInput = value.replace(/\r\n/g, '').replace(/'/g, '"');
+    try {
+        return JSON.parse(cleanedInput);
+    }
+    catch (_a) {
+        return cleanedInput;
+    }
+}
 class GoogleSheetsService {
     postRegistrationInfoOnSheet(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -29,8 +41,28 @@ class GoogleSheetsService {
                     body: body.toString(),
                 });
                 const data = yield response.json();
-                console.log(data);
                 return data;
+            }
+            catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        });
+    }
+    getSheetData() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbwsVYYR7Iqc84tDGoqjFhp0wwaS4oUlFb9Usb_AISzl0QIZL4FrXL-qunwTF9IC8Zuz/exec';
+                const response = yield fetch(scriptUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                });
+                let data = yield response.json();
+                const dataArray = Object.values(data[0]);
+                const parseData = dataArray.map(cleanString);
+                return parseData;
             }
             catch (error) {
                 console.error('Error:', error);
@@ -66,7 +98,6 @@ class GoogleSheetsService {
                     body: body.toString(),
                 });
                 const data = yield response.json();
-                console.log(data);
                 return data;
             }
             catch (error) {

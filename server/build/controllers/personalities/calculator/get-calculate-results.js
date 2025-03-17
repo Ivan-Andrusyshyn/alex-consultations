@@ -12,19 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const postTestsResultGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const _16_personalities_calculator_1 = __importDefault(require("../../../services/16-personalities-calculator"));
+const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = req.body;
-        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-        if (data) {
-            yield google_sheets_1.default.postTestResultsOnSheet(Object.assign({ ip }, data));
-            res.status(200).send({ message: 'Successfull add new row' });
-        }
+        const pair = req.body;
+        const scoreResult = _16_personalities_calculator_1.default.calculateMatches(pair);
+        const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
+        res
+            .status(201)
+            .send({
+            message: 'Successful calculate!',
+            relationshipsType,
+            scoreResult,
+        });
     }
     catch (error) {
         console.log(error);
-        return res.status(400).send({ message: 'Internal server Error' });
+        return res.status(400);
     }
 });
-exports.default = postTestsResultGoogleSheet;
+exports.default = getPersonalitiesCalculatorResults;

@@ -22,6 +22,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ThemeService } from './shared/services/theme.service';
 import { PersonalitiesPhraseService } from './shared/services/personalities-phrase.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GoogleSheetsService } from './shared/services/google-sheets.service';
 
 @Component({
   selector: 'app-root',
@@ -46,7 +47,12 @@ export class AppComponent implements OnInit {
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
+  // private readonly googleSheetService = inject(GoogleSheetsService);
+  //  this.googleSheetService.getSheetsTestsData().subscribe((r) => {
+  //     console.log(r);
+  //   });
   private destroyRef = inject(DestroyRef);
+
   loading$!: Observable<boolean>;
   currentReqMethod$!: Observable<string>;
   ngOnInit(): void {

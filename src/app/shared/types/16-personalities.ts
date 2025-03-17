@@ -5,7 +5,23 @@ interface Question {
   question: string;
   answers: any[];
 }
-
+type Personalities =
+  | 'ISFJ'
+  | 'ISTJ'
+  | 'INFJ'
+  | 'INTJ'
+  | 'ISFP'
+  | 'ISTP'
+  | 'INFP'
+  | 'INTP'
+  | 'ESFJ'
+  | 'ESTJ'
+  | 'ENFJ'
+  | 'ENTJ'
+  | 'ESFP'
+  | 'ESTP'
+  | 'ENFP'
+  | 'ENTP';
 interface TestResult {
   E: number;
   I: number;
@@ -66,4 +82,5 @@ export {
   TypeInformation,
   PersonalityTypes,
   UsersPhraseSubject,
+  Personalities,
 };
