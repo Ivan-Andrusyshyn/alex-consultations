@@ -8,23 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const attractiveness_1 = __importDefault(require("../../services/attractiveness"));
-const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const categoryName = req.params.categoryName;
-        const results = attractiveness_1.default.getResults(categoryName);
-        res.status(200).send({
-            message: 'Success get relationship-sensitivity category by answers!',
-            results,
+class CacheService {
+    constructor() {
+        this.cache = {};
+        this.cacheTTL = 24 * 60 * 60 * 1000;
+    }
+    getCache(key, fetchDataFn) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const now = Date.now();
+            if (this.cache[key] && now - this.cache[key].timestamp < this.cacheTTL) {
+                return this.cache[key].data;
+            }
+            const data = yield fetchDataFn();
+            this.cache[key] = { data, timestamp: now };
+            return data;
         });
     }
-    catch (error) {
-        console.log(error);
-        return res.status(400).send({ message: 'Internal server Error' });
-    }
-});
-exports.default = getInfoByCategory;
+}
+const cacheService = new CacheService();
+exports.default = cacheService;

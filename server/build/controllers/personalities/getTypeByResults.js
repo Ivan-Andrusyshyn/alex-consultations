@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
+const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -22,9 +22,7 @@ const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, functio
         // const personInformation =
         //   personalitiesService.getInformationByType(personNameByType);
         const fileId = '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq';
-        const filePath = path_1.default.join(process.cwd(), 'build', 'content', '16-personality', '16-personalities-results.json');
-        // const results = await personalitiesFileService.fileEditor(fileId, filePath);
-        const results = yield google_sheets_1.default.getDataGoogle(fileId);
+        const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         const personInformation = results[personType];
         res.status(200).send({
             personType: personNameByType,
