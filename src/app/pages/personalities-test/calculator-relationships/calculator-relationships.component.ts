@@ -33,6 +33,7 @@ import { TitleCardComponent } from '../../../components/title-card/title-card.co
     NgFor,
     ReactiveFormsModule,
     NgIf,
+    AsyncPipe,
     TitleCardComponent,
     MatFormFieldModule,
     MatSelectModule,
@@ -50,12 +51,12 @@ export class CalculatorRelationshipsComponent implements OnInit {
   formGroup: FormGroup = this.fb.group({});
   personalities: PersonalityTypes[] = personalityTypesContent;
 
-  calculatorResult!: {
+  calculatorResult$!: Observable<{
     message: string;
     relationshipsType: { title: string; text: string };
     scoreResult: number;
     calculatorResults: CalculatorResult;
-  };
+  }>;
 
   imgUrl = 'assets/svg/tests/crossfit.svg';
   subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
@@ -74,13 +75,9 @@ export class CalculatorRelationshipsComponent implements OnInit {
         this.formGroup.get('selectedSecondPersonality')?.value,
       ];
 
-      this.personalitiesService
+      this.calculatorResult$ = this.personalitiesService
         .getPersonalitiesCalculatorResults(pair)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe((r) => {
-          this.calculatorResult = r;
-          this.cdr.markForCheck();
-        });
+        .pipe(takeUntilDestroyed(this.destroyRef));
     }
   }
 }

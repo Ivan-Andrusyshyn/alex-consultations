@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import {
   Answer,
@@ -71,9 +71,13 @@ export class PersonalitiesTestService {
   getPersonalitiesCalculatorResults(
     personsTypes: [string, string]
   ): Observable<CalculatorResponse> {
-    return this.http.post<CalculatorResponse>(
+    const params = new HttpParams()
+      .set('type1', personsTypes[0])
+      .set('type2', personsTypes[1]);
+
+    return this.http.get<CalculatorResponse>(
       this.testsUrl + '/16-personalities/calculator',
-      personsTypes
+      { params }
     );
   }
   getPersonType(scorePercentages: TestResult | null): Observable<{

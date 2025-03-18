@@ -52,7 +52,7 @@
     </form>
   </div>
   <br />
-  <ng-container *ngIf="calculatorResult">
+  <ng-container *ngIf="calculatorResult$ | async as calculatorResult">
     <h3>
       {{ calculatorResult.relationshipsType.text }}
       {{ calculatorResult.scoreResult }} %

@@ -74,7 +74,7 @@ class PersonalitiesCalculatorService {
             };
         if (percantages > 83 && percantages <= 90)
             return { text: 'Справжня гармонія', title: 'spravzhniaHarmoniia' };
-        else if (percantages > 91 && percantages <= 100)
+        if (percantages > 91 && percantages <= 100)
             return { text: 'Одна душа на двох', title: 'odnaDushaNaDvoh' };
         else
             return { text: '', title: '' };

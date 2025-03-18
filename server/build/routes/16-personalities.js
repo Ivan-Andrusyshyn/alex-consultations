@@ -13,7 +13,7 @@ const get_calculate_results_1 = __importDefault(require("../controllers/personal
 const personalitiesRouter = (0, express_1.default)();
 personalitiesRouter.post('/16-personalities/get-type', getTypeByScores_1.default);
 personalitiesRouter.post('/16-personalities/results', getPercentages_1.default);
-personalitiesRouter.post('/16-personalities/calculator', get_calculate_results_1.default);
+personalitiesRouter.get('/16-personalities/calculator', get_calculate_results_1.default);
 personalitiesRouter.get('/16-personalities', getQuestions_1.default);
 personalitiesRouter.get('/16-personalities/person-type/:personType', getTypeByResults_1.default);
 personalitiesRouter.get('/16-personalities/personalities-phrases/:personType', getDayPhrases_1.default);
