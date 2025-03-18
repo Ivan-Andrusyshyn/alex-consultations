@@ -8,6 +8,7 @@ const testCardsData = Object.freeze([
     testSvg: 'assets/svg/tests/attractiveness.svg',
     routeStart: '/tests/attractiveness/questions',
     routeInfo: '/tests/attractiveness/test-information',
+    btnText: 'Почати тест',
   },
   {
     title: 'На токсичність стосунків ',
@@ -18,6 +19,7 @@ const testCardsData = Object.freeze([
     testSvg: 'assets/svg/tests/worry-woman.svg',
     routeStart: '/tests/toxical-relationship/questions',
     routeInfo: '/tests/toxical-relationship/test-information',
+    btnText: 'Почати тест',
   },
   {
     title: 'Калькулятор сумісності ',
@@ -28,6 +30,7 @@ const testCardsData = Object.freeze([
     testSvg: 'assets/svg/tests/crossfit.svg',
     routeStart: '/tests/16-personalities/calculator-relationships',
     routeInfo: '/tests/16-personalities/calculator-information',
+    btnText: 'Почати аналіз',
   },
   {
     title: '16 типів особистості ',
@@ -39,6 +42,7 @@ const testCardsData = Object.freeze([
     testSvg: 'assets/svg/tests/16-personalities-card.svg',
     routeStart: '/tests/16-personalities/questions',
     routeInfo: '/tests/16-personalities/test-information',
+    btnText: 'Почати тест',
   },
   {
     title: 'На травматичну чуттєвість ',
@@ -49,6 +53,7 @@ const testCardsData = Object.freeze([
     testSvg: 'assets/svg/tests/pick-heart.svg',
     routeStart: '/tests/traumatic-sensitivity/questions',
     routeInfo: '/tests/traumatic-sensitivity/test-information',
+    btnText: 'Почати тест',
   },
 ]);
 
