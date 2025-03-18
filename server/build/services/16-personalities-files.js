@@ -14,14 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 class PersonalitiesFileService {
-    constructor() {
-        this.getDataGoogle = (fileId) => __awaiter(this, void 0, void 0, function* () {
-            const fileUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            const response = yield fetch(fileUrl);
-            if (!response.ok) {
-                throw new Error('Failed to fetch the file');
+    getDataGoogle(fileId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const fileUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                const response = yield fetch(fileUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch the file');
+                }
+                return yield response.json();
             }
-            return yield response.json();
+            catch (error) {
+                console.log('File was modified within the last 24 hours, reading it...');
+            }
         });
     }
     fileEditor(fileId, filePath) {
@@ -71,6 +76,7 @@ class PersonalitiesFileService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield fs_1.default.promises.readFile(filePath, 'utf8');
+                console.log('reading');
                 return JSON.parse(data);
             }
             catch (err) {

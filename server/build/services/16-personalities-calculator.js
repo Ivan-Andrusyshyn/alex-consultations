@@ -63,7 +63,7 @@ class PersonalitiesCalculatorService {
         };
     }
     getTypeRelationshipByScore(percantages) {
-        if (percantages > 30 && percantages <= 53)
+        if (percantages <= 53)
             return { text: 'Паралельні світи', title: 'worstMatches' };
         if (percantages > 53 && percantages <= 70)
             return { text: 'Хиткий міст', title: 'mediumMatches' };
