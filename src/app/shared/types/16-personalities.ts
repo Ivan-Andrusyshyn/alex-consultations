@@ -54,6 +54,20 @@ interface TypeInformation {
     title: string;
   };
 }
+
+interface CalculatorResult {
+  range: string;
+  title: string;
+  description: string;
+  sections: {
+    relationshipExplanation: string;
+    possibleDifficulties: string[];
+    improvingRelationship: string[];
+    conclusion: string;
+  };
+  reflection: string;
+}
+
 type Answer = { point: number; text: string };
 type AnswerPoint = 1 | 2 | 3 | 4 | 5;
 
@@ -83,4 +97,5 @@ export {
   PersonalityTypes,
   UsersPhraseSubject,
   Personalities,
+  CalculatorResult,
 };

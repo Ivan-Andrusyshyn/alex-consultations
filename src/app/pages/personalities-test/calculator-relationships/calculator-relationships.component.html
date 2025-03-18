@@ -53,7 +53,10 @@
   </div>
   <br />
   <h3 *ngIf="matchesResult$ | async as matchesResult">
-    {{ matchesResult.relationshipsType }}
+    {{ matchesResult.relationshipsType.text }}
     {{ matchesResult.scoreResult }} %
   </h3>
+  <p *ngIf="matchesResult$ | async as matchesResult">
+    {{ matchesResult.calculatorResults | json }}
+  </p>
 </section>

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import {
   Answer,
+  CalculatorResult,
   Question,
   TestResult,
   TypeInformation,
@@ -65,8 +66,9 @@ export class PersonalitiesTestService {
     personsTypes: [string, string]
   ): Observable<{
     message: string;
-    relationshipsType: string;
+    relationshipsType: { title: string; text: string };
     scoreResult: number;
+    calculatorResults: CalculatorResult;
   }> {
     return this.http.post<any>(
       this.testsUrl + '/16-personalities/personalities-love-calculator',

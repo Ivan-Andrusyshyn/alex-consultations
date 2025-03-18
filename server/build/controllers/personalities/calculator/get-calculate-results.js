@@ -12,17 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(require("path"));
 const _16_personalities_calculator_1 = __importDefault(require("../../../services/16-personalities-calculator"));
+const _16_personalities_files_1 = __importDefault(require("../../../services/16-personalities-files"));
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const pair = req.body;
+        const fileId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
+        const filePath = path_1.default.join(process.cwd(), 'src', 'content', '16-personality', 'calculator-results.json');
         const scoreResult = _16_personalities_calculator_1.default.calculateMatches(pair);
         const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
-        res
-            .status(201)
-            .send({
+        const data = yield _16_personalities_files_1.default.fileEditor(fileId, filePath);
+        const calculatorResults = data[relationshipsType.title];
+        res.status(201).send({
             message: 'Successful calculate!',
             relationshipsType,
+            calculatorResults,
             scoreResult,
         });
     }

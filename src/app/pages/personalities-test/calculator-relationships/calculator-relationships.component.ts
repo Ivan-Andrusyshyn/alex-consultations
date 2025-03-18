@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Observable } from 'rxjs';
@@ -11,7 +11,10 @@ import {
 } from '@angular/forms';
 
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
-import { PersonalityTypes } from '../../../shared/types/16-personalities';
+import {
+  CalculatorResult,
+  PersonalityTypes,
+} from '../../../shared/types/16-personalities';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 
@@ -23,6 +26,7 @@ import { TitleCardComponent } from '../../../components/title-card/title-card.co
     ReactiveFormsModule,
     AsyncPipe,
     NgIf,
+    JsonPipe,
     TitleCardComponent,
     MatFormFieldModule,
     MatSelectModule,
@@ -39,8 +43,9 @@ export class CalculatorRelationshipsComponent implements OnInit {
 
   matchesResult$!: Observable<{
     message: string;
-    relationshipsType: string;
+    relationshipsType: { title: string; text: string };
     scoreResult: number;
+    calculatorResults: CalculatorResult;
   }>;
 
   imgUrl = 'assets/svg/tests/crossfit.svg';
