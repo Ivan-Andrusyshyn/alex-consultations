@@ -55,6 +55,27 @@ interface TypeInformation {
   };
 }
 
+interface CalculatorInformation {
+  title: string;
+  description: string;
+  sections: {
+    howItWorks: {
+      title: string;
+      steps: string[];
+    };
+    benefits: {
+      title: string;
+      points: string[];
+    };
+    importance: {
+      title: string;
+      text: string;
+    };
+    callToAction: {
+      text: string;
+    };
+  };
+}
 interface CalculatorResult {
   range: string;
   title: string;
@@ -102,4 +123,5 @@ export {
   UsersPhraseSubject,
   Personalities,
   CalculatorResult,
+  CalculatorInformation,
 };
