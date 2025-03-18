@@ -17,13 +17,9 @@ const _16_personalities_calculator_1 = __importDefault(require("../../../service
 const _16_personalities_files_1 = __importDefault(require("../../../services/16-personalities-files"));
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
         const personsTypes = req.body;
         const fileId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
-        const filePath = path_1.default.join(process.cwd(), 'src', 'content', '16-personality', 'calculator-results.json');
+        const filePath = path_1.default.join(process.cwd(), 'build', 'content', '16-personality', 'calculator-results.json');
         const data = yield _16_personalities_files_1.default.fileEditor(fileId, filePath);
         const scoreResult = _16_personalities_calculator_1.default.calculateMatches(personsTypes);
         const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);

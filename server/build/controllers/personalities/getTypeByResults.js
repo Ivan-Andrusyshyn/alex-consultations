@@ -14,15 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
+const _16_personalities_files_1 = __importDefault(require("../../services/16-personalities-files"));
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
         const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
-        const personInformation = _16_personality_1.default.getInformationByType(personNameByType);
+        // const personInformation =
+        //   personalitiesService.getInformationByType(personNameByType);
         const fileId = '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq';
-        const filePath = path_1.default.join(process.cwd(), 'src', 'content', '16-personality', 'results.json');
-        // const results = await personalitiesFileService.fileEditor();
-        // const personInformation = results[personType];
+        const filePath = path_1.default.join(process.cwd(), 'build', 'content', '16-personality', '16-personalities-results.json');
+        const results = yield _16_personalities_files_1.default.fileEditor(fileId, filePath);
+        const personInformation = results[personType];
         res.status(200).send({
             personType: personNameByType,
             personInformation,

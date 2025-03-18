@@ -25,7 +25,7 @@ class PersonalitiesFileService {
                 return yield response.json();
             }
             catch (error) {
-                console.log('File was modified within the last 24 hours, reading it...');
+                console.log(error);
             }
         });
     }
@@ -38,7 +38,6 @@ class PersonalitiesFileService {
                 const timeDifference = currentTime.getTime() - lastModifiedTime.getTime();
                 if (timeDifference >= 86400000) {
                     const googelFile = yield this.getDataGoogle(fileId);
-                    console.log('24 hours have passed, rewriting the file...');
                     yield this.writeFile(filePath, googelFile);
                     return googelFile;
                 }
@@ -50,6 +49,8 @@ class PersonalitiesFileService {
             catch (err) {
                 if (err.code === 'ENOENT') {
                     const googelFile = yield this.getDataGoogle(fileId);
+                    console.log(googelFile);
+                    console.error('Error checking file stats:', err);
                     yield this.writeFile(filePath, googelFile);
                     return googelFile;
                 }
@@ -60,10 +61,10 @@ class PersonalitiesFileService {
             }
         });
     }
-    writeFile(filePath, personInformation) {
+    writeFile(filePath, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield fs_1.default.promises.writeFile(filePath, JSON.stringify(personInformation));
+                yield fs_1.default.promises.writeFile(filePath, JSON.stringify(data));
                 console.log('Done writing');
             }
             catch (err) {
@@ -76,7 +77,6 @@ class PersonalitiesFileService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield fs_1.default.promises.readFile(filePath, 'utf8');
-                console.log('reading');
                 return JSON.parse(data);
             }
             catch (err) {

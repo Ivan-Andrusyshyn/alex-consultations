@@ -24,6 +24,21 @@ function cleanString(value) {
     }
 }
 class GoogleSheetsService {
+    getDataGoogle(fileId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const fileUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                const response = yield fetch(fileUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch the file');
+                }
+                return yield response.json();
+            }
+            catch (error) {
+                console.log('File was modified within the last 24 hours, reading it...');
+            }
+        });
+    }
     postRegistrationInfoOnSheet(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const body = new URLSearchParams();
