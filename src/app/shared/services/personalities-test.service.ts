@@ -71,7 +71,7 @@ export class PersonalitiesTestService {
     calculatorResults: CalculatorResult;
   }> {
     return this.http.post<any>(
-      this.testsUrl + '/16-personalities/personalities-love-calculator',
+      this.testsUrl + '/16-personalities/personalities-calculator',
       personsTypes
     );
   }

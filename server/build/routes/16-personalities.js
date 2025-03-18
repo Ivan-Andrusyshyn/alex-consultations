@@ -11,10 +11,10 @@ const getTypeByScores_1 = __importDefault(require("../controllers/personalities/
 const getDayPhrases_1 = __importDefault(require("../controllers/personalities/getDayPhrases"));
 const get_calculate_results_1 = __importDefault(require("../controllers/personalities/calculator/get-calculate-results"));
 const testsRouter = (0, express_1.default)();
-testsRouter.get('/16-personalities', getQuestions_1.default);
 testsRouter.post('/16-personalities/get-type', getTypeByScores_1.default);
 testsRouter.post('/16-personalities/results', getPercentages_1.default);
+testsRouter.post('/16-personalities/personalities-calculator', get_calculate_results_1.default);
+testsRouter.get('/16-personalities', getQuestions_1.default);
 testsRouter.get('/16-personalities/person-type/:personType', getTypeByResults_1.default);
 testsRouter.get('/16-personalities/personalities-phrases/:personType', getDayPhrases_1.default);
-testsRouter.post('/16-personalities/personalities-love-calculator', get_calculate_results_1.default);
 exports.default = testsRouter;
