@@ -60,7 +60,11 @@ interface CalculatorResult {
   title: string;
   description: string;
   sections: {
-    relationshipExplanation: string;
+    relationshipExplanation: {
+      emotionalPerception: string;
+      futureVision: string;
+      lifeRhythm: string;
+    };
     possibleDifficulties: string[];
     improvingRelationship: string[];
     conclusion: string;

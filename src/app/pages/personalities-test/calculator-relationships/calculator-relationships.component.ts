@@ -16,6 +16,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import {
@@ -24,7 +25,6 @@ import {
 } from '../../../shared/types/16-personalities';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-calculator-relationships',

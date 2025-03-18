@@ -72,7 +72,7 @@ export class PersonalitiesTestService {
     personsTypes: [string, string]
   ): Observable<CalculatorResponse> {
     return this.http.post<CalculatorResponse>(
-      this.testsUrl + '/16-personalities/personalities-calculator',
+      this.testsUrl + '/16-personalities/calculator',
       personsTypes
     );
   }
