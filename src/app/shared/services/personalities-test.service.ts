@@ -77,7 +77,7 @@ export class PersonalitiesTestService {
 
     return this.http.get<CalculatorResponse>(
       this.testsUrl + '/16-personalities/calculator',
-      { params }
+      { params, headers: { 'Cache-Control': 'no-store' } }
     );
   }
   getPersonType(scorePercentages: TestResult | null): Observable<{

@@ -61,6 +61,7 @@ export class CalculatorRelationshipsComponent implements OnInit {
   imgUrl = 'assets/svg/tests/crossfit.svg';
   subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
   titleText = 'Калькулятор сумісності';
+
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       selectedFirstPersonality: ['INFJ', Validators.required],
