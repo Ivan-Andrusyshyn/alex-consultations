@@ -24,7 +24,7 @@ const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0
         const scoreResult = _16_personalities_calculator_1.default.calculateMatches(personsTypes);
         const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
         const calculatorResults = data[relationshipsType.title];
-        res.status(201).send({
+        res.status(200).send({
             message: 'Successful calculate!',
             relationshipsType,
             calculatorResults,
