@@ -14,13 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const _16_personalities_calculator_1 = __importDefault(require("../../../services/16-personalities-calculator"));
-const _16_personalities_files_1 = __importDefault(require("../../../services/16-personalities-files"));
+const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personsTypes = req.body;
         const fileId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
         const filePath = path_1.default.join(process.cwd(), 'build', 'content', '16-personality', 'calculator-results.json');
-        const data = yield _16_personalities_files_1.default.fileEditor(fileId, filePath);
+        // const data = await personalitiesFileService.fileEditor(fileId, filePath);
+        const data = yield google_sheets_1.default.getDataGoogle(fileId);
         const scoreResult = _16_personalities_calculator_1.default.calculateMatches(personsTypes);
         const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
         const calculatorResults = data[relationshipsType.title];

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
-const _16_personalities_files_1 = __importDefault(require("../../services/16-personalities-files"));
+const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
@@ -23,7 +23,8 @@ const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, functio
         //   personalitiesService.getInformationByType(personNameByType);
         const fileId = '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq';
         const filePath = path_1.default.join(process.cwd(), 'build', 'content', '16-personality', '16-personalities-results.json');
-        const results = yield _16_personalities_files_1.default.fileEditor(fileId, filePath);
+        // const results = await personalitiesFileService.fileEditor(fileId, filePath);
+        const results = yield google_sheets_1.default.getDataGoogle(fileId);
         const personInformation = results[personType];
         res.status(200).send({
             personType: personNameByType,
