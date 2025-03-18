@@ -41,7 +41,7 @@ export class CalculatorRelationshipsComponent implements OnInit {
   formGroup: FormGroup = this.fb.group({});
   personalities: PersonalityTypes[] = personalityTypesContent;
 
-  matchesResult$!: Observable<{
+  calculatorResult$!: Observable<{
     message: string;
     relationshipsType: { title: string; text: string };
     scoreResult: number;
@@ -65,7 +65,7 @@ export class CalculatorRelationshipsComponent implements OnInit {
         this.formGroup.get('selectedSecondPersonality')?.value,
       ];
 
-      this.matchesResult$ =
+      this.calculatorResult$ =
         this.personalitiesService.getPersonalitiesCalculatorResults(pair);
     }
   }

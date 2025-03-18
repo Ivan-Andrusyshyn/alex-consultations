@@ -52,11 +52,64 @@
     </form>
   </div>
   <br />
-  <h3 *ngIf="matchesResult$ | async as matchesResult">
-    {{ matchesResult.relationshipsType.text }}
-    {{ matchesResult.scoreResult }} %
-  </h3>
-  <p *ngIf="matchesResult$ | async as matchesResult">
-    {{ matchesResult.calculatorResults | json }}
-  </p>
+  <ng-container *ngIf="calculatorResult$ | async as calculatorResult">
+    <h3>
+      {{ calculatorResult.relationshipsType.text }}
+      {{ calculatorResult.scoreResult }} %
+    </h3>
+
+    <div class="calculator-result">
+      <div class="description">
+        <strong> </strong>
+        <p>{{ calculatorResult.calculatorResults.description }}</p>
+      </div>
+
+      <div class="section">
+        <h4>Опис стосунків</h4>
+        <p>
+          {{
+            calculatorResult.calculatorResults.sections.relationshipExplanation
+          }}
+        </p>
+      </div>
+
+      <div class="section">
+        <h4>Можливі складності</h4>
+        <ul>
+          <li
+            *ngFor="
+              let difficulty of calculatorResult.calculatorResults.sections
+                .possibleDifficulties
+            "
+          >
+            {{ difficulty }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h4>Як покращити стосунки?</h4>
+        <ul>
+          <li
+            *ngFor="
+              let improvement of calculatorResult.calculatorResults.sections
+                .improvingRelationship
+            "
+          >
+            {{ improvement }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h4></h4>
+        <p>{{ calculatorResult.calculatorResults.sections.conclusion }}</p>
+      </div>
+
+      <div class="reflection">
+        <strong> </strong>
+        <p>{{ calculatorResult.calculatorResults.reflection }}</p>
+      </div>
+    </div>
+  </ng-container>
 </section>

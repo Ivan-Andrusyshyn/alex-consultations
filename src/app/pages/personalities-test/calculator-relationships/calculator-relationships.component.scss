@@ -29,6 +29,59 @@
   min-height: 100vh;
 
   border-radius: 12px;
+  h3 {
+    font-size: 18px;
+    color: var(--textColor);
+
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 16px;
+
+    padding-bottom: 10px;
+    @media screen and (min-width: 764px) {
+      font-size: 22px;
+    }
+  }
+  h4 {
+    font-size: 18px;
+    letter-spacing: 0.01em;
+    padding: 4px;
+
+    color: var(--textColor);
+    text-align: left;
+  }
+  ul {
+    padding-left: 0;
+    padding: 8px;
+  }
+  p {
+    font-size: 16px;
+    padding: 8px 0;
+    letter-spacing: 0.01em;
+
+    text-align: left;
+    color: var(--textColor);
+
+    font-style: normal;
+    transition: color 0.3s ease;
+    @media screen and (min-width: 764px) {
+      font-size: 18px;
+    }
+  }
+  li {
+    font-size: 16px;
+    padding: 8px 0;
+    letter-spacing: 0.01em;
+
+    text-align: left;
+    color: var(--textColor);
+
+    font-style: normal;
+    transition: color 0.3s ease;
+    @media screen and (min-width: 764px) {
+      font-size: 18px;
+    }
+  }
 }
 
 .wrapper {

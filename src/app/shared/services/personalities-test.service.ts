@@ -20,6 +20,12 @@ interface PersonalitiesResults {
   results: { scores: TestResult; percentages: TestResult; personType: string };
   message: string;
 }
+interface CalculatorResponse {
+  message: string;
+  relationshipsType: { title: string; text: string };
+  scoreResult: number;
+  calculatorResults: CalculatorResult;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -64,13 +70,8 @@ export class PersonalitiesTestService {
 
   getPersonalitiesCalculatorResults(
     personsTypes: [string, string]
-  ): Observable<{
-    message: string;
-    relationshipsType: { title: string; text: string };
-    scoreResult: number;
-    calculatorResults: CalculatorResult;
-  }> {
-    return this.http.post<any>(
+  ): Observable<CalculatorResponse> {
+    return this.http.post<CalculatorResponse>(
       this.testsUrl + '/16-personalities/personalities-calculator',
       personsTypes
     );
