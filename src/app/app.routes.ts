@@ -25,6 +25,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),
   },
+
   {
     path: 'tests/attractiveness',
     loadComponent: () =>
@@ -122,6 +123,20 @@ export const routes: Routes = [
         (m) => m.PersonalitiesTestComponent
       ),
     children: [
+      {
+        path: 'calculator-relationships',
+        loadComponent: () =>
+          import(
+            './pages/personalities-test/calculator-relationships/calculator-relationships.component'
+          ).then((m) => m.CalculatorRelationshipsComponent),
+      },
+      {
+        path: 'calculator-information',
+        loadComponent: () =>
+          import(
+            './pages/personalities-test/calculator-information/calculator-information.component'
+          ).then((m) => m.CalculatorInformationComponent),
+      },
       {
         path: 'details/:personalitiesName',
         loadComponent: () =>

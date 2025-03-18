@@ -47,12 +47,19 @@ class PersonalitiesCalculatorService {
     constructor() {
         this.groupMultipliers = {
             'ST+NF': 0.8,
+            'NF+ST': 0.8,
             'SF+NF': 0.8,
+            'NF+SF': 0.8,
             'NT+NF': 0.95,
+            'NF+NT': 0.95,
             'EJ+EP': 0.8,
+            'EP+EJ': 0.8,
             'EJ+IP': 0.8,
+            'IP+EJ': 0.8,
             'EP+IP': 0.9,
+            'IP+EP': 0.9,
             'IJ+EJ': 0.9,
+            'EJ+IJ': 0.9,
         };
     }
     getTypeRelationshipByScore(percantages) {
@@ -99,11 +106,16 @@ class PersonalitiesCalculatorService {
         return matches.some((p) => p.sort().toString() === normalizedPair.toString());
     }
     getGroupMultiplier(person1, person2) {
-        var _a;
         const group1 = this.getGroup(person1);
         const group2 = this.getGroup(person2);
         const key = [group1, group2].sort().join('+');
-        return (_a = this.groupMultipliers[key]) !== null && _a !== void 0 ? _a : 1;
+        const reversedKey = key.split('+').reverse().join('+');
+        if (this.groupMultipliers[key])
+            return this.groupMultipliers[key];
+        if (this.groupMultipliers[reversedKey])
+            return this.groupMultipliers[reversedKey];
+        else
+            return 1;
     }
     getGroup(personality) {
         const [first, second, third, fourth] = personality;

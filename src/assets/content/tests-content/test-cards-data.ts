@@ -20,6 +20,16 @@ const testCardsData = Object.freeze([
     routeInfo: '/tests/toxical-relationship/test-information',
   },
   {
+    title: 'Калькулятор сумісності ',
+    time: '(1хв ⏳)',
+    cardClass: 'calculator-card',
+    category: ['Всі тести', 'Для стосунків'],
+    description: 'Дізнайтеся рівень гармонії ваших стосунків.',
+    testSvg: 'assets/svg/tests/crossfit.svg',
+    routeStart: '/tests/16-personalities/calculator-relationships',
+    routeInfo: '/tests/16-personalities/calculator-information',
+  },
+  {
     title: '16 типів особистості ',
     time: '(5хв ⏳)',
     cardClass: 'personality-card',

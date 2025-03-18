@@ -10,4 +10,5 @@ import { RouterLink } from '@angular/router';
 })
 export class TestCardStartBtnComponent {
   @Input() route!: string;
+  @Input() btnText = 'Почати тест';
 }

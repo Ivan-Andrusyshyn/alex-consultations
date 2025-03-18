@@ -1,0 +1,36 @@
+<app-title-card
+  [imgUrl]="imgUrl"
+  [titleText]="titleText"
+  [subtitleText]="subtitleText"
+></app-title-card>
+<section class="calculator">
+  <h1>{{ title }}</h1>
+  <p>{{ description }}</p>
+
+  <div>
+    <h2>{{ sections.howItWorks.title }}</h2>
+    <ul>
+      <li *ngFor="let step of sections.howItWorks.steps">{{ step }}</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>{{ sections.benefits.title }}</h2>
+    <ul>
+      <li *ngFor="let point of sections.benefits.points">{{ point }}</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>{{ sections.importance.title }}</h2>
+    <p>{{ sections.importance.text }}</p>
+  </div>
+
+  <div class="cta">
+    <p>{{ sections.callToAction.text }}</p>
+    <app-test-card-start-btn
+      [btnText]="'Почати аналіз'"
+      [route]="routeUrl"
+    ></app-test-card-start-btn>
+  </div>
+</section>
