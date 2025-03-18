@@ -9,6 +9,6 @@ const getAttractivenessName_1 = __importDefault(require("../controllers/attracti
 const getInfoByCategory_1 = __importDefault(require("../controllers/attractiveness/getInfoByCategory"));
 const attractivenessRouter = (0, express_1.default)();
 attractivenessRouter.get('/attractiveness', getAttractiveness_1.default);
-attractivenessRouter.post('/attractiveness/category', getAttractivenessName_1.default);
 attractivenessRouter.get('/attractiveness/category/:categoryName', getInfoByCategory_1.default);
+attractivenessRouter.post('/attractiveness/category', getAttractivenessName_1.default);
 exports.default = attractivenessRouter;

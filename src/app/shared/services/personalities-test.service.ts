@@ -72,13 +72,9 @@ export class PersonalitiesTestService {
   getPersonalitiesCalculatorResults(
     personsTypes: [string, string]
   ): Observable<CalculatorResponse> {
-    const params = new HttpParams()
-      .set('type1', personsTypes[0])
-      .set('type2', personsTypes[1]);
-
-    return this.http.get<CalculatorResponse>(
+    return this.http.post<CalculatorResponse>(
       this.testsUrl + '/16-personalities/calculator',
-      { params }
+      personsTypes
     );
   }
 

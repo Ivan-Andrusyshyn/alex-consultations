@@ -17,12 +17,11 @@ const _16_personalities_calculator_1 = __importDefault(require("../../../service
 const _16_personalities_files_1 = __importDefault(require("../../../services/16-personalities-files"));
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { type1, type2 } = req.query;
-        const pair = [type1, type2];
+        const personsTypes = req.body;
         const fileId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
         const filePath = path_1.default.join(process.cwd(), 'src', 'content', '16-personality', 'calculator-results.json');
         const data = yield _16_personalities_files_1.default.fileEditor(fileId, filePath);
-        const scoreResult = _16_personalities_calculator_1.default.calculateMatches(pair);
+        const scoreResult = _16_personalities_calculator_1.default.calculateMatches(personsTypes);
         const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
         const calculatorResults = data[relationshipsType.title];
         res.status(201).send({
