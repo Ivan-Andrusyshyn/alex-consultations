@@ -9,7 +9,7 @@ import {
 import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import {
   FormBuilder,
   FormGroup,
@@ -77,7 +77,12 @@ export class CalculatorRelationshipsComponent implements OnInit {
 
       this.calculatorResult$ = this.personalitiesService
         .getPersonalitiesCalculatorResults(pair)
-        .pipe(takeUntilDestroyed(this.destroyRef));
+        .pipe(
+          takeUntilDestroyed(this.destroyRef),
+          tap((r) => {
+            console.log(r);
+          })
+        );
     }
   }
 }
