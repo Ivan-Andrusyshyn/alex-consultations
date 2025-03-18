@@ -64,19 +64,18 @@ class PersonalitiesCalculatorService {
     }
     getTypeRelationshipByScore(percantages) {
         if (percantages <= 53)
-            return { text: 'Паралельні світи', title: 'worstMatches' };
+            return { text: 'Паралельні світи', title: 'paralelniSvity' };
         if (percantages > 53 && percantages <= 70)
-            return { text: 'Хиткий міст', title: 'mediumMatches' };
+            return { text: 'Хиткий міст', title: 'hitkyiMist' };
         if (percantages > 71 && percantages <= 82)
-            return { text: 'Глибоке взаєморозуміння', title: 'heighMatches' };
-        if ((percantages > 83 && percantages <= 90) ||
-            (percantages > 91 && percantages <= 100)) {
-            if (percantages > 83 && percantages <= 90)
-                return { text: 'Справжня гармонія', title: 'perfectMatches' };
-            else
-                percantages > 91 && percantages <= 100;
-            return { text: 'Одна душа на двох', title: 'perfectMatches' };
-        }
+            return {
+                text: 'Глибоке взаєморозуміння',
+                title: 'hlybokeVzaiemorozuminnia',
+            };
+        if (percantages > 83 && percantages <= 90)
+            return { text: 'Справжня гармонія', title: 'spravzhniaHarmoniia' };
+        else if (percantages > 91 && percantages <= 100)
+            return { text: 'Одна душа на двох', title: 'odnaDushaNaDvoh' };
         else
             return { text: '', title: '' };
     }

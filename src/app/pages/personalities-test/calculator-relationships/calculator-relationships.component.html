@@ -60,21 +60,34 @@
 
     <div class="calculator-result">
       <div class="description">
-        <strong> </strong>
+        <strong></strong>
         <p>{{ calculatorResult.calculatorResults.description }}</p>
       </div>
 
       <div class="section">
-        <h4>Опис стосунків</h4>
+        <h4>Що між вами відбувається?</h4>
         <p>
           {{
             calculatorResult.calculatorResults.sections.relationshipExplanation
+              .deepUnderstanding
+          }}
+        </p>
+        <p>
+          {{
+            calculatorResult.calculatorResults.sections.relationshipExplanation
+              .desireForDepth
+          }}
+        </p>
+        <p>
+          {{
+            calculatorResult.calculatorResults.sections.relationshipExplanation
+              .stabilityAndComfort
           }}
         </p>
       </div>
 
       <div class="section">
-        <h4>Можливі складності</h4>
+        <h4>Чому вам може бути складно?</h4>
         <ul>
           <li
             *ngFor="
@@ -88,7 +101,7 @@
       </div>
 
       <div class="section">
-        <h4>Як покращити стосунки?</h4>
+        <h4>Як зробити ці стосунки комфортнішими?</h4>
         <ul>
           <li
             *ngFor="

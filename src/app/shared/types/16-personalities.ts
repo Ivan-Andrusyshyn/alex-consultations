@@ -61,9 +61,9 @@ interface CalculatorResult {
   description: string;
   sections: {
     relationshipExplanation: {
-      emotionalPerception: string;
-      futureVision: string;
-      lifeRhythm: string;
+      deepUnderstanding: string;
+      stabilityAndComfort: string;
+      desireForDepth: string;
     };
     possibleDifficulties: string[];
     improvingRelationship: string[];
