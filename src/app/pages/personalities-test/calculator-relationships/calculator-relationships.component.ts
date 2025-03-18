@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   inject,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
-import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import {
   FormBuilder,
   FormGroup,
@@ -42,10 +42,10 @@ import { TitleCardComponent } from '../../../components/title-card/title-card.co
   styleUrl: './calculator-relationships.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalculatorRelationshipsComponent implements OnInit {
+export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
   private personalitiesService = inject(PersonalitiesTestService);
   private fb = inject(FormBuilder);
-  private cdr = inject(ChangeDetectorRef);
+
   private destroyRef = inject(DestroyRef);
 
   formGroup: FormGroup = this.fb.group({});
@@ -62,7 +62,17 @@ export class CalculatorRelationshipsComponent implements OnInit {
   subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
   titleText = 'Калькулятор сумісності';
 
+  ngOnDestroy(): void {
+    sessionStorage.removeItem('personalities-calculator');
+  }
+
   ngOnInit(): void {
+    const data = JSON.parse(
+      sessionStorage.getItem('personalities-calculator') ?? 'null'
+    );
+
+    this.calculatorResult$ = of(data);
+
     this.formGroup = this.fb.group({
       selectedFirstPersonality: ['INFJ', Validators.required],
       selectedSecondPersonality: ['INTP', Validators.required],
@@ -81,7 +91,10 @@ export class CalculatorRelationshipsComponent implements OnInit {
         .pipe(
           takeUntilDestroyed(this.destroyRef),
           tap((r) => {
-            console.log(r);
+            sessionStorage.setItem(
+              'personalities-calculator',
+              JSON.stringify(r)
+            );
           })
         );
     }
