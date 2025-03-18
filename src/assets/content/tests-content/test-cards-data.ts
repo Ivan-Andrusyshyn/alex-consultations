@@ -28,7 +28,7 @@ const testCardsData = Object.freeze([
     category: ['Всі тести', 'Для стосунків'],
     description: 'Дізнайтеся рівень гармонії ваших стосунків.',
     testSvg: 'assets/svg/tests/crossfit.svg',
-    routeStart: '/tests/16-personalities/calculator-relationships',
+    routeStart: '/tests/16-personalities/calculator',
     routeInfo: '/tests/16-personalities/calculator-information',
     btnText: 'Почати аналіз',
   },

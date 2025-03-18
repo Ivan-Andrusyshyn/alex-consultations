@@ -16,7 +16,6 @@ const test_1 = __importDefault(require("../../utils/16-personalities/test"));
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const questionsWithAnswers = (0, test_1.default)();
-        console.log(questionsWithAnswers.length);
         res.status(200).send({
             questions: questionsWithAnswers,
             message: 'Succesfull get all questions!',

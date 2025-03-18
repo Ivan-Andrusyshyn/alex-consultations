@@ -56,6 +56,7 @@ export class PersonalitiesTestService {
         })
       );
   }
+
   getPersonTypeByResults(personType: string): Observable<{
     personInformation: TypeInformation;
     message: string;
@@ -80,6 +81,7 @@ export class PersonalitiesTestService {
       { params }
     );
   }
+
   getPersonType(scorePercentages: TestResult | null): Observable<{
     message: string;
     personType: string;

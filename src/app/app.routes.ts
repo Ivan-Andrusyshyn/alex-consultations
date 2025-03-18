@@ -124,7 +124,7 @@ export const routes: Routes = [
       ),
     children: [
       {
-        path: 'calculator-relationships',
+        path: 'calculator',
         loadComponent: () =>
           import(
             './pages/personalities-test/calculator-relationships/calculator-relationships.component'

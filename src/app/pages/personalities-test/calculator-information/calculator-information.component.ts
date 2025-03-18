@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
@@ -10,6 +10,7 @@ import { TestCardStartBtnComponent } from '../../../components/test/test-card-st
   imports: [TitleCardComponent, TestCardStartBtnComponent, NgIf, NgFor],
   templateUrl: './calculator-information.component.html',
   styleUrl: './calculator-information.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalculatorInformationComponent {
   imgUrl = 'assets/svg/tests/crossfit.svg';
