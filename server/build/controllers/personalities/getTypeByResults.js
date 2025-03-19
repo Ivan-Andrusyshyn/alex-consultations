@@ -23,6 +23,7 @@ const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, functio
         //   personalitiesService.getInformationByType(personNameByType);
         const fileId = '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq';
         const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
+        console.log(results);
         const personInformation = results[personType];
         res.status(200).send({
             personType: personNameByType,
