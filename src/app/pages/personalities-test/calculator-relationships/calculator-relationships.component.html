@@ -23,6 +23,9 @@
     <br />
 
     <form action="" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <p class="subtitle">
+        Оберіть два типи особистості, щоб дізнатися їхню сумісність
+      </p>
       <div class="select-group">
         <mat-form-field appearance="outline">
           <mat-select formControlName="selectedFirstPersonality">
@@ -61,7 +64,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <button class="calculate-btn" type="submit">Розрахувати</button>
+      <button class="calculate-btn" type="submit">Дізнатися сумісність</button>
     </form>
   </div>
   <br />
