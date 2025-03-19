@@ -66,16 +66,16 @@ class PersonalitiesCalculatorService {
     getTypeRelationshipByScore(percantages) {
         if (percantages <= 53)
             return { text: 'Паралельні світи', title: 'paralelniSvity' };
-        if (percantages > 53 && percantages <= 70)
+        if (percantages >= 53 && percantages <= 70)
             return { text: 'Хиткий міст', title: 'hitkyiMist' };
-        if (percantages > 71 && percantages <= 82)
+        if (percantages >= 71 && percantages <= 82)
             return {
                 text: 'Глибоке взаєморозуміння',
                 title: 'hlybokeVzaiemorozuminnia',
             };
-        if (percantages > 83 && percantages <= 90)
+        if (percantages >= 83 && percantages <= 90)
             return { text: 'Справжня гармонія', title: 'spravzhniaHarmoniia' };
-        if (percantages > 91 && percantages <= 100)
+        if (percantages >= 91 && percantages <= 100)
             return { text: 'Одна душа на двох', title: 'odnaDushaNaDvoh' };
         else
             return { text: '', title: '' };
@@ -84,6 +84,9 @@ class PersonalitiesCalculatorService {
         const normalizedPair = pair.sort();
         if (pair[0] === pair[1])
             return 81;
+        const types = ['ENFP', 'ENTP', 'ENTJ', 'ESTP', 'ESFP', 'ESFJ'];
+        if (types.includes(pair[0]) && types.includes(pair[1]))
+            return 76;
         if (this.comparePair(perfectMatches, normalizedPair)) {
             return 100;
         }
