@@ -18,7 +18,6 @@ import {
 } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import {
   CalculatorDisclaimer,
   CalculatorResult,
@@ -54,6 +53,10 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
 
   private destroyRef = inject(DestroyRef);
 
+  imgUrl = 'assets/svg/tests/crossfit.svg';
+  subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
+  titleText = 'Калькулятор сумісності';
+
   formGroup: FormGroup = this.fb.group({});
   personalities: PersonalityTypes[] = personalityTypesContent;
 
@@ -64,11 +67,6 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
     calculatorResults: CalculatorResult;
   }>;
   calculatorDeclaimer$!: Observable<CalculatorDisclaimer>;
-
-  imgUrl = 'assets/svg/tests/crossfit.svg';
-  subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
-  titleText = 'Калькулятор сумісності';
-
   ngOnDestroy(): void {
     sessionStorage.removeItem('personalities-calculator');
   }

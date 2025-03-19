@@ -38,7 +38,6 @@ import { LoadingService } from '../../shared/services/loading.service';
     InfoCardComponent,
     AccentBtnComponent,
     NgIf,
-
     MatProgressSpinnerModule,
   ],
   templateUrl: './home.component.html',

@@ -25,27 +25,32 @@
   border: 1px solid var(--borderColor) !important;
 }
 .disclaimer {
-  background-color: #fef4e8;
-  border-left: 4px solid #ff9800;
   padding: 16px;
   margin: 20px 0;
+  min-height: 173px;
   border-radius: 8px;
-  font-family: Arial, sans-serif;
+
+  background-color: #fef4e8;
+  border-left: 4px solid #ff9800;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .disclaimer-title {
   font-size: 20px;
+  margin-bottom: 10px;
+
   font-weight: bold;
   color: #d84315;
-  margin-bottom: 10px;
 }
 
 .disclaimer-text,
 .disclaimer-experimental {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   color: #444;
+  @media screen and (min-width: 764px) {
+    font-size: 16px;
+  }
 }
 
 .disclaimer-experimental {
@@ -184,6 +189,9 @@ p {
 .select-box:focus {
   border-color: #007bff;
   outline: none;
+}
+.spinner-container {
+  margin: 0 auto;
 }
 .calculate-btn {
   width: 100%;
