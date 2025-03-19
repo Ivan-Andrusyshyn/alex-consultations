@@ -94,8 +94,8 @@ interface CalculatorResult {
     possibleDifficulties: string[];
     improvingRelationship: string[];
     conclusion: string;
+    reflection: string;
   };
-  reflection: string;
 }
 
 type Answer = { point: number; text: string };
