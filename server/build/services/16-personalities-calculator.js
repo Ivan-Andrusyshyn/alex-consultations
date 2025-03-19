@@ -32,6 +32,7 @@ const worstMatches = [
 const traitCompatibility = {
     'E+I': 10,
     'N+N': 40,
+    'S+S': 40,
     'F+F': 30,
     'T+T': 30,
     'J+P': 20,
@@ -81,6 +82,8 @@ class PersonalitiesCalculatorService {
     }
     calculateMatches(pair) {
         const normalizedPair = pair.sort();
+        if (pair[0] === pair[1])
+            return 81;
         if (this.comparePair(perfectMatches, normalizedPair)) {
             return 100;
         }
