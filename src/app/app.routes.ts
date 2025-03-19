@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { PersonalitiesTestResolver } from './shared/resolvers/personalities-test.resolver';
 
 export const routes: Routes = [
   {
@@ -139,6 +140,7 @@ export const routes: Routes = [
       },
       {
         path: 'details/:personalitiesName',
+        resolve: { personalityData: PersonalitiesTestResolver },
         loadComponent: () =>
           import(
             './pages/personalities-test/test-results/test-results.component'

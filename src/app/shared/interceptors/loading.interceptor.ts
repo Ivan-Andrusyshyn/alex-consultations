@@ -7,15 +7,10 @@ import { LoadingService } from '../services/loading.service';
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoadingService);
 
-  let timer: ReturnType<typeof setTimeout>;
-
   loadingService.showLoadingSpinner();
   return next(req).pipe(
     finalize(() => {
-      timer = setTimeout(() => {
-        loadingService.hideLoadingSpinner();
-      }, 1000);
-      return () => clearTimeout(timer);
+      loadingService.hideLoadingSpinner();
     }),
 
     catchError((err) => {

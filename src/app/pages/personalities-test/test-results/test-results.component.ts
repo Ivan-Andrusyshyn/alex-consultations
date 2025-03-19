@@ -97,34 +97,28 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.scorePercentages$ =
       this.personalitiesService.getObservableScorePercentages();
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
+    this.personInformation$ = this.activeRoute.data.pipe(
+      map((data) => {
+        const response = data['personalityData'];
+        console.log(response.personInformation);
 
-    this.activeRoute.params.subscribe((r) => {
-      localStorage.setItem('personalityType', r['personalitiesName']);
-
-      this.imgUrl =
-        this.personalityTypes.find(
-          (type) => type.type === r['personalitiesName']
-        )?.urlImg ?? '';
-      this.personInformation$ = this.personalitiesService
-        .getPersonTypeByResults(r['personalitiesName'])
-        .pipe(
-          map((r) => {
-            console.log(r);
-
-            this.sendObject = {
-              personType: r.personType,
-              personInformation: r.personInformation,
-            } as {
-              personType: string;
-              personInformation: TypeInformation;
-            };
-            return {
-              personType: r.personType,
-              personInformation: r.personInformation,
-            };
-          })
-        );
-    });
+        this.imgUrl =
+          this.personalityTypes.find(
+            (type) => type.type === response.personInformation.type
+          )?.urlImg ?? '';
+        this.sendObject = {
+          personType: response.personType,
+          personInformation: response.personInformation,
+        } as {
+          personType: string;
+          personInformation: TypeInformation;
+        };
+        return {
+          personType: response.personType,
+          personInformation: response.personInformation,
+        };
+      })
+    );
   }
 
   openDialog(): void {
