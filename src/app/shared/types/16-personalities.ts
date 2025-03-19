@@ -76,6 +76,11 @@ interface CalculatorInformation {
     };
   };
 }
+interface CalculatorDisclaimer {
+  title: string;
+  text: string;
+  responsibility: string;
+}
 interface CalculatorResult {
   range: string;
   title: string;
@@ -124,4 +129,5 @@ export {
   Personalities,
   CalculatorResult,
   CalculatorInformation,
+  CalculatorDisclaimer,
 };

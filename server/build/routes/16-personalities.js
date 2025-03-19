@@ -10,12 +10,14 @@ const getTypeByResults_1 = __importDefault(require("../controllers/personalities
 const getTypeByScores_1 = __importDefault(require("../controllers/personalities/getTypeByScores"));
 const getDayPhrases_1 = __importDefault(require("../controllers/personalities/getDayPhrases"));
 const get_calculate_results_1 = __importDefault(require("../controllers/personalities/calculator/get-calculate-results"));
-const get_calculate_information_1 = __importDefault(require("../controllers/personalities/calculator/get-calculate-information"));
+const get_calculator_information_1 = __importDefault(require("../controllers/personalities/calculator/get-calculator-information"));
+const get_calculator_disclaimer_1 = __importDefault(require("../controllers/personalities/calculator/get-calculator-disclaimer"));
 const personalitiesRouter = (0, express_1.default)();
 personalitiesRouter.post('/16-personalities/get-type', getTypeByScores_1.default);
 personalitiesRouter.post('/16-personalities/results', getPercentages_1.default);
 personalitiesRouter.post('/16-personalities/calculator', get_calculate_results_1.default);
-personalitiesRouter.get('/16-personalities/calculator-information', get_calculate_information_1.default);
+personalitiesRouter.get('/16-personalities/calculator-information', get_calculator_information_1.default);
+personalitiesRouter.get('/16-personalities/calculator-disclaimer', get_calculator_disclaimer_1.default);
 personalitiesRouter.get('/16-personalities', getQuestions_1.default);
 personalitiesRouter.get('/16-personalities/person-type/:personType', getTypeByResults_1.default);
 personalitiesRouter.get('/16-personalities/personalities-phrases/:personType', getDayPhrases_1.default);

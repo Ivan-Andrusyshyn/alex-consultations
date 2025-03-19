@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import {
   Answer,
+  CalculatorDisclaimer,
   CalculatorInformation,
   CalculatorResult,
   Question,
@@ -21,12 +22,7 @@ interface PersonalitiesResults {
   results: { scores: TestResult; percentages: TestResult; personType: string };
   message: string;
 }
-interface CalculatorResponse {
-  message: string;
-  relationshipsType: { title: string; text: string };
-  scoreResult: number;
-  calculatorResults: CalculatorResult;
-}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -57,15 +53,6 @@ export class PersonalitiesTestService {
         })
       );
   }
-  getPersonalitiesCalculatorInformation(): Observable<{
-    message: string;
-    calculatorInformation: CalculatorInformation;
-  }> {
-    return this.http.get<{
-      message: string;
-      calculatorInformation: CalculatorInformation;
-    }>(this.testsUrl + '/16-personalities/calculator-information');
-  }
 
   getPersonTypeByResults(personType: string): Observable<{
     personInformation: TypeInformation;
@@ -77,15 +64,6 @@ export class PersonalitiesTestService {
       message: string;
       personType: string;
     }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);
-  }
-
-  getPersonalitiesCalculatorResults(
-    personsTypes: [string, string]
-  ): Observable<CalculatorResponse> {
-    return this.http.post<CalculatorResponse>(
-      this.testsUrl + '/16-personalities/calculator',
-      personsTypes
-    );
   }
 
   getPersonType(scorePercentages: TestResult | null): Observable<{

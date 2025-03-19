@@ -3,6 +3,19 @@
   [titleText]="titleText"
   [subtitleText]="subtitleText"
 ></app-title-card>
+<section
+  class="disclaimer"
+  *ngIf="calculatorDeclaimer$ | async as calculatorDeclaimer"
+>
+  <h3 class="disclaimer-title">{{ calculatorDeclaimer.title }}</h3>
+  <p class="disclaimer-text">
+    {{ calculatorDeclaimer.text }}
+  </p>
+  <p class="disclaimer-experimental">
+    {{ calculatorDeclaimer.responsibility }}
+  </p>
+</section>
+
 <section class="calculator">
   <div class="wrapper">
     <h3>Аналіз сумісності за типами особистості</h3>

@@ -9,7 +9,7 @@ import {
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { Observable, of, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import {
   FormBuilder,
   FormGroup,
@@ -20,11 +20,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import {
+  CalculatorDisclaimer,
   CalculatorResult,
   PersonalityTypes,
 } from '../../../shared/types/16-personalities';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
+import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
 
 @Component({
   selector: 'app-calculator-relationships',
@@ -43,7 +45,9 @@ import { TitleCardComponent } from '../../../components/title-card/title-card.co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
-  private personalitiesService = inject(PersonalitiesTestService);
+  private personalitiesCalculatorService = inject(
+    PersonalitiesCalculatorService
+  );
   private fb = inject(FormBuilder);
 
   private destroyRef = inject(DestroyRef);
@@ -57,6 +61,7 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
     scoreResult: number;
     calculatorResults: CalculatorResult;
   }>;
+  calculatorDeclaimer$!: Observable<CalculatorDisclaimer>;
 
   imgUrl = 'assets/svg/tests/crossfit.svg';
   subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
@@ -67,6 +72,10 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.calculatorDeclaimer$ = this.personalitiesCalculatorService
+      .getPersonalitiesCalculatorDisclaimer()
+      .pipe(map((r) => r.calculatorDisclaimer));
+
     const data = JSON.parse(
       sessionStorage.getItem('personalities-calculator') ?? 'null'
     );
@@ -86,7 +95,7 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
         this.formGroup.get('selectedSecondPersonality')?.value,
       ];
 
-      this.calculatorResult$ = this.personalitiesService
+      this.calculatorResult$ = this.personalitiesCalculatorService
         .getPersonalitiesCalculatorResults(pair)
         .pipe(
           takeUntilDestroyed(this.destroyRef),

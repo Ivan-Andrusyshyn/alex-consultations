@@ -9,8 +9,8 @@ import { map, Observable } from 'rxjs';
 
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
-import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { CalculatorInformation } from '../../../shared/types/16-personalities';
+import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
 
 @Component({
   selector: 'app-calculator-information',
@@ -34,12 +34,14 @@ export class CalculatorInformationComponent implements OnInit {
   routeUrl = '/tests/16-personalities/calculator-relationships';
 
   titleText = 'Калькулятор сумісності';
-  private personalitiesTestService = inject(PersonalitiesTestService);
+  private personalitiesCalculatorService = inject(
+    PersonalitiesCalculatorService
+  );
 
   calculatorInformation$!: Observable<CalculatorInformation>;
 
   ngOnInit(): void {
-    this.calculatorInformation$ = this.personalitiesTestService
+    this.calculatorInformation$ = this.personalitiesCalculatorService
       .getPersonalitiesCalculatorInformation()
       .pipe(map((r) => r.calculatorInformation));
   }
