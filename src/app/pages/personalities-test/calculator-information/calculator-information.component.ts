@@ -11,6 +11,7 @@ import { TitleCardComponent } from '../../../components/title-card/title-card.co
 import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { CalculatorInformation } from '../../../shared/types/16-personalities';
 import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-calculator-information',
@@ -37,10 +38,20 @@ export class CalculatorInformationComponent implements OnInit {
   private personalitiesCalculatorService = inject(
     PersonalitiesCalculatorService
   );
+  private seoService = inject(SeoService);
 
   calculatorInformation$!: Observable<CalculatorInformation>;
 
   ngOnInit(): void {
+    this.seoService.updateTitle(
+      'Калькулятор сумісності: дізнайтеся рівень гармонії ваших стосунків'
+    );
+
+    this.seoService.updateMetaTags(
+      'Перевірте свою сумісність у стосунках за системою 16 особистостей (MBTI). Дізнайтеся, як ваші типи впливають на взаєморозуміння та гармонію.',
+      'калькулятор сумісності, тест на сумісність, MBTI пари, 16 особистостей, психологія відносин, аналіз сумісності, як покращити стосунки, сумісність у парі, типи особистості у стосунках'
+    );
+
     this.calculatorInformation$ = this.personalitiesCalculatorService
       .getPersonalitiesCalculatorInformation()
       .pipe(map((r) => r.calculatorInformation));
