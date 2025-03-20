@@ -19,6 +19,7 @@ const toxical_relationship_1 = __importDefault(require("./routes/toxical-relatio
 const common_tests_1 = __importDefault(require("./routes/common-tests"));
 const attractiveness_1 = __importDefault(require("./routes/attractiveness"));
 const google_drive_1 = __importDefault(require("./routes/google-drive"));
+const load_files_1 = __importDefault(require("./routes/load-files"));
 const server = (0, express_1.default)();
 server.set('view engine', 'pug');
 server.set('views', path_1.default.join(__dirname, 'views'));
@@ -30,6 +31,7 @@ server.use(body_parser_1.default.json({ limit: '50mb' }));
 server.use((0, cookie_parser_1.default)());
 server.use((0, morgan_1.default)('dev'));
 server.use('/google-drive', google_drive_1.default);
+server.use('/files', load_files_1.default);
 server.use('/common-tests', common_tests_1.default);
 server.use('/tests', _16_personalities_1.default);
 server.use('/tests', attractiveness_1.default);

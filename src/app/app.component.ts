@@ -10,8 +10,8 @@ import { RouterOutlet } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Observable, switchMap } from 'rxjs';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -23,6 +23,7 @@ import { ThemeService } from './shared/services/theme.service';
 import { PersonalitiesPhraseService } from './shared/services/personalities-phrase.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GoogleSheetsService } from './shared/services/google-sheets.service';
+import { OnAppInitService } from './shared/services/on-app-init.service';
 
 @Component({
   selector: 'app-root',
@@ -44,13 +45,11 @@ import { GoogleSheetsService } from './shared/services/google-sheets.service';
 export class AppComponent implements OnInit {
   private readonly loadingService = inject(LoadingService);
   private readonly themeService = inject(ThemeService);
+  private readonly onAppInitService = inject(OnAppInitService);
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
-  // private readonly googleSheetService = inject(GoogleSheetsService);
-  //  this.googleSheetService.getSheetsTestsData().subscribe((r) => {
-  //     console.log(r);
-  //   });
+
   private destroyRef = inject(DestroyRef);
 
   loading$!: Observable<boolean>;
@@ -58,7 +57,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.personalitiesPhrasesService
       .getPersonalitiesPhrases()
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap((r) => this.onAppInitService.loadOnInit())
+      )
       .subscribe();
     this.loading$ = this.loadingService.isLoading();
     this.themeService.initTheme();

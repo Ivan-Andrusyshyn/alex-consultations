@@ -17,11 +17,15 @@ const google_sheets_1 = __importDefault(require("../../../services/google-sheets
 const cache_1 = __importDefault(require("../../../services/cache"));
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const personsTypes = req.body;
+        const { personsTypes, userInformation } = req.body;
+        const ip = req.headers['x-forwarded-for']
+            ? req.headers['x-forwarded-for'].split(',')[0].trim()
+            : req.socket.remoteAddress || 'Unknown';
         const fileId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
         const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         const scoreResult = _16_personalities_calculator_1.default.calculateMatches(personsTypes);
         const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
+        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: relationshipsType.title }));
         const calculatorResults = results[relationshipsType.title];
         res.status(200).send({
             message: 'Successful calculate!',

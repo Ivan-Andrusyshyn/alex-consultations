@@ -12,27 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const _16_personality_1 = __importDefault(require("../../services/16-personality"));
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const cache_1 = __importDefault(require("../../services/cache"));
+const loadAllFiles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const personType = req.params.personType;
-        const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
-        // const personInformation =
-        //   personalitiesService.getInformationByType(personNameByType);
-        const fileId = '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq';
-        const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        const personInformation = results[personType];
+        const fileIds = [
+            '1jR2ovHIRBxuW-TTHkft-THazgN38z1mz',
+            '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq',
+            '1P-NtuxCfS3aXZd9JkKN4OqzB7-FPsJa1',
+        ];
+        for (let i = 0; i < fileIds.length; i += 1) {
+            (yield cache_1.default.getCache(fileIds[i], () => google_sheets_1.default.getDataGoogle(fileIds[i])));
+        }
         res.status(200).send({
-            personType: personNameByType,
-            personInformation,
-            message: 'Success post person type .',
+            message: 'Succesfull loaded files!',
         });
     }
     catch (error) {
         console.log(error);
-        return res.status(400).send({ message: 'Internal server Error' });
+        return res.status(400).send('Internal server error');
     }
 });
-exports.default = getTypeByResults;
+exports.default = loadAllFiles;

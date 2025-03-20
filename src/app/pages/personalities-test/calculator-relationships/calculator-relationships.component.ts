@@ -17,6 +17,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DateTime } from 'luxon';
 
 import {
   CalculatorDisclaimer,
@@ -27,6 +28,9 @@ import { personalityTypesContent } from '../../../../assets/content/16-personali
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
 import { SeoService } from '../../../shared/services/seo.service';
+import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
+import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-calculator-relationships',
@@ -50,8 +54,14 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
   );
   private fb = inject(FormBuilder);
   private seoService = inject(SeoService);
-
+  private routeTracker = inject(RouteTrackerService);
+  private googleSheetService = inject(GoogleSheetsService);
+  private loadingService = inject(LoadingService);
   private destroyRef = inject(DestroyRef);
+
+  timestamp = DateTime.now()
+    .setZone('Europe/Kyiv')
+    .toFormat('yyyy-MM-dd HH:mm:ss');
 
   imgUrl = 'assets/svg/tests/crossfit.svg';
   subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
@@ -103,9 +113,15 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
         this.formGroup.get('selectedFirstPersonality')?.value,
         this.formGroup.get('selectedSecondPersonality')?.value,
       ];
-
+      this.loadingService.showLoadingSpinner();
       this.calculatorResult$ = this.personalitiesCalculatorService
-        .getPersonalitiesCalculatorResults(pair)
+        .getPersonalitiesCalculatorResults(pair, {
+          routeTracker: this.routeTracker.getRoutes(),
+          referrer: document.referrer,
+          testName: '16-personalities-calculator',
+          timestamp: this.timestamp ?? '',
+          device: this.googleSheetService.getDeviceType(),
+        })
         .pipe(
           takeUntilDestroyed(this.destroyRef),
           tap((r) => {

@@ -43,11 +43,18 @@ export class PersonalitiesCalculatorService {
   }
 
   getPersonalitiesCalculatorResults(
-    personsTypes: [string, string]
+    personsTypes: [string, string],
+    userInformation: {
+      routeTracker: string;
+      referrer: string;
+      testName: string;
+      timestamp: string;
+      device: string;
+    }
   ): Observable<CalculatorResponse> {
     return this.http.post<CalculatorResponse>(
       this.testsUrl + '/16-personalities/calculator',
-      personsTypes
+      { personsTypes, userInformation }
     );
   }
 }
