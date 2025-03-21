@@ -2,38 +2,42 @@
   <app-test-list-hero></app-test-list-hero>
 
   <div class="hero-bg">
-    <div *ngIf="dayPhrase$ | async as dayPhrase">
-      @if (!dayPhrase.usersPhrase.phrase) {
-      <div>
-        <img src="assets/svg/heart.svg" alt="Heart Icon" />
-
-        <div class="bg-text">"{{ dayPhrase.allPhrases[1].phrase }}"</div>
-      </div>
-
-      } @else if (loading$|async) {
+    <div class="hero-content">
+      @if (loading$|async) {
       <div class="spinner-container">
         <mat-progress-spinner
           mode="indeterminate"
           color="primary"
         ></mat-progress-spinner>
       </div>
+      }@else {
 
-      } @else {
-      <div class="users-type-wrapper">
-        <img src="assets/svg/heart.svg" alt="Heart Icon" />
-        <div class="users-type">
-          <div class="type-description">Ваш тип особистості</div>
-          <div>
-            {{ dayPhrase.usersPhrase.userTypeName }}
-            <span>({{ dayPhrase.usersPhrase.personalityType }})</span>
+      <ng-container *ngIf="dayPhrase$ | async as dayPhrase">
+        @if (!dayPhrase.usersPhrase.phrase) {
+        <div>
+          <img src="assets/svg/heart.svg" alt="Heart Icon" />
+
+          <div class="bg-text">"{{ dayPhrase.allPhrases[1].phrase }}"</div>
+        </div>
+
+        } @else {
+        <div class="users-type-wrapper">
+          <img src="assets/svg/heart.svg" alt="Heart Icon" />
+          <div class="users-type">
+            <div class="type-description">Ваш тип особистості</div>
+            <div>
+              {{ dayPhrase.usersPhrase.userTypeName }}
+              <span>({{ dayPhrase.usersPhrase.personalityType }})</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="date-container">
-        <strong>{{ todayDate }}</strong>
-      </div>
-      <div class="bg-text">"{{ dayPhrase.usersPhrase.phrase }}"</div>
+        <div class="date-container">
+          <strong>{{ todayDate }}</strong>
+        </div>
+        <div class="bg-text">"{{ dayPhrase.usersPhrase.phrase }}"</div>
 
+        }
+      </ng-container>
       }
     </div>
     <div class="btn-wrapper">

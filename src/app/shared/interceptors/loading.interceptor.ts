@@ -1,4 +1,4 @@
-import { finalize, catchError, tap } from 'rxjs';
+import { finalize, catchError } from 'rxjs';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 
@@ -9,18 +9,12 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
 
   loadingService.showLoadingSpinner();
   return next(req).pipe(
-    tap((event) => {
-      if ('status' in event && (event.status === 200 || event.status === 201)) {
-        loadingService.hideLoadingSpinner();
-      }
+    finalize(() => {
+      return loadingService.hideLoadingSpinner();
     }),
-
     catchError((err) => {
       console.error('HTTP Error:', err.message);
       throw err;
-    }),
-    finalize(() => {
-      loadingService.hideLoadingSpinner();
     })
   );
 };
