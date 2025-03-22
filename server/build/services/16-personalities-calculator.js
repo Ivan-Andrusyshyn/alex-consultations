@@ -53,6 +53,7 @@ class PersonalitiesCalculatorService {
             'NF+SF': 0.8,
             'IJ+IP': 0.8,
             'NT+NF': 0.95,
+            'IP+IJ': 0.8,
             'NF+NT': 0.95,
             'EP+FJ': 0.9,
             'EJ+EP': 0.8,
@@ -86,7 +87,16 @@ class PersonalitiesCalculatorService {
         const normalizedPair = pair.sort();
         if (pair[0] === pair[1])
             return 81;
-        const types = ['ENFP', 'ENTP', 'ENTJ', 'ESTP', 'ESFP', 'ESFJ'];
+        const types = [
+            'ENFP',
+            'INTP',
+            'INTJ',
+            'ENTP',
+            'ENTJ',
+            'ESTP',
+            'ESFP',
+            'ESFJ',
+        ];
         if (types.includes(pair[0]) && types.includes(pair[1]))
             return 76;
         if (this.comparePair(perfectMatches, normalizedPair)) {
