@@ -96,6 +96,8 @@ class PersonalitiesCalculatorService {
             'ESTP',
             'ESFP',
             'ESFJ',
+            'INFJ',
+            'ENFJ',
         ];
         if (types.includes(pair[0]) && types.includes(pair[1]))
             return 76;
