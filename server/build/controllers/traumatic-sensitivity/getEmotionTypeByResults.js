@@ -21,6 +21,7 @@ const getEmotionTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, 
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         if (googlefileData) {
             const results = googlefileData[emotionType];
+            console.log(results);
             res.status(200).send({
                 message: 'Successfully get information by categoryName.',
                 results,

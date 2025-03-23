@@ -108,11 +108,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     );
 
     this.activeRoute.params.subscribe((r) => {
-      this.typeInfo$ = this.typeInfo$ = this.traumaticSensitivityService
+      this.typeInfo$ = this.traumaticSensitivityService
         .getEmotionsTypeInfoByResults(r['traumaticSensitivity'])
         .pipe(
           map((info) => {
-            return info.information;
+            return info.results;
           })
         );
     });
@@ -122,7 +122,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       .getObservableSensitivityResults()
       .pipe(
         tap((r) => {
-          this.sendObject = { ...r?.results } as PersonalitiesResults;
+          this.sendObject = { ...r?.results };
         })
       );
 
@@ -130,6 +130,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   sendResultsOnEmail(results: { email: string }) {
+    if (!this.sendObject)
+      return console.error(
+        'Щоб відправити повідомлення на пошту треба пройти тест!'
+      );
+
     if (results.email) {
       this.mailerService
         .postEmailTraumatic({ email: results.email, ...this.sendObject })

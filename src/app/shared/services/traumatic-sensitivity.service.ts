@@ -55,11 +55,11 @@ export class TraumaticSensitivityService {
     );
   }
   getEmotionsTypeInfoByResults(personCodeType: string): Observable<{
-    information: TypeInformation;
+    results: TypeInformation;
     message: string;
   }> {
     return this.http.get<{
-      information: TypeInformation;
+      results: TypeInformation;
       message: string;
     }>(
       this.testsUrl +
