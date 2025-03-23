@@ -21,18 +21,28 @@ const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0
         const ip = req.headers['x-forwarded-for']
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
-        const fileId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
-        const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        const scoreResult = _16_personalities_calculator_1.default.calculateMatches(personsTypes);
-        const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: relationshipsType.title }));
-        const calculatorResults = results[relationshipsType.title];
-        res.status(200).send({
-            message: 'Successful calculate!',
-            relationshipsType,
-            calculatorResults,
-            scoreResult,
-        });
+        const fileResultsId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
+        const calculateMatchesId = '1sy5WZO5q4ERIOZMeTLWdprLda9GTI0az';
+        const results = yield cache_1.default.getCache(fileResultsId, () => google_sheets_1.default.getDataGoogle(fileResultsId));
+        const calculateMatches = yield cache_1.default.getCache(calculateMatchesId, () => google_sheets_1.default.getDataGoogle(calculateMatchesId));
+        const typesOfPair = `${personsTypes[0]}-${personsTypes[1]}`;
+        const scoreResult = calculateMatches[typesOfPair];
+        if (scoreResult) {
+            const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
+            yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: relationshipsType.title }));
+            const calculatorResults = results[relationshipsType.title];
+            res.status(200).send({
+                message: 'Successful calculate!',
+                relationshipsType,
+                calculatorResults,
+                scoreResult,
+            });
+        }
+        else {
+            return res
+                .status(400)
+                .send({ message: 'Error, scoreResult is not a number!' });
+        }
     }
     catch (error) {
         console.log(error);
