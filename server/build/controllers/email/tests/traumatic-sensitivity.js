@@ -13,17 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
-const traumatic_sensitivity_1 = __importDefault(require("../../../services/traumatic-sensitivity"));
 const nodemailer_1 = __importDefault(require("../../../services/nodemailer"));
 const createResultsTemplate_1 = require("./createResultsTemplate");
+const cache_1 = __importDefault(require("../../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 (0, dotenv_1.config)();
 const postEmailTraumaticResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { value } = req.body;
+        const type = value.matchResults;
         if (!value.email) {
             return res.status(400).send({ message: 'Email is required' });
         }
-        const typeInformation = traumatic_sensitivity_1.default.getReults(value.matchResults);
+        const fileId = '1RMmsi-q2t341rvuslLjo-HbuHCvBGJOg';
+        const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
+        const typeInformation = googlefileData[type];
         if (!typeInformation) {
             return res.status(400).send({ message: 'No type information found' });
         }
