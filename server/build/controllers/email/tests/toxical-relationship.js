@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const nodemailer_1 = __importDefault(require("../../../services/nodemailer"));
 const createResultsTemplate_1 = require("./createResultsTemplate");
-const toxical_relationship_1 = __importDefault(require("../../../services/toxical-relationship"));
+const cache_1 = __importDefault(require("../../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 (0, dotenv_1.config)();
 const postEmailToxicalRelationship = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -23,7 +24,9 @@ const postEmailToxicalRelationship = (req, res) => __awaiter(void 0, void 0, voi
         if (!value.email) {
             return res.status(400).send({ message: 'Email is required' });
         }
-        const results = toxical_relationship_1.default.getResults(value.category);
+        const fileId = '19G2C02YZy6llYCi6qzZfxWgldgRhDLOw';
+        const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
+        const results = googlefileData[value.category];
         const mailOptions = {
             from: `"Vidchuttia"<${process.env.EMAIL_USER}>`,
             to: value.email,

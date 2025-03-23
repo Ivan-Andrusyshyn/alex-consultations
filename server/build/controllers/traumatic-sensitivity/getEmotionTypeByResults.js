@@ -12,15 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const traumatic_sensitivity_1 = __importDefault(require("../../services/traumatic-sensitivity"));
+const cache_1 = __importDefault(require("../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getEmotionTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const emotionType = req.params.emotionType;
-        const result = traumatic_sensitivity_1.default.getReults(emotionType);
-        res.status(200).send({
-            information: result,
-            message: 'Success post person type.',
-        });
+        const fileId = '1RMmsi-q2t341rvuslLjo-HbuHCvBGJOg';
+        const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
+        if (googlefileData) {
+            const results = googlefileData[emotionType];
+            res.status(200).send({
+                message: 'Successfully get information by categoryName.',
+                results,
+            });
+        }
+        else {
+            res.status(400).send({
+                message: 'Error google file is undefinde or null!',
+            });
+        }
     }
     catch (error) {
         console.log(error);

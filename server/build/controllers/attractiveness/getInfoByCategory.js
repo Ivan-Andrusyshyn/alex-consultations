@@ -19,7 +19,6 @@ const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, functi
         const typeCategory = req.params.categoryName;
         const fileId = '1xW1qCjHAN-Ch_XjScmWttG9djWGpJw-n';
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        console.log(googlefileData);
         if (googlefileData) {
             const results = googlefileData[typeCategory];
             res.status(200).send({
