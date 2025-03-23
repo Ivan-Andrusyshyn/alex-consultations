@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const nodemailer_1 = __importDefault(require("../../../services/nodemailer"));
 const createResultsTemplate_1 = require("./createResultsTemplate");
-const attractiveness_1 = __importDefault(require("../../../services/attractiveness"));
+const cache_1 = __importDefault(require("../../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 (0, dotenv_1.config)();
 const postEmailAttractiveness = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -23,7 +24,9 @@ const postEmailAttractiveness = (req, res) => __awaiter(void 0, void 0, void 0, 
         if (!value.email) {
             return res.status(400).send({ message: 'Email is required' });
         }
-        const results = attractiveness_1.default.getResults(value.category);
+        const fileId = '1xW1qCjHAN-Ch_XjScmWttG9djWGpJw-n';
+        const googlefileData = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
+        const results = googlefileData[value.category];
         const mailOptions = {
             from: `"Vidchuttia"<${process.env.EMAIL_USER}>`,
             to: value.email,

@@ -35,7 +35,7 @@ class GoogleSheetsService {
                 return yield response.json();
             }
             catch (error) {
-                console.log('File was modified within the last 24 hours, reading it...');
+                console.log(error);
             }
         });
     }

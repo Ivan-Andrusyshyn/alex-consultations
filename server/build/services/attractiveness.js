@@ -1,12 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const results_1 = require("../content/attractiveness/results");
 class AttractivenessService {
-    getResults(typeCategory) {
-        return results_1.attractivenessResults.find((r) => r.category === typeCategory);
-    }
     getNameCategoryByScore(scores) {
-        console.log(scores);
         const categoryCount = {};
         for (let key of Object.keys(scores)) {
             const category = scores[key];
@@ -19,7 +14,6 @@ class AttractivenessService {
                 categoryCount[category] = numberPrefix;
             }
         }
-        console.log(categoryCount);
         let maxCount = -Infinity;
         let mostFrequentCategory = '';
         for (let category in categoryCount) {
