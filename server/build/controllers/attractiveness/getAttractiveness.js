@@ -8,15 +8,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = require("../../utils/attractiveness/test");
+const cache_1 = __importDefault(require("../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getAttractiveness = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const attractivenessTest = (0, test_1.createQuestionsAttractiveness)();
-        res.status(200).send({
-            questions: attractivenessTest,
-            message: 'Succesfull get all questions!',
-        });
+        // const attractivenessQuestions: Question[] = createQuestionsAttractiveness();
+        const fileId = '1u1qVaIaxpiIydExaUQj_6N3SfUJ7sFY7';
+        const attractivenessQuestions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
+        if (attractivenessQuestions) {
+            res.status(200).send({
+                questions: attractivenessQuestions,
+                message: 'Succesfull get all questions!',
+            });
+        }
+        else {
+            res.status(400).send({
+                message: 'Something wrong wuth data.',
+            });
+        }
     }
     catch (error) {
         console.log(error);

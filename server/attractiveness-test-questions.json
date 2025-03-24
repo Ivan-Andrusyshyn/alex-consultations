@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "Що люди зазвичай кажуть про тебе після знайомства?",
+    "answers": [
+      {
+        "text": "Ти дуже впевнений(а) у собі, це притягує!",
+        "type": "charismatic-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "Ти загадка, хочеться дізнатися більше!",
+        "type": "mysterious-attractivenes",
+        "point": 1.5
+      },
+      {
+        "text": "З тобою цікаво говорити, ти розумний(а)!",
+        "type": "intellectual-attractivenes",
+        "point": 1.5
+      },
+      {
+        "text": "Ти випромінюєш тепло, з тобою спокійно!",
+        "type": "warm-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "Ти заряджаєш своєю енергією!",
+        "type": "wild-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "Ти дуже милий(а) і ніжний(а)!",
+        "type": "gentle-attractiveness",
+        "point": 1.5
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Що найбільше привертає увагу до тебе?",
+    "answers": [
+      {
+        "text": "Моя впевненість у собі, це відчувається.",
+        "type": "charismatic-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Моя загадковість, мене хочеться розгадати.",
+        "type": "mysterious-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Мій розум і цікаві розмови.",
+        "type": "intellectual-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Моє тепло, з тобою добре.",
+        "type": "warm-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Моя енергія, я заряджаю людей!",
+        "type": "wild-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Моя ніжність і щирість.",
+        "type": "gentle-attractiveness",
+        "point": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Яке місце тобі найближче за відчуттями?",
+    "answers": [
+      {
+        "text": "Осяяна сцена, де всі погляди звернені на тебе.",
+        "type": "charismatic-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Старовинна бібліотека з книгами, що приховують таємниці.",
+        "type": "mysterious-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Затишна кав’ярня, де можна годинами говорити про сенс життя.",
+        "type": "intellectual-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Будинок друзів, де тебе зустрічають теплим обіймом.",
+        "type": "warm-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Шалена подорож у невідоме, коли вітер розвиває волосся.",
+        "type": "wild-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "М'який плед, приглушене світло й відчуття спокою.",
+        "type": "gentle-attractiveness",
+        "point": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Як ти зазвичай привертаєш увагу?",
+    "answers": [
+      {
+        "text": "Просто заходжу – і всі мене помічають",
+        "type": "charismatic-attractiveness",
+        "point": 1
+      },
+      {
+        "text": " Моя загадковість змушує людей цікавитися мною",
+        "type": "mysterious-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Люди слухають мене, бо я цікаво говорю",
+        "type": "intellectual-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Я випромінюю тепло, тому люди тягнуться до мене",
+        "type": "warm-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Я дію несподівано, і це зачаровує",
+        "type": "wild-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Моє спокійне і ніжне ставлення викликає симпатію ",
+        "type": "gentle-attractiveness",
+        "point": 1
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Як ти реагуєш на компліменти?",
+    "answers": [
+      {
+        "text": " Усміхаюсь і кажу: ‘Знаю, дякую!",
+        "type": "charismatic-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Посміхаюсь загадково, нічого не відповідаю.",
+        "type": "mysterious-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Щиро дякую і радію!",
+        "type": "intellectual-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Моє тепло, з тобою добре.",
+        "type": "warm-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Жартую або кокетую у відповідь.",
+        "type": "wild-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Трохи червонію, але це приємно.",
+        "type": "gentle-attractiveness",
+        "point": 1
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Як ти фліртуєш?",
+    "answers": [
+      {
+        "text": "Дивлюсь прямо в очі й впевнено посміхаюсь.",
+        "type": "charismatic-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "Граю в загадковість, щоб хотілося мене розгадати.",
+        "type": "mysterious-attractivenes",
+        "point": 1.5
+      },
+      {
+        "text": "Захоплюю розмовою так, що неможливо відірватися.",
+        "type": "intellectual-attractivenes",
+        "point": 1.5
+      },
+      {
+        "text": "Буду уважним(ою) і дам відчути, що мені справді цікаво.",
+        "type": "warm-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "Роблю щось несподіване, щоб змусити сміятися. ",
+        "type": "wild-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "Червонію, відводжу погляд, але ніжно посміхаюсь.",
+        "type": "gentle-attractiveness",
+        "point": 1.5
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Що ти робиш, коли заходиш у кімнату, повну людей?",
+    "answers": [
+      {
+        "text": "Одразу відчуваю себе головним(ою), і це помічають всі.",
+        "type": "charismatic-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Залишаюся осторонь, але люди все одно звертають увагу. ",
+        "type": "mysterious-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Швидко знаходжу цікаву тему, і всі починають слухати.",
+        "type": "intellectual-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Просто посміхаюсь і легко вливаюся в спілкування.",
+        "type": "warm-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Кидаю жарт або роблю щось несподіване, щоб привернути увагу. ",
+        "type": "wild-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Спокійно спостерігаю і відчуваю атмосферу.",
+        "type": "gentle-attractiveness",
+        "point": 1
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Який фільм або серіал тобі ближче?",
+    "answers": [
+      {
+        "text": " \"Вовк з Волл-стріт\" – яскравість, впевненість, магнетизм. ",
+        "type": "charismatic-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": "\"Шерлок\" – загадковість, спостережливість, інтелект.",
+        "type": "mysterious-attractivenes",
+        "point": 1.5
+      },
+      {
+        "text": " \"Інтерстеллар\" – глибина, філософія, великі питання.",
+        "type": "intellectual-attractivenes",
+        "point": 1.5
+      },
+      {
+        "text": "\"Друзі\" – тепло, довіра, відчуття близькості.",
+        "type": "warm-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": " \"Джон Вік\" – дія, енергія, вибуховий характер. ",
+        "type": "wild-attractiveness",
+        "point": 1.5
+      },
+      {
+        "text": " \"Амелі\" – ніжність, чарівність, легкість.",
+        "type": "gentle-attractiveness",
+        "point": 1.5
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "В який момент ти відчуваєш, що світ належить тобі?",
+    "answers": [
+      {
+        "text": " Коли я заходжу в кімнату і відчуваю, що всі мене помітили.",
+        "type": "charismatic-attractiveness",
+        "point": 1
+      },
+      {
+        "text": " Коли я ловлю на собі зацікавлені погляди, але ніхто не може мене \"прочитати\".",
+        "type": "mysterious-attractivenes",
+        "point": 1
+      },
+      {
+        "text": " Коли мої слова або ідеї змушують людей задуматися.",
+        "type": "intellectual-attractivenes",
+        "point": 1
+      },
+      {
+        "text": "Коли я підтримую когось, і бачу, як змінюється їхній настрій.",
+        "type": "warm-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Коли я приймаю ризиковане рішення і воно виявляється правильним! ",
+        "type": "wild-attractiveness",
+        "point": 1
+      },
+      {
+        "text": "Коли я відчуваю, що мене люблять по-справжньому.",
+        "type": "gentle-attractiveness",
+        "point": 1
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Що тобі найбільше хочеться, але не завжди вистачає сміливості зробити?",
+    "answers": [
+      {
+        "text": " Взяти ситуацію під контроль і змусити всіх слухати мене. ",
+        "type": "charismatic-attractiveness",
+        "point": 0.5
+      },
+      {
+        "text": "Не пояснювати себе, а просто залишатися загадкою.",
+        "type": "mysterious-attractivenes",
+        "point": 0.5
+      },
+      {
+        "text": "Розкрити свої ідеї повністю, навіть якщо вони здаються дивними.",
+        "type": "intellectual-attractivenes",
+        "point": 0.5
+      },
+      {
+        "text": "Стати для когось справжньою опорою, навіть якщо це важко. ",
+        "type": "warm-attractiveness",
+        "point": 0.5
+      },
+      {
+        "text": "Ризикнути всім і зробити щось абсолютно божевільне.",
+        "type": "wild-attractiveness",
+        "point": 0.5
+      },
+      {
+        "text": " Відкритися перед кимось повністю, не боячись бути вразливим(ою).",
+        "type": "gentle-attractiveness",
+        "point": 0.5
+      }
+    ]
+  }
+]

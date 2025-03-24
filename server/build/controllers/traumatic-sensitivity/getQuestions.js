@@ -12,14 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = __importDefault(require("../../utils/traumatic-sensitivity/test"));
+const cache_1 = __importDefault(require("../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questionsWithAnswers = (0, test_1.default)();
-        res.status(200).send({
-            questions: questionsWithAnswers,
-            message: 'Succesfull get all questions!',
-        });
+        // const questionsWithAnswers: Question[] = createTraumaticSensitivityTest();
+        const fileId = '1yB6RLaxZCdXYmQddal8k6yvygxTnKO6o';
+        const questionsWithAnswers = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
+        if (questionsWithAnswers) {
+            res.status(200).send({
+                questions: questionsWithAnswers,
+                message: 'Succesfull get all questions!',
+            });
+        }
+        else {
+            res.status(400).send({
+                message: 'Something wrong with data.',
+            });
+        }
     }
     catch (error) {
         console.log(error);

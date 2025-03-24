@@ -8,15 +8,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const test_1 = require("../../utils/toxical-relationship/test");
+const cache_1 = __importDefault(require("../../services/cache"));
+const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questions = (0, test_1.createQuestionsRelationship)();
-        res.status(200).send({
-            message: 'Success get relationship-sensitivity questions!',
-            questions,
-        });
+        // const questions = createQuestionsRelationship();
+        const fileId = '1vQ7nXsXt6vt95-KcgMB9QFYWPU8O5CEl';
+        const questions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
+        if (questions) {
+            res.status(200).send({
+                message: 'Success get relationship-sensitivity questions!',
+                questions,
+            });
+        }
+        else {
+            res.status(400).send({
+                message: 'Something wrong with data.',
+            });
+        }
     }
     catch (error) {
         console.log(error);
