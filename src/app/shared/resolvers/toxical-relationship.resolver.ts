@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoadingService } from '../services/loading.service';
+
 import { ToxicalRelationshipService } from '../services/toxical-relationship.service';
 import { RelationshipResult } from '../types/toxical-relationship';
 

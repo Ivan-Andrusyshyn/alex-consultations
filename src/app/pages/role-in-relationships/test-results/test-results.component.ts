@@ -21,21 +21,13 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 
-import { PersonalitiesTypeInformationComponent } from '../../../components/test/personalities-test/personalities-type-information/personalities-type-information.component';
-import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
-import {
-  TestResult,
-  TypeInformation,
-} from '../../../shared/types/16-personalities';
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
-import { ResultsIndicatorComponent } from '../../../components/test/personalities-test/results-indicator/results-indicator.component';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
-import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { RoleInRelationshipsService } from '../../../shared/services/role-in-relationships.service';

@@ -29,7 +29,6 @@ import { ParagraphPipe } from './paragraph.pipe';
 
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { ModalComponent } from '../../../components/modal/modal.component';
-import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';

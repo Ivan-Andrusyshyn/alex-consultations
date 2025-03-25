@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoadingService } from '../services/loading.service';
+
 import { RoleInRelationshipsService } from '../services/role-in-relationships.service';
 import { RoleInRelationshipsResult } from '../types/role-in-relationships';
 

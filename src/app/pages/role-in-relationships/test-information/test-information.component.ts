@@ -4,15 +4,15 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { map, Observable } from 'rxjs';
 
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { PersonalityTypesComponent } from '../../../components/test/personalities-test/personality-types/personality-types.component';
 import { RoleInRelationshipsService } from '../../../shared/services/role-in-relationships.service';
-import { map, Observable } from 'rxjs';
-import { RoleInRelationshipsInformation } from '../../../../../server/src/types/role-in-relationships';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { RoleInRelationshipsInformation } from '../../../shared/types/role-in-relationships';
 
 @Component({
   selector: 'app-test-information',
