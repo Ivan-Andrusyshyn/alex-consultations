@@ -14,9 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 const cache_1 = __importDefault(require("../../../services/cache"));
+const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 const getPersonalitiesCalculatorDisclaimer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const fileId = '1P-NtuxCfS3aXZd9JkKN4OqzB7-FPsJa1';
+        const fileId = google_file_ids_env_1.PERSONALITIES.CALCULATOR.DISCLAIMER;
         const calculatorDisclaimer = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
         res.status(200).send({
             message: 'Successful calculate!',

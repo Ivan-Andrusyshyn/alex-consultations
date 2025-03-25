@@ -14,10 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
+const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const getAttractiveness = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // const attractivenessQuestions: Question[] = createQuestionsAttractiveness();
-        const fileId = '1u1qVaIaxpiIydExaUQj_6N3SfUJ7sFY7';
+        const fileId = google_file_ids_env_1.ATTRACTIVENESS.QUESTIONS;
         const attractivenessQuestions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
         if (attractivenessQuestions) {
             res.status(200).send({

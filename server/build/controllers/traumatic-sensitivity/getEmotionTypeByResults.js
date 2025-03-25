@@ -14,14 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
+const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const getEmotionTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const emotionType = req.params.emotionType;
-        const fileId = '1RMmsi-q2t341rvuslLjo-HbuHCvBGJOg';
+        const fileId = google_file_ids_env_1.TRAUMATIC_SENSITIVITY.RESULTS;
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         if (googlefileData) {
             const results = googlefileData[emotionType];
-            console.log(results);
             res.status(200).send({
                 message: 'Successfully get information by categoryName.',
                 results,

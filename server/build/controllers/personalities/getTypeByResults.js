@@ -15,13 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
+const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
         const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
         // const personInformation =
         //   personalitiesService.getInformationByType(personNameByType);
-        const fileId = '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq';
+        const fileId = google_file_ids_env_1.PERSONALITIES.RESULTS;
         const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         const personInformation = results[personType];
         res.status(200).send({

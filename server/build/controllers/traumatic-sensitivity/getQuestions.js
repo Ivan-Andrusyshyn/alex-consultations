@@ -14,10 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
+const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // const questionsWithAnswers: Question[] = createTraumaticSensitivityTest();
-        const fileId = '1yB6RLaxZCdXYmQddal8k6yvygxTnKO6o';
+        const fileId = google_file_ids_env_1.TRAUMATIC_SENSITIVITY.QUESTIONS;
         const questionsWithAnswers = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
         if (questionsWithAnswers) {
             res.status(200).send({

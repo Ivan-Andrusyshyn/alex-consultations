@@ -14,25 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const cache_1 = __importDefault(require("../../services/cache"));
+const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const loadAllFiles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const fileIds = [
-            '1jR2ovHIRBxuW-TTHkft-THazgN38z1mz',
-            '1MXEb0Grxn_KwhxDHhVdV_3OM6A68K2Jq',
-            '1P-NtuxCfS3aXZd9JkKN4OqzB7-FPsJa1',
-            '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK',
-            '1xW1qCjHAN-Ch_XjScmWttG9djWGpJw-n',
-            '19G2C02YZy6llYCi6qzZfxWgldgRhDLOw',
-            '1RMmsi-q2t341rvuslLjo-HbuHCvBGJOg',
-            '1sy5WZO5q4ERIOZMeTLWdprLda9GTI0az',
-            '1QjBe2NcTo_yuBovbsCa_zlkJx1Yva_mY',
-            '1u1qVaIaxpiIydExaUQj_6N3SfUJ7sFY7',
-            '1vQ7nXsXt6vt95-KcgMB9QFYWPU8O5CEl',
-            '1yB6RLaxZCdXYmQddal8k6yvygxTnKO6o',
-            '11mkaYmnOhro7a0nZZEykUzQ1QueEZHTU',
-            '1BU-SKwiH-_dHGGGE25UlRLQ4s5qVOYXf',
-            '1Z1DYM9sOldCFE-AAnInb45O_FnCFzl5p',
-        ];
+        const fileIds = google_file_ids_env_1.ARRAY_OF_FILE_IDS;
         for (let i = 0; i < fileIds.length; i += 1) {
             (yield cache_1.default.getCache(fileIds[i], () => google_sheets_1.default.getDataGoogle(fileIds[i])));
         }

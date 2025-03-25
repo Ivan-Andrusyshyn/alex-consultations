@@ -15,14 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const _16_personalities_calculator_1 = __importDefault(require("../../../services/16-personalities-calculator"));
 const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 const cache_1 = __importDefault(require("../../../services/cache"));
+const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { personsTypes, userInformation } = req.body;
         const ip = req.headers['x-forwarded-for']
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
-        const fileResultsId = '1uj1XQecNEmSBI1cJRINcBYJmTtBMj4sK';
-        const calculateMatchesId = '1sy5WZO5q4ERIOZMeTLWdprLda9GTI0az';
+        const fileResultsId = google_file_ids_env_1.PERSONALITIES.CALCULATOR.RESULTS;
+        const calculateMatchesId = google_file_ids_env_1.PERSONALITIES.CALCULATOR.IDS;
         const results = yield cache_1.default.getCache(fileResultsId, () => google_sheets_1.default.getDataGoogle(fileResultsId));
         const calculateMatches = yield cache_1.default.getCache(calculateMatchesId, () => google_sheets_1.default.getDataGoogle(calculateMatchesId));
         const typesOfPair = `${personsTypes[0]}-${personsTypes[1]}`;
