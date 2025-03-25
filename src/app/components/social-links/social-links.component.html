@@ -1,29 +1,15 @@
 <section class="social-links">
   <p [ngStyle]="{ color: isTheme ? textColor : '#333' }">{{ titleLinks }} ❤️</p>
-  <div class="container">
-    <div data-text="Telegram" style="--r: -15" class="glass">
-      <a href="https://t.me/@alex_andrusishin" target="_blank">
-        <img src="../../../assets/svg/media/telegram.svg" alt="" />
+  <ul class="container">
+    <li
+      *ngFor="let link of socialLinks"
+      [attr.data-text]="link.name"
+      [style.--r]="link.rotation"
+      class="glass"
+    >
+      <a [href]="link.url" target="_blank">
+        <img [src]="link.imgSrc" [alt]="link.name" />
       </a>
-    </div>
-    @if (showAllMedia) {
-
-    <div data-text="Tik tok" style="--r: 5" class="glass">
-      <a
-        href="https://www.tiktok.com/@alex_white_light?_t=ZM-8u3NPohrWXn&_r=1"
-        target="_blank"
-      >
-        <img src="../../../assets/svg/media/tiktok.svg" alt="" />
-      </a>
-    </div>
-    }
-    <div data-text="Instagram" style="--r: 25" class="glass">
-      <a
-        href="https://www.instagram.com/depth_seekerr?igsh=MTZuNGxudnNrNWYzeg%3D%3D&utm_source=qr"
-        target="_blank"
-      >
-        <img src="../../../assets/svg/media/instagram.svg" alt="" />
-      </a>
-    </div>
-  </div>
+    </li>
+  </ul>
 </section>
