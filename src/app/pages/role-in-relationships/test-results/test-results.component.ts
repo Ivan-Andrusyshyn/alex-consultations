@@ -87,11 +87,14 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.activeRoute.params.subscribe((r) => {
       this.testResults$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['roleInRelationshipsData'];
-
-          this.sendObject = {
-            category: response.results.category,
+          const response = data['roleInRelationshipsData'] as {
+            results: RoleInRelationshipsResult;
+            message: string;
           };
+          this.sendObject = {
+            category: response.results.type,
+          };
+
           return response.results;
         })
       );
@@ -103,7 +106,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService
-        .postEmailAttractiveness({
+        .postEmailRoleInRelationships({
           email: results.email,
           ...this.sendObject,
         })

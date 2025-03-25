@@ -15,24 +15,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const nodemailer_1 = __importDefault(require("../../../services/nodemailer"));
 const createResultsTemplate_1 = require("./createResultsTemplate");
-const cache_1 = __importDefault(require("../../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
+const cache_1 = __importDefault(require("../../../services/cache"));
 const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 (0, dotenv_1.config)();
-const postEmailAttractiveness = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postEmailRoleInRelationships = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { value } = req.body;
+        const value = req.body.value;
         if (!value.email) {
             return res.status(400).send({ message: 'Email is required' });
         }
-        const fileId = google_file_ids_env_1.ATTRACTIVENESS.RESULTS;
+        if (!value.category) {
+            return res.status(400).send({ message: 'Categoty is required' });
+        }
+        const fileId = google_file_ids_env_1.ROLE_IN_RELATIONSHIPS.RESULTS;
         const googlefileData = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
         const results = googlefileData[value.category];
         const mailOptions = {
             from: `"Vidchuttia"<${process.env.EMAIL_USER}>`,
             to: value.email,
-            subject: 'Тест на привабливість',
-            html: (0, createResultsTemplate_1.getAttractivenessResultTemplate)(results),
+            subject: 'Хто ти у відносинах?',
+            html: (0, createResultsTemplate_1.getRoleInRelationshipsTemplate)(results),
         };
         const respone = yield nodemailer_1.default.sendMail(mailOptions);
         res
@@ -44,4 +47,4 @@ const postEmailAttractiveness = (req, res) => __awaiter(void 0, void 0, void 0, 
         return res.status(500).send({ message: 'Internal Server Error' });
     }
 });
-exports.default = postEmailAttractiveness;
+exports.default = postEmailRoleInRelationships;

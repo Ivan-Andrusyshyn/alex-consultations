@@ -9,7 +9,7 @@ interface Option {
   point?: string | number;
 }
 interface RoleInRelationshipsResult {
-  type: relationshipRoleType;
+  type: RelationshipRoleType;
   title: string;
   subtitle: string;
   description: string;
@@ -26,17 +26,17 @@ interface RoleInRelationshipsInformation {
   };
   cta: string;
 }
-type relationshipRoleType =
-  | 'Натхненник'
-  | 'Опора'
-  | 'Вогонь і вітер'
-  | 'Творець сенсів'
-  | 'Капітан'
-  | 'Вільне серце';
+type RelationshipRoleType =
+  | 'natchnennik'
+  | 'opora'
+  | 'vogon-i-viter'
+  | 'tvorec'
+  | 'kapitan'
+  | 'vilne-serce';
 
 export {
   Question,
   RoleInRelationshipsInformation,
   RoleInRelationshipsResult,
-  relationshipRoleType,
+  RelationshipRoleType,
 };

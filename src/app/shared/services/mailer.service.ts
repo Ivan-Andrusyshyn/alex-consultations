@@ -19,6 +19,14 @@ export class MailerService {
       }
     );
   }
+  postEmailRoleInRelationships(value: any): Observable<any> {
+    return this.http.post(
+      environment.apiUrl + '/send-email' + '/role-in-relationships',
+      {
+        value,
+      }
+    );
+  }
   postEmailTraumatic(value: any): Observable<any> {
     return this.http.post(
       environment.apiUrl + '/send-email' + '/traumatic-sensitivity',

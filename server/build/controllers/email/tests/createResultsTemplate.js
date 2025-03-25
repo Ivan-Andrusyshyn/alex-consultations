@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAttractivenessResultTemplate = exports.getPersonalitiesTemplate = exports.getToxicalRelTemplate = exports.getTraumaticTemplate = void 0;
+exports.getRoleInRelationshipsTemplate = exports.getAttractivenessResultTemplate = exports.getPersonalitiesTemplate = exports.getToxicalRelTemplate = exports.getTraumaticTemplate = void 0;
 const getTraumaticTemplate = (typeInformation) => `
         <h3>Your Test Results:</h3>
         <p><strong>Description:</strong> ${typeInformation.description}</p>
@@ -28,6 +28,14 @@ const getTraumaticTemplate = (typeInformation) => `
         <p>${typeInformation.summary.text}</p>
       `;
 exports.getTraumaticTemplate = getTraumaticTemplate;
+const getRoleInRelationshipsTemplate = (roleInfo) => `
+  <h3>${roleInfo.title}</h3>
+  <h4>${roleInfo.subtitle}</h4>
+  <p><strong>Тип ролі:</strong> ${roleInfo.type}</p>
+  <p><strong>Опис:</strong> ${roleInfo.description}</p>
+  <p><strong>Що робити далі?</strong> ${roleInfo.cta}</p>
+`;
+exports.getRoleInRelationshipsTemplate = getRoleInRelationshipsTemplate;
 const getPersonalitiesTemplate = (typeInformation) => `
   <div class="personality-info-container">
     <div class="info-card">

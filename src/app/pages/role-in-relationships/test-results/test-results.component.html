@@ -1,7 +1,7 @@
 <section class="person-info" *ngIf="testResults$ | async as testResults">
   <app-title-card
     [imgUrl]="imgUrl"
-    [titleText]="testResults.type"
+    [titleText]="testResults.title"
     [subtitleText]="testResults.subtitle"
   ></app-title-card>
   <div class="score-wrapper">

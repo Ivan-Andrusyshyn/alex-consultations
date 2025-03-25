@@ -17,6 +17,7 @@ const nodemailer_1 = __importDefault(require("../../../services/nodemailer"));
 const createResultsTemplate_1 = require("./createResultsTemplate");
 const cache_1 = __importDefault(require("../../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
+const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 (0, dotenv_1.config)();
 const postEmailTraumaticResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -25,7 +26,7 @@ const postEmailTraumaticResults = (req, res) => __awaiter(void 0, void 0, void 0
         if (!value.email) {
             return res.status(400).send({ message: 'Email is required' });
         }
-        const fileId = '1RMmsi-q2t341rvuslLjo-HbuHCvBGJOg';
+        const fileId = google_file_ids_env_1.TRAUMATIC_SENSITIVITY.RESULTS;
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         const typeInformation = googlefileData[type];
         if (!typeInformation) {

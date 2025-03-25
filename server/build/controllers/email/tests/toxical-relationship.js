@@ -17,6 +17,7 @@ const nodemailer_1 = __importDefault(require("../../../services/nodemailer"));
 const createResultsTemplate_1 = require("./createResultsTemplate");
 const cache_1 = __importDefault(require("../../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
+const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 (0, dotenv_1.config)();
 const postEmailToxicalRelationship = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -24,7 +25,7 @@ const postEmailToxicalRelationship = (req, res) => __awaiter(void 0, void 0, voi
         if (!value.email) {
             return res.status(400).send({ message: 'Email is required' });
         }
-        const fileId = '19G2C02YZy6llYCi6qzZfxWgldgRhDLOw';
+        const fileId = google_file_ids_env_1.TOXICAL_RELATIONSHIPS.RESULTS;
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         const results = googlefileData[value.category];
         const mailOptions = {

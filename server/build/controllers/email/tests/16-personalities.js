@@ -34,7 +34,6 @@ const postEmailPersonalitiesResults = (req, res) => __awaiter(void 0, void 0, vo
             html: (0, createResultsTemplate_1.getPersonalitiesTemplate)(personInformation),
         };
         const respone = yield nodemailer_1.default.sendMail(mailOptions);
-        console.log(respone);
         res
             .status(200)
             .send({ message: `Success send email message to ${value.email}` });
