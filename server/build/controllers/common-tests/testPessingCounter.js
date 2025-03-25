@@ -18,7 +18,6 @@ const testPessingCounter = (req, res) => __awaiter(void 0, void 0, void 0, funct
     try {
         const filePath = path_1.default.join(process.cwd(), 'src', 'public', 'test-passing-quantity.json');
         const data = fileSistem_1.default.readJsonFile(filePath);
-        console.log(data);
         res.status(201).send({ message: 'Tests pessing success writed!' });
     }
     catch (error) {
