@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
 export class SocialLinksComponent {
   @Input() titleLinks?: string = 'Приєднуйся';
   @Input() isTheme: boolean = true;
+  @Input() showAllMedia: boolean = false;
 
   textColor = 'var(--textColor)';
 }

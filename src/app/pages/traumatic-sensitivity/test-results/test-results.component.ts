@@ -37,6 +37,7 @@ import { ModalComponent } from '../../../components/modal/modal.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
+import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -63,6 +64,7 @@ const types: string[] = [
     AccentBtnComponent,
     TypeInformationComponent,
     TestListHeroComponent,
+    SocialLinksComponent,
     NgStyle,
   ],
   templateUrl: './test-results.component.html',

@@ -32,6 +32,7 @@ import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.co
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { RoleInRelationshipsService } from '../../../shared/services/role-in-relationships.service';
 import { RoleInRelationshipsResult } from '../../../shared/types/role-in-relationships';
+import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
 
 @Component({
   selector: 'app-test-results',
@@ -43,6 +44,7 @@ import { RoleInRelationshipsResult } from '../../../shared/types/role-in-relatio
     AsyncPipe,
     TitleCardComponent,
     TestListHeroComponent,
+    SocialLinksComponent,
     NgIf,
   ],
   templateUrl: './test-results.component.html',

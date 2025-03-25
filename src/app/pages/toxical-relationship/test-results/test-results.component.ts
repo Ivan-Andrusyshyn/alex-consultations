@@ -32,6 +32,7 @@ import { ModalComponent } from '../../../components/modal/modal.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
+import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
 
 @Component({
   selector: 'app-test-results',
@@ -45,6 +46,7 @@ import { TestListHeroComponent } from '../../../components/test/test-list-hero/t
     ParagraphPipe,
     TestListHeroComponent,
     AccentBtnComponent,
+    SocialLinksComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
