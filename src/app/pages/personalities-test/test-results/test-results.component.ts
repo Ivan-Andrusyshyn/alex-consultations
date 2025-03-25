@@ -100,7 +100,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.personInformation$ = this.activeRoute.data.pipe(
       map((data) => {
         const response = data['personalityData'];
-        console.log(response.personInformation);
 
         this.imgUrl =
           this.personalityTypes.find(

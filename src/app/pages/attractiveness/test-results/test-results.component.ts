@@ -79,18 +79,16 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       'тест на привабливість, оцінка привабливості, харизма, зовнішність, чарівність, краса, самооцінка, впевненість, особистість'
     );
     this.activeRoute.params.subscribe((r) => {
-      this.testResults$ = this.attractivenessService
-        .getAttractivenessInfoByCategory(r['categoryName'])
-        .pipe(
-          map((info) => {
-            console.log(info);
+      this.testResults$ = this.activeRoute.data.pipe(
+        map((data) => {
+          const response = data['attractivenessData'];
 
-            this.sendObject = {
-              category: info.results.category,
-            };
-            return info.results;
-          })
-        );
+          this.sendObject = {
+            category: response.results.category,
+          };
+          return response.results;
+        })
+      );
     });
 
     this.isShowSendForm$ = this.attractivenessService.getIsShowSendForm();

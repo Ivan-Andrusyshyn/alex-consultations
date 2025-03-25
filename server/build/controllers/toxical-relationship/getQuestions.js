@@ -16,7 +16,6 @@ const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // const questions = createQuestionsRelationship();
         const fileId = '1vQ7nXsXt6vt95-KcgMB9QFYWPU8O5CEl';
         const questions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
         if (questions) {

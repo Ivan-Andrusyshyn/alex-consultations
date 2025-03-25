@@ -16,13 +16,11 @@ const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const typeCategory = req.params.categoryName;
-        const fileId = '1xW1qCjHAN-Ch_XjScmWttG9djWGpJw-n';
+        const categoryName = req.params.categoryName;
+        const fileId = '1BU-SKwiH-_dHGGGE25UlRLQ4s5qVOYXf';
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        console.log(typeCategory);
-        console.log(googlefileData);
         if (googlefileData) {
-            const results = googlefileData[typeCategory];
+            const results = googlefileData[categoryName];
             res.status(200).send({
                 message: 'Successfully get information by categoryName.',
                 results,

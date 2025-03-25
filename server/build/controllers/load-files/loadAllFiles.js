@@ -29,6 +29,9 @@ const loadAllFiles = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             '1u1qVaIaxpiIydExaUQj_6N3SfUJ7sFY7',
             '1vQ7nXsXt6vt95-KcgMB9QFYWPU8O5CEl',
             '1yB6RLaxZCdXYmQddal8k6yvygxTnKO6o',
+            '11mkaYmnOhro7a0nZZEykUzQ1QueEZHTU',
+            '1BU-SKwiH-_dHGGGE25UlRLQ4s5qVOYXf',
+            '1Z1DYM9sOldCFE-AAnInb45O_FnCFzl5p',
         ];
         for (let i = 0; i < fileIds.length; i += 1) {
             (yield cache_1.default.getCache(fileIds[i], () => google_sheets_1.default.getDataGoogle(fileIds[i])));

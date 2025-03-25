@@ -1,0 +1,43 @@
+<div class="test-information">
+  <app-title-card
+    [imgUrl]="imgUrl"
+    [titleText]="titleText"
+    [subtitleText]="subtitleText"
+  ></app-title-card>
+
+  <!-- ===================== -->
+  <div *ngIf="testInformation$ | async as testInformation">
+    <h3>{{ testInformation.title }}</h3>
+    <p class="description">{{ testInformation.description }}</p>
+
+    <div class="details">
+      <p>
+        <strong>Кількість питань:</strong>
+        {{ testInformation.details.questions_count }}
+      </p>
+      <p>{{ testInformation.details.note }}</p>
+      <p>{{ testInformation.details.result }}</p>
+
+      <div *ngIf="testInformation.details.unlocks.length" class="unlocks">
+        <h3>Що ти дізнаєшся після теста?</h3>
+
+        <ul class="unlocks-list">
+          <li
+            *ngFor="
+              let unlock of testInformation.details.unlocks;
+              let i = index
+            "
+            class="unlocks-item"
+          >
+            {{ i + 1 }}. {{ unlock }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>{{ testInformation.cta }}</p>
+    </div>
+    <app-test-card-start-btn [route]="routeUrl"></app-test-card-start-btn>
+  </div>
+</div>

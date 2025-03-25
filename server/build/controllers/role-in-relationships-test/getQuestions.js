@@ -14,23 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const typeCategory = req.params.categoryName;
-        const fileId = '1xW1qCjHAN-Ch_XjScmWttG9djWGpJw-n';
-        const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        console.log(typeCategory);
-        console.log(googlefileData);
-        if (googlefileData) {
-            const results = googlefileData[typeCategory];
+        const fileId = '11mkaYmnOhro7a0nZZEykUzQ1QueEZHTU';
+        const questions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
+        if (questions) {
             res.status(200).send({
-                message: 'Successfully get information by categoryName.',
-                results,
+                message: 'Success get relationship-sensitivity questions!',
+                questions,
             });
         }
         else {
             res.status(400).send({
-                message: 'Error google file is undefinde or null!',
+                message: 'Something wrong with data.',
             });
         }
     }
@@ -39,4 +35,4 @@ const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = getInfoByCategory;
+exports.default = getQuestions;

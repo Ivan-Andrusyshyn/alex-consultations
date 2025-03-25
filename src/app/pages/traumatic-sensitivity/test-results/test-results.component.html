@@ -46,7 +46,9 @@
     <br />
   </ng-container>
 
-  <app-type-information [typeInfo]="typeInfo$ | async"></app-type-information>
+  <app-type-information
+    [typeInfo]="testResults$ | async"
+  ></app-type-information>
   <br />
   <br />
   <div class="btns-wrapper">

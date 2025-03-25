@@ -13,66 +13,71 @@ import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Answer } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
+import { Question, Answer } from '../../../shared/types/16-personalities';
 import { SeoService } from '../../../shared/services/seo.service';
-import { AttractivenessService } from '../../../shared/services/attractiveness.service';
-import { Question } from '../../../shared/types/attractiveness';
+import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
+import { RoleInRelationshipsService } from '../../../shared/services/role-in-relationships.service';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [FormQuestionsComponent, AsyncPipe],
+  imports: [FormQuestionsComponent, TitleCardComponent, AsyncPipe],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionsComponent implements OnDestroy, OnInit {
+  private readonly roleInRelationshipsService = inject(
+    RoleInRelationshipsService
+  );
   private readonly googleSheetService = inject(GoogleSheetsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
-  private readonly attractivenessService = inject(AttractivenessService);
+  private readonly fb = inject(FormBuilder);
   private seoService = inject(SeoService);
 
-  private readonly fb = inject(FormBuilder);
   private routeTracker = inject(RouteTrackerService);
 
+  readonly imgUrl = 'assets/svg/tests/heart.svg';
+  readonly subtitleText =
+    'Дізнайся, яка твоя роль у стосунках, і краще зрозумій свої природні схильності у взаєминах.';
+
+  readonly titleText = 'Яка твоя роль у стосунках?';
   answersArray!: Answer[];
   isShowResults$!: Observable<boolean>;
   timestamp = DateTime.now()
     .setZone('Europe/Kyiv')
     .toFormat('yyyy-MM-dd HH:mm:ss');
   currentQuestionNumber: number = 1;
-
+  testQuestions$!: Observable<Question[]>;
   timer: any;
+  formGroup: FormGroup = this.fb.group({});
   //
 
-  attractivenessService$!: Observable<Question[]>;
-  formGroup: FormGroup = this.fb.group({});
   ngOnInit(): void {
     this.routeTracker.getRoutes();
-
-    this.seoService.updateTitle('Запитання тесту на привабливість');
-
+    this.seoService.updateTitle(
+      'Тест: Яка твоя роль у стосунках? - Дай відповідь на питання'
+    );
     this.seoService.updateMetaTags(
-      'Відповідай на запитання тесту на привабливість, щоб дізнатися, як тебе сприймають інші. Оціни свою харизму, впевненість і чарівність!',
-      'тест, привабливість, оцінка привабливості, зовнішність, харизма, впевненість, чарівність, психологічний тест, самопізнання'
+      'Дізнайся більше про тест "Яка твоя роль у стосунках?", щоб краще зрозуміти свої сильні сторони, стиль спілкування та природні схильності.',
+      'тест про стосунки, роль у стосунках, психологічний тест, самопізнання, взаємини, MBTI'
     );
 
-    this.attractivenessService$ = this.attractivenessService
-      .getQuestions()
-      .pipe(
-        map((r) => {
-          this.createFormGroup(r.questions);
-          this.setCurrentAnswers();
+    this.testQuestions$ = this.roleInRelationshipsService.getQuestions().pipe(
+      map((r) => {
+        console.log(r);
 
-          return r.questions;
-        })
-      );
+        this.createFormGroup(r.questions);
+        this.setCurrentAnswers();
+
+        return r.questions;
+      })
+    );
   }
-
   ngOnDestroy(): void {
     clearTimeout(this.timer);
   }
@@ -96,7 +101,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }) {
     if (this.formGroup.invalid) {
       this.setSessionStorage(
-        'attractiveness-answers',
+        'role-in-relationships-answers',
         JSON.stringify({
           answers,
           currentQuestion: currentQuestionNumber,
@@ -115,7 +120,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }
   private setCurrentAnswers() {
     const stringAnswers =
-      sessionStorage.getItem('attractiveness-answers') ?? 'null';
+      sessionStorage.getItem('role-in-relationships-answers') ?? 'null';
     const parsedAnswers = JSON.parse(stringAnswers);
 
     if (parsedAnswers) {
@@ -127,17 +132,17 @@ export class QuestionsComponent implements OnDestroy, OnInit {
     if (this.formGroup.invalid) return;
 
     const storage = JSON.parse(
-      sessionStorage.getItem('attractiveness') || 'null'
+      sessionStorage.getItem('role-in-relationships') || 'null'
     );
     if (storage) return;
 
-    this.attractivenessService
-      .getAttractivenessCategory({
+    this.roleInRelationshipsService
+      .getRoleInRelationshipsCategory({
         answers,
         userInformation: {
           routeTracker: this.routeTracker.getRoutes(),
           referrer: document.referrer,
-          testName: 'attractiveness',
+          testName: 'role-in-relationships',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),
         },
@@ -145,7 +150,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       .pipe(
         map((r) => {
           this.setSessionStorage(
-            'toxical-relationship-results',
+            'role-in-relationships-results',
             JSON.stringify({
               categoryName: r.categoryName,
             })
@@ -163,14 +168,19 @@ export class QuestionsComponent implements OnDestroy, OnInit {
   }
 
   private handlePersonType(matchResults: string) {
-    this.router.navigate(['tests', 'attractiveness', 'details', matchResults]);
+    this.router.navigate([
+      'tests',
+      'role-in-relationships',
+      'details',
+      matchResults,
+    ]);
 
     this.formGroup.reset();
-    this.attractivenessService.counterQuestion.next(1);
+    this.roleInRelationshipsService.counterQuestion.next(1);
 
     const answers = this.formGroup.value;
     this.setSessionStorage(
-      'attractiveness-answers',
+      'role-in-relationships-answers',
       JSON.stringify({
         answers,
         currentQuestion: 1,

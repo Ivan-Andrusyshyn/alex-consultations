@@ -1,5 +1,9 @@
 import { Routes } from '@angular/router';
 import { PersonalitiesTestResolver } from './shared/resolvers/personalities-test.resolver';
+import { AttractivenessResultsResolver } from './shared/resolvers/attractiveness.resolver';
+import { TraumaticSensitivityResultsResolver } from './shared/resolvers/traumatic-sensitivity.resolver';
+import { ToxicalRelationshipResultsResolver } from './shared/resolvers/toxical-relationship.resolver';
+import { RoleInRelationshipsResultsResolver } from './shared/resolvers/role-in-relationships.resolver';
 
 export const routes: Routes = [
   {
@@ -47,6 +51,7 @@ export const routes: Routes = [
           import(
             './pages/attractiveness/test-results/test-results.component'
           ).then((m) => m.TestResultsComponent),
+        resolve: { attractivenessData: AttractivenessResultsResolver },
       },
       {
         path: 'test-information',
@@ -72,11 +77,14 @@ export const routes: Routes = [
           ).then((m) => m.QuestionsComponent),
       },
       {
-        path: 'details/:traumaticSensitivity',
+        path: 'details/:categoryName',
         loadComponent: () =>
           import(
             './pages/traumatic-sensitivity/test-results/test-results.component'
           ).then((m) => m.TestResultsComponent),
+        resolve: {
+          traumaticSensitivityData: TraumaticSensitivityResultsResolver,
+        },
       },
       {
         path: 'test-information',
@@ -102,17 +110,53 @@ export const routes: Routes = [
           ).then((m) => m.QuestionsComponent),
       },
       {
-        path: 'details/:traumaticSensitivity',
+        path: 'details/:categoryName',
         loadComponent: () =>
           import(
             './pages/toxical-relationship/test-results/test-results.component'
           ).then((m) => m.TestResultsComponent),
+        resolve: {
+          toxicalRelationshipData: ToxicalRelationshipResultsResolver,
+        },
       },
       {
         path: 'test-information',
         loadComponent: () =>
           import(
             './pages/toxical-relationship/test-information/test-information.component'
+          ).then((m) => m.TestInformationComponent),
+      },
+    ],
+  },
+  {
+    path: 'tests/role-in-relationships',
+    loadComponent: () =>
+      import(
+        './pages/role-in-relationships/role-in-relationships.component'
+      ).then((m) => m.RoleInRelationshipsComponent),
+    children: [
+      {
+        path: 'questions',
+        loadComponent: () =>
+          import(
+            './pages/role-in-relationships/questions/questions.component'
+          ).then((m) => m.QuestionsComponent),
+      },
+      {
+        path: 'details/:categoryName',
+        loadComponent: () =>
+          import(
+            './pages/role-in-relationships/test-results/test-results.component'
+          ).then((m) => m.TestResultsComponent),
+        resolve: {
+          roleInRelationshipsData: RoleInRelationshipsResultsResolver,
+        },
+      },
+      {
+        path: 'test-information',
+        loadComponent: () =>
+          import(
+            './pages/role-in-relationships/test-information/test-information.component'
           ).then((m) => m.TestInformationComponent),
       },
     ],

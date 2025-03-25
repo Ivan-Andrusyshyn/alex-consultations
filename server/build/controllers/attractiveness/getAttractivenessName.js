@@ -21,7 +21,6 @@ const getAttractivenessName = (req, res) => __awaiter(void 0, void 0, void 0, fu
         const ip = req.headers['x-forwarded-for']
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
-        console.log('IPHERE', ip);
         yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: categoryName }));
         res.status(200).send({
             categoryName,

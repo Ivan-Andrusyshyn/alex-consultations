@@ -1,5 +1,16 @@
 const testCardsData = Object.freeze([
   {
+    title: 'Яка твоя роль у стосунках? ',
+    time: '(3хв ⏳)',
+    cardClass: 'role-in-relationships-card',
+    category: ['Всі тести', 'Для стосунків'],
+    description: 'Краще зрозумій свої природні схильності у відносинах.',
+    testSvg: 'assets/svg/tests/heart.svg',
+    routeStart: '/tests/role-in-relationships/questions',
+    routeInfo: '/tests/role-in-relationships/test-information',
+    btnText: 'Почати тест',
+  },
+  {
     title: 'Який у тебе тип привабливості?',
     time: '(3хв ⏳)',
     cardClass: 'attractiveness-card',

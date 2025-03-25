@@ -63,12 +63,13 @@
               </div>
             </div>
           </div>
-
-          <app-secondary-btn
-            *ngIf="formGroup.valid"
-            [btnTitle]="'Результати'"
-            (onClick)="getSubmit()"
-          ></app-secondary-btn>
+          <div style="display: flex; justify-content: center">
+            <app-secondary-btn
+              *ngIf="formGroup.valid"
+              [btnTitle]="'Результати'"
+              (onClick)="getSubmit()"
+            ></app-secondary-btn>
+          </div>
         </mat-tab>
       </ng-container>
     </form>

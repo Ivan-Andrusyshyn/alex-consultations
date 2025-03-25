@@ -40,10 +40,8 @@ export class AttractivenessService {
     message: string;
     results: AttractivenessResult;
   }> {
-    const encodedCategory = encodeURIComponent(categoryName);
-
     return this.http.get<{ message: string; results: AttractivenessResult }>(
-      this.testsUrl + '/attractiveness' + '/category' + '/' + encodedCategory
+      this.testsUrl + '/attractiveness' + '/category' + '/' + categoryName
     );
   }
   getIsShowSendForm(): Observable<boolean> {

@@ -91,7 +91,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   successRegistration = signal(false);
 
   possibleVariablesArray = types;
-  typeInfo$!: Observable<any>;
+  testResults$!: Observable<any>;
 
   sendObject!: any;
 
@@ -106,15 +106,17 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       'Дізнайся свої результати тесту на травматичну чутливість. Аналізуй рівень емоційної вразливості та зрозумій, як він впливає на твоє життя.',
       'результати тесту, травматична чутливість, емоційна вразливість, психологія, психіка, самопізнання'
     );
-
     this.activeRoute.params.subscribe((r) => {
-      this.typeInfo$ = this.traumaticSensitivityService
-        .getEmotionsTypeInfoByResults(r['traumaticSensitivity'])
-        .pipe(
-          map((info) => {
-            return info.results;
-          })
-        );
+      this.testResults$ = this.activeRoute.data.pipe(
+        map((data) => {
+          const response = data['traumaticSensitivityData'];
+
+          this.sendObject = {
+            category: response.results.category,
+          };
+          return response.results;
+        })
+      );
     });
 
     this.scoresKeys = this.traumaticSensitivityService.getScoreKeys();
