@@ -21,7 +21,6 @@ const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
         const categoryName = roleInRelationshipService_1.default.getNameCategoryByScore(answers);
-        console.log(categoryName);
         yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip,
             categoryName }));
         res.status(200).send({

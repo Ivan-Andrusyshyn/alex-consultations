@@ -5,7 +5,7 @@
     [subtitleText]="subtitleText"
   ></app-title-card>
   <app-form-questions
-    [coloredLabel]="false"
+    [coloredLabel]="true"
     [formGroup]="formGroup"
     [questions]="(testQuestions$ | async) ?? []"
     [currentTestName]="'role-in-relationships'"
