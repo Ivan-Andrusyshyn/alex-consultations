@@ -76,6 +76,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
   }
+
   openSnackBar(text: string, textBtn: string) {
     const snackBarRef = this._snackBar.open(text, textBtn, {
       verticalPosition: 'bottom',
@@ -104,6 +105,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
       currentQuestionNumber: this.currentQuestionNumber,
     });
   }
+
   isAnswered(questionId: number): boolean | null {
     const control = this.formGroup.get(questionId.toString());
     return control && control.value != null;

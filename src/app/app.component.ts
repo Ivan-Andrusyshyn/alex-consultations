@@ -6,7 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
-
+  private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   loading$!: Observable<boolean>;

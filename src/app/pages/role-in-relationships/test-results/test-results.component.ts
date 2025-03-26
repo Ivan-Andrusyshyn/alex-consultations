@@ -7,7 +7,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf, ViewportScroller } from '@angular/common';
 import {
   catchError,
   filter,
@@ -65,7 +65,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   successRegistration = signal(false);
   isShowSendForm$!: Observable<boolean>;
   successMessage = signal(false);
-
+  viewportScroller = inject(ViewportScroller);
   testResults$!: Observable<RoleInRelationshipsResult>;
 
   sendObject!: any;
@@ -91,6 +91,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
             results: RoleInRelationshipsResult;
             message: string;
           };
+          const scrollToTop = data['scrollToTop'];
+
+          if (scrollToTop) {
+            this.viewportScroller.scrollToPosition([0, 0]);
+          }
           this.sendObject = {
             category: response.results.type,
           };

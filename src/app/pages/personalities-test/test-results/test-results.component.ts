@@ -8,7 +8,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf, ViewportScroller } from '@angular/common';
 import {
   catchError,
   filter,
@@ -67,6 +67,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   readonly dialog = inject(MatDialog);
   private readonly googleService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
+  private viewportScroller = inject(ViewportScroller);
 
   personInformation$!: Observable<{
     personType: string;
@@ -100,7 +101,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.personInformation$ = this.activeRoute.data.pipe(
       map((data) => {
         const response = data['personalityData'];
+        const scrollToTop = data['scrollToTop'];
 
+        if (scrollToTop) {
+          this.viewportScroller.scrollToPosition([0, 0]);
+        }
         this.imgUrl =
           this.personalityTypes.find(
             (type) => type.type === response.personInformation.type

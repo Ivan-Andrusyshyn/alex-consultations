@@ -52,6 +52,7 @@ export const routes: Routes = [
             './pages/attractiveness/test-results/test-results.component'
           ).then((m) => m.TestResultsComponent),
         resolve: { attractivenessData: AttractivenessResultsResolver },
+        data: { scrollToTop: true },
       },
       {
         path: 'test-information',
@@ -85,6 +86,7 @@ export const routes: Routes = [
         resolve: {
           traumaticSensitivityData: TraumaticSensitivityResultsResolver,
         },
+        data: { scrollToTop: true },
       },
       {
         path: 'test-information',
@@ -118,6 +120,7 @@ export const routes: Routes = [
         resolve: {
           toxicalRelationshipData: ToxicalRelationshipResultsResolver,
         },
+        data: { scrollToTop: true },
       },
       {
         path: 'test-information',
@@ -151,6 +154,7 @@ export const routes: Routes = [
         resolve: {
           roleInRelationshipsData: RoleInRelationshipsResultsResolver,
         },
+        data: { scrollToTop: true },
       },
       {
         path: 'test-information',
@@ -170,6 +174,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'calculator',
+        data: { scrollToTop: false },
+
         loadComponent: () =>
           import(
             './pages/personalities-test/calculator-relationships/calculator-relationships.component'
@@ -185,11 +191,14 @@ export const routes: Routes = [
       {
         path: 'details/:personalitiesName',
         resolve: { personalityData: PersonalitiesTestResolver },
+        data: { scrollToTop: true },
+
         loadComponent: () =>
           import(
             './pages/personalities-test/test-results/test-results.component'
           ).then((m) => m.TestResultsComponent),
       },
+
       {
         path: 'questions',
         loadComponent: () =>

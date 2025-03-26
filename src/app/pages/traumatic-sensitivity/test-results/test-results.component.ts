@@ -8,7 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import {
+  AsyncPipe,
+  NgFor,
+  NgIf,
+  NgStyle,
+  ViewportScroller,
+} from '@angular/common';
 import {
   catchError,
   filter,
@@ -79,6 +85,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   readonly dialog = inject(MatDialog);
   private readonly googleService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
+  private viewportScroller = inject(ViewportScroller);
 
   personInformation$!: Observable<{
     personType: string;
@@ -112,7 +119,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       this.testResults$ = this.activeRoute.data.pipe(
         map((data) => {
           const response = data['traumaticSensitivityData'];
+          const scrollToTop = data['scrollToTop'];
 
+          if (scrollToTop) {
+            this.viewportScroller.scrollToPosition([0, 0]);
+          }
           this.sendObject = {
             category: response.results.category,
           };
