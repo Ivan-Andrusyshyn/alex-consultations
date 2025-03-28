@@ -13,6 +13,50 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+.form-container {
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--bgColorBox);
+  box-shadow: var(--boxShadow);
+  text-align: center;
+
+  h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--textColor);
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--textColor);
+    line-height: 1.5;
+  }
+
+  .offer {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #d63384;
+    background: rgba(214, 51, 132, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 16px 0;
+    display: inline-block;
+  }
+  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    color: var(--textColor);
+  }
+  ::ng-deep app-consultation-form form {
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+
+    background-color: transparent !important;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 h3 {
   font-size: 16px;
   padding: 10px;

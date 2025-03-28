@@ -18,15 +18,33 @@
         <app-social-links [titleLinks]="'Напиши мені'"></app-social-links>
       </div>
     </div>
+    <div class="form-container">
+      <h3>Запишись на консультацію вже зараз!</h3>
+      <br />
+      <p>
+        Отримайте персональну консультацію та дізнайтеся, як досягти кращих
+        результатів!
+      </p>
+
+      <p class="offer">
+        📢 Лише цього тижня: 20-хвилинна безкоштовна консультація!
+      </p>
+      <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
+      <app-secondary-btn
+        (onClick)="registration()"
+        [textBtn]="'Записатися'"
+      ></app-secondary-btn>
+    </div>
     <br />
+
     <br />
 
     <div class="btns-wrapper">
-      <app-accent-btn
+      <!-- <app-accent-btn
         [textBtn]="'Записатися'"
         (onClickBtn)="openDialog()"
         [matColor]="'accent'"
-      ></app-accent-btn>
+      ></app-accent-btn> -->
       <app-send-form-on-email-btn
         *ngIf="!(isShowSendForm$ | async)"
         (sendForm)="toggleSendForm()"
@@ -41,5 +59,7 @@
   <div *ngIf="successMessage()" class="success-message">
     Ми відправили результати тесту на пошту!
   </div>
-  <app-test-list-hero [hideTestsCard]="'personality-card'"></app-test-list-hero>
+  <app-test-list-hero
+    [hideTestsCard]="'role-in-relationships-card'"
+  ></app-test-list-hero>
 </section>

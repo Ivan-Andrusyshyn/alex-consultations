@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SecondaryBtnComponent {
   @Output() onClick = new EventEmitter<void>();
-  @Input() btnTitle: string = 'Результати';
+  @Input() textBtn: string = 'Результати';
 
   getClick() {
     this.onClick.emit();

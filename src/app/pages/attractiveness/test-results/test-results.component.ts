@@ -33,6 +33,9 @@ import { AttractivenessService } from '../../../shared/services/attractiveness.s
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
+import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 
 @Component({
   selector: 'app-test-results',
@@ -45,6 +48,8 @@ import { SocialLinksComponent } from '../../../components/social-links/social-li
     NgFor,
     TestListHeroComponent,
     AccentBtnComponent,
+    SecondaryBtnComponent,
+    ConsultationFormComponent,
     SocialLinksComponent,
   ],
   templateUrl: './test-results.component.html',
@@ -60,6 +65,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private readonly googleService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
   private viewportScroller = inject(ViewportScroller);
+  private readonly fb = inject(FormBuilder);
 
   successRegistration = signal(false);
   isShowSendForm$!: Observable<boolean>;
@@ -68,11 +74,15 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   testResults$!: Observable<any>;
 
   sendObject!: any;
+  formGroup!: FormGroup;
+
   ngOnDestroy(): void {
     sessionStorage.clear();
   }
 
   ngOnInit(): void {
+    this.createForm();
+
     this.seoService.updateTitle(
       'Результати тесту на твою привабливість | Дізнайся, наскільки ти чарівний(а)'
     );
@@ -130,35 +140,30 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     return r === b;
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      height: '500px',
-      width: '400px',
-      data: {
-        contentType: 'form-consultation',
-        title: '🔥 Готові до прориву?',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: '🚀 Отримати консультацію',
-        },
-      },
-    });
+  registration(): void {
+    if (this.formGroup.valid) {
+      this.googleService
+        .postRegistrationInSheet(this.formGroup.value)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((response) => {
+          this.formGroup.reset();
+        });
+    }
+  }
 
-    dialogRef
-      .afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter((r) => !!r),
-        switchMap((r) =>
-          this.googleService.postRegistrationInSheet(r).pipe(
-            tap(() => this.successRegistration.set(true)),
-            catchError((error) => {
-              this.successRegistration.set(false);
-              return throwError(() => error);
-            })
-          )
-        )
-      )
-      .subscribe();
+  private createForm() {
+    this.formGroup = this.fb.group({
+      name: ['', Validators.required],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\+380\d{9}$/),
+          Validators.minLength(13),
+          Validators.maxLength(13),
+        ],
+      ],
+      interest: ['', Validators.required],
+    });
   }
 }

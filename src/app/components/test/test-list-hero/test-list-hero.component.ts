@@ -20,7 +20,8 @@ type HideTestsCard =
   | 'attractiveness-card'
   | 'toxical-card'
   | 'personality-card'
-  | 'traumatic-card';
+  | 'traumatic-card'
+  | 'role-in-relationships-card';
 
 @Component({
   selector: 'app-test-list-hero',

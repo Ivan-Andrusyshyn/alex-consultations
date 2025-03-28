@@ -9,30 +9,24 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf, ViewportScroller } from '@angular/common';
-import {
-  catchError,
-  filter,
-  map,
-  Observable,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ParagraphPipe } from './paragraph.pipe';
 
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
 import { ToxicalRelationshipService } from '../../../shared/services/toxical-relationship.service';
-import { ParagraphPipe } from './paragraph.pipe';
 
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
-import { ModalComponent } from '../../../components/modal/modal.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
+import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
+import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 
 @Component({
   selector: 'app-test-results',
@@ -45,6 +39,8 @@ import { SocialLinksComponent } from '../../../components/social-links/social-li
     NgFor,
     ParagraphPipe,
     TestListHeroComponent,
+    ConsultationFormComponent,
+    SecondaryBtnComponent,
     AccentBtnComponent,
     SocialLinksComponent,
   ],
@@ -63,9 +59,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private viewportScroller = inject(ViewportScroller);
   successRegistration = signal(false);
   isShowSendForm$!: Observable<boolean>;
+  private readonly fb = inject(FormBuilder);
   successMessage = signal(false);
 
   testResults$!: Observable<any>;
+
+  formGroup!: FormGroup;
 
   sendObject!: any;
   ngOnDestroy(): void {
@@ -73,6 +72,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.createForm();
     this.seoService.updateTitle(
       'Результати тесту на токсичні відносини з партнером | Оцінка твоїх стосунків'
     );
@@ -100,7 +100,31 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
     this.isShowSendForm$ = this.toxicalRelationshipService.getIsShowSendForm();
   }
-
+  registration(): void {
+    if (this.formGroup.valid) {
+      this.googleService
+        .postRegistrationInSheet(this.formGroup.value)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((response) => {
+          this.formGroup.reset();
+        });
+    }
+  }
+  private createForm() {
+    this.formGroup = this.fb.group({
+      name: ['', Validators.required],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\+380\d{9}$/),
+          Validators.minLength(13),
+          Validators.maxLength(13),
+        ],
+      ],
+      interest: ['', Validators.required],
+    });
+  }
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService
@@ -128,37 +152,5 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   compare(r: string, b: string) {
     return r === b;
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      height: '500px',
-      width: '400px',
-      data: {
-        contentType: 'form-consultation',
-        title: '🔥 Готові до прориву?',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: '🚀 Отримати консультацію',
-        },
-      },
-    });
-
-    dialogRef
-      .afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter((r) => !!r),
-        switchMap((r) =>
-          this.googleService.postRegistrationInSheet(r).pipe(
-            tap(() => this.successRegistration.set(true)),
-            catchError((error) => {
-              this.successRegistration.set(false);
-              return throwError(() => error);
-            })
-          )
-        )
-      )
-      .subscribe();
   }
 }

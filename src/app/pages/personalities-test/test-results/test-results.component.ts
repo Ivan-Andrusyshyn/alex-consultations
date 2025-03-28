@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   inject,
@@ -9,15 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { AsyncPipe, NgIf, ViewportScroller } from '@angular/common';
-import {
-  catchError,
-  filter,
-  map,
-  Observable,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,13 +24,14 @@ import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-em
 import { MailerService } from '../../../shared/services/mailer.service';
 import { ResultsIndicatorComponent } from '../../../components/test/personalities-test/results-indicator/results-indicator.component';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
-import { ModalComponent } from '../../../components/modal/modal.component';
-import { PrimaryBtnComponent } from '../../../components/primary-btn/primary-btn.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
+import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 
 @Component({
   selector: 'app-test-results',
@@ -54,6 +46,9 @@ import { TestListHeroComponent } from '../../../components/test/test-list-hero/t
     TitleCardComponent,
     TestListHeroComponent,
     NgIf,
+    ConsultationFormComponent,
+    ConsultationFormComponent,
+    SecondaryBtnComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -68,6 +63,9 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private readonly googleService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
   private viewportScroller = inject(ViewportScroller);
+  private readonly fb = inject(FormBuilder);
+
+  formGroup!: FormGroup;
 
   personInformation$!: Observable<{
     personType: string;
@@ -81,12 +79,15 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   successMessage = signal(false);
   successRegistration = signal(false);
   imgUrl = '';
+
   ngOnDestroy(): void {
     this.personalitiesService.scorePercentages.next(null);
     sessionStorage.clear();
   }
 
   ngOnInit(): void {
+    this.createForm();
+    // ====>
     this.seoService.updateTitle(
       'Результати тесту 16 типів особистості | Дізнайся більше про свій тип'
     );
@@ -125,40 +126,33 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     );
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, this.dialogSettings());
-    dialogRef
-      .afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter((r) => !!r),
-        switchMap((r) =>
-          this.googleService.postRegistrationInSheet(r).pipe(
-            tap(() => this.successRegistration.set(true)),
-            catchError((error) => {
-              this.successRegistration.set(false);
-              return throwError(() => error);
-            })
-          )
-        )
-      )
-      .subscribe();
+  registration(): void {
+    if (this.formGroup.valid) {
+      this.googleService
+        .postRegistrationInSheet(this.formGroup.value)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((response) => {
+          this.formGroup.reset();
+        });
+    }
   }
 
-  private dialogSettings() {
-    return {
-      height: '500px',
-      width: '400px',
-      data: {
-        contentType: 'form-consultation',
-        title: '🔥 Готові до прориву?',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: '🚀 Отримати консультацію',
-        },
-      },
-    };
+  private createForm() {
+    this.formGroup = this.fb.group({
+      name: ['', Validators.required],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\+380\d{9}$/),
+          Validators.minLength(13),
+          Validators.maxLength(13),
+        ],
+      ],
+      interest: ['', Validators.required],
+    });
   }
+
   sendResultsOnEmail(results: { email: string }) {
     if (results.email) {
       this.mailerService
