@@ -45,7 +45,7 @@ class GoogleSheetsService {
             body.set('name', data.name);
             // body.set('email', data.email);
             body.set('phone', data.phone);
-            body.set('interest', data.interest);
+            // body.set('interest', data.interest);
             const scriptUrl = `${process.env.GOOGLE_SHEET_URL_CONSULTATIONS}`;
             try {
                 const response = yield fetch(scriptUrl, {

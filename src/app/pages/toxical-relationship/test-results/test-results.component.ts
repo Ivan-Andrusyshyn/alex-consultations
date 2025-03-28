@@ -122,7 +122,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           Validators.maxLength(13),
         ],
       ],
-      interest: ['', Validators.required],
     });
   }
   sendResultsOnEmail(results: { email: string }) {
