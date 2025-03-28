@@ -36,6 +36,7 @@ import {
   UsersPhraseSubject,
 } from '../../shared/types/16-personalities';
 import { LoadingService } from '../../shared/services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -59,6 +60,8 @@ export class HomeComponent implements OnInit {
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
+  private _snackBar = inject(MatSnackBar);
+
   successRegistration = signal(false);
   todayDate!: string;
 
@@ -79,6 +82,11 @@ export class HomeComponent implements OnInit {
     this.routeTracker.getRoutes();
     this.loading$ = this.loadingService.isLoading();
 
+    this.openSnackBar(
+      'Запишись на консультацію, щоб пізнати себе ще краще!',
+      'Записатися'
+    );
+
     this.dayPhrase$ =
       this.personalitiesPhrasesService.getPersonalitiesPhrases();
 
@@ -89,6 +97,18 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  openSnackBar(text: string, textBtn: string) {
+    const snackBarRef = this._snackBar.open(text, textBtn, {
+      verticalPosition: 'bottom',
+      duration: 6000,
+      panelClass: ['custom-snackbar'],
+      horizontalPosition: 'center',
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.openDialog();
+    });
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       height: '500px',

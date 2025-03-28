@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    const intervalTime = 60000 * 3;
+    const intervalTime = 60000 * 2;
     let currentIndex = 0;
 
     interval(intervalTime).subscribe(() => {
@@ -65,6 +65,7 @@ export class HeaderComponent implements OnInit {
   openSnackBar(text: string, textBtn: string) {
     const snackBarRef = this._snackBar.open(text, textBtn, {
       verticalPosition: 'bottom',
+      duration: 6000,
       panelClass: ['custom-snackbar'],
       horizontalPosition: 'center',
     });
