@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    const intervalTime = 60000 * 4;
+    const intervalTime = 60000 * 3;
     let currentIndex = 0;
 
     interval(intervalTime).subscribe(() => {
