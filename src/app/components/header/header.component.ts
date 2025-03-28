@@ -2,13 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  HostListener,
   inject,
   OnInit,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { catchError, filter, interval, switchMap, tap, throwError } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouterLink } from '@angular/router';
 
 import { CubeComponent } from '../cube/cube.component';
 import { MobComponent } from './mob/mob.component';
@@ -17,7 +19,6 @@ import { StickyHeaderDirective } from './sticky-header.directive';
 
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
 import { ModalComponent } from '../modal/modal.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -40,27 +41,20 @@ export class HeaderComponent implements OnInit {
   private readonly googleService = inject(GoogleSheetsService);
   private _snackBar = inject(MatSnackBar);
 
-  banners = [
-    () => this.openDialog(),
-    () =>
-      this.openSnackBar(
-        'Запишись на консультацію, щоб пізнати себе ще краще!',
-        'Записатися'
-      ),
-  ];
-
+  private counter: number = 0;
   ngOnInit(): void {
-    const intervalTime = 60000 * 2;
-    let currentIndex = 0;
-
+    const intervalTime = 60000 * 4;
     interval(intervalTime).subscribe(() => {
-      if (currentIndex > this.banners.length) {
-        currentIndex = 0;
-      }
-      this.banners[currentIndex]();
-
-      currentIndex = (currentIndex + 1) % this.banners.length;
+      this.openDialog();
     });
+  }
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any) {
+    this.counter += 1;
+
+    if (this.counter % 5 === 0) {
+      this.openDialog();
+    }
   }
   openSnackBar(text: string, textBtn: string) {
     const snackBarRef = this._snackBar.open(text, textBtn, {
@@ -70,20 +64,18 @@ export class HeaderComponent implements OnInit {
       horizontalPosition: 'center',
     });
 
-    snackBarRef.onAction().subscribe(() => {
-      this.openDialog();
-    });
+    snackBarRef.onAction().subscribe(() => {});
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '500px',
+      height: '400px',
       width: '400px',
       data: {
         contentType: 'form-consultation',
-        title: '🔥 Готові до прориву?',
+        title: 'Запис на консультацію ще відкритий.',
         btn: {
           cancel: 'Ні, дякую',
-          confirm: '🚀 Отримати консультацію',
+          confirm: 'Записатися',
         },
       },
     });
@@ -111,6 +103,6 @@ export class HeaderComponent implements OnInit {
           )
         )
       )
-      .subscribe();
+      .subscribe((result) => {});
   }
 }

@@ -1,45 +1,30 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<app-social-links [isTheme]="false"></app-social-links>
-
 <ng-container *ngIf="data.contentType === 'form-consultation'">
   <mat-dialog-content>
-    <p>
-      Отримайте персональну консультацію та дізнайтеся, як досягти кращих
-      результатів!
-    </p>
+    <p>{{ data.title }}</p>
+    <br />
+    <p>1. Залиш свої дані</p>
     <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
+    <p>2. Тисни "Записатися"</p>
+    <br />
+    <div class="btns-wrapper">
+      <button
+        mat-raised-button
+        color="primary"
+        class="main-button"
+        [mat-dialog-close]="confirm()"
+        cdkFocusInitial
+      >
+        {{ data.btn["confirm"] }}
+      </button>
 
-    <p class="offer">
-      📢 Лише цього тижня: 20-хвилинна безкоштовна консультація!
-    </p>
+      <button
+        class="cancel-button"
+        mat-stroked-button
+        color="#333"
+        (click)="cancel()"
+      >
+        {{ data.btn["cancel"] }}
+      </button>
+    </div>
   </mat-dialog-content>
 </ng-container>
-
-<mat-dialog-actions>
-  @if (data.btn['confirm']==='🚀 Отримати консультацію') {
-  <div class="emoji-pointer">👇</div>
-
-  <button
-    mat-raised-button
-    color="primary"
-    class="main-button"
-    [mat-dialog-close]="confirm()"
-    cdkFocusInitial
-  >
-    {{ data.btn["confirm"] }}
-  </button>
-
-  }@else {
-  <button mat-stroked-button color="#333" (click)="cancel()">
-    {{ data.btn["cancel"] }}
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    [mat-dialog-close]="confirm()"
-    cdkFocusInitial
-  >
-    {{ data.btn["confirm"] }}
-  </button>
-  }
-</mat-dialog-actions>
