@@ -23,8 +23,11 @@
   h3 {
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--textColor);
+
     margin-bottom: 12px;
+
+    color: var(--textColor);
+    text-align: center;
   }
 
   p {
