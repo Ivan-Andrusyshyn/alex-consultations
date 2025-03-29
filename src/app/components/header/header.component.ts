@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   onPopState(event: any) {
     this.counter += 1;
 
-    if (this.counter % 3 === 0) {
+    if (this.counter % 2 === 0) {
       this.openDialog();
     }
   }
