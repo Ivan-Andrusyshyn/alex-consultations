@@ -6,7 +6,16 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { catchError, filter, interval, switchMap, tap, throwError } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  filter,
+  interval,
+  switchMap,
+  tap,
+  throwError,
+  timer,
+} from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -43,10 +52,16 @@ export class HeaderComponent implements OnInit {
 
   private counter: number = 0;
   ngOnInit(): void {
-    const intervalTime = 60000 * 4;
-    interval(intervalTime).subscribe(() => {
-      this.openDialog();
-    });
+    const firstDelay = 60000 * 1.5;
+    const secondDelay = 60000 * 4;
+
+    timer(firstDelay)
+      .pipe(
+        tap(() => this.openDialog()),
+        concatMap(() => timer(secondDelay)),
+        tap(() => this.openDialog())
+      )
+      .subscribe();
   }
   @HostListener('window:popstate', ['$event'])
   onPopState(event: any) {
@@ -72,7 +87,7 @@ export class HeaderComponent implements OnInit {
       width: '400px',
       data: {
         contentType: 'form-consultation',
-        title: 'Запис на консультацію ще відкритий.',
+        title: 'Відчуй свою глибину. Запишись на консультацію.',
         btn: {
           cancel: 'Ні, дякую',
           confirm: 'Записатися',
