@@ -154,13 +154,13 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private createForm() {
     this.formGroup = this.fb.group({
       name: ['', Validators.required],
-      phone: [
+      socialMedia: [
         '',
         [
           Validators.required,
-          Validators.pattern(/^\+380\d{9}$/),
-          Validators.minLength(13),
-          Validators.maxLength(13),
+          Validators.pattern(/^@[a-zA-Z0-9_]{4,29}$/),
+          Validators.minLength(5),
+          Validators.maxLength(30),
         ],
       ],
     });

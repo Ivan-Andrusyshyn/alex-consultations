@@ -4,30 +4,22 @@
     <input matInput formControlName="name" placeholder="Наприклад: Олександр" />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Ваш телефон</mat-label>
+    <mat-label>Нік в Instagram або Telegram</mat-label>
     <input
       matInput
-      formControlName="phone"
-      placeholder="Наприклад: +380961234567"
+      formControlName="socialMedia"
+      placeholder="Наприклад: @my_nickname"
     />
     <div
       class="error-message"
       *ngIf="
-            formGroup.get('phone')?.errors?.['pattern'] ||
-            formGroup.get('phone')?.errors?.['maxlength'] ||
-            formGroup.get('phone')?.errors?.['minlength']
+        formGroup.get('socialMedia')?.errors?.['pattern'] ||
+        formGroup.get('socialMedia')?.errors?.['minlength'] ||
+        formGroup.get('socialMedia')?.errors?.['maxlength']
           "
     >
-      Номер має містити 13 цифр (+380961234567)
+      Нік повинен починатися з &#64;, містити тільки латинські літери, цифри або
+      _ та бути довжиною від 5 до 30 символів.
     </div>
   </mat-form-field>
-
-  <!-- <mat-form-field>
-    <mat-label>Що вас цікавить?</mat-label>
-    <input
-      matInput
-      formControlName="interest"
-      placeholder="Наприклад: тип особистості, почуття"
-    />
-  </mat-form-field> -->
 </form>

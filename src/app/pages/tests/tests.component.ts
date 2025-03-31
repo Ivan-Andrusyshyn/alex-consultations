@@ -8,7 +8,6 @@ import { testCardsData } from '../../../assets/content/tests-content/test-cards-
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
 import { IconsListComponent } from '../../components/test/personalities-test/icons-list/icons-list.component';
-import { CommonTestsService } from '../../shared/services/common-tests.service';
 import titleCardContent from './titleCard-content';
 
 @Component({
@@ -30,7 +29,6 @@ export class TestsComponent implements OnInit {
   readonly titleCardContent = titleCardContent;
 
   private seoService = inject(SeoService);
-  private commonTestsService = inject(CommonTestsService);
 
   readonly categoryList = [
     'Всі тести',
@@ -47,7 +45,5 @@ export class TestsComponent implements OnInit {
       'Переглянь список доступних тестів для самопізнання, розвитку особистості та оцінки стосунків. Обери тест і дізнайся більше про себе.',
       'список тестів, самопізнання, розвиток особистості, психологічні тести, тести для стосунків, тест на особистість, саморозвиток'
     );
-
-    // this.commonTestsService.testPassingCounter().subscribe((r) => console.log);
   }
 }

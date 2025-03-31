@@ -13,9 +13,7 @@ interface GoogleSheetTestResults {
 
 interface GoogleSheetRegistration {
   name: string;
-  email: string;
-  phone: string;
-  interest: string;
+  socialMedia: string;
 }
 
 @Injectable({

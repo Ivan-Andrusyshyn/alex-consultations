@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './social-links.component.scss',
 })
 export class SocialLinksComponent {
-  @Input() titleLinks?: string = 'Приєднуйся';
+  @Input() titleLinks?: string = 'Приєднуйся ❤️';
   @Input() isTheme: boolean = true;
   @Input() showAllMedia: boolean = false;
 

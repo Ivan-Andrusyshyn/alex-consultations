@@ -16,9 +16,14 @@ const google_sheets_1 = __importDefault(require("../../../services/google-sheets
 const postRegistrationGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
-        if (data) {
+        if (data.socialMedia && data.name) {
             yield google_sheets_1.default.postRegistrationInfoOnSheet(data);
             res.status(200).send({ message: 'Successfull add new row' });
+        }
+        else {
+            res.status(400).send({
+                message: 'Please check data in form. Required 2 values: name and socialMedia.',
+            });
         }
     }
     catch (error) {
