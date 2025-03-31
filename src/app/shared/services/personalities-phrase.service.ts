@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
 
 import { environment } from '../../environment/environment';
-import { PersonalityDayPhrases } from '../types/16-personalities';
 import { personalityTypesContent } from '../../../assets/content/16-personalities/personalityTypes';
+import { PersonalityDayPhrases } from '../types/personalities-phrases';
 
 interface PersonalitiesPhrasesResponse {
   message: string;

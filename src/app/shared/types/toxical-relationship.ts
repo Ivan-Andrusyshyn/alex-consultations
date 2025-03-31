@@ -26,4 +26,16 @@ type CategoryName =
   | 'very-dangerous-relationship'
   | 'unknown-type';
 
-export { Answer, Question, CategoryName, RelationshipResult };
+interface TestInformation {
+  title: string;
+  description: string;
+  details: string[];
+  benefits_title: string;
+  benefits: string[];
+  cta: {
+    text: string;
+    highlight: string;
+  };
+}
+
+export { Answer, Question, CategoryName, TestInformation, RelationshipResult };

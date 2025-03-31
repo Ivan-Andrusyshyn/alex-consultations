@@ -5,6 +5,7 @@ import {
   CategoryName,
   Question,
   RelationshipResult,
+  TestInformation,
 } from '../types/toxical-relationship';
 
 import { environment } from '../../environment/environment';
@@ -38,7 +39,15 @@ export class ToxicalRelationshipService {
       answers
     );
   }
-
+  getTestInformation(): Observable<{
+    message: string;
+    testInformation: TestInformation;
+  }> {
+    return this.http.get<{
+      message: string;
+      testInformation: TestInformation;
+    }>(this.testsUrl + '/toxical-relationship' + '/information');
+  }
   getToxicalRelationshipInfoByCategory(categoryName: string): Observable<{
     message: string;
     results: RelationshipResult;

@@ -55,49 +55,6 @@ interface TypeInformation {
   };
 }
 
-interface CalculatorInformation {
-  title: string;
-  description: string;
-  sections: {
-    howItWorks: {
-      title: string;
-      steps: string[];
-    };
-    benefits: {
-      title: string;
-      points: string[];
-    };
-    importance: {
-      title: string;
-      text: string;
-    };
-    callToAction: {
-      text: string;
-    };
-  };
-}
-interface CalculatorDisclaimer {
-  title: string;
-  text: string;
-  responsibility: string;
-}
-interface CalculatorResult {
-  range: string;
-  title: string;
-  description: string;
-  sections: {
-    relationshipExplanation: {
-      deepUnderstanding: string;
-      stabilityAndComfort: string;
-      desireForDepth: string;
-    };
-    possibleDifficulties: string[];
-    improvingRelationship: string[];
-    conclusion: string;
-    reflection: string;
-  };
-}
-
 type Answer = { point: number; text: string };
 type AnswerPoint = 1 | 2 | 3 | 4 | 5;
 
@@ -108,26 +65,13 @@ interface PersonalityTypes {
   route: string;
 }
 
-interface PersonalityDayPhrases {
-  personalityType: string;
-  phrase: string;
-}
-interface UsersPhraseSubject extends PersonalityDayPhrases {
-  userTypeName: string;
-  typeAvatarUrl: string;
-}
 export {
   Answer,
-  PersonalityDayPhrases,
   Question,
   AnswerPoint,
   TestResult,
   Dichotomy,
   TypeInformation,
   PersonalityTypes,
-  UsersPhraseSubject,
   Personalities,
-  CalculatorResult,
-  CalculatorInformation,
-  CalculatorDisclaimer,
 };

@@ -163,6 +163,14 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           Validators.maxLength(30),
         ],
       ],
+      phone: [
+        '',
+        [
+          Validators.minLength(8),
+          Validators.maxLength(12),
+          Validators.pattern('^[0-9]+$'),
+        ],
+      ],
     });
   }
 }

@@ -6,8 +6,8 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { ToxicalRelationshipService } from '../services/toxical-relationship.service';
-import { RelationshipResult } from '../types/toxical-relationship';
+import { ToxicalRelationshipService } from '../../services/toxical-relationship.service';
+import { RelationshipResult } from '../../types/toxical-relationship';
 
 @Injectable({
   providedIn: 'root',

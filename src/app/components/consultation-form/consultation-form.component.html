@@ -22,4 +22,17 @@
       _ та бути довжиною від 5 до 30 символів.
     </div>
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Номер телефону (не обов'язково)</mat-label>
+    <input
+      matInput
+      formControlName="phone"
+      placeholder="Наприклад: 0961234567"
+    />
+    <div class="error-message" *ngIf="formGroup.get('phone')?.errors as errors">
+      <span *ngIf="errors['pattern']">Номер має містити лише цифри.</span>
+      <span *ngIf="errors['minlength']">Номер занадто короткий.</span>
+      <span *ngIf="errors['maxlength']">Номер занадто довгий.</span>
+    </div>
+  </mat-form-field>
 </form>

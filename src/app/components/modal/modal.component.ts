@@ -63,6 +63,14 @@ export class ModalComponent implements OnInit {
           Validators.maxLength(30),
         ],
       ],
+      phone: [
+        '',
+        [
+          Validators.minLength(8),
+          Validators.maxLength(12),
+          Validators.pattern('^[0-9]+$'),
+        ],
+      ],
     });
   }
 
@@ -71,6 +79,8 @@ export class ModalComponent implements OnInit {
   }
 
   confirm() {
+    console.log(this.formGroup.valid);
+
     if (this.formGroup.valid) {
       return this.formGroup.value;
     } else {

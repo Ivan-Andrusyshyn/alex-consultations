@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+
 import { PersonalitiesTestResolver } from './shared/resolvers/personalities-test.resolver';
 import { AttractivenessResultsResolver } from './shared/resolvers/attractiveness.resolver';
 import { TraumaticSensitivityResultsResolver } from './shared/resolvers/traumatic-sensitivity.resolver';
-import { ToxicalRelationshipResultsResolver } from './shared/resolvers/toxical-relationship.resolver';
+import { ToxicalRelationshipResultsResolver } from './shared/resolvers/toxical-relationship/toxical-relationship.resolver';
 import { RoleInRelationshipsResultsResolver } from './shared/resolvers/role-in-relationships.resolver';
+import { ToxicalRelationshipDescriptionResolver } from './shared/resolvers/toxical-relationship/toxical-relationship-description.resolver';
 
 export const routes: Routes = [
   {
@@ -128,6 +130,9 @@ export const routes: Routes = [
           import(
             './pages/toxical-relationship/test-information/test-information.component'
           ).then((m) => m.TestInformationComponent),
+        resolve: {
+          toxicalRelationshipData: ToxicalRelationshipDescriptionResolver,
+        },
       },
     ],
   },

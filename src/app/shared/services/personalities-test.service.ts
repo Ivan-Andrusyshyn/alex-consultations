@@ -4,13 +4,11 @@ import { HttpClient } from '@angular/common/http';
 
 import {
   Answer,
-  CalculatorDisclaimer,
-  CalculatorInformation,
-  CalculatorResult,
   Question,
   TestResult,
   TypeInformation,
 } from '../types/16-personalities';
+
 import { environment } from '../../environment/environment';
 
 interface Personalities {

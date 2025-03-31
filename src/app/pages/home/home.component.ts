@@ -29,11 +29,12 @@ import { InfoCardComponent } from '../../components/home/info-card/info-card.com
 import { RouteTrackerService } from '../../shared/services/route-tracker.service';
 import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
 import { PersonalitiesPhraseService } from '../../shared/services/personalities-phrase.service';
+
+import { LoadingService } from '../../shared/services/loading.service';
 import {
   PersonalityDayPhrases,
   UsersPhraseSubject,
-} from '../../shared/types/16-personalities';
-import { LoadingService } from '../../shared/services/loading.service';
+} from '../../shared/types/personalities-phrases';
 
 @Component({
   selector: 'app-home',
@@ -90,7 +91,7 @@ export class HomeComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '400px',
+      height: '460px',
       width: '400px',
       data: {
         contentType: 'form-consultation',

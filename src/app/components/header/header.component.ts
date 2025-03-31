@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '400px',
+      height: '460px',
       width: '400px',
       data: {
         contentType: 'form-consultation',

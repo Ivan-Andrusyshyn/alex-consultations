@@ -43,9 +43,12 @@ class GoogleSheetsService {
         return __awaiter(this, void 0, void 0, function* () {
             const body = new URLSearchParams();
             body.set('name', data.name);
-            // body.set('email', data.email);
             body.set('socialMedia', data.socialMedia);
-            // body.set('interest', data.interest);
+            if (data.phone) {
+                body.set('phone', data.phone);
+                // body.set('email', data.email);
+                // body.set('interest', data.interest);
+            }
             const scriptUrl = `${process.env.GOOGLE_SHEET_URL_CONSULTATIONS}`;
             try {
                 const response = yield fetch(scriptUrl, {

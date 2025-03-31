@@ -19,11 +19,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 
-import {
-  CalculatorDisclaimer,
-  CalculatorResult,
-  PersonalityTypes,
-} from '../../../shared/types/16-personalities';
+import { PersonalityTypes } from '../../../shared/types/16-personalities';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
@@ -31,6 +27,10 @@ import { SeoService } from '../../../shared/services/seo.service';
 import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { LoadingService } from '../../../shared/services/loading.service';
+import {
+  CalculatorDisclaimer,
+  CalculatorResult,
+} from '../../../shared/types/personalities-calculator';
 
 @Component({
   selector: 'app-calculator-relationships',

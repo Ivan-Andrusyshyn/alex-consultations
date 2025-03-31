@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environment/environment';
 import {
   CalculatorDisclaimer,
   CalculatorInformation,
   CalculatorResult,
-} from '../types/16-personalities';
-import { environment } from '../../environment/environment';
+} from '../types/personalities-calculator';
 
 interface CalculatorResponse {
   message: string;

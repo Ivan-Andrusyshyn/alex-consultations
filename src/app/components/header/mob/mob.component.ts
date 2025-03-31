@@ -16,7 +16,7 @@ import { PersonalitiesPhraseService } from '../../../shared/services/personaliti
 import {
   PersonalityDayPhrases,
   UsersPhraseSubject,
-} from '../../../shared/types/16-personalities';
+} from '../../../shared/types/personalities-phrases';
 
 @Component({
   selector: 'app-mob',
