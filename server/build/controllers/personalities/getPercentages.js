@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = __importDefault(require("../../utils/16-personalities/test"));
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const postPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postPercentagesAndType = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
         const userInformation = req.body.userInformation;
@@ -36,4 +36,4 @@ const postPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.status(400).send('Internal server error');
     }
 });
-exports.default = postPercentages;
+exports.default = postPercentagesAndType;

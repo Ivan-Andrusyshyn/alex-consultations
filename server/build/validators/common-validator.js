@@ -12,18 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const _16_personalities_phrases_1 = require("../../services/16-personalities-phrases");
-const _16_personality_1 = __importDefault(require("../../services/16-personality"));
-const getDayPhrases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const personType = req.params.personType;
-        const dayPhrases = _16_personalities_phrases_1.personalitiesPhraseService.getAllDayPhrases();
-        const userTypeName = _16_personality_1.default.getPersonNameByType(personType);
-        res.send(Object.assign(Object.assign({ message: 'Success get phrases.' }, dayPhrases), { userTypeName }));
+exports.commonValidator = void 0;
+const validatorjs_1 = __importDefault(require("validatorjs"));
+const commonValidator = (req, res, next, validationRule) => __awaiter(void 0, void 0, void 0, function* () {
+    const validation = new validatorjs_1.default(req.body, validationRule);
+    if (validation.fails()) {
+        res.status(412).send({
+            success: false,
+            message: 'Validation failed',
+            data: validation.errors.all(),
+        });
     }
-    catch (error) {
-        console.log(error);
-        return res.status(400).send('Internal server error');
+    else {
+        next();
     }
 });
-exports.default = getDayPhrases;
+exports.commonValidator = commonValidator;

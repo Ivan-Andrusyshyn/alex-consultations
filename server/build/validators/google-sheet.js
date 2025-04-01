@@ -8,20 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
-const postRegistrationGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const data = req.body;
-        yield google_sheets_1.default.postRegistrationInfoOnSheet(data);
-        res.status(200).send({ message: 'Successfull add new row' });
-    }
-    catch (error) {
-        console.log(error);
-        return res.status(400).send({ message: 'Internal server Error' });
-    }
+exports.postRegistrationGoogleSheetValidator = void 0;
+const common_validator_1 = require("./common-validator");
+const postRegistrationGoogleSheetValidator = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const validationRule = {
+        name: 'required|string',
+        socialMedia: 'required|string',
+    };
+    return yield (0, common_validator_1.commonValidator)(req, res, next, validationRule);
 });
-exports.default = postRegistrationGoogleSheet;
+exports.postRegistrationGoogleSheetValidator = postRegistrationGoogleSheetValidator;

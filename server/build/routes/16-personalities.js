@@ -12,10 +12,12 @@ const getDayPhrases_1 = __importDefault(require("../controllers/personalities/ge
 const get_calculate_results_1 = __importDefault(require("../controllers/personalities/calculator/get-calculate-results"));
 const get_calculator_information_1 = __importDefault(require("../controllers/personalities/calculator/get-calculator-information"));
 const get_calculator_disclaimer_1 = __importDefault(require("../controllers/personalities/calculator/get-calculator-disclaimer"));
+const personalities_1 = require("../validators/personalities");
+const personalities_calculator_1 = require("../validators/personalities-calculator");
 const personalitiesRouter = (0, express_1.default)();
 personalitiesRouter.post('/16-personalities/get-type', getTypeByScores_1.default);
-personalitiesRouter.post('/16-personalities/results', getPercentages_1.default);
-personalitiesRouter.post('/16-personalities/calculator', get_calculate_results_1.default);
+personalitiesRouter.post('/16-personalities/results', personalities_1.personalitiesGetTypeValidator, getPercentages_1.default);
+personalitiesRouter.post('/16-personalities/calculator', personalities_calculator_1.personalitiesCalculatorResultsValidator, get_calculate_results_1.default);
 personalitiesRouter.get('/16-personalities/calculator-information', get_calculator_information_1.default);
 personalitiesRouter.get('/16-personalities/calculator-disclaimer', get_calculator_disclaimer_1.default);
 personalitiesRouter.get('/16-personalities', getQuestions_1.default);

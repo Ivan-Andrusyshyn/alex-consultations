@@ -8,9 +8,10 @@ const getCategoryName_1 = __importDefault(require("../controllers/toxical-relati
 const getQuestions_1 = __importDefault(require("../controllers/toxical-relationship/getQuestions"));
 const getInfoByCategory_1 = __importDefault(require("../controllers/toxical-relationship/getInfoByCategory"));
 const getTestInformation_1 = __importDefault(require("../controllers/toxical-relationship/getTestInformation"));
+const toxical_relationship_1 = require("../validators/toxical-relationship");
 const relationshipRoute = (0, express_1.default)();
 relationshipRoute.get('/toxical-relationship', getQuestions_1.default);
 relationshipRoute.get('/toxical-relationship/information', getTestInformation_1.default);
-relationshipRoute.post('/toxical-relationship/category', getCategoryName_1.default);
+relationshipRoute.post('/toxical-relationship/category', toxical_relationship_1.toxicalRelationshpsGetCategoryValidator, getCategoryName_1.default);
 relationshipRoute.get('/toxical-relationship/results/:categoryName', getInfoByCategory_1.default);
 exports.default = relationshipRoute;
