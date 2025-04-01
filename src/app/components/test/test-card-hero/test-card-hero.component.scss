@@ -1,0 +1,68 @@
+.test-card {
+  padding: 0.5rem;
+  border-radius: 12px;
+  min-width: 300px;
+
+  letter-spacing: 0.01em;
+  gap: 8px;
+
+  background-color: var(--bgColorBox);
+  box-shadow: var(--boxShadow);
+  text-align: center;
+  position: relative;
+  justify-content: center;
+  flex-wrap: wrap;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  @media screen and (min-width: 764px) {
+  }
+
+  ::ng-deep app-test-card-start-btn .cta {
+    min-width: 250px !important;
+  }
+  ::ng-deep app-test-card-info-btn .info-test-btn {
+    min-width: 250px !important;
+  }
+  .test-card-buttons {
+  }
+  .btn-container {
+    gap: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-container {
+    height: 180px;
+  }
+  .test-img {
+    width: 64px;
+    height: 64px;
+
+    position: absolute;
+    right: 50%;
+    top: 40%;
+    transform: translate(50%);
+  }
+  h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+
+    text-align: center;
+    position: relative;
+    color: #ff2e63;
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  p {
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    margin-bottom: 40px;
+
+    color: var(--textColor);
+  }
+}

@@ -1,4 +1,4 @@
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,9 +12,8 @@ import {
 import { delay, Subscription, tap, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { TestCardInfoBtnComponent } from '../test-card-info-btn/test-card-info-btn.component';
-import { TestCardStartBtnComponent } from '../test-card-start-btn/test-card-start-btn.component';
 import { testCardsData } from '../../../../assets/content/tests-content/test-cards-data';
+import { TestCardHeroComponent } from '../test-card-hero/test-card-hero.component';
 
 type HideTestsCard =
   | 'attractiveness-card'
@@ -26,12 +25,7 @@ type HideTestsCard =
 @Component({
   selector: 'app-test-list-hero',
   standalone: true,
-  imports: [
-    NgFor,
-    NgClass,
-    TestCardInfoBtnComponent,
-    TestCardStartBtnComponent,
-  ],
+  imports: [NgFor, TestCardHeroComponent],
   templateUrl: './test-list-hero.component.html',
   styleUrl: './test-list-hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

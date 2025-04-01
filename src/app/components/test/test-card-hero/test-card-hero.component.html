@@ -1,0 +1,21 @@
+<div class="test-card" [ngClass]="testInfo.cardClass">
+  <div class="text-container">
+    <h3>
+      {{ testInfo.title }}
+      <span>{{ testInfo.time }}</span>
+    </h3>
+    <p>{{ testInfo.description }}</p>
+  </div>
+  <app-test-card-info-btn
+    [route]="testInfo.routeInfo"
+    class="btn-info"
+  ></app-test-card-info-btn>
+  <img class="test-img" [src]="testInfo.testSvg" alt="feelings" />
+  <div class="test-card-buttons">
+    <app-test-card-start-btn
+      [route]="testInfo.routeStart"
+      [btnText]="testInfo.btnText"
+      class="btn-start"
+    ></app-test-card-start-btn>
+  </div>
+</div>
