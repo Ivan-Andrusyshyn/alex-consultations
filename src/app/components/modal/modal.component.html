@@ -11,6 +11,7 @@
         mat-raised-button
         color="primary"
         class="main-button"
+        [mat-dialog-close]="onConfirm()"
         (click)="onConfirm()"
         cdkFocusInitial
       >

@@ -1,36 +1,13 @@
 .info-test-btn {
-  right: 8px;
-  top: 8px;
-  font-size: 20px;
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 200px;
 
-  position: absolute;
+  font-size: 14px;
+
+  color: #433333;
+  background-color: #ffff;
+  transition: all 0.3s linear;
   display: inline-block;
   cursor: pointer;
-
-  .info-title {
-    border-radius: 8px;
-    border: 1px solid #333;
-    padding: 8px;
-    width: 150px;
-    opacity: 0;
-    top: 28px;
-    right: 0;
-    font-size: 16px;
-
-    color: #433333;
-    position: absolute;
-    background-color: #ffff;
-    visibility: hidden;
-    transition: all 0.3s linear;
-  }
-  @media screen and (min-width: 764px) {
-    top: 24px;
-    top: 8px;
-
-    &:hover > .info-title,
-    &:focus > .info-title {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
 }

@@ -30,8 +30,11 @@
       display: none;
     }
   }
-  ::ng-deep app-test-card-start-btn {
-    max-width: 50%;
+  ::ng-deep app-test-card-start-btn .cta {
+    min-width: 250px !important;
+  }
+  ::ng-deep app-test-card-info-btn .info-test-btn {
+    min-width: 250px !important;
   }
   .test-card {
     padding: 0.5rem;
@@ -48,34 +51,35 @@
     justify-content: center;
     flex-wrap: wrap;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    @media screen and (min-width: 768px) {
-      min-width: 101%;
+    @media screen and (min-width: 764px) {
+      min-width: 300px;
+    }
+    .test-card-buttons {
+    }
+    .btn-container {
+      gap: 8px;
 
-      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-container {
+      height: 180px;
     }
     .test-img {
-      position: absolute;
-      width: 54px;
-      height: 54px;
-      bottom: 8px;
-      left: 8px;
-      display: none;
+      width: 64px;
+      height: 64px;
 
-      @media screen and (min-width: 374px) {
-        display: block;
-      }
-      @media screen and (min-width: 764px) {
-        top: 8px;
-        left: 8px;
-        width: 84px;
-        height: 84px;
-      }
+      position: absolute;
+      right: 50%;
+      top: 40%;
+      transform: translate(50%);
     }
     h3 {
       font-size: 18px;
       margin-bottom: 10px;
       letter-spacing: 0.02em;
-      width: 97%;
 
       text-align: center;
       position: relative;
@@ -83,10 +87,6 @@
 
       span {
         font-size: 16px;
-      }
-      @media screen and (min-width: 768px) {
-        font-size: 22px;
-        width: 100%;
       }
     }
 
@@ -96,10 +96,6 @@
       margin-bottom: 40px;
 
       color: var(--textColor);
-
-      @media screen and (min-width: 768px) {
-        font-size: 18px;
-      }
     }
   }
   .scroll-btn {
@@ -117,9 +113,7 @@
     cursor: pointer;
     position: absolute;
     transition: all 0.3s ease;
-    @media screen and (min-width: 768px) {
-      padding: 12px;
-    }
+
     &:hover {
       background: #1a1a2e;
     }

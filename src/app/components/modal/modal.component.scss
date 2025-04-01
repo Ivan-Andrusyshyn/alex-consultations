@@ -15,6 +15,11 @@ mat-dialog-actions {
   background-color: #f5f5f5;
   border-radius: 12px;
 }
+::ng-deep .mat-mdc-dialog-container .mat-mdc-dialog-content {
+  @media screen and (max-width: 764px) {
+    padding: 10px;
+  }
+}
 .main-button {
   padding: 16px 18px;
   border-radius: 8px;
@@ -32,6 +37,9 @@ mat-dialog-actions {
   @media screen and (min-width: 764px) {
     font-size: 16px;
   }
+}
+.cancel-button {
+  min-width: 100px;
 }
 .btns-wrapper {
   gap: 16px;

@@ -60,7 +60,7 @@ export class TestListHeroComponent implements OnInit {
     if (list) {
       const cardWidth = list.querySelector('.test-card')?.clientWidth || 300;
       list.scrollBy({
-        left: direction === 'next' ? cardWidth + 32 : -(cardWidth + 32),
+        left: direction === 'next' ? cardWidth + 18 : -(cardWidth + 18),
         behavior: 'smooth',
       });
     }

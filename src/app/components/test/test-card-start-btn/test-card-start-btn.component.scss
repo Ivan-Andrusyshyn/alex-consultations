@@ -1,97 +1,30 @@
 .cta {
   font-size: 16px;
-  padding: 6px 12px;
+  padding: 8px 16px;
   text-decoration: none;
-  transition: 1s;
-  transform: skewX(-15deg);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 4px 4px 0 #2a2a2a;
+  border-radius: 8px;
+  min-width: 200px;
   margin: 8px auto;
-  box-shadow: 6px 6px 0 #333;
 
-  color: #f5f5f5;
+  color: #fff;
   background-color: #42b846;
 
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   cursor: pointer;
 
-  @media screen and (min-width: 764px) {
-    padding: 8px 16px;
-    margin: 22px auto;
-    font-size: 22px;
-  }
-}
-
-.cta:focus {
-  outline: none;
-}
-
-.cta:hover {
-  transition: 0.5s;
-  box-shadow: 10px 10px 0 #1d5710;
-}
-
-.cta .second {
-  transition: 0.5s;
-  margin-right: 0px;
-}
-
-.cta:hover .second {
-  transition: 0.5s;
-  margin-right: 45px;
-}
-
-.span {
-  transform: skewX(15deg);
-}
-
-.second {
-  width: 20px;
-  margin-left: 16px;
-  top: 12%;
-
-  position: relative;
-  display: flex;
-  align-items: center;
-  @media screen and (min-width: 764px) {
-    margin-left: 30px;
-  }
-}
-
-.one {
-  transition: 0.4s;
-  transform: translateX(-60%);
-}
-
-.two {
-  transition: 0.5s;
-  transform: translateX(-30%);
-}
-
-.cta:hover .three {
-  animation: color_anim 1s infinite 0.2s;
-}
-
-.cta:hover .one {
-  transform: translateX(0%);
-  animation: color_anim 1s infinite 0.6s;
-}
-
-.cta:hover .two {
-  transform: translateX(0%);
-  animation: color_anim 1s infinite 0.4s;
-}
-
-@keyframes color_anim {
-  0% {
-    fill: #ccc;
+  &:hover {
+    background-color: darken(#42b846, 10%);
+    box-shadow: 6px 6px 0 #1d1d1d;
+    transform: translate(-2px, -2px);
   }
 
-  50% {
-    fill: #fbc638;
-  }
-
-  100% {
-    fill: #ccc;
+  &:active {
+    box-shadow: 2px 2px 0 #1d1d1d;
+    transform: translate(1px, 1px);
   }
 }

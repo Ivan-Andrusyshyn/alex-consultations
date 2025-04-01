@@ -6,23 +6,24 @@
     (!(test.cardClass===hideTestsCard)) {
 
     <li class="test-card" [ngClass]="test.cardClass">
-      <h3>
-        {{ test.title }}
-        <span>{{ test.time }}</span>
-      </h3>
-      <p>{{ test.description }}</p>
+      <div class="text-container">
+        <h3>
+          {{ test.title }}
+          <span>{{ test.time }}</span>
+        </h3>
+        <p>{{ test.description }}</p>
+      </div>
+      <app-test-card-info-btn
+        [route]="test.routeInfo"
+        class="btn-info"
+      ></app-test-card-info-btn>
       <img class="test-img" [src]="test.testSvg" alt="feelings" />
-
       <div class="test-card-buttons">
         <app-test-card-start-btn
           [route]="test.routeStart"
           [btnText]="test.btnText"
           class="btn-start"
         ></app-test-card-start-btn>
-        <app-test-card-info-btn
-          [route]="test.routeInfo"
-          class="btn-info"
-        ></app-test-card-info-btn>
       </div>
     </li>
     } }
