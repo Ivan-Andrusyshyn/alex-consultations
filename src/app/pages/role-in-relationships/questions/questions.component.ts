@@ -69,8 +69,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
 
     this.testQuestions$ = this.roleInRelationshipsService.getQuestions().pipe(
       map((r) => {
-        console.log(r);
-
         this.createFormGroup(r.questions);
         this.setCurrentAnswers();
 
@@ -141,7 +139,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         answers,
         userInformation: {
           routeTracker: this.routeTracker.getRoutes(),
-          referrer: document.referrer,
+          referrer: document.referrer ?? '',
           testName: 'role-in-relationships',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),

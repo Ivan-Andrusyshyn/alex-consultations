@@ -16,7 +16,7 @@ const personalitiesCalculatorResultsValidator = (req, res, next) => __awaiter(vo
         personsTypes: 'required|array|size:2',
         'personsTypes.*': 'required|string|in:ISFJ,ISTJ,INFJ,INTJ,ISFP,ISTP,INFP,INTP,ESFJ,ESTJ,ENFJ,ENTJ,ESFP,ESTP,ENFP,ENTP',
         'userInformation.routeTracker': 'required|string',
-        'userInformation.referrer': 'string|nullable',
+        'userInformation.referrer': 'string',
         'userInformation.testName': 'required|string',
         'userInformation.timestamp': 'required|string',
         'userInformation.device': 'required|string',

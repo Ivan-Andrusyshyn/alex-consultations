@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const _16_personality_1 = __importDefault(require("../../services/16-personality"));
-const getTypeByScores = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getPersonTypeByScores = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const results = req.body;
         const personType = _16_personality_1.default.getPersonalityType(results);
@@ -28,4 +28,4 @@ const getTypeByScores = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = getTypeByScores;
+exports.default = getPersonTypeByScores;

@@ -64,16 +64,6 @@ export class PersonalitiesTestService {
     }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);
   }
 
-  getPersonType(scorePercentages: TestResult | null): Observable<{
-    message: string;
-    personType: string;
-  }> {
-    return this.http.post<{
-      personInformation: TypeInformation;
-      message: string;
-      personType: string;
-    }>(this.testsUrl + '/16-personalities/get-type', scorePercentages);
-  }
   getPersonalitiesResultOfTest(data: {
     answers: Answer[];
     userInformation: {

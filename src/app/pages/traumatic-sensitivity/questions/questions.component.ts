@@ -139,7 +139,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         answers,
         userInformation: {
           routeTracker: this.routeTracker.getRoutes(),
-          referrer: document.referrer,
+          referrer: document.referrer ?? '',
           testName: 'traumatic-sensitivity',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),

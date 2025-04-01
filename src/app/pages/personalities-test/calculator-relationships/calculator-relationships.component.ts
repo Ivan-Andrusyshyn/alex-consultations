@@ -117,7 +117,7 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
       this.calculatorResult$ = this.personalitiesCalculatorService
         .getPersonalitiesCalculatorResults(pair, {
           routeTracker: this.routeTracker.getRoutes(),
-          referrer: document.referrer,
+          referrer: document.referrer ?? '',
           testName: '16-personalities-calculator',
           timestamp: this.timestamp ?? '',
           device: this.googleSheetService.getDeviceType(),

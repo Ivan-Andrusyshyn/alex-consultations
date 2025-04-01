@@ -138,7 +138,7 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       .getToxicalRelationshipCategory({
         answers,
         userInformation: {
-          referrer: document.referrer,
+          referrer: document.referrer ?? '',
           routeTracker: this.routeTracker.getRoutes(),
           testName: 'toxical-relationship',
           timestamp: this.timestamp ?? '',

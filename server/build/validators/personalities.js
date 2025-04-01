@@ -16,7 +16,7 @@ const personalitiesGetTypeValidator = (req, res, next) => __awaiter(void 0, void
         answers: 'required',
         'answers.*': ['required', 'string', 'regex:/^[0-9]+(\\.[0-9]+)?-[a-z-]+$/'],
         'userInformation.routeTracker': 'required|string',
-        'userInformation.referrer': 'string|nullable',
+        'userInformation.referrer': 'string',
         'userInformation.testName': 'required|string',
         'userInformation.timestamp': 'required|string',
         'userInformation.device': 'required|string',
