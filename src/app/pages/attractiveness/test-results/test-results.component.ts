@@ -36,6 +36,7 @@ import { SocialLinksComponent } from '../../../components/social-links/social-li
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
+import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 
 @Component({
   selector: 'app-test-results',
@@ -47,7 +48,7 @@ import { ConsultationFormComponent } from '../../../components/consultation-form
     NgIf,
     NgFor,
     TestListHeroComponent,
-    AccentBtnComponent,
+    ConsultationBenefitComponent,
     SecondaryBtnComponent,
     ConsultationFormComponent,
     SocialLinksComponent,

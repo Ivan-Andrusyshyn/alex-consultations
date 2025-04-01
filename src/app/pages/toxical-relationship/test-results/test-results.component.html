@@ -23,16 +23,7 @@
     </div>
   </ng-container>
   <div class="form-container">
-    <h3>Запишись на консультацію вже зараз!</h3>
-    <br />
-    <p>
-      Отримайте персональну консультацію та дізнайтеся, як досягти кращих
-      результатів!
-    </p>
-
-    <p class="offer">
-      📢 Лише цього тижня: 20-хвилинна безкоштовна консультація!
-    </p>
+    <app-consultation-benefit></app-consultation-benefit>
     <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
     <app-secondary-btn
       (onClick)="registration()"

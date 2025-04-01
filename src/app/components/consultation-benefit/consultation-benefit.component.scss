@@ -1,0 +1,115 @@
+.consultation-container {
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+
+  text-align: left;
+  color: var(--textColorTitle);
+  span {
+    font-size: 1rem;
+    font-style: italic;
+  }
+}
+::ng-deep .mat-expansion-panel-header {
+  height: 300px !important;
+  padding: 0 !important;
+  @media screen and (min-width: 764px) {
+    height: 180px !important;
+  }
+}
+::ng-deep .mat-expansion-panel {
+  background-color: transparent !important;
+}
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+  display: flex;
+}
+::ng-deep .mat-expansion-indicator::after {
+  color: var(--textColor) !important;
+  fill: var(--textColor) !important;
+}
+::ng-deep .mat-accordion .mat-expansion-panel:not(.mat-expanded),
+.mat-accordion .mat-expansion-panel {
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+ng-deep .mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+
+  text-align: left;
+  color: var(--textColor);
+}
+.consultation-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+
+  text-align: left;
+  color: var(--textColor);
+}
+
+.target-audience ul {
+  margin-bottom: 20px;
+  list-style: none;
+}
+
+.target-audience li {
+  font-size: 1.125rem;
+  margin-bottom: 16px;
+
+  text-align: left;
+  color: var(--textColor);
+}
+
+.benefits {
+  margin-bottom: 30px;
+}
+
+.benefit {
+  margin-bottom: 20px;
+}
+
+.benefit p {
+  font-size: 1.125rem;
+
+  text-align: left;
+  color: var(--textColor);
+}
+
+.testimonial {
+  margin-bottom: 30px;
+}
+
+.testimonial-quote {
+  font-size: 1rem;
+  line-height: 1.5;
+
+  text-align: left;
+  color: var(--textColor);
+}
+
+.testimonial-description {
+  font-size: 1rem;
+  line-height: 1.5;
+
+  text-align: left;
+  color: var(--textColor);
+}
+
+.note {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 1.125rem;
+
+  color: #e74c3c;
+  font-weight: bold;
+  text-align: left;
+}

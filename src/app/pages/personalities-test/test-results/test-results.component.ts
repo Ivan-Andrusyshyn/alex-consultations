@@ -27,11 +27,11 @@ import { GoogleSheetsService } from '../../../shared/services/google-sheets.serv
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
-import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
+import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 
 @Component({
   selector: 'app-test-results',
@@ -41,7 +41,6 @@ import { SecondaryBtnComponent } from '../../../components/secondary-btn/seconda
     SendResultsFormComponent,
     ResultsIndicatorComponent,
     SendFormOnEmailBtnComponent,
-    AccentBtnComponent,
     AsyncPipe,
     TitleCardComponent,
     TestListHeroComponent,
@@ -49,6 +48,7 @@ import { SecondaryBtnComponent } from '../../../components/secondary-btn/seconda
     ConsultationFormComponent,
     ConsultationFormComponent,
     SecondaryBtnComponent,
+    ConsultationBenefitComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',

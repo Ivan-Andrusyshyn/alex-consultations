@@ -47,6 +47,7 @@ import { SocialLinksComponent } from '../../../components/social-links/social-li
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
+import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -70,7 +71,7 @@ const types: string[] = [
     AsyncPipe,
     NgIf,
     NgFor,
-    AccentBtnComponent,
+    ConsultationBenefitComponent,
     TypeInformationComponent,
     TestListHeroComponent,
     ConsultationFormComponent,

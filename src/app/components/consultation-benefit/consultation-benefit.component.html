@@ -1,0 +1,52 @@
+<div class="consultation-container">
+  <ng-container *ngIf="benefitConsultationData$ | async as consultationBenefit">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="panelOpenState$ | async">
+        <mat-expansion-panel-header>
+          <div>
+            <h3 class="consultation-title">
+              {{ consultationBenefit.title }}
+            </h3>
+            <p class="consultation-description">
+              {{ consultationBenefit.description }}
+            </p>
+          </div>
+        </mat-expansion-panel-header>
+        <div>
+          <div class="target-audience">
+            <h3>Якщо ти:</h3>
+            <ul>
+              <li *ngFor="let item of consultationBenefit.targetAudience">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="benefits">
+            <h3>Що саме ти отримаєш:</h3>
+            <div
+              class="benefit"
+              *ngFor="let benefit of consultationBenefit.benefits"
+            >
+              <h4>{{ benefit.title }}</h4>
+              <p>{{ benefit.description }}</p>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <p class="testimonial-quote">
+              {{ consultationBenefit.testimonial.quote }}
+            </p>
+            <p class="testimonial-description">
+              {{ consultationBenefit.testimonial.description }}
+            </p>
+          </div>
+
+          <p class="note">
+            {{ consultationBenefit.note }}
+          </p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+</div>

@@ -27,6 +27,7 @@ import { RoleInRelationshipsResult } from '../../../shared/types/role-in-relatio
 import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
+import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 
 @Component({
   selector: 'app-test-results',
@@ -34,12 +35,12 @@ import { SecondaryBtnComponent } from '../../../components/secondary-btn/seconda
   imports: [
     SendResultsFormComponent,
     SendFormOnEmailBtnComponent,
-    AccentBtnComponent,
     AsyncPipe,
     TitleCardComponent,
     TestListHeroComponent,
     SocialLinksComponent,
     ConsultationFormComponent,
+    ConsultationBenefitComponent,
     SecondaryBtnComponent,
     NgIf,
   ],
