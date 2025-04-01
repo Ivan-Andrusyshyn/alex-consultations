@@ -78,13 +78,9 @@ export class ModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  confirm() {
-    console.log(this.formGroup.valid);
-
+  onConfirm() {
     if (this.formGroup.valid) {
-      return this.formGroup.value;
-    } else {
-      return null;
+      this.dialogRef.close(this.formGroup.value);
     }
   }
 }
