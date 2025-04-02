@@ -1,7 +1,8 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ConsultationService } from '../../shared/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/types/benefit-consultation';
@@ -9,7 +10,14 @@ import { BenefitConsultationData } from '../../shared/types/benefit-consultation
 @Component({
   selector: 'app-consultation-benefit',
   standalone: true,
-  imports: [NgIf, NgFor, AsyncPipe, MatExpansionModule],
+  imports: [
+    NgIf,
+    NgStyle,
+    NgFor,
+    MatButtonModule,
+    AsyncPipe,
+    MatExpansionModule,
+  ],
   templateUrl: './consultation-benefit.component.html',
   styleUrl: './consultation-benefit.component.scss',
 })
@@ -17,8 +25,7 @@ export class ConsultationBenefitComponent implements OnInit {
   private readonly consultationService = inject(ConsultationService);
 
   benefitConsultationData$!: Observable<BenefitConsultationData>;
-  private panelOpenState = new BehaviorSubject(false);
-  panelOpenState$ = this.panelOpenState.asObservable();
+  panelOpenState = false;
 
   ngOnInit(): void {
     this.benefitConsultationData$ = this.consultationService
@@ -27,6 +34,6 @@ export class ConsultationBenefitComponent implements OnInit {
   }
 
   togglePanel() {
-    this.panelOpenState.next(!this.panelOpenState.value);
+    this.panelOpenState = !this.panelOpenState;
   }
 }

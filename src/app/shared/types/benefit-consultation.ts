@@ -5,7 +5,6 @@ interface Benefit {
 
 interface Testimonial {
   quote: string;
-  numberOfPeople: number;
   description: string;
 }
 
@@ -13,6 +12,7 @@ interface BenefitConsultationData {
   title: string;
   description: string;
   targetAudience: string[];
+  targetTitle: string;
   benefits: Benefit[];
   testimonial: Testimonial;
   note: string;

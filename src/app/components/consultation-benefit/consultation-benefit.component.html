@@ -1,7 +1,7 @@
 <div class="consultation-container">
   <ng-container *ngIf="benefitConsultationData$ | async as consultationBenefit">
     <mat-accordion>
-      <mat-expansion-panel [expanded]="panelOpenState$ | async">
+      <mat-expansion-panel [expanded]="panelOpenState">
         <mat-expansion-panel-header>
           <div>
             <h3 class="consultation-title">
@@ -21,7 +21,10 @@
               </li>
             </ul>
           </div>
-
+          <p class="testimonial-description">
+            {{ consultationBenefit.targetTitle }}
+          </p>
+          <br />
           <div class="benefits">
             <h3>Що саме ти отримаєш:</h3>
             <div
@@ -34,11 +37,12 @@
           </div>
 
           <div class="testimonial">
-            <p class="testimonial-quote">
-              {{ consultationBenefit.testimonial.quote }}
-            </p>
             <p class="testimonial-description">
               {{ consultationBenefit.testimonial.description }}
+            </p>
+            <br />
+            <p class="testimonial-quote">
+              {{ consultationBenefit.testimonial.quote }}
             </p>
           </div>
 

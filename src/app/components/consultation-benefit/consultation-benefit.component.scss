@@ -13,9 +13,12 @@ h3 {
     font-style: italic;
   }
 }
+
 ::ng-deep .mat-expansion-panel-header {
   height: 300px !important;
   padding: 0 !important;
+  flex-direction: column !important;
+  padding: 4px !important;
   @media screen and (min-width: 764px) {
     height: 180px !important;
   }
@@ -23,6 +26,7 @@ h3 {
 ::ng-deep .mat-expansion-panel {
   background-color: transparent !important;
 }
+
 ::ng-deep .mat-expansion-panel-body {
   padding: 0 !important;
   display: flex;
@@ -30,6 +34,7 @@ h3 {
 ::ng-deep .mat-expansion-indicator::after {
   color: var(--textColor) !important;
   fill: var(--textColor) !important;
+  font-size: 16px !important;
 }
 ::ng-deep .mat-accordion .mat-expansion-panel:not(.mat-expanded),
 .mat-accordion .mat-expansion-panel {
@@ -38,6 +43,22 @@ h3 {
 }
 ng-deep .mat-expansion-panel:not([class*="mat-elevation-z"]) {
   box-shadow: none !important;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 4px solid black;
+  border-bottom: 4px solid black;
+  display: inline-block;
+}
+
+.arrow-up {
+  transform: rotate(-135deg);
+}
+
+.arrow-down {
+  transform: rotate(45deg);
 }
 h4 {
   font-size: 1.2rem;
@@ -77,7 +98,7 @@ h4 {
   margin-bottom: 20px;
 }
 
-.benefit p {
+p {
   font-size: 1.125rem;
 
   text-align: left;
@@ -88,28 +109,12 @@ h4 {
   margin-bottom: 30px;
 }
 
-.testimonial-quote {
-  font-size: 1rem;
-  line-height: 1.5;
-
-  text-align: left;
-  color: var(--textColor);
-}
-
-.testimonial-description {
-  font-size: 1rem;
-  line-height: 1.5;
-
-  text-align: left;
-  color: var(--textColor);
-}
-
 .note {
   margin-top: 16px;
   margin-bottom: 16px;
   font-size: 1.125rem;
 
-  color: #e74c3c;
+  color: var(--textColor);
   font-weight: bold;
   text-align: left;
 }
