@@ -20,6 +20,30 @@ mat-dialog-actions {
     padding: 10px;
   }
 }
+::ng-deep .mat-mdc-dialog-container .mat-mdc-dialog-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+.video-container {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  .video-container iframe {
+    width: 100%;
+    margin: 0 auto-;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+
+    text-align: center;
+  }
+}
+
 .main-button {
   padding: 16px 18px;
   border-radius: 8px;

@@ -94,6 +94,7 @@ export class HomeComponent implements OnInit {
       height: '460px',
       width: '400px',
       data: {
+        isForm: true,
         contentType: 'form-consultation',
         title: 'Відчуй свою глибину. Запишись на консультацію!',
         btn: {

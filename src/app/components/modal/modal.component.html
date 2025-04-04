@@ -1,30 +1,47 @@
 <ng-container *ngIf="data.contentType === 'form-consultation'">
   <mat-dialog-content>
-    <p>{{ data.title }}</p>
-    <br />
-    <p>1. Залиш свої дані</p>
-    <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
-    <p>2. Тисни "Записатися"</p>
-    <br />
-    <div class="btns-wrapper">
-      <button
-        mat-raised-button
-        color="primary"
-        class="main-button"
-        (click)="onConfirm()"
-        cdkFocusInitial
-      >
-        {{ data.btn["confirm"] }}
-      </button>
+    <div>
+      @if(data.isForm){
 
-      <button
-        class="cancel-button"
-        mat-stroked-button
-        color="#333"
-        (click)="cancel()"
-      >
-        {{ data.btn["cancel"] }}
-      </button>
+      <p>{{ data.title }}</p>
+
+      <br />
+      <p>1. Залиш свої дані</p>
+      <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
+      <p>2. Тисни "Записатися"</p>
+      <br />
+      <div class="btns-wrapper">
+        <button
+          mat-raised-button
+          color="primary"
+          class="main-button"
+          (click)="onConfirm()"
+          cdkFocusInitial
+        >
+          {{ data.btn["confirm"] }}
+        </button>
+
+        <button
+          class="cancel-button"
+          mat-stroked-button
+          color="#333"
+          (click)="cancel()"
+        >
+          {{ data.btn["cancel"] }}
+        </button>
+      </div>
+      }@else{
+      <div class="video-container">
+        <h3>Твої відчуття важливі !</h3>
+        <iframe
+          src="https://player.vimeo.com/video/1072592233"
+          height="350"
+          frameborder="0"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+      }
     </div>
   </mat-dialog-content>
 </ng-container>

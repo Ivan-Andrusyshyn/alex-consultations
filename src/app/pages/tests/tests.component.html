@@ -5,6 +5,7 @@
       [titleText]="titleCardContent.titleText"
       [subtitleText]="titleCardContent.subtitleText"
     ></app-title-card>
+
     <div class="container">
       <mat-tab-group [(selectedIndex)]="currentTopic">
         @for (category of categoryList; track $index) {
