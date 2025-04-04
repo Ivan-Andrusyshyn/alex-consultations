@@ -41,6 +41,8 @@ export class TestsComponent implements OnInit {
   currentTopic: string = '';
 
   ngOnInit(): void {
+    this.openDialog();
+
     const isNewUser = JSON.parse(sessionStorage.getItem('isNewUser') ?? 'null');
     if (!isNewUser) {
       this.openDialog();
@@ -58,7 +60,7 @@ export class TestsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '590px',
+      height: '580px',
       width: '280px',
       data: {
         isForm: false,
