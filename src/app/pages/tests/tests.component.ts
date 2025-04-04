@@ -58,7 +58,7 @@ export class TestsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '460px',
+      height: '590px',
       width: '280px',
       data: {
         isForm: false,

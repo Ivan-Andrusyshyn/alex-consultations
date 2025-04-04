@@ -32,14 +32,31 @@
       </div>
       }@else{
       <div class="video-container">
-        <h3>Твої відчуття важливі !</h3>
         <iframe
           src="https://player.vimeo.com/video/1072592233"
-          height="350"
+          width="300"
+          height="390"
           frameborder="0"
           allowfullscreen
         >
         </iframe>
+        <p class="video-subtitle">
+          Ти тут — бо бачиш, відчуваєш і розумієш більше. Пройди тест. Залиши
+          заявку. А головне — дозволь собі відчути, що тут для тебе
+        </p>
+        <br />
+        <div style="display: flex; justify-content: center">
+          <button
+            mat-raised-button
+            color="primary"
+            class="main-button"
+            (click)="cancel()"
+            cdkFocusInitial
+          >
+            Пройти тести
+          </button>
+        </div>
+        <br />
       </div>
       }
     </div>

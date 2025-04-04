@@ -27,15 +27,18 @@ mat-dialog-actions {
   overflow-x: hidden;
 }
 .video-container {
-  width: 100%;
-  margin: 0 auto;
   border-radius: 12px;
-  overflow: hidden;
-  .video-container iframe {
-    width: 100%;
-    margin: 0 auto-;
-  }
+  margin-top: 16px;
 
+  .video-container iframe {
+  }
+  .video-subtitle {
+    max-width: 260px;
+    font-size: 16px;
+    margin: 0 auto;
+
+    text-align: center;
+  }
   h3 {
     font-size: 16px;
     margin-bottom: 16px;

@@ -55,14 +55,15 @@ export class ConsultationsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '500px',
+      height: '460px',
       width: '400px',
       data: {
+        isForm: true,
         contentType: 'form-consultation',
-        title: '🔥 Готові до прориву?',
+        title: 'Відчуй свою глибину. Запишись на консультацію!',
         btn: {
           cancel: 'Ні, дякую',
-          confirm: '🚀 Отримати консультацію',
+          confirm: 'Записатися',
         },
       },
     });
