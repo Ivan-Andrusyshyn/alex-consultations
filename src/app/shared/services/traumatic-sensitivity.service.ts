@@ -6,6 +6,7 @@ import { environment } from '../../environment/environment';
 import {
   PersonalitiesResponse,
   PersonalitiesResults,
+  TestInformation,
   TestResult,
   TypeInformation,
 } from '../types/traumatic-sensitivity';
@@ -68,7 +69,15 @@ export class TraumaticSensitivityService {
         personCodeType
     );
   }
-
+  getTestInformation(): Observable<{
+    message: string;
+    testInformation: TestInformation;
+  }> {
+    return this.http.get<{
+      message: string;
+      testInformation: TestInformation;
+    }>(this.testsUrl + '/traumatic-sensitivity' + '/information');
+  }
   getObservableScorePercentages(): Observable<TestResult | null> {
     return this.scorePercentages.asObservable();
   }

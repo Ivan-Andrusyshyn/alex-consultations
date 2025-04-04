@@ -24,7 +24,6 @@ import { RefreshButtonComponent } from '../../refresh-button/refresh-button.comp
 import { ModalComponent } from '../../modal/modal.component';
 import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.component';
 import { QuestionWordPipe } from './questions.pipe';
-import { CheckboxComponent } from '../../checkbox/checkbox.component';
 
 @Component({
   selector: 'app-form-questions',
@@ -39,7 +38,6 @@ import { CheckboxComponent } from '../../checkbox/checkbox.component';
     QuestionWordPipe,
     DecimalPipe,
     NgClass,
-    CheckboxComponent,
   ],
   templateUrl: './form-questions.component.html',
   styleUrl: './form-questions.component.scss',

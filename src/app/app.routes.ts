@@ -2,10 +2,11 @@ import { Routes } from '@angular/router';
 
 import { PersonalitiesTestResolver } from './shared/resolvers/personalities-test.resolver';
 import { AttractivenessResultsResolver } from './shared/resolvers/attractiveness.resolver';
-import { TraumaticSensitivityResultsResolver } from './shared/resolvers/traumatic-sensitivity.resolver';
+import { TraumaticSensitivityResultsResolver } from './shared/resolvers/traumetic-sensitivity/traumatic-sensitivity-results.resolver';
 import { ToxicalRelationshipResultsResolver } from './shared/resolvers/toxical-relationship/toxical-relationship.resolver';
 import { RoleInRelationshipsResultsResolver } from './shared/resolvers/role-in-relationships.resolver';
 import { ToxicalRelationshipDescriptionResolver } from './shared/resolvers/toxical-relationship/toxical-relationship-description.resolver';
+import { TraumaticSensitivityInformationResolver } from './shared/resolvers/traumetic-sensitivity/traumetic-sensitivity-information.resolver';
 
 export const routes: Routes = [
   {
@@ -96,6 +97,9 @@ export const routes: Routes = [
           import(
             './pages/traumatic-sensitivity/test-information/test-information.component'
           ).then((m) => m.TestInformationComponent),
+        resolve: {
+          traumaticSensitivityData: TraumaticSensitivityInformationResolver,
+        },
       },
     ],
   },

@@ -55,9 +55,14 @@ interface TypeInformation {
     text: string;
   };
 }
+interface TestInformation {
+  sections: { title: string; items: string[] }[];
+  conclusion: string;
+}
 export {
   TestResult,
   PersonalitiesResults,
   TypeInformation,
   PersonalitiesResponse,
+  TestInformation,
 };

@@ -6,13 +6,19 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { TraumaticSensitivityService } from '../services/traumatic-sensitivity.service';
-import { TypeInformation } from '../types/traumatic-sensitivity';
+import { TraumaticSensitivityService } from '../../services/traumatic-sensitivity.service';
+import { TypeInformation } from '../../types/traumatic-sensitivity';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TraumaticSensitivityResultsResolver implements Resolve<any> {
+export class TraumaticSensitivityResultsResolver
+  implements
+    Resolve<{
+      results: TypeInformation;
+      message: string;
+    }>
+{
   constructor(
     private traumaticSensitivityService: TraumaticSensitivityService
   ) {}
