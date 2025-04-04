@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NgClass, NgFor } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TestCardStartBtnComponent } from '../../components/test/test-card-start-btn/test-card-start-btn.component';
 import { TestCardInfoBtnComponent } from '../../components/test/test-card-info-btn/test-card-info-btn.component';
@@ -9,7 +10,6 @@ import { TitleCardComponent } from '../../components/title-card/title-card.compo
 import { SeoService } from '../../shared/services/seo.service';
 import { IconsListComponent } from '../../components/test/personalities-test/icons-list/icons-list.component';
 import titleCardContent from './titleCard-content';
-import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
@@ -41,8 +41,6 @@ export class TestsComponent implements OnInit {
   currentTopic: string = '';
 
   ngOnInit(): void {
-    this.openDialog();
-
     const isNewUser = JSON.parse(sessionStorage.getItem('isNewUser') ?? 'null');
     if (!isNewUser) {
       this.openDialog();
@@ -60,8 +58,8 @@ export class TestsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '580px',
-      width: '280px',
+      height: '550px',
+      width: '330px',
       data: {
         isForm: false,
         contentType: 'form-consultation',

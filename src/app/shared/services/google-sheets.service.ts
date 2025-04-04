@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DateTime } from 'luxon';
 
 import { environment } from '../../environment/environment';
 
@@ -14,6 +15,8 @@ interface GoogleSheetTestResults {
 interface GoogleSheetRegistration {
   name: string;
   socialMedia: string;
+  timestamp?: string;
+  referrer?: string;
 }
 
 @Injectable({
@@ -21,6 +24,9 @@ interface GoogleSheetRegistration {
 })
 export class GoogleSheetsService {
   private readonly BASE_URL: string = environment.apiUrl;
+  timestamp = DateTime.now()
+    .setZone('Europe/Kyiv')
+    .toFormat('yyyy-MM-dd HH:mm:ss');
   constructor(private http: HttpClient) {}
 
   postTestResultsInSheet(data: GoogleSheetTestResults): Observable<any> {
@@ -29,6 +35,9 @@ export class GoogleSheetsService {
   }
   postRegistrationInSheet(data: GoogleSheetRegistration): Observable<any> {
     const scriptUrl: string = '/google/registration/send';
+
+    data.timestamp = this.timestamp ?? '';
+    data.referrer = document.referrer ?? '';
     return this.http.post(this.BASE_URL + scriptUrl, data);
   }
 
