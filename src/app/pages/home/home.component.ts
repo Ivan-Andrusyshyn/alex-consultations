@@ -91,12 +91,13 @@ export class HomeComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '460px',
+      height: '480px',
       width: '400px',
       data: {
         isForm: true,
         contentType: 'form-consultation',
-        title: 'Відчуй свою глибину. Запишись на консультацію!',
+        title:
+          'Залиш дані, та дізнайся детальніше про консультацію, яка допоможе тобі пізнати краще себе.',
         btn: {
           cancel: 'Ні, дякую',
           confirm: 'Записатися',

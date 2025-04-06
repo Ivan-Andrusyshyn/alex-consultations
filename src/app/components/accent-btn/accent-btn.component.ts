@@ -10,7 +10,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 })
 export class AccentBtnComponent {
   @Output() onClickBtn = new EventEmitter();
-  @Input() textBtn: string = 'Записатися';
+  @Input() textBtn: string = 'Дізнатись більше';
   @Input() matColor: string = 'primary';
 
   onClick() {

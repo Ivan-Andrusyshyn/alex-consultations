@@ -32,6 +32,40 @@
       flex-wrap: nowrap;
     }
   }
+  .social-link {
+    max-width: 200px;
+    margin: 0 auto;
+    gap: 12px;
+
+    display: none;
+
+    @media screen and (min-width: 764px) {
+      margin: 0;
+
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .link-img {
+    margin: 0;
+
+    transition: 0.4s linear;
+    display: block;
+    &:hover {
+      transform: scale(1.1);
+    }
+    width: 32px;
+    height: 32px;
+  }
+  .links-title {
+    color: var(--textColor);
+    margin: 0;
+    font-size: 14px;
+    @media screen and (min-width: 764px) {
+      font-size: 16px;
+    }
+  }
   .tests-title {
     font-size: 18px;
     letter-spacing: 0.01em;
