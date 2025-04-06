@@ -2,14 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import {
-  Answer,
-  Question,
-  TestResult,
-  TypeInformation,
-} from '../types/16-personalities';
+import { Answer, Question, TestResult } from '../types/16-personalities';
 
 import { environment } from '../../environment/environment';
+import { TypeResultInformation } from '../types/16-personalities-results';
 
 interface Personalities {
   message: string;
@@ -53,12 +49,12 @@ export class PersonalitiesTestService {
   }
 
   getPersonTypeByResults(personType: string): Observable<{
-    personInformation: TypeInformation;
+    personInformation: TypeResultInformation;
     message: string;
     personType: string;
   }> {
     return this.http.get<{
-      personInformation: TypeInformation;
+      personInformation: TypeResultInformation;
       message: string;
       personType: string;
     }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);

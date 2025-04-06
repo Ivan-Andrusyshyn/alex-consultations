@@ -22,12 +22,12 @@ import { ToxicalRelationshipService } from '../../../shared/services/toxical-rel
 
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { SeoService } from '../../../shared/services/seo.service';
-import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
+import { RelationshipResult } from '../../../shared/types/toxical-relationship';
 
 @Component({
   selector: 'app-test-results',
@@ -63,7 +63,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   successMessage = signal(false);
 
-  testResults$!: Observable<any>;
+  testResults$!: Observable<RelationshipResult>;
 
   formGroup!: FormGroup;
 

@@ -6,8 +6,9 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PersonalitiesTestService } from '../services/personalities-test.service';
-import { TypeInformation } from '../types/16-personalities';
+
 import { LoadingService } from '../services/loading.service';
+import { TypeResultInformation } from '../types/16-personalities-results';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,10 @@ export class PersonalitiesTestResolver implements Resolve<any> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<{ personType: string; personInformation: TypeInformation }> {
+  ): Observable<{
+    personType: string;
+    personInformation: TypeResultInformation;
+  }> {
     const personalityName = route.paramMap.get('personalitiesName');
     return this.personalitiesService.getPersonTypeByResults(personalityName!);
   }

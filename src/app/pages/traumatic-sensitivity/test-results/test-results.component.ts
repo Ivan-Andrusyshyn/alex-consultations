@@ -27,7 +27,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 
-import { TypeInformation } from '../../../shared/types/16-personalities';
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
@@ -39,9 +38,7 @@ import {
 import { TraumaticResultsIndicatorComponent } from '../../../components/test/traumatic-sensitivity/traumatic-indicator/traumatic-indicator.component';
 import { TypeInformationComponent } from '../../../components/test/traumatic-sensitivity/type-information/type-information.component';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
-import { ModalComponent } from '../../../components/modal/modal.component';
 import { SeoService } from '../../../shared/services/seo.service';
-import { AccentBtnComponent } from '../../../components/accent-btn/accent-btn.component';
 import { TestListHeroComponent } from '../../../components/test/test-list-hero/test-list-hero.component';
 import { SocialLinksComponent } from '../../../components/social-links/social-links.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -96,7 +93,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   personInformation$!: Observable<{
     personType: string;
-    personInformation: TypeInformation;
+    personInformation: any;
   }>;
   scorePercentages$!: Observable<TestResult | null>;
   userResults$!: Observable<PersonalitiesResults | null>;

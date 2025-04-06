@@ -2,95 +2,52 @@
   <div class="info-card" *ngIf="personInformation">
     <div class="card-content">
       <div class="info-section">
-        <h3>Коронна фраза</h3>
-        <p>{{ personInformation.koronnaFraza }}</p>
+        <h3>{{ personInformation.entry.title }}</h3>
+        <p>{{ personInformation.entry.subtitle }}</p>
       </div>
       <hr />
+
       <div class="info-section">
-        <h3>В чому ти № 1</h3>
+        <h3>{{ personInformation.mirror.insight }}</h3>
+
         <ul>
-          <li *ngFor="let strength of personInformation.tvoyaSyla">
-            {{ strength }}
-          </li>
-        </ul>
-      </div>
-      <hr />
-      <div class="info-section">
-        <h3>Твоя таємниця</h3>
-        <ul>
-          <li *ngFor="let weakness of personInformation.tvoyaTayemnytsya">
+          <li *ngFor="let weakness of personInformation.mirror.painPoints">
             🔴 {{ weakness }}
           </li>
         </ul>
       </div>
       <hr />
       <div class="info-section">
-        <h3>Що буде, якщо ти нічого не змінюватимеш?</h3>
-        <p>{{ personInformation.shchoBudeYakshchoNeZminyuvaty }}</p>
+        <h3>Дещо ти вже знаєш про себе</h3>
+        <p>{{ personInformation.transformation.before }}</p>
+      </div>
+      <hr />
+      <div class="info-section">
+        <h3>Я допоможу пізнати себе через призму твого типу особистості</h3>
+        <p>{{ personInformation.transformation.after }}</p>
       </div>
       <hr />
 
       <div class="info-section">
-        <h3>Як усе зміниться, коли ти зрозумієш себе?</h3>
-        <p>{{ personInformation.yakUseZminytsyaKolyZrozumishSebe }}</p>
+        <h3>{{ personInformation.CTAblock.title }}</h3>
+        <ul>
+          <li *ngFor="let benefit of personInformation.CTAblock.benefits">
+            {{ benefit }}
+          </li>
+        </ul>
+      </div>
+
+      <hr />
+      <div class="info-section">
+        <p>{{ personInformation.socialProof.note }}</p>
+        <p>{{ personInformation.socialProof.subNote }}</p>
       </div>
       <hr />
 
       <div class="info-section">
-        <h3>Темний близнюк</h3>
-        <h4>{{ personInformation.temnyyBlyznyuk.nazva }}</h4>
-        <ul>
-          <li
-            *ngFor="let trait of personInformation.temnyyBlyznyuk.osoblyvosti"
-          >
-            {{ trait }}
-          </li>
-        </ul>
+        <p>{{ personInformation.footerEmotion.text }}</p>
+        <p>{{ personInformation.footerEmotion.softCTA }}</p>
       </div>
-      <hr />
-
-      <div class="info-section">
-        <h3>Легендарний момент</h3>
-        <p>{{ personInformation.legendarnyyMoment }}</p>
-      </div>
-      <hr />
-      <div class="info-section">
-        <ul>
-          <li *ngFor="let trait of personInformation.offer.resume">
-            {{ trait }}
-          </li>
-        </ul>
-        <ul>
-          <li *ngFor="let question of personInformation.offer.keyQuestions">
-            {{ question }}
-          </li>
-        </ul>
-      </div>
-      <hr />
-      @if (personInformation.offer) {
-
-      <div class="info-section benefits">
-        <h3>{{ personInformation.offer.title }}</h3>
-        <ul>
-          <li *ngFor="let benefit of personInformation.offer.benefits">
-            💡 {{ benefit }}
-          </li>
-        </ul>
-        <p>{{ personInformation.offer.subtitle }}</p>
-      </div>
-      }
     </div>
-  </div>
-
-  <!-- <div class="mobile-navigation">
-    <button
-      *ngFor="let section of sectionList"
-      (click)="scrollToSection(section.id)"
-    >
-      {{ section.label }}
-    </button>
-  </div> -->
-  <div class="card-footer">
-    <p>{{ personInformation.shchoBudeYakshchoNeZminyuvaty }}</p>
   </div>
 </div>

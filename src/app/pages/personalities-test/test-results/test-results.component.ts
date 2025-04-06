@@ -15,10 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { PersonalitiesTypeInformationComponent } from '../../../components/test/personalities-test/personalities-type-information/personalities-type-information.component';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
-import {
-  TestResult,
-  TypeInformation,
-} from '../../../shared/types/16-personalities';
+import { TestResult } from '../../../shared/types/16-personalities';
 import { SendResultsFormComponent } from '../../../components/send-results-form/send-results-form.component';
 import { SendFormOnEmailBtnComponent } from '../../../components/send-form-on-email-btn/send-form-on-email-btn.component';
 import { MailerService } from '../../../shared/services/mailer.service';
@@ -32,6 +29,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
+import { TypeResultInformation } from '../../../shared/types/16-personalities-results';
 
 @Component({
   selector: 'app-test-results',
@@ -64,12 +62,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);
   private viewportScroller = inject(ViewportScroller);
   private readonly fb = inject(FormBuilder);
-
   formGroup!: FormGroup;
 
+  buttonLabel: string = 'Записатися';
   personInformation$!: Observable<{
     personType: string;
-    personInformation: TypeInformation;
+    personInformation: TypeResultInformation;
   }>;
   scorePercentages$!: Observable<TestResult | null>;
   isShowSendForm$!: Observable<boolean>;
@@ -111,12 +109,14 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           this.personalityTypes.find(
             (type) => type.type === response.personInformation.type
           )?.urlImg ?? '';
+        this.buttonLabel = response.personInformation.CTAblock.buttonLabel;
+
         this.sendObject = {
           personType: response.personType,
           personInformation: response.personInformation,
         } as {
           personType: string;
-          personInformation: TypeInformation;
+          personInformation: TypeResultInformation;
         };
         return {
           personType: response.personType,

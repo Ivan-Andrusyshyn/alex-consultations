@@ -5,7 +5,7 @@
   <app-title-card
     [imgUrl]="imgUrl"
     [titleText]="personInformation.personInformation.type"
-    [subtitleText]="personInformation.personInformation.deviz"
+    [subtitleText]="personInformation.personInformation.entry.title"
   ></app-title-card>
   <div class="score-wrapper">
     <app-results-indicator
@@ -24,7 +24,7 @@
       <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
       <app-secondary-btn
         (onClick)="registration()"
-        [textBtn]="'Записатися'"
+        [textBtn]="buttonLabel"
       ></app-secondary-btn>
     </div>
     <br />

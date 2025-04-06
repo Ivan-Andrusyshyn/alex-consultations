@@ -22,6 +22,7 @@ type Personalities =
   | 'ESTP'
   | 'ENFP'
   | 'ENTP';
+
 interface TestResult {
   E: number;
   I: number;
@@ -31,28 +32,6 @@ interface TestResult {
   F: number;
   J: number;
   P: number;
-}
-interface TypeInformation {
-  type: string;
-  deviz: string;
-  koronnaFraza: string;
-  tvoyaSyla: string[];
-  tvoyaTayemnytsya: string[];
-  shchoBudeYakshchoNeZminyuvaty: string;
-  yakUseZminytsyaKolyZrozumishSebe: string;
-  temnyyBlyznyuk: {
-    nazva: string;
-    osoblyvosti: string[];
-  };
-  legendarnyyMoment: string;
-
-  offer: {
-    resume: string[];
-    keyQuestions: string[];
-    benefits: string[];
-    subtitle: string;
-    title: string;
-  };
 }
 
 type Answer = { point: number; text: string };
@@ -71,7 +50,6 @@ export {
   AnswerPoint,
   TestResult,
   Dichotomy,
-  TypeInformation,
   PersonalityTypes,
   Personalities,
 };

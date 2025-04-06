@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
         isForm: true,
         contentType: 'form-consultation',
         title:
-          'Залиш дані, та дізнайся детальніше про консультацію, яка допоможе тобі пізнати краще себе.',
+          'Залиш контакти, та дізнайся детальніше про консультацію, яка допоможе тобі пізнати краще себе.',
         btn: {
           cancel: 'Ні, дякую',
           confirm: 'Записатися',

@@ -3,8 +3,8 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { TypeInformation } from '../../../../shared/types/16-personalities';
 import { NotificationService } from '../../../../shared/services/notification.service';
+import { TypeResultInformation } from '../../../../shared/types/16-personalities-results';
 
 @Component({
   selector: 'app-personalities-type-information',
@@ -14,7 +14,7 @@ import { NotificationService } from '../../../../shared/services/notification.se
   styleUrl: './personalities-type-information.component.scss',
 })
 export class PersonalitiesTypeInformationComponent implements OnInit {
-  @Input() personInformation!: TypeInformation;
+  @Input() personInformation!: TypeResultInformation;
   @Input() personType!: string;
 
   private readonly location = inject(Location);
