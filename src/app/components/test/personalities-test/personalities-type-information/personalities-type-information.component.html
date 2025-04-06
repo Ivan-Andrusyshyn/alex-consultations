@@ -39,15 +39,17 @@
 
       <hr />
       <div class="info-section">
-        <p>{{ personInformation.socialProof.note }}</p>
-        <p>{{ personInformation.socialProof.subNote }}</p>
+        <div class="highlighted-title">
+          <h3>Дуже важливо</h3>
+          <p>{{ personInformation.socialProof.note }}</p>
+          <p>{{ personInformation.socialProof.subNote }}</p>
+          <div class="info-section">
+            <p>{{ personInformation.footerEmotion.text }}</p>
+            <p>{{ personInformation.footerEmotion.softCTA }}</p>
+          </div>
+        </div>
       </div>
       <hr />
-
-      <div class="info-section">
-        <p>{{ personInformation.footerEmotion.text }}</p>
-        <p>{{ personInformation.footerEmotion.softCTA }}</p>
-      </div>
     </div>
   </div>
 </div>
