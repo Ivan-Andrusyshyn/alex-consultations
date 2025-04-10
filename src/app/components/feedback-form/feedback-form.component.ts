@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -23,7 +23,7 @@ export class FeedbackFormComponent implements OnInit {
 
   private readonly googleSheetService = inject(GoogleSheetsService);
   private destroyRef = inject(DestroyRef);
-
+  title = signal('Дуже цікаво дізнатись твій результат ❤️');
   formGroup!: FormGroup;
 
   ngOnInit(): void {
@@ -51,6 +51,7 @@ export class FeedbackFormComponent implements OnInit {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((response) => {
           this.formGroup.reset();
+          this.title.set('Повідомлення успішно відправлене ✅');
         });
     }
   }
