@@ -46,12 +46,12 @@ export class FeedbackFormComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      console.log(this.formGroup.value);
-
       this.googleSheetService
         .postSheetsTestsFeedBack(this.formGroup.value)
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+        .subscribe((response) => {
+          this.formGroup.reset();
+        });
     }
   }
 }
