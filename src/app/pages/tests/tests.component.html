@@ -9,35 +9,40 @@
     <div class="container">
       <mat-tab-group [(selectedIndex)]="currentTopic">
         @for (category of categoryList; track $index) {
-        <mat-tab [label]="category">
-          <ul class="test-list">
-            @for (test of testData; track $index) { @if(
-            test.category.includes(category)){
-            <li class="test-card" [ngClass]="test.cardClass">
-              <h3>
-                {{ test.title }}
-                <span>{{ test.time }}</span>
-              </h3>
-              <p>{{ test.description }}</p>
-              @if(test.time.includes('5')){
-              <app-icons-list></app-icons-list>
-              }
 
-              <img class="test-img" [src]="test.testSvg" alt="" />
-              <div class="test-card-buttons">
-                <app-test-card-start-btn
-                  [route]="test.routeStart"
-                  [btnText]="test.btnText"
-                  class="btn-start"
-                ></app-test-card-start-btn>
-                <app-test-card-info-btn
-                  [route]="test.routeInfo"
-                  class="btn-info"
-                ></app-test-card-info-btn>
-              </div>
-            </li>
-            } }
-          </ul>
+        <mat-tab [label]="category">
+          <div class="list-wrapper">
+            <ul class="test-list">
+              @for (test of testData; track $index) { @if(
+              test.category.includes(category)){
+              <li class="test-card" [ngClass]="test.cardClass">
+                <h3>
+                  {{ test.title }}
+                  <span>{{ test.time }}</span>
+                </h3>
+                <p>{{ test.description }}</p>
+                @if(test.time.includes('5')){
+                <div style="margin: 12px 0">
+                  <app-icons-list></app-icons-list>
+                </div>
+                }
+
+                <img class="test-img" [src]="test.testSvg" alt="" />
+                <div class="test-card-buttons">
+                  <app-test-card-start-btn
+                    [route]="test.routeStart"
+                    [btnText]="test.btnText"
+                    class="btn-start"
+                  ></app-test-card-start-btn>
+                  <app-test-card-info-btn
+                    [route]="test.routeInfo"
+                    class="btn-info"
+                  ></app-test-card-info-btn>
+                </div>
+              </li>
+              } }
+            </ul>
+          </div>
         </mat-tab>
         }
       </mat-tab-group>

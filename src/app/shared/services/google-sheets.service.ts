@@ -41,6 +41,19 @@ export class GoogleSheetsService {
     return this.http.post(this.BASE_URL + scriptUrl, data);
   }
 
+  postSheetsTestsFeedBack(data: {
+    socialMedia: string;
+    feedBack: string;
+    timestamp?: string;
+    referrer?: string;
+  }): Observable<any> {
+    data.timestamp = this.timestamp ?? '';
+    data.referrer = document.referrer ?? '';
+
+    const scriptUrl: string = '/google/feed-back/send';
+    return this.http.post(this.BASE_URL + scriptUrl, data);
+  }
+
   getSheetsTestsData(): Observable<any> {
     const scriptUrl: string = '/google/tests/data';
     return this.http.get(this.BASE_URL + scriptUrl);

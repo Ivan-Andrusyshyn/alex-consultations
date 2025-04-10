@@ -12,28 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../../services/cache"));
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
-const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
-const getBenefitConsultation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
+const postFeedBackGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const fileId = google_file_ids_env_1.BENEFIT_CONSULTATION;
-        const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        if (results) {
-            res.status(200).send({
-                message: 'Successfully get information by categoryName.',
-                results,
-            });
-        }
-        else {
-            res.status(400).send({
-                message: 'Error google file is undefinde or null!',
-            });
-        }
+        const data = req.body;
+        yield google_sheets_1.default.postFeedBackOnSheet(data);
+        res.status(200).send({ message: 'Successfull add new row' });
     }
     catch (error) {
         console.log(error);
         return res.status(400).send({ message: 'Internal server Error' });
     }
 });
-exports.default = getBenefitConsultation;
+exports.default = postFeedBackGoogleSheet;

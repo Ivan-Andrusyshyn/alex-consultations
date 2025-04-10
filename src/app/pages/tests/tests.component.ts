@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NgClass, NgFor } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { SeoService } from '../../shared/services/seo.service';
 import { IconsListComponent } from '../../components/test/personalities-test/icons-list/icons-list.component';
 import titleCardContent from './titleCard-content';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tests',
@@ -30,8 +31,9 @@ export class TestsComponent implements OnInit {
   readonly testData = testCardsData;
   readonly titleCardContent = titleCardContent;
   readonly dialog = inject(MatDialog);
-
+  private readonly route = inject(Router);
   private seoService = inject(SeoService);
+  focusedCardIndex = signal<number | null>(null);
 
   readonly categoryList = [
     'Всі тести',
@@ -55,7 +57,9 @@ export class TestsComponent implements OnInit {
       'список тестів, самопізнання, розвиток особистості, психологічні тести, тести для стосунків, тест на особистість, саморозвиток'
     );
   }
-
+  startTestOnClick(testUrl: string) {
+    this.route.navigateByUrl(testUrl);
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       height: '550px',

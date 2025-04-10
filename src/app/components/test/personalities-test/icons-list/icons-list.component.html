@@ -1,5 +1,10 @@
-<ul>
-  <li *ngFor="let type of personalitiesTypes">
+<ul #scrollList>
+  <li
+    *ngFor="let type of personalitiesTypes; let i = index"
+    [ngClass]="{ active: i === activeIndex() }"
+    (mouseup)="onMouseUp()"
+    (click)="setActiveItem(i)"
+  >
     <img [src]="type.urlImg" alt="" />
   </li>
 </ul>

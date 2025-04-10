@@ -1,0 +1,46 @@
+<div>
+  <h3>Дуже цікаво дізнатись твій результат</h3>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Нік в Instagram або Telegram</mat-label>
+      <input
+        matInput
+        formControlName="socialMedia"
+        placeholder="@my_nickname"
+        autocomplete="off"
+      />
+      <mat-error *ngIf="formGroup.get('socialMedia')?.hasError('required')">
+        Обов’язкове поле
+      </mat-error>
+      <mat-error
+        *ngIf="
+          formGroup.get('socialMedia')?.hasError('pattern') ||
+          formGroup.get('socialMedia')?.hasError('minlength') ||
+          formGroup.get('socialMedia')?.hasError('maxlength')
+        "
+      >
+        Нік повинен починатися з &#64;, містити тільки латинські літери, цифри
+        або _ та бути довжиною від 5 до 30 символів.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Коментар або повідомлення</mat-label>
+      <textarea
+        matInput
+        formControlName="feedBack"
+        rows="4"
+        placeholder="Напиши щось цікаве або зауваження :)"
+      ></textarea>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="formGroup.invalid"
+    >
+      Надіслати
+    </button>
+  </form>
+</div>

@@ -67,6 +67,32 @@ class GoogleSheetsService {
             }
         });
     }
+    postFeedBackOnSheet(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const body = new URLSearchParams();
+            body.set('socialMedia', data.socialMedia);
+            body.set('feedBack', data.feedBack);
+            body.set('timestamp', data.timestamp);
+            body.set('referrer', data.referrer);
+            const scriptUrl = `${process.env.GOOGLE_SHEET_URL_FEEDBACK}`;
+            try {
+                const response = yield fetch(scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: body.toString(),
+                });
+                const data = yield response.json();
+                console.log(data);
+                return data;
+            }
+            catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        });
+    }
     getSheetData() {
         return __awaiter(this, void 0, void 0, function* () {
             try {

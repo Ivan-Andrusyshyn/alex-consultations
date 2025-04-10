@@ -5,11 +5,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { TypeResultInformation } from '../../../../shared/types/16-personalities-results';
+import { FeedbackFormComponent } from '../../../feedback-form/feedback-form.component';
 
 @Component({
   selector: 'app-personalities-type-information',
   standalone: true,
-  imports: [NgIf, NgFor, MatSelectModule, MatFormFieldModule],
+  imports: [
+    NgIf,
+    NgFor,
+    MatSelectModule,
+    FeedbackFormComponent,
+    MatFormFieldModule,
+  ],
   templateUrl: './personalities-type-information.component.html',
   styleUrl: './personalities-type-information.component.scss',
 })
