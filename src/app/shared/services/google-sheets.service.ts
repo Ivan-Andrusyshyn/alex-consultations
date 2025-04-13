@@ -15,6 +15,7 @@ interface GoogleSheetTestResults {
 interface GoogleSheetRegistration {
   name: string;
   socialMedia: string;
+  feedBack?: string;
   timestamp?: string;
   referrer?: string;
 }

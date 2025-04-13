@@ -1,33 +1,63 @@
 <div>
-  <h3>{{ title() }}</h3>
+  <h3>
+    {{ title() }}
+    @if(isFormSended()){
+
+    <a
+      _ngcontent-ng-c1872690992=""
+      target="_blank"
+      class="social-link"
+      href="https://www.instagram.com/depth_seekerr?igsh=MTZuNGxudnNrNWYzeg%3D%3D&amp;utm_source=qr"
+      ><p _ngcontent-ng-c1872690992="" class="links-title">
+        Розповім усе про твою любовну сферу безкоштовно — пиши в особисті
+        “ЛЮБОВ”, і я все покажу ❤️👉
+      </p>
+      <img
+        _ngcontent-ng-c1872690992=""
+        class="link-img"
+        src="../../../assets/svg/media/instagram.svg"
+        alt="Instagram"
+    /></a>
+    }
+  </h3>
+
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Нік в Instagram або Telegram</mat-label>
+      <mat-label> Нік в Instagram або Telegram </mat-label>
       <input
         matInput
         formControlName="socialMedia"
         placeholder="@my_nickname"
         autocomplete="off"
       />
-      <mat-error *ngIf="formGroup.get('socialMedia')?.hasError('required')">
-        Обов’язкове поле
-      </mat-error>
-      <mat-error
-        *ngIf="
-          formGroup.get('socialMedia')?.hasError('pattern') ||
-          formGroup.get('socialMedia')?.hasError('minlength') ||
-          formGroup.get('socialMedia')?.hasError('maxlength')
-        "
-      >
-        Нік повинен починатися з &#64;, містити тільки латинські літери, цифри
-        або _ та бути довжиною від 5 до 30 символів.
-      </mat-error>
+      <div>
+        <mat-error
+          class="error-validation"
+          *ngIf="
+            formGroup.get('socialMedia')?.hasError('pattern') ||
+            formGroup.get('socialMedia')?.hasError('minlength') ||
+            formGroup.get('socialMedia')?.hasError('maxlength')
+          "
+        >
+          Нік повинен починатися з &#64;, містити тільки латинські літери, цифри
+          або _ та бути довжиною від 5 до 30 символів.
+        </mat-error>
+      </div>
     </mat-form-field>
     <br />
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Коментар або повідомлення</mat-label>
+      <mat-label> Залиш своє запитання — я на зв’язку 💬 </mat-label>
       <textarea matInput formControlName="feedBack" rows="4"></textarea>
+      <mat-error
+        *ngIf="
+          formGroup.get('feedBack')?.hasError('required') &&
+          formGroup.get('feedBack')?.touched
+        "
+        class="error-validation"
+        >Це поле обов’язкове. Напиши, що хвилює — я допоможу розібратись ❤️
+      </mat-error>
     </mat-form-field>
+    <br /><br />
 
     <button
       mat-raised-button

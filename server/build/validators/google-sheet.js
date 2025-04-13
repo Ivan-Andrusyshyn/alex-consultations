@@ -13,7 +13,6 @@ exports.postRegistrationGoogleSheetValidator = void 0;
 const common_validator_1 = require("./common-validator");
 const postRegistrationGoogleSheetValidator = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const validationRule = {
-        name: 'required|string',
         socialMedia: 'required|string',
     };
     return yield (0, common_validator_1.commonValidator)(req, res, next, validationRule);

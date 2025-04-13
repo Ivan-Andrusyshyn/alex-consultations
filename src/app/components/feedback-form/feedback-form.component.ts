@@ -8,13 +8,21 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+
+import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
 
 @Component({
   selector: 'app-feedback-form',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, NgIf, ReactiveFormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgIf,
+    ReactiveFormsModule,
+  ],
   templateUrl: './feedback-form.component.html',
   styleUrl: './feedback-form.component.scss',
 })
@@ -23,7 +31,11 @@ export class FeedbackFormComponent implements OnInit {
 
   private readonly googleSheetService = inject(GoogleSheetsService);
   private destroyRef = inject(DestroyRef);
-  title = signal('Дуже цікаво дізнатись твій результат ❤️');
+  title = signal(
+    'Маєш сумніви? Я допоможу визначити твій тип особистості абсолютно безкоштовно 😊'
+  );
+  isFormSended = signal(false);
+
   formGroup!: FormGroup;
 
   ngOnInit(): void {
@@ -45,13 +57,16 @@ export class FeedbackFormComponent implements OnInit {
   }
 
   onSubmit() {
+    const userData = this.formGroup.value;
+    userData.name = 'Question';
     if (this.formGroup.valid) {
       this.googleSheetService
-        .postSheetsTestsFeedBack(this.formGroup.value)
+        .postRegistrationInSheet(userData)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((response) => {
           this.formGroup.reset();
-          this.title.set('Повідомлення успішно відправлене ✅');
+          this.isFormSended.set(true);
+          this.title.set('Повідомлення успішно надіслане ✅');
         });
     }
   }

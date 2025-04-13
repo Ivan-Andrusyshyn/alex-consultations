@@ -41,13 +41,13 @@ class GoogleSheetsService {
     }
     postRegistrationInfoOnSheet(data) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             const body = new URLSearchParams();
             body.set('name', data.name);
             body.set('socialMedia', data.socialMedia);
+            body.set('feedBack', (_a = data.feedBack) !== null && _a !== void 0 ? _a : '');
             if (data.phone) {
                 body.set('phone', data.phone);
-                // body.set('email', data.email);
-                // body.set('interest', data.interest);
             }
             const scriptUrl = `${process.env.GOOGLE_SHEET_URL_CONSULTATIONS}`;
             try {
@@ -84,7 +84,6 @@ class GoogleSheetsService {
                     body: body.toString(),
                 });
                 const data = yield response.json();
-                console.log(data);
                 return data;
             }
             catch (error) {
