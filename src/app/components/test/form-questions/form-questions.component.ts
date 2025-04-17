@@ -18,12 +18,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Answer, Question } from '../../../shared/types/16-personalities';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { RefreshButtonComponent } from '../../refresh-button/refresh-button.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { SecondaryBtnComponent } from '../../secondary-btn/secondary-btn.component';
 import { QuestionWordPipe } from './questions.pipe';
+import { Answer, Question } from '../../../shared/types/common-tests';
 
 @Component({
   selector: 'app-form-questions',
@@ -61,8 +61,13 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
   private isSnackBarOpened = false;
 
   colorProgressBar = signal('linear-gradient(90deg, #ff7eb3, #ff758c)');
+  isStartTest = signal(false);
 
   ngOnInit(): void {
+    this.isStartTest.set(
+      JSON.parse(sessionStorage.getItem('isStartTest') ?? 'false')
+    );
+
     this.isSnackBarOpened = JSON.parse(
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
@@ -73,6 +78,7 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
+    sessionStorage.setItem('isStartTest', 'false');
   }
 
   openSnackBar(text: string, textBtn: string) {
@@ -131,6 +137,11 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
 
     return progress;
   }
+  startTestOnClick() {
+    sessionStorage.setItem('isStartTest', JSON.stringify(true));
+    this.currentQuestionNumber = 0;
+    this.isStartTest.set(true);
+  }
 
   getSubmit() {
     const answers = this.formGroup.value;
@@ -140,8 +151,12 @@ export class FormQuestionsComponent implements OnInit, OnDestroy {
 
   private openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
+      height: '200px',
+      width: '300px',
       data: {
         contentType: 'confirm',
+        isForm: false,
+        isConfirmForm: true,
         title: 'Ви впевнені що хочете почати з початку ?',
         btn: {
           cancel: 'Ні',

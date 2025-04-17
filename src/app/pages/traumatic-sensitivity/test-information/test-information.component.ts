@@ -25,7 +25,7 @@ export class TestInformationComponent {
     this.activeRoute.params.subscribe((r) => {
       this.testInfo$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['traumaticSensitivityData'];
+          const response = data['data'];
           return response.testInformation;
         })
       );

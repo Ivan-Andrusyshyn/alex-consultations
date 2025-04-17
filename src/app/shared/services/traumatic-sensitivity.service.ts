@@ -10,7 +10,7 @@ import {
   TestResult,
   TypeInformation,
 } from '../types/traumatic-sensitivity';
-import { Answer } from '../types/16-personalities';
+import { TestResultRequest } from '../types/common-tests';
 
 @Injectable({ providedIn: 'root' })
 export class TraumaticSensitivityService {
@@ -40,16 +40,9 @@ export class TraumaticSensitivityService {
     );
   }
 
-  getTraumaticSensitivityResults(data: {
-    answers: Answer[];
-    userInformation: {
-      testName: string;
-      routeTracker: string;
-      referrer: string;
-      timestamp: string;
-      device: string;
-    };
-  }): Observable<PersonalitiesResponse> {
+  getTraumaticSensitivityResults(
+    data: TestResultRequest
+  ): Observable<PersonalitiesResponse> {
     return this.http.post<PersonalitiesResponse>(
       this.testsUrl + '/traumatic-sensitivity/results',
       data

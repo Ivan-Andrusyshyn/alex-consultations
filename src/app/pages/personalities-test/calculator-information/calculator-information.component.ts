@@ -32,7 +32,7 @@ export class CalculatorInformationComponent implements OnInit {
   subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
 
   // -----------
-  routeUrl = '/tests/16-personalities/calculator-relationships';
+  routeUrl = '/tests/16-personalities/calculator';
 
   titleText = 'Калькулятор сумісності';
   private personalitiesCalculatorService = inject(

@@ -4,10 +4,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from '../../environment/environment';
 import {
-  Question,
   RoleInRelationshipsInformation,
   RoleInRelationshipsResult,
 } from '../types/role-in-relationships';
+import { Question, TestResultRequest } from '../types/common-tests';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class RoleInRelationshipsService {
     }>(this.testsUrl + '/role-in-relationships');
   }
 
-  getRoleInRelationshipsCategory(answers: any): Observable<{
+  getRoleInRelationshipsCategory(answers: TestResultRequest): Observable<{
     message: string;
     categoryName: string;
   }> {

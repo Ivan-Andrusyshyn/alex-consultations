@@ -77,7 +77,9 @@ export class ModalComponent implements OnInit {
   cancel(): void {
     this.dialogRef.close();
   }
-
+  closeModalOnClick() {
+    this.dialogRef.close(true);
+  }
   onConfirm() {
     if (this.formGroup.valid) {
       this.dialogRef.close(this.formGroup.value);

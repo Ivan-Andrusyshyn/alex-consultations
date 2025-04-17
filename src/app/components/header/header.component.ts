@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
   private _snackBar = inject(MatSnackBar);
 
   private counter: number = 0;
+
   ngOnInit(): void {
     const firstDelay = 60000 * 1.5;
     const secondDelay = 60000 * 4;
@@ -67,7 +68,7 @@ export class HeaderComponent implements OnInit {
   onPopState(event: any) {
     this.counter += 1;
 
-    if (this.counter % 2 === 0) {
+    if (this.counter % 5 === 0) {
       this.openDialog();
     }
   }

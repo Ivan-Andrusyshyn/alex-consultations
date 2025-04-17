@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { Answer, Question, TestResult } from '../types/16-personalities';
+import { TestResult } from '../types/16-personalities';
 
 import { environment } from '../../environment/environment';
 import { TypeResultInformation } from '../types/16-personalities-results';
+import { Answer, Question, TestResultRequest } from '../types/common-tests';
 
 interface Personalities {
   message: string;
@@ -60,16 +61,9 @@ export class PersonalitiesTestService {
     }>(this.testsUrl + '/16-personalities/person-type' + '/' + personType);
   }
 
-  getPersonalitiesResultOfTest(data: {
-    answers: Answer[];
-    userInformation: {
-      testName: string;
-      referrer: string;
-      routeTracker: string;
-      timestamp: string;
-      device: string;
-    };
-  }): Observable<PersonalitiesResults> {
+  getPersonalitiesResultOfTest(
+    data: TestResultRequest
+  ): Observable<PersonalitiesResults> {
     return this.http.post<PersonalitiesResults>(
       this.testsUrl + '/16-personalities/results',
       data

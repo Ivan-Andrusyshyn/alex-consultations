@@ -13,7 +13,7 @@ import { TypeResultInformation } from '../types/16-personalities-results';
 @Injectable({
   providedIn: 'root',
 })
-export class PersonalitiesTestResolver implements Resolve<any> {
+export class PersonalitiesTestResultResolver implements Resolve<any> {
   constructor(
     private personalitiesService: PersonalitiesTestService,
     private loadingService: LoadingService
@@ -26,7 +26,7 @@ export class PersonalitiesTestResolver implements Resolve<any> {
     personType: string;
     personInformation: TypeResultInformation;
   }> {
-    const personalityName = route.paramMap.get('personalitiesName');
+    const personalityName = route.paramMap.get('categoryName');
     return this.personalitiesService.getPersonTypeByResults(personalityName!);
   }
 }

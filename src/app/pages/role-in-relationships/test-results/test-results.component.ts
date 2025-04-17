@@ -28,6 +28,7 @@ import { SocialLinksComponent } from '../../../components/social-links/social-li
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
+import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
 
 @Component({
   selector: 'app-test-results',
@@ -43,6 +44,7 @@ import { ConsultationBenefitComponent } from '../../../components/consultation-b
     ConsultationBenefitComponent,
     SecondaryBtnComponent,
     NgIf,
+    FeedbackFormComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -88,7 +90,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.activeRoute.params.subscribe((r) => {
       this.testResults$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['roleInRelationshipsData'] as {
+          const response = data['data'] as {
             results: RoleInRelationshipsResult;
             message: string;
           };

@@ -26,7 +26,7 @@ export class TestInformationComponent implements OnInit {
     this.activeRoute.params.subscribe((r) => {
       this.testInfo$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['toxicalRelationshipData'];
+          const response = data['data'];
           return response.testInformation;
         })
       );

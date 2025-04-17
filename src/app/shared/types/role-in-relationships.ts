@@ -1,13 +1,3 @@
-interface Question {
-  id: number;
-  question: string;
-  answers: Option[];
-}
-interface Option {
-  text: string;
-  type: string;
-  point?: string | number;
-}
 interface RoleInRelationshipsResult {
   type: RelationshipRoleType;
   title: string;
@@ -35,7 +25,6 @@ type RelationshipRoleType =
   | 'vilne-serce';
 
 export {
-  Question,
   RoleInRelationshipsInformation,
   RoleInRelationshipsResult,
   RelationshipRoleType,

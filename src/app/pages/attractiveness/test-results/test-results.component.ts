@@ -37,6 +37,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
+import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
 
 @Component({
   selector: 'app-test-results',
@@ -52,6 +53,7 @@ import { ConsultationBenefitComponent } from '../../../components/consultation-b
     SecondaryBtnComponent,
     ConsultationFormComponent,
     SocialLinksComponent,
+    FeedbackFormComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -95,7 +97,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.activeRoute.params.subscribe((r) => {
       this.testResults$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['attractivenessData'];
+          const response = data['data'];
           const scrollToTop = data['scrollToTop'];
 
           if (scrollToTop) {

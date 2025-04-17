@@ -14,7 +14,6 @@ import { FeedbackFormComponent } from '../../../feedback-form/feedback-form.comp
     NgIf,
     NgFor,
     MatSelectModule,
-    FeedbackFormComponent,
     MatFormFieldModule,
   ],
   templateUrl: './personalities-type-information.component.html',

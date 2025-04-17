@@ -45,6 +45,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConsultationFormComponent } from '../../../components/consultation-form/consultation-form.component';
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
+import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -75,6 +76,7 @@ const types: string[] = [
     SecondaryBtnComponent,
     SocialLinksComponent,
     NgStyle,
+    FeedbackFormComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -123,7 +125,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.activeRoute.params.subscribe((r) => {
       this.testResults$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['traumaticSensitivityData'];
+          const response = data['data'];
           const scrollToTop = data['scrollToTop'];
 
           if (scrollToTop) {

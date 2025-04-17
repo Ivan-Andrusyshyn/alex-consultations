@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { PersonalitiesTestResolver } from './shared/resolvers/personalities-test.resolver';
+import { PersonalitiesTestResultResolver } from './shared/resolvers/personalities-test.resolver';
 import { AttractivenessResultsResolver } from './shared/resolvers/attractiveness.resolver';
 import { TraumaticSensitivityResultsResolver } from './shared/resolvers/traumetic-sensitivity/traumatic-sensitivity-results.resolver';
 import { ToxicalRelationshipResultsResolver } from './shared/resolvers/toxical-relationship/toxical-relationship.resolver';
 import { RoleInRelationshipsResultsResolver } from './shared/resolvers/role-in-relationships.resolver';
 import { ToxicalRelationshipDescriptionResolver } from './shared/resolvers/toxical-relationship/toxical-relationship-description.resolver';
 import { TraumaticSensitivityInformationResolver } from './shared/resolvers/traumetic-sensitivity/traumetic-sensitivity-information.resolver';
+import { createTestRoutes } from './shared/utils/createTestRoutes';
 
 export const routes: Routes = [
   {
@@ -33,147 +34,93 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),
   },
-
-  {
-    path: 'tests/attractiveness',
+  ...createTestRoutes({
+    basePath: 'tests/attractiveness',
     loadComponent: () =>
       import('./pages/attractiveness/attractiveness.component').then(
         (m) => m.AttractivenessComponent
       ),
-    children: [
-      {
-        path: 'questions',
-        loadComponent: () =>
-          import('./pages/attractiveness/questions/questions.component').then(
-            (m) => m.QuestionsComponent
-          ),
-      },
-      {
-        path: 'details/:categoryName',
-        loadComponent: () =>
-          import(
-            './pages/attractiveness/test-results/test-results.component'
-          ).then((m) => m.TestResultsComponent),
-        resolve: { attractivenessData: AttractivenessResultsResolver },
-        data: { scrollToTop: true },
-      },
-      {
-        path: 'test-information',
-        loadComponent: () =>
-          import(
-            './pages/attractiveness/test-information/test-information.component'
-          ).then((m) => m.TestInformationComponent),
-      },
-    ],
-  },
-  {
-    path: 'tests/traumatic-sensitivity',
+    loadQuestions: () =>
+      import('./pages/attractiveness/questions/questions.component').then(
+        (m) => m.QuestionsComponent
+      ),
+    loadResults: () =>
+      import('./pages/attractiveness/test-results/test-results.component').then(
+        (m) => m.TestResultsComponent
+      ),
+    loadInformation: () =>
+      import(
+        './pages/attractiveness/test-information/test-information.component'
+      ).then((m) => m.TestInformationComponent),
+    resultsResolver: AttractivenessResultsResolver,
+    informationResolver: null,
+  }),
+
+  ...createTestRoutes({
+    basePath: 'tests/traumatic-sensitivity',
     loadComponent: () =>
       import(
         './pages/traumatic-sensitivity/traumatic-sensitivity.component'
       ).then((m) => m.TraumaticSensitivityComponent),
-    children: [
-      {
-        path: 'questions',
-        loadComponent: () =>
-          import(
-            './pages/traumatic-sensitivity/questions/questions.component'
-          ).then((m) => m.QuestionsComponent),
-      },
-      {
-        path: 'details/:categoryName',
-        loadComponent: () =>
-          import(
-            './pages/traumatic-sensitivity/test-results/test-results.component'
-          ).then((m) => m.TestResultsComponent),
-        resolve: {
-          traumaticSensitivityData: TraumaticSensitivityResultsResolver,
-        },
-        data: { scrollToTop: true },
-      },
-      {
-        path: 'test-information',
-        loadComponent: () =>
-          import(
-            './pages/traumatic-sensitivity/test-information/test-information.component'
-          ).then((m) => m.TestInformationComponent),
-        resolve: {
-          traumaticSensitivityData: TraumaticSensitivityInformationResolver,
-        },
-      },
-    ],
-  },
-  {
-    path: 'tests/toxical-relationship',
+    loadQuestions: () =>
+      import(
+        './pages/traumatic-sensitivity/questions/questions.component'
+      ).then((m) => m.QuestionsComponent),
+    loadResults: () =>
+      import(
+        './pages/traumatic-sensitivity/test-results/test-results.component'
+      ).then((m) => m.TestResultsComponent),
+    loadInformation: () =>
+      import(
+        './pages/traumatic-sensitivity/test-information/test-information.component'
+      ).then((m) => m.TestInformationComponent),
+    resultsResolver: TraumaticSensitivityResultsResolver,
+    informationResolver: TraumaticSensitivityInformationResolver,
+  }),
+
+  ...createTestRoutes({
+    basePath: 'tests/toxical-relationship',
     loadComponent: () =>
       import(
         './pages/toxical-relationship/toxical-relationship.component'
       ).then((m) => m.ToxicalRelationshipComponent),
-    children: [
-      {
-        path: 'questions',
-        loadComponent: () =>
-          import(
-            './pages/toxical-relationship/questions/questions.component'
-          ).then((m) => m.QuestionsComponent),
-      },
-      {
-        path: 'details/:categoryName',
-        loadComponent: () =>
-          import(
-            './pages/toxical-relationship/test-results/test-results.component'
-          ).then((m) => m.TestResultsComponent),
-        resolve: {
-          toxicalRelationshipData: ToxicalRelationshipResultsResolver,
-        },
-        data: { scrollToTop: true },
-      },
-      {
-        path: 'test-information',
-        loadComponent: () =>
-          import(
-            './pages/toxical-relationship/test-information/test-information.component'
-          ).then((m) => m.TestInformationComponent),
-        resolve: {
-          toxicalRelationshipData: ToxicalRelationshipDescriptionResolver,
-        },
-      },
-    ],
-  },
-  {
-    path: 'tests/role-in-relationships',
+    loadQuestions: () =>
+      import('./pages/toxical-relationship/questions/questions.component').then(
+        (m) => m.QuestionsComponent
+      ),
+    loadResults: () =>
+      import(
+        './pages/toxical-relationship/test-results/test-results.component'
+      ).then((m) => m.TestResultsComponent),
+    loadInformation: () =>
+      import(
+        './pages/toxical-relationship/test-information/test-information.component'
+      ).then((m) => m.TestInformationComponent),
+    resultsResolver: ToxicalRelationshipResultsResolver,
+    informationResolver: ToxicalRelationshipDescriptionResolver,
+  }),
+  ...createTestRoutes({
+    basePath: 'tests/role-in-relationships',
     loadComponent: () =>
       import(
         './pages/role-in-relationships/role-in-relationships.component'
       ).then((m) => m.RoleInRelationshipsComponent),
-    children: [
-      {
-        path: 'questions',
-        loadComponent: () =>
-          import(
-            './pages/role-in-relationships/questions/questions.component'
-          ).then((m) => m.QuestionsComponent),
-      },
-      {
-        path: 'details/:categoryName',
-        loadComponent: () =>
-          import(
-            './pages/role-in-relationships/test-results/test-results.component'
-          ).then((m) => m.TestResultsComponent),
-        resolve: {
-          roleInRelationshipsData: RoleInRelationshipsResultsResolver,
-        },
-        data: { scrollToTop: true },
-      },
-      {
-        path: 'test-information',
-        loadComponent: () =>
-          import(
-            './pages/role-in-relationships/test-information/test-information.component'
-          ).then((m) => m.TestInformationComponent),
-      },
-    ],
-  },
+    loadQuestions: () =>
+      import(
+        './pages/role-in-relationships/questions/questions.component'
+      ).then((m) => m.QuestionsComponent),
+    loadResults: () =>
+      import(
+        './pages/role-in-relationships/test-results/test-results.component'
+      ).then((m) => m.TestResultsComponent),
+    loadInformation: () =>
+      import(
+        './pages/role-in-relationships/test-information/test-information.component'
+      ).then((m) => m.TestInformationComponent),
+    resultsResolver: RoleInRelationshipsResultsResolver,
+    informationResolver: null,
+  }),
+
   {
     path: 'tests/16-personalities',
     loadComponent: () =>
@@ -197,31 +144,27 @@ export const routes: Routes = [
             './pages/personalities-test/calculator-information/calculator-information.component'
           ).then((m) => m.CalculatorInformationComponent),
       },
-      {
-        path: 'details/:personalitiesName',
-        resolve: { personalityData: PersonalitiesTestResolver },
-        data: { scrollToTop: true },
-
+      ...createTestRoutes({
+        basePath: '',
         loadComponent: () =>
           import(
-            './pages/personalities-test/test-results/test-results.component'
-          ).then((m) => m.TestResultsComponent),
-      },
-
-      {
-        path: 'questions',
-        loadComponent: () =>
+            './pages/personalities-test/personalities-test.component'
+          ).then((m) => m.PersonalitiesTestComponent),
+        loadQuestions: () =>
           import(
             './pages/personalities-test/questions/questions.component'
           ).then((m) => m.QuestionsComponent),
-      },
-      {
-        path: 'test-information',
-        loadComponent: () =>
+        loadResults: () =>
+          import(
+            './pages/personalities-test/test-results/test-results.component'
+          ).then((m) => m.TestResultsComponent),
+        loadInformation: () =>
           import(
             './pages/personalities-test/test-information/test-information.component'
           ).then((m) => m.TestInformationComponent),
-      },
+        resultsResolver: PersonalitiesTestResultResolver,
+        informationResolver: null,
+      }),
     ],
   },
 

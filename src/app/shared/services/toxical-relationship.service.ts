@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   CategoryName,
-  Question,
   RelationshipResult,
   TestInformation,
 } from '../types/toxical-relationship';
 
 import { environment } from '../../environment/environment';
+import { Question, TestResultRequest } from '../types/common-tests';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class ToxicalRelationshipService {
     }>(this.testsUrl + '/toxical-relationship');
   }
 
-  getToxicalRelationshipCategory(answers: any): Observable<{
+  getToxicalRelationshipCategory(answers: TestResultRequest): Observable<{
     message: string;
     categoryName: CategoryName;
   }> {
@@ -52,7 +52,6 @@ export class ToxicalRelationshipService {
     message: string;
     results: RelationshipResult;
   }> {
-    console.log(categoryName);
     const encodedCategory = encodeURIComponent(categoryName);
 
     return this.http.get<{ message: string; results: RelationshipResult }>(

@@ -28,6 +28,7 @@ import { ConsultationFormComponent } from '../../../components/consultation-form
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 import { RelationshipResult } from '../../../shared/types/toxical-relationship';
+import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
 
 @Component({
   selector: 'app-test-results',
@@ -44,6 +45,8 @@ import { RelationshipResult } from '../../../shared/types/toxical-relationship';
     SecondaryBtnComponent,
     ConsultationBenefitComponent,
     SocialLinksComponent,
+    FeedbackFormComponent,
+    FeedbackFormComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -85,7 +88,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.activeRoute.params.subscribe((r) => {
       this.testResults$ = this.activeRoute.data.pipe(
         map((data) => {
-          const response = data['toxicalRelationshipData'];
+          const response = data['data'];
           const scrollToTop = data['scrollToTop'];
 
           if (scrollToTop) {

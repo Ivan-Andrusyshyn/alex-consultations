@@ -1,10 +1,5 @@
 type Dichotomy = 'EI' | 'SN' | 'TF' | 'JP';
 
-interface Question {
-  id: number;
-  question: string;
-  answers: any[];
-}
 type Personalities =
   | 'ISFJ'
   | 'ISTJ'
@@ -34,7 +29,6 @@ interface TestResult {
   P: number;
 }
 
-type Answer = { point: number; text: string };
 type AnswerPoint = 1 | 2 | 3 | 4 | 5;
 
 interface PersonalityTypes {
@@ -44,12 +38,4 @@ interface PersonalityTypes {
   route: string;
 }
 
-export {
-  Answer,
-  Question,
-  AnswerPoint,
-  TestResult,
-  Dichotomy,
-  PersonalityTypes,
-  Personalities,
-};
+export { AnswerPoint, TestResult, Dichotomy, PersonalityTypes, Personalities };

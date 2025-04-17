@@ -1,24 +1,15 @@
-interface Question {
-  id: number;
-  question: string;
-  answers: Option[];
-}
+type Category =
+  | 'gentle-attractiveness'
+  | 'wild-attractiveness'
+  | 'warm-attractiveness'
+  | 'intellectual-attractiveness'
+  | 'charismatic-attractiveness'
+  | 'mysterious-attractiveness';
 
-interface Option {
-  text: string;
-  type: PersonalityType;
-  point?: string | number;
-}
 interface AttractivenessResult {
   type: string;
   subtitle: string;
-  category:
-    | 'gentle-attractiveness'
-    | 'wild-attractiveness'
-    | 'warm-attractiveness'
-    | 'intellectual-attractiveness'
-    | 'charismatic-attractiveness'
-    | 'mysterious-attractiveness';
+  category: Category;
   description: string;
   knownTraits: string[];
   hiddenTraits: string[];
@@ -27,7 +18,7 @@ interface AttractivenessResult {
   nextStep: string;
   callToAction: string;
 }
-type PersonalityType =
+type AttractivenessType =
   | '🔥 Харизматична'
   | '🖤 Загадкова'
   | '🧠 Інтелектуальна'
@@ -35,4 +26,4 @@ type PersonalityType =
   | '⚡ Дика'
   | '💫 Ніжна';
 
-export { Question, Option, PersonalityType, AttractivenessResult };
+export { AttractivenessType, AttractivenessResult };

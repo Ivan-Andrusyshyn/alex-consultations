@@ -15,11 +15,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
-import { Question, Answer } from '../../../shared/types/16-personalities';
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 import { RoleInRelationshipsService } from '../../../shared/services/role-in-relationships.service';
+import { Answer, Question } from '../../../shared/types/common-tests';
 
 @Component({
   selector: 'app-questions',

@@ -13,13 +13,13 @@ import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Answer, Question } from '../../../shared/types/16-personalities';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
 import { ToxicalRelationshipService } from '../../../shared/services/toxical-relationship.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
+import { Answer, Question } from '../../../shared/types/common-tests';
 
 @Component({
   selector: 'app-questions',

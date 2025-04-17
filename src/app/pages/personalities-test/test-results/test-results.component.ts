@@ -30,6 +30,8 @@ import { ConsultationFormComponent } from '../../../components/consultation-form
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 import { TypeResultInformation } from '../../../shared/types/16-personalities-results';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
 
 @Component({
   selector: 'app-test-results',
@@ -47,6 +49,7 @@ import { TypeResultInformation } from '../../../shared/types/16-personalities-re
     ConsultationFormComponent,
     SecondaryBtnComponent,
     ConsultationBenefitComponent,
+    FeedbackFormComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -72,6 +75,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   scorePercentages$!: Observable<TestResult | null>;
   isShowSendForm$!: Observable<boolean>;
   private personalityTypes = personalityTypesContent;
+  private _snackBar = inject(MatSnackBar);
 
   sendObject!: any;
   successMessage = signal(false);
@@ -84,6 +88,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.openSnackBar(
+      'Розповім усе про твою любовну сферу безкоштовно — заповнюй форму нижче 😊',
+      'Закрити'
+    );
+
     this.createForm();
     // ====>
     this.seoService.updateTitle(
@@ -99,12 +108,13 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.isShowSendForm$ = this.personalitiesService.getIsShowSendForm();
     this.personInformation$ = this.activeRoute.data.pipe(
       map((data) => {
-        const response = data['personalityData'];
+        const response = data['data'];
         const scrollToTop = data['scrollToTop'];
 
         if (scrollToTop) {
           this.viewportScroller.scrollToPosition([0, 0]);
         }
+
         this.imgUrl =
           this.personalityTypes.find(
             (type) => type.type === response.personInformation.type
@@ -136,7 +146,15 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         });
     }
   }
+  private openSnackBar(text: string, textBtn: string) {
+    const snackBarRef = this._snackBar.open(text, textBtn, {
+      verticalPosition: 'bottom',
+      panelClass: ['custom-snackbar'],
+      horizontalPosition: 'center',
+    });
 
+    snackBarRef.onAction().subscribe(() => {});
+  }
   private createForm() {
     this.formGroup = this.fb.group({
       name: ['', Validators.required],

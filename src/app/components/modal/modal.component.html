@@ -1,21 +1,45 @@
-<ng-container *ngIf="data.contentType === 'form-consultation'">
-  <mat-dialog-content>
+<mat-dialog-content>
+  <div>
+    @if(data.isForm){
+
+    <p>{{ data.title }}</p>
+
+    <br />
+    <p>1. Залиш свої контакти</p>
+    <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
+    <p>2. Тисни "Записатися"</p>
+    <br />
+    <div class="btns-wrapper">
+      <button
+        mat-raised-button
+        color="primary"
+        class="main-button"
+        (click)="onConfirm()"
+        cdkFocusInitial
+      >
+        {{ data.btn["confirm"] }}
+      </button>
+
+      <button
+        class="cancel-button"
+        mat-stroked-button
+        color="#333"
+        (click)="cancel()"
+      >
+        {{ data.btn["cancel"] }}
+      </button>
+    </div>
+    }@else if (data?.isConfirmForm) {
     <div>
-      @if(data.isForm){
-
       <p>{{ data.title }}</p>
-
       <br />
-      <p>1. Залиш свої контакти</p>
-      <app-consultation-form [formGroup]="formGroup"></app-consultation-form>
-      <p>2. Тисни "Записатися"</p>
       <br />
       <div class="btns-wrapper">
         <button
           mat-raised-button
           color="primary"
-          class="main-button"
-          (click)="onConfirm()"
+          class="confirm-button"
+          (click)="closeModalOnClick()"
           cdkFocusInitial
         >
           {{ data.btn["confirm"] }}
@@ -30,35 +54,35 @@
           {{ data.btn["cancel"] }}
         </button>
       </div>
-      }@else{
-      <div class="video-container">
-        <iframe
-          src="https://player.vimeo.com/video/1072592233"
-          width="300"
-          height="390"
-          frameborder="0"
-          allowfullscreen
-        >
-        </iframe>
-        <p class="video-subtitle">
-          Ти тут — бо бачиш, відчуваєш і розумієш більше. Пройди тест. Залиши
-          заявку. А головне — дозволь собі відчути, що тут для тебе
-        </p>
-        <br />
-        <div style="display: flex; justify-content: center">
-          <button
-            mat-raised-button
-            color="primary"
-            class="main-button"
-            (click)="cancel()"
-            cdkFocusInitial
-          >
-            Пройти тести
-          </button>
-        </div>
-        <br />
-      </div>
-      }
     </div>
-  </mat-dialog-content>
-</ng-container>
+    }@else{
+    <div class="video-container">
+      <iframe
+        src="https://player.vimeo.com/video/1072592233"
+        width="300"
+        height="390"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
+      <p class="video-subtitle">
+        Ти тут — бо бачиш, відчуваєш і розумієш більше. Пройди тест. Залиши
+        заявку. А головне — дозволь собі відчути, що тут для тебе
+      </p>
+      <br />
+      <div style="display: flex; justify-content: center">
+        <button
+          mat-raised-button
+          color="primary"
+          class="main-button"
+          (click)="cancel()"
+          cdkFocusInitial
+        >
+          Пройти тести
+        </button>
+      </div>
+      <br />
+    </div>
+    }
+  </div>
+</mat-dialog-content>

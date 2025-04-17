@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 import { AsyncPipe } from '@angular/common';
@@ -16,10 +16,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersonalitiesTestService } from '../../../shared/services/personalities-test.service';
 import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
 import { FormQuestionsComponent } from '../../../components/test/form-questions/form-questions.component';
-import { Question, Answer } from '../../../shared/types/16-personalities';
 import { SeoService } from '../../../shared/services/seo.service';
 import { TitleCardComponent } from '../../../components/title-card/title-card.component';
 import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
+import { Answer, Question } from '../../../shared/types/common-tests';
 
 @Component({
   selector: 'app-questions',
@@ -133,18 +133,18 @@ export class QuestionsComponent implements OnDestroy, OnInit {
       sessionStorage.getItem('16-personalities-results') || 'null'
     );
     if (storage) return;
-
+    const request = {
+      answers,
+      userInformation: {
+        routeTracker: this.routeTracker.getRoutes(),
+        referrer: document.referrer ?? '',
+        testName: '16-personalities',
+        timestamp: this.timestamp ?? '',
+        device: this.googleSheetService.getDeviceType(),
+      },
+    };
     this.personalitiesService
-      .getPersonalitiesResultOfTest({
-        answers,
-        userInformation: {
-          routeTracker: this.routeTracker.getRoutes(),
-          referrer: document.referrer ?? '',
-          testName: '16-personalities',
-          timestamp: this.timestamp ?? '',
-          device: this.googleSheetService.getDeviceType(),
-        },
-      })
+      .getPersonalitiesResultOfTest(request)
       .pipe(
         map((r) => {
           this.setSessionStorage(
@@ -165,7 +165,6 @@ export class QuestionsComponent implements OnDestroy, OnInit {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((results) => {
-        console.log(results);
         this.handlePersonType(results.personType);
       });
   }

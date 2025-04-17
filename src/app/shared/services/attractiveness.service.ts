@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from '../../environment/environment';
-import { AttractivenessResult, Question } from '../types/attractiveness';
+import { AttractivenessResult } from '../types/attractiveness';
+import { Question, TestResultRequest } from '../types/common-tests';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +27,11 @@ export class AttractivenessService {
     }>(this.testsUrl + '/attractiveness');
   }
 
-  getAttractivenessCategory(answers: any): Observable<{
+  getAttractivenessCategory(answers: TestResultRequest): Observable<{
     message: string;
-    categoryName: any;
+    categoryName: string;
   }> {
-    return this.http.post<{ message: string; categoryName: any }>(
+    return this.http.post<{ message: string; categoryName: string }>(
       this.testsUrl + '/attractiveness' + '/category',
       answers
     );

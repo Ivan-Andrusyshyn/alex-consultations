@@ -32,8 +32,9 @@ export class FeedbackFormComponent implements OnInit {
   private readonly googleSheetService = inject(GoogleSheetsService);
   private destroyRef = inject(DestroyRef);
   title = signal(
-    'Маєш сумніви? Я допоможу визначити твій тип особистості абсолютно безкоштовно 😊'
+    'Хочеш глибше зрозуміти себе? Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁'
   );
+
   isFormSended = signal(false);
 
   formGroup!: FormGroup;

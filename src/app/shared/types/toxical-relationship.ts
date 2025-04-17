@@ -1,12 +1,3 @@
-interface Answer {
-  point: number;
-  text: string;
-}
-type Question = {
-  id: number;
-  question: string;
-  answers: Answer[];
-};
 type RelationshipResult = {
   scoreRange: string;
   category: string;
@@ -38,4 +29,4 @@ interface TestInformation {
   };
 }
 
-export { Answer, Question, CategoryName, TestInformation, RelationshipResult };
+export { CategoryName, TestInformation, RelationshipResult };
