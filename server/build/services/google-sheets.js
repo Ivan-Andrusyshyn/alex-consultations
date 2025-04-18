@@ -44,6 +44,7 @@ class GoogleSheetsService {
             var _a;
             const body = new URLSearchParams();
             body.set('name', data.name);
+            body.set('ip', data.ip);
             body.set('socialMedia', data.socialMedia);
             body.set('feedBack', (_a = data.feedBack) !== null && _a !== void 0 ? _a : '');
             if (data.phone) {
@@ -71,6 +72,7 @@ class GoogleSheetsService {
         return __awaiter(this, void 0, void 0, function* () {
             const body = new URLSearchParams();
             body.set('socialMedia', data.socialMedia);
+            body.set('ip', data.ip);
             body.set('feedBack', data.feedBack);
             body.set('timestamp', data.timestamp);
             body.set('referrer', data.referrer);

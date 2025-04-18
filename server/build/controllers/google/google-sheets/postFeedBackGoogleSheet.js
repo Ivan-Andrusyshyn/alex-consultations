@@ -16,7 +16,8 @@ const google_sheets_1 = __importDefault(require("../../../services/google-sheets
 const postFeedBackGoogleSheet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;
-        yield google_sheets_1.default.postFeedBackOnSheet(data);
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        yield google_sheets_1.default.postFeedBackOnSheet(Object.assign({ ip }, data));
         res.status(200).send({ message: 'Successfull add new row' });
     }
     catch (error) {
