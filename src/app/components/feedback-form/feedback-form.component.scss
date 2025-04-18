@@ -14,6 +14,12 @@
   border-color: var(--textColor) !important;
   width: 100%;
 }
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--bgColor) !important;
+}
+::ng-deep .mdc-floating-label {
+  color: var(--textColor) !important;
+}
 ::ng-deep
   .mdc-text-field--outlined:not(.mdc-text-field--disabled)
   .mdc-floating-label {
@@ -24,17 +30,28 @@
 input {
   color: var(--textColor) !important;
   border-color: var(--textColor) !important;
+  &::placeholder {
+    color: var(--textColor) !important;
+  }
 }
 
 textarea {
   color: var(--textColor) !important;
   border-color: var(--textColor) !important;
 }
-button {
-  font-size: 16px;
 
-  color: #f5f5f5;
+.submit-button {
+  font-size: 16px;
+  padding: 8px 24px;
+
+  background-color: #4caf50 !important;
+  color: #f5f5f5 !important;
+
+  &:hover {
+    background-color: #45a049 !important;
+  }
 }
+
 .error-validation {
   font-size: 12px;
 }
@@ -49,18 +66,51 @@ button {
   }
 }
 form {
-  padding: 12px;
+  padding: 12px 0;
 }
 h3 {
+  color: var(--textColorTitle);
   font-size: 1rem;
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+  @media screen and (min-width: 764px) {
+    line-height: 1.5;
+    font-size: 1.3rem;
+  }
+}
+h4 {
+  color: var(--textColorTitle);
+  font-size: 1rem;
+  line-height: 1.4;
+
+  text-align: left;
+  @media screen and (min-width: 764px) {
+    line-height: 1.5;
+    font-size: 1.1rem;
+  }
+}
+ul {
   padding: 8px;
   border-radius: 12px;
-  font-weight: 700;
   margin-bottom: 12px;
   margin-top: 12px;
+  display: flex;
+  align-items: self-start;
+  flex-direction: column;
+  gap: 8px;
 
   color: var(--textColor);
   background-color: #d32f2f80;
+  li {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: left;
+    @media screen and (min-width: 764px) {
+      font-size: 1rem;
+    }
+  }
 }
 
 .social-link {

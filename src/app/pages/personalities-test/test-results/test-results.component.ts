@@ -46,7 +46,6 @@ import { FeedbackFormComponent } from '../../../components/feedback-form/feedbac
     TestListHeroComponent,
     NgIf,
     ConsultationFormComponent,
-    ConsultationFormComponent,
     SecondaryBtnComponent,
     ConsultationBenefitComponent,
     FeedbackFormComponent,
@@ -89,7 +88,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.openSnackBar(
-      'Розповім усе про твою любовну сферу безкоштовно — заповнюй форму нижче 😊',
+      'Хочеш розібратись у своєму типі? У кінці буде форма для індивідуального розбору 🌟',
       'Закрити'
     );
 

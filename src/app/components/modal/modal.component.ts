@@ -21,6 +21,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ConsultationFormComponent } from '../consultation-form/consultation-form.component';
+import { FeedbackFormComponent } from '../feedback-form/feedback-form.component';
 
 export interface DialogData {
   animal: string;
@@ -39,7 +40,7 @@ export interface DialogData {
     NgIf,
     MatButtonModule,
     MatDialogClose,
-    ConsultationFormComponent,
+    FeedbackFormComponent,
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
@@ -83,6 +84,8 @@ export class ModalComponent implements OnInit {
   onConfirm() {
     if (this.formGroup.valid) {
       this.dialogRef.close(this.formGroup.value);
+    } else {
+      this.formGroup.get('socialMedia')?.setErrors({ pattern: true });
     }
   }
 }

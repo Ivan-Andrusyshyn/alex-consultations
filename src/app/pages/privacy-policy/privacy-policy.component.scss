@@ -1,0 +1,72 @@
+.privacy-container {
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  color: var(--textColor);
+}
+
+.privacy-container h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+
+  color: var(--textColorTitle);
+
+  text-align: center;
+}
+
+.privacy-container p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.privacy-container h4 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+
+  color: var(--textColorTitle);
+  border-bottom: 2px solid #e2e2e2;
+  padding-bottom: 0.4rem;
+}
+
+.privacy-container ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.privacy-container li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  list-style-type: disc;
+}
+
+.privacy-container a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+.privacy-container a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  .privacy-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .privacy-container h3 {
+    font-size: 1.5rem;
+  }
+
+  .privacy-container h4 {
+    font-size: 1.1rem;
+  }
+
+  .privacy-container p,
+  .privacy-container li {
+    font-size: 0.95rem;
+  }
+}

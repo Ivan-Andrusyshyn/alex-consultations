@@ -9,7 +9,9 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-
+  a {
+    text-decoration: underline;
+  }
   .footer-info {
     display: flex;
     flex-direction: column;

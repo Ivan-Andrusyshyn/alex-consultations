@@ -1,5 +1,18 @@
 <div>
-  <h3>
+  <h3>Індивідуальний розбір твого типу особистості</h3>
+  <ul>
+    <li>- Глибше розуміння себе — чому ти реагуєш саме так, а не інакше</li>
+    <li>- Поради для стосунків — що тобі підходить і з ким буде гармонія</li>
+    <li>
+      - Рекомендації для розвитку — як використовувати свої сильні сторони
+    </li>
+    <li>
+      - 🎁 Подарую гайд про те, як знайти себе та свій шлях відповідно до твого
+      типу
+    </li>
+  </ul>
+
+  <h4>
     {{ title() }}
     @if(isFormSended()){
 
@@ -19,10 +32,10 @@
         alt="Instagram"
     /></a>
     }
-  </h3>
+  </h4>
 
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label> Нік в Instagram або Telegram </mat-label>
       <input
         matInput
@@ -45,7 +58,7 @@
       </div>
     </mat-form-field>
     <br />
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label> Залиш своє запитання — я на зв’язку 💬 </mat-label>
       <textarea matInput formControlName="feedBack" rows="4"></textarea>
       <mat-error
@@ -59,12 +72,7 @@
     </mat-form-field>
     <br /><br />
 
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="formGroup.invalid"
-    >
+    <button mat-raised-button class="submit-button" type="submit">
       Надіслати
     </button>
   </form>

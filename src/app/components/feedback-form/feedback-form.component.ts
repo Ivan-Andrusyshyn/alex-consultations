@@ -31,9 +31,7 @@ export class FeedbackFormComponent implements OnInit {
 
   private readonly googleSheetService = inject(GoogleSheetsService);
   private destroyRef = inject(DestroyRef);
-  title = signal(
-    'Хочеш глибше зрозуміти себе? Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁'
-  );
+  title = signal('Хочеш дізнатись більше? Просто надішли форму ✨');
 
   isFormSended = signal(false);
 
@@ -53,7 +51,7 @@ export class FeedbackFormComponent implements OnInit {
           Validators.maxLength(30),
         ],
       ],
-      feedBack: ['', [Validators.required]],
+      feedBack: ['', []],
     });
   }
 
@@ -69,6 +67,8 @@ export class FeedbackFormComponent implements OnInit {
           this.isFormSended.set(true);
           this.title.set('Повідомлення успішно надіслане ✅');
         });
+    } else {
+      this.formGroup.get('socialMedia')?.setErrors({ pattern: true });
     }
   }
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" class="consultation-form">
   <mat-form-field>
     <mat-label>Ваше ім'я</mat-label>
     <input matInput formControlName="name" placeholder="Наприклад: Олександр" />
@@ -22,7 +22,7 @@
       _ та бути довжиною від 5 до 30 символів.
     </div>
   </mat-form-field>
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Номер телефону (не обов'язково)</mat-label>
     <input
       matInput
@@ -34,5 +34,5 @@
       <span *ngIf="errors['minlength']">Номер занадто короткий.</span>
       <span *ngIf="errors['maxlength']">Номер занадто довгий.</span>
     </div>
-  </mat-form-field>
+  </mat-form-field> -->
 </form>

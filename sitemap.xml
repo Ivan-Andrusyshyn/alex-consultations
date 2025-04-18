@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
     <url>
         <loc>https://vidchuttia.com.ua/</loc>
         <priority>1.0</priority>
@@ -12,7 +13,38 @@
         <loc>https://vidchuttia.com.ua/tests</loc>
         <priority>0.8</priority>
     </url>
+
+
+
+       <url>
+        <loc>https://vidchuttia.com.ua/tests/attractiveness</loc>
+        <priority>0.7</priority>
+    </url>
     <url>
+        <loc>https://vidchuttia.com.ua/tests/attractiveness/questions</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vidchuttia.com.ua/tests/attractiveness/test-information</loc>
+        <priority>0.6</priority>
+    </url>
+
+
+
+       <url>
+        <loc>https://vidchuttia.com.ua/tests/role-in-relationships</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://vidchuttia.com.ua/tests/role-in-relationships/questions</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vidchuttia.com.ua/tests/role-in-relationships/test-information</loc>
+        <priority>0.6</priority>
+    </url>
+
+   <url>
         <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity</loc>
         <priority>0.7</priority>
     </url>
@@ -23,7 +55,8 @@
     <url>
         <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity/test-information</loc>
         <priority>0.6</priority>
-    </url>
+    </url> 
+
     <url>
         <loc>https://vidchuttia.com.ua/tests/16-personalities</loc>
         <priority>0.7</priority>
@@ -36,6 +69,7 @@
         <loc>https://vidchuttia.com.ua/tests/16-personalities/test-information</loc>
         <priority>0.6</priority>
     </url>
+    
     <url>
         <loc>https://vidchuttia.com.ua/about</loc>
         <priority>0.6</priority>
@@ -44,4 +78,11 @@
         <loc>https://vidchuttia.com.ua/contacts</loc>
         <priority>0.6</priority>
     </url>
+
+<url>
+  <loc>https://vidchuttia.com.ua/privacy-policy</loc>
+  <priority>0.6</priority>
+  <lastmod>2025-04-18</lastmod>
+</url>
+
 </urlset>
