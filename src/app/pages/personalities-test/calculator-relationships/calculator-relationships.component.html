@@ -3,6 +3,7 @@
   [titleText]="titleText"
   [subtitleText]="subtitleText"
 ></app-title-card>
+<app-test-consultation-registration></app-test-consultation-registration>
 
 <section class="disclaimer">
   <ng-container *ngIf="calculatorDeclaimer$ | async as calculatorDeclaimer">
@@ -143,6 +144,6 @@
         <p>{{ calculatorResult.calculatorResults.sections.reflection }}</p>
       </div>
     </div>
-    <app-feedback-form></app-feedback-form>
+    <!-- <app-feedback-form></app-feedback-form> -->
   </ng-container>
 </section>

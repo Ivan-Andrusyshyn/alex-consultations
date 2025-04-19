@@ -1,0 +1,13 @@
+.btn-wrapper {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  z-index: 999;
+
+  position: fixed;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+}

@@ -32,6 +32,7 @@ import { ConsultationBenefitComponent } from '../../../components/consultation-b
 import { TypeResultInformation } from '../../../shared/types/16-personalities-results';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
+import { TestConsultationRegistrationComponent } from '../../../components/test-consultation-registration/test-consultation-registration.component';
 
 @Component({
   selector: 'app-test-results',
@@ -49,6 +50,7 @@ import { FeedbackFormComponent } from '../../../components/feedback-form/feedbac
     SecondaryBtnComponent,
     ConsultationBenefitComponent,
     FeedbackFormComponent,
+    TestConsultationRegistrationComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -87,10 +89,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.openSnackBar(
-      'Хочеш розібратись у своєму типі? У кінці буде форма для індивідуального розбору 🌟',
-      'Закрити'
-    );
+    // this.openSnackBar(
+    //   'Хочеш розібратись у своєму типі? У кінці буде форма для індивідуального розбору 🌟',
+    //   'Закрити'
+    // );
 
     this.createForm();
     // ====>

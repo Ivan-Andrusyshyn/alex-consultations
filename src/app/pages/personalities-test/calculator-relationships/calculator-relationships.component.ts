@@ -32,6 +32,7 @@ import {
   CalculatorResult,
 } from '../../../shared/types/personalities-calculator';
 import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
+import { TestConsultationRegistrationComponent } from '../../../components/test-consultation-registration/test-consultation-registration.component';
 
 @Component({
   selector: 'app-calculator-relationships',
@@ -44,6 +45,7 @@ import { FeedbackFormComponent } from '../../../components/feedback-form/feedbac
     TitleCardComponent,
     MatFormFieldModule,
     MatSelectModule,
+    TestConsultationRegistrationComponent,
     FeedbackFormComponent,
   ],
   templateUrl: './calculator-relationships.component.html',

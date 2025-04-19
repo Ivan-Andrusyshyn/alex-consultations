@@ -1,4 +1,4 @@
-mat-dialog-actions {
+::ng-deep .mat-dialog-actions {
   display: flex;
   justify-content: center;
   gap: 8px;
@@ -169,6 +169,9 @@ form {
     width: 90%;
     font-size: 15px;
   }
+}
+::ng-deep .mdc-dialog__surface {
+  height: 100%;
 }
 .error-message {
   font-size: 12px;

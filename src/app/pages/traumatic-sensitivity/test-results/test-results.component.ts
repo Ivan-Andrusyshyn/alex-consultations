@@ -46,6 +46,7 @@ import { ConsultationFormComponent } from '../../../components/consultation-form
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
+import { TestConsultationRegistrationComponent } from '../../../components/test-consultation-registration/test-consultation-registration.component';
 
 const types: string[] = [
   'C1-E1-T4-W2-B3-F2-R3',
@@ -74,6 +75,7 @@ const types: string[] = [
     SocialLinksComponent,
     NgStyle,
     FeedbackFormComponent,
+    TestConsultationRegistrationComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',

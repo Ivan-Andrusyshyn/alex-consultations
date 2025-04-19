@@ -29,6 +29,7 @@ import { SecondaryBtnComponent } from '../../../components/secondary-btn/seconda
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 import { RelationshipResult } from '../../../shared/types/toxical-relationship';
 import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
+import { TestConsultationRegistrationComponent } from '../../../components/test-consultation-registration/test-consultation-registration.component';
 
 @Component({
   selector: 'app-test-results',
@@ -46,7 +47,7 @@ import { FeedbackFormComponent } from '../../../components/feedback-form/feedbac
     ConsultationBenefitComponent,
     SocialLinksComponent,
     FeedbackFormComponent,
-    FeedbackFormComponent,
+    TestConsultationRegistrationComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',

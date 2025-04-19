@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { TitleCardComponent } from '../../components/title-card/title-card.component';
 import { SeoService } from '../../shared/services/seo.service';
 import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+import { TestConsultationRegistrationComponent } from '../../components/test-consultation-registration/test-consultation-registration.component';
 
 @Component({
   selector: 'app-traumatic-sensitivity',

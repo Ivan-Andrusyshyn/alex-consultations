@@ -29,6 +29,7 @@ import { ConsultationFormComponent } from '../../../components/consultation-form
 import { SecondaryBtnComponent } from '../../../components/secondary-btn/secondary-btn.component';
 import { ConsultationBenefitComponent } from '../../../components/consultation-benefit/consultation-benefit.component';
 import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
+import { TestConsultationRegistrationComponent } from '../../../components/test-consultation-registration/test-consultation-registration.component';
 
 @Component({
   selector: 'app-test-results',
@@ -43,6 +44,7 @@ import { FeedbackFormComponent } from '../../../components/feedback-form/feedbac
     ConsultationFormComponent,
     ConsultationBenefitComponent,
     SecondaryBtnComponent,
+    TestConsultationRegistrationComponent,
     NgIf,
     FeedbackFormComponent,
   ],
