@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const counter_1 = __importDefault(require("../../services/counter"));
 const getAllClicksData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield counter_1.default.init();
         const allClicksData = yield counter_1.default.getAllClicksData();
         console.log(allClicksData);
         res.status(200).send({
