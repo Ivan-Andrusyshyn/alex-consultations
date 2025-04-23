@@ -1,0 +1,34 @@
+<section class="contact">
+  @if (!isShowNextStep()) {
+  <div class="title-wrapper">
+    <h3>Запишись на персональний розбір твого типу 🧠</h3>
+
+    <app-accent-btn
+      (onClickBtn)="showNextStepBuClick()"
+      [textBtn]="'Хочу на розбір'"
+    ></app-accent-btn>
+  </div>
+  }@else {
+  <p>1. Обери зручну платформу для зв’язку: Instagram або Telegram</p>
+  <p>2. Напиши мені в директ</p>
+  <div class="container">
+    <div
+      data-text="Telegram"
+      style="--r: -15"
+      class="glass"
+      (click)="openTelegram()"
+    >
+      <img src="../../../assets/svg/media/telegram.svg" alt="" />
+    </div>
+
+    <div
+      data-text="Instagram"
+      style="--r: 25"
+      class="glass"
+      (click)="openInstagram()"
+    >
+      <img src="../../../assets/svg/media/instagram.svg" alt="" />
+    </div>
+  </div>
+  }
+</section>

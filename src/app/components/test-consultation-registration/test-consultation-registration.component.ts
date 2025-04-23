@@ -33,7 +33,7 @@ import { AccentBtnComponent } from '../accent-btn/accent-btn.component';
 })
 export class TestConsultationRegistrationComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-  private readonly googleService = inject(GoogleSheetsService);
+  private googleService = inject(GoogleSheetsService);
   private destroyRef = inject(DestroyRef);
 
   @ViewChild('btnWrapper') btnWrapper!: ElementRef;
@@ -64,10 +64,11 @@ export class TestConsultationRegistrationComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '570px',
-      width: '400px',
+      height: '290px',
+      width: '350px',
       data: {
-        isForm: true,
+        isForm: false,
+        isShowLinks: true,
         contentType: 'form-consultation',
         title:
           'Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁',

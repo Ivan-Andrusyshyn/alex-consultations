@@ -23,6 +23,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'counting-clicks',
+    loadComponent: () =>
+      import('./pages/counting-clicks/counting-clicks.component').then(
+        (m) => m.CountingClicksComponent
+      ),
+  },
+  {
     path: 'courses',
     loadComponent: () =>
       import('./pages/courses/courses.component').then(

@@ -18,7 +18,7 @@ export class SocialLinksComponent {
   socialLinks = [
     {
       name: 'Telegram',
-      url: 'https://t.me/@alex_andrusishin',
+      url: 'https://t.me/alex_andrusishin',
       imgSrc: '../../../assets/svg/media/telegram.svg',
       rotation: '-15',
     },

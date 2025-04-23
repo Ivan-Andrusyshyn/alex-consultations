@@ -1,7 +1,7 @@
 button {
   padding: 20px 28px;
   border-radius: 8px;
-  min-width: 280px !important;
+  min-width: 260px !important;
   font-size: 12px;
 
   transition: all 0.3s ease-in-out;
@@ -15,6 +15,8 @@ button {
   cursor: pointer;
 
   @media screen and (min-width: 764px) {
+    padding: 20px 28px;
+    min-width: 280px !important;
     font-size: 14px;
   }
 }

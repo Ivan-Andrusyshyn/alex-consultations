@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
   OnInit,
 } from '@angular/core';
@@ -22,6 +23,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ConsultationFormComponent } from '../consultation-form/consultation-form.component';
 import { FeedbackFormComponent } from '../feedback-form/feedback-form.component';
+import { ModalSocialLinksComponent } from '../modal-social-links/modal-social-links.component';
+import { CountingClicksService } from '../../shared/services/counting-clicks.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 export interface DialogData {
   animal: string;
@@ -37,10 +42,10 @@ export interface DialogData {
     MatDialogContent,
     ConsultationFormComponent,
     MatInputModule,
-    NgIf,
     MatButtonModule,
     MatDialogClose,
     FeedbackFormComponent,
+    ModalSocialLinksComponent,
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
@@ -50,6 +55,7 @@ export class ModalComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<ModalComponent>);
   readonly data: any = inject<DialogData>(MAT_DIALOG_DATA);
   private readonly fb = inject(FormBuilder);
+
   formGroup!: FormGroup;
 
   ngOnInit(): void {

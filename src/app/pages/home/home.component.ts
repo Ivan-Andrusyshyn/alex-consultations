@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
   filter,
+  map,
   Observable,
   switchMap,
   tap,
@@ -91,10 +92,11 @@ export class HomeComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '570px',
-      width: '400px',
+      height: '290px',
+      width: '350px',
       data: {
-        isForm: true,
+        isForm: false,
+        isShowLinks: true,
         contentType: 'form-consultation',
         title:
           'Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁',

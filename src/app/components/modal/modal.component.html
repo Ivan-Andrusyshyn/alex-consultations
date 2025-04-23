@@ -65,7 +65,11 @@
         </button>
       </div>
     </div>
-    }@else{
+    } @else if (data?.isShowLinks) {
+    <div class="links-container">
+      <app-modal-social-links></app-modal-social-links>
+    </div>
+    } @else{
     <div class="video-container">
       <iframe
         src="https://player.vimeo.com/video/1072592233"

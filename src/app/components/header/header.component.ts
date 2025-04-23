@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
 
     timer(firstDelay)
       .pipe(
-        tap(() => this.openDialog()),
+        tap(() => this.openDialog),
         concatMap(() => timer(secondDelay)),
         tap(() => this.openDialog())
       )
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
   onPopState(event: any) {
     this.counter += 1;
 
-    if (this.counter % 5 === 0) {
+    if (this.counter % 4 === 0) {
       this.openDialog();
     }
   }
@@ -82,12 +82,19 @@ export class HeaderComponent implements OnInit {
 
     snackBarRef.onAction().subscribe(() => {});
   }
+  openInstagram(): void {
+    window.open(
+      'https://www.instagram.com/depth_seekerr?igsh=MTZuNGxudnNrNWYzeg%3D%3D&utm_source=qr',
+      '_blank'
+    );
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '570px',
-      width: '400px',
+      height: '290px',
+      width: '350px',
       data: {
-        isForm: true,
+        isForm: false,
+        isShowLinks: true,
         contentType: 'form-consultation',
         title:
           'Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁',

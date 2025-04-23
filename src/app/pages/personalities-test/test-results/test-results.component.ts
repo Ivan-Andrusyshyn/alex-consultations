@@ -111,7 +111,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
       map((data) => {
         const response = data['data'];
         const scrollToTop = data['scrollToTop'];
-
+        // ====>set type of person for day phrase
+        localStorage.setItem(
+          'personalityType',
+          response.personInformation.type
+        );
+        //
         if (scrollToTop) {
           this.viewportScroller.scrollToPosition([0, 0]);
         }

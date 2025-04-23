@@ -187,7 +187,10 @@
   display: flex;
   flex-direction: column;
 }
-
+.social-link {
+  text-decoration: underline;
+  color: #6c63ff;
+}
 .instruction li {
   margin-bottom: 12px;
   padding: 8px;

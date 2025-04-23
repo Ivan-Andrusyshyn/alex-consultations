@@ -1,0 +1,24 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.links-clicks {
+  font-size: 1.2rem;
+  color: #333333;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+  transition: background-color 0.3s ease;
+}
+
+.links-clicks:hover {
+  background-color: #e2ecf7;
+}

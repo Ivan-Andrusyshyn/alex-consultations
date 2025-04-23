@@ -1,10 +1,10 @@
 $padding-mobile: 10px;
 $padding-tablet: 20px;
-$padding-desktop: 40px;
+$padding-desktop: 30px;
 
 $margin-mobile: 5px;
 $margin-tablet: 15px;
-$margin-desktop: 30px;
+$margin-desktop: 20px;
 
 @mixin adaptive-spacing($property, $mobile, $tablet, $desktop) {
   #{$property}: $mobile;
