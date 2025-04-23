@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const path_1 = __importDefault(require("path"));
 // __dirname => build/services/clicks-data.json
-const DATA_FILE = path_1.default.join(__dirname, 'clicks-data.json');
 class CounterService {
     constructor() {
+        this.DATA_FILE = path_1.default.join(__dirname, 'clicks-data.json');
         this.clicksData = {};
     }
     init() {
@@ -28,8 +28,8 @@ class CounterService {
     loadData() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (yield fs_extra_1.default.pathExists(DATA_FILE)) {
-                    this.clicksData = yield fs_extra_1.default.readJson(DATA_FILE);
+                if (yield fs_extra_1.default.pathExists(this.DATA_FILE)) {
+                    this.clicksData = yield fs_extra_1.default.readJson(this.DATA_FILE);
                 }
                 else {
                     this.clicksData = {
@@ -47,7 +47,7 @@ class CounterService {
     saveData() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield fs_extra_1.default.writeJson(DATA_FILE, this.clicksData, { spaces: 2 });
+                yield fs_extra_1.default.writeJson(this.DATA_FILE, this.clicksData, { spaces: 2 });
             }
             catch (err) {
                 console.error('❌ Failed to save clicks data:', err);

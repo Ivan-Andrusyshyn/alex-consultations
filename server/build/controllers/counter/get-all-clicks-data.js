@@ -17,6 +17,7 @@ const getAllClicksData = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         yield counter_1.default.init();
         const allClicksData = yield counter_1.default.getAllClicksData();
+        console.log(allClicksData);
         res.status(200).send({
             message: 'Success!',
             allClicksData,
