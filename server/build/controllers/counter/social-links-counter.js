@@ -17,7 +17,6 @@ const socialLinksCounter = (req, res) => __awaiter(void 0, void 0, void 0, funct
     try {
         const clickFrom = req.body.clickFrom;
         const allClicksData = yield counter_1.default.incrementClick(clickFrom);
-        console.log(allClicksData);
         res.status(200).send({
             message: 'Success!',
             allClicksData,
