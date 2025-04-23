@@ -57,10 +57,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.personalitiesPhrasesService
       .getPersonalitiesPhrases()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        switchMap((r) => this.onAppInitService.loadOnInit())
-      )
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
     this.loading$ = this.loadingService.isLoading();
     this.themeService.initTheme();

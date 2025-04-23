@@ -9,30 +9,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const click_schema_1 = require("../db/models/click-schema");
+const sharedClicksData = {
+    instagram: { amountClick: 0 },
+    telegram: { amountClick: 0 },
+};
 class CounterService {
     constructor() {
-        this.clicksData = {
-            instagram: { amountClick: 0 },
-            telegram: { amountClick: 0 },
-        };
+        this.data = sharedClicksData;
     }
     incrementClick(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!this.clicksData[key]) {
-                this.clicksData[key] = { amountClick: 1 };
-            }
-            else {
-                this.clicksData[key].amountClick += 1;
-            }
-            return this.clicksData[key];
+            const updated = yield click_schema_1.ClickModel.findOneAndUpdate({ socialMedia: key }, { $inc: { amountClick: 1 } }, { new: true, upsert: true });
+            return { amountClick: updated.amountClick };
         });
     }
     getClickData(key) {
-        return this.clicksData[key] || { amountClick: 0 };
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield click_schema_1.ClickModel.findOne({ socialMedia: key });
+            return result ? { amountClick: result.amountClick } : { amountClick: 0 };
+        });
     }
     getAllClicksData() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.clicksData;
+            const results = yield click_schema_1.ClickModel.find({});
+            const data = {
+                telegram: { amountClick: 0 },
+                instagram: { amountClick: 0 },
+            };
+            for (const doc of results) {
+                data[doc.socialMedia] = { amountClick: doc.amountClick };
+            }
+            return data;
         });
     }
 }

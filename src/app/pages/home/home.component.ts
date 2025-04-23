@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
   todayDate!: string;
 
   private seoService = inject(SeoService);
-  private routeTracker = inject(RouteTrackerService);
   loading$!: Observable<boolean>;
   private readonly loadingService = inject(LoadingService);
 
@@ -77,7 +76,6 @@ export class HomeComponent implements OnInit {
     this.todayDate = DateTime.now()
       .setLocale('uk')
       .toLocaleString(DateTime.DATE_FULL);
-    this.routeTracker.getRoutes();
     this.loading$ = this.loadingService.isLoading();
 
     this.dayPhrase$ =
