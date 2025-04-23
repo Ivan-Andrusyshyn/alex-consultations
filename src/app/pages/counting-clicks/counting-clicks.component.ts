@@ -3,6 +3,7 @@ import { map, Observable, tap } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 
 import { CountingClicksService } from '../../shared/services/counting-clicks.service';
+import { ActivatedRoute } from '@angular/router';
 
 type AllowedClickKeys = 'telegram' | 'instagram';
 
@@ -18,18 +19,18 @@ type ClickData = {
   styleUrl: './counting-clicks.component.scss',
 })
 export class CountingClicksComponent implements OnInit {
-  private countingService = inject(CountingClicksService);
+  private activeRoute = inject(ActivatedRoute);
 
   clicksData$!: Observable<ClickData>;
 
   ngOnInit(): void {
-    this.clicksData$ = this.countingService
-      .getCountingClicksInSocialLinks()
-      .pipe(
-        map((r) => r.allClicksData),
-        tap((r) => {
-          console.log(r);
-        })
-      );
+    this.clicksData$ = this.activeRoute.data.pipe(
+      map((data) => {
+        const response = data['data'];
+        console.log(response);
+
+        return response.allClicksData;
+      })
+    );
   }
 }

@@ -8,6 +8,7 @@ import { RoleInRelationshipsResultsResolver } from './shared/resolvers/role-in-r
 import { ToxicalRelationshipDescriptionResolver } from './shared/resolvers/toxical-relationship/toxical-relationship-description.resolver';
 import { TraumaticSensitivityInformationResolver } from './shared/resolvers/traumetic-sensitivity/traumetic-sensitivity-information.resolver';
 import { createTestRoutes } from './shared/utils/createTestRoutes';
+import { CountingClicksResolver } from './shared/resolvers/counting-clicks.resolver';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'counting-clicks',
+    resolve: { data: CountingClicksResolver },
     loadComponent: () =>
       import('./pages/counting-clicks/counting-clicks.component').then(
         (m) => m.CountingClicksComponent
