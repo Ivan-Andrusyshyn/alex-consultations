@@ -19,7 +19,11 @@ const DATA_FILE = path_1.default.join(__dirname, 'clicks-data.json');
 class CounterService {
     constructor() {
         this.clicksData = {};
-        this.loadData();
+    }
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.loadData();
+        });
     }
     loadData() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -66,7 +70,9 @@ class CounterService {
         return this.clicksData[key] || { amountClick: 0 };
     }
     getAllClicksData() {
-        return this.clicksData;
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.clicksData;
+        });
     }
 }
 const counterService = new CounterService();
