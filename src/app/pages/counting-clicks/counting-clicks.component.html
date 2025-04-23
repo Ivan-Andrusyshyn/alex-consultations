@@ -1,17 +1,19 @@
 <div class="container">
   <ng-container *ngIf="clicksData$ | async as clicksData">
-    @if(clicksData.telegram){
-
-    <div class="links-clicks">
-      Clicks on telegram-buttons: {{ clicksData.telegram.amountClick }}
-    </div>
-    <br />
-
-    <div class="links-clicks">
-      Clicks on instagram-buttons: {{ clicksData.instagram.amountClick }}
-    </div>
+    @if(clicksData){
+    <ng-container *ngIf="clicksData.telegram as telegram">
+      <div class="links-clicks">
+        Clicks on telegram-buttons: {{ telegram.amountClick }}
+      </div>
+      <br />
+    </ng-container>
+    <ng-container *ngIf="clicksData.instagram as instagram">
+      <div class="links-clicks">
+        Clicks on instagram-buttons: {{ instagram.amountClick }}
+      </div>
+    </ng-container>
     } @else {
-    <h3>Server problem</h3>
+    <h3>No clicks yet</h3>
     }
   </ng-container>
 </div>

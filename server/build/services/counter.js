@@ -8,18 +8,62 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
+const path_1 = __importDefault(require("path"));
+// __dirname => build/services/clicks-data.json
+const DATA_FILE = path_1.default.join(__dirname, 'clicks-data.json');
 class CounterService {
     constructor() {
         this.clicksData = {};
+        this.loadData();
     }
-    setClicksData(key, amountClick) {
+    loadData() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.clicksData[key] = { amountClick: amountClick + 1 };
+            try {
+                if (yield fs_extra_1.default.pathExists(DATA_FILE)) {
+                    this.clicksData = yield fs_extra_1.default.readJson(DATA_FILE);
+                }
+                else {
+                    this.clicksData = {
+                        telegram: { amountClick: 0 },
+                        instagram: { amountClick: 0 },
+                    };
+                    yield this.saveData();
+                }
+            }
+            catch (err) {
+                console.error('❌ Failed to load clicks data:', err);
+            }
         });
     }
-    getClicksData(key) {
-        return this.clicksData[key];
+    saveData() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield fs_extra_1.default.writeJson(DATA_FILE, this.clicksData, { spaces: 2 });
+            }
+            catch (err) {
+                console.error('❌ Failed to save clicks data:', err);
+            }
+        });
+    }
+    incrementClick(key) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.clicksData[key]) {
+                this.clicksData[key] = { amountClick: 1 };
+            }
+            else {
+                this.clicksData[key].amountClick += 1;
+            }
+            yield this.saveData();
+            return this.clicksData[key];
+        });
+    }
+    getClickData(key) {
+        return this.clicksData[key] || { amountClick: 0 };
     }
     getAllClicksData() {
         return this.clicksData;

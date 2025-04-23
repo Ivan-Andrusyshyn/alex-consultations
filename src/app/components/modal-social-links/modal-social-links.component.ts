@@ -37,11 +37,11 @@ export class ModalSocialLinksComponent {
     socialMedia: 'telegram' | 'instagram',
     url: string
   ) {
+    window.open(url, '_blank');
+
     this.countingService
       .postCountingClicksInSocialLinks(socialMedia)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        window.open(url, '_blank');
-      });
+      .subscribe(() => {});
   }
 }

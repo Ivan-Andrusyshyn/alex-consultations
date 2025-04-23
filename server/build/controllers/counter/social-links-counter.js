@@ -14,14 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const counter_1 = __importDefault(require("../../services/counter"));
 const socialLinksCounter = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     try {
         const clickFrom = req.body.clickFrom;
-        const getClicksByKey = (_a = counter_1.default.getClicksData(clickFrom)) !== null && _a !== void 0 ? _a : {
-            amountClick: 0,
-        };
-        counter_1.default.setClicksData(clickFrom, getClicksByKey.amountClick);
-        const allClicksData = counter_1.default.getAllClicksData();
+        const allClicksData = yield counter_1.default.incrementClick(clickFrom);
         console.log(allClicksData);
         res.status(200).send({
             message: 'Success!',
