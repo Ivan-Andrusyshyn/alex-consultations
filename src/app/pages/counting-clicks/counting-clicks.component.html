@@ -12,6 +12,11 @@
         Clicks on instagram-buttons: {{ instagram.amountClick }}
       </div>
     </ng-container>
+    <ng-container *ngIf="clicksData.modalButton as modalButton">
+      <div class="links-clicks">
+        Clicks on modal-buttons: {{ modalButton.amountClick }}
+      </div>
+    </ng-container>
     } @else {
     <h3>No clicks yet</h3>
     }

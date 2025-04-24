@@ -12,7 +12,7 @@ export class CountingClicksService {
   constructor(private http: HttpClient) {}
 
   postCountingClicksInSocialLinks(
-    socialMedia: 'telegram' | 'instagram'
+    socialMedia: 'telegram' | 'instagram' | 'modalButton'
   ): Observable<{
     allClicksData: any;
     message: string;

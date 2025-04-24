@@ -2,10 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 
-import { CountingClicksService } from '../../shared/services/counting-clicks.service';
 import { ActivatedRoute } from '@angular/router';
 
-type AllowedClickKeys = 'telegram' | 'instagram';
+type AllowedClickKeys = 'telegram' | 'instagram' | 'modalButton';
 
 type ClickData = {
   [K in AllowedClickKeys]: { amountClick: number };
@@ -27,8 +26,6 @@ export class CountingClicksComponent implements OnInit {
     this.clicksData$ = this.activeRoute.data.pipe(
       map((data) => {
         const response = data['data'];
-        console.log(response);
-
         return response.allClicksData;
       })
     );

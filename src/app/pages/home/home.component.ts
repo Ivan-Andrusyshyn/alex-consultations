@@ -36,6 +36,7 @@ import {
   PersonalityDayPhrases,
   UsersPhraseSubject,
 } from '../../shared/types/personalities-phrases';
+import { CountingClicksService } from '../../shared/services/counting-clicks.service';
 
 @Component({
   selector: 'app-home',
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
+  private countingService = inject(CountingClicksService);
 
   successRegistration = signal(false);
   todayDate!: string;
@@ -87,8 +89,17 @@ export class HomeComponent implements OnInit {
       'тести,краща версія самого себе, самопізнання, розвиток особистості, психологічні тести, оцінка стосунків, тест на особистість, саморозвиток'
     );
   }
-
+  private postCountingClicksInSocialLinks(
+    socialMedia: 'telegram' | 'instagram' | 'modalButton'
+  ) {
+    this.countingService
+      .postCountingClicksInSocialLinks(socialMedia)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {});
+  }
   openDialog(): void {
+    this.postCountingClicksInSocialLinks('modalButton');
+
     const dialogRef = this.dialog.open(ModalComponent, {
       height: '290px',
       width: '350px',
@@ -120,6 +131,6 @@ export class HomeComponent implements OnInit {
           )
         )
       )
-      .subscribe();
+      .subscribe(() => {});
   }
 }

@@ -8,7 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const clickSchema = new mongoose_1.default.Schema({
     socialMedia: {
         type: String,
-        enum: ['telegram', 'instagram'],
+        enum: ['telegram', 'instagram', 'modalButton'],
         required: true,
     },
     amountClick: {

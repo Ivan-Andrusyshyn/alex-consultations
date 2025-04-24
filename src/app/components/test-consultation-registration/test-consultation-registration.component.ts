@@ -16,13 +16,13 @@ import {
   map,
   startWith,
   switchMap,
-  tap,
   throwError,
 } from 'rxjs';
 
 import { ModalComponent } from '../modal/modal.component';
 import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
 import { AccentBtnComponent } from '../accent-btn/accent-btn.component';
+import { CountingClicksService } from '../../shared/services/counting-clicks.service';
 
 @Component({
   selector: 'app-test-consultation-registration',
@@ -35,6 +35,7 @@ export class TestConsultationRegistrationComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   private googleService = inject(GoogleSheetsService);
   private destroyRef = inject(DestroyRef);
+  private countingService = inject(CountingClicksService);
 
   @ViewChild('btnWrapper') btnWrapper!: ElementRef;
 
@@ -61,8 +62,17 @@ export class TestConsultationRegistrationComponent implements OnInit {
       }
     });
   }
-
+  private postCountingClicksInSocialLinks(
+    socialMedia: 'telegram' | 'instagram' | 'modalButton'
+  ) {
+    this.countingService
+      .postCountingClicksInSocialLinks(socialMedia)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {});
+  }
   openDialog(): void {
+    this.postCountingClicksInSocialLinks('modalButton');
+
     const dialogRef = this.dialog.open(ModalComponent, {
       height: '290px',
       width: '350px',
@@ -92,6 +102,6 @@ export class TestConsultationRegistrationComponent implements OnInit {
           )
         )
       )
-      .subscribe();
+      .subscribe(() => {});
   }
 }
