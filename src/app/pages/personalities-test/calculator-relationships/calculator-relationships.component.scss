@@ -36,13 +36,13 @@
 }
 
 .disclaimer-title {
-  font-size: 20px;
+  font-size: 24px;
   margin-bottom: 10px;
 
+  text-align: center;
   font-weight: bold;
   color: #d84315;
 }
-
 .disclaimer-text,
 .disclaimer-experimental {
   font-size: 14px;
@@ -57,39 +57,26 @@
   font-style: italic;
   color: #b71c1c;
 }
-.subtitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  padding: 0.5rem;
-
-  color: #444;
-  text-align: center;
-}
 
 .calculator {
-  padding: 1rem;
+  padding: 18px 0;
   min-height: 100vh;
 
-  border-radius: 12px;
+  border-radius: 20px;
+  color: var(--color-text-secondary);
+  @media screen and (min-width: 764px) {
+    padding: 64px 0;
+  }
   h3 {
-    font-size: 18px;
-    color: var(--textColor);
-
     border-radius: 12px;
     padding: 8px;
 
+    text-align: center;
     padding-bottom: 10px;
-    @media screen and (min-width: 764px) {
-      font-size: 22px;
-    }
   }
   h4 {
-    font-size: 16px;
-    letter-spacing: 0.01em;
     padding: 4px;
-
-    color: var(--textColor);
+    font-weight: 600;
     text-align: left;
   }
   ul {
@@ -102,12 +89,11 @@
     letter-spacing: 0.01em;
 
     text-align: left;
-    color: var(--textColor);
 
     font-style: normal;
     transition: color 0.3s ease;
     @media screen and (min-width: 764px) {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
   li {
@@ -116,39 +102,35 @@
     letter-spacing: 0.01em;
 
     text-align: left;
-    color: var(--textColor);
 
     font-style: normal;
     transition: color 0.3s ease;
     @media screen and (min-width: 764px) {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 }
-
+.calculator-section {
+  padding: 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background: #fff;
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
+}
 .wrapper {
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: var(--boxShadow);
 }
 .select-group {
   margin-bottom: 15px;
 }
-h3 {
-  letter-spacing: 0.01em;
-  font-size: 18px;
-  color: var(--textColorTitle);
-  @media screen and (min-width: 764px) {
-    font-size: 24px;
-  }
-}
+
 p {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.01em;
-  color: var(--textColor);
   margin-bottom: 16px;
   @media screen and (min-width: 764px) {
     font-size: 18px;
@@ -157,7 +139,6 @@ p {
 .option-content {
   display: flex;
   align-items: center;
-  color: var(--textColor);
   justify-content: space-between;
   width: 100%;
 }
@@ -181,8 +162,8 @@ p {
     justify-content: space-around;
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
     }
   }
 }
@@ -193,19 +174,7 @@ p {
 .spinner-container {
   margin: 0 auto;
 }
-.calculate-btn {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-
-  background: linear-gradient(45deg, #4caf50, #2e7d32);
-  color: #f5f5f5;
-  border: none;
-
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.calculate-btn:hover {
-  background: linear-gradient(45deg, #419644, #1a5e1d);
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
 }

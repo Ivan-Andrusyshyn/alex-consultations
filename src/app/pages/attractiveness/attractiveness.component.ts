@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { TitleCardComponent } from '../../components/title-card/title-card.component';
-import { SeoService } from '../../shared/services/seo.service';
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+import { RouteTrackerService } from '../../core/services/route-tracker.service';
+import { SeoService } from '../../core/services/seo.service';
+import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 
 @Component({
   selector: 'app-attractiveness',

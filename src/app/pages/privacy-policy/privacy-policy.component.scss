@@ -8,7 +8,9 @@
 
   color: var(--textColor);
 }
-
+span {
+  display: inline-block;
+}
 .privacy-container h3 {
   font-size: 2rem;
   margin-bottom: 1rem;

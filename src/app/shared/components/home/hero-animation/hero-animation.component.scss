@@ -1,0 +1,178 @@
+.hero-init-animation {
+  height: 650px;
+  width: 100%;
+
+  @media screen and (min-width: 764px) {
+    height: 819px;
+  }
+  @media screen and (min-width: 764px) {
+    height: 919px;
+  }
+  .top-wave {
+    background: url("/assets/new/core/main/hero/wave-mob-1.svg") no-repeat top
+      center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    @media screen and (min-width: 764px) {
+      background: url("/assets/new/core/main/hero/wave.svg") no-repeat top
+        center;
+    }
+  }
+  .box {
+    position: absolute;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+    background-color: #057988;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: riseUp 0.6s ease-out forwards;
+    transform: translateY(100%);
+    .text-wrapper {
+      min-width: 300px;
+      @media screen and (min-width: 764px) {
+        min-width: 500px;
+      }
+      @media screen and (min-width: 1200px) {
+        min-width: 900px;
+      }
+    }
+    .text-wrapper h2 {
+      color: #fff;
+      text-align: left;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: 1.2px;
+      @media screen and (min-width: 1200px) {
+        text-align: center;
+        font-size: 56px;
+      }
+      @media screen and (min-width: 1920px) {
+        text-align: center;
+        font-size: 96px;
+      }
+    }
+    .text-wrapper p {
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 1.2px;
+      @media screen and (min-width: 1440px) {
+        font-size: 28px;
+      }
+      @media screen and (min-width: 1920px) {
+        font-size: 36px;
+      }
+    }
+  }
+
+  @keyframes riseUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .delay-1 {
+    left: 40%;
+    bottom: 40%;
+    animation-delay: 0s;
+    @media screen and (min-width: 540px) {
+      left: 63%;
+      bottom: 20%;
+    }
+    @media screen and (min-width: 764px) {
+      left: 53%;
+      bottom: 20%;
+    }
+    @media screen and (min-width: 1920px) {
+      bottom: 20%;
+    }
+  }
+  .delay-2 {
+    background: url("/assets/new/core/main/hero/world-for-you.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-delay: 1s;
+    width: 150px;
+    height: 150px;
+    bottom: 10%;
+    left: 45px;
+    @media screen and (min-width: 764px) {
+      height: 200px;
+      width: 200px;
+      bottom: 32%;
+    }
+    @media screen and (min-width: 1920px) {
+      height: 400px;
+      bottom: 15%;
+      width: 400px;
+    }
+  }
+  .delay-3 {
+    background: url("/assets/new/core/main/hero/meditation-red-tshort.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-delay: 2s;
+    width: 160px;
+    height: 135px;
+    right: 20px;
+    bottom: 53%;
+    @media screen and (min-width: 764px) {
+      bottom: 45%;
+      width: 260px;
+      height: 195px;
+    }
+    @media screen and (min-width: 1920px) {
+      background: url("/assets/new/core/main/hero/with-balance.svg");
+
+      bottom: 35%;
+      width: 470px;
+      height: 400px;
+    }
+  }
+  .delay-4 {
+    background: url("/assets/new/core/main/hero/camping.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    animation-delay: 3s;
+    width: 180px;
+    height: 180px;
+    left: 6%;
+    bottom: 59%;
+    z-index: -1;
+    @media screen and (min-width: 460px) {
+      bottom: 50%;
+      width: 200px;
+      height: 200px;
+    }
+    @media screen and (min-width: 580px) {
+      bottom: 40%;
+    }
+    @media screen and (min-width: 764px) {
+      bottom: 30%;
+      left: 30%;
+      width: 250px;
+      height: 250px;
+    }
+    @media screen and (min-width: 1920px) {
+      bottom: 30%;
+      left: 35%;
+      width: 400px;
+      height: 400px;
+    }
+  }
+}

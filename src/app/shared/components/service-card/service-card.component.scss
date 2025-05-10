@@ -1,0 +1,59 @@
+.service-card {
+  gap: 22px;
+  padding: 44px 24px;
+  flex-direction: column;
+  max-width: 422px;
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(248deg, #057988 1.84%, #003d45 97.58%);
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s linear;
+
+  &:hover {
+    border-radius: 20px;
+    background: linear-gradient(248deg, #057988 1.84%, #057988 97.58%);
+
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  }
+  @media screen and (min-width: 1320px) {
+    height: 350px;
+    padding: 84px 31px;
+    border-radius: 20px;
+  }
+  h4 {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    @media screen and (min-width: 764px) {
+    }
+
+    @media screen and (min-width: 1320px) {
+      font-size: 24px;
+    }
+  }
+  .service-card-text {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    @media screen and (min-width: 764px) {
+    }
+
+    @media screen and (min-width: 1320px) {
+      font-size: 20px;
+    }
+  }
+
+  img {
+    width: 171px;
+    margin: 0 auto;
+    @media screen and (min-width: 1320px) {
+      display: none;
+    }
+  }
+}

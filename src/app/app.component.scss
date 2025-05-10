@@ -1,12 +1,12 @@
 main {
   min-height: 100vh;
-  max-width: 1200px;
+  max-width: 1920px;
   margin: 0 auto;
-
-  color: var(--textColor);
+  color: var(--color-text-white);
 
   transition: all 0.3s ease-in-out;
-
+  @media screen and (min-width: 764px) {
+  }
   @media (max-width: 768px) {
     min-height: calc(100vh - 120px);
   }
@@ -21,7 +21,7 @@ main {
   z-index: 1000;
   font-size: 18px;
 
-  color: var(--textColor);
+  color: var(--color-text-white);
 
   display: flex;
   align-items: center;

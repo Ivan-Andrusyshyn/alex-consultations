@@ -6,8 +6,8 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { TraumaticSensitivityService } from '../../services/traumatic-sensitivity.service';
-import { TestInformation } from '../../types/traumatic-sensitivity';
+import { TestInformation } from '../../models/traumatic-sensitivity';
+import { TraumaticSensitivityService } from '../../../core/services/traumatic-sensitivity.service';
 
 @Injectable({
   providedIn: 'root',

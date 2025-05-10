@@ -1,0 +1,66 @@
+.my-help {
+  padding: 42px 18px;
+  @media screen and (min-width: 764px) {
+    padding: 118px 0;
+  }
+  .my-help-title {
+    margin-bottom: 23px;
+
+    @media screen and (min-width: 764px) {
+      text-align: center;
+      margin-bottom: 83px;
+      font-size: 50px;
+    }
+  }
+}
+.my-help-list {
+  gap: 23px;
+  max-width: 1320px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+
+  @media screen and (min-width: 764px) {
+    gap: 217px;
+  }
+}
+.my-help-item {
+  max-width: 359px;
+  gap: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 764px) {
+    align-items: center;
+    flex-direction: column;
+  }
+  p {
+    color: #003d45;
+    font-size: 16px;
+    font-style: normal;
+    text-align: left;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 1.2px;
+    @media screen and (min-width: 764px) {
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+
+  .svg-icon {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+
+    @media screen and (min-width: 1320px) {
+      width: 130px;
+      height: 130px;
+    }
+  }
+}

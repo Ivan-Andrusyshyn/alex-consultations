@@ -1,0 +1,41 @@
+.reset-btn {
+  border-radius: 1rem;
+  padding: 4px;
+  border: none;
+  outline: none;
+  gap: 4px;
+  margin-bottom: 8px;
+
+  box-sizing: border-box;
+  background-color: transparent;
+  display: flex;
+  color: var(--color-text-secondary);
+
+  align-items: center;
+  cursor: pointer;
+  svg {
+    stroke: var(--color-text-secondary);
+    width: 36px;
+  }
+  p {
+    margin: 0;
+    font-size: 12px;
+
+    transition: all 0.5s linear;
+  }
+  .refresh-icon {
+    transition: all 0.4s linear;
+  }
+
+  &:hover {
+    .refresh-icon {
+      transform: scale(1.2);
+      transform: rotate(360deg) !important;
+    }
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

@@ -1,62 +1,44 @@
 <section class="home">
-  <app-test-list-hero></app-test-list-hero>
-
-  <div class="hero-bg">
-    <div class="hero-content">
-      @if (loading$|async) {
-      <div class="spinner-container">
-        <mat-progress-spinner
-          mode="indeterminate"
-          color="primary"
-        ></mat-progress-spinner>
+  <div class="hero">
+    <app-hero-animation></app-hero-animation>
+    <div class="relative-wrapper">
+      <div class="card-tests-container">
+        <app-hero-cards-slider></app-hero-cards-slider>
+        <br />
       </div>
-      }@else {
-
-      <ng-container *ngIf="dayPhrase$ | async as dayPhrase">
-        @if (!dayPhrase.usersPhrase.phrase) {
-        <div>
-          <img src="assets/svg/heart.svg" alt="Heart Icon" />
-
-          <div class="bg-text">"{{ dayPhrase.allPhrases[1].phrase }}"</div>
-        </div>
-
-        } @else {
-        <div class="users-type-wrapper">
-          <img src="assets/svg/heart.svg" alt="Heart Icon" />
-          <div class="users-type">
-            <div class="type-description">Ваш тип особистості</div>
-            <div>
-              {{ dayPhrase.usersPhrase.userTypeName }}
-              <span>({{ dayPhrase.usersPhrase.personalityType }})</span>
+      <div class="absolute-wrapper">
+        <div class="card-container">
+          <div class="main-card hover-container">
+            <div class="hero-content">
+              <ng-container *ngIf="dayPhrase$ | async as dayPhrase">
+                <div>
+                  <div class="bg-text">
+                    "{{ dayPhrase.allPhrases[dayNumber - 1].phrase }}"
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div class="btn-wrapper">
+              <app-primary-btn
+                [textBtn]="'Записатися'"
+                (onClick)="openDialog()"
+              ></app-primary-btn>
             </div>
           </div>
         </div>
-        <div class="date-container">
-          <strong>{{ todayDate }}</strong>
-        </div>
-        <div class="bg-text">"{{ dayPhrase.usersPhrase.phrase }}"</div>
-
-        }
-      </ng-container>
-      }
+      </div>
     </div>
-    <div class="btn-wrapper">
-      <app-accent-btn
-        [textBtn]="'Персональний розбір'"
-        (onClickBtn)="openDialog()"
-        [matColor]="'primary'"
-      ></app-accent-btn>
-    </div>
-  </div>
 
-  @if (successRegistration()) {
+    @if (successRegistration()) {
 
-  <div class="success-message">✅ Ви успішно записалися!</div>
-  <br />
-  }
-  <div class="consultation-wrapper">
-    <app-info-card></app-info-card>
+    <div class="success-message">✅ Ви успішно записалися!</div>
+    <br />
+    }
+    <app-information></app-information>
+    <app-my-help></app-my-help>
+    <app-benefits></app-benefits>
+    <app-video-benefits></app-video-benefits>
+    <app-goals></app-goals>
+    <app-our-service-cards></app-our-service-cards>
   </div>
-  <br />
-  <br />
 </section>

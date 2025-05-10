@@ -1,29 +1,83 @@
-@import "../../../assets/mixins.scss";
-
 .home {
-  @include adaptive-spacing(
-    padding,
-    $padding-mobile,
-    $padding-tablet,
-    $padding-desktop
-  );
+  padding-top: 30px;
+  @media screen and (min-width: 764px) {
+    padding-top: 70px;
+  }
 }
 
-.hero-bg {
-  border-radius: 15px;
-  gap: 20px;
-  padding: 16px 8px;
-  margin-bottom: 20px;
+.card-tests-container {
+  background-color: #057988;
+  width: 100%;
+
+  padding: 18px 0;
+  @media screen and (min-width: 764px) {
+    padding: 100px 0;
+  }
+  @media screen and (min-width: 1200px) {
+    padding-bottom: 138px;
+    padding-top: 200px;
+    height: 1350px;
+    background-image: url("../../../assets/new/core/main/hero/wave-2.svg");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+  }
+}
+.card-container {
+  background: #057988;
+  padding: 16px;
+  @media screen and (min-width: 764px) {
+    padding: 0 100px;
+  }
+  @media screen and (min-width: 1200px) {
+    background: transparent;
+    padding: 0 200px;
+  }
+}
+.relative-wrapper {
+  position: relative;
+}
+.absolute-wrapper {
+  background-color: #057988;
+  padding: 30px 0;
+
+  @media screen and (min-width: 1200px) {
+    position: absolute;
+    top: 75%;
+    background-color: transparent;
+    left: 100px;
+  }
+  @media screen and (min-width: 1640px) {
+    padding: 0;
+    top: 67%;
+  }
+}
+.main-card {
+  gap: 24px;
+  padding: 33px 24px;
+  max-width: 1320px;
 
   position: relative;
   display: flex;
-  box-shadow: var(--boxShadow);
+  flex-direction: column;
   align-items: center;
-  background-color: var(--bgColorBox);
+  box-sizing: border-box;
+  transition: all 0.4s linear;
+  border-radius: var(--border-radius-primary);
+  box-shadow: var(--container-shadow);
+  color: var(--color-text-secondary);
+  background-color: #fff;
   justify-content: space-around;
   flex-wrap: wrap;
-  .hero-content {
-    min-width: 250px;
+  @media screen and (min-width: 764px) {
+    gap: 72px;
+    align-items: flex-start;
+    padding: 60px;
+  }
+  @media screen and (min-width: 1640px) {
+    gap: 117px;
+    padding: 107px 96px 60px 96px;
   }
   .users-type-wrapper {
     gap: 20px;
@@ -55,20 +109,8 @@
         padding-left: 64px;
       }
     }
-    img {
-      margin: 0;
-    }
   }
-  img {
-    width: 44px;
-    display: block;
-    margin: 0 auto;
-  }
-  @media screen and (min-width: 764px) {
-    gap: 0;
-    height: 250px;
-    flex-wrap: nowrap;
-  }
+
   .date-container {
     font-size: 14px;
     top: 8px;
@@ -84,25 +126,21 @@
     }
   }
   .bg-text {
-    font-size: 16px;
-    line-height: 200%;
-    font-size: 16px;
-    padding-left: 0;
-
-    color: var(--textColor);
-    font-family: var(--fontFamilySecondary);
-    text-align: center;
-    font-style: italic;
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: 24px;
+    letter-spacing: 1.2px;
     @media screen and (min-width: 764px) {
-      padding-left: 24px;
-      text-align: left;
-      font-size: 20px;
+      font-size: 32px;
+    }
+    @media screen and (min-width: 1200px) {
+      font-size: 50px;
     }
   }
 }
+
 .btn-wrapper {
   padding: 8px;
-  flex-shrink: 1;
 }
 .success-message {
   border-radius: 5px;

@@ -37,6 +37,7 @@ export function createTestRoutes(options: RouteOptions): Routes {
         {
           path: TestPage.Questions,
           loadComponent: loadQuestions,
+          data: { scrollToTop },
         },
         {
           path: TestPage.Details,

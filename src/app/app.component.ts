@@ -10,20 +10,19 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Observable, switchMap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-
-import { LoadingService } from './shared/services/loading.service';
-import { LoaderSquareComponent } from './components/loader-square/loader-square.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ThemeService } from './shared/services/theme.service';
-import { PersonalitiesPhraseService } from './shared/services/personalities-phrase.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { GoogleSheetsService } from './shared/services/google-sheets.service';
-import { OnAppInitService } from './shared/services/on-app-init.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './core/footer/footer.component';
+import { HeaderComponent } from './core/header/header.component';
+import { LoadingService } from './core/services/loading.service';
+import { OnAppInitService } from './core/services/on-app-init.service';
+import { PersonalitiesPhraseService } from './core/services/personalities-phrase.service';
+import { ThemeService } from './core/services/theme.service';
+import { LoaderSquareComponent } from './shared/components/loader-square/loader-square.component';
+import { MatIconsService } from './core/services/mat-icons.service';
 
 @Component({
   selector: 'app-root',
@@ -51,6 +50,7 @@ export class AppComponent implements OnInit {
   );
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
+  private iconService = inject(MatIconsService);
 
   loading$!: Observable<boolean>;
   currentReqMethod$!: Observable<string>;

@@ -1,0 +1,45 @@
+.instruction {
+  max-width: 600px;
+  color: var(--textColor);
+  margin: 0 auto;
+}
+
+.instruction h3 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  color: var(--textColor);
+
+  text-align: center;
+
+  @media screen and (min-width: 764px) {
+    font-size: 1.6rem;
+  }
+}
+
+.instruction ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 12px;
+
+  display: flex;
+  flex-direction: column;
+}
+.instruction li {
+  margin-bottom: 12px;
+  padding: 8px;
+  border-left: 5px solid #6c63ff;
+  border-radius: 8px;
+  font-size: 1rem;
+
+  color: var(--textColor);
+  transition: background-color 0.3s ease;
+
+  @media screen and (min-width: 764px) {
+    height: 100px;
+  }
+}
+
+.instruction li:hover {
+  background-color: #f1f0ff;
+}

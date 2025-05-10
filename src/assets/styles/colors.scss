@@ -1,0 +1,26 @@
+:root {
+  --color-text-primary: #003d45;
+  --color-text-secondary: #057988;
+  --color-text-white-primary: #ffffff;
+  --color-text-white-secondary: #f5f5f5;
+
+  --bg-container-white: #fff;
+  --background-muted: #f9f9f9;
+  --gradient: linear-gradient(93deg, #003d45 0%, #056571 100%);
+
+  --dark-gradient-button: linear-gradient(90deg, #003d45 0%, #057988 100%);
+
+  --red-gradient-button: linear-gradient(135deg, #ff6479, #993c49);
+
+  --btn-border-color: #f5f5f5;
+  --btn-border-width: 1px;
+
+  --border-radius-primary: 20px;
+  --border-radius-secondary: 15px;
+
+  --container-shadow: 3px 3px 15px rgba(0, 0, 0, 0.15);
+
+  --error-color: #ff3b30;
+  --success-color: #4cd964;
+  --warning-color: #ffcc00;
+}

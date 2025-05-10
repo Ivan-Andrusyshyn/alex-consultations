@@ -1,0 +1,9 @@
+<section class="service-cards">
+  <h3 class="service-title title-primary">Для цього на сайті є:</h3>
+  <ul class="service-card-list">
+    @for ( card of cards; track $index) {
+
+    <app-service-card [card]="card"></app-service-card>
+    }
+  </ul>
+</section>

@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 
 import { RouterOutlet } from '@angular/router';
 
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
-import { SeoService } from '../../shared/services/seo.service';
+import { RouteTrackerService } from '../../core/services/route-tracker.service';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-role-in-relationships',

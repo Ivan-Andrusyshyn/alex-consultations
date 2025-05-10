@@ -1,18 +1,15 @@
-@import "../../../assets/mixins.scss";
-
-.test {
-  width: 100%;
+.attractiveness {
+  max-width: 1320px;
+  padding: 18px;
+  margin: 0 auto;
 
   color: #fff;
   text-align: center;
   box-sizing: border-box;
   position: relative;
-  @include adaptive-spacing(
-    padding,
-    $padding-mobile,
-    $padding-tablet,
-    $padding-desktop
-  );
+  @media screen and (min-width: 764px) {
+    padding: 64px 18px;
+  }
 }
 // ERROR
 .test-error {

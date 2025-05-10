@@ -1,0 +1,37 @@
+.primary-btn {
+  padding: 13px 48px;
+  gap: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-width: var(--btn-border-width);
+  border-radius: 15px;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-white-primary);
+
+  box-sizing: border-box;
+  line-height: 1;
+  letter-spacing: 1.2px;
+  text-align: center;
+
+  cursor: pointer;
+  transition: all 0.4s linear;
+
+  @media screen and (min-width: 764px) {
+    border-radius: var(--border-radius-secondary);
+    padding: 20px 58px;
+  }
+}
+.dark-btn {
+  box-shadow: var(--container-shadow);
+  background: var(--dark-gradient-button);
+  border-color: var(--btn-border-color);
+}
+.red-btn {
+  border-radius: 20px;
+  background: linear-gradient(90deg, #993c49 0%, #ff6479 100%);
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
+}

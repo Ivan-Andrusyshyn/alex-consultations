@@ -1,17 +1,14 @@
-<app-title-card
-  [imgUrl]="imgUrl"
-  [titleText]="titleText"
-  [subtitleText]="subtitleText"
-></app-title-card>
-<app-test-consultation-registration></app-test-consultation-registration>
+<app-title-card></app-title-card>
 
 <section class="disclaimer">
   <ng-container *ngIf="calculatorDeclaimer$ | async as calculatorDeclaimer">
-    <h3 class="disclaimer-title">{{ calculatorDeclaimer.title }}</h3>
-    <p class="disclaimer-text">
+    <h3 class="disclaimer-title title-primary">
+      {{ calculatorDeclaimer.title }}
+    </h3>
+    <p class="disclaimer-text subtitle">
       {{ calculatorDeclaimer.text }}
     </p>
-    <p class="disclaimer-experimental">
+    <p class="disclaimer-experimental subtitle">
       {{ calculatorDeclaimer.responsibility }}
     </p>
   </ng-container>
@@ -19,11 +16,10 @@
 
 <section class="calculator">
   <div class="wrapper">
-    <h3>Аналіз сумісності за типами особистості</h3>
-    <br />
+    <h3 class="title-primary">Аналіз сумісності за типами особистості</h3>
     <br />
 
-    <form action="" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <form action="" [formGroup]="formGroup">
       <p class="subtitle">
         Оберіть два типи особистості, щоб дізнатися їхню сумісність
       </p>
@@ -65,41 +61,47 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <button class="calculate-btn" type="submit">Дізнатися сумісність</button>
+      <div class="btn-wrapper">
+        <app-primary-btn
+          (onClick)="onSubmit()"
+          [textBtn]="'Дізнатися сумісність'"
+        ></app-primary-btn>
+      </div>
     </form>
   </div>
   <br />
   <ng-container *ngIf="calculatorResult$ | async as calculatorResult">
-    <h3>
-      {{ calculatorResult.relationshipsType.text }}
-      {{ calculatorResult.scoreResult }} %
-    </h3>
-
     <div class="calculator-result">
-      <div class="description">
-        <p>{{ calculatorResult.calculatorResults.description }}</p>
+      <div class="calculator-section">
+        <h3 class="title-primary">
+          {{ calculatorResult.relationshipsType.text }}
+          {{ calculatorResult.scoreResult }} %
+        </h3>
+        <div class="description subtitle">
+          <p>{{ calculatorResult.calculatorResults.description }}</p>
+        </div>
       </div>
 
       <div
-        class="section"
+        class="calculator-section"
         *ngIf="
           calculatorResult.calculatorResults.sections.relationshipExplanation
         "
       >
-        <h4>Що між вами відбувається?</h4>
-        <p>
+        <h4 class="subtitle">Що між вами відбувається?</h4>
+        <p class="subtitle">
           {{
             calculatorResult.calculatorResults.sections.relationshipExplanation
               .deepUnderstanding
           }}
         </p>
-        <p>
+        <p class="subtitle">
           {{
             calculatorResult.calculatorResults.sections.relationshipExplanation
               .desireForDepth
           }}
         </p>
-        <p>
+        <p class="subtitle">
           {{
             calculatorResult.calculatorResults.sections.relationshipExplanation
               .stabilityAndComfort
@@ -107,8 +109,8 @@
         </p>
       </div>
 
-      <div class="section">
-        <h4>Чому вам може бути складно?</h4>
+      <div class="calculator-section">
+        <h4 class="subtitle">Чому вам може бути складно?</h4>
         <ul>
           <li
             *ngFor="
@@ -116,34 +118,36 @@
                 .possibleDifficulties
             "
           >
-            {{ difficulty }}
+            <p class="subtitles">
+              {{ difficulty }}
+            </p>
           </li>
         </ul>
       </div>
 
-      <div class="section">
-        <h4>Як зробити ці стосунки комфортнішими?</h4>
+      <div class="calculator-section">
+        <h4 class="subtitle">Як зробити ці стосунки комфортнішими?</h4>
         <ul>
           <li
+            class="subtitle"
             *ngFor="
               let improvement of calculatorResult.calculatorResults.sections
                 .improvingRelationship
             "
           >
-            {{ improvement }}
+            <p>
+              {{ improvement }}
+            </p>
           </li>
         </ul>
       </div>
 
-      <div class="section">
-        <h4>Важливо</h4>
-        <p>{{ calculatorResult.calculatorResults.sections.conclusion }}</p>
-      </div>
-
-      <div class="reflection">
-        <p>{{ calculatorResult.calculatorResults.sections.reflection }}</p>
+      <div class="calculator-section">
+        <h4 class="subtitle">Важливо</h4>
+        <p class="subtitle">
+          {{ calculatorResult.calculatorResults.sections.conclusion }}
+        </p>
       </div>
     </div>
-    <!-- <app-feedback-form></app-feedback-form> -->
   </ng-container>
 </section>

@@ -12,7 +12,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
   filter,
-  map,
   Observable,
   switchMap,
   tap,
@@ -22,32 +21,42 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DateTime } from 'luxon';
 
-import { ModalComponent } from '../../components/modal/modal.component';
-import { TestListHeroComponent } from '../../components/test/test-list-hero/test-list-hero.component';
-import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
-import { SeoService } from '../../shared/services/seo.service';
-import { InfoCardComponent } from '../../components/home/info-card/info-card.component';
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
-import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
-import { PersonalitiesPhraseService } from '../../shared/services/personalities-phrase.service';
-
-import { LoadingService } from '../../shared/services/loading.service';
+import { CountingClicksService } from '../../core/services/counting-clicks.service';
+import { GoogleSheetsService } from '../../core/services/google-sheets.service';
+import { LoadingService } from '../../core/services/loading.service';
+import { PersonalitiesPhraseService } from '../../core/services/personalities-phrase.service';
+import { SeoService } from '../../core/services/seo.service';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import {
   PersonalityDayPhrases,
   UsersPhraseSubject,
-} from '../../shared/types/personalities-phrases';
-import { CountingClicksService } from '../../shared/services/counting-clicks.service';
+} from '../../shared/models/personalities-phrases';
+import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
+import { InformationComponent } from '../../shared/components/home/information/information.component';
+import { MyHelpComponent } from '../../shared/components/home/my-help/my-help.component';
+import { BenefitsComponent } from '../../shared/components/home/benefits/benefits.component';
+import { VideoBenefitsComponent } from '../../shared/components/home/video-benefits/video-benefits.component';
+import { GoalsComponent } from '../../shared/components/home/goals/goals.component';
+import { OurServiceCardsComponent } from '../../shared/components/home/our-service-cards/our-service-cards.component';
+import { HeroAnimationComponent } from '../../shared/components/home/hero-animation/hero-animation.component';
+import { HeroCardsSliderComponent } from '../../shared/components/home/hero-cards-slider/hero-cards-slider.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    TestListHeroComponent,
     AsyncPipe,
-    InfoCardComponent,
-    AccentBtnComponent,
     NgIf,
     MatProgressSpinnerModule,
+    PrimaryBtnComponent,
+    MyHelpComponent,
+    BenefitsComponent,
+    InformationComponent,
+    VideoBenefitsComponent,
+    GoalsComponent,
+    OurServiceCardsComponent,
+    HeroCardsSliderComponent,
+    HeroAnimationComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -61,13 +70,13 @@ export class HomeComponent implements OnInit {
     PersonalitiesPhraseService
   );
   private countingService = inject(CountingClicksService);
+  private readonly loadingService = inject(LoadingService);
 
   successRegistration = signal(false);
   todayDate!: string;
-
+  dayNumber = new Date().getDate();
   private seoService = inject(SeoService);
   loading$!: Observable<boolean>;
-  private readonly loadingService = inject(LoadingService);
 
   dayPhrase$!: Observable<{
     allPhrases: PersonalityDayPhrases[];
@@ -75,6 +84,7 @@ export class HomeComponent implements OnInit {
   }>;
 
   ngOnInit(): void {
+    // this.openDialog();
     this.todayDate = DateTime.now()
       .setLocale('uk')
       .toLocaleString(DateTime.DATE_FULL);
@@ -101,11 +111,11 @@ export class HomeComponent implements OnInit {
     this.postCountingClicksInSocialLinks('modalButton');
 
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '290px',
-      width: '350px',
+      width: '90vw',
+      maxWidth: '1320px',
       data: {
-        isForm: false,
-        isShowLinks: true,
+        isForm: true,
+        isShowLinks: false,
         contentType: 'form-consultation',
         title:
           'Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁',

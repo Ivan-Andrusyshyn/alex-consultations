@@ -1,79 +1,124 @@
 <div class="consultation">
-  <div class="wrapper">
-    <h2>{{ consultationContent.title }}</h2>
+  <div class="title-card-wrapper">
+    <app-title-card
+      [titleText]="titleText"
+      [subtitleText]="''"
+    ></app-title-card>
   </div>
 
-  <div class="wrapper">
-    <h3>{{ consultationContent.results.title }}</h3>
-    <p class="main-card-text">
-      {{ consultationContent.results.resultsDescription }}
-    </p>
-    <ul>
-      <li *ngFor="let item of consultationContent.results.items">
-        <strong>{{ item.heading }}</strong>
-        {{ item.description }}
+  <section class="my-help section-container">
+    <h3 class="my-help-title title-primary">
+      {{ consultationContent.myHelp.sectionTitle }}
+    </h3>
+    <ul class="my-help-list">
+      @for (content of consultationContent.myHelp.listItems; track $index) {
+
+      <li class="my-help-item">
+        <div class="item-title-wrapper">
+          <div class="my-help-svg-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 72 72"
+              fill="none"
+            >
+              <path
+                d="M36 6C19.5 6 6 19.5 6 36C6 52.5 19.5 66 36 66C52.5 66 66 52.5 66 36C66 19.5 52.5 6 36 6ZM48.6 30.9L34.2 45.3C33 46.5 31.2 46.5 30 45.3L23.4 38.7C22.2 37.5 22.2 35.7 23.4 34.5C24.6 33.3 26.4 33.3 27.6 34.5L32.1 39L44.4 26.7C45.6 25.5 47.4 25.5 48.6 26.7C49.8 27.9 49.8 29.7 48.6 30.9Z"
+                fill="#057988"
+              />
+            </svg>
+          </div>
+          <h4 class="my-help-item-title subtitle">{{ content.itemTitle }}</h4>
+        </div>
+        <p class="my-help-item-text subtitle">{{ content.subtitle }}</p>
       </li>
+      }
     </ul>
+  </section>
+  <div class="main-icon section-container">
+    <img src="/assets/new/core/consultation/icon-1.svg" alt="" />
   </div>
+  <section class="about-consultation section-container">
+    <h3 class="my-help-title title-primary">
+      {{ consultationContent.aboutConsultation.sectionTitle }}
+    </h3>
+    <ul class="about-cards">
+      @for (content of consultationContent.aboutConsultation.listItems; track
+      $index) {
 
-  <div class="wrapper">
-    <h3>{{ consultationContent.consultationProcess.title }}</h3>
-    <p class="main-card-text">
-      {{ consultationContent.consultationProcess.descriptions }}
-    </p>
-    <ul>
-      <li *ngFor="let step of consultationContent.consultationProcess.steps">
-        <strong>{{ step.stepTitle }}</strong>
-        {{ step.description }}
+      <li class="about-card">
+        <div class="card-number-wrapper">
+          <div class="card-number">0{{ $index + 1 }}</div>
+          <h4 class="about-card-title-mob subtitle">{{ content.itemTitle }}</h4>
+        </div>
+        <div class="about-card-text">
+          <h4 class="subtitle">{{ content.itemTitle }}</h4>
+          <p class="subtitle">{{ content.subtitle }}</p>
+        </div>
       </li>
+      }
     </ul>
-    <p>
-      <strong>Тривалість консультації:</strong>
-      {{ consultationContent.consultationProcess.sessionDuration }}
-    </p>
-    <p>
-      <strong>Конфіденційність:</strong>
-      {{ consultationContent.consultationProcess.confidentiality }}
-    </p>
-    <p>
-      {{ consultationContent.consultationProcess.summaryText }}
-    </p>
-  </div>
+  </section>
 
-  <div class="wrapper">
-    <h3>{{ consultationContent.uniqueApproach.title }}</h3>
-    <p>{{ consultationContent.uniqueApproach.description }}</p>
-    <p>{{ consultationContent.uniqueApproach.extraDescription }}</p>
-    <p class="main-card-text">
-      {{ consultationContent.uniqueApproach.elseDescription }}
+  <section class="it-works section-container">
+    <h3 class="it-works-title title-primary">Чому це працює?</h3>
+    <p class="it-works-subtitle subtitle">
+      Ви дізнаєтеся свій унікальний когнітивний профіль: свої сильні сторони,
+      приховані мотиви та потреби. Це усвідомлення допоможе побачити себе з
+      нового ракурсу. Ви зрозумієте, чому деякі рішення вас виснажують чи чому
+      конфлікти у стосунках повторюються, як інші бачать вас. Ці пошуки можуть
+      тривати все життя. Багато людей приходять до справжнього розуміння себе
+      лише після десятків років проб і болю, коли через досвід відсіюють усе
+      зайве. Але вся інструкція до себе завжди була поруч. Вона не складна –
+      просто її ніколи не пояснювали так, щоб вона дійсно відкрила тобі очі.
     </p>
-    <ul>
-      <li *ngFor="let option of consultationContent.uniqueApproach.options">
-        {{ option }}
+    <div class="it-works-cards-wrapper">
+      <ul class="it-works-list">
+        @for (card of consultationContent.itWorksCards; track $index) {
+
+        <app-service-card
+          [svgPath]="card.svgPath"
+          [card]="card"
+        ></app-service-card>
+        }
+      </ul>
+    </div>
+    <p class="it-works-subtitle subtitle">
+      Я не просто аналізую особистісні типи – я допомагаю зрозуміти себе глибше
+      та простіше. Як ENFP, я природно бачу закономірності у мисленні, почуттях
+      і виборах. Помічаю ваші сильні сторони, навіть якщо ви їх ще не
+      усвідомлюєте, розплутую внутрішні суперечності та допомагаю знайти шлях,
+      що відгукнеться саме вам. Без осуду, без складних термінів – лише,
+      ясність, підтримка і новий погляд на себе.
+    </p>
+  </section>
+
+  <section class="registration section-container">
+    <h3 class="registration-title title-primary">Запишіться на консультацію</h3>
+
+    <ul class="registration-cards">
+      <li class="registration-card hover-container arrow-step-1">
+        <p class="registration-card-text subtitle">
+          Заповніть форму нижче або напишіть мені в месенджер
+        </p>
       </li>
-    </ul>
-    <p>{{ consultationContent.uniqueApproach.optionsDescription }}</p>
-  </div>
-
-  <div class="wrapper">
-    <h3>{{ consultationContent.signUp.title }}</h3>
-    <p class="main-card-text">{{ consultationContent.signUp.description }}</p>
-    <h4>{{ consultationContent.signUp.extraTitle }}</h4>
-    <ul>
-      <li *ngFor="let instruction of consultationContent.signUp.instructions">
-        {{ instruction }}
+      <li class="registration-card hover-container arrow-step-2">
+        <p class="registration-card-text subtitle">
+          Я зв’яжусь із вами для узгодження часу консультації.
+        </p>
+      </li>
+      <li class="registration-card hover-container arrow-step-3">
+        <p class="registration-card-text subtitle">
+          Ви отримуєте деталі зустрічі та рекомендації перед консультацією.
+        </p>
       </li>
     </ul>
     <div class="btn-wrapper">
-      <app-accent-btn
-        [textBtn]="'Записатися'"
-        (onClickBtn)="openDialog()"
-        [matColor]="'primary'"
-      ></app-accent-btn>
+      <app-primary-btn (onClick)="openDialog()"></app-primary-btn>
     </div>
-  </div>
+    @if (successRegistration()) {
 
-  <div class="success-message" *ngIf="successRegistration()">
-    <p>{{ consultationContent.successMessage }}</p>
-  </div>
+    <div class="success-message">✅ Ви успішно записалися!</div>
+    <br />
+    }
+  </section>
 </div>

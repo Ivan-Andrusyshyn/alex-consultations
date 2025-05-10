@@ -1,0 +1,28 @@
+.video-benefits {
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  @media screen and (min-width: 764px) {
+    padding: 48px 0;
+  }
+  @media screen and (min-width: 1390px) {
+    padding: 169px 0;
+  }
+  .video-youtube {
+    width: 358px;
+    height: 201px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    @media screen and (min-width: 764px) {
+      width: 658px;
+      height: 351px;
+    }
+    @media screen and (min-width: 1390px) {
+      width: 1320px;
+      height: 742px;
+    }
+  }
+}

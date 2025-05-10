@@ -1,0 +1,85 @@
+.info {
+  background-color: #057988;
+  background-size: cover;
+  padding: 18px;
+
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  @media screen and (min-width: 764px) {
+    padding-top: 214px;
+    padding-bottom: 164px;
+  }
+  @media screen and (min-width: 1200px) {
+    background-color: transparent;
+    background-image: url(/assets/new/core/main/hero/wave-3.svg);
+    background-repeat: no-repeat;
+  }
+
+  .info-list {
+    gap: 23px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1320px;
+    @media screen and (min-width: 764px) {
+      gap: 120px;
+    }
+  }
+  .info-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 36px;
+    max-width: 360px;
+    @media screen and (min-width: 764px) {
+      align-items: center;
+    }
+    p {
+      border-top: 1px solid #fff;
+
+      padding-top: 20px;
+      text-align: left;
+      color: inherit;
+      font-size: 16px;
+      max-width: 360px;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 1.2px;
+      @media screen and (min-width: 764px) {
+        font-size: 20px;
+        width: 360px;
+        text-align: center;
+      }
+    }
+  }
+  .items-icon {
+    width: 100px;
+    height: 100px;
+    transition: all 0.6s linear;
+    background-position: center;
+    background-size: contain;
+    position: relative;
+
+    @media screen and (min-width: 1200px) {
+      width: 238px;
+      height: 238px;
+    }
+  }
+}
+.icon-wrapper .icon-hover {
+  display: none;
+}
+
+.icon-wrapper:hover .icon-hover {
+  display: block;
+}
+
+.icon-wrapper .delete-hover {
+  display: block;
+}
+
+.icon-wrapper:hover .delete-hover {
+  display: none;
+}

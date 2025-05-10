@@ -1,0 +1,19 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-primary-btn',
+  standalone: true,
+  imports: [],
+  templateUrl: './primary-btn.component.html',
+  styleUrl: './primary-btn.component.scss',
+})
+export class PrimaryBtnComponent {
+  @Output() onClick = new EventEmitter();
+
+  @Input() classColor: 'dark-btn' | 'red-btn' = 'dark-btn';
+  @Input() textBtn: string = 'Запис на консультацію';
+
+  click() {
+    this.onClick.emit();
+  }
+}

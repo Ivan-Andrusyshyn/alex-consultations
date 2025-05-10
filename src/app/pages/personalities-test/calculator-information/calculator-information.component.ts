@@ -7,11 +7,11 @@ import {
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { map, Observable } from 'rxjs';
 
-import { TitleCardComponent } from '../../../components/title-card/title-card.component';
-import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
-import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
-import { SeoService } from '../../../shared/services/seo.service';
-import { CalculatorInformation } from '../../../shared/types/personalities-calculator';
+import { PersonalitiesCalculatorService } from '../../../core/services/personalities-calculator.service';
+import { SeoService } from '../../../core/services/seo.service';
+import { TestCardStartBtnComponent } from '../../../shared/components/test/test-card-start-btn/test-card-start-btn.component';
+import { TitleCardComponent } from '../../../shared/components/title-card/title-card.component';
+import { CalculatorInformation } from '../../../shared/models/personalities-calculator';
 
 @Component({
   selector: 'app-calculator-information',

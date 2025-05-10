@@ -5,8 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { CountingClicksService } from '../services/counting-clicks.service';
+import { CountingClicksService } from '../../core/services/counting-clicks.service';
 
 @Injectable({
   providedIn: 'root',

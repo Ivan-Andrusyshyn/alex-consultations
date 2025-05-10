@@ -1,0 +1,21 @@
+.service-cards {
+  padding: 18px;
+
+  @media screen and (min-width: 764px) {
+    padding: 44px 0;
+  }
+  @media screen and (min-width: 1200px) {
+    padding: 189px 0;
+  }
+}
+.service-title {
+  margin-bottom: 64px;
+  text-align: center;
+}
+.service-card-list {
+  gap: 27px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

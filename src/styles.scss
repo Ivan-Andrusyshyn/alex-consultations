@@ -1,7 +1,11 @@
 @use "./assets/themes.scss" as *;
 @use "./assets/reset.scss";
 @use "./assets/mat.scss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@use "./assets/styles/colors.scss";
+@use "./assets/styles/utils.scss";
+@use "./assets/styles/typography.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap");
 
 :root {
   @include darken();
@@ -13,37 +17,25 @@
 .dark-mode {
   @include darken();
 }
-[data-stuck] {
-  position: sticky;
-  top: 0;
-  transition: transform 0.3s;
-}
 
-[data-stuck="false"] {
-  transform: translate3d(0, -100%, 0);
-  transition: transform 0.3s 0.5s;
-}
 ul,
 ol,
 li {
+  margin: 0;
   list-style: none;
-  font-weight: 500;
-  font-family: var(--fontFamilyPrimary);
-  font-style: italic;
+  padding: 0;
 }
 h1,
 h2,
 h3,
 h4,
 h5 {
-  font-family: var(--fontFamilySecondary);
-  font-weight: 700;
+  margin: 0;
 }
 
 p,
 label {
-  font-family: var(--fontFamilyPrimary);
-  font-weight: 500;
+  margin: 0;
 }
 p,
 li {
@@ -62,7 +54,7 @@ span {
   border: none;
   outline: none;
   background: none;
-  font-family: var(--fontFamilyPrimary);
+  font-family: var(--font-main);
 
   font-weight: 400;
 }
@@ -70,7 +62,7 @@ span {
 a {
   text-decoration: none;
   color: inherit;
-  font-family: var(--fontFamilyPrimary);
+  font-family: var(--font-main);
 
   font-weight: 400;
 }
@@ -78,7 +70,7 @@ html,
 body {
   margin: 0;
 
-  background: var(--bgColor);
+  font-family: var(--font-main);
 
   ::-webkit-scrollbar {
     background-color: #f9f9f9;

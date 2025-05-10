@@ -1,0 +1,66 @@
+<header
+  class="header"
+  appStickyHeader
+  [stickyClass]="'sticky-header'"
+  #header
+  [offset]="200"
+>
+  <div class="container">
+    <app-logo></app-logo>
+
+    <nav class="nav">
+      <ul>
+        <li
+          routerLink="/"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          Головна
+        </li>
+
+        <li
+          routerLink="/tests"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          Тести
+        </li>
+        <li
+          [hidden]="hiddenRoutes"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/courses"
+          routerLinkActive="active"
+        >
+          Курси
+        </li>
+        <li
+          routerLink="/consultations"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          Аналіз особистості
+        </li>
+
+        <li
+          routerLink="/contacts"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          Контакти
+        </li>
+        <li
+          routerLink="/about"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          Про нас
+        </li>
+      </ul>
+    </nav>
+    <!-- <div class="toggle-wrapper">
+      <app-toggle-btn></app-toggle-btn>
+    </div> -->
+    <app-mob></app-mob>
+  </div>
+</header>
+<div class="p-container"></div>

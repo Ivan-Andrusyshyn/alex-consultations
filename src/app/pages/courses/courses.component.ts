@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+
+import { RouteTrackerService } from '../../core/services/route-tracker.service';
 
 @Component({
   selector: 'app-courses',

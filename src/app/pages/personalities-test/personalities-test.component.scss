@@ -1,18 +1,14 @@
-@import "../../../assets/mixins.scss";
-
-.test {
-  width: 100%;
-
+.personalities {
+  max-width: 1320px;
+  padding: 18px;
+  margin: 0 auto;
   color: #fff;
   text-align: center;
   position: relative;
   box-sizing: border-box;
-  @include adaptive-spacing(
-    padding,
-    $padding-mobile,
-    $padding-tablet,
-    $padding-desktop
-  );
+  @media screen and (min-width: 764px) {
+    padding: 64px 18px;
+  }
 }
 // ERROR
 .test-error {

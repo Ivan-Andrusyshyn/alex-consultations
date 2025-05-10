@@ -5,28 +5,35 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
+import { NgIf, NgFor } from '@angular/common';
 
-import { AccentBtnComponent } from '../../components/accent-btn/accent-btn.component';
-import { ModalComponent } from '../../components/modal/modal.component';
-import { GoogleSheetsService } from '../../shared/services/google-sheets.service';
-import { ColorDotsComponent } from '../../components/color-dots/color-dots.component';
-import { SeoService } from '../../shared/services/seo.service';
+import { GoogleSheetsService } from '../../core/services/google-sheets.service';
+import { RouteTrackerService } from '../../core/services/route-tracker.service';
+import { SeoService } from '../../core/services/seo.service';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { consultationData } from './consultations';
-import { ConsultationContent } from '../../shared/types/consultations';
-import { NgFor, NgIf } from '@angular/common';
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import { ServiceCardComponent } from '../../shared/components/service-card/service-card.component';
+import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
+
+type SectionType = {
+  sectionTitle: string;
+  listItems: {
+    itemTitle: string;
+    subtitle: string;
+  }[];
+};
 
 @Component({
   selector: 'app-consultations',
   standalone: true,
   imports: [
     MatFormFieldModule,
-    AccentBtnComponent,
-    ColorDotsComponent,
-    NgIf,
-    NgFor,
     MatInputModule,
     MatButtonModule,
+    TitleCardComponent,
+    ServiceCardComponent,
+    PrimaryBtnComponent,
   ],
   templateUrl: './consultations.component.html',
   styleUrl: './consultations.component.scss',
@@ -37,10 +44,14 @@ export class ConsultationsComponent implements OnInit {
   private readonly seoService = inject(SeoService);
   private readonly googleService = inject(GoogleSheetsService);
   successRegistration = signal(false);
-
-  consultationContent: ConsultationContent = consultationData;
+  consultationContent: {
+    myHelp: SectionType;
+    aboutConsultation: SectionType;
+    itWorksCards: { title: string; svgPath: string; subtitle: string }[];
+  } = consultationData;
   private routeTracker = inject(RouteTrackerService);
-
+  titleText =
+    'Замість років пошуків — цілісне розуміння себе вже на першій зустрічі.';
   ngOnInit(): void {
     this.routeTracker.getRoutes();
 
@@ -55,8 +66,8 @@ export class ConsultationsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '460px',
-      width: '400px',
+      width: '90vw',
+      maxWidth: '1320px',
       data: {
         isForm: true,
         contentType: 'form-consultation',

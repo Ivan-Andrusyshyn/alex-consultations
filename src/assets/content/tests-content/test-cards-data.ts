@@ -1,6 +1,6 @@
 const testCardsData = Object.freeze([
   {
-    title: '16 типів особистості ',
+    title: '16 типів особистості',
     time: '(5хв ⏳)',
     cardClass: 'personality-card',
     category: ['Всі тести', 'Для особистого розвитку'],

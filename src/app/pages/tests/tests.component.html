@@ -1,51 +1,22 @@
 <section class="tests">
   <div>
     <app-title-card
-      [imgUrl]="titleCardContent.imgUrl"
       [titleText]="titleCardContent.titleText"
       [subtitleText]="titleCardContent.subtitleText"
     ></app-title-card>
 
     <div class="container">
-      <mat-tab-group [(selectedIndex)]="currentTopic">
-        @for (category of categoryList; track $index) {
+      <ng-container *ngFor="let group of groupedCards">
+        <div class="category-wrapper" *ngIf="group.cards.length > 0">
+          <p class="category-title subtitle">{{ group.category }}</p>
 
-        <mat-tab [label]="category">
-          <div class="list-wrapper">
-            <ul class="test-list">
-              @for (test of testData; track $index) { @if(
-              test.category.includes(category)){
-              <li class="test-card" [ngClass]="test.cardClass">
-                <h3>
-                  {{ test.title }}
-                  <span>{{ test.time }}</span>
-                </h3>
-                <p>{{ test.description }}</p>
-                @if(test.time.includes('5')){
-                <div style="margin: 12px 0">
-                  <app-icons-list></app-icons-list>
-                </div>
-                }
-
-                <img class="test-img" [src]="test.testSvg" alt="" />
-                <div class="test-card-buttons">
-                  <app-test-card-start-btn
-                    [route]="test.routeStart"
-                    [btnText]="test.btnText"
-                    class="btn-start"
-                  ></app-test-card-start-btn>
-                  <app-test-card-info-btn
-                    [route]="test.routeInfo"
-                    class="btn-info"
-                  ></app-test-card-info-btn>
-                </div>
-              </li>
-              } }
-            </ul>
-          </div>
-        </mat-tab>
-        }
-      </mat-tab-group>
+          <ul class="test-list">
+            <ng-container *ngFor="let card of group.cards">
+              <app-test-card [card]="card"></app-test-card>
+            </ng-container>
+          </ul>
+        </div>
+      </ng-container>
     </div>
   </div>
 </section>

@@ -19,20 +19,19 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateTime } from 'luxon';
 
-import { PersonalityTypes } from '../../../shared/types/16-personalities';
 import { personalityTypesContent } from '../../../../assets/content/16-personalities/personalityTypes';
-import { TitleCardComponent } from '../../../components/title-card/title-card.component';
-import { PersonalitiesCalculatorService } from '../../../shared/services/personalities-calculator.service';
-import { SeoService } from '../../../shared/services/seo.service';
-import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
-import { GoogleSheetsService } from '../../../shared/services/google-sheets.service';
-import { LoadingService } from '../../../shared/services/loading.service';
+import { GoogleSheetsService } from '../../../core/services/google-sheets.service';
+import { LoadingService } from '../../../core/services/loading.service';
+import { PersonalitiesCalculatorService } from '../../../core/services/personalities-calculator.service';
+import { RouteTrackerService } from '../../../core/services/route-tracker.service';
+import { SeoService } from '../../../core/services/seo.service';
+import { TitleCardComponent } from '../../../shared/components/title-card/title-card.component';
+import { PersonalityTypes } from '../../../shared/models/16-personalities';
 import {
-  CalculatorDisclaimer,
   CalculatorResult,
-} from '../../../shared/types/personalities-calculator';
-import { FeedbackFormComponent } from '../../../components/feedback-form/feedback-form.component';
-import { TestConsultationRegistrationComponent } from '../../../components/test-consultation-registration/test-consultation-registration.component';
+  CalculatorDisclaimer,
+} from '../../../shared/models/personalities-calculator';
+import { PrimaryBtnComponent } from '../../../shared/components/primary-btn/primary-btn.component';
 
 @Component({
   selector: 'app-calculator-relationships',
@@ -45,8 +44,7 @@ import { TestConsultationRegistrationComponent } from '../../../components/test-
     TitleCardComponent,
     MatFormFieldModule,
     MatSelectModule,
-    TestConsultationRegistrationComponent,
-    FeedbackFormComponent,
+    PrimaryBtnComponent,
   ],
   templateUrl: './calculator-relationships.component.html',
   styleUrl: './calculator-relationships.component.scss',

@@ -1,0 +1,118 @@
+.benefits {
+  background: linear-gradient(248deg, #057988 1.84%, #003d45 97.58%);
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  padding: 18px;
+
+  @media screen and (min-width: 764px) {
+    padding: 44px;
+  }
+  @media screen and (min-width: 1200px) {
+    padding: 77px 200px;
+  }
+}
+.benefits-title {
+  letter-spacing: 1.2px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 22px;
+
+  text-align: left;
+  color: #fff;
+  font-style: normal;
+  line-height: normal;
+  @media screen and (min-width: 764px) {
+    text-align: center;
+    font-size: 36px;
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 50px;
+  }
+}
+.benefits-list {
+  gap: 22px;
+
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+.benefits-item {
+  width: 358px;
+  height: 245px;
+
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+  @media screen and (min-width: 764px) {
+    width: 425px;
+    height: 316px;
+  }
+}
+.card-content {
+  gap: 20px;
+  border-radius: 15px;
+  padding: 26px;
+  height: 202px;
+
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  background: rgba(0, 0, 0, 0.25);
+  transition: all 0.3s linear;
+
+  &:hover {
+    border-radius: 20px;
+    background: #057b88;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  }
+  @media screen and (min-width: 764px) {
+    border-radius: 20px;
+    padding: 43px 32px;
+    gap: 22px;
+    height: 243px;
+  }
+  h3 {
+    color: #fff;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+
+    @media screen and (min-width: 764px) {
+      font-size: 24px;
+    }
+  }
+  p {
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.2px;
+    @media screen and (min-width: 764px) {
+      font-size: 20px;
+    }
+  }
+  span {
+    letter-spacing: 1.2px;
+    font-size: 70px;
+    font-weight: 600;
+    top: -55px;
+    right: 10px;
+    z-index: 99;
+    opacity: 0.5;
+    position: absolute;
+    color: rgba(31, 115, 129, 0.6);
+    text-align: center;
+    font-style: normal;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+      1px 1px 0 #fff;
+
+    @media screen and (min-width: 764px) {
+      top: -80px;
+      right: 30px;
+      font-size: 96px;
+    }
+  }
+}

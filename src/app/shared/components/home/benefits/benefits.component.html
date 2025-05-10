@@ -1,0 +1,15 @@
+<section class="benefits">
+  <h2 class="benefits-title">Що ти отримаєш?</h2>
+  <ul class="benefits-list">
+    @for (card of cards; track $index) {
+
+    <li class="benefits-item">
+      <div class="card-content">
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.subtitle }}</p>
+        <span>{{ card.number }}</span>
+      </div>
+    </li>
+    }
+  </ul>
+</section>

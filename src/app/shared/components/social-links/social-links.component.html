@@ -1,0 +1,22 @@
+<section class="social-links">
+  <ul class="links {{ svgSize }}">
+    @for (link of socialLinks; track link.name) {
+
+    <li [attr.data-text]="link.name" class="glass">
+      <a [href]="link.url" target="_blank">
+        @if (isDarkTheme) {
+        <mat-icon
+          class="items-icon svg-icon"
+          [svgIcon]="link.iconName + '-dark'"
+        ></mat-icon>
+        }@else {
+        <mat-icon
+          class="items-icon svg-icon"
+          [svgIcon]="link.iconName"
+        ></mat-icon>
+        }
+      </a>
+    </li>
+    }
+  </ul>
+</section>

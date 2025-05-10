@@ -1,0 +1,143 @@
+<mat-dialog-content>
+  <div>
+    @if(data.isForm){
+
+    <form class="registration-form" [formGroup]="formGroup">
+      <h3 class="title-primary">Запишись на консультацію</h3>
+      <div class="controllers-wrapper">
+        <div
+          class="form-group"
+          [class.valid-controller]="formGroup.get('name')?.valid"
+        >
+          <input
+            class="subtitle registration-controller"
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Ваше імʼя*"
+          />
+          <div
+            class="error submit"
+            *ngIf="
+              formGroup.get('name')?.touched &&
+              formGroup.get('name')?.hasError('required')
+            "
+          >
+            Ім’я обов’язкове
+          </div>
+        </div>
+
+        <div
+          class="form-group"
+          [class.valid-controller]="formGroup.get('socialMedia')?.valid"
+        >
+          <input
+            class="subtitle registration-controller"
+            type="text"
+            id="socialMedia"
+            formControlName="socialMedia"
+            placeholder="Нік в Instagram або Telegram*"
+          />
+          <div
+            class="error submit"
+            *ngIf="
+              formGroup.get('socialMedia')?.touched &&
+              formGroup.get('socialMedia')?.errors as errors
+            "
+          >
+            <div *ngIf="errors['required']">Поле обов’язкове</div>
+            <div *ngIf="errors['pattern']">
+              Нік повинен починатися з &#64;, і містити лише латинські літери,
+              цифри або _
+            </div>
+            <div *ngIf="errors['minlength']">Мінімум 5 символів</div>
+            <div *ngIf="errors['maxlength']">Максимум 30 символів</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input
+            class="subtitle registration-controller"
+            [class.controller-with-error]="
+              formGroup.get('phone')?.touched && formGroup.get('phone')?.invalid
+            "
+            type="text"
+            id="phone"
+            formControlName="phone"
+            placeholder="380XXXXXXXXX"
+          />
+          <div
+            class="error submit"
+            *ngIf="
+              formGroup.get('phone')?.touched &&
+              formGroup.get('phone')?.errors as errors
+            "
+          >
+            <div *ngIf="errors['pattern']">Лише цифри</div>
+            <div *ngIf="errors['minlength']">Мінімум 8 цифр</div>
+            <div *ngIf="errors['maxlength']">Максимум 12 цифр</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-wrapper">
+        <app-primary-btn
+          (onClick)="onConfirm()"
+          [textBtn]="'Запис на консультацію'"
+        ></app-primary-btn>
+      </div>
+    </form>
+
+    }@else if (data.isConfirm) {
+    <div>
+      <p class="subtitle">{{ data.title }}</p>
+      <br />
+      <br />
+      <div class="btns-wrapper">
+        <button
+          mat-raised-button
+          color="primary"
+          class="confirm-button"
+          (click)="closeModalOnClick()"
+          cdkFocusInitial
+        >
+          {{ data.btn["confirm"] }}
+        </button>
+
+        <button
+          class="cancel-button"
+          mat-stroked-button
+          color="#333"
+          (click)="cancel()"
+        >
+          {{ data.btn["cancel"] }}
+        </button>
+      </div>
+    </div>
+
+    } @else{
+    <div class="video-container">
+      <iframe
+        src="https://player.vimeo.com/video/1072592233"
+        width="300"
+        height="390"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
+      <p class="video-subtitle">
+        Ти тут — бо бачиш, відчуваєш і розумієш більше. Пройди тест. Залиши
+        заявку. А головне — дозволь собі відчути, що тут для тебе
+      </p>
+      <br />
+      <div style="display: flex; justify-content: center">
+        <app-primary-btn
+          [textBtn]="'Пройти тести'"
+          (onClick)="cancel()"
+        ></app-primary-btn>
+      </div>
+      <br />
+    </div>
+    }
+  </div>
+</mat-dialog-content>

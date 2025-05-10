@@ -1,0 +1,67 @@
+<section class="results-container hover-container consultations">
+  <div class="slider">
+    <ul class="consultations-cards carousel">
+      @for (card of cards; track $index) {
+      <li
+        [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+        class="slide"
+        [class.active]="$index === currentIndex"
+      >
+        <h3 class="card-title title-primary">{{ card.title }}</h3>
+
+        <div class="consultations-card">
+          <h4 class="subtitle">{{ card.list.titleList }}</h4>
+          <ul class="card-list">
+            @for (item of card.list.listCards; track $index) {
+            <li>
+              <div class="dot"></div>
+              <p class="subtitle">
+                {{ item }}
+              </p>
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="icons-container">
+          <ul class="icons-list">
+            <li>
+              <img src="/assets/new/shared/pin.svg" alt="" />
+              <p class="subtitle">онлайн або офлайн у Києві</p>
+            </li>
+            <li>
+              <img src="/assets/new/shared/back-in-time.svg" alt="" />
+              <p class="subtitle">60 хв</p>
+            </li>
+            <li>
+              <img src="/assets/new/shared/coins.svg" alt="" />
+              <p class="subtitle">980 грн</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="information">
+          <p class="main-text subtitle">Не підійде, якщо:</p>
+          <p class="subtitle">
+            Ти шукаєш тільки того, що вже знаєш, і не готовий відкривати.
+          </p>
+        </div>
+      </li>
+      }
+    </ul>
+  </div>
+  <div class="consultations-control-btns">
+    <app-slider-controls-btn
+      [controlsInside]="false"
+      (next)="next()"
+      (prev)="prev()"
+    ></app-slider-controls-btn>
+  </div>
+
+  <div class="consultations-btn-wrapper">
+    <app-primary-btn
+      [classColor]="'red-btn'"
+      [textBtn]="'Записатися'"
+      (onClick)="openDialog()"
+    ></app-primary-btn>
+  </div>
+</section>

@@ -18,6 +18,9 @@ const getDayPhrases = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const personType = req.params.personType;
         const dayPhrases = _16_personalities_phrases_1.personalitiesPhraseService.getAllDayPhrases();
+        if (personType === 'unknown') {
+            return res.send(Object.assign({ message: 'Success get phrases.' }, dayPhrases));
+        }
         const userTypeName = _16_personality_1.default.getPersonNameByType(personType);
         res.send(Object.assign(Object.assign({ message: 'Success get phrases.' }, dayPhrases), { userTypeName }));
     }

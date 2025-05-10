@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
 
-import { TestCardStartBtnComponent } from '../../../components/test/test-card-start-btn/test-card-start-btn.component';
-import { SeoService } from '../../../shared/services/seo.service';
+import { RouteTrackerService } from '../../../core/services/route-tracker.service';
+import { SeoService } from '../../../core/services/seo.service';
+import { TestCardStartBtnComponent } from '../../../shared/components/test/test-card-start-btn/test-card-start-btn.component';
 import testInfo from './test-info';
-import { RouteTrackerService } from '../../../shared/services/route-tracker.service';
 
 @Component({
   selector: 'app-test-information',

@@ -1,106 +1,45 @@
-@import "../../../assets/mixins.scss";
-
 .tests {
-  width: 100%;
-
   color: #fff;
   text-align: center;
+  max-width: 1320px;
+  padding: 18px;
+  margin: 0 auto;
 
-  @include adaptive-spacing(
-    padding,
-    $padding-mobile,
-    $padding-tablet,
-    $padding-desktop
-  );
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  @media screen and (min-width: 764px) {
+    padding: 64px 18px;
   }
+}
+.test-list {
+  gap: 59px;
 
-  .section-description {
-    font-size: 16px;
-    margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container {
+  margin-top: 64px;
+}
+.category-wrapper:last-child {
+  margin-bottom: 0;
+}
+.category-wrapper {
+  margin-bottom: 64px;
 
-    color: var(--textColor);
-
-    @media screen and (min-width: 768px) {
-      margin-bottom: 40px;
-      font-size: 18px;
-    }
-  }
-
-  .list-wrapper {
-    padding: 24px 12px;
-  }
-  .test-list > *:not(:first-child):not(:last-child) {
-    margin: 16px 0;
-  }
-
-  .test-card {
-    padding: 0.5rem;
-    border-radius: 12px;
-
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    gap: 8px;
-
-    background-color: var(--bgColorBox);
-    text-align: center;
+  .category-title {
     position: relative;
-    justify-content: center;
-    flex-wrap: wrap;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-bottom: 64px;
+    width: 100%;
+    font-weight: 600;
 
-    @media screen and (min-width: 768px) {
-      padding: 24px;
-    }
-
-    ::ng-deep app-test-card-start-btn {
-      max-width: 50%;
-    }
-    .test-img {
+    &::after {
+      content: "";
       position: absolute;
-      width: 54px;
-      height: 54px;
-      bottom: 8px;
-      left: 8px;
-      display: none;
-      @media screen and (min-width: 350px) {
-        display: block;
-      }
-      @media screen and (min-width: 764px) {
-        top: 8px;
-        left: 8px;
-        width: 84px;
-        height: 84px;
-      }
-    }
-    h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      max-width: 95%;
-
-      color: var(--textColor);
-
-      span {
-        font-size: 16px;
-      }
-      @media screen and (min-width: 768px) {
-        font-size: 22px;
-      }
-    }
-
-    p {
-      font-size: 16px;
-      margin-bottom: 20px;
-      max-width: 80%;
-      margin: 0 auto;
-
-      color: var(--textColor);
-
-      @media screen and (min-width: 768px) {
-        font-size: 18px;
-      }
+      bottom: -14px;
+      left: 0;
+      width: 100%;
+      max-width: 1320px;
+      height: 1px;
+      background: #003d45;
     }
   }
 }

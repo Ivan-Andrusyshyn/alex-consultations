@@ -1,17 +1,9 @@
-@import "../../../assets/mixins.scss";
-
 .courses {
   width: 100%;
 
   color: #fff;
   text-align: center;
   box-sizing: border-box;
-  @include adaptive-spacing(
-    padding,
-    $padding-mobile,
-    $padding-tablet,
-    $padding-desktop
-  );
 
   .container {
     max-width: 1200px;

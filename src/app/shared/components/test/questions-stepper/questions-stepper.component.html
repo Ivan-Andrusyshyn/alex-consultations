@@ -1,0 +1,46 @@
+<div class="container">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="vertical-tab-bar">
+    <div class="stepper">
+      <div class="line"></div>
+      @for (question of questions; track $index) {
+
+      <a
+        mat-tab-link
+        [active]="currentQuestionNumber === $index"
+        (click)="changeQuestion(question.id)"
+        [class.active]="isValid($index)"
+        class="step"
+      >
+        <span class="number">{{ $index + 1 }}</span>
+        <span class="dot"></span>
+      </a>
+
+      }
+    </div>
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  <div
+    class="stepper stepper-mob"
+    #stepperContainer
+    [class.lgGap]="isLgGap()"
+    [class.mdGap]="isMdGap()"
+    [class.xsGap]="isXsGap()"
+  >
+    <div class="line line-mob"></div>
+    @for (question of questions; track $index) {
+
+    <a
+      (click)="changeQuestion($index + 1)"
+      [class.active]="isValid($index)"
+      [class.chooseQuestion]="
+        isChooseQuestion() && currentQuestionNumber === $index + 1
+      "
+      class="step step-mob"
+    >
+      <span class="number number-mob">{{ $index + 1 }}</span>
+      <span class="dot dot-mob"></span>
+    </a>
+
+    }
+  </div>
+</div>

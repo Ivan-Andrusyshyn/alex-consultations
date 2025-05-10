@@ -1,0 +1,42 @@
+.controls {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    cursor: pointer;
+    pointer-events: all;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    svg {
+      width: 45px;
+      height: 45px;
+      stroke: #057988;
+    }
+  }
+}
+.controls-inside {
+  min-width: 360px;
+  max-width: 400px;
+  @media screen and (min-width: 764px) {
+    min-width: 600px;
+  }
+  @media screen and (min-width: 1320px) {
+    min-width: 65%;
+  }
+}
+.controls-outside {
+  width: 100%;
+}

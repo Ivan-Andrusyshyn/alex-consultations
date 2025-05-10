@@ -5,12 +5,14 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+
+import { RouteTrackerService } from '../../core/services/route-tracker.service';
+import { SocialLinksComponent } from '../../shared/components/social-links/social-links.component';
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SocialLinksComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,9 +20,10 @@ import { RouteTrackerService } from '../../shared/services/route-tracker.service
 export class ContactsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
-  contactForm!: FormGroup;
   private routeTracker = inject(RouteTrackerService);
 
+  classLinks = 'contacts';
+  contactForm!: FormGroup;
   ngOnInit(): void {
     this.routeTracker.getRoutes();
 

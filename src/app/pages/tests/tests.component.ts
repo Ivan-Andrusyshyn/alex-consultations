@@ -1,46 +1,46 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { NgClass, NgFor } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-
-import { TestCardStartBtnComponent } from '../../components/test/test-card-start-btn/test-card-start-btn.component';
-import { TestCardInfoBtnComponent } from '../../components/test/test-card-info-btn/test-card-info-btn.component';
-import { testCardsData } from '../../../assets/content/tests-content/test-cards-data';
-import { TitleCardComponent } from '../../components/title-card/title-card.component';
-import { SeoService } from '../../shared/services/seo.service';
-import { IconsListComponent } from '../../components/test/personalities-test/icons-list/icons-list.component';
-import titleCardContent from './titleCard-content';
-import { ModalComponent } from '../../components/modal/modal.component';
 import { Router } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
+
+import { SeoService } from '../../core/services/seo.service';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import titleCardContent from './titleCard-content';
+import { TestCardComponent } from '../../shared/components/test-card/test-card.component';
+import { TEST_CARDS } from '../../../assets/content/TEST_CARDS';
+import { CardContent } from '../../shared/models/common-tests';
 
 @Component({
   selector: 'app-tests',
   standalone: true,
-  imports: [
-    TestCardStartBtnComponent,
-    TitleCardComponent,
-    TestCardInfoBtnComponent,
-    NgClass,
-    MatTabsModule,
-    IconsListComponent,
-  ],
+  imports: [TitleCardComponent, MatTabsModule, TestCardComponent, NgFor, NgIf],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
 })
 export class TestsComponent implements OnInit {
-  readonly testData = testCardsData;
+  readonly testCards: CardContent[] = TEST_CARDS;
   readonly titleCardContent = titleCardContent;
   readonly dialog = inject(MatDialog);
   private readonly route = inject(Router);
   private seoService = inject(SeoService);
   focusedCardIndex = signal<number | null>(null);
 
-  readonly categoryList = [
-    'Всі тести',
-    'Для стосунків',
-    'Для особистого розвитку',
-  ];
+  readonly categoryList = ['Для стосунків', 'Для особистого розвитку'];
   currentTopic: string = '';
+  groupedCards = [
+    {
+      category: 'Для стосунків',
+      cards: this.testCards.filter((card) => card.category === 'Для стосунків'),
+    },
+    {
+      category: 'Для особистого розвитку',
+      cards: this.testCards.filter(
+        (card) => card.category === 'Для особистого розвитку'
+      ),
+    },
+  ];
 
   ngOnInit(): void {
     const isNewUser = JSON.parse(sessionStorage.getItem('isNewUser') ?? 'null');
@@ -63,9 +63,10 @@ export class TestsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       height: '550px',
-      width: '330px',
+      width: '350px',
       data: {
         isForm: false,
+        isConfirm: false,
         contentType: 'form-consultation',
         title: 'Відчуй свою глибину. Запишись на консультацію.',
         btn: {

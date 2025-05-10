@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
-import { SeoService } from '../../shared/services/seo.service';
-import { RouteTrackerService } from '../../shared/services/route-tracker.service';
+import { RouteTrackerService } from '../../core/services/route-tracker.service';
+import { SeoService } from '../../core/services/seo.service';
+import { SocialLinksComponent } from '../../shared/components/social-links/social-links.component';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [RouterLink],
+  imports: [SocialLinksComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })
