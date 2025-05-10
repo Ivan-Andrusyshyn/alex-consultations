@@ -10,9 +10,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class PrimaryBtnComponent {
   @Output() onClick = new EventEmitter();
 
+  @Input() isPulsationAnimation?: boolean = false;
   @Input() classColor: 'dark-btn' | 'red-btn' = 'dark-btn';
   @Input() textBtn: string = 'Запис на консультацію';
-
   click() {
     this.onClick.emit();
   }

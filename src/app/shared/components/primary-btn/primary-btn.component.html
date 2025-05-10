@@ -2,6 +2,7 @@
   class="primary-btn 
 {{ classColor }}
 hover-button"
+  [class.pulsation-btn]="isPulsationAnimation"
   (click)="click()"
 >
   {{ textBtn }}
