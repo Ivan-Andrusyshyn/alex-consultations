@@ -39,12 +39,14 @@ export class TestsComponent implements OnInit {
   currentTopic: string = '';
   groupedCards = [
     {
+      tabsLabel: 'Особистість',
       category: 'Для особистого розвитку',
       cards: this.testCards.filter(
         (card) => card.category === 'Для особистого розвитку'
       ),
     },
     {
+      tabsLabel: 'Стосунки',
       category: 'Для стосунків',
       cards: this.testCards.filter((card) => card.category === 'Для стосунків'),
     },

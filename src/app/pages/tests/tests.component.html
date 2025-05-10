@@ -9,7 +9,7 @@
       @if (isMobDevice) {
       <mat-tab-group>
         <ng-container *ngFor="let group of groupedCards">
-          <mat-tab [label]="group.category">
+          <mat-tab [label]="group.tabsLabel">
             <ng-container
               *ngTemplateOutlet="cardList; context: { $implicit: group }"
             ></ng-container>
