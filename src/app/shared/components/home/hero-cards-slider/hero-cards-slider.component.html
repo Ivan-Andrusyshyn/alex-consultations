@@ -1,15 +1,20 @@
-<div class="carousel-wrapper" [class.big-cards]="bigCards">
+<div
+  class="carousel-wrapper"
+  [class.big-cards]="bigCards"
+  (touchstart)="onTouchStart($event)"
+  (touchend)="onTouchEnd($event)"
+>
   <div class="carousel" [class.carousel-no-padding]="!bigCards">
     @for (slide of slideCards; track $index) {
 
     <div
-      [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+      [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'"
       class="slide"
       [class.small-slide]="!bigCards"
       [class.active]="
         bigCards
-          ? $index === currentIndex
-          : $index >= currentIndex && $index < currentIndex + 3
+          ? $index === currentIndex()
+          : $index >= currentIndex() && $index < currentIndex() + 3
       "
     >
       @if (bigCards) {
@@ -56,12 +61,12 @@
   ></app-slider-controls-btn>
   <ul class="dots">
     @for (slide of slideCards; track $index) { @if (bigCards ||isMobDevice) {
-    <li [class.active]="$index === currentIndex" (click)="goToSlide($index)">
+    <li [class.active]="$index === currentIndex()" (click)="goToSlide($index)">
       <div class="dot"></div>
     </li>
     }@else{ @if (!isMobDevice) { @if($index%3===0 ) {
 
-    <li [class.active]="$index === currentIndex" (click)="goToSlide($index)">
+    <li [class.active]="$index === currentIndex()" (click)="goToSlide($index)">
       <div class="dot"></div>
     </li>
     } } } }

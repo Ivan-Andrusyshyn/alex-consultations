@@ -14,6 +14,7 @@ import { SliderControlsBtnComponent } from '../slider-controls-btn/slider-contro
 import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { GoogleSheetsService } from '../../../../core/services/google-sheets.service';
+import { SliderService } from '../../../../core/services/slider.service';
 
 @Component({
   selector: 'app-consultations-cards',
@@ -27,6 +28,7 @@ export class ConsultationsCardsComponent {
   private dr = inject(DestroyRef);
   private dialog = inject(MatDialog);
   private googleService = inject(GoogleSheetsService);
+  private sliderService = inject(SliderService);
 
   successRegistration = signal(false);
   cards: {
@@ -36,19 +38,29 @@ export class ConsultationsCardsComponent {
       listCards: string[];
     };
   }[];
-  currentIndex: number = 0;
+  currentIndex = signal<number>(0);
 
   constructor() {
     this.cards = consultationCards;
   }
 
   next() {
-    this.currentIndex = (this.currentIndex + 1) % this.cards.length;
+    const cardIndex = this.sliderService.next(true, this.cards);
+    this.currentIndex.set(cardIndex);
   }
 
   prev() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.cards.length) % this.cards.length;
+    const cardIndex = this.sliderService.prev(true, this.cards);
+    this.currentIndex.set(cardIndex);
+  }
+
+  onTouchStart(event: TouchEvent) {
+    this.sliderService.onTouchStart(event);
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    const cardIndex = this.sliderService.onTouchEnd(true, this.cards, event);
+    this.currentIndex.set(cardIndex);
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {

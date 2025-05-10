@@ -6,15 +6,17 @@ import {
   inject,
   Input,
   OnInit,
+  signal,
 } from '@angular/core';
 import { interval, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 import { TEST_CARDS } from '../../../../../assets/content/TEST_CARDS';
 import { TestCardComponent } from '../../test-card/test-card.component';
 import { SliderControlsBtnComponent } from '../../test/slider-controls-btn/slider-controls-btn.component';
 import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
-import { Router } from '@angular/router';
+import { SliderService } from '../../../../core/services/slider.service';
 
 @Component({
   selector: 'app-hero-cards-slider',
@@ -28,15 +30,18 @@ export class HeroCardsSliderComponent implements OnInit {
   private chr = inject(ChangeDetectorRef);
   private dr = inject(DestroyRef);
   private router = inject(Router);
+  private sliderService = inject(SliderService);
 
   @Input() bigCards: boolean = true;
 
-  currentIndex = 0;
+  currentIndex = signal(0);
   slideCards = TEST_CARDS;
   isMobDevice = window.innerWidth < 764;
 
   ngOnInit(): void {
-    interval(6000)
+    this.currentIndex.set(this.sliderService.currentIndex);
+
+    interval(7000)
       .pipe(
         takeUntilDestroyed(this.dr),
         tap(() => {
@@ -48,39 +53,33 @@ export class HeroCardsSliderComponent implements OnInit {
   }
 
   next() {
-    if (this.bigCards) {
-      this.currentIndex = (this.currentIndex + 1) % this.slideCards.length;
-
-      return;
-    }
-    if (this.isMobDevice) {
-      this.currentIndex = (this.currentIndex + 1) % this.slideCards.length;
-    } else {
-      this.currentIndex = (this.currentIndex + 3) % this.slideCards.length;
-    }
+    const cardIndex = this.sliderService.next(this.bigCards, this.slideCards);
+    this.currentIndex.set(cardIndex);
   }
 
   prev() {
-    if (this.bigCards) {
-      this.currentIndex =
-        (this.currentIndex - 1 + this.slideCards.length) %
-        this.slideCards.length;
-      return;
-    }
-    if (this.isMobDevice) {
-      this.currentIndex =
-        (this.currentIndex - 1 + this.slideCards.length) %
-        this.slideCards.length;
-    } else {
-      this.currentIndex =
-        (this.currentIndex - 3 + this.slideCards.length) %
-        this.slideCards.length;
-    }
+    const cardIndex = this.sliderService.prev(this.bigCards, this.slideCards);
+    this.currentIndex.set(cardIndex);
   }
   startTest(testUrl: string): void {
     this.router.navigateByUrl(testUrl);
   }
+
+  onTouchStart(event: TouchEvent) {
+    this.sliderService.onTouchStart(event);
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    const cardIndex = this.sliderService.onTouchEnd(
+      this.bigCards,
+      this.slideCards,
+      event
+    );
+    this.currentIndex.set(cardIndex);
+  }
+
   goToSlide(index: number) {
-    this.currentIndex = index;
+    const cardIndex = this.sliderService.goToSlide(index);
+    this.currentIndex.set(cardIndex);
   }
 }

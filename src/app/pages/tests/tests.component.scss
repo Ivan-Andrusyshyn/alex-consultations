@@ -10,11 +10,15 @@
   }
 }
 .test-list {
-  gap: 59px;
+  gap: 18px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (min-width: 1320px) {
+    gap: 58px;
+  }
 }
 .container {
   margin-top: 64px;
@@ -23,14 +27,20 @@
   margin-bottom: 0;
 }
 .category-wrapper {
-  margin-bottom: 64px;
+  margin-bottom: 30px;
+
+  @media screen and (min-width: 1320px) {
+    margin-bottom: 64px;
+  }
 
   .category-title {
     position: relative;
-    margin-bottom: 64px;
+    margin-bottom: 30px;
     width: 100%;
     font-weight: 600;
-
+    @media screen and (min-width: 1320px) {
+      margin-bottom: 64px;
+    }
     &::after {
       content: "";
       position: absolute;

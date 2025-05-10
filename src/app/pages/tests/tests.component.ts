@@ -31,14 +31,14 @@ export class TestsComponent implements OnInit {
   currentTopic: string = '';
   groupedCards = [
     {
-      category: 'Для стосунків',
-      cards: this.testCards.filter((card) => card.category === 'Для стосунків'),
-    },
-    {
       category: 'Для особистого розвитку',
       cards: this.testCards.filter(
         (card) => card.category === 'Для особистого розвитку'
       ),
+    },
+    {
+      category: 'Для стосунків',
+      cards: this.testCards.filter((card) => card.category === 'Для стосунків'),
     },
   ];
 

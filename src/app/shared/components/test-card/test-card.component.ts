@@ -25,11 +25,11 @@ import { interval } from 'rxjs';
     trigger('imageFade', [
       transition(':increment', [
         style({ opacity: 0 }),
-        animate('300ms ease-in-out', style({ opacity: 1 })),
+        animate('500ms ease-in-out', style({ opacity: 1 })),
       ]),
       transition(':decrement', [
         style({ opacity: 1 }),
-        animate('300ms ease-in-out', style({ opacity: 0 })),
+        animate('500ms ease-in-out', style({ opacity: 0 })),
       ]),
     ]),
   ],
@@ -59,7 +59,7 @@ export class TestCardComponent implements OnInit, OnDestroy {
 
     this.intervalId = setInterval(() => {
       this.currentIndex.update((prev) => (prev + 1) % this.card.imgList.length);
-    }, 2000);
+    }, 3000);
   }
 
   stopCarousel(): void {

@@ -2,6 +2,18 @@ import { CardContent } from '../../app/shared/models/common-tests';
 
 export const TEST_CARDS: CardContent[] = [
   {
+    time: '5 хв',
+    title: '16 типів особистості',
+    imgList: [1, 2, 3, 4, 5, 6, 7, 8],
+
+    category: 'Для особистого розвитку',
+    routeStart: '/tests/16-personalities/questions',
+    subtitle:
+      'Дізнайся свій унікальний тип особистості та розкрий свої сильні сторони!',
+    buttonText: 'Почати тест',
+    imageUrl: 'assets/new/core/tests/16-personalities/',
+  },
+  {
     time: '3 хв',
     category: 'Для особистого розвитку',
     routeStart: '/tests/attractiveness/questions',
@@ -10,6 +22,18 @@ export const TEST_CARDS: CardContent[] = [
     buttonText: 'Почати тест',
     imgList: [1, 2, 3, 4, 5, 6],
     imageUrl: 'assets/new/core/tests/attractiveness/',
+  },
+  {
+    time: '3 хв',
+    title: 'Яка твоя роль у стосунках?',
+    imgList: [1, 2, 3, 4, 5],
+
+    category: 'Для стосунків',
+    routeStart: '/tests/role-in-relationships/questions',
+
+    subtitle: 'Дізнайся, що робить тебе по-справжньому привабливим!',
+    buttonText: 'Почати тест',
+    imageUrl: 'assets/new/core/tests/role-in-relationships/',
   },
   {
     time: '1 хв',
@@ -32,30 +56,6 @@ export const TEST_CARDS: CardContent[] = [
     subtitle: 'Як сильно ти реагуєш на коментарі та зауваження?',
     buttonText: 'Почати тест',
     imageUrl: 'assets/new/core/tests/traumatic-sensitivity/',
-  },
-  {
-    time: '3 хв',
-    title: 'Яка твоя роль у стосунках?',
-    imgList: [1, 2, 3, 4, 5],
-
-    category: 'Для стосунків',
-    routeStart: '/tests/role-in-relationships/questions',
-
-    subtitle: 'Дізнайся, що робить тебе по-справжньому привабливим!',
-    buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/role-in-relationships/',
-  },
-  {
-    time: '5 хв',
-    title: '16 типів особистості',
-    imgList: [1, 2, 3, 4, 5, 6, 7, 8],
-
-    category: 'Для особистого розвитку',
-    routeStart: '/tests/16-personalities/questions',
-    subtitle:
-      'Дізнайся свій унікальний тип особистості та розкрий свої сильні сторони!',
-    buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/16-personalities/',
   },
   {
     time: '3 хв',

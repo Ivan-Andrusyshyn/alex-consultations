@@ -115,10 +115,12 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
         );
         this.createFormGroup(data['questions']);
         this.testQuestionsLength = data['questions']?.length;
+        window.scrollTo(0, 0);
+
         return data['questions'];
       })
     );
-    this.viewportScroller.scrollToPosition([0, 0]);
+
     this.isStartTest.set(
       JSON.parse(sessionStorage.getItem('isStartTest') ?? 'false')
     );

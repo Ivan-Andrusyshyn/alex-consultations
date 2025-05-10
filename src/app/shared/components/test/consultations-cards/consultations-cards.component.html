@@ -1,11 +1,15 @@
 <section class="results-container hover-container consultations">
-  <div class="slider">
+  <div
+    class="slider"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
     <ul class="consultations-cards carousel">
       @for (card of cards; track $index) {
       <li
-        [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+        [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'"
         class="slide"
-        [class.active]="$index === currentIndex"
+        [class.active]="$index === currentIndex()"
       >
         <h3 class="card-title title-primary">{{ card.title }}</h3>
 
