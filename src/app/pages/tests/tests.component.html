@@ -6,17 +6,32 @@
     ></app-title-card>
 
     <div class="container">
+      @if (isMobDevice) {
+      <mat-tab-group>
+        <ng-container *ngFor="let group of groupedCards">
+          <mat-tab [label]="group.category">
+            <ng-container
+              *ngTemplateOutlet="cardList; context: { $implicit: group }"
+            ></ng-container>
+          </mat-tab>
+        </ng-container>
+      </mat-tab-group>
+      }@else {
       <ng-container *ngFor="let group of groupedCards">
         <div class="category-wrapper" *ngIf="group.cards.length > 0">
           <p class="category-title subtitle">{{ group.category }}</p>
-
-          <ul class="test-list">
-            <ng-container *ngFor="let card of group.cards">
-              <app-test-card [card]="card"></app-test-card>
-            </ng-container>
-          </ul>
-        </div>
-      </ng-container>
+          <ng-container
+            *ngTemplateOutlet="cardList; context: { $implicit: group }"
+          ></ng-container>
+        </div> </ng-container
+      >}
     </div>
   </div>
 </section>
+<ng-template #cardList let-group>
+  <ul class="test-list">
+    <ng-container *ngFor="let card of group.cards">
+      <app-test-card [card]="card"></app-test-card>
+    </ng-container>
+  </ul>
+</ng-template>

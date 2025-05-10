@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 
 import { SeoService } from '../../core/services/seo.service';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
@@ -15,7 +15,14 @@ import { CardContent } from '../../shared/models/common-tests';
 @Component({
   selector: 'app-tests',
   standalone: true,
-  imports: [TitleCardComponent, MatTabsModule, TestCardComponent, NgFor, NgIf],
+  imports: [
+    TitleCardComponent,
+    NgTemplateOutlet,
+    MatTabsModule,
+    TestCardComponent,
+    NgFor,
+    NgIf,
+  ],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
 })
@@ -26,6 +33,7 @@ export class TestsComponent implements OnInit {
   private readonly route = inject(Router);
   private seoService = inject(SeoService);
   focusedCardIndex = signal<number | null>(null);
+  isMobDevice = window.innerWidth < 764;
 
   readonly categoryList = ['Для стосунків', 'Для особистого розвитку'];
   currentTopic: string = '';
