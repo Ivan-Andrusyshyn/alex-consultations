@@ -22,6 +22,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
+import { VideoBenefitsComponent } from '../home/video-benefits/video-benefits.component';
 
 export interface DialogData {
   animal: string;
@@ -40,6 +41,7 @@ export interface DialogData {
     MatDialogClose,
     NgIf,
     PrimaryBtnComponent,
+    VideoBenefitsComponent,
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',

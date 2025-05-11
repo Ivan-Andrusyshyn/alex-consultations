@@ -26,6 +26,18 @@
     text-align: center;
   }
 }
+::ng-deep .video-container app-video-benefits .video-benefits {
+  padding: 0 18px;
+}
+::ng-deep .video-container app-video-benefits .video-youtube {
+  max-width: 338px;
+  height: 201px;
+
+  @media screen and (min-width: 1320px) {
+    max-width: 1100px;
+    max-height: 500px;
+  }
+}
 // ====================
 
 .cancel-button {
