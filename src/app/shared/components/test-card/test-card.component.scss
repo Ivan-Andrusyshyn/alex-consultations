@@ -31,19 +31,21 @@
     border-radius: 20px;
   }
   @media screen and (min-width: 1200px) {
-    min-width: 600px;
-    max-width: 600px;
-    height: 700px;
+    flex-direction: row;
+    max-width: 950px;
+    align-items: center;
+    height: 400px;
   }
   @media screen and (min-width: 1640px) {
-    align-items: center;
-    height: 500px;
+    height: 400px;
     max-width: 1305px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    flex-direction: row;
+    padding: 24px;
+  }
+  @media screen and (min-width: 1840px) {
+    height: 500px;
     padding: 61px 78px;
   }
-
   .card-left {
     .time-wrapper {
       gap: 16px;
@@ -69,7 +71,7 @@
       margin-bottom: 16px;
       text-align: left;
 
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1640px) {
         font-size: 48px;
       }
     }
@@ -81,6 +83,9 @@
 
       @media screen and (min-width: 1200px) {
         margin-bottom: 30px;
+      }
+
+      @media screen and (min-width: 1640px) {
         font-size: 20px;
       }
     }

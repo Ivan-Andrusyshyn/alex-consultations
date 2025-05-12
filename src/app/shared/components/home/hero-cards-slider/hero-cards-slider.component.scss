@@ -7,17 +7,25 @@
 }
 .big-cards {
   padding-left: 0;
-  @media screen and (min-width: 1640px) {
+  @media screen and (min-width: 1200px) {
     &::before,
     &::after {
       content: "";
       position: absolute;
       top: 0;
-      width: 300px;
+      width: 200px;
       height: 90%;
       z-index: 99;
       pointer-events: none;
       backdrop-filter: blur(10px);
+
+      @media screen and (min-width: 1640px) {
+        width: 250px;
+      }
+
+      @media screen and (min-width: 1820px) {
+        width: 300px;
+      }
     }
 
     &::before {
