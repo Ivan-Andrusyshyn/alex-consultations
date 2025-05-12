@@ -10,10 +10,8 @@ import {
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
-
-import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
-import { CardContent } from '../../models/common-tests';
-import { interval } from 'rxjs';
+import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
+import { CardContent } from '../../../models/common-tests';
 
 @Component({
   selector: 'app-test-card',

@@ -8,9 +8,9 @@ import { SeoService } from '../../core/services/seo.service';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import titleCardContent from './titleCard-content';
-import { TestCardComponent } from '../../shared/components/test-card/test-card.component';
 import { TEST_CARDS } from '../../../assets/content/TEST_CARDS';
 import { CardContent } from '../../shared/models/common-tests';
+import { TestCardComponent } from '../../shared/components/test/test-card/test-card.component';
 
 @Component({
   selector: 'app-tests',

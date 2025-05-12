@@ -33,6 +33,10 @@
   max-width: 338px;
   height: 201px;
 
+  @media screen and (min-width: 764px) {
+    max-width: 438px;
+    height: 301px;
+  }
   @media screen and (min-width: 1320px) {
     max-width: 1100px;
     max-height: 500px;
