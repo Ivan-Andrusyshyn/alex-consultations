@@ -24,9 +24,9 @@ import { ConsultationsCardsComponent } from '../../shared/components/test/consul
 import { ExpandablePanelComponent } from '../../shared/components/expandable-panel/expandable-panel.component';
 import { ConsultationService } from '../../core/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/models/benefit-consultation';
-import { HeroCardsSliderComponent } from '../../shared/components/home/hero-cards-slider/hero-cards-slider.component';
 import { testResultExample } from './dev';
 import { ProgressBarComponent } from '../../shared/components/test/progress-bar/progress-bar.component';
+import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 
 @Component({
   selector: 'app-test-results',

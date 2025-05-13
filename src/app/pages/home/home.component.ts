@@ -39,7 +39,7 @@ import { VideoBenefitsComponent } from '../../shared/components/home/video-benef
 import { GoalsComponent } from '../../shared/components/home/goals/goals.component';
 import { OurServiceCardsComponent } from '../../shared/components/home/our-service-cards/our-service-cards.component';
 import { HeroAnimationComponent } from '../../shared/components/home/hero-animation/hero-animation.component';
-import { HeroCardsSliderComponent } from '../../shared/components/home/hero-cards-slider/hero-cards-slider.component';
+import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 
 @Component({
   selector: 'app-home',

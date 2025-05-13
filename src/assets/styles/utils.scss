@@ -2,6 +2,7 @@
   transition: all 1s ease-in-out;
 
   &:hover {
+    border-radius: 20px;
     outline: 1px solid #057988;
     background-image: linear-gradient(180deg, #fff 44.23%, #a5cfd4 100%);
     box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);

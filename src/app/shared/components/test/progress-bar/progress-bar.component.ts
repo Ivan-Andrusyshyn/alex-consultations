@@ -17,7 +17,6 @@ export class ProgressBarComponent {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const docHeight = document.documentElement.scrollTop;
-    console.log(this.scrollContainerNumber);
 
     this.isShow.update((prev) => docHeight > 70);
     const scrollOffset =

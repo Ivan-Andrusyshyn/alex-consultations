@@ -1,0 +1,168 @@
+.card-content {
+  height: 640px;
+  @media screen and (min-width: 764px) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (min-width: 1320px) {
+    width: 1120px;
+  }
+}
+.card-title {
+  max-width: 90%;
+  text-align: left;
+  margin-bottom: 30px;
+  font-size: 16px;
+
+  @media screen and (min-width: 764px) {
+    font-size: 24px;
+  }
+  @media screen and (min-width: 1320px) {
+    font-size: 50px;
+  }
+}
+.consultations-card {
+  gap: 10px;
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border: 1px solid #057988;
+  color: var(--color-text-primary);
+
+  @media screen and (min-width: 480px) {
+    height: auto;
+  }
+  @media screen and (min-width: 764px) {
+    padding: 55px 78px;
+  }
+  @media screen and (min-width: 1320px) {
+  }
+
+  h4 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+    @media screen and (min-width: 1320px) {
+      margin-bottom: 30px;
+    }
+  }
+  .card-list {
+    gap: 18px;
+
+    flex-direction: column;
+    display: flex;
+    li {
+      gap: 38px;
+
+      display: flex;
+      .dot {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background-color: #057988;
+      }
+    }
+  }
+}
+p {
+  font-size: 12px;
+
+  @media screen and (min-width: 764px) {
+    font-size: 16px;
+  }
+  @media screen and (min-width: 1320px) {
+    font-size: 20px;
+  }
+}
+.icons-container {
+  margin: 30px 0;
+}
+.icons-list {
+  gap: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @media screen and (min-width: 764px) {
+    gap: 48px;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  li {
+    gap: 24px;
+    display: flex;
+    align-items: center;
+
+    .items-icon {
+      width: 30px;
+      height: auto;
+      @media screen and (min-width: 764px) {
+        width: 50px;
+      }
+    }
+    &:last-child {
+      gap: 24px;
+      display: flex;
+      @media screen and (min-width: 764px) {
+        justify-content: space-between;
+        gap: 42px;
+      }
+    }
+  }
+  .item-info {
+    gap: 24px;
+
+    display: flex;
+    align-items: center;
+  }
+}
+
+.information {
+  margin-bottom: 30px;
+  .main-text {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 14px;
+    @media screen and (min-width: 1320px) {
+      font-size: 24px;
+    }
+  }
+}
+.consultations-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  @media screen and (min-width: 764px) {
+    padding-left: 20px;
+    justify-content: flex-start;
+  }
+}
+::ng-deep .consultations-control-btns app-slider-controls-btn .controls button {
+  @media screen and (max-width: 764px) {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+
+    background-color: #057988;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 16px !important;
+      height: 16px !important;
+    }
+    svg path {
+      stroke: #fff;
+    }
+  }
+}
+::ng-deep .consultations-btn-wrapper app-primary-btn .primary-btn {
+  @media screen and (max-width: 764px) {
+    min-width: 300px;
+  }
+}
