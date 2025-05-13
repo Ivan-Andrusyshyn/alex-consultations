@@ -18,7 +18,11 @@
 }
 .slider {
   overflow: hidden;
+
   width: 100%;
+  @media screen and (min-width: 480px) {
+    margin-bottom: 18px;
+  }
   @media screen and (min-width: 764px) {
     margin-bottom: 30px;
   }
@@ -41,7 +45,7 @@
   display: flex;
   overflow: hidden;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   transition: transform 0.6s ease-in-out;
   will-change: transform;
 }
@@ -112,20 +116,36 @@
     align-items: center;
     flex-direction: row;
   }
+
   li {
     gap: 24px;
     display: flex;
     align-items: center;
 
-    img {
+    .items-icon {
       width: 30px;
       height: auto;
       @media screen and (min-width: 764px) {
         width: 50px;
       }
     }
+    &:last-child {
+      gap: 24px;
+      display: flex;
+      @media screen and (min-width: 764px) {
+        justify-content: space-between;
+        gap: 42px;
+      }
+    }
+  }
+  .item-info {
+    gap: 24px;
+
+    display: flex;
+    align-items: center;
   }
 }
+
 .information {
   .main-text {
     font-weight: 600;
@@ -145,8 +165,8 @@
 .consultations-btn-wrapper {
   display: flex;
   justify-content: center;
-  @media screen and (min-width: 1320px) {
-    display: block;
+  @media screen and (min-width: 764px) {
+    justify-content: flex-start;
   }
 }
 ::ng-deep .consultations-control-btns app-slider-controls-btn .controls button {

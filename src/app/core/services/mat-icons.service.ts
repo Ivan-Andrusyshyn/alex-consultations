@@ -6,6 +6,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class MatIconsService {
   private icons = [
     {
+      name: 'pin',
+      url: '/assets/new/shared/pin.svg',
+    },
+    {
+      name: 'back-in-time',
+      url: '/assets/new/shared/back-in-time.svg',
+    },
+    {
+      name: 'coins',
+      url: '/assets/new/shared/coins.svg',
+    },
+    {
       name: 'telegram',
       url: '/assets/new/core/media/telegram.svg',
     },

@@ -15,11 +15,12 @@ import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { GoogleSheetsService } from '../../../../core/services/google-sheets.service';
 import { SliderService } from '../../../../core/services/slider.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-consultations-cards',
   standalone: true,
-  imports: [SliderControlsBtnComponent, PrimaryBtnComponent],
+  imports: [SliderControlsBtnComponent, MatIconModule, PrimaryBtnComponent],
   templateUrl: './consultations-cards.component.html',
   styleUrl: './consultations-cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,6 +38,7 @@ export class ConsultationsCardsComponent {
       titleList: string;
       listCards: string[];
     };
+    unfit: string;
   }[];
   currentIndex = signal<number>(0);
 

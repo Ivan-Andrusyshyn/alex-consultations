@@ -29,16 +29,18 @@
         <div class="icons-container">
           <ul class="icons-list">
             <li>
-              <img src="/assets/new/shared/pin.svg" alt="" />
+              <mat-icon class="items-icon" svgIcon="pin"></mat-icon>
               <p class="subtitle">онлайн або офлайн у Києві</p>
             </li>
             <li>
-              <img src="/assets/new/shared/back-in-time.svg" alt="" />
-              <p class="subtitle">60 хв</p>
-            </li>
-            <li>
-              <img src="/assets/new/shared/coins.svg" alt="" />
-              <p class="subtitle">980 грн</p>
+              <div class="item-info">
+                <mat-icon class="items-icon" svgIcon="back-in-time"></mat-icon>
+                <p class="subtitle">60 хв</p>
+              </div>
+              <div class="item-info">
+                <mat-icon class="items-icon" svgIcon="coins"></mat-icon>
+                <p class="subtitle">980 грн</p>
+              </div>
             </li>
           </ul>
         </div>
@@ -46,7 +48,7 @@
         <div class="information">
           <p class="main-text subtitle">Не підійде, якщо:</p>
           <p class="subtitle">
-            Ти шукаєш тільки того, що вже знаєш, і не готовий відкривати.
+            {{ card.unfit }}
           </p>
         </div>
       </li>

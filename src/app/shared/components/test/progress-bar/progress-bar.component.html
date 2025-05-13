@@ -1,0 +1,19 @@
+@if (isShow()) {
+
+<div class="progress-bar-container">
+  <div
+    class="progress-bar"
+    [class.progress-border-red]="scrollPercentage * 100 > 70"
+    [class.progress-bg-red]="scrollPercentage * 100 > 99"
+  >
+    <div
+      class="progress-fill"
+      [class.progress-fill-red]="scrollPercentage * 100 > 70"
+      [style.transform]="'translateX(' + (100 - scrollPercentage * 100) + '%)'"
+    ></div>
+  </div>
+  <p [class.white-text]="scrollPercentage * 100 > 70" class="progress-bar-text">
+    {{ scrollPercentage | percent : "1.0-0" }}
+  </p>
+</div>
+}
