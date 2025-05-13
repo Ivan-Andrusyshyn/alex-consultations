@@ -87,3 +87,22 @@
 .white-text {
   color: #fff;
 }
+.pulsation {
+  animation: pulseGradient 1s infinite;
+  background: linear-gradient(90deg, #fff, #73f57e, #4ade80);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes pulseGradient {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
