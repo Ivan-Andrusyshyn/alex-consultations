@@ -1,5 +1,5 @@
 .container {
-  padding: 40px 0;
+  padding: 20px 0;
   margin-bottom: 18px;
 
   position: relative;
@@ -9,12 +9,17 @@
 }
 .slide-card {
   min-width: 100%;
+  padding-top: 4px;
 
   z-index: -3;
+  border-radius: 20px;
   transition: all 0.6s ease-in-out;
   opacity: 0;
   display: flex;
   justify-content: center;
+  @media screen and (min-width: 764px) {
+    border-radius: 20px;
+  }
 }
 
 .slide-card:hover .card {
@@ -22,7 +27,7 @@
   box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
 }
 .card {
-  border-radius: 20px;
+  border-radius: 15px;
   max-width: 1280px;
   box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
   gap: 10px;
@@ -35,12 +40,12 @@
   position: relative;
 
   @media screen and (min-width: 764px) {
-    height: 880px;
+    height: 840px;
     padding: 40px 32px;
+    border-radius: 20px;
   }
   @media screen and (min-width: 1320px) {
     padding: 81px 65px;
-    border-radius: 15px;
   }
 }
 
