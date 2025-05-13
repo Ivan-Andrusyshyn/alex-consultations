@@ -1,5 +1,5 @@
 import { PercentPipe } from '@angular/common';
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-progress-bar',
@@ -9,25 +9,22 @@ import { Component, HostListener, signal } from '@angular/core';
   styleUrl: './progress-bar.component.scss',
 })
 export class ProgressBarComponent {
+  @Input() scrollContainerNumber!: number;
+
   scrollPercentage: number = 0;
   isShow = signal(false);
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const docHeight = document.documentElement.scrollTop;
+    console.log(this.scrollContainerNumber);
 
-    this.isShow.update((prev) => {
-      if (docHeight > 70) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    this.isShow.update((prev) => docHeight > 70);
     const scrollOffset =
       window.scrollY || docHeight || document.body.scrollTop || 0;
     const windowHeight =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
-    this.scrollPercentage = (scrollOffset - 10) / windowHeight;
+    this.scrollPercentage = scrollOffset / this.scrollContainerNumber;
   }
 }

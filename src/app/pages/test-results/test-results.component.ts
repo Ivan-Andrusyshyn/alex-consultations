@@ -1,11 +1,13 @@
 import {
   Component,
   DestroyRef,
+  ElementRef,
   inject,
   Input,
   OnDestroy,
   OnInit,
   signal,
+  ViewChild,
 } from '@angular/core';
 import { AsyncPipe, NgFor, NgIf, ViewportScroller } from '@angular/common';
 import { map, Observable, tap } from 'rxjs';
@@ -14,8 +16,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { SendFormOnEmailBtnComponent } from '../../shared/components/send-form-on-email-btn/send-form-on-email-btn.component';
-import { SendResultsFormComponent } from '../../shared/components/send-results-form/send-results-form.component';
 import { MailerService } from '../../core/services/mailer.service';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { SeoService } from '../../core/services/seo.service';
@@ -51,6 +51,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);
   private activeRoute = inject(ActivatedRoute);
   private consultationService = inject(ConsultationService);
+  scrollContainerNumber!: number;
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
   formGroup!: FormGroup;
   successMessage = signal(false);
@@ -63,6 +65,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   TEST_NAME = signal<string>('');
 
   ngOnDestroy(): void {}
+
+  ngAfterViewInit(): void {
+    const element = this.scrollContainer.nativeElement.offsetTop;
+
+    this.scrollContainerNumber = element;
+  }
 
   ngOnInit(): void {
     this.benefitConsultationData$ = this.consultationService

@@ -13,7 +13,7 @@
     ></div>
   </div>
   <p [class.white-text]="scrollPercentage * 100 > 70" class="progress-bar-text">
-    {{ scrollPercentage | percent : "1.0-0" }}
+    {{ (scrollPercentage > 1 ? 1 : scrollPercentage) | percent : "1.0-0" }}
   </p>
 </div>
 }

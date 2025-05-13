@@ -20,9 +20,7 @@
   overflow: hidden;
 
   width: 100%;
-  @media screen and (min-width: 480px) {
-    margin-bottom: 18px;
-  }
+  margin-bottom: 18px;
   @media screen and (min-width: 764px) {
     margin-bottom: 30px;
   }
@@ -54,19 +52,17 @@
 
   pointer-events: none;
   will-change: transform;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 .consultations-card {
   gap: 10px;
   padding: 15px;
   border-radius: 20px;
-  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   border: 1px solid #057988;
-  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
   color: var(--color-text-primary);
   @media screen and (min-width: 764px) {
     padding: 55px 78px;
@@ -103,7 +99,7 @@
   }
 }
 .icons-container {
-  margin-bottom: 30px;
+  margin: 30px 0;
 }
 .icons-list {
   gap: 16px;
