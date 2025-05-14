@@ -69,7 +69,11 @@
 
   h3 {
     font-weight: 600;
+    color: var(--color-text-primary);
     letter-spacing: 1.2px;
+  }
+  p {
+    color: var(--color-text-primary);
   }
 }
 .results-image {
