@@ -40,7 +40,7 @@
   position: relative;
 
   @media screen and (min-width: 764px) {
-    height: 840px;
+    height: 880px;
     padding: 40px 32px;
     border-radius: 20px;
   }
@@ -66,7 +66,7 @@
   padding: 0 8px;
 
   display: flex;
-  overflow-x: hidden;
+  overflow: hidden;
   align-items: center;
   transition: transform 1s ease-in-out;
   will-change: transform;
