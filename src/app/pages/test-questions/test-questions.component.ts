@@ -96,7 +96,8 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
   private isSnackBarOpened = false;
   private viewportScroller = inject(ViewportScroller);
   TEST_NAME!: string;
-
+  testTitleText = '';
+  testSubtitleText = '';
   isStartTest = signal(false);
   testQuestionsLength!: number;
 
@@ -107,6 +108,8 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
         const scrollToTop = response['scrollToTop'];
         this.seoService.updateTitle(data['seo'].title);
         const testName: string = data['testName'];
+        this.testTitleText = data['testTitleText'];
+        this.testSubtitleText = data['testSubtitleText'];
         this.TEST_NAME = testName;
 
         this.seoService.updateMetaTags(

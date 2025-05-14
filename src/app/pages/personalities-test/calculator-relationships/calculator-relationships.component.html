@@ -1,4 +1,7 @@
-<app-title-card></app-title-card>
+<app-title-card
+  [titleText]="titleText"
+  [subtitleText]="subtitleText"
+></app-title-card>
 
 <section class="disclaimer">
   <ng-container *ngIf="calculatorDeclaimer$ | async as calculatorDeclaimer">

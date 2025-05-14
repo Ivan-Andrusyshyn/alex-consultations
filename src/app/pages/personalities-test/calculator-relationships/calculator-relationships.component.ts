@@ -68,8 +68,9 @@ export class CalculatorRelationshipsComponent implements OnInit, OnDestroy {
     .toFormat('yyyy-MM-dd HH:mm:ss');
 
   imgUrl = 'assets/svg/tests/crossfit.svg';
-  subtitleText = 'Дізнайтеся рівень гармонії ваших стосунків.';
-  titleText = 'Калькулятор сумісності';
+  subtitleText =
+    'Допоможе подивитися на ваші стосунки через призму мислення та емоцій. Це не “оцінка любові”, а глибокий погляд на гармонію і потенційні труднощі.';
+  titleText = 'Перевір, наскільки ви з партнером доповнюєте одне одного.';
 
   formGroup: FormGroup = this.fb.group({});
   personalities: PersonalityTypes[] = personalityTypesContent;

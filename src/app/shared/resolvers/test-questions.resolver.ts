@@ -32,6 +32,8 @@ export class TestsQuestionsResolver implements Resolve<any> {
     message: string | null;
     questions: Question[] | null;
     testName: string | null;
+    testTitleText: string;
+    testSubtitleText: string;
     seo?: {
       title: string;
       metaTags: Array<string>;
@@ -45,6 +47,9 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testTitleText: 'Ти — опора, натхнення чи дзеркало для партнера?',
+            testSubtitleText:
+              'Цей тест покаже, як ти поводишся у близьких зв’язках і що несеш у життя іншої людини. Це дає глибоке усвідомлення себе у парі.',
             seo: {
               title:
                 'Тест: Яка твоя роль у стосунках? - Дай відповідь на питання',
@@ -63,6 +68,10 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testTitleText:
+              'Дізнайся свій унікальний тип мислення, сильні сторони та спосіб прийняття рішень.',
+            testSubtitleText:
+              'Цей тест допоможе краще зрозуміти, як ти бачиш світ, будуєш стосунки та знаходиш своє місце. Від нього ми йдемо далі в глибину.',
             seo: {
               title: 'Запитання | 16 типів особистості | vidchuttia',
               metaTags: [
@@ -80,7 +89,10 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
-
+            testTitleText:
+              'Зрозумій, що саме в тобі найбільше притягує людей — емоційність, впевненість чи глибина?',
+            testSubtitleText:
+              'Цей тест допоможе побачити свої неочевидні сильні сторони в любові та дружбі. Те, що інші помічають, а ти — можливо, ні.',
             seo: {
               title: 'Запитання тесту на привабливість',
               metaTags: [
@@ -98,7 +110,10 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
-
+            testTitleText:
+              'Чи не виснажують тебе стосунки? А може, щось давно сигналить про проблему?',
+            testSubtitleText:
+              'Цей тест допоможе побачити сигнали токсичності, які легко ігнорувати. І дасть перший поштовх до чесного діалогу з собою.',
             seo: {
               title:
                 'Запитання до тесту на токсичні відносини з партнером | Оціні свої стосунки',
@@ -118,7 +133,10 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
-
+            testTitleText:
+              'Як ти реагуєш на критику, непорозуміння чи образливі слова?',
+            testSubtitleText:
+              'Цей тест допоможе виявити свої вразливі місця — і зрозуміти, чи не живеш ти в режимі захисту. Це важливо, щоб побудувати здорові межі та зцілити себе.',
             seo: {
               title: 'Запитання тесту на травматичну чутливість',
               metaTags: [
@@ -133,6 +151,8 @@ export class TestsQuestionsResolver implements Resolve<any> {
     return of({
       message: null,
       testName: null,
+      testTitleText: '',
+      testSubtitleText: '',
       questions: null,
       seo: undefined,
     });

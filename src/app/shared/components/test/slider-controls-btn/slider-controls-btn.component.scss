@@ -27,9 +27,7 @@
   }
 }
 ::ng-deep button.disable mat-icon svg {
-  width: 45px;
-  height: 45px;
-  stroke: #fff;
+  stroke: gray;
   opacity: 0.5;
   pointer-events: none;
 }

@@ -142,25 +142,7 @@ p {
     justify-content: flex-start;
   }
 }
-::ng-deep .consultations-control-btns app-slider-controls-btn .controls button {
-  @media screen and (max-width: 764px) {
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
 
-    background-color: #057988;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-      width: 16px !important;
-      height: 16px !important;
-    }
-    svg path {
-      stroke: #fff;
-    }
-  }
-}
 ::ng-deep .consultations-btn-wrapper app-primary-btn .primary-btn {
   @media screen and (max-width: 764px) {
     min-width: 300px;

@@ -1,4 +1,7 @@
-<app-title-card></app-title-card>
+<app-title-card
+  [titleText]="testTitleText"
+  [subtitleText]="testSubtitleText"
+></app-title-card>
 <ng-container *ngIf="testQuestions$ | async as questions">
   <h3 class="question question-mob">
     {{ questions[currentQuestionNumber() - 1]?.question }}
