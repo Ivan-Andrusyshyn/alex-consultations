@@ -3,10 +3,20 @@
   [class.controls-outside]="!controlsInside"
   [class.controls-inside]="controlsInside"
 >
-  <button class="btn-prev" (click)="prevSlide()" [class.disable]="disablePrev">
+  <button
+    [disabled]="disablePrev"
+    class="btn-prev"
+    (click)="prevSlide()"
+    [class.disable]="disablePrev"
+  >
     <mat-icon class="btns-icon" svgIcon="prev-btn"></mat-icon>
   </button>
-  <button class="btn-next" (click)="nextSlide()" [class.disable]="disableNext">
+  <button
+    [disabled]="disableNext"
+    class="btn-next"
+    (click)="nextSlide()"
+    [class.disable]="disableNext"
+  >
     <mat-icon class="btns-icon" svgIcon="next-btn"></mat-icon>
   </button>
 </div>
