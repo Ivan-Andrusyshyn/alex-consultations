@@ -56,6 +56,9 @@
       align-items: center;
       justify-content: flex-start;
       flex-direction: row;
+      @media screen and (min-width: 1320px) {
+        margin-bottom: 70px;
+      }
     }
     .time {
       font-size: 20px;
@@ -96,18 +99,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 250px;
-    height: 213px;
+    overflow: hidden;
 
-    @media screen and (min-width: 1640px) {
-      height: 400px;
-      width: 600px;
-      max-width: 600px;
-    }
-    img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
+    .carousel-frame {
+      width: 250px;
+      height: 213px;
+
+      position: relative;
+      overflow: hidden;
+
+      @media screen and (min-width: 1640px) {
+        height: 400px;
+        width: 600px;
+        max-width: 600px;
+      }
     }
   }
+}
+
+.carousel-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  will-change: opacity;
+
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  z-index: 0;
+}
+
+.img-show {
+  opacity: 1;
+  z-index: 2;
 }

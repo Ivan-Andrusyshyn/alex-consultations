@@ -35,13 +35,15 @@
       (mouseenter)="startCarousel()"
       (mouseleave)="stopCarousel()"
     >
+      @for (item of card.imgList; track $index) {
+
       <img
-        *ngIf="card"
-        [@imageFade]="isMobile ? '' : currentIndex()"
-        [src]="getCurrentImgUrl()"
+        [src]="this.card.imageUrl + 'carousel/' + item + '.svg'"
+        [class.img-show]="currentIndex() === $index"
         class="carousel-img"
         alt="Test image"
       />
+      }
     </div>
   </div>
   <div class="btn-wrapper-mob">

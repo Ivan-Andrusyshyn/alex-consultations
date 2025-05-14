@@ -8,30 +8,17 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
+
 import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
 import { CardContent } from '../../../models/common-tests';
 
 @Component({
   selector: 'app-test-card',
   standalone: true,
-  imports: [PrimaryBtnComponent, NgIf],
+  imports: [PrimaryBtnComponent],
   templateUrl: './test-card.component.html',
   styleUrl: './test-card.component.scss',
-  animations: [
-    trigger('imageFade', [
-      transition(':increment', [
-        style({ opacity: 0 }),
-        animate('500ms ease-in-out', style({ opacity: 1 })),
-      ]),
-      transition(':decrement', [
-        style({ opacity: 1 }),
-        animate('500ms ease-in-out', style({ opacity: 0 })),
-      ]),
-    ]),
-  ],
-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestCardComponent implements OnInit, OnDestroy {
@@ -55,9 +42,14 @@ export class TestCardComponent implements OnInit, OnDestroy {
   startCarousel(): void {
     if (this.intervalId || !this.card?.imgList?.length) return;
 
-    this.intervalId = setInterval(() => {
-      this.currentIndex.update((prev) => (prev + 1) % this.card.imgList.length);
-    }, 3000);
+    this.intervalId = setInterval(
+      () => {
+        this.currentIndex.update(
+          (prev) => (prev + 1) % this.card.imgList.length
+        );
+      },
+      this.isMobile ? 2000 : 3000
+    );
   }
 
   stopCarousel(): void {
@@ -65,12 +57,6 @@ export class TestCardComponent implements OnInit, OnDestroy {
       clearInterval(this.intervalId);
       this.intervalId = null;
     }
-  }
-
-  getCurrentImgUrl(): string {
-    const index = this.currentIndex();
-    if (!this.card?.imgList?.length) return '';
-    return `${this.card.imageUrl}carousel/${this.card.imgList[index]}.svg`;
   }
 
   startTest(): void {
