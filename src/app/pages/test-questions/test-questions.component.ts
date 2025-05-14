@@ -95,7 +95,7 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
   testQuestions$!: Observable<Question[]>;
   private isSnackBarOpened = false;
   private viewportScroller = inject(ViewportScroller);
-  private TEST_NAME!: string;
+  TEST_NAME!: string;
 
   isStartTest = signal(false);
   testQuestionsLength!: number;

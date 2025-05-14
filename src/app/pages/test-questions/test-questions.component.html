@@ -30,6 +30,9 @@
                   >
                     <label
                       class="label subtitle"
+                      [class.higher-options]="
+                        TEST_NAME === 'traumatic-sensitivity'
+                      "
                       [ngClass]="'label-' + (answerIndex + 1)"
                     >
                       <input

@@ -110,7 +110,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         this.sendObject = {
           category: response.results.type,
         };
-        console.log(response.results);
 
         return response.results;
       })
