@@ -3,36 +3,10 @@
   [class.controls-outside]="!controlsInside"
   [class.controls-inside]="controlsInside"
 >
-  <button class="btn-prev" (click)="prevSlide()">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="45"
-      height="45"
-      viewBox="0 0 45 45"
-      fill="none"
-    >
-      <path
-        d="M33 4L12 22.5L33 41"
-        stroke="#9F9F9F"
-        stroke-width="4"
-        stroke-linecap="round"
-      />
-    </svg>
+  <button class="btn-prev" (click)="prevSlide()" [class.disable]="disablePrev">
+    <mat-icon class="btns-icon" svgIcon="prev-btn"></mat-icon>
   </button>
-  <button class="btn-next" (click)="nextSlide()">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="45"
-      height="45"
-      viewBox="0 0 45 45"
-      fill="none"
-    >
-      <path
-        d="M12 4L33 22.5L12 41"
-        stroke="#9F9F9F"
-        stroke-width="4"
-        stroke-linecap="round"
-      />
-    </svg>
+  <button class="btn-next" (click)="nextSlide()" [class.disable]="disableNext">
+    <mat-icon class="btns-icon" svgIcon="next-btn"></mat-icon>
   </button>
 </div>

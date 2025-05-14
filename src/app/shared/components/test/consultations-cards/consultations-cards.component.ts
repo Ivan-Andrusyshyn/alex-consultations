@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -36,18 +37,26 @@ export class ConsultationsCardsComponent {
     unfit: string;
   }[];
   currentIndex = signal<number>(0);
+
+  isPrevDisabled = computed(() => this.currentIndex() === 0);
+  isNextDisabled = computed(() => this.currentIndex() >= this.cards.length - 1);
+
   constructor() {
     this.cards = consultationCards;
   }
 
   next() {
-    const cardIndex = this.sliderService.next(true, this.cards);
-    this.currentIndex.set(cardIndex);
+    if (!this.isNextDisabled()) {
+      const cardIndex = this.sliderService.next(true, this.cards);
+      this.currentIndex.set(cardIndex);
+    }
   }
 
   prev() {
-    const cardIndex = this.sliderService.prev(true, this.cards);
-    this.currentIndex.set(cardIndex);
+    if (!this.isPrevDisabled()) {
+      const cardIndex = this.sliderService.prev(true, this.cards);
+      this.currentIndex.set(cardIndex);
+    }
   }
 
   onTouchStart(event: TouchEvent) {
@@ -55,7 +64,15 @@ export class ConsultationsCardsComponent {
   }
 
   onTouchEnd(event: TouchEvent) {
+    const current = this.currentIndex();
+
     const cardIndex = this.sliderService.onTouchEnd(true, this.cards, event);
-    this.currentIndex.set(cardIndex);
+
+    if (
+      (cardIndex > current && !this.isNextDisabled()) ||
+      (cardIndex < current && !this.isPrevDisabled())
+    ) {
+      this.currentIndex.set(cardIndex);
+    }
   }
 }

@@ -19,11 +19,13 @@ export class ProgressBarComponent {
     const docHeight = document.documentElement.scrollTop;
 
     this.isShow.update((prev) => docHeight > 70);
+
     const scrollOffset =
       window.scrollY || docHeight || document.body.scrollTop || 0;
     const windowHeight =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
+
     this.scrollPercentage = scrollOffset / this.scrollContainerNumber;
   }
 }

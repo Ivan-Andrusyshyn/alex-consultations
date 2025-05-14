@@ -19,14 +19,21 @@
     &:hover {
       transform: scale(1.1);
     }
-
-    svg {
+    .btns-icon {
       width: 45px;
       height: 45px;
       stroke: #057988;
     }
   }
 }
+::ng-deep button.disable mat-icon svg {
+  width: 45px;
+  height: 45px;
+  stroke: #fff;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .controls-inside {
   min-width: 360px;
   max-width: 400px;

@@ -14,6 +14,14 @@ export class MatIconsService {
       url: '/assets/new/shared/back-in-time.svg',
     },
     {
+      name: 'prev-btn',
+      url: '/assets/new/shared/prev-btn.svg',
+    },
+    {
+      name: 'next-btn',
+      url: '/assets/new/shared/next-btn.svg',
+    },
+    {
       name: 'coins',
       url: '/assets/new/shared/coins.svg',
     },
