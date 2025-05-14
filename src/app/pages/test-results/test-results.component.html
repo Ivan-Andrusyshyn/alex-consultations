@@ -4,7 +4,12 @@
   ></app-progress-bar>
   <section class="results-container">
     <div class="results-content">
-      <h2 class="title-mob title-primary">{{ testResults.title }}</h2>
+      <h2 class="title-mob title-primary">
+        {{ testResults.title }} @if (TEST_NAME()==='16-personalities') { ({{
+          testResults.type
+        }}
+        ) }
+      </h2>
 
       <img
         [src]="
@@ -21,7 +26,9 @@
       <div class="results-text-container">
         <h2 class="title-primary">
           {{ testResults.title }}
+          @if (TEST_NAME()==='16-personalities') { ({{ testResults.type }} ) }
         </h2>
+
         <p>{{ testResults.subtitle }}</p>
       </div>
     </div>

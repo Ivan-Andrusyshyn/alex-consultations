@@ -36,7 +36,6 @@ export class ConsultationsCardsComponent {
     unfit: string;
   }[];
   currentIndex = signal<number>(0);
-
   constructor() {
     this.cards = consultationCards;
   }

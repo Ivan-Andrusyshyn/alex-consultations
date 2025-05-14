@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { TEST_CARDS } from '../../../assets/content/TEST_CARDS';
-
 @Injectable({
   providedIn: 'root',
 })
