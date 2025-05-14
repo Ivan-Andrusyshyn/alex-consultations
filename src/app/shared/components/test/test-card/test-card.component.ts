@@ -42,14 +42,9 @@ export class TestCardComponent implements OnInit, OnDestroy {
   startCarousel(): void {
     if (this.intervalId || !this.card?.imgList?.length) return;
 
-    this.intervalId = setInterval(
-      () => {
-        this.currentIndex.update(
-          (prev) => (prev + 1) % this.card.imgList.length
-        );
-      },
-      this.isMobile ? 2000 : 3000
-    );
+    this.intervalId = setInterval(() => {
+      this.currentIndex.update((prev) => (prev + 1) % this.card.imgList.length);
+    }, 2000);
   }
 
   stopCarousel(): void {
