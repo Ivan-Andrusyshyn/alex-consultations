@@ -32,6 +32,7 @@ import {
   CalculatorDisclaimer,
 } from '../../../shared/models/personalities-calculator';
 import { PrimaryBtnComponent } from '../../../shared/components/primary-btn/primary-btn.component';
+import { HeroCardsSliderComponent } from '../../../shared/components/hero-cards-slider/hero-cards-slider.component';
 
 @Component({
   selector: 'app-calculator-relationships',
@@ -41,6 +42,7 @@ import { PrimaryBtnComponent } from '../../../shared/components/primary-btn/prim
     ReactiveFormsModule,
     NgIf,
     AsyncPipe,
+    HeroCardsSliderComponent,
     TitleCardComponent,
     MatFormFieldModule,
     MatSelectModule,

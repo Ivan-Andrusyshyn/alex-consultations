@@ -66,6 +66,6 @@ export const TEST_CARDS: CardContent[] = [
     routeStart: '/tests/toxical-relationship/questions',
     subtitle: 'Перевір, чи твій партнер не токсичний.',
     buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/toxical-relationships/',
+    imageUrl: 'assets/new/core/tests/toxical-relationship/',
   },
 ];

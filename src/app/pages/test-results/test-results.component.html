@@ -1,10 +1,10 @@
 <section class="test-results" *ngIf="testResults$ | async as testResults">
   <app-progress-bar
-    [scrollContainerNumber]="scrollContainerNumber"
+    [scrollContainerNumber]="scrollContainerNumber()"
   ></app-progress-bar>
   <section class="results-container">
     <div class="results-content">
-      <h2 class="title-mob title-primary">{{ example.title }}</h2>
+      <h2 class="title-mob title-primary">{{ testResults.title }}</h2>
 
       <img
         [src]="
@@ -19,12 +19,14 @@
         class="results-image"
       />
       <div class="results-text-container">
-        <h2 class="title-primary">{{ example.title ?? example.type }}</h2>
-        <p>{{ example.subtitle }}</p>
+        <h2 class="title-primary">
+          {{ testResults.title }}
+        </h2>
+        <p>{{ testResults.subtitle }}</p>
       </div>
     </div>
     <ul class="results-text-list">
-      @for (item of example.sections; track $index) {
+      @for (item of testResults.sections; track $index) {
 
       <li class="results-text-card">
         <h3 class="subtitle">{{ item.sectionsName }}</h3>

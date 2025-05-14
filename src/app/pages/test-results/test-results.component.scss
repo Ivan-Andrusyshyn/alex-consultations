@@ -36,10 +36,16 @@
       display: none;
     }
   }
+  img {
+    max-width: 442px;
+    max-height: auto;
+  }
   h2 {
     margin-bottom: 18px;
+    display: none;
     @media screen and (min-width: 1320px) {
       margin-bottom: 42px;
+      display: block;
     }
   }
   @media screen and (min-width: 1320px) {
@@ -49,9 +55,11 @@
   }
 }
 .results-text-list {
+  gap: 30px;
+  line-height: 1.5;
+
   display: flex;
   flex-direction: column;
-  gap: 30px;
 }
 
 .results-text-card {
@@ -83,6 +91,7 @@
 .benefits {
   p {
     margin-bottom: 16px;
+    line-height: 1.5;
     @media screen and (min-width: 1320px) {
       margin-bottom: 30px;
     }
@@ -99,6 +108,7 @@
 }
 .testimonial {
   p {
+    line-height: 1.5;
     margin-bottom: 16px;
     @media screen and (min-width: 1320px) {
       margin-bottom: 30px;

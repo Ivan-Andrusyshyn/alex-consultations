@@ -25,7 +25,7 @@ const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const fileId = google_file_ids_env_1.PERSONALITIES.RESULTS;
         const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         const personInformation = results[personType];
-        personInformation.type = personNameByType;
+        personInformation.title = personNameByType;
         res.status(200).send({
             personInformation,
             message: 'Success post person type .',

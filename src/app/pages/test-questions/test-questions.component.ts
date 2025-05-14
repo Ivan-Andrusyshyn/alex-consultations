@@ -193,8 +193,6 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
       .makeRequestByTestName(this.TEST_NAME, request)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((results) => {
-        console.log(results);
-
         this.handlePersonType(results);
       });
   }

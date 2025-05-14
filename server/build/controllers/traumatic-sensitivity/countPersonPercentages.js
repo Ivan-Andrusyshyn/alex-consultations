@@ -24,15 +24,7 @@ const countPersonPercentages = (req, res) => __awaiter(void 0, void 0, void 0, f
             : req.socket.remoteAddress || 'Unknown';
         yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: sensitivityType }));
         res.status(200).send({
-            results: {
-                percentages,
-                scores,
-                matchResults,
-                originMatchResults,
-                sensitivityType,
-                minScoreNumber,
-                maxScoreNumber,
-            },
+            results: matchResults,
             message: 'Success post scores operation.',
         });
     }
