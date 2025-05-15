@@ -1,13 +1,13 @@
 ::ng-deep .mat-mdc-form-field {
   width: 100%;
-  color: var(--textColor) !important;
+  color: var(--color-text-secondary) !important;
 }
 ::ng-deep .mat-mdc-select {
-  color: var(--textColor) !important;
+  color: var(--color-text-secondary) !important;
 }
 ::ng-deep .mdc-floating-label {
-  border-color: var(--borderColor) !important;
-  color: var(--textColor) !important;
+  border-color: var(--color-text-secondary) !important;
+  color: var(--color-text-secondary) !important;
   z-index: 999 !important;
 }
 ::ng-deep .mdc-text-field.mdc-text-field--outlined {
@@ -15,15 +15,16 @@
 }
 
 ::ng-deep .mat-mdc-select-panel {
-  background-color: var(--bgColor) !important;
+  background-color: #fff !important;
 }
 ::ng-deep .mat-mdc-select-arrow {
-  color: var(--textColor) !important;
+  color: var(--color-text-secondary) !important;
 }
 ::ng-deep .mdc-text-field.mdc-text-field--outlined,
 ::ng-deep .mat-mdc-form-field-outline {
-  border: 1px solid var(--borderColor) !important;
+  border: 1px solid var(--color-text-secondary) !important;
 }
+
 .disclaimer {
   padding: 16px;
   margin: 20px 0;
