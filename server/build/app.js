@@ -30,6 +30,10 @@ server.set('views', path_1.default.join(__dirname, 'views'));
 server.use((0, cors_1.default)(cors_2.default));
 server.use((0, helmet_1.default)());
 const port = 3000;
+server.use((req, res, next) => {
+    console.log(`${req.method} ${req.originalUrl}`);
+    next();
+});
 server.use(body_parser_1.default.urlencoded({ extended: true, limit: '50mb' }));
 server.use(body_parser_1.default.json({ limit: '50mb' }));
 (0, mongo_1.connectToDB)();
