@@ -11,7 +11,7 @@ const helmet_1 = __importDefault(require("helmet"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const _16_personalities_1 = __importDefault(require("./routes/16-personalities"));
-const cors_2 = __importDefault(require("./utils/cors"));
+const cors_2 = __importDefault(require("./secure/cors"));
 const mailer_1 = __importDefault(require("./routes/mailer"));
 const google_sheets_1 = __importDefault(require("./routes/google-sheets"));
 const traumatic_sensitivity_1 = __importDefault(require("./routes/traumatic-sensitivity"));
@@ -24,11 +24,13 @@ const role_in_relationships_1 = __importDefault(require("./routes/role-in-relati
 const consultations_1 = __importDefault(require("./routes/consultations"));
 const counter_1 = __importDefault(require("./routes/counter"));
 const mongo_1 = require("./db/mongo");
+const limiter_1 = require("./secure/limiter");
 const server = (0, express_1.default)();
 server.set('view engine', 'pug');
 server.set('views', path_1.default.join(__dirname, 'views'));
 server.use((0, cors_1.default)(cors_2.default));
 server.use((0, helmet_1.default)());
+server.use(limiter_1.limiter);
 const port = 3000;
 server.use((req, res, next) => {
     console.log(`${req.method} ${req.originalUrl}`);
