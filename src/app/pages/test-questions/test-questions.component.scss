@@ -121,7 +121,10 @@ form {
       border-radius: 50%;
       flex-shrink: 0;
       background: #000;
+      display: none;
       @media screen and (min-width: 764px) {
+        display: block;
+
         width: 23px;
         height: 23px;
       }

@@ -17,9 +17,9 @@
     padding: 81px 65px;
   }
 }
+
 .results-content {
   gap: 24px;
-  margin-bottom: 24px;
 
   display: flex;
   flex-wrap: wrap;
@@ -55,6 +55,9 @@
       display: block;
     }
   }
+  p {
+    color: var(--color-text-primary);
+  }
   @media screen and (min-width: 1320px) {
     justify-content: flex-start;
     align-items: flex-start;
@@ -63,7 +66,7 @@
 }
 .results-text-list {
   gap: 30px;
-  line-height: 1.5;
+  line-height: normal;
 
   display: flex;
   flex-direction: column;
@@ -98,7 +101,7 @@
 .benefits {
   p {
     margin-bottom: 16px;
-    line-height: 1.5;
+    line-height: normal;
     @media screen and (min-width: 1320px) {
       margin-bottom: 30px;
     }
@@ -115,7 +118,7 @@
 }
 .testimonial {
   p {
-    line-height: 1.5;
+    line-height: normal;
     margin-bottom: 16px;
     @media screen and (min-width: 1320px) {
       margin-bottom: 30px;
