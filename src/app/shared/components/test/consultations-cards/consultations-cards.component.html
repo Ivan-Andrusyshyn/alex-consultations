@@ -1,9 +1,9 @@
-<section
-  class="container consultations"
-  (touchstart)="onTouchStart($event)"
-  (touchend)="onTouchEnd($event)"
->
-  <div class="consultations-cards carousel">
+<section class="container consultations">
+  <div
+    class="consultations-cards carousel"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
     @for (card of cards; track $index) {
     <div
       class="slide-card"
