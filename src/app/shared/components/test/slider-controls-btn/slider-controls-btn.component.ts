@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -7,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatIconModule],
   templateUrl: './slider-controls-btn.component.html',
   styleUrl: './slider-controls-btn.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderControlsBtnComponent {
   @Output() next = new EventEmitter();
