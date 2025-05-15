@@ -8,7 +8,7 @@
     padding: 64px 18px;
   }
 }
-.container-bg {
+.container {
   padding: 19px;
   gap: 24px;
   width: 1320px;
@@ -62,6 +62,7 @@
   }
   .text {
     margin-bottom: 24px;
+    color: var(--color-text-primary);
   }
   img {
     width: 522px;
@@ -78,7 +79,8 @@
 }
 
 .text {
-  line-height: 1.5;
+  color: var(--color-text-primary);
+  line-height: normal;
   font-size: 16px;
   @media screen and (min-width: 1200p) {
     font-size: 20px;
