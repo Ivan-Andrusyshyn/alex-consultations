@@ -52,6 +52,8 @@ export class PersonalitiesCalculatorService {
       device: string;
     }
   ): Observable<CalculatorResponse> {
+    console.log({ personsTypes, userInformation });
+
     return this.http.post<CalculatorResponse>(
       this.testsUrl + '/16-personalities/calculator',
       { personsTypes, userInformation }
