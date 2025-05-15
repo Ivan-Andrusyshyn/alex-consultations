@@ -52,10 +52,9 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private activeRoute = inject(ActivatedRoute);
   private consultationService = inject(ConsultationService);
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
-
+  containerElement!: HTMLElement;
   formGroup!: FormGroup;
   successMessage = signal(false);
-  scrollContainerNumber = signal<number>(0);
   isShowSendForm = signal(false);
   sendObject: any;
   viewportScroller = inject(ViewportScroller);
@@ -64,14 +63,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   // example: Partial<TestResults> = testResultExample;
   TEST_NAME = signal<string>('');
 
-  ngOnDestroy(): void {
-    this.scrollContainerNumber.set(0);
-  }
+  ngOnDestroy(): void {}
 
   ngAfterViewInit(): void {
-    const elementBottom = this.scrollContainer.nativeElement.offsetTop;
-
-    this.scrollContainerNumber.set(elementBottom);
+    this.containerElement = this.scrollContainer.nativeElement;
   }
 
   ngOnInit(): void {
