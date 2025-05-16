@@ -5,10 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
-import { NgIf, NgFor } from '@angular/common';
 
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
-import { RouteTrackerService } from '../../core/services/route-tracker.service';
 import { SeoService } from '../../core/services/seo.service';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { consultationData } from './consultations';
@@ -49,11 +47,10 @@ export class ConsultationsComponent implements OnInit {
     aboutConsultation: SectionType;
     itWorksCards: { title: string; svgPath: string; subtitle: string }[];
   } = consultationData;
-  private routeTracker = inject(RouteTrackerService);
   titleText =
     'Замість років пошуків — цілісне розуміння себе вже на першій зустрічі.';
   ngOnInit(): void {
-    this.routeTracker.getRoutes();
+    window.scrollTo(0, 0);
 
     this.seoService.updateTitle(
       'Консультації | Отримайте цілісну картину своєї особистості за одну зустріч'

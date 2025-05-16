@@ -1,6 +1,9 @@
-<li class="service-card hover-card">
+<li
+  class="service-card hover-card"
+  [class.class-pointer]="card.link ?? false"
+  [routerLink]="card.link ? card.link : null"
+>
   <img [src]="svgPath" alt="" />
-
   <h4>{{ card.title }}</h4>
   <p class="service-card-text">
     {{ card.subtitle }}

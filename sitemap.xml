@@ -25,9 +25,25 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/attractiveness/test-information</loc>
+        <loc>https://vidchuttia.com.ua/tests/attractiveness/details</loc>
         <priority>0.6</priority>
     </url>
+
+
+
+       <url>
+        <loc>https://vidchuttia.com.ua/tests/toxical-relationship</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://vidchuttia.com.ua/tests/toxical-relationship/questions</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vidchuttia.com.ua/tests/toxical-relationship/details</loc>
+        <priority>0.6</priority>
+    </url>
+
 
 
 
@@ -40,7 +56,7 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/role-in-relationships/test-information</loc>
+        <loc>https://vidchuttia.com.ua/tests/role-in-relationships/details</loc>
         <priority>0.6</priority>
     </url>
 
@@ -53,7 +69,7 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity/test-information</loc>
+        <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity/details</loc>
         <priority>0.6</priority>
     </url> 
 
@@ -66,7 +82,7 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/16-personalities/test-information</loc>
+        <loc>https://vidchuttia.com.ua/tests/16-personalities/details</loc>
         <priority>0.6</priority>
     </url>
     

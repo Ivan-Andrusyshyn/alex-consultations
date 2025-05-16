@@ -44,7 +44,7 @@ export class TestCardComponent implements OnInit, OnDestroy {
 
     this.intervalId = setInterval(() => {
       this.currentIndex.update((prev) => (prev + 1) % this.card.imgList.length);
-    }, 2000);
+    }, 3000);
   }
 
   stopCarousel(): void {

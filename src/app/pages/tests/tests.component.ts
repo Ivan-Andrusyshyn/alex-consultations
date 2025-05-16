@@ -60,12 +60,13 @@ export class TestsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+
     const isNewUser = JSON.parse(sessionStorage.getItem('isNewUser') ?? 'null');
     if (!isNewUser) {
       this.openDialog();
       sessionStorage.setItem('isNewUser', JSON.stringify(true));
     }
-
     this.seoService.updateTitle(
       'Список тестів | Оцініть свої можливості та особистість'
     );
