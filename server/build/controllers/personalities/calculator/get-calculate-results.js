@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const _16_personalities_calculator_1 = __importDefault(require("../../../services/16-personalities-calculator"));
 const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
-const cache_1 = __importDefault(require("../../../services/cache"));
 const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 const tests_data_schema_1 = require("../../../db/models/tests-data-schema");
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,14 +24,24 @@ const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0
             : req.socket.remoteAddress || 'Unknown';
         const fileResultsId = google_file_ids_env_1.PERSONALITIES.CALCULATOR.RESULTS;
         // const calculateMatchesId = PERSONALITIES.CALCULATOR.IDS;
-        const results = yield cache_1.default.getCache(fileResultsId, () => google_sheets_1.default.getDataGoogle(fileResultsId));
-        const calculateMatches = yield (0, tests_data_schema_1.getUniversalModel)('personalities-calculator-matches').findOne();
+        // const results = await cacheService.getCache(fileResultsId, () =>
+        //   googleSheetsService.getDataGoogle(fileResultsId)
+        // );
+        const resultsModel = (0, tests_data_schema_1.getUniversalModel)('personalities-calculator-results');
+        const matchesModel = (0, tests_data_schema_1.getUniversalModel)('personalities-calculator-matches');
+        const [resultsDoc, matchesDoc] = yield Promise.all([
+            resultsModel.findOne(),
+            matchesModel.findOne(),
+        ]);
+        if (!resultsDoc || !matchesDoc) {
+            return res.status(500).json({ message: 'Data not found in database' });
+        }
         const typesOfPair = `${personsTypes[0]}-${personsTypes[1]}`;
-        const scoreResult = calculateMatches[typesOfPair];
+        const scoreResult = matchesDoc[typesOfPair];
         if (scoreResult) {
             const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
             yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: relationshipsType.title }));
-            const calculatorResults = results[relationshipsType.title];
+            const calculatorResults = resultsDoc[relationshipsType.title];
             res.status(200).send({
                 message: 'Successful calculate!',
                 relationshipsType,

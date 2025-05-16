@@ -6,19 +6,23 @@
 .mat-mdc-tab-body-wrapper,
 .mat-mdc-tab,
 .mat-mdc-tab-nav-bar {
-  --mdc-tab-indicator-active-indicator-color: var(--textColor);
-  --mat-tab-header-active-label-text-color: var(--textColor);
-  --mat-tab-header-inactive-label-text-color: var(--textColor);
-  --mat-mdc-tab-header-pagination-chevron-color: var(--textColor) !important;
+  --mdc-tab-indicator-active-indicator-color: var(--color-text-primary);
+  --mat-tab-header-active-label-text-color: var(--color-text-primary);
+  --mat-tab-header-inactive-label-text-color: var(--color-text-primary);
+  --mat-mdc-tab-header-pagination-chevron-color: var(
+    --color-text-primary
+  ) !important;
 
-  --mat-full-pseudo-checkbox-selected-checkmark-color: var(--textColor);
-  --mdc-tab-text-label-color: var(--textColor);
-  --mdc-tab-text-label-color-default: var(--textColor);
+  --mat-full-pseudo-checkbox-selected-checkmark-color: var(
+    --color-text-primary
+  );
+  --mdc-tab-text-label-color: var(--color-text-primary);
+  --mdc-tab-text-label-color-default: var(--color-text-primary);
 }
 
 .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
-  color: var(--textColor) !important;
+  color: var(--color-text-primary) !important;
 }
 .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
-  color: var(--textColor) !important;
+  color: var(--color-text-primary) !important;
 }

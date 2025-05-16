@@ -5,8 +5,8 @@
       [subtitleText]="titleCardContent.subtitleText"
     ></app-title-card>
 
-    <div class="container">
-      @if (isMobDevice) {
+    <div class="tests-container">
+      @if (isMobDevice()) {
       <mat-tab-group>
         <ng-container *ngFor="let group of groupedCards">
           <mat-tab [label]="group.tabsLabel">

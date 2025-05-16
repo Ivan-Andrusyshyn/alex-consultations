@@ -21,7 +21,7 @@
     padding: 0;
   }
 }
-.container {
+.tests-container {
   margin-top: 24px;
   @media screen and (min-width: 764px) {
     margin-top: 44px;
@@ -30,6 +30,7 @@
     margin-top: 64px;
   }
 }
+
 .category-wrapper:last-child {
   margin-bottom: 0;
 }

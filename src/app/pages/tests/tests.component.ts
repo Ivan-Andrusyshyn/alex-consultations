@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -25,6 +31,7 @@ import { TestCardComponent } from '../../shared/components/test/test-card/test-c
   ],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestsComponent implements OnInit {
   readonly testCards: CardContent[] = TEST_CARDS;
@@ -33,7 +40,7 @@ export class TestsComponent implements OnInit {
   private readonly route = inject(Router);
   private seoService = inject(SeoService);
   focusedCardIndex = signal<number | null>(null);
-  isMobDevice = window.innerWidth < 764;
+  isMobDevice = signal<boolean>(window.innerWidth < 764);
 
   readonly categoryList = ['Для стосунків', 'Для особистого розвитку'];
   currentTopic: string = '';
