@@ -140,7 +140,9 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
     this.formGroup.reset();
     sessionStorage.setItem('isStartTest', 'false');
   }
-
+  isValid(index: number) {
+    return this.formGroup.get(index.toString())?.valid || index == 0;
+  }
   private setCurrentAnswers() {
     const stringAnswers =
       sessionStorage.getItem(this.TEST_NAME + '-answers') ?? 'null';

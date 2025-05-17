@@ -29,8 +29,9 @@
 .wrapper {
   display: flex;
   gap: 12px;
+  //
+  display: block;
   @media screen and (min-width: 764px) {
-    display: block;
     padding: 0;
   }
 }

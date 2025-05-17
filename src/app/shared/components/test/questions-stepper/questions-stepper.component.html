@@ -9,6 +9,9 @@
         [active]="currentQuestionNumber === $index"
         (click)="changeQuestion(question.id)"
         [class.active]="isValid($index)"
+        [class.currentQuestion]="
+          isChooseQuestion() && currentQuestionNumber === $index + 1
+        "
         class="step"
       >
         <span class="number">{{ $index + 1 }}</span>
