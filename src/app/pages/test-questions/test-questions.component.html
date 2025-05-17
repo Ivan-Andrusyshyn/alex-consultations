@@ -3,23 +3,22 @@
   [subtitleText]="testSubtitleText"
 ></app-title-card>
 <ng-container *ngIf="testQuestions$ | async as questions">
+  <div class="refresh-btn-wrapper">
+    <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+    <P class="subtitle"> {{ questions.length | questionWord }} </P>
+  </div>
+  <app-questions-stepper
+    [formGroup]="formGroup"
+    [questions]="questions"
+    [currentQuestionNumber]="currentQuestionNumber()"
+    (changeViewQuestion)="changeViewQuestion($event)"
+  ></app-questions-stepper>
   <h3 class="question question-mob">
     {{ questions[currentQuestionNumber() - 1]?.question }}
   </h3>
 
   <div class="wrapper">
-    <app-questions-stepper
-      [formGroup]="formGroup"
-      [questions]="questions"
-      [currentQuestionNumber]="currentQuestionNumber()"
-      (changeViewQuestion)="changeViewQuestion($event)"
-    ></app-questions-stepper>
-
     <div class="container" *ngIf="questions">
-      <div class="refresh-btn-wrapper">
-        <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
-      </div>
-
       <form [formGroup]="formGroup">
         <ng-container *ngFor="let q of questions; let i = index">
           @if (q.id===currentQuestionNumber() ) {

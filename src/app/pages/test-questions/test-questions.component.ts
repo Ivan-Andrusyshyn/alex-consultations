@@ -41,6 +41,7 @@ import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { SeoService } from '../../core/services/seo.service';
 import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
+import { QuestionWordPipe } from './test-questions.pipe';
 
 @Component({
   selector: 'app-test-questions',
@@ -56,6 +57,7 @@ import { TitleCardComponent } from '../../shared/components/title-card/title-car
     QuestionsStepperComponent,
     PrimaryBtnComponent,
     TitleCardComponent,
+    QuestionWordPipe,
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
@@ -84,6 +86,7 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
   private activeRoute = inject(ActivatedRoute);
   private googleSheetService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
+  private viewportScroller = inject(ViewportScroller);
   private questionsService = inject(QuestionsService);
 
   formGroup: FormGroup = this.fb.group({});
@@ -94,7 +97,6 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
   currentQuestionNumber = signal<number>(1);
   testQuestions$!: Observable<Question[]>;
   private isSnackBarOpened = false;
-  private viewportScroller = inject(ViewportScroller);
   TEST_NAME!: string;
   testTitleText = '';
   testSubtitleText = '';
@@ -204,7 +206,7 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
 
   private openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      height: '180px',
+      height: '200px',
       width: '300px',
       data: {
         contentType: 'confirm',
