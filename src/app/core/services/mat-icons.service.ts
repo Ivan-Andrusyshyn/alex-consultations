@@ -10,6 +10,10 @@ export class MatIconsService {
       url: '/assets/new/shared/pin.svg',
     },
     {
+      name: 'arrows',
+      url: '/assets/new/shared/arrows.svg',
+    },
+    {
       name: 'back-in-time',
       url: '/assets/new/shared/back-in-time.svg',
     },

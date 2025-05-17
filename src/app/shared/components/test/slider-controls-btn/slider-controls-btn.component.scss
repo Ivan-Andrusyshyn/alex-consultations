@@ -35,9 +35,7 @@
 .controls-inside {
   min-width: 360px;
   max-width: 400px;
-  @media screen and (min-width: 764px) {
-    min-width: 600px;
-  }
+
   @media screen and (min-width: 1320px) {
     min-width: 65%;
   }

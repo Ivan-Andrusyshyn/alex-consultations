@@ -6,26 +6,16 @@ import {
   Input,
   signal,
 } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-expandable-panel',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, MatIconModule, MatExpansionModule],
   templateUrl: './expandable-panel.component.html',
   styleUrl: './expandable-panel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('expandCollapse', [
-      transition(':enter', [
-        style({ height: 0, opacity: 0 }),
-        animate('250ms ease-out', style({ height: '*', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ height: '*', opacity: 1 }),
-        animate('200ms ease-in', style({ height: 0, opacity: 0 })),
-      ]),
-    ]),
-  ],
 })
 export class ExpandablePanelComponent {
   @Input() title: string = '';

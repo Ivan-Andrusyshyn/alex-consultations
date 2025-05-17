@@ -1,70 +1,68 @@
 import { Injectable } from '@angular/core';
 
+import { SLIDER_KEYS } from '../../shared/models/slider';
+
 @Injectable({
   providedIn: 'root',
 })
 export class SliderService {
-  currentIndex = 0;
-  isMobDevice = window.innerWidth < 764;
+  currentIndex = new Map<string, number>();
+  isMobCardType = window.innerWidth < 1320;
 
   private touchStartX = 0;
   private touchEndX = 0;
 
   constructor() {}
-  next(bigCards: boolean, slideCards: any): number {
-    if (bigCards) {
-      this.currentIndex = (this.currentIndex + 1) % slideCards.length;
 
-      return this.currentIndex;
-    }
-    if (this.isMobDevice) {
-      this.currentIndex = (this.currentIndex + 1) % slideCards.length;
-    } else {
-      this.currentIndex = (this.currentIndex + 3) % slideCards.length;
-    }
-    return this.currentIndex;
+  next(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
+    const current = this.currentIndex.get(sliderKey) ?? 0;
+    const step = bigCards || this.isMobCardType ? 1 : 3;
+    const newIndex = (current + step) % slideCards.length;
+    this.currentIndex.set(sliderKey, newIndex);
+    return newIndex;
   }
 
-  prev(bigCards: boolean, slideCards: any): number {
-    if (bigCards) {
-      this.currentIndex =
-        (this.currentIndex - 1 + slideCards.length) % slideCards.length;
-      return this.currentIndex;
-    }
-    if (this.isMobDevice) {
-      this.currentIndex =
-        (this.currentIndex - 1 + slideCards.length) % slideCards.length;
-    } else {
-      this.currentIndex =
-        (this.currentIndex - 3 + slideCards.length) % slideCards.length;
-    }
-    return this.currentIndex;
+  prev(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
+    const current = this.currentIndex.get(sliderKey) ?? 0;
+    const step = bigCards || this.isMobCardType ? 1 : 3;
+    const newIndex = (current - step + slideCards.length) % slideCards.length;
+    this.currentIndex.set(sliderKey, newIndex);
+    return newIndex;
   }
 
   onTouchStart(event: TouchEvent) {
     this.touchStartX = event.changedTouches[0].screenX;
   }
 
-  onTouchEnd(bigCards: boolean, slideCards: any, event: TouchEvent): number {
+  onTouchEnd(
+    sliderKey: SLIDER_KEYS,
+    bigCards: boolean,
+    slideCards: any[],
+    event: TouchEvent
+  ): number {
     this.touchEndX = event.changedTouches[0].screenX;
-    this.handleSwipeGesture(bigCards, slideCards);
-    return this.currentIndex;
+    this.handleSwipeGesture(sliderKey, bigCards, slideCards);
+    return this.currentIndex.get(sliderKey) ?? 0;
   }
 
-  private handleSwipeGesture(bigCards: boolean, slideCards: any) {
+  private handleSwipeGesture(
+    sliderKey: SLIDER_KEYS,
+    bigCards: boolean,
+    slideCards: any[]
+  ) {
     const deltaX = this.touchEndX - this.touchStartX;
 
     if (Math.abs(deltaX) < 50) return;
 
     if (deltaX > 0) {
-      this.prev(bigCards, slideCards);
+      this.prev(sliderKey, bigCards, slideCards);
     } else {
-      this.next(bigCards, slideCards);
+      this.next(sliderKey, bigCards, slideCards);
     }
   }
 
-  goToSlide(index: number): number {
-    this.currentIndex = index;
-    return this.currentIndex;
+  goToSlide(sliderKey: SLIDER_KEYS, index: number): number {
+    this.currentIndex.set(sliderKey, index);
+    return index;
   }
 }

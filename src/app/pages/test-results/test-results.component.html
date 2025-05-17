@@ -107,8 +107,12 @@
     </section>
   </ng-container>
   <div #scrollContainer></div>
-  <app-consultations-cards> </app-consultations-cards>
-  <app-hero-cards-slider [bigCards]="false"></app-hero-cards-slider>
+  <app-consultations-cards [sliderKey]="'consultations'">
+  </app-consultations-cards>
+  <app-hero-cards-slider
+    [sliderKey]="'tests-results'"
+    [bigCards]="false"
+  ></app-hero-cards-slider>
   <!-- <section class="results-container email-form">
     <div class="btns-wrapper">
       <app-send-form-on-email-btn

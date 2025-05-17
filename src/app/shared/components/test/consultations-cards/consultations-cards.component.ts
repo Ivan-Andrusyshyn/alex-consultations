@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   inject,
+  Input,
   signal,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,7 @@ import { consultationCards } from './cards';
 import { SliderControlsBtnComponent } from '../slider-controls-btn/slider-controls-btn.component';
 import { SliderService } from '../../../../core/services/slider.service';
 import { ConsultationsCardComponent } from '../consultations-card/consultations-card.component';
+import { SLIDER_KEYS } from '../../../models/slider';
 
 @Component({
   selector: 'app-consultations-cards',
@@ -26,6 +28,8 @@ import { ConsultationsCardComponent } from '../consultations-card/consultations-
 })
 export class ConsultationsCardsComponent {
   private sliderService = inject(SliderService);
+
+  @Input() sliderKey!: SLIDER_KEYS;
 
   successRegistration = signal(false);
   cards: {
@@ -47,14 +51,24 @@ export class ConsultationsCardsComponent {
 
   next() {
     if (!this.isNextDisabled()) {
-      const cardIndex = this.sliderService.next(true, this.cards);
+      const cardIndex = this.sliderService.next(
+        this.sliderKey,
+        true,
+        this.cards
+      );
+
       this.currentIndex.set(cardIndex);
     }
   }
 
   prev() {
     if (!this.isPrevDisabled()) {
-      const cardIndex = this.sliderService.prev(true, this.cards);
+      const cardIndex = this.sliderService.prev(
+        this.sliderKey,
+        true,
+        this.cards
+      );
+
       this.currentIndex.set(cardIndex);
     }
   }
@@ -66,7 +80,12 @@ export class ConsultationsCardsComponent {
   onTouchEnd(event: TouchEvent) {
     const current = this.currentIndex();
 
-    const cardIndex = this.sliderService.onTouchEnd(true, this.cards, event);
+    const cardIndex = this.sliderService.onTouchEnd(
+      this.sliderKey,
+      true,
+      this.cards,
+      event
+    );
 
     if (
       (cardIndex > current && !this.isNextDisabled()) ||

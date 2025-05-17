@@ -17,6 +17,7 @@ import { SliderService } from '../../../core/services/slider.service';
 import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
 import { SliderControlsBtnComponent } from '../test/slider-controls-btn/slider-controls-btn.component';
 import { TestCardComponent } from '../test/test-card/test-card.component';
+import { SLIDER_KEYS } from '../../models/slider';
 
 @Component({
   selector: 'app-hero-cards-slider',
@@ -33,13 +34,16 @@ export class HeroCardsSliderComponent implements OnInit {
   private sliderService = inject(SliderService);
 
   @Input() bigCards: boolean = true;
+  @Input() sliderKey!: SLIDER_KEYS;
 
   currentIndex = signal(0);
   slideCards = TEST_CARDS;
-  isMobDevice = window.innerWidth < 764;
+  isMobCardType = window.innerWidth < 1320;
 
   ngOnInit(): void {
-    this.currentIndex.set(this.sliderService.currentIndex);
+    this.currentIndex.set(
+      this.sliderService.currentIndex.get(this.sliderKey) ?? 0
+    );
 
     interval(7000)
       .pipe(
@@ -53,12 +57,20 @@ export class HeroCardsSliderComponent implements OnInit {
   }
 
   next() {
-    const cardIndex = this.sliderService.next(this.bigCards, this.slideCards);
+    const cardIndex = this.sliderService.next(
+      this.sliderKey,
+      this.bigCards,
+      this.slideCards
+    );
     this.currentIndex.set(cardIndex);
   }
 
   prev() {
-    const cardIndex = this.sliderService.prev(this.bigCards, this.slideCards);
+    const cardIndex = this.sliderService.prev(
+      this.sliderKey,
+      this.bigCards,
+      this.slideCards
+    );
     this.currentIndex.set(cardIndex);
   }
   startTest(testUrl: string): void {
@@ -71,6 +83,7 @@ export class HeroCardsSliderComponent implements OnInit {
 
   onTouchEnd(event: TouchEvent) {
     const cardIndex = this.sliderService.onTouchEnd(
+      this.sliderKey,
       this.bigCards,
       this.slideCards,
       event
@@ -79,7 +92,7 @@ export class HeroCardsSliderComponent implements OnInit {
   }
 
   goToSlide(index: number) {
-    const cardIndex = this.sliderService.goToSlide(index);
+    const cardIndex = this.sliderService.goToSlide(this.sliderKey, index);
     this.currentIndex.set(cardIndex);
   }
 }
