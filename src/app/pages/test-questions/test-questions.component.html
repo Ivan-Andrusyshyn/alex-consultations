@@ -65,6 +65,7 @@
         </ng-container>
         <div class="btn-wrapper" *ngIf="formGroup.valid">
           <app-primary-btn
+            [isDisabled]="isSubmitting()"
             [textBtn]="'Результати'"
             (onClick)="onSubmit()"
           ></app-primary-btn>

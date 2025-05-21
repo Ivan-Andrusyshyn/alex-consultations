@@ -15,4 +15,21 @@ export class SeoService {
     this.metaService.updateTag({ name: 'description', content: description });
     this.metaService.updateTag({ name: 'keywords', content: keywords });
   }
+
+  updateOgTags({
+    title,
+    description,
+    url,
+  }: {
+    title: string;
+    description: string;
+    url: string;
+  }) {
+    this.metaService.updateTag({ property: 'og:title', content: title });
+    this.metaService.updateTag({
+      property: 'og:description',
+      content: description,
+    });
+    this.metaService.updateTag({ property: 'og:url', content: url });
+  }
 }

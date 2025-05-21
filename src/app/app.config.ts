@@ -6,12 +6,14 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
+import { provideShareButtonsOptions } from 'ngx-sharebuttons';
+import { shareIcons } from 'ngx-sharebuttons/icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptors([loadingInterceptor])),
     provideAnimationsAsync(),
-    provideAnimationsAsync(),
+    provideShareButtonsOptions(shareIcons()),
   ],
 };

@@ -1,11 +1,6 @@
+import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import {
-  AsyncPipe,
-  NgClass,
-  NgFor,
-  NgIf,
-  ViewportScroller,
-} from '@angular/common';
-import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -26,7 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { map, Observable, timer } from 'rxjs';
+import { catchError, map, Observable, of, timer } from 'rxjs';
 import { DateTime } from 'luxon';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -74,7 +69,9 @@ import { QuestionWordPipe } from './test-questions.pipe';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TestQuestionsComponent implements OnInit, OnDestroy {
+export class TestQuestionsComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   readonly personalitiesService = inject(PersonalitiesTestService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdr = inject(ChangeDetectorRef);
@@ -86,7 +83,6 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
   private activeRoute = inject(ActivatedRoute);
   private googleSheetService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
-  private viewportScroller = inject(ViewportScroller);
   private questionsService = inject(QuestionsService);
 
   formGroup: FormGroup = this.fb.group({});
@@ -100,8 +96,10 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
   TEST_NAME!: string;
   testTitleText = '';
   testSubtitleText = '';
-  isStartTest = signal(false);
   testQuestionsLength!: number;
+
+  isStartTest = signal<boolean>(false);
+  isSubmitting = signal<boolean>(false);
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -132,10 +130,9 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
     this.isSnackBarOpened = JSON.parse(
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
-
-    timer(400).subscribe(() => {
-      this.setCurrentAnswers();
-    });
+  }
+  ngAfterViewInit(): void {
+    this.setCurrentAnswers();
   }
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
@@ -149,7 +146,6 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
     const stringAnswers =
       sessionStorage.getItem(this.TEST_NAME + '-answers') ?? 'null';
     const parsedAnswers = JSON.parse(stringAnswers);
-    console.log(parsedAnswers);
 
     if (parsedAnswers) {
       this.currentQuestionNumber.set(parsedAnswers.currentQuestion);
@@ -182,8 +178,10 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
     this.isStartTest.set(true);
   }
   onSubmit() {
+    if (this.isSubmitting()) return;
     const answers = this.formGroup.value as Answer[];
     this._snackBar.dismiss();
+    this.isSubmitting.set(true);
 
     const request = {
       answers,
@@ -198,9 +196,17 @@ export class TestQuestionsComponent implements OnInit, OnDestroy {
 
     this.questionsService
       .makeRequestByTestName(this.TEST_NAME, request)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError((error) => {
+          this.isSubmitting.set(false);
+          this.openSnackBar(error.message, 'Закрити');
+          return of(error);
+        })
+      )
       .subscribe((results) => {
         this.handlePersonType(results);
+        this.isSubmitting.set(false);
       });
   }
 

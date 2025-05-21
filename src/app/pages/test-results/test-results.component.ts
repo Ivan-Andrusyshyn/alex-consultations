@@ -3,7 +3,6 @@ import {
   DestroyRef,
   ElementRef,
   inject,
-  Input,
   OnDestroy,
   OnInit,
   signal,
@@ -15,6 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ShareButtons } from 'ngx-sharebuttons/buttons';
 
 import { MailerService } from '../../core/services/mailer.service';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
@@ -24,7 +24,6 @@ import { ConsultationsCardsComponent } from '../../shared/components/test/consul
 import { ExpandablePanelComponent } from '../../shared/components/expandable-panel/expandable-panel.component';
 import { ConsultationService } from '../../core/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/models/benefit-consultation';
-import { testResultExample } from './dev';
 import { ProgressBarComponent } from '../../shared/components/test/progress-bar/progress-bar.component';
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 
@@ -38,6 +37,7 @@ import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-sli
     ExpandablePanelComponent,
     ProgressBarComponent,
     HeroCardsSliderComponent,
+    ShareButtons,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -62,6 +62,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   benefitConsultationData$!: Observable<BenefitConsultationData>;
   // example: Partial<TestResults> = testResultExample;
   TEST_NAME = signal<string>('');
+  fullUrl!: string;
 
   ngOnDestroy(): void {}
 
@@ -87,6 +88,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
             metaTags: Array<string>;
           };
         };
+        this.fullUrl = window.location.href;
+        console.log(this.fullUrl);
 
         const scrollToTop = data['scrollToTop'];
         this.seoService.updateTitle(response.seo.title);
@@ -95,6 +98,12 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           response.seo.metaTags[0],
           response.seo.metaTags[1]
         );
+        this.seoService.updateOgTags({
+          title: response.results.title,
+          description: response.results.subtitle,
+          url: window.location.href,
+        });
+
         if (scrollToTop) {
           this.viewportScroller.scrollToPosition([0, 0]);
         }

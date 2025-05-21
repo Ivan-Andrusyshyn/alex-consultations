@@ -50,7 +50,24 @@
       </li>
       }
     </ul>
+    <br />
+    <share-buttons
+      [title]="testResults.title"
+      [description]="testResults.subtitle"
+      [include]="[
+        'facebook',
+        'x',
+        'linkedin',
+        'viber',
+        'telegram',
+        'whatsapp',
+        'copy'
+      ]"
+      [showText]="true"
+      [url]="fullUrl"
+    ></share-buttons>
   </section>
+
   <ng-container *ngIf="benefitConsultationData$ | async as consultationBenefit">
     <section class="results-container extension-content">
       <app-expandable-panel

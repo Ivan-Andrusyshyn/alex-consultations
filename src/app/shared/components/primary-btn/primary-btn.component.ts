@@ -13,6 +13,7 @@ export class PrimaryBtnComponent {
   @Input() isPulsationAnimation?: boolean = false;
   @Input() classColor: 'dark-btn' | 'red-btn' = 'dark-btn';
   @Input() textBtn: string = 'Запис на консультацію';
+  @Input() isDisabled?: boolean = false;
   click() {
     this.onClick.emit();
   }
