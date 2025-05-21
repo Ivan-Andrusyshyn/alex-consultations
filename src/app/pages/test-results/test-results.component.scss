@@ -64,6 +64,14 @@
     flex-wrap: nowrap;
   }
 }
+//
+.shared-title {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: 1.2px;
+}
+
+//
 .results-text-list {
   gap: 30px;
   line-height: normal;
