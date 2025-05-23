@@ -11,12 +11,6 @@
   box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
   transition: all 0.3s linear;
 
-  &:hover {
-    border-radius: 20px;
-    background: linear-gradient(248deg, #057988 1.84%, #057988 97.58%);
-
-    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
-  }
   @media screen and (min-width: 1320px) {
     height: 350px;
     padding: 84px 31px;

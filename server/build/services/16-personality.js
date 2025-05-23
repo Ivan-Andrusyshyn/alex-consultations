@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const personalitiesName_1 = __importDefault(require("../utils/16-personalities/personalitiesName"));
 class PersonalitiesService {
     constructor() {
         this.amountQuestionsInType = (qlist) => {
@@ -62,10 +58,6 @@ class PersonalitiesService {
         this.getPersonalityType = (scores) => {
             const typeName = this.getCodedTypeName(scores);
             return this.getPersonNameByType(typeName);
-        };
-        this.getInformationByType = (type) => {
-            var _a;
-            return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
     }
     getCodedTypeName(scores) {

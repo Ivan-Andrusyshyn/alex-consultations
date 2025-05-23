@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const possibleVariablesArray_1 = __importDefault(require("../content/traumatic-sensitivity/possibleVariablesArray"));
 const results_1 = require("../content/traumatic-sensitivity/results");
-const personalitiesName_1 = __importDefault(require("../utils/16-personalities/personalitiesName"));
 const findBestRate_1 = __importDefault(require("../utils/traumatic-sensitivity/findBestRate"));
 const getBlockGradation_1 = __importDefault(require("../utils/traumatic-sensitivity/getBlockGradation"));
 const getSensitivityRateGrade_1 = __importDefault(require("../utils/traumatic-sensitivity/getSensitivityRateGrade"));
@@ -51,10 +50,6 @@ class TraumaticSensitivityService {
                 minScoreNumber,
                 maxScoreNumber,
             };
-        };
-        this.getInformationByType = (type) => {
-            var _a;
-            return (_a = personalitiesName_1.default.get(type)) !== null && _a !== void 0 ? _a : null;
         };
     }
     getReults(variableType) {

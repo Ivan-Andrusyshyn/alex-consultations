@@ -11,16 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.attractivenessGetNameValidator = void 0;
 const common_validator_1 = require("./common-validator");
+const testsValidationCommonObject_1 = require("./testsValidationCommonObject");
 const attractivenessGetNameValidator = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const validationRule = {
-        answers: 'required',
-        'answers.*': ['required', 'string', 'regex:/^[0-9]+(\\.[0-9]+)?-[a-z-]+$/'],
-        'userInformation.routeTracker': 'required|string',
-        'userInformation.referrer': 'string',
-        'userInformation.testName': 'required|string',
-        'userInformation.timestamp': 'required|string',
-        'userInformation.device': 'required|string',
-    };
+    const validationRule = Object.assign({ answers: 'required', 'answers.*': ['required', 'string', 'regex:/^[0-9]+(\\.[0-9]+)?-[a-z-]+$/'] }, testsValidationCommonObject_1.testsValidationCommonObject);
     return yield (0, common_validator_1.commonValidator)(req, res, next, validationRule);
 });
 exports.attractivenessGetNameValidator = attractivenessGetNameValidator;

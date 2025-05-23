@@ -17,9 +17,8 @@ const getPersonTypeByScores = (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const results = req.body;
         const personType = _16_personality_1.default.getPersonalityType(results);
-        const personInformation = _16_personality_1.default.getInformationByType(personType);
         res.status(200).send({
-            personType: personInformation.type,
+            personType,
             message: 'Success post person type .',
         });
     }

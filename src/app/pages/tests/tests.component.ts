@@ -62,11 +62,6 @@ export class TestsComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
-    const isNewUser = JSON.parse(sessionStorage.getItem('isNewUser') ?? 'null');
-    if (!isNewUser) {
-      this.openDialog();
-      sessionStorage.setItem('isNewUser', JSON.stringify(true));
-    }
     this.seoService.updateTitle(
       'Список тестів | Оцініть свої можливості та особистість'
     );
@@ -77,23 +72,5 @@ export class TestsComponent implements OnInit {
   }
   startTestOnClick(testUrl: string) {
     this.route.navigateByUrl(testUrl);
-  }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '90vw',
-      maxWidth: '1320px',
-      data: {
-        isForm: false,
-        isConfirm: false,
-        contentType: 'form-consultation',
-        title: 'Відчуй свою глибину. Запишись на консультацію.',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: 'Записатися',
-        },
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

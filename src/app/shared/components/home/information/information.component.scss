@@ -68,18 +68,40 @@
     }
   }
 }
-.icon-wrapper .icon-hover {
-  display: none;
-}
 
-.icon-wrapper:hover .icon-hover {
-  display: block;
-}
+.icon-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
 
-.icon-wrapper .delete-hover {
-  display: block;
-}
+  @media screen and (min-width: 1200px) {
+    width: 238px;
+    height: 238px;
+  }
 
-.icon-wrapper:hover .delete-hover {
-  display: none;
+  .items-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s linear;
+    pointer-events: none;
+  }
+
+  .icon-hover {
+    opacity: 0;
+  }
+
+  .delete-hover {
+    opacity: 1;
+  }
+
+  &:hover .icon-hover {
+    opacity: 1;
+  }
+
+  &:hover .delete-hover {
+    opacity: 0;
+  }
 }
