@@ -64,61 +64,67 @@
     ></share-buttons>
   </section>
 
-  <ng-container *ngIf="benefitConsultationData$ | async as consultationBenefit">
-    <section class="results-container extension-content">
-      <app-expandable-panel
-        [subtitle]="consultationBenefit.targetTitle"
-        [title]="
-          'В тобі є більше. Настав час повернутись до себе — по-справжньому'
-        "
-      >
-        <br />
-        <div>
-          <div class="target-audience">
-            <h3 class="subtitle">Якщо ти:</h3>
-            <ul>
-              @for (item of consultationBenefit.targetAudience; track $index) {
-
-              <li>
-                <p class="subtitle">
-                  {{ item }}
-                </p>
-              </li>
-              }
-            </ul>
-          </div>
+  <div class="extension-wrapper">
+    <ng-container
+      *ngIf="benefitConsultationData$ | async as consultationBenefit"
+    >
+      <section class="results-container extension-content">
+        <app-expandable-panel
+          [subtitle]="consultationBenefit.targetTitle"
+          [title]="
+            'В тобі є більше. Настав час повернутись до себе — по-справжньому'
+          "
+        >
           <br />
+          <div>
+            <div class="target-audience">
+              <h3 class="subtitle">Якщо ти:</h3>
+              <ul>
+                @for (item of consultationBenefit.targetAudience; track $index)
+                {
 
-          <div class="benefits">
-            <h3 class="subtitle">Що саме ти отримаєш:</h3>
-
-            @for (benefit of consultationBenefit.benefits; track $index) {
-
-            <div class="benefit">
-              <h4 class="subtitle">{{ benefit.title }}</h4>
-              <p class="subtitle">{{ benefit.description }}</p>
+                <li>
+                  <p class="subtitle">
+                    {{ item }}
+                  </p>
+                </li>
+                }
+              </ul>
             </div>
-            }
-          </div>
-
-          <div class="subtitle testimonial">
-            <p class="subtitle testimonial-description">
-              {{ consultationBenefit.testimonial.description }}
-            </p>
             <br />
-            <p class="subtitle testimonial-quote">
-              {{ consultationBenefit.testimonial.quote }}
+
+            <div class="benefits">
+              <h3 class="subtitle">Що саме ти отримаєш:</h3>
+
+              @for (benefit of consultationBenefit.benefits; track $index) {
+
+              <div class="benefit">
+                <h4 class="subtitle">{{ benefit.title }}</h4>
+                <p class="subtitle">{{ benefit.description }}</p>
+              </div>
+              }
+            </div>
+
+            <div class="subtitle testimonial">
+              <p class="subtitle testimonial-description">
+                {{ consultationBenefit.testimonial.description }}
+              </p>
+              <br />
+              <p class="subtitle testimonial-quote">
+                {{ consultationBenefit.testimonial.quote }}
+              </p>
+            </div>
+            <br />
+
+            <p class="subtitle note">
+              {{ consultationBenefit.note }}
             </p>
           </div>
-          <br />
+        </app-expandable-panel>
+      </section>
+    </ng-container>
+  </div>
 
-          <p class="subtitle note">
-            {{ consultationBenefit.note }}
-          </p>
-        </div>
-      </app-expandable-panel>
-    </section>
-  </ng-container>
   <div #scrollContainer></div>
   <app-consultations-cards [sliderKey]="'consultations'">
   </app-consultations-cards>
@@ -126,20 +132,4 @@
     [sliderKey]="'tests-results'"
     [bigCards]="false"
   ></app-hero-cards-slider>
-  <!-- <section class="results-container email-form">
-    <div class="btns-wrapper">
-      <app-send-form-on-email-btn
-        *ngIf="!isShowSendForm()"
-        (sendForm)="toggleSendForm()"
-      ></app-send-form-on-email-btn>
-      <app-send-results-form
-        *ngIf="isShowSendForm()"
-        (toggleSendForm)="toggleSendForm()"
-        (sendResultsOnEmail)="sendResultsOnEmail($event)"
-      ></app-send-results-form>
-    </div>
-    <div *ngIf="successMessage()" class="success-message">
-      Ми відправили результати тесту на пошту!
-    </div>
-  </section> -->
 </section>
