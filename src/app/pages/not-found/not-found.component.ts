@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
 
 @Component({
   selector: 'app-not-found',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [PrimaryBtnComponent],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
 })

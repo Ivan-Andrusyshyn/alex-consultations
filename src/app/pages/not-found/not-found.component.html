@@ -1,6 +1,9 @@
 <section class="not-found">
   <h2 class="title-primary">Сторінку не знайдено</h2>
-  <button mat-raised-button color="primary" (click)="goBack()">
-    Повернутись
-  </button>
+  <img src="/assets/new/core/404.png" alt="" />
+
+  <app-primary-btn
+    (onClick)="goBack()"
+    [textBtn]="'Повернутись'"
+  ></app-primary-btn>
 </section>

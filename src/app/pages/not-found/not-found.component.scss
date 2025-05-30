@@ -1,6 +1,6 @@
 .not-found {
-  padding: 60px;
-  max-width: 450px;
+  padding: 60px 18px;
+  max-width: 650px;
   margin: 0 auto;
 
   display: flex;
@@ -8,11 +8,18 @@
   align-items: center;
   color: #fff;
 
+  @media screen and (min-width: 1320px) {
+    max-width: 1200px;
+  }
+  img {
+    height: 300px;
+    max-height: 300px;
+    @media screen and (min-width: 1320px) {
+      height: 500px;
+      max-height: 500px;
+    }
+  }
   h2 {
-    padding: 8px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-
     text-align: center;
   }
 }
