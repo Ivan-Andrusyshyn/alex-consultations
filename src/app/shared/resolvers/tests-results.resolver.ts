@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  Router,
 } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 
 import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
 import { TestResults } from '../models/common-tests';
@@ -24,6 +25,8 @@ export class TestsResultsResolver implements Resolve<any> {
     private traumaticSensitivityService: TraumaticSensitivityService,
     private toxicalRelationshipsService: ToxicalRelationshipService
   ) {}
+
+  private router = inject(Router);
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -60,6 +63,10 @@ export class TestsResultsResolver implements Resolve<any> {
                 ],
               },
             };
+          }),
+          catchError((error) => {
+            this.router.navigateByUrl('/not-found');
+            return of(error);
           })
         );
     }
@@ -89,6 +96,10 @@ export class TestsResultsResolver implements Resolve<any> {
                 ],
               },
             };
+          }),
+          catchError((error) => {
+            this.router.navigateByUrl('/not-found');
+            return of(error);
           })
         );
     }
@@ -111,6 +122,10 @@ export class TestsResultsResolver implements Resolve<any> {
                 ],
               },
             };
+          }),
+          catchError((error) => {
+            this.router.navigateByUrl('/not-found');
+            return of(error);
           })
         );
     }
@@ -131,6 +146,10 @@ export class TestsResultsResolver implements Resolve<any> {
                 ],
               },
             };
+          }),
+          catchError((error) => {
+            this.router.navigateByUrl('/not-found');
+            return of(error);
           })
         );
     }
@@ -152,6 +171,10 @@ export class TestsResultsResolver implements Resolve<any> {
                 ],
               },
             };
+          }),
+          catchError((error) => {
+            this.router.navigateByUrl('/not-found');
+            return of(error);
           })
         );
     }

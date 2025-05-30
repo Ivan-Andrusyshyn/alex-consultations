@@ -1,6 +1,6 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
@@ -10,8 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './not-found.component.scss',
 })
 export class NotFoundComponent {
-  constructor(private location: Location) {}
+  constructor(private route: Router) {}
   goBack() {
-    this.location.back();
+    this.route.navigateByUrl('/');
   }
 }

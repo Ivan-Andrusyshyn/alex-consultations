@@ -16,9 +16,15 @@ const _16_personality_1 = __importDefault(require("../../services/16-personality
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
+const tests_1 = require("../../validators/valid-categoryName/tests");
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
+        if (!tests_1.personalitites.includes(personType)) {
+            return res.status(400).send({
+                message: 'Error invalid params',
+            });
+        }
         const personNameByType = _16_personality_1.default.getPersonNameByType(personType);
         // const personInformation =
         //   personalitiesService.getInformationByType(personNameByType);

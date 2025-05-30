@@ -15,9 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
+const tests_1 = require("../../validators/valid-categoryName/tests");
 const getEmotionTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const emotionType = req.params.emotionType;
+        if (!tests_1.traumeticSensitivity.includes(emotionType)) {
+            return res.status(400).send({
+                message: 'Error invalid params',
+            });
+        }
         const fileId = google_file_ids_env_1.TRAUMATIC_SENSITIVITY.RESULTS;
         const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
         if (googlefileData) {
