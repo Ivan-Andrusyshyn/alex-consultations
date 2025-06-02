@@ -8,6 +8,7 @@ import { AttractivenessService } from '../../core/services/attractiveness.servic
 import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
 import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
+import { YouCoffeeService } from '../../core/services/you-coffee.service';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
@@ -17,30 +18,39 @@ export class QuestionsService {
   private routeTracker = inject(RouteTrackerService);
   private toxicalRelationshipService = inject(ToxicalRelationshipService);
   private traumaticSensitivityService = inject(TraumaticSensitivityService);
+  private youCoffeeService = inject(YouCoffeeService);
 
   private roleInRelationships = 'role-in-relationships';
   private toxicalRelationships = 'toxical-relationship';
   private attractiveness = 'attractiveness';
   private personalities = '16-personalities';
   private traumatic = 'traumatic-sensitivity';
+  private youCoffee = 'you-coffee';
 
   makeRequestByTestName(
     testName: string,
     request: TestResultRequest
   ): Observable<any> {
-    console.log(testName);
-
+    if (testName === this.youCoffee) {
+      return this.youCoffeeService.youCoffeeCategory(request).pipe(
+        map((r) => {
+          this.setSessionStorage(testName, {
+            categoryName: r.categoryName,
+          });
+          sessionStorage.setItem('subCategoryCoffee', r.subCategoryName);
+          this.routeTracker.clearRouteMap();
+          return r.categoryName;
+        })
+      );
+    }
     if (testName === this.roleInRelationships) {
       return this.roleInRelationshipsService
         .getRoleInRelationshipsCategory(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(
-              testName + '-results',
-              JSON.stringify({
-                categoryName: r.categoryName,
-              })
-            );
+            this.setSessionStorage(testName, {
+              categoryName: r.categoryName,
+            });
             this.routeTracker.clearRouteMap();
 
             return r.categoryName;
@@ -52,12 +62,9 @@ export class QuestionsService {
         .getToxicalRelationshipCategory(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(
-              testName + '-results',
-              JSON.stringify({
-                categoryName: r.categoryName,
-              })
-            );
+            this.setSessionStorage(testName, {
+              categoryName: r.categoryName,
+            });
             this.routeTracker.clearRouteMap();
 
             this.toxicalRelationshipService.toxicalRelationshipResults.next(
@@ -71,12 +78,9 @@ export class QuestionsService {
     if (testName === this.attractiveness) {
       return this.attractivenessService.getAttractivenessCategory(request).pipe(
         map((r) => {
-          this.setSessionStorage(
-            testName + '-results',
-            JSON.stringify({
-              categoryName: r.categoryName,
-            })
-          );
+          this.setSessionStorage(testName, {
+            categoryName: r.categoryName,
+          });
           this.routeTracker.clearRouteMap();
 
           return r.categoryName;
@@ -88,13 +92,10 @@ export class QuestionsService {
         .getPersonalitiesResultOfTest(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(
-              testName + '-results',
-              JSON.stringify({
-                results: r.results.scores,
-                scorePercentages: r.results.percentages,
-              })
-            );
+            this.setSessionStorage(testName, {
+              results: r.results.scores,
+              scorePercentages: r.results.percentages,
+            });
             this.routeTracker.clearRouteMap();
 
             this.personalitiesService.scorePercentages.next(
@@ -109,12 +110,9 @@ export class QuestionsService {
         .getTraumaticSensitivityResults(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(
-              this.traumatic + '-results',
-              JSON.stringify({
-                ...r.results,
-              })
-            );
+            this.setSessionStorage(testName, {
+              ...r.results,
+            });
             this.routeTracker.clearRouteMap();
             this.traumaticSensitivityService.scorePercentages.next(
               r.results.percentages
@@ -132,7 +130,8 @@ export class QuestionsService {
     }
   }
 
-  setSessionStorage(key: string, value: any) {
-    sessionStorage.setItem(key, value);
+  private setSessionStorage(key: string, value: any) {
+    const fullKey = key + '-results';
+    sessionStorage.setItem(fullKey, JSON.stringify(value));
   }
 }

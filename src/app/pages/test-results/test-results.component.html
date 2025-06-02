@@ -29,6 +29,13 @@
           ({{ testResults.type }} ) }
         </h2>
 
+        @if (testResults.subCategoryName) {
+
+        <h3 class="coffee-subCategory subtitle">
+          {{ testResults.subCategoryName }}
+        </h3>
+
+        }
         <p class="subtitle">{{ testResults.subtitle }}</p>
       </div>
     </div>

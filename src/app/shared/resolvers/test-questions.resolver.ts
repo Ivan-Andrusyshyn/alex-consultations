@@ -12,12 +12,14 @@ import { PersonalitiesTestService } from '../../core/services/personalities-test
 import { AttractivenessService } from '../../core/services/attractiveness.service';
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
 import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
+import { YouCoffeeService } from '../../core/services/you-coffee.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TestsQuestionsResolver implements Resolve<any> {
   constructor(
+    private youcoffeeService: YouCoffeeService,
     private roleInRelationshipsService: RoleInRelationshipsService,
     private attractivenessService: AttractivenessService,
     private personalitiesService: PersonalitiesTestService,
@@ -34,6 +36,12 @@ export class TestsQuestionsResolver implements Resolve<any> {
     testName: string | null;
     testTitleText: string;
     testSubtitleText: string;
+    snackBar?: {
+      firstSnackBarBtnText: string;
+      secondSnackBarBtnText: string;
+      secondSnackBar: string;
+      firstSnackBar: string;
+    };
     seo?: {
       title: string;
       metaTags: Array<string>;
@@ -56,6 +64,34 @@ export class TestsQuestionsResolver implements Resolve<any> {
               metaTags: [
                 'Дізнайся більше про тест "Яка твоя роль у стосунках?", щоб краще зрозуміти свої сильні сторони, стиль спілкування та природні схильності.',
                 'тест про стосунки, роль у стосунках, психологічний тест, самопізнання, взаємини, MBTI',
+              ],
+            },
+          };
+        })
+      );
+    }
+
+    if (testName === 'you-coffee') {
+      return this.youcoffeeService.getQuestions().pipe(
+        map((r) => {
+          return {
+            ...r,
+            testName,
+            snackBar: {
+              firstSnackBarBtnText: 'Розкриваю аромат',
+              secondSnackBarBtnText: 'Розкрити повний букет',
+              secondSnackBar: '☕ Твоя кава майже заварена. Який у тебе аромат',
+              firstSnackBar: '☕ Твій смак уже починає відкриватись',
+            },
+            testTitleText:
+              'Твій смак особистості — як кава: глибокий, іноді з гірчинкою, але завжди унікальний.',
+            testSubtitleText:
+              'Відповідай на 11 простих, але смачних запитань — і дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою?',
+            seo: {
+              title: 'Запитання | Яка ти кава | vidchuttia',
+              metaTags: [
+                'Відповідай на запитання тесту Яка ти кава, щоб дізнатися свій унікальний тип.',
+                'тест, Яка ти кава, запитання, психологія, саморозвиток',
               ],
             },
           };

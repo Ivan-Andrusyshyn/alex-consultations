@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.personalitites = exports.traumeticSensitivity = exports.toxicalRelationship = exports.roleInRelationship = exports.attractiveness = void 0;
+exports.personalitites = exports.traumeticSensitivity = exports.toxicalRelationship = exports.youcoffee = exports.roleInRelationship = exports.attractiveness = void 0;
 exports.attractiveness = Object.freeze([
     'charismatic-attractiveness',
     'mysterious-attractiveness',
@@ -16,6 +16,14 @@ exports.roleInRelationship = Object.freeze([
     'tvorec',
     'kapitan',
     'vilne-serce',
+]);
+exports.youcoffee = Object.freeze([
+    'espresso',
+    'macchiato',
+    'filter',
+    'latte',
+    'coldbrew',
+    'raf',
 ]);
 exports.toxicalRelationship = Object.freeze([
     'healthy-relationship',

@@ -58,7 +58,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   isShowSendForm = signal(false);
   sendObject: any;
   viewportScroller = inject(ViewportScroller);
-  testResults$!: Observable<TestResults>;
+  testResults$!: Observable<TestResults & { subCategoryName?: string }>;
   benefitConsultationData$!: Observable<BenefitConsultationData>;
   // example: Partial<TestResults> = testResultExample;
   TEST_NAME = signal<string>('');
@@ -83,13 +83,13 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           results: TestResults;
           message: string;
           testName: string;
+          subCategoryCoffee?: string;
           seo: {
             title: string;
             metaTags: Array<string>;
           };
         };
         this.fullUrl = window.location.href;
-        console.log(this.fullUrl);
 
         const scrollToTop = data['scrollToTop'];
         this.seoService.updateTitle(response.seo.title);
@@ -115,7 +115,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           category: response.results.type,
         };
 
-        return response.results;
+        return {
+          ...response.results,
+          subCategoryName: response.subCategoryCoffee ?? '',
+        };
       })
     );
   }

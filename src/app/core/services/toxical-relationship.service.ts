@@ -7,10 +7,7 @@ import {
   TestResultRequest,
   TestResults,
 } from '../../shared/models/common-tests';
-import {
-  CategoryName,
-  RelationshipResult,
-} from '../../shared/models/toxical-relationship';
+import { CategoryName } from '../../shared/models/toxical-relationship';
 import { TestInformation } from '../../shared/models/toxical-relationship';
 import { environment } from '../environment/environment';
 

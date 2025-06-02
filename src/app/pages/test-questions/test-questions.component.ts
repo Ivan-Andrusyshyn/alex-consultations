@@ -38,6 +38,13 @@ import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { QuestionWordPipe } from './test-questions.pipe';
 
+interface SnackBar {
+  firstSnackBarBtnText: string;
+  secondSnackBarBtnText: string;
+  secondSnackBar: string;
+  firstSnackBar: string;
+}
+
 @Component({
   selector: 'app-test-questions',
   standalone: true,
@@ -97,6 +104,12 @@ export class TestQuestionsComponent
   testTitleText = '';
   testSubtitleText = '';
   testQuestionsLength!: number;
+  snackBar: SnackBar = {
+    firstSnackBarBtnText: 'Йду далі',
+    firstSnackBar: 'Ще трохи – і ти дізнаєшся щось, що може тебе здивувати! 😉',
+    secondSnackBarBtnText: 'Розкрити себе',
+    secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
+  };
 
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -110,6 +123,7 @@ export class TestQuestionsComponent
         const testName: string = data['testName'];
         this.testTitleText = data['testTitleText'];
         this.testSubtitleText = data['testSubtitleText'];
+        this.snackBar = data['snackBar'] || this.snackBar;
         this.TEST_NAME = testName;
 
         this.seoService.updateMetaTags(
@@ -131,17 +145,21 @@ export class TestQuestionsComponent
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
   }
+
   ngAfterViewInit(): void {
     this.setCurrentAnswers();
   }
+
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
     this.formGroup.reset();
     sessionStorage.setItem('isStartTest', 'false');
   }
+
   isValid(index: number) {
     return this.formGroup.get(index.toString())?.valid || index == 0;
   }
+
   private setCurrentAnswers() {
     const stringAnswers =
       sessionStorage.getItem(this.TEST_NAME + '-answers') ?? 'null';
@@ -263,7 +281,7 @@ export class TestQuestionsComponent
     this.currentQuestionNumber.update((prev) => prev + 1);
 
     if (this.formGroup.invalid) {
-      this.questionsService.setSessionStorage(
+      sessionStorage.setItem(
         this.TEST_NAME + '-answers',
         JSON.stringify({
           answers,
@@ -283,13 +301,14 @@ export class TestQuestionsComponent
       : 0;
 
     if (!this.isSnackBarOpened && progress > 50 && progress < 80) {
-      const text = 'Ще трохи – і ти дізнаєшся щось, що може тебе здивувати! 😉';
-      const textBtn = 'Йду далі';
+      const text = this.snackBar.firstSnackBar;
+      const textBtn = this.snackBar.firstSnackBarBtnText;
       this.openSnackBar(text, textBtn);
       this.setSnackBar(true, 'true');
     } else if (this.isSnackBarOpened && progress > 80) {
-      const text = 'Ти молодець. Залишилось зовсім трішки до відкриття себе!';
-      const textBtn = 'Розкрити себе';
+      const text = this.snackBar.secondSnackBar;
+      const textBtn = this.snackBar.secondSnackBarBtnText;
+
       this.openSnackBar(text, textBtn);
       this.setSnackBar(false, 'false');
     }
@@ -340,7 +359,7 @@ export class TestQuestionsComponent
     this.personalitiesService.counterQuestion.next(1);
 
     const answers = this.formGroup.value;
-    this.questionsService.setSessionStorage(
+    sessionStorage.setItem(
       this.TEST_NAME + '-answers',
       JSON.stringify({
         answers,

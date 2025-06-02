@@ -13,6 +13,7 @@ import { PersonalitiesTestService } from '../../core/services/personalities-test
 import { AttractivenessService } from '../../core/services/attractiveness.service';
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
 import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
+import { YouCoffeeService } from '../../core/services/you-coffee.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class TestsResultsResolver implements Resolve<any> {
     private attractivenessService: AttractivenessService,
     private personalitiesService: PersonalitiesTestService,
     private traumaticSensitivityService: TraumaticSensitivityService,
-    private toxicalRelationshipsService: ToxicalRelationshipService
+    private toxicalRelationshipsService: ToxicalRelationshipService,
+    private youCoffeeService: YouCoffeeService
   ) {}
 
   private router = inject(Router);
@@ -70,6 +72,35 @@ export class TestsResultsResolver implements Resolve<any> {
           })
         );
     }
+    if (testName === 'you-coffee') {
+      return this.youCoffeeService
+        .youCoffeeInfoByCategory(personalityName)
+        .pipe(
+          map((r) => {
+            const subCategoryCoffee =
+              sessionStorage.getItem('subCategoryCoffee');
+            return {
+              ...r,
+              testName,
+              subCategoryCoffee,
+              seo: {
+                title:
+                  'Результати тесту Яка ти кава | Дізнайся, наскільки ти смачна, гірка чи ароматна кава',
+
+                metaTags: [
+                  'Пройди тест Яка ти кава і дізнайся, наскільки ти чарівний(а) в очах інших. Оціни свої унікальні риси разом з ароматом смачної кави!',
+                  'тест на те яка саме ти кава, оцінка аромату, харизма, зовнішність, чарівність, краса, самооцінка, впевненість, особистість',
+                ],
+              },
+            };
+          }),
+          catchError((error) => {
+            this.router.navigateByUrl('/not-found');
+            return of(error);
+          })
+        );
+    }
+
     if (testName === '16-personalities') {
       return this.personalitiesService
         .getPersonTypeByResults(personalityName!)
