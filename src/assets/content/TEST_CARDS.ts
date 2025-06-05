@@ -13,17 +13,17 @@ export const TEST_CARDS: CardContent[] = [
     buttonText: 'Почати тест',
     imageUrl: 'assets/new/core/tests/16-personalities/',
   },
-  {
-    time: '3 хв',
-    category: 'Для особистого розвитку',
-    routeStart: '/tests/you-coffee/questions',
-    title: 'Яка ти кава?',
-    subtitle:
-      'Відповідай на 11 простих, але смачних запитань — і дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою',
-    buttonText: 'Почати тест',
-    imgList: [1, 2, 3, 4, 5, 6],
-    imageUrl: 'assets/new/core/tests/you-coffee/',
-  },
+  // {
+  //   time: '3 хв',
+  //   category: 'Для особистого розвитку',
+  //   routeStart: '/tests/you-coffee/questions',
+  //   title: 'Яка ти кава?',
+  //   subtitle:
+  //     'Відповідай на 11 простих, але смачних запитань — і дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою',
+  //   buttonText: 'Почати тест',
+  //   imgList: [1, 2, 3, 4, 5, 6],
+  //   imageUrl: 'assets/new/core/tests/you-coffee/',
+  // },
   {
     time: '3 хв',
     category: 'Для особистого розвитку',

@@ -1,0 +1,32 @@
+.marquee {
+  padding: 10px 0;
+  font-size: 1rem;
+  width: 100%;
+
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background-color: #ffeb3b;
+  font-weight: bold;
+  position: relative;
+  @media screen and (min-width: 764px) {
+    font-size: 1.2rem;
+    margin-top: 16px;
+  }
+}
+
+.marquee .line-text {
+  display: inline-block;
+  color: #000;
+  padding-left: 100%;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

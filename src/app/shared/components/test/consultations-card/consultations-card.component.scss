@@ -99,6 +99,18 @@ p {
     display: flex;
     align-items: center;
 
+    .price-title {
+      text-decoration: line-through;
+      position: relative;
+      &::after {
+        content: "Безкоштовно!";
+        position: absolute;
+        color: green;
+        z-index: 10;
+        right: -60%;
+        bottom: 20px;
+      }
+    }
     .items-icon {
       width: 30px;
       height: auto;

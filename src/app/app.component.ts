@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   inject,
@@ -23,6 +22,7 @@ import { PersonalitiesPhraseService } from './core/services/personalities-phrase
 import { ThemeService } from './core/services/theme.service';
 import { LoaderSquareComponent } from './shared/components/loader-square/loader-square.component';
 import { MatIconsService } from './core/services/mat-icons.service';
+import { MarqueeComponent } from './shared/components/marquee/marquee.component';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +36,7 @@ import { MatIconsService } from './core/services/mat-icons.service';
     ReactiveFormsModule,
     AsyncPipe,
     FooterComponent,
+    MarqueeComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
