@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { GoogleSheetsService } from '../../../core/services/google-sheets.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-marquee',
@@ -25,11 +26,23 @@ export class MarqueeComponent {
 
   readonly dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
   private readonly googleService = inject(GoogleSheetsService);
 
   successRegistration = signal(false);
 
-  openDialog(): void {
+  onClick() {
+    const currentUrl = this.router.url;
+    const isTestsUrl =
+      currentUrl.includes('/questions') || currentUrl.includes('/details');
+    if (isTestsUrl) {
+      this.openDialog();
+    } else {
+      this.router.navigateByUrl('/consultations');
+    }
+  }
+
+  private openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '90vw',
       maxWidth: '1320px',
