@@ -13,6 +13,7 @@ import { consultationData } from './consultations';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { ServiceCardComponent } from '../../shared/components/service-card/service-card.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
+import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
 
 type SectionType = {
   sectionTitle: string;
@@ -32,6 +33,7 @@ type SectionType = {
     TitleCardComponent,
     ServiceCardComponent,
     PrimaryBtnComponent,
+    ConsultationsCardsComponent,
   ],
   templateUrl: './consultations.component.html',
   styleUrl: './consultations.component.scss',
