@@ -22,6 +22,18 @@
   animation: marquee 15s linear infinite;
 }
 
+.success-message {
+  border-radius: 5px;
+  border: 1px solid #c3e6cb;
+  margin-top: 10px;
+  padding: 15px;
+
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  text-align: center;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0%);

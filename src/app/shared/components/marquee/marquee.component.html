@@ -1,6 +1,12 @@
-<div class="marquee">
+<div class="marquee" (click)="openDialog()">
   <span class="line-text subtitle"
     >Зараз всі консультації
     <span style="text-decoration: underline"> безкоштовно !</span>
   </span>
 </div>
+
+@if (successRegistration()) {
+
+<div class="success-message">✅ Ви успішно записалися!</div>
+<br />
+}

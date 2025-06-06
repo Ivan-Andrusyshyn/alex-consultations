@@ -39,6 +39,7 @@ export class ConsultationsCardsComponent {
       listCards: string[];
     };
     unfit: string;
+    price: string;
   }[];
   currentIndex = signal<number>(0);
 

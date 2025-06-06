@@ -26,6 +26,7 @@ export class ConsultationsCardComponent {
       titleList: string;
       listCards: string[];
     };
+    price: string;
     unfit: string;
   };
 
