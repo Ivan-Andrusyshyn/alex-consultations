@@ -262,13 +262,17 @@
   padding: 42px 36px 43px 35px;
   justify-content: center;
   align-items: center;
+  position: static;
 
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
   transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), outline 0.3s ease;
-
+  &:hover {
+    outline: 1px solid #057988;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.15);
+  }
   @media screen and (min-width: 1320px) {
     width: 410px;
   }
