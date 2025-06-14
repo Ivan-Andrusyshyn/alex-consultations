@@ -77,7 +77,6 @@ export class HomeComponent implements OnInit {
   private modalService = inject(ModalService);
   private notificationService = inject(NotificationService);
 
-  successRegistration = signal(false);
   todayDate!: string;
   dayNumber = new Date().getDate();
   loading$!: Observable<boolean>;

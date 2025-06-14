@@ -45,7 +45,6 @@ export class ConsultationsComponent implements OnInit {
   private modalService = inject(ModalService);
   private notificationService = inject(NotificationService);
 
-  successRegistration = signal(false);
   consultationContent: {
     myHelp: SectionType;
     aboutConsultation: SectionType;
