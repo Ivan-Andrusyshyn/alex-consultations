@@ -30,7 +30,7 @@ export class NotificationService {
       const [nextMessage, ...remainingMessages] = currentQueue;
 
       this.snackBar
-        .open(nextMessage, 'Close', {
+        .open(nextMessage, 'Закрити', {
           duration: 7000,
           horizontalPosition: 'right',
           verticalPosition: 'top',

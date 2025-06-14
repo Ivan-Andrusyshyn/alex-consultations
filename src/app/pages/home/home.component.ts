@@ -40,6 +40,8 @@ import { GoalsComponent } from '../../shared/components/home/goals/goals.compone
 import { OurServiceCardsComponent } from '../../shared/components/home/our-service-cards/our-service-cards.component';
 import { HeroAnimationComponent } from '../../shared/components/home/hero-animation/hero-animation.component';
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
+import { ModalService } from '../../core/services/modal.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -71,11 +73,13 @@ export class HomeComponent implements OnInit {
   );
   private countingService = inject(CountingClicksService);
   private readonly loadingService = inject(LoadingService);
+  private seoService = inject(SeoService);
+  private modalService = inject(ModalService);
+  private notificationService = inject(NotificationService);
 
   successRegistration = signal(false);
   todayDate!: string;
   dayNumber = new Date().getDate();
-  private seoService = inject(SeoService);
   loading$!: Observable<boolean>;
 
   dayPhrase$!: Observable<{
@@ -107,35 +111,32 @@ export class HomeComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {});
   }
+  private showSuccess() {
+    this.notificationService.setNotification(
+      '✅ Дякуємо! Вас успішно записано на безкоштовну консультацію. Ми скоро з вами зв’яжемося!'
+    );
+  }
+  private showError() {
+    this.notificationService.setNotification(
+      '❌ Сталася помилка під час запису на консультацію. Спробуйте ще раз.'
+    );
+  }
   openDialog(): void {
     this.postCountingClicksInSocialLinks('modalButton');
-
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '90vw',
-      maxWidth: '1320px',
-      data: {
+    this.modalService
+      .openModal({
+        width: '90vw',
         isForm: true,
-        isShowLinks: false,
-        contentType: 'form-consultation',
-        title:
-          'Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: 'Надіслати',
-        },
-      },
-    });
-
-    dialogRef
-      .afterClosed()
+        isConfirm: false,
+      })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((r) => !!r),
         switchMap((r) =>
           this.googleService.postRegistrationInSheet(r).pipe(
-            tap(() => this.successRegistration.set(true)),
+            tap(() => this.showSuccess()),
             catchError((error) => {
-              this.successRegistration.set(false);
+              this.showError();
               return throwError(() => error);
             })
           )

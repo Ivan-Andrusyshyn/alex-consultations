@@ -359,63 +359,61 @@
   }
 
   @media screen and (min-width: 1320px) {
-    &:hover {
-      .arrow-step-1 {
-        animation-delay: 0s;
-        &::after {
-          content: " ";
+    .arrow-step-1 {
+      animation-delay: 0s;
+      &::after {
+        content: " ";
 
-          position: absolute;
-          background-image: url("../../../assets/new/core/consultation/arrow-step-1.svg");
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 200px;
-          width: 200px;
-          height: 200px;
-          bottom: -150px;
-          opacity: 0;
-          animation: fadeInUp 0.6s ease-out 0s forwards;
+        position: absolute;
+        background-image: url("../../../assets/new/core/consultation/arrow-step-1.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 200px;
+        width: 200px;
+        height: 200px;
+        bottom: -150px;
+        opacity: 0;
+        animation: fadeInUp 0.6s ease-out 0s forwards;
 
-          left: 300px;
-        }
+        left: 300px;
       }
-      .arrow-step-2 {
-        animation-delay: 1s;
-        &::after {
-          content: " ";
+    }
+    .arrow-step-2 {
+      animation-delay: 1s;
+      &::after {
+        content: " ";
 
-          position: absolute;
-          background-image: url("../../../assets/new/core/consultation/arrow-step-2.svg");
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 200px;
-          width: 200px;
-          height: 200px;
+        position: absolute;
+        background-image: url("../../../assets/new/core/consultation/arrow-step-2.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 200px;
+        width: 200px;
+        height: 200px;
 
-          top: -150px;
-          opacity: 0;
-          animation: fadeInUp 0.6s ease-out 1s forwards;
-          right: 300px;
-        }
+        top: -150px;
+        opacity: 0;
+        animation: fadeInUp 0.6s ease-out 1s forwards;
+        right: 300px;
       }
+    }
 
-      .arrow-step-3 {
-        animation-delay: 2s;
-        &::after {
-          content: " ";
+    .arrow-step-3 {
+      animation-delay: 2s;
+      &::after {
+        content: " ";
 
-          position: absolute;
-          background-image: url("../../../assets/new/core/consultation/arrow-step-3.svg");
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 200px;
-          width: 200px;
-          height: 200px;
-          bottom: -250px;
-          right: 150px;
-          opacity: 0;
-          animation: fadeInUp 0.6s ease-out 2s forwards;
-        }
+        position: absolute;
+        background-image: url("../../../assets/new/core/consultation/arrow-step-3.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 200px;
+        width: 200px;
+        height: 200px;
+        bottom: -250px;
+        right: 150px;
+        opacity: 0;
+        animation: fadeInUp 0.6s ease-out 2s forwards;
       }
     }
   }

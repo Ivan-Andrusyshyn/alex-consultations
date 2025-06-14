@@ -16,6 +16,8 @@ import { GoogleSheetsService } from '../../../core/services/google-sheets.servic
 import { PersonalitiesPhraseService } from '../../../core/services/personalities-phrase.service';
 import { CountingClicksService } from '../../../core/services/counting-clicks.service';
 import { ModalComponent } from '../modal/modal.component';
+import { ModalService } from '../../../core/services/modal.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-title-card',
@@ -30,13 +32,15 @@ export class TitleCardComponent {
   @Input() subtitleText: string =
     'Цей тест створений не для того, щоб поставити тебе в рамки, а навпаки — щоб показати твою природну силу, яка вже в тобі є.';
 
-  readonly dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
   private readonly googleService = inject(GoogleSheetsService);
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );
   private countingService = inject(CountingClicksService);
+  private modalService = inject(ModalService);
+  private notificationService = inject(NotificationService);
+
   successRegistration = signal(false);
 
   private postCountingClicksInSocialLinks(
@@ -47,33 +51,24 @@ export class TitleCardComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {});
   }
+  private showSuccess() {
+    this.notificationService.setNotification(
+      '✅ Дякуємо! Вас успішно записано на безкоштовну консультацію. Ми скоро з вами зв’яжемося!'
+    );
+  }
   openDialog(): void {
-    this.postCountingClicksInSocialLinks('modalButton');
-
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '90vw',
-      maxWidth: '1320px',
-      data: {
+    this.modalService
+      .openModal({
+        width: '90vw',
         isForm: true,
-        isShowLinks: false,
-        contentType: 'form-consultation',
-        title:
-          'Залиши заявку та отримай у подарунок гайд, який допоможе знайти свою пару відповідно до твого типу особистості 🎁',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: 'Надіслати',
-        },
-      },
-    });
-
-    dialogRef
-      .afterClosed()
+        isConfirm: false,
+      })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((r) => !!r),
         switchMap((r) =>
           this.googleService.postRegistrationInSheet(r).pipe(
-            tap(() => this.successRegistration.set(true)),
+            tap(() => this.showSuccess()),
             catchError((error) => {
               this.successRegistration.set(false);
               return throwError(() => error);

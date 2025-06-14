@@ -2,7 +2,6 @@ import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   inject,
   OnInit,
 } from '@angular/core';
@@ -15,12 +14,12 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
 import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
 import { VideoBenefitsComponent } from '../home/video-benefits/video-benefits.component';
 
@@ -38,7 +37,6 @@ export interface DialogData {
     MatDialogContent,
     MatInputModule,
     MatButtonModule,
-    MatDialogClose,
     NgIf,
     PrimaryBtnComponent,
     VideoBenefitsComponent,
@@ -50,7 +48,7 @@ export interface DialogData {
 export class ModalComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<ModalComponent>);
   readonly data: any = inject<DialogData>(MAT_DIALOG_DATA);
-  private readonly fb = inject(FormBuilder);
+  private fb = inject(FormBuilder);
 
   formGroup!: FormGroup;
 

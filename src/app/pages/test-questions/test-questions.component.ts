@@ -37,6 +37,7 @@ import { SeoService } from '../../core/services/seo.service';
 import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { QuestionWordPipe } from './test-questions.pipe';
+import { ModalService } from '../../core/services/modal.service';
 
 interface SnackBar {
   firstSnackBarBtnText: string;
@@ -91,6 +92,7 @@ export class TestQuestionsComponent
   private googleSheetService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
   private questionsService = inject(QuestionsService);
+  private modalService = inject(ModalService);
 
   formGroup: FormGroup = this.fb.group({});
   coloredLabel: boolean = true;
@@ -229,23 +231,15 @@ export class TestQuestionsComponent
   }
 
   private openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      height: '200px',
+    const settings = {
       width: '300px',
-      data: {
-        contentType: 'confirm',
-        isForm: false,
-        isConfirm: true,
-        title: 'Ви впевнені що хочете почати з початку ?',
-        btn: {
-          cancel: 'Ні',
-          confirm: 'Так',
-        },
-      },
-    });
+      height: '200px',
+      isForm: false,
+      isConfirm: true,
+    };
 
-    dialogRef
-      .afterClosed()
+    this.modalService
+      .openModal(settings)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if (result !== undefined) {

@@ -2,18 +2,18 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
 
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { SeoService } from '../../core/services/seo.service';
-import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { consultationData } from './consultations';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { ServiceCardComponent } from '../../shared/components/service-card/service-card.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
+import { ModalService } from '../../core/services/modal.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 type SectionType = {
   sectionTitle: string;
@@ -39,10 +39,12 @@ type SectionType = {
   styleUrl: './consultations.component.scss',
 })
 export class ConsultationsComponent implements OnInit {
-  private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly seoService = inject(SeoService);
-  private readonly googleService = inject(GoogleSheetsService);
+  private destroyRef = inject(DestroyRef);
+  private seoService = inject(SeoService);
+  private googleService = inject(GoogleSheetsService);
+  private modalService = inject(ModalService);
+  private notificationService = inject(NotificationService);
+
   successRegistration = signal(false);
   consultationContent: {
     myHelp: SectionType;
@@ -51,6 +53,7 @@ export class ConsultationsComponent implements OnInit {
   } = consultationData;
   titleText =
     'Замість років пошуків — цілісне розуміння себе вже на першій зустрічі.';
+
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
@@ -62,32 +65,31 @@ export class ConsultationsComponent implements OnInit {
       'консультація, самопізнання, розвиток особистості, когнітивні функції, психологія, гармонія, життя'
     );
   }
-
+  private showSuccess() {
+    this.notificationService.setNotification(
+      '✅ Дякуємо! Вас успішно записано на безкоштовну консультацію. Ми скоро з вами зв’яжемося!'
+    );
+  }
+  private showError() {
+    this.notificationService.setNotification(
+      '❌ Сталася помилка під час запису на консультацію. Спробуйте ще раз.'
+    );
+  }
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '90vw',
-      maxWidth: '1320px',
-      data: {
+    this.modalService
+      .openModal({
+        width: '90vw',
         isForm: true,
-        contentType: 'form-consultation',
-        title: 'Відчуй свою глибину. Запишись на консультацію!',
-        btn: {
-          cancel: 'Ні, дякую',
-          confirm: 'Записатися',
-        },
-      },
-    });
-
-    dialogRef
-      .afterClosed()
+        isConfirm: false,
+      })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((r) => !!r),
         switchMap((r) =>
           this.googleService.postRegistrationInSheet(r).pipe(
-            tap(() => this.successRegistration.set(true)),
+            tap(() => this.showSuccess()),
             catchError((error) => {
-              this.successRegistration.set(false);
+              this.showError();
               return throwError(() => error);
             })
           )
