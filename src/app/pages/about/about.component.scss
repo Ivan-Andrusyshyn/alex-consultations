@@ -10,7 +10,6 @@
 }
 .container {
   padding: 19px;
-  gap: 24px;
   width: 1320px;
   border-radius: 20px;
   display: flex;
@@ -48,7 +47,7 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1320px) {
     align-items: flex-start;
     flex-direction: row;
     gap: 0;
@@ -56,7 +55,7 @@
   .about-title {
     margin-bottom: 21px;
     display: none;
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1320px) {
       display: block;
     }
   }
@@ -70,19 +69,24 @@
     border-radius: 20px;
 
     height: auto;
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1320px) {
       margin-bottom: 0;
       margin-right: 76px;
       margin-left: 20px;
     }
   }
 }
-
+.btns-wrapper {
+  @media screen and (max-width: 764px) {
+    display: flex;
+    justify-content: center;
+  }
+}
 .text {
   color: var(--color-text-primary);
   line-height: normal;
   font-size: 16px;
-  @media screen and (min-width: 1200p) {
+  @media screen and (min-width: 1320p) {
     font-size: 20px;
   }
 }
