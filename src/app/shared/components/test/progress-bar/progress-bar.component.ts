@@ -2,10 +2,17 @@ import { PercentPipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   HostListener,
+  inject,
   Input,
+  OnDestroy,
+  OnInit,
+  Output,
   signal,
 } from '@angular/core';
+
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-progress-bar',
@@ -16,6 +23,8 @@ import {
 })
 export class ProgressBarComponent implements AfterViewInit {
   @Input() scrollContainer!: HTMLElement;
+  @Input() isFirstNotification: boolean = false;
+  @Output() showSuccess = new EventEmitter<boolean>();
 
   scrollPercentage: number = 0;
   private scrollContainerNumber = signal<number>(0);
@@ -43,12 +52,13 @@ export class ProgressBarComponent implements AfterViewInit {
 
     const scrollOffset =
       window.scrollY || docHeight || document.body.scrollTop || 0;
-    const windowHeight =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
 
     this.isShow.update((prev) => docHeight > 70);
 
     this.scrollPercentage = scrollOffset / this.scrollContainerNumber();
+
+    if (this.scrollPercentage >= 1 && !this.isFirstNotification) {
+      this.showSuccess.emit(true);
+    }
   }
 }

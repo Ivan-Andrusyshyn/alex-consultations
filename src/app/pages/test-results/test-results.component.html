@@ -1,5 +1,9 @@
 <section class="test-results" *ngIf="testResults$ | async as testResults">
-  <app-progress-bar [scrollContainer]="containerElement"></app-progress-bar>
+  <app-progress-bar
+    (showSuccess)="showNotification($event)"
+    [isFirstNotification]="isFirstNotification"
+    [scrollContainer]="containerElement"
+  ></app-progress-bar>
   <section class="results-container">
     <div class="results-content">
       <h2 class="title-mob title-primary">
@@ -71,7 +75,7 @@
     ></share-buttons>
   </section>
 
-  <div class="extension-wrapper">
+  <!-- <div class="extension-wrapper">
     <ng-container
       *ngIf="benefitConsultationData$ | async as consultationBenefit"
     >
@@ -130,7 +134,7 @@
         </app-expandable-panel>
       </section>
     </ng-container>
-  </div>
+  </div> -->
 
   <div #scrollContainer></div>
   <app-consultations-cards [sliderKey]="'consultations'">

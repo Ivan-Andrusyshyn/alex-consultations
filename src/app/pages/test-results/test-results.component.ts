@@ -26,6 +26,7 @@ import { ConsultationService } from '../../core/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/models/benefit-consultation';
 import { ProgressBarComponent } from '../../shared/components/test/progress-bar/progress-bar.component';
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-test-results',
@@ -51,26 +52,37 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);
   private activeRoute = inject(ActivatedRoute);
   private consultationService = inject(ConsultationService);
+  private notificationService = inject(NotificationService);
+  private viewportScroller = inject(ViewportScroller);
+
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+
   containerElement!: HTMLElement;
   formGroup!: FormGroup;
   successMessage = signal(false);
   isShowSendForm = signal(false);
+  TEST_NAME = signal<string>('');
   sendObject: any;
-  viewportScroller = inject(ViewportScroller);
   testResults$!: Observable<TestResults & { subCategoryName?: string }>;
   benefitConsultationData$!: Observable<BenefitConsultationData>;
-  // example: Partial<TestResults> = testResultExample;
-  TEST_NAME = signal<string>('');
   fullUrl!: string;
+  timeInterval: any;
+  isFirstNotification = false;
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    clearInterval(this.timeInterval);
+    this.timeInterval = null;
+  }
 
   ngAfterViewInit(): void {
     this.containerElement = this.scrollContainer.nativeElement;
   }
 
   ngOnInit(): void {
+    this.timeInterval = setInterval(() => {
+      this.isFirstNotification = false;
+    }, 25000);
+
     this.benefitConsultationData$ = this.consultationService
       .getBenefitConsultation()
       .pipe(map((r) => r.results));
@@ -98,6 +110,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           response.seo.metaTags[0],
           response.seo.metaTags[1]
         );
+
         this.seoService.updateOgTags({
           title: response.results.title,
           description: response.results.subtitle,
@@ -145,6 +158,23 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   toggleSendForm() {
     this.isShowSendForm.update((prev) => !prev);
   }
+  showNotification(isFirst: boolean) {
+    this.isFirstNotification = isFirst;
+    this.notificationService.setNotification(
+      'Запишись на безкоштовну консультацію прямо зараз! Тисни кнопку "Безкоштовна консультація".'
+    );
+  }
+
+  registration(): void {
+    if (this.formGroup.valid) {
+      this.googleService
+        .postRegistrationInSheet(this.formGroup.value)
+        .pipe(takeUntilDestroyed(this.dr))
+        .subscribe((response) => {
+          this.formGroup.reset();
+        });
+    }
+  }
 
   private createForm() {
     this.formGroup = this.fb.group({
@@ -167,15 +197,5 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         ],
       ],
     });
-  }
-  registration(): void {
-    if (this.formGroup.valid) {
-      this.googleService
-        .postRegistrationInSheet(this.formGroup.value)
-        .pipe(takeUntilDestroyed(this.dr))
-        .subscribe((response) => {
-          this.formGroup.reset();
-        });
-    }
   }
 }
