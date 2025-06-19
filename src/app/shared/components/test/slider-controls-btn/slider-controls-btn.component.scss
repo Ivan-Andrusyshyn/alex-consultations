@@ -15,7 +15,6 @@
     cursor: pointer;
     pointer-events: all;
     transition: transform 0.3s ease;
-    backdrop-filter: blur(1px);
     &:hover {
       transform: scale(1.1);
     }
