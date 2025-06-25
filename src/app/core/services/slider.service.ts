@@ -17,10 +17,7 @@ export class SliderService {
     if (slideCards.length === 0) return 0;
 
     const current = this.currentIndex.get(sliderKey) ?? 0;
-    const step = Math.min(
-      bigCards || this.isMobCardType ? 1 : 3,
-      slideCards.length
-    );
+    const step = bigCards || this.isMobCardType ? 1 : 3;
 
     const numberIteration = this.getNumberIteration(
       step,
@@ -37,10 +34,8 @@ export class SliderService {
   prev(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
     if (slideCards.length === 0) return 0;
     const current = this.currentIndex.get(sliderKey) ?? 0;
-    const step = Math.min(
-      bigCards || this.isMobCardType ? 1 : 3,
-      slideCards.length
-    );
+    const step = bigCards || this.isMobCardType ? 1 : 3;
+
     const numberIteration = this.getNumberIteration(
       step,
       sliderKey,
@@ -59,7 +54,7 @@ export class SliderService {
     if (sliderKey === 'home') {
       return cardsLength;
     } else {
-      return step * 3;
+      return this.isMobCardType ? cardsLength : step * 3;
     }
   }
   onTouchStart(event: TouchEvent) {
