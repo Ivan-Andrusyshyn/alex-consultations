@@ -13,18 +13,24 @@
         ) }
       </h2>
 
-      <img
-        [src]="
-          '/assets/new/core/tests/' +
-          TEST_NAME() +
-          '/results' +
-          '/' +
-          testResults.type +
-          '.svg'
-        "
-        alt=""
-        class="results-image"
-      />
+      @if(TEST_NAME()==='you-coffee' && testResults.subCategoryName){
+      <div class="you-coffee-container">
+        <div
+          class="pointing-subtype-img"
+          [style.top]="
+            getPositionElementBySubType(testResults.subCategoryName) + '%'
+          "
+        >
+          🡆
+        </div>
+        <img [src]="getImgUrl(testResults.type)" alt="" class="results-image" />
+      </div>
+
+      }@else{
+      <img [src]="getImgUrl(testResults.type)" alt="" class="results-image" />
+
+      }
+
       <div class="results-text-container">
         <h2 class="title-primary">
           {{ testResults.title }}

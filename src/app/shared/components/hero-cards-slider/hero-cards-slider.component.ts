@@ -62,6 +62,7 @@ export class HeroCardsSliderComponent implements OnInit {
       this.bigCards,
       this.slideCards
     );
+
     this.currentIndex.set(cardIndex);
   }
 

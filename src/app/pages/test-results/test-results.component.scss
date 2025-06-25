@@ -50,10 +50,34 @@
     max-width: 442px;
     @media screen and (min-width: 1320px) {
       min-width: 442px;
-      max-height: 342px;
+      height: 322px;
       max-width: 442px;
     }
   }
+  .you-coffee-container {
+    padding-left: 24px;
+    position: relative;
+    @media screen and (min-width: 1320px) {
+      padding-left: 0;
+    }
+    .results-image {
+      @media screen and (min-width: 1320px) {
+        min-width: 442px;
+        height: 292px;
+        width: 442px;
+      }
+    }
+    .pointing-subtype-img {
+      font-size: 24px;
+      left: 0;
+      position: absolute;
+      @media screen and (min-width: 1320px) {
+        left: 34px;
+        font-size: 32px;
+      }
+    }
+  }
+
   h2 {
     margin-bottom: 18px;
     display: none;

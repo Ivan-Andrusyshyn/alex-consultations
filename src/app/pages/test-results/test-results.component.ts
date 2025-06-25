@@ -27,6 +27,7 @@ import { BenefitConsultationData } from '../../shared/models/benefit-consultatio
 import { ProgressBarComponent } from '../../shared/components/test/progress-bar/progress-bar.component';
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 import { NotificationService } from '../../core/services/notification.service';
+import { CoffeeTestService } from './coffee-test.service';
 
 @Component({
   selector: 'app-test-results',
@@ -42,6 +43,7 @@ import { NotificationService } from '../../core/services/notification.service';
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
+  providers: [CoffeeTestService],
 })
 export class TestResultsComponent implements OnInit, OnDestroy {
   private mailerService = inject(MailerService);
@@ -54,6 +56,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private consultationService = inject(ConsultationService);
   private notificationService = inject(NotificationService);
   private viewportScroller = inject(ViewportScroller);
+  private coffeeTestService = inject(CoffeeTestService);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
@@ -176,6 +179,14 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     }
   }
 
+  getPositionElementBySubType(type: string): number | string {
+    return this.coffeeTestService.getSubCategoryName(type);
+  }
+
+  getImgUrl(type: string): string {
+    const base_url = '/assets/new/core/tests/';
+    return base_url + this.TEST_NAME() + '/results' + '/' + type + '.svg';
+  }
   private createForm() {
     this.formGroup = this.fb.group({
       name: ['', Validators.required],

@@ -13,19 +13,32 @@ export class SliderService {
   private touchEndX = 0;
 
   constructor() {}
-
   next(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
+    if (slideCards.length === 0) return 0;
+
     const current = this.currentIndex.get(sliderKey) ?? 0;
-    const step = bigCards || this.isMobCardType ? 1 : 3;
-    const newIndex = (current + step) % slideCards.length;
+    const step = Math.min(
+      bigCards || this.isMobCardType ? 1 : 3,
+      slideCards.length
+    );
+
+    const numberIteration = step * 3;
+    const newIndex = (current + step) % numberIteration;
+
     this.currentIndex.set(sliderKey, newIndex);
     return newIndex;
   }
 
   prev(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
+    if (slideCards.length === 0) return 0;
     const current = this.currentIndex.get(sliderKey) ?? 0;
-    const step = bigCards || this.isMobCardType ? 1 : 3;
-    const newIndex = (current - step + slideCards.length) % slideCards.length;
+    const step = Math.min(
+      bigCards || this.isMobCardType ? 1 : 3,
+      slideCards.length
+    );
+    const numberIteration = step * 3;
+
+    const newIndex = (current - step + numberIteration) % numberIteration;
     this.currentIndex.set(sliderKey, newIndex);
     return newIndex;
   }

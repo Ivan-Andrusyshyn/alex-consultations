@@ -56,8 +56,8 @@
   </div>
   <app-slider-controls-btn
     (next)="next()"
-    [controlsInside]="bigCards ? true : false"
     (prev)="prev()"
+    [controlsInside]="bigCards ? true : false"
   ></app-slider-controls-btn>
   <ul class="dots">
     @for (slide of slideCards; track $index) { @if (bigCards ||isMobCardType) {
