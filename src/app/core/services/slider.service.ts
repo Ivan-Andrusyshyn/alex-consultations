@@ -22,7 +22,12 @@ export class SliderService {
       slideCards.length
     );
 
-    const numberIteration = step * 3;
+    const numberIteration = this.getNumberIteration(
+      step,
+      sliderKey,
+      slideCards.length
+    );
+
     const newIndex = (current + step) % numberIteration;
 
     this.currentIndex.set(sliderKey, newIndex);
@@ -36,13 +41,27 @@ export class SliderService {
       bigCards || this.isMobCardType ? 1 : 3,
       slideCards.length
     );
-    const numberIteration = step * 3;
+    const numberIteration = this.getNumberIteration(
+      step,
+      sliderKey,
+      slideCards.length
+    );
 
     const newIndex = (current - step + numberIteration) % numberIteration;
     this.currentIndex.set(sliderKey, newIndex);
     return newIndex;
   }
-
+  private getNumberIteration(
+    step: number,
+    sliderKey: SLIDER_KEYS,
+    cardsLength: number
+  ) {
+    if (sliderKey === 'home') {
+      return cardsLength;
+    } else {
+      return step * 3;
+    }
+  }
   onTouchStart(event: TouchEvent) {
     this.touchStartX = event.changedTouches[0].screenX;
   }
