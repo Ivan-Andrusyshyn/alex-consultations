@@ -9,6 +9,19 @@
     padding: 64px 18px;
   }
 }
+//========================
+.mob-container {
+  @media screen and (min-width: 764px) {
+    display: none;
+  }
+}
+.desk-container {
+  display: none;
+  @media screen and (min-width: 764px) {
+    display: block;
+  }
+}
+//=======================
 .test-list {
   gap: 18px;
   padding: 24px 12px;

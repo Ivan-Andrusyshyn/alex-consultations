@@ -47,6 +47,7 @@
   }
   .results-image {
     max-height: auto;
+    min-height: 230px;
     max-width: 442px;
     @media screen and (min-width: 1320px) {
       min-width: 442px;
@@ -68,12 +69,12 @@
       }
     }
     .pointing-subtype-img {
-      font-size: 24px;
-      left: 0;
+      font-size: 18px;
+      left: -2px;
       position: absolute;
       @media screen and (min-width: 1320px) {
         left: 34px;
-        font-size: 32px;
+        font-size: 24px;
       }
     }
   }

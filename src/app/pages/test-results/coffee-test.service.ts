@@ -4,18 +4,18 @@ import { Injectable } from '@angular/core';
 export class CoffeeTestService {
   getSubCategoryName(type: string): number {
     if (type === 'Слабо заварена') {
-      return 81;
+      return 83;
     }
     if (type === 'Смак починає звучати') {
-      return 66;
+      return 69;
     }
     if (type === 'Розкритий аромат') {
-      return 45;
+      return 47;
     }
     if (type === 'Фірмова подача') {
-      return 15;
+      return 18;
     } else {
-      return 15;
+      return 18;
     }
   }
 }

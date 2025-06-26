@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [class.vip-card]="card.title.includes('Яка ти кава')">
   <div class="card-left">
     <div class="time-wrapper">
       <div>
@@ -32,6 +32,7 @@
   <div class="card-right">
     <div
       class="carousel-frame"
+      [class.smaller-frame]="card.title.includes('Яка ти кава')"
       (mouseenter)="startCarousel()"
       (mouseleave)="stopCarousel()"
     >
@@ -40,6 +41,7 @@
       <img
         [src]="this.card.imageUrl + 'carousel/' + item + '.svg'"
         [class.img-show]="currentIndex() === $index"
+        c
         class="carousel-img"
         alt="Test image"
       />

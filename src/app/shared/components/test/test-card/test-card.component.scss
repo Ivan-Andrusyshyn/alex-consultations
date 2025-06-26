@@ -47,6 +47,7 @@
     height: 500px;
     padding: 61px 78px;
   }
+
   .card-left {
     .time-wrapper {
       gap: 16px;
@@ -106,20 +107,52 @@
 
     .carousel-frame {
       width: 250px;
-      height: 213px;
+      height: 193px;
 
       position: relative;
       overflow: hidden;
 
-      @media screen and (min-width: 1640px) {
+      @media screen and (min-width: 1740px) {
         height: 450px;
         width: 600px;
         max-width: 600px;
       }
     }
+    .smaller-frame {
+      width: 150px;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      @media screen and (min-width: 1320px) {
+        height: 300px;
+        width: 200px;
+      }
+      @media screen and (min-width: 1740px) {
+        height: 400px;
+        width: 280px;
+      }
+    }
   }
 }
+.vip-card {
+  position: relative;
+  &::after {
+    content: "👑";
 
+    right: 3%;
+    top: 3%;
+    z-index: 99;
+    font-size: 36px;
+
+    position: absolute;
+
+    @media screen and (min-width: 1200px) {
+      font-size: 54px;
+      right: 2%;
+      top: 2%;
+    }
+  }
+}
 .carousel-img {
   position: absolute;
   top: 0;
@@ -128,7 +161,8 @@
   height: auto;
   object-fit: cover;
   will-change: opacity;
-
+  display: flex;
+  justify-content: center;
   opacity: 0;
   transition: all 0.7s ease-in-out;
   z-index: 0;
