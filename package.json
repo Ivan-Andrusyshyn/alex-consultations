@@ -27,6 +27,7 @@
     "luxon": "^3.5.0",
     "mongodb": "^6.14.2",
     "ngx-sharebuttons": "^17.0.0",
+    "ngx-star-rating": "^2.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.14.10"

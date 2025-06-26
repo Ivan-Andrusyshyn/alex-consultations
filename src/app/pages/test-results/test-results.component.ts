@@ -28,6 +28,7 @@ import { ProgressBarComponent } from '../../shared/components/test/progress-bar/
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 import { NotificationService } from '../../core/services/notification.service';
 import { CoffeeTestService } from './coffee-test.service';
+import { StarRatingComponent } from '../../shared/components/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-test-results',
@@ -37,6 +38,7 @@ import { CoffeeTestService } from './coffee-test.service';
     AsyncPipe,
     ConsultationsCardsComponent,
     ExpandablePanelComponent,
+    StarRatingComponent,
     ProgressBarComponent,
     HeroCardsSliderComponent,
     ShareButtons,

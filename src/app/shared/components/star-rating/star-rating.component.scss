@@ -1,0 +1,23 @@
+.rating-header {
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.average-rating {
+  font-weight: bold;
+  color: #333;
+}
+
+.votes-count {
+  color: #888;
+  font-size: 14px;
+}
+
+.star-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
