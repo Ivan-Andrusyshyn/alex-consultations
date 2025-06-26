@@ -21,14 +21,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { catchError, map, Observable, of, timer } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { DateTime } from 'luxon';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { RefreshButtonComponent } from '../../shared/components/refresh-button/refresh-button.component';
-import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { PersonalitiesTestService } from '../../core/services/personalities-test.service';
-import { Answer, Question } from '../../shared/models/common-tests';
+import { Answer, Question, TestName } from '../../shared/models/common-tests';
 import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
@@ -85,24 +84,20 @@ export class TestQuestionsComponent
   private readonly cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
   private fb = inject(FormBuilder);
-  readonly dialog = inject(MatDialog);
   private _snackBar = inject(MatSnackBar);
-  private routeTracker = inject(RouteTrackerService);
+
   private activeRoute = inject(ActivatedRoute);
-  private googleSheetService = inject(GoogleSheetsService);
   private seoService = inject(SeoService);
   private questionsService = inject(QuestionsService);
   private modalService = inject(ModalService);
 
   formGroup: FormGroup = this.fb.group({});
   coloredLabel: boolean = true;
-  timestamp = DateTime.now()
-    .setZone('Europe/Kyiv')
-    .toFormat('yyyy-MM-dd HH:mm:ss');
+
   currentQuestionNumber = signal<number>(1);
   testQuestions$!: Observable<Question[]>;
   private isSnackBarOpened = false;
-  TEST_NAME!: string;
+  TEST_NAME!: TestName;
   testTitleText = '';
   testSubtitleText = '';
   testQuestionsLength!: number;
@@ -122,7 +117,7 @@ export class TestQuestionsComponent
         const data = response['data'];
         const scrollToTop = response['scrollToTop'];
         this.seoService.updateTitle(data['seo'].title);
-        const testName: string = data['testName'];
+        const testName: TestName = data['testName'];
         this.testTitleText = data['testTitleText'];
         this.testSubtitleText = data['testSubtitleText'];
         this.snackBar = data['snackBar'] || this.snackBar;
@@ -132,7 +127,11 @@ export class TestQuestionsComponent
           data['seo'].metaTags[0],
           data['seo'].metaTags[1]
         );
-        this.createFormGroup(data['questions']);
+        const formControls = this.questionsService.createFormGroup(
+          data['questions']
+        );
+        this.formGroup = this.fb.group(formControls);
+
         this.testQuestionsLength = data['questions']?.length;
         window.scrollTo(0, 0);
 
@@ -163,9 +162,7 @@ export class TestQuestionsComponent
   }
 
   private setCurrentAnswers() {
-    const stringAnswers =
-      sessionStorage.getItem(this.TEST_NAME + '-answers') ?? 'null';
-    const parsedAnswers = JSON.parse(stringAnswers);
+    const parsedAnswers = this.questionsService.parseAnswers(this.TEST_NAME);
 
     if (parsedAnswers) {
       this.currentQuestionNumber.set(parsedAnswers.currentQuestion);
@@ -203,19 +200,13 @@ export class TestQuestionsComponent
     this._snackBar.dismiss();
     this.isSubmitting.set(true);
 
-    const request = {
-      answers,
-      userInformation: {
-        routeTracker: this.routeTracker.getRoutes(),
-        referrer: document.referrer ?? '',
-        testName: this.TEST_NAME,
-        timestamp: this.timestamp ?? '',
-        device: this.googleSheetService.getDeviceType(),
-      },
-    };
+    const newRequest = this.questionsService.createNewRequestObject(
+      this.TEST_NAME,
+      answers
+    );
 
     this.questionsService
-      .makeRequestByTestName(this.TEST_NAME, request)
+      .makeRequestByTestName(this.TEST_NAME, newRequest)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         catchError((error) => {
@@ -230,13 +221,68 @@ export class TestQuestionsComponent
       });
   }
 
+  answerQuestionByClick(questionId: number, value: string) {
+    const control = this.formGroup.get(questionId.toString());
+    if (control?.value === value) {
+      control.setValue(null, { emitEvent: false });
+    }
+    this.handlePercentageWithSnackBar();
+    control?.setValue(value, { emitEvent: true });
+
+    if (this.testQuestionsLength === this.currentQuestionNumber()) {
+      return;
+    }
+    this.currentQuestionNumber.update((prev) => prev + 1);
+    this.saveAnswersInStorage();
+  }
+  private saveAnswersInStorage() {
+    const answers = this.formGroup.value;
+
+    if (this.formGroup.invalid) {
+      sessionStorage.setItem(
+        this.TEST_NAME + '-answers',
+        JSON.stringify({
+          answers,
+          currentQuestion: this.currentQuestionNumber(),
+        })
+      );
+    }
+  }
+  // snackbar
+  private handlePercentageWithSnackBar(): number {
+    const totalQuestions = this.testQuestionsLength;
+    const answeredQuestions = this.answeredQuestions();
+    const progress = totalQuestions
+      ? (answeredQuestions / totalQuestions) * 100
+      : 0;
+
+    this.handleSnackBarByProgress(progress);
+
+    return progress;
+  }
+
+  private handleSnackBarByProgress(progress: number) {
+    if (!this.isSnackBarOpened && progress > 50 && progress < 80) {
+      const text = this.snackBar.firstSnackBar;
+      const textBtn = this.snackBar.firstSnackBarBtnText;
+      this.openSnackBar(text, textBtn);
+      this.setSnackBar(true, 'true');
+    } else if (this.isSnackBarOpened && progress > 80) {
+      const text = this.snackBar.secondSnackBar;
+      const textBtn = this.snackBar.secondSnackBarBtnText;
+
+      this.openSnackBar(text, textBtn);
+      this.setSnackBar(false, 'false');
+    }
+  }
+  //
+  private answeredQuestions(): number {
+    return Object.values(this.formGroup.value).filter(
+      (value) => value !== null && value !== undefined && value !== ''
+    ).length;
+  }
   private openDialog(): void {
-    const settings = {
-      width: '300px',
-      height: '200px',
-      isForm: false,
-      isConfirm: true,
-    };
+    const settings = this.questionsService.dialogSettings;
 
     this.modalService
       .openModal(settings)
@@ -260,68 +306,12 @@ export class TestQuestionsComponent
         }
       });
   }
-  nextQuestionByClick(questionId: number, value: string) {
-    const control = this.formGroup.get(questionId.toString());
-    if (control?.value === value) {
-      control.setValue(null, { emitEvent: false });
-    }
-    this.progressPercentage();
-    control?.setValue(value, { emitEvent: true });
-    const answers = this.formGroup.value;
 
-    if (this.testQuestionsLength === this.currentQuestionNumber()) {
-      return;
-    }
-    this.currentQuestionNumber.update((prev) => prev + 1);
-
-    if (this.formGroup.invalid) {
-      sessionStorage.setItem(
-        this.TEST_NAME + '-answers',
-        JSON.stringify({
-          answers,
-          currentQuestion: this.currentQuestionNumber(),
-        })
-      );
-    }
-  }
-
-  private progressPercentage(): number {
-    const totalQuestions = this.testQuestionsLength;
-    const answeredQuestions = Object.values(this.formGroup.value).filter(
-      (value) => value !== null && value !== undefined && value !== ''
-    ).length;
-    const progress = totalQuestions
-      ? (answeredQuestions / totalQuestions) * 100
-      : 0;
-
-    if (!this.isSnackBarOpened && progress > 50 && progress < 80) {
-      const text = this.snackBar.firstSnackBar;
-      const textBtn = this.snackBar.firstSnackBarBtnText;
-      this.openSnackBar(text, textBtn);
-      this.setSnackBar(true, 'true');
-    } else if (this.isSnackBarOpened && progress > 80) {
-      const text = this.snackBar.secondSnackBar;
-      const textBtn = this.snackBar.secondSnackBarBtnText;
-
-      this.openSnackBar(text, textBtn);
-      this.setSnackBar(false, 'false');
-    }
-
-    return progress;
-  }
-  private createFormGroup(questions: Question[]) {
-    const formControls: { [key: string]: any } = {};
-
-    questions.forEach((q: Question, i: number) => {
-      formControls[q.id.toString()] = ['', Validators.required];
-    });
-
-    this.formGroup = this.fb.group(formControls);
-  }
   private setSnackBar(isSnack: boolean, storage: string) {
     this.isSnackBarOpened = isSnack;
     sessionStorage.setItem('isSnackBarOpened', storage);
   }
+
   refreshTest() {
     this.openDialog();
   }
@@ -336,7 +326,7 @@ export class TestQuestionsComponent
     return parseInt(proc.toString());
   }
 
-  getInvalidControls(): string[] {
+  getInvalidControls(): string[] | [] {
     if (!this.formGroup) {
       return [];
     }

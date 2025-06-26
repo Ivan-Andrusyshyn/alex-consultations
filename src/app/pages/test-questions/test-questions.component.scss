@@ -35,6 +35,11 @@
     justify-content: flex-start;
   }
 }
+//
+.progressbar-container {
+  position: absolute;
+  bottom: 0;
+}
 .wrapper {
   display: flex;
   gap: 12px;

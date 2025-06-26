@@ -3,12 +3,19 @@ import { map, Observable, of } from 'rxjs';
 
 import { PersonalitiesTestService } from '../../core/services/personalities-test.service';
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
-import { TestResultRequest } from '../../shared/models/common-tests';
+import {
+  Question,
+  TestName,
+  TestResultRequest,
+} from '../../shared/models/common-tests';
 import { AttractivenessService } from '../../core/services/attractiveness.service';
 import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
 import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
 import { YouCoffeeService } from '../../core/services/you-coffee.service';
+import { Validators } from '@angular/forms';
+import { GoogleSheetsService } from '../../core/services/google-sheets.service';
+import { DateTime } from 'luxon';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
@@ -19,6 +26,7 @@ export class QuestionsService {
   private toxicalRelationshipService = inject(ToxicalRelationshipService);
   private traumaticSensitivityService = inject(TraumaticSensitivityService);
   private youCoffeeService = inject(YouCoffeeService);
+  private googleSheetService = inject(GoogleSheetsService);
 
   private roleInRelationships = 'role-in-relationships';
   private toxicalRelationships = 'toxical-relationship';
@@ -27,8 +35,45 @@ export class QuestionsService {
   private traumatic = 'traumatic-sensitivity';
   private youCoffee = 'you-coffee';
 
+  timestamp = DateTime.now()
+    .setZone('Europe/Kyiv')
+    .toFormat('yyyy-MM-dd HH:mm:ss');
+  dialogSettings = {
+    width: '300px',
+    height: '170px',
+    isForm: false,
+    isConfirm: true,
+  };
+
+  createNewRequestObject(testName: TestName, answers: any) {
+    return {
+      answers,
+      userInformation: {
+        routeTracker: this.routeTracker.getRoutes(),
+        referrer: document.referrer ?? '',
+        testName,
+        timestamp: this.timestamp ?? '',
+        device: this.googleSheetService.getDeviceType(),
+      },
+    };
+  }
+
+  createFormGroup(questions: Question[]): { [key: string]: any } {
+    const formControls: { [key: string]: any } = {};
+
+    questions.forEach((q: Question, i: number) => {
+      formControls[q.id.toString()] = ['', Validators.required];
+    });
+
+    return formControls;
+  }
+  parseAnswers(testName: string) {
+    const stringAnswers =
+      sessionStorage.getItem(testName + '-answers') ?? 'null';
+    return JSON.parse(stringAnswers);
+  }
   makeRequestByTestName(
-    testName: string,
+    testName: TestName,
     request: TestResultRequest
   ): Observable<any> {
     if (testName === this.youCoffee) {
