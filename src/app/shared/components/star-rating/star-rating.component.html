@@ -1,12 +1,13 @@
 <form class="rating-form" [formGroup]="form">
-  <div class="rating-header">
-    <span class="average-rating">Рейтинг: {{ form.value.rating }}</span>
-    <span class="votes-count">/ Голосів: 234</span>
+  <div class="rating-header" *ngIf="rating$ | async as rating">
+    <span class="average-rating">Рейтинг:{{ rating.rating }}</span>
+    <span class="votes-count">/ Голосів: {{ rating.votes }}</span>
   </div>
 
   <div class="star-container">
     <ngx-star-rating
       formControlName="rating"
+      [disabled]="isVoted()"
       [id]="'rating'"
       activeColor="#ffc107"
     ></ngx-star-rating>

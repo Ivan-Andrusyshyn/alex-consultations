@@ -19,7 +19,7 @@ import { ShareButtons } from 'ngx-sharebuttons/buttons';
 import { MailerService } from '../../core/services/mailer.service';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { SeoService } from '../../core/services/seo.service';
-import { TestResults } from '../../shared/models/common-tests';
+import { TestName, TestResults } from '../../shared/models/common-tests';
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
 import { ExpandablePanelComponent } from '../../shared/components/expandable-panel/expandable-panel.component';
 import { ConsultationService } from '../../core/services/consultation.service';
@@ -66,7 +66,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   formGroup!: FormGroup;
   successMessage = signal(false);
   isShowSendForm = signal(false);
-  TEST_NAME = signal<string>('');
+  TEST_NAME = signal<TestName | ''>('');
   sendObject: any;
   testResults$!: Observable<TestResults & { subCategoryName?: string }>;
   benefitConsultationData$!: Observable<BenefitConsultationData>;
@@ -125,7 +125,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
         if (scrollToTop) {
           this.viewportScroller.scrollToPosition([0, 0]);
         }
-        const testName: string = response.testName;
+        const testName = response.testName as TestName;
 
         this.TEST_NAME.set(testName);
 

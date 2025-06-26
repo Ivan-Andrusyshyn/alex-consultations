@@ -1,4 +1,13 @@
 export type Answer = { point: number; text: string };
+
+export type TestName =
+  | 'you-coffee'
+  | '16-personalities'
+  | 'attractiveness'
+  | 'traumatic-sensitivity'
+  | 'role-in-relationships'
+  | 'toxical-relationship';
+
 export interface Question {
   id: number;
   question: string;

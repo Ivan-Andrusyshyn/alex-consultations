@@ -1,20 +1,92 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgxStarRatingModule } from 'ngx-star-rating';
+import { map, Observable, switchMap, tap } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { StarRatingService } from '../../../core/services/star-rating.service';
+import { TestName } from '../../models/common-tests';
 
 @Component({
   selector: 'app-star-rating',
   standalone: true,
-  imports: [NgxStarRatingModule, ReactiveFormsModule],
+  imports: [NgxStarRatingModule, AsyncPipe, NgIf, ReactiveFormsModule],
   templateUrl: './star-rating.component.html',
   styleUrl: './star-rating.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StarRatingComponent implements OnInit {
-  public form!: FormGroup;
+  @Input() testName!: TestName | '';
+
+  private destroyRef = inject(DestroyRef);
+  private starRatingService = inject(StarRatingService);
+
+  rating$!: Observable<{ rating: any; votes: any }>;
+  isVoted = signal(false);
+  storageName!: string;
+  public form: FormGroup = new FormGroup({
+    rating: new FormControl(0),
+  });
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      rating: new FormControl(4),
-    });
+    this.rating$ = this.starRatingService.getRating(this.testName).pipe(
+      map((r) => {
+        const roundedRating = Math.round(Number(r.rating));
+        return { rating: roundedRating, votes: r.votes };
+      }),
+      tap((r) => {
+        this.storageName = this.testName + '-isVoted';
+
+        const storage = JSON.parse(
+          localStorage.getItem(this.storageName) ?? 'false'
+        );
+        this.isVoted.set(storage);
+
+        this.form.setValue({ rating: r.rating }, { emitEvent: false });
+      })
+    );
+    this.form.statusChanges
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap(() => this.onRate())
+      )
+      .subscribe((r) => {
+        localStorage.setItem(this.storageName, JSON.stringify(true));
+        this.isVoted.set(true);
+        //rounded numbers
+        const roundedRating = Math.round(Number(r.rating));
+        this.form.setValue({ rating: roundedRating }, { emitEvent: false });
+      });
+  }
+
+  addRating(score: number | string) {
+    const newRating = {
+      testName: this.testName,
+      score,
+    };
+
+    this.starRatingService
+      .addNewRating(newRating)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((r) => {
+        this.form.setValue({ rating: r.rating });
+      });
+  }
+
+  private onRate() {
+    const newRating = {
+      testName: this.testName,
+      score: this.form.value.rating,
+    };
+    return this.starRatingService.addNewRating(newRating);
   }
 }
