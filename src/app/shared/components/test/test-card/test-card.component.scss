@@ -51,6 +51,7 @@
   }
 
   .card-left {
+    position: relative;
     .time-wrapper {
       gap: 16px;
       margin-bottom: 16px;
@@ -162,15 +163,13 @@
 
 // vip-card only for you-coffee test and another payed tests
 .vip-card {
-  position: relative;
   .badge {
     font-size: 12px;
     padding: 2px 8px;
     border-radius: 12px;
-    margin-bottom: 12px;
-    display: block;
     max-width: 120px;
 
+    display: block;
     background: #ff5252;
     color: #fff;
 
