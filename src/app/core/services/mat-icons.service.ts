@@ -10,6 +10,14 @@ export class MatIconsService {
       url: '/assets/new/shared/pin.svg',
     },
     {
+      name: 'krona-1',
+      url: '/assets/new/shared/krona-1.svg',
+    },
+    {
+      name: 'clock',
+      url: '/assets/new/shared/clock.svg',
+    },
+    {
       name: 'arrows',
       url: '/assets/new/shared/arrows.svg',
     },

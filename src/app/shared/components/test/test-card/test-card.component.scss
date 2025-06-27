@@ -1,6 +1,6 @@
 .card {
   padding: 35px 24px;
-  min-width: 350px;
+  min-width: 300px;
   max-width: 400px;
   gap: 16px;
   box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.15);
@@ -11,7 +11,9 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
+  .badge {
+    display: none;
+  }
   .btn-wrapper {
     display: none;
     @media screen and (min-width: 1200px) {
@@ -134,24 +136,9 @@
     }
   }
 }
-.vip-card {
-  position: relative;
-  &::after {
-    content: "👑";
-
-    right: 3%;
-    top: 3%;
-    z-index: 99;
-    font-size: 36px;
-
-    position: absolute;
-
-    @media screen and (min-width: 1200px) {
-      font-size: 54px;
-      right: 2%;
-      top: 2%;
-    }
-  }
+::ng-deep .time-wrapper .items-icon {
+  width: 44px;
+  height: 44px;
 }
 .carousel-img {
   position: absolute;
@@ -171,4 +158,59 @@
 .img-show {
   opacity: 1;
   z-index: 2;
+}
+
+// vip-card only for you-coffee test and another payed tests
+.vip-card {
+  position: relative;
+  .badge {
+    top: 12px;
+    left: 12px;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+
+    display: block;
+    position: absolute;
+
+    background: #ff5252;
+    color: #fff;
+
+    font-weight: bold;
+    @media screen and (min-width: 1320px) {
+      font-size: 16px;
+    }
+  }
+  h2 {
+    position: relative;
+    color: #ffd700;
+    font-size: 2rem;
+    overflow: hidden;
+  }
+
+  h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent
+    );
+    transform: skewX(-20deg);
+    animation: shine 4s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -75%;
+    }
+    100% {
+      left: 125%;
+    }
+  }
 }

@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
 import { CardContent } from '../../../models/common-tests';
@@ -16,7 +16,7 @@ import { CardContent } from '../../../models/common-tests';
 @Component({
   selector: 'app-test-card',
   standalone: true,
-  imports: [PrimaryBtnComponent],
+  imports: [PrimaryBtnComponent, MatIconModule],
   templateUrl: './test-card.component.html',
   styleUrl: './test-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
