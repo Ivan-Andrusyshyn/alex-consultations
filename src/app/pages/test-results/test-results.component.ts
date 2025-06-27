@@ -8,27 +8,25 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { AsyncPipe, NgFor, NgIf, ViewportScroller } from '@angular/common';
+import { AsyncPipe, NgIf, ViewportScroller } from '@angular/common';
 import { map, Observable, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ShareButtons } from 'ngx-sharebuttons/buttons';
 
-import { MailerService } from '../../core/services/mailer.service';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
-import { SeoService } from '../../core/services/seo.service';
 import { TestName, TestResults } from '../../shared/models/common-tests';
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
-import { ExpandablePanelComponent } from '../../shared/components/expandable-panel/expandable-panel.component';
 import { ConsultationService } from '../../core/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/models/benefit-consultation';
 import { ProgressBarComponent } from '../../shared/components/test/progress-bar/progress-bar.component';
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 import { NotificationService } from '../../core/services/notification.service';
-import { CoffeeTestService } from './coffee-test.service';
 import { StarRatingComponent } from '../../shared/components/star-rating/star-rating.component';
+import { ResultService } from './results.service';
+import { ResponseData } from './data.interface';
 
 @Component({
   selector: 'app-test-results',
@@ -37,7 +35,6 @@ import { StarRatingComponent } from '../../shared/components/star-rating/star-ra
     NgIf,
     AsyncPipe,
     ConsultationsCardsComponent,
-    ExpandablePanelComponent,
     StarRatingComponent,
     ProgressBarComponent,
     HeroCardsSliderComponent,
@@ -45,20 +42,17 @@ import { StarRatingComponent } from '../../shared/components/star-rating/star-ra
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
-  providers: [CoffeeTestService],
+  providers: [ResultService],
 })
 export class TestResultsComponent implements OnInit, OnDestroy {
-  private mailerService = inject(MailerService);
   private dr = inject(DestroyRef);
-  private fb = inject(FormBuilder);
   private googleService = inject(GoogleSheetsService);
   readonly dialog = inject(MatDialog);
-  private seoService = inject(SeoService);
   private activeRoute = inject(ActivatedRoute);
   private consultationService = inject(ConsultationService);
   private notificationService = inject(NotificationService);
   private viewportScroller = inject(ViewportScroller);
-  private coffeeTestService = inject(CoffeeTestService);
+  private resultsService = inject(ResultService);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
@@ -96,35 +90,17 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
     this.testResults$ = this.activeRoute.data.pipe(
       map((data) => {
-        const response = data['data'] as {
-          results: TestResults;
-          message: string;
-          testName: string;
-          subCategoryCoffee?: string;
-          seo: {
-            title: string;
-            metaTags: Array<string>;
-          };
-        };
+        const response = data['data'] as ResponseData;
+
         this.fullUrl = window.location.href;
 
+        this.resultsService.updatePageSeo(response);
+
         const scrollToTop = data['scrollToTop'];
-        this.seoService.updateTitle(response.seo.title);
-
-        this.seoService.updateMetaTags(
-          response.seo.metaTags[0],
-          response.seo.metaTags[1]
-        );
-
-        this.seoService.updateOgTags({
-          title: response.results.title,
-          description: response.results.subtitle,
-          url: window.location.href,
-        });
-
         if (scrollToTop) {
           this.viewportScroller.scrollToPosition([0, 0]);
         }
+
         const testName = response.testName as TestName;
 
         this.TEST_NAME.set(testName);
@@ -141,28 +117,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     );
   }
 
-  sendResultsOnEmail(results: { email: string }) {
-    if (results.email) {
-      this.mailerService
-        .postEmailRoleInRelationships({
-          email: results.email,
-          ...this.sendObject,
-        })
-        .pipe(
-          tap((r) => {
-            this.successMessage.set(true);
-          }),
-          takeUntilDestroyed(this.dr)
-        )
-        .subscribe((r) => {
-          this.toggleSendForm();
-        });
-    }
-  }
-
-  toggleSendForm() {
-    this.isShowSendForm.update((prev) => !prev);
-  }
   showNotification(isFirst: boolean) {
     this.isFirstNotification = isFirst;
     this.notificationService.setNotification(
@@ -182,7 +136,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   }
 
   getPositionElementBySubType(type: string): number | string {
-    return this.coffeeTestService.getSubCategoryName(type);
+    return this.resultsService.getSubCategoryName(type);
   }
 
   getImgUrl(type: string): string {
@@ -190,25 +144,6 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     return base_url + this.TEST_NAME() + '/results' + '/' + type + '.svg';
   }
   private createForm() {
-    this.formGroup = this.fb.group({
-      name: ['', Validators.required],
-      socialMedia: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^@[a-zA-Z0-9_]{4,29}$/),
-          Validators.minLength(5),
-          Validators.maxLength(30),
-        ],
-      ],
-      phone: [
-        '',
-        [
-          Validators.minLength(8),
-          Validators.maxLength(12),
-          Validators.pattern('^[0-9]+$'),
-        ],
-      ],
-    });
+    this.formGroup = this.resultsService.createForm();
   }
 }

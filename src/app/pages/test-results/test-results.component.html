@@ -83,67 +83,6 @@
     <app-star-rating [testName]="TEST_NAME()"></app-star-rating>
   </section>
 
-  <!-- <div class="extension-wrapper">
-    <ng-container
-      *ngIf="benefitConsultationData$ | async as consultationBenefit"
-    >
-      <section class="results-container extension-content">
-        <app-expandable-panel
-          [subtitle]="consultationBenefit.targetTitle"
-          [title]="
-            'В тобі є більше. Настав час повернутись до себе — по-справжньому'
-          "
-        >
-          <br />
-          <div>
-            <div class="target-audience">
-              <h3 class="subtitle">Якщо ти:</h3>
-              <ul>
-                @for (item of consultationBenefit.targetAudience; track $index)
-                {
-
-                <li>
-                  <p class="subtitle">
-                    {{ item }}
-                  </p>
-                </li>
-                }
-              </ul>
-            </div>
-            <br />
-
-            <div class="benefits">
-              <h3 class="subtitle">Що саме ти отримаєш:</h3>
-
-              @for (benefit of consultationBenefit.benefits; track $index) {
-
-              <div class="benefit">
-                <h4 class="subtitle">{{ benefit.title }}</h4>
-                <p class="subtitle">{{ benefit.description }}</p>
-              </div>
-              }
-            </div>
-
-            <div class="subtitle testimonial">
-              <p class="subtitle testimonial-description">
-                {{ consultationBenefit.testimonial.description }}
-              </p>
-              <br />
-              <p class="subtitle testimonial-quote">
-                {{ consultationBenefit.testimonial.quote }}
-              </p>
-            </div>
-            <br />
-
-            <p class="subtitle note">
-              {{ consultationBenefit.note }}
-            </p>
-          </div>
-        </app-expandable-panel>
-      </section>
-    </ng-container>
-  </div> -->
-
   <div #scrollContainer></div>
   <app-consultations-cards [sliderKey]="'consultations'">
   </app-consultations-cards>

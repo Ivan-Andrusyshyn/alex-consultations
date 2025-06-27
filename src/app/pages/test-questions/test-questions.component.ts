@@ -10,19 +10,11 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { catchError, map, Observable, of } from 'rxjs';
-import { DateTime } from 'luxon';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { RefreshButtonComponent } from '../../shared/components/refresh-button/refresh-button.component';
@@ -30,20 +22,13 @@ import { PersonalitiesTestService } from '../../core/services/personalities-test
 import { Answer, Question, TestName } from '../../shared/models/common-tests';
 import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
-import { RouteTrackerService } from '../../core/services/route-tracker.service';
-import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { SeoService } from '../../core/services/seo.service';
 import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { QuestionWordPipe } from './test-questions.pipe';
 import { ModalService } from '../../core/services/modal.service';
-
-interface SnackBar {
-  firstSnackBarBtnText: string;
-  secondSnackBarBtnText: string;
-  secondSnackBar: string;
-  firstSnackBar: string;
-}
+import { fadeInAnimation } from './fadeIn-animation';
+import { SnackBar } from './snackBar.interface';
 
 @Component({
   selector: 'app-test-questions',
@@ -63,17 +48,8 @@ interface SnackBar {
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate(
-          '400ms ease-out',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-    ]),
-  ],
+  animations: [fadeInAnimation],
+  providers: [QuestionsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestQuestionsComponent

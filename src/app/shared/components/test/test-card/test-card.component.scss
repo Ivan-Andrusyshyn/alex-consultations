@@ -164,20 +164,19 @@
 .vip-card {
   position: relative;
   .badge {
-    top: 12px;
-    left: 12px;
     font-size: 12px;
     padding: 2px 8px;
     border-radius: 12px;
-
+    margin-bottom: 12px;
     display: block;
-    position: absolute;
+    max-width: 120px;
 
     background: #ff5252;
     color: #fff;
 
     font-weight: bold;
     @media screen and (min-width: 1320px) {
+      max-width: 140px;
       font-size: 16px;
     }
   }
