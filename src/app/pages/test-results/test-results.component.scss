@@ -109,7 +109,9 @@
   color: var(--color-text-primary);
   letter-spacing: 1.2px;
 }
-
+.countdown-wrapper {
+  z-index: 99;
+}
 //
 .results-text-list {
   gap: 30px;

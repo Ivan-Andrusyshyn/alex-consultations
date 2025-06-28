@@ -27,6 +27,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { StarRatingComponent } from '../../shared/components/star-rating/star-rating.component';
 import { ResultService } from './results.service';
 import { ResponseData } from './data.interface';
+import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 
 @Component({
   selector: 'app-test-results',
@@ -39,6 +40,7 @@ import { ResponseData } from './data.interface';
     ProgressBarComponent,
     HeroCardsSliderComponent,
     ShareButtons,
+    CountdownTimerComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -58,9 +60,11 @@ export class TestResultsComponent implements OnInit, OnDestroy {
 
   containerElement!: HTMLElement;
   formGroup!: FormGroup;
+
   successMessage = signal(false);
   isShowSendForm = signal(false);
   TEST_NAME = signal<TestName | ''>('');
+
   sendObject: any;
   testResults$!: Observable<TestResults & { subCategoryName?: string }>;
   benefitConsultationData$!: Observable<BenefitConsultationData>;

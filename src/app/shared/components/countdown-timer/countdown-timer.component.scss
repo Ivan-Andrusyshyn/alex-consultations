@@ -1,0 +1,74 @@
+.timer {
+  font-size: 1rem;
+  color: #ffc107;
+  background: var(--color-text-primary);
+  padding: 20px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 1320px;
+  margin: 20px auto;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.5px;
+  animation: pulse 1.5s infinite;
+  border: 2px solid #ffc107;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+}
+::ng-deep .timer app-primary-btn .primary-btn {
+  @media screen and (max-width: 764px) {
+    min-width: 300px;
+  }
+}
+.timer-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 12px;
+
+  strong {
+    color: #ffc107;
+    font-weight: 700;
+  }
+}
+.btn-wrapper {
+  padding: 16px 0;
+
+  display: flex;
+  justify-content: center;
+}
+.countdown {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #2c2c2c;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 193, 7, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+  }
+}
+
+@media screen and (min-width: 1320px) {
+  .timer {
+    font-size: 1.3rem;
+  }
+
+  .timer-text {
+    font-size: 1.3rem;
+  }
+
+  .countdown {
+    font-size: 1.5rem;
+  }
+}

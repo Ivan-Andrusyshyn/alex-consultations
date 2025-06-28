@@ -1,0 +1,20 @@
+<div class="timer">
+  <p class="timer-text">
+    🎁 Отримай <strong>безкоштовну першу</strong> та
+    <strong>знижку 20%</strong> на другу консультацію!
+    <br />
+    Зареєструйся просто зараз ⏳
+  </p>
+  <div class="countdown">
+    ⏱ Залишилось часу:
+    <strong countdown="timerCountdown" (timerFinished)="openDialog()"> </strong>
+  </div>
+  <div class="btn-wrapper">
+    <app-primary-btn
+      [isPulsationAnimation]="true"
+      [classColor]="'red-btn'"
+      [textBtn]="textBtn"
+      (onClick)="openDialog()"
+    ></app-primary-btn>
+  </div>
+</div>
