@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { NgxStarRatingModule } from 'ngx-star-rating';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -44,42 +44,42 @@ export class StarRatingComponent implements OnInit {
         return { rating: roundedRating, votes: r.votes };
       }),
       tap((r) => {
-        this.storageName = this.testName + '-isVoted';
-
-        const storage = JSON.parse(
-          localStorage.getItem(this.storageName) ?? 'false'
-        );
-        this.isVoted.set(storage);
-
+        this.getStorageData();
         this.form.setValue({ rating: r.rating }, { emitEvent: false });
       })
     );
+
     this.form.statusChanges
       .pipe(
         takeUntilDestroyed(this.destroyRef),
+        filter(() => {
+          if (this.isVoted()) {
+            alert('Ви вже проголосували. Дякуємо за вашу оцінку!');
+            return false;
+          }
+          return true;
+        }),
         switchMap(() => this.onRate())
       )
       .subscribe((r) => {
-        localStorage.setItem(this.storageName, JSON.stringify(true));
-        this.isVoted.set(true);
+        this.setStorageData();
         //rounded numbers
         const roundedRating = Math.round(Number(r.rating));
         this.form.setValue({ rating: roundedRating }, { emitEvent: false });
       });
   }
 
-  addRating(score: number | string) {
-    const newRating = {
-      testName: this.testName,
-      score,
-    };
+  private setStorageData() {
+    localStorage.setItem(this.storageName, JSON.stringify(true));
+    this.isVoted.set(true);
+  }
 
-    this.starRatingService
-      .addNewRating(newRating)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((r) => {
-        this.form.setValue({ rating: r.rating });
-      });
+  private getStorageData() {
+    this.storageName = this.testName + '-isVoted';
+    const storage = JSON.parse(
+      localStorage.getItem(this.storageName) ?? 'false'
+    );
+    this.isVoted.set(storage);
   }
 
   private onRate() {
