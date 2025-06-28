@@ -65,7 +65,7 @@ export class CountDownTimerDirective implements OnInit, OnDestroy {
 
   saveTime = () => {
     const formatted = this.formatTime(this.remainingTime);
-    localStorage.setItem(this.storageKey, formatted);
+    sessionStorage.setItem(this.storageKey, formatted);
   };
 
   onTimerEnd() {
@@ -74,7 +74,7 @@ export class CountDownTimerDirective implements OnInit, OnDestroy {
     this.timerFinished.emit();
   }
   restoreTime() {
-    const saved = localStorage.getItem(this.storageKey);
+    const saved = sessionStorage.getItem(this.storageKey);
     if (saved !== null) {
       const seconds = this.parseTime(saved);
       if (seconds > 0 && seconds <= this.countdownTime) {
