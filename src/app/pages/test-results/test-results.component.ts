@@ -28,6 +28,7 @@ import { StarRatingComponent } from '../../shared/components/star-rating/star-ra
 import { ResultService } from './results.service';
 import { ResponseData } from './data.interface';
 import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
+import { SLIDER_KEYS } from '../../shared/models/slider';
 
 @Component({
   selector: 'app-test-results',
@@ -62,8 +63,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   formGroup!: FormGroup;
 
   successMessage = signal(false);
-  isShowSendForm = signal(false);
   TEST_NAME = signal<TestName | ''>('');
+  showCountDownTimer = signal(false);
 
   sendObject: any;
   testResults$!: Observable<TestResults & { subCategoryName?: string }>;
@@ -71,6 +72,9 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   fullUrl!: string;
   timeInterval: any;
   isFirstNotification = false;
+  includeShareBtn = ['copy', 'facebook', 'linkedin', 'viber', 'telegram'];
+  consultationsSliderKey: SLIDER_KEYS = 'consultations';
+  cardsSliderKey: SLIDER_KEYS = 'tests-results';
 
   ngOnDestroy(): void {
     clearInterval(this.timeInterval);
@@ -95,7 +99,7 @@ export class TestResultsComponent implements OnInit, OnDestroy {
     this.testResults$ = this.activeRoute.data.pipe(
       map((data) => {
         const response = data['data'] as ResponseData;
-
+        this.showCountDownTimer.set(true);
         this.fullUrl = window.location.href;
 
         this.resultsService.updatePageSeo(response);

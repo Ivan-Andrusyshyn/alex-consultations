@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -29,6 +29,7 @@ import { QuestionWordPipe } from './test-questions.pipe';
 import { ModalService } from '../../core/services/modal.service';
 import { fadeInAnimation } from './fadeIn-animation';
 import { SnackBar } from './snackBar.interface';
+import { QuestionOptionComponent } from '../../shared/components/test/question-option/question-option.component';
 
 @Component({
   selector: 'app-test-questions',
@@ -39,12 +40,12 @@ import { SnackBar } from './snackBar.interface';
     MatTabsModule,
     NgFor,
     ReactiveFormsModule,
-    NgClass,
     AsyncPipe,
     QuestionsStepperComponent,
     PrimaryBtnComponent,
     TitleCardComponent,
     QuestionWordPipe,
+    QuestionOptionComponent,
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
@@ -56,8 +57,8 @@ export class TestQuestionsComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   readonly personalitiesService = inject(PersonalitiesTestService);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly cdr = inject(ChangeDetectorRef);
+  private destroyRef = inject(DestroyRef);
+  private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private _snackBar = inject(MatSnackBar);
@@ -70,9 +71,9 @@ export class TestQuestionsComponent
   formGroup: FormGroup = this.fb.group({});
   coloredLabel: boolean = true;
 
-  currentQuestionNumber = signal<number>(1);
-  testQuestions$!: Observable<Question[]>;
   private isSnackBarOpened = false;
+
+  testQuestions$!: Observable<Question[]>;
   TEST_NAME!: TestName;
   testTitleText = '';
   testSubtitleText = '';
@@ -86,6 +87,8 @@ export class TestQuestionsComponent
 
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
+  currentQuestionNumber = signal<number>(1);
+  showTextBoard = signal(true);
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -125,11 +128,17 @@ export class TestQuestionsComponent
 
   ngAfterViewInit(): void {
     this.setCurrentAnswers();
+    const showQuestions = JSON.parse(
+      sessionStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
+    );
+    this.showTextBoard.set(showQuestions);
   }
 
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
+
     this.formGroup.reset();
+    sessionStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
     sessionStorage.setItem('isStartTest', 'false');
   }
 
@@ -170,6 +179,7 @@ export class TestQuestionsComponent
     this.currentQuestionNumber.set(1);
     this.isStartTest.set(true);
   }
+
   onSubmit() {
     if (this.isSubmitting()) return;
     const answers = this.formGroup.value as Answer[];
@@ -197,13 +207,14 @@ export class TestQuestionsComponent
       });
   }
 
-  answerQuestionByClick(questionId: number, value: string) {
-    const control = this.formGroup.get(questionId.toString());
-    if (control?.value === value) {
+  answerQuestionByClick(value: { questionsId: string; answer: string }) {
+    const control = this.formGroup.get(value.questionsId);
+
+    if (control?.value === value.answer) {
       control.setValue(null, { emitEvent: false });
     }
     this.handlePercentageWithSnackBar();
-    control?.setValue(value, { emitEvent: true });
+    control?.setValue(value.answer, { emitEvent: true });
 
     if (this.testQuestionsLength === this.currentQuestionNumber()) {
       return;
@@ -211,6 +222,15 @@ export class TestQuestionsComponent
     this.currentQuestionNumber.update((prev) => prev + 1);
     this.saveAnswersInStorage();
   }
+
+  hideTextBoardOnClick() {
+    this.showTextBoard.set(false);
+    sessionStorage.setItem(
+      this.TEST_NAME + '-showQuestions',
+      JSON.stringify(false)
+    );
+  }
+  //
   private saveAnswersInStorage() {
     const answers = this.formGroup.value;
 

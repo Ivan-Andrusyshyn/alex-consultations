@@ -36,8 +36,8 @@ export class QuestionsStepperComponent {
     this.changeViewQuestion.emit(currentQuNumber);
   }
 
-  isValid(index: number) {
-    return this.formGroup.get(index.toString())?.valid || index == 0;
+  isValid(indexQ: number) {
+    return this.formGroup.get(indexQ.toString())?.valid || indexQ == 0;
   }
   isXsGap(): boolean {
     return this.questions.length > 24 ? true : false;

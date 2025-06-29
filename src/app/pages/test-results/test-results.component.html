@@ -74,7 +74,7 @@
     <share-buttons
       [title]="testResults.title"
       [description]="testResults.subtitle"
-      [include]="['copy', 'facebook', 'linkedin', 'viber', 'telegram']"
+      [include]="includeShareBtn"
       [showText]="true"
       [url]="fullUrl"
     ></share-buttons>
@@ -84,13 +84,13 @@
   </section>
 
   <div #scrollContainer></div>
-  <div class="countdown-wrapper">
+  <div class="countdown-wrapper" *ngIf="showCountDownTimer()">
     <app-countdown-timer></app-countdown-timer>
   </div>
-  <app-consultations-cards [sliderKey]="'consultations'">
+  <app-consultations-cards [sliderKey]="consultationsSliderKey">
   </app-consultations-cards>
   <app-hero-cards-slider
-    [sliderKey]="'tests-results'"
+    [sliderKey]="cardsSliderKey"
     [bigCards]="false"
   ></app-hero-cards-slider>
 </section>

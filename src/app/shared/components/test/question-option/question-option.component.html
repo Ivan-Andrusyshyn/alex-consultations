@@ -1,0 +1,21 @@
+<label
+  class="label subtitle"
+  [class.higher-options]="testName === 'traumatic-sensitivity'"
+  [ngClass]="'label-' + (answerIndex + 1)"
+>
+  <input
+    [formControlName]="questionsId.toString()"
+    (click)="
+      answerQuestionByClick(
+        answer.point + (answer.type ? '-' + answer.type : ''),
+        questionsId.toString()
+      )
+    "
+    type="radio"
+    [value]="answer.point + (answer.type ? '-' + answer.type : '')"
+  />
+
+  <span>
+    {{ answer.text }}
+  </span>
+</label>

@@ -13,7 +13,6 @@ const star_rating_schema_1 = require("../../db/models/star-rating-schema");
 const getRating = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const testName = req.params.testName;
-        console.log(testName);
         const ratingDoc = yield star_rating_schema_1.StarRatingModel.findOne({ testName });
         if (!ratingDoc) {
             return res.status(404).json({ message: 'Rating not found' });

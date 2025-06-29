@@ -17,7 +17,7 @@ import { Validators } from '@angular/forms';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { DateTime } from 'luxon';
 
-@Injectable( )
+@Injectable()
 export class QuestionsService {
   private personalitiesService = inject(PersonalitiesTestService);
   private roleInRelationshipsService = inject(RoleInRelationshipsService);

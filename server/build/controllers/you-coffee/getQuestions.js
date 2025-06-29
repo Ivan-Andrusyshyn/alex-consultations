@@ -19,7 +19,6 @@ const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const fileId = google_file_ids_env_1.YOUCOFFEE.QUESTIONS;
         const questionsWithAnswers = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
-        console.log(questionsWithAnswers);
         if (questionsWithAnswers) {
             res.status(200).send({
                 questions: questionsWithAnswers,
