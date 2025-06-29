@@ -114,10 +114,12 @@ export class TestQuestionsComponent
         this.testQuestionsLength = data['questions']?.length;
         window.scrollTo(0, 0);
 
+        this.setStorageBoardValue();
         return data['questions'];
       })
     );
 
+    //
     this.isStartTest.set(
       JSON.parse(sessionStorage.getItem('isStartTest') ?? 'false')
     );
@@ -128,10 +130,6 @@ export class TestQuestionsComponent
 
   ngAfterViewInit(): void {
     this.setCurrentAnswers();
-    const showQuestions = JSON.parse(
-      sessionStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
-    );
-    this.showTextBoard.set(showQuestions);
   }
 
   ngOnDestroy(): void {
@@ -230,7 +228,18 @@ export class TestQuestionsComponent
       JSON.stringify(false)
     );
   }
+
   //
+
+  private setStorageBoardValue() {
+    const showQuestions = JSON.parse(
+      sessionStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
+    );
+    this.showTextBoard.set(showQuestions);
+  }
+
+  //
+
   private saveAnswersInStorage() {
     const answers = this.formGroup.value;
 
@@ -244,7 +253,9 @@ export class TestQuestionsComponent
       );
     }
   }
+
   // snackbar
+
   private handlePercentageWithSnackBar(): number {
     const totalQuestions = this.testQuestionsLength;
     const answeredQuestions = this.answeredQuestions();

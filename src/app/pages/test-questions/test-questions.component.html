@@ -1,17 +1,15 @@
 <app-title-card
-  @fadeIn
   [titleText]="testTitleText"
   [subtitleText]="testSubtitleText"
   *ngIf="!showTextBoard()"
 ></app-title-card>
 <ng-container *ngIf="testQuestions$ | async as questions">
   <ng-container *ngIf="!showTextBoard(); else boardContainer">
-    <div class="refresh-btn-wrapper" @fadeIn>
+    <div class="refresh-btn-wrapper">
       <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
       <P class="subtitle"> {{ questions.length | questionWord }} </P>
     </div>
     <app-questions-stepper
-      @fadeIn
       [formGroup]="formGroup"
       [questions]="questions"
       [currentQuestionNumber]="currentQuestionNumber()"
@@ -21,7 +19,7 @@
       {{ questions[currentQuestionNumber() - 1]?.question }}
     </h3>
 
-    <div class="wrapper" @fadeIn>
+    <div class="wrapper">
       <div class="container" *ngIf="questions">
         <form [formGroup]="formGroup">
           <ng-container *ngFor="let q of questions; let i = index">
