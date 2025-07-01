@@ -62,19 +62,16 @@
 <ng-template #boardContainer>
   <div class="container" @fadeIn>
     <h3 class="title">
-      Дотримуйтесь наступних кроків, щоб отримати максимальний результат:
+      {{ testsInstruction.instructionsTitle }}
     </h3>
 
     <br />
-    <ul class="board-content-list">
-      <li class="subtitle">1. Дайте чесні відповіді на всі питання</li>
-      <li class="subtitle">
-        2. Прочитайте унікальні результати, які розкривають потаємну частину
-        вашої підсвідомості
-      </li>
-      <li class="subtitle">
-        3. Після результатів не зволікайте — запишіться на безкоштовну
-        60-хвилинну консультацію. Отримайте цілісне та унікальне розуміння себе
+    <ul class="instructions-list">
+      <li
+        class="subtitle"
+        *ngFor="let instructionItem of testsInstruction?.steps; let i = index"
+      >
+        {{ i + 1 }}. {{ instructionItem }}
       </li>
     </ul>
     <br />

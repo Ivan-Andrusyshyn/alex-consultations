@@ -89,6 +89,10 @@ export class TestQuestionsComponent
   isSubmitting = signal<boolean>(false);
   currentQuestionNumber = signal<number>(1);
   showTextBoard = signal(true);
+  testsInstruction!: {
+    instructionsTitle: string;
+    steps: string[];
+  };
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -99,6 +103,9 @@ export class TestQuestionsComponent
         const testName: TestName = data['testName'];
         this.testTitleText = data['testTitleText'];
         this.testSubtitleText = data['testSubtitleText'];
+
+        this.testsInstruction = data['testsInstruction'];
+
         this.snackBar = data['snackBar'] || this.snackBar;
         this.TEST_NAME = testName;
 

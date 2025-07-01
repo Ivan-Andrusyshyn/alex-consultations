@@ -13,6 +13,29 @@ import { AttractivenessService } from '../../core/services/attractiveness.servic
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
 import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
 import { YouCoffeeService } from '../../core/services/you-coffee.service';
+import { questionsInstructions } from '../../../assets/content/testsInstruction';
+
+interface ResolveData {
+  message: string | null;
+  questions: Question[] | null;
+  testName: string | null;
+  testTitleText: string;
+  testSubtitleText: string;
+  testInstruction?: {
+    instructionsTitle: string;
+    steps: string[];
+  };
+  snackBar?: {
+    firstSnackBarBtnText: string;
+    secondSnackBarBtnText: string;
+    secondSnackBar: string;
+    firstSnackBar: string;
+  };
+  seo?: {
+    title: string;
+    metaTags: Array<string>;
+  };
+}
 
 @Injectable({
   providedIn: 'root',
@@ -30,23 +53,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<{
-    message: string | null;
-    questions: Question[] | null;
-    testName: string | null;
-    testTitleText: string;
-    testSubtitleText: string;
-    snackBar?: {
-      firstSnackBarBtnText: string;
-      secondSnackBarBtnText: string;
-      secondSnackBar: string;
-      firstSnackBar: string;
-    };
-    seo?: {
-      title: string;
-      metaTags: Array<string>;
-    };
-  }> {
+  ): Observable<ResolveData> {
     const testName = route.parent?.paramMap.get('testName');
 
     if (testName === 'role-in-relationships') {
@@ -55,6 +62,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testsInstruction: questionsInstructions[testName],
             testTitleText: 'Ти — опора, натхнення чи дзеркало для партнера?',
             testSubtitleText:
               'Цей тест покаже, як ти поводишся у близьких зв’язках і що несеш у життя іншої людини. Це дає глибоке усвідомлення себе у парі.',
@@ -83,6 +91,8 @@ export class TestsQuestionsResolver implements Resolve<any> {
               secondSnackBar: '☕ Твоя кава майже заварена. Який у тебе аромат',
               firstSnackBar: '☕ Твій смак уже починає відкриватись',
             },
+            testsInstruction: questionsInstructions[testName],
+
             testTitleText:
               'Твій смак особистості — як кава: глибокий, іноді з гірчинкою, але завжди унікальний.',
             testSubtitleText:
@@ -104,6 +114,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testsInstruction: questionsInstructions[testName],
             testTitleText:
               'Пройшовши цей тест, ти відкриєш основу своєї особистості.',
             testSubtitleText:
@@ -125,6 +136,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testsInstruction: questionsInstructions[testName],
             testTitleText:
               'Зрозумій, що саме в тобі найбільше притягує людей — емоційність, впевненість чи глибина?',
             testSubtitleText:
@@ -146,6 +158,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testsInstruction: questionsInstructions[testName],
             testTitleText:
               'Чи не виснажують тебе стосунки? А може, щось давно сигналить про проблему?',
             testSubtitleText:
@@ -169,6 +182,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
           return {
             ...r,
             testName,
+            testsInstruction: questionsInstructions[testName],
             testTitleText:
               'Як ти реагуєш на критику, непорозуміння чи образливі слова?',
             testSubtitleText:
