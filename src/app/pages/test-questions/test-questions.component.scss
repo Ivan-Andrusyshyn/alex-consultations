@@ -19,12 +19,34 @@
     box-shadow: var(--container-shadow);
   }
 }
+.instructions-container {
+  .instructions-header {
+    gap: 12px;
+    padding: 12px 0;
 
-.instructions-list {
-  gap: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    @media screen and (min-width: 764px) {
+      gap: 16px;
+      flex-direction: row;
+    }
+    h3 {
+    }
+    img {
+      width: 40%;
+      min-width: 280px;
+      @media screen and (min-width: 764px) {
+        width: 25%;
+      }
+    }
+  }
+  .instructions-list {
+    gap: 16px;
 
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 //
@@ -39,6 +61,8 @@
   }
 }
 .btn-wrapper {
+  width: 100%;
+
   display: flex;
   justify-content: center;
   @media screen and (min-width: 764px) {

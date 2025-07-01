@@ -220,10 +220,13 @@ export class TestQuestionsComponent
     }
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
-
-    if (this.testQuestionsLength === this.currentQuestionNumber()) {
+    //
+    if (this.formGroup.valid) {
+      this.onSubmit();
       return;
     }
+
+    //
     this.currentQuestionNumber.update((prev) => prev + 1);
     this.saveAnswersInStorage();
   }
@@ -234,6 +237,11 @@ export class TestQuestionsComponent
       this.TEST_NAME + '-showQuestions',
       JSON.stringify(false)
     );
+  }
+  //
+
+  getInstructionsImgUrl(): string {
+    return '/assets/new/core/tests/' + this.TEST_NAME + '/card/' + 1 + '.svg';
   }
 
   //
@@ -295,6 +303,7 @@ export class TestQuestionsComponent
       (value) => value !== null && value !== undefined && value !== ''
     ).length;
   }
+
   private openDialog(): void {
     const settings = this.questionsService.dialogSettings;
 

@@ -46,13 +46,13 @@
             </div>
             }
           </ng-container>
-          <div class="btn-wrapper" *ngIf="formGroup.valid">
+          <!-- <div class="btn-wrapper" *ngIf="formGroup.valid">
             <app-primary-btn
               [isDisabled]="isSubmitting()"
               [textBtn]="'Результати'"
               (onClick)="onSubmit()"
             ></app-primary-btn>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>
@@ -60,10 +60,13 @@
 </ng-container>
 
 <ng-template #boardContainer>
-  <div class="container" @fadeIn>
-    <h3 class="title">
-      {{ testsInstruction.instructionsTitle }}
-    </h3>
+  <div class="container instructions-container" @fadeIn>
+    <div class="instructions-header">
+      <img [src]="getInstructionsImgUrl()" alt="" />
+      <h3 class="title-primary">
+        {{ testsInstruction.instructionsTitle }}
+      </h3>
+    </div>
 
     <br />
     <ul class="instructions-list">
