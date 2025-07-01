@@ -15,6 +15,17 @@ import { ToxicalRelationshipService } from '../../core/services/toxical-relation
 import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
 import { YouCoffeeService } from '../../core/services/you-coffee.service';
 
+interface ResultsResolver {
+  message: string | null;
+  results: TestResults | null;
+  personType?: string;
+  testName: string | null;
+  seo?: {
+    title: string;
+    metaTags: Array<string>;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,16 +44,7 @@ export class TestsResultsResolver implements Resolve<any> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<{
-    message: string | null;
-    results: TestResults | null;
-    personType?: string;
-    testName: string | null;
-    seo?: {
-      title: string;
-      metaTags: Array<string>;
-    };
-  }> {
+  ): Observable<ResultsResolver> {
     const personalityName = route.paramMap.get('categoryName') as string;
 
     const testName = route.parent?.paramMap.get('testName');
