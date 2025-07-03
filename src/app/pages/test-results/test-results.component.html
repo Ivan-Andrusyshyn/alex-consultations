@@ -84,7 +84,7 @@
 
   <div #scrollContainer></div>
   <div class="countdown-wrapper" *ngIf="showCountDownTimer()">
-    <app-countdown-timer></app-countdown-timer>
+    <app-countdown-timer [testName]="TEST_NAME()"></app-countdown-timer>
   </div>
   <app-consultations-cards [sliderKey]="consultationsSliderKey">
   </app-consultations-cards>

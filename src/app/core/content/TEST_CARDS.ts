@@ -1,16 +1,17 @@
 import { CardContent } from '../../shared/models/common-tests';
+import { MainTestNames } from '../utils/testsNames';
 
 export const TEST_CARDS: CardContent[] = [
   {
     time: '3 хв',
     category: 'Для особистого розвитку',
-    routeStart: '/tests/you-coffee/questions',
+    routeStart: '/tests/' + MainTestNames.YouCoffee + '/questions',
     title: 'Яка ти кава?',
     subtitle:
       'Відповідай на 12 простих, але смачних запитань — і дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою',
     buttonText: 'Почати тест',
     imgList: [1, 2, 3, 4, 5, 6],
-    imageUrl: 'assets/new/core/tests/you-coffee/',
+    imageUrl: 'assets/new/core/tests/' + MainTestNames.YouCoffee + '/',
   },
   {
     time: '5 хв',
@@ -18,38 +19,39 @@ export const TEST_CARDS: CardContent[] = [
     imgList: [1, 2, 3, 4, 5, 6, 7, 8],
 
     category: 'Для особистого розвитку',
-    routeStart: '/tests/be-yourself/questions',
+    routeStart: '/tests/' + MainTestNames.BeYourself + '/questions',
     subtitle:
       'Дізнайся свій унікальний тип особистості та розкрий свої сильні сторони!',
     buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/be-yourself/',
+    imageUrl: 'assets/new/core/tests/' + MainTestNames.BeYourself + '/',
   },
 
   {
     time: '3 хв',
     category: 'Для особистого розвитку',
-    routeStart: '/tests/attractiveness/questions',
+    routeStart: '/tests/' + MainTestNames.Attractiveness + '/questions',
     title: 'Який у тебе тип привабливості?',
     subtitle: 'Дізнайся, що робить тебе по-справжньому привабливим!',
     buttonText: 'Почати тест',
     imgList: [1, 2, 3, 4, 5, 6],
-    imageUrl: 'assets/new/core/tests/attractiveness/',
+    imageUrl: 'assets/new/core/tests/' + MainTestNames.Attractiveness + '/',
   },
   {
     time: '3 хв',
     title: 'Яка твоя роль у стосунках?',
     imgList: [1, 2, 3, 4, 5],
     category: 'Для стосунків',
-    routeStart: '/tests/role-in-relationships/questions',
+    routeStart: '/tests/' + MainTestNames.RoleInRelationships + '/questions',
     subtitle: 'Краще зрозумій свою природну емоційність у відносинах.',
     buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/role-in-relationships/',
+    imageUrl:
+      'assets/new/core/tests/' + MainTestNames.RoleInRelationships + '/',
   },
   {
     time: '1 хв',
     title: 'Калькулятор сумісності',
     category: 'Для стосунків',
-    routeStart: '/tests/be-yourself/calculator',
+    routeStart: '/tests/' + MainTestNames.BeYourself + '/calculator',
     imgList: [1, 2, 3, 4, 5],
     subtitle: 'Дізнайтеся рівень гармонії ваших стосунків.',
     buttonText: 'Почати тест',
@@ -60,19 +62,20 @@ export const TEST_CARDS: CardContent[] = [
     title: 'Тест на травматичний досвід',
     imgList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     category: 'Для особистого розвитку',
-    routeStart: '/tests/traumatic-experience/questions',
+    routeStart: '/tests/' + MainTestNames.Traumatic + '/questions',
     subtitle: 'Як сильно ти реагуєш на коментарі та зауваження?',
     buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/traumatic-experience/',
+    imageUrl: 'assets/new/core/tests/' + MainTestNames.Traumatic + '/',
   },
   {
     time: '3 хв',
     title: 'На токсичність стосунків ',
     imgList: [1, 2, 3, 4],
     category: 'Для стосунків',
-    routeStart: '/tests/toxical-relationships/questions',
+    routeStart: '/tests/' + MainTestNames.ToxicalRelationships + '/questions',
     subtitle: 'Перевір, чи твій партнер не токсичний.',
     buttonText: 'Почати тест',
-    imageUrl: 'assets/new/core/tests/toxical-relationships/',
+    imageUrl:
+      'assets/new/core/tests/' + MainTestNames.ToxicalRelationships + '/',
   },
 ];

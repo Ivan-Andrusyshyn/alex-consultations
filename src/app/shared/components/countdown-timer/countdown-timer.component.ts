@@ -3,6 +3,7 @@ import {
   Component,
   DestroyRef,
   inject,
+  Input,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
@@ -23,6 +24,8 @@ import { CountDownTimerDirective } from './count-down.directive';
 })
 export class CountdownTimerComponent {
   textBtn = 'Записатися';
+
+  @Input() testName: string = '';
 
   private dr = inject(DestroyRef);
   private googleService = inject(GoogleSheetsService);

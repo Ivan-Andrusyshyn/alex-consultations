@@ -16,7 +16,7 @@ import { interval, takeWhile, Subscription } from 'rxjs';
   standalone: true,
 })
 export class CountDownTimerDirective implements OnInit, OnDestroy {
-  @Input('localStorageRestore') storageKey!: string;
+  @Input() testName!: string;
   @Output() timerFinished = new EventEmitter<void>();
 
   private chr = inject(ChangeDetectorRef);
@@ -24,6 +24,7 @@ export class CountDownTimerDirective implements OnInit, OnDestroy {
 
   countdownTime = 15 * 60;
   remainingTime = this.countdownTime;
+  storageKey = `countdown-${this.testName}`;
 
   constructor(private el: ElementRef<HTMLElement>) {}
 
