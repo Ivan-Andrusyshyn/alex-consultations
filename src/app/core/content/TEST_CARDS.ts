@@ -30,7 +30,7 @@ export const TEST_CARDS: CardContent[] = [
     category: 'Для особистого розвитку',
     routeStart: '/tests/attractiveness/questions',
     title: 'Який у тебе тип привабливості?',
-    subtitle: 'Краще зрозумій свою природну емоційність у відносинах.',
+    subtitle: 'Дізнайся, що робить тебе по-справжньому привабливим!',
     buttonText: 'Почати тест',
     imgList: [1, 2, 3, 4, 5, 6],
     imageUrl: 'assets/new/core/tests/attractiveness/',
@@ -39,11 +39,9 @@ export const TEST_CARDS: CardContent[] = [
     time: '3 хв',
     title: 'Яка твоя роль у стосунках?',
     imgList: [1, 2, 3, 4, 5],
-
     category: 'Для стосунків',
     routeStart: '/tests/role-in-relationships/questions',
-
-    subtitle: 'Дізнайся, що робить тебе по-справжньому привабливим!',
+    subtitle: 'Краще зрозумій свою природну емоційність у відносинах.',
     buttonText: 'Почати тест',
     imageUrl: 'assets/new/core/tests/role-in-relationships/',
   },
