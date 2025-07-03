@@ -10,9 +10,9 @@ const starRatingSchema = new mongoose_1.default.Schema({
         type: String,
         enum: [
             'you-coffee',
-            '16-personalities',
+            'be-yourself',
             'attractiveness',
-            'traumatic-sensitivity',
+            'traumatic-experience',
             'role-in-relationships',
             'toxical-relationship',
         ],

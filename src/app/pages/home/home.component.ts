@@ -26,7 +26,6 @@ import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { PersonalitiesPhraseService } from '../../core/services/personalities-phrase.service';
 import { SeoService } from '../../core/services/seo.service';
-import { ModalComponent } from '../../shared/components/modal/modal.component';
 import {
   PersonalityDayPhrases,
   UsersPhraseSubject,

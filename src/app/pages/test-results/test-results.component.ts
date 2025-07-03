@@ -29,6 +29,7 @@ import { ResultService } from './results.service';
 import { ResponseData } from './data.interface';
 import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 import { SLIDER_KEYS } from '../../shared/models/slider';
+import { MainTestNames } from '../../core/utils/testsNames';
 
 @Component({
   selector: 'app-test-results',
@@ -75,7 +76,10 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   includeShareBtn = ['copy', 'facebook', 'linkedin', 'viber', 'telegram'];
   consultationsSliderKey: SLIDER_KEYS = 'consultations';
   cardsSliderKey: SLIDER_KEYS = 'tests-results';
+  mainTestNames = MainTestNames;
+  //
 
+  //
   ngOnDestroy(): void {
     clearInterval(this.timeInterval);
     this.timeInterval = null;

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 @Component({
   selector: 'app-not-found',
@@ -8,6 +9,7 @@ import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary
   imports: [PrimaryBtnComponent],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
+  animations: [fadeInAnimation],
 })
 export class NotFoundComponent {
   constructor(private route: Router) {}

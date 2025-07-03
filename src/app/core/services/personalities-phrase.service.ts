@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
-import { personalityTypesContent } from '../../../assets/content/16-personalities/personalityTypes';
 import { PersonalityDayPhrases } from '../../shared/models/personalities-phrases';
 import { environment } from '../environment/environment';
+import { MainTestNames } from '../utils/testsNames';
+import { personalityTypesContent } from '../content/be-yourself/personalityTypes';
 
 interface PersonalitiesPhrasesResponse {
   message: string;
@@ -25,6 +26,7 @@ export class PersonalitiesPhraseService {
   readonly storageKEY = 'personalityType';
 
   personalitiesContent = personalityTypesContent;
+  testName = MainTestNames.BeYourself;
 
   constructor(private http: HttpClient) {}
 
@@ -39,7 +41,8 @@ export class PersonalitiesPhraseService {
     return this.http
       .get<PersonalitiesPhrasesResponse>(
         this.testsUrl +
-          '/16-personalities' +
+          '/' +
+          this.testName +
           '/personalities-phrases' +
           isUrlParams
       )

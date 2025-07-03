@@ -7,13 +7,12 @@
   <section class="results-container">
     <div class="results-content">
       <h2 class="title-mob title-primary">
-        {{ testResults.title }} @if (TEST_NAME()==='16-personalities') { ({{
-          testResults.type
-        }}
+        {{ testResults.title }} @if (TEST_NAME()===mainTestNames.BeYourself) {
+        ({{ testResults.type }}
         ) }
       </h2>
 
-      @if(TEST_NAME()==='you-coffee' && testResults.subCategoryName){
+      @if(TEST_NAME()===mainTestNames.YouCoffee && testResults.subCategoryName){
       <div class="you-coffee-container">
         <div
           class="pointing-subtype-img"
@@ -34,7 +33,7 @@
       <div class="results-text-container">
         <h2 class="title-primary">
           {{ testResults.title }}
-          @if (TEST_NAME()==='16-personalities') {
+          @if (TEST_NAME()===mainTestNames.BeYourself) {
           <br />
           ({{ testResults.type }} ) }
         </h2>

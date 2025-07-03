@@ -12,6 +12,7 @@ import {
   TestResultRequest,
   TestResults,
 } from '../../shared/models/common-tests';
+import { MainTestNames } from '../utils/testsNames';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,9 @@ export class RoleInRelationshipsService {
   counterQuestion = new BehaviorSubject(1);
   attractivenessResults = new BehaviorSubject<string | null>(null);
   isShowSendForm = new BehaviorSubject(false);
+  testName = MainTestNames.RoleInRelationships;
+
+  //
   constructor(private readonly http: HttpClient) {}
 
   getQuestions(): Observable<{
@@ -31,7 +35,7 @@ export class RoleInRelationshipsService {
     return this.http.get<{
       message: string;
       questions: Question[];
-    }>(this.testsUrl + '/role-in-relationships');
+    }>(this.testsUrl + '/' + this.testName);
   }
 
   getRoleInRelationshipsCategory(answers: TestResultRequest): Observable<{
@@ -39,7 +43,7 @@ export class RoleInRelationshipsService {
     categoryName: string;
   }> {
     return this.http.post<{ message: string; categoryName: string }>(
-      this.testsUrl + '/role-in-relationships' + '/category',
+      this.testsUrl + '/' + this.testName + '/category',
       answers
     );
   }
@@ -50,7 +54,7 @@ export class RoleInRelationshipsService {
     return this.http.get<{
       message: string;
       testInformation: RoleInRelationshipsInformation;
-    }>(this.testsUrl + '/role-in-relationships' + '/information');
+    }>(this.testsUrl + '/' + this.testName + '/information');
   }
 
   getRoleInRelationshipsInfoByCategory(categoryName: string): Observable<{
@@ -63,11 +67,7 @@ export class RoleInRelationshipsService {
       message: string;
       results: TestResults;
     }>(
-      this.testsUrl +
-        '/role-in-relationships' +
-        '/category' +
-        '/' +
-        encodedCategory
+      this.testsUrl + '/' + this.testName + '/category' + '/' + encodedCategory
     );
   }
   getIsShowSendForm(): Observable<boolean> {

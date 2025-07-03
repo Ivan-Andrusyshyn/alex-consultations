@@ -1,26 +1,26 @@
-<app-title-card
-  [titleText]="testTitleText"
-  [subtitleText]="testSubtitleText"
-  *ngIf="!showTextBoard()"
-></app-title-card>
-<ng-container *ngIf="testQuestions$ | async as questions">
-  <ng-container *ngIf="!showTextBoard(); else boardContainer">
-    <div class="refresh-btn-wrapper">
-      <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
-      <P class="subtitle"> {{ questions.length | questionWord }} </P>
-    </div>
-    <app-questions-stepper
-      [formGroup]="formGroup"
-      [questions]="questions"
-      [currentQuestionNumber]="currentQuestionNumber()"
-      (changeViewQuestion)="changeViewQuestion($event)"
-    ></app-questions-stepper>
-    <h3 class="question question-mob">
-      {{ questions[currentQuestionNumber() - 1]?.question }}
-    </h3>
+<div class="main-container">
+  <app-title-card
+    [titleText]="testTitleText"
+    [subtitleText]="testSubtitleText"
+    *ngIf="!showTextBoard()"
+  ></app-title-card>
+  <ng-container *ngIf="testQuestions$ | async as questions">
+    <ng-container *ngIf="!showTextBoard(); else boardContainer">
+      <div class="refresh-btn-wrapper">
+        <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+        <P class="subtitle"> {{ questions.length | questionWord }} </P>
+      </div>
+      <app-questions-stepper
+        [formGroup]="formGroup"
+        [questions]="questions"
+        [currentQuestionNumber]="currentQuestionNumber()"
+        (changeViewQuestion)="changeViewQuestion($event)"
+      ></app-questions-stepper>
+      <h3 class="question question-mob">
+        {{ questions[currentQuestionNumber() - 1]?.question }}
+      </h3>
 
-    <div class="wrapper">
-      <div class="container" *ngIf="questions">
+      <div class="question-container" *ngIf="questions">
         <form [formGroup]="formGroup">
           <ng-container *ngFor="let q of questions; let i = index">
             @if (q.id===currentQuestionNumber() ) {
@@ -55,35 +55,40 @@
           </div> -->
         </form>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
-</ng-container>
 
-<ng-template #boardContainer>
-  <div class="container instructions-container" @fadeIn>
-    <div class="instructions-header">
-      <img [src]="getInstructionsImgUrl()" alt="" />
-      <h3 class="title-primary">
-        {{ testsInstruction.instructionsTitle }}
+  <ng-template #boardContainer>
+    <div class="question-container instructions-container" @fadeIn>
+      <div class="instructions-header">
+        <img [src]="getInstructionsImgUrl()" alt="" />
+        <h3 class="title-primary">
+          {{ testsInstruction.testTitle }}
+        </h3>
+      </div>
+
+      <br />
+      <h3 class="subtitle">
+        <strong>
+          {{ testsInstruction.instructionsTitle }}
+        </strong>
       </h3>
-    </div>
+      <ul class="instructions-list">
+        <li
+          class="subtitle"
+          *ngFor="let instructionItem of testsInstruction?.steps; let i = index"
+        >
+          {{ i + 1 }}. {{ instructionItem }}
+        </li>
+      </ul>
+      <br />
 
-    <br />
-    <ul class="instructions-list">
-      <li
-        class="subtitle"
-        *ngFor="let instructionItem of testsInstruction?.steps; let i = index"
-      >
-        {{ i + 1 }}. {{ instructionItem }}
-      </li>
-    </ul>
-    <br />
-
-    <div class="btn-wrapper">
-      <app-primary-btn
-        [textBtn]="'Почати тест'"
-        (onClick)="hideTextBoardOnClick()"
-      ></app-primary-btn>
+      <div class="btn-wrapper">
+        <app-primary-btn
+          [textBtn]="'Почати тест'"
+          (onClick)="hideTextBoardOnClick()"
+        ></app-primary-btn>
+      </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+</div>

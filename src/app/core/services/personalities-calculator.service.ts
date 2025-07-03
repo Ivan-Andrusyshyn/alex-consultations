@@ -8,6 +8,7 @@ import {
   CalculatorDisclaimer,
 } from '../../shared/models/personalities-calculator';
 import { environment } from '../environment/environment';
+import { MainTestNames } from '../utils/testsNames';
 
 interface CalculatorResponse {
   message: string;
@@ -20,7 +21,7 @@ interface CalculatorResponse {
 })
 export class PersonalitiesCalculatorService {
   readonly testsUrl = environment.apiUrl + '/tests';
-
+  testName = MainTestNames.BeYourself;
   constructor(private http: HttpClient) {}
 
   getPersonalitiesCalculatorInformation(): Observable<{
@@ -30,7 +31,7 @@ export class PersonalitiesCalculatorService {
     return this.http.get<{
       message: string;
       calculatorInformation: CalculatorInformation;
-    }>(this.testsUrl + '/16-personalities/calculator-information');
+    }>(this.testsUrl + '/' + this.testName + '/calculator-information');
   }
   getPersonalitiesCalculatorDisclaimer(): Observable<{
     message: string;
@@ -39,7 +40,7 @@ export class PersonalitiesCalculatorService {
     return this.http.get<{
       message: string;
       calculatorDisclaimer: CalculatorDisclaimer;
-    }>(this.testsUrl + '/16-personalities/calculator-disclaimer');
+    }>(this.testsUrl + '/' + this.testName + '/calculator-disclaimer');
   }
 
   getPersonalitiesCalculatorResults(
@@ -53,7 +54,7 @@ export class PersonalitiesCalculatorService {
     }
   ): Observable<CalculatorResponse> {
     return this.http.post<CalculatorResponse>(
-      this.testsUrl + '/16-personalities/calculator',
+      this.testsUrl + '/' + this.testName + '/calculator',
       { personsTypes, userInformation }
     );
   }

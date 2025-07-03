@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +20,7 @@ import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
 import { ModalService } from '../../core/services/modal.service';
 import { NotificationService } from '../../core/services/notification.service';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 type SectionType = {
   sectionTitle: string;
@@ -37,6 +44,8 @@ type SectionType = {
   ],
   templateUrl: './consultations.component.html',
   styleUrl: './consultations.component.scss',
+  animations: [fadeInAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConsultationsComponent implements OnInit {
   private destroyRef = inject(DestroyRef);

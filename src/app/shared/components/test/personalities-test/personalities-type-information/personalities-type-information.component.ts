@@ -4,7 +4,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { NotificationService } from '../../../../../core/services/notification.service';
-import { TypeResultInformation } from '../../../../models/16-personalities-results';
+import { TypeResultInformation } from '../../../../models/be-yourself-results';
 
 @Component({
   selector: 'app-personalities-type-information',

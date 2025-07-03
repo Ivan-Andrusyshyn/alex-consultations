@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { PersonalitiesTestService } from '../../../../../core/services/personalities-test.service';
-import { TestResult } from '../../../../models/16-personalities';
+import { PersonalitiesTestService } from '../../../../../core/services/be-yourself.service';
+import { TestResult } from '../../../../models/be-yourself';
 
 @Component({
   selector: 'app-results-indicator',

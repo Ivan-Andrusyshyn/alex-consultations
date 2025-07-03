@@ -10,6 +10,7 @@ import {
 import { CategoryName } from '../../shared/models/toxical-relationship';
 import { TestInformation } from '../../shared/models/toxical-relationship';
 import { environment } from '../environment/environment';
+import { MainTestNames } from '../utils/testsNames';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,9 @@ export class ToxicalRelationshipService {
   counterQuestion = new BehaviorSubject(1);
   toxicalRelationshipResults = new BehaviorSubject<string | null>(null);
   isShowSendForm = new BehaviorSubject(false);
+  testName = MainTestNames.ToxicalRelationships;
+
+  //
   constructor(private readonly http: HttpClient) {}
 
   getQuestions(): Observable<{
@@ -28,7 +32,7 @@ export class ToxicalRelationshipService {
     return this.http.get<{
       message: string;
       questions: Question[];
-    }>(this.testsUrl + '/toxical-relationship');
+    }>(this.testsUrl + '/' + this.testName);
   }
 
   getToxicalRelationshipCategory(answers: TestResultRequest): Observable<{
@@ -36,7 +40,7 @@ export class ToxicalRelationshipService {
     categoryName: CategoryName;
   }> {
     return this.http.post<{ message: string; categoryName: CategoryName }>(
-      this.testsUrl + '/toxical-relationship' + '/category',
+      this.testsUrl + '/' + this.testName + '/category',
       answers
     );
   }
@@ -47,7 +51,7 @@ export class ToxicalRelationshipService {
     return this.http.get<{
       message: string;
       testInformation: TestInformation;
-    }>(this.testsUrl + '/toxical-relationship' + '/information');
+    }>(this.testsUrl + '/' + this.testName + '/information');
   }
   getToxicalRelationshipInfoByCategory(categoryName: string): Observable<{
     message: string;
@@ -56,11 +60,7 @@ export class ToxicalRelationshipService {
     const encodedCategory = encodeURIComponent(categoryName);
 
     return this.http.get<{ message: string; results: TestResults }>(
-      this.testsUrl +
-        '/toxical-relationship' +
-        '/results' +
-        '/' +
-        encodedCategory
+      this.testsUrl + '/' + this.testName + '/results' + '/' + encodedCategory
     );
   }
 

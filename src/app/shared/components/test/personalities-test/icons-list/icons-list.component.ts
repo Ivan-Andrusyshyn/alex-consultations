@@ -10,7 +10,7 @@ import { NgClass, NgFor } from '@angular/common';
 import { interval, switchMap, tap, timeout } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { personalityTypesContent } from '../../../../../../assets/content/16-personalities/personalityTypes';
+import { personalityTypesContent } from '../../../../../../assets/content/be-yourself/personalityTypes';
 
 @Component({
   selector: 'app-icons-list',

@@ -18,7 +18,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { RefreshButtonComponent } from '../../shared/components/refresh-button/refresh-button.component';
-import { PersonalitiesTestService } from '../../core/services/personalities-test.service';
+import { BeYourselfTestService } from '../../core/services/be-yourself.service';
 import { Answer, Question, TestName } from '../../shared/models/common-tests';
 import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
@@ -56,7 +56,7 @@ import { QuestionOptionComponent } from '../../shared/components/test/question-o
 export class TestQuestionsComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
-  readonly personalitiesService = inject(PersonalitiesTestService);
+  readonly beYourselfService = inject(BeYourselfTestService);
   private destroyRef = inject(DestroyRef);
   private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
@@ -91,6 +91,7 @@ export class TestQuestionsComponent
   showTextBoard = signal(true);
   testsInstruction!: {
     instructionsTitle: string;
+    testTitle: string;
     steps: string[];
   };
 
@@ -363,7 +364,7 @@ export class TestQuestionsComponent
     this.router.navigate(['tests', this.TEST_NAME, 'details', personType]);
 
     this.formGroup.reset();
-    this.personalitiesService.counterQuestion.next(1);
+    this.beYourselfService.counterQuestion.next(1);
 
     const answers = this.formGroup.value;
     sessionStorage.setItem(

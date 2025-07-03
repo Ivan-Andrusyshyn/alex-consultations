@@ -8,18 +8,19 @@ import {
 import { catchError, map, Observable, of } from 'rxjs';
 
 import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
-import { TestResults } from '../models/common-tests';
-import { PersonalitiesTestService } from '../../core/services/personalities-test.service';
+import { TestName, TestResults } from '../models/common-tests';
 import { AttractivenessService } from '../../core/services/attractiveness.service';
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
-import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
 import { YouCoffeeService } from '../../core/services/you-coffee.service';
+import { TraumaticExperienceService } from '../../core/services/traumatic-experience.service';
+import { BeYourselfTestService } from '../../core/services/be-yourself.service';
+import { MainTestNames } from '../../core/utils/testsNames';
 
 interface ResultsResolver {
   message: string | null;
   results: TestResults | null;
   personType?: string;
-  testName: string | null;
+  testName: TestName | null;
   seo?: {
     title: string;
     metaTags: Array<string>;
@@ -33,8 +34,8 @@ export class TestsResultsResolver implements Resolve<any> {
   constructor(
     private roleInRelationshipsService: RoleInRelationshipsService,
     private attractivenessService: AttractivenessService,
-    private personalitiesService: PersonalitiesTestService,
-    private traumaticSensitivityService: TraumaticSensitivityService,
+    private beYourselfService: BeYourselfTestService,
+    private traumaticExperienceService: TraumaticExperienceService,
     private toxicalRelationshipsService: ToxicalRelationshipService,
     private youCoffeeService: YouCoffeeService
   ) {}
@@ -47,9 +48,9 @@ export class TestsResultsResolver implements Resolve<any> {
   ): Observable<ResultsResolver> {
     const personalityName = route.paramMap.get('categoryName') as string;
 
-    const testName = route.parent?.paramMap.get('testName');
+    const testName = route.parent?.paramMap.get('testName') as TestName;
 
-    if (testName === 'role-in-relationships') {
+    if (testName === MainTestNames.RoleInRelationships) {
       return this.roleInRelationshipsService
         .getRoleInRelationshipsInfoByCategory(personalityName!)
         .pipe(
@@ -74,7 +75,7 @@ export class TestsResultsResolver implements Resolve<any> {
           })
         );
     }
-    if (testName === 'you-coffee') {
+    if (testName === MainTestNames.YouCoffee) {
       return this.youCoffeeService
         .youCoffeeInfoByCategory(personalityName)
         .pipe(
@@ -103,8 +104,8 @@ export class TestsResultsResolver implements Resolve<any> {
         );
     }
 
-    if (testName === '16-personalities') {
-      return this.personalitiesService
+    if (testName === MainTestNames.BeYourself) {
+      return this.beYourselfService
         .getPersonTypeByResults(personalityName!)
         .pipe(
           map((response) => ({
@@ -136,7 +137,7 @@ export class TestsResultsResolver implements Resolve<any> {
           })
         );
     }
-    if (testName === 'attractiveness') {
+    if (testName === MainTestNames.Attractiveness) {
       return this.attractivenessService
         .getAttractivenessInfoByCategory(personalityName)
         .pipe(
@@ -162,7 +163,7 @@ export class TestsResultsResolver implements Resolve<any> {
           })
         );
     }
-    if (testName === 'toxical-relationship') {
+    if (testName === MainTestNames.ToxicalRelationships) {
       return this.toxicalRelationshipsService
         .getToxicalRelationshipInfoByCategory(personalityName!)
         .pipe(
@@ -186,8 +187,8 @@ export class TestsResultsResolver implements Resolve<any> {
           })
         );
     }
-    if (testName === 'traumatic-sensitivity') {
-      return this.traumaticSensitivityService
+    if (testName === MainTestNames.Traumatic) {
+      return this.traumaticExperienceService
         .getEmotionsTypeInfoByResults(personalityName!)
         .pipe(
           map((r) => {

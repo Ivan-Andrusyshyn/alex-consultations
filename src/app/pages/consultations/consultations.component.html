@@ -1,4 +1,4 @@
-<div class="consultation">
+<div class="consultation" @fadeIn>
   <div class="title-card-wrapper">
     <app-title-card
       [titleText]="titleText"
@@ -6,7 +6,7 @@
     ></app-title-card>
   </div>
 
-  <section class="my-help section-container">
+  <section class="my-help section-container" @fadeIn>
     <h3 class="my-help-title title-primary">
       {{ consultationContent.myHelp.sectionTitle }}
     </h3>

@@ -17,7 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { LoadingService } from './core/services/loading.service';
-import { OnAppInitService } from './core/services/on-app-init.service';
 import { PersonalitiesPhraseService } from './core/services/personalities-phrase.service';
 import { ThemeService } from './core/services/theme.service';
 import { LoaderSquareComponent } from './shared/components/loader-square/loader-square.component';
@@ -45,7 +44,6 @@ import { MarqueeComponent } from './shared/components/marquee/marquee.component'
 export class AppComponent implements OnInit {
   private readonly loadingService = inject(LoadingService);
   private readonly themeService = inject(ThemeService);
-  private readonly onAppInitService = inject(OnAppInitService);
   private readonly personalitiesPhrasesService = inject(
     PersonalitiesPhraseService
   );

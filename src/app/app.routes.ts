@@ -47,10 +47,7 @@ export const routes: Routes = [
 
   {
     path: 'tests/:testName',
-    loadComponent: () =>
-      import(
-        './pages/role-in-relationships/role-in-relationships.component'
-      ).then((m) => m.RoleInRelationshipsComponent),
+
     children: [
       {
         path: 'questions',
@@ -74,12 +71,11 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
-    path: 'tests/16-personalities',
+    path: 'tests/be-yourself',
     loadComponent: () =>
-      import('./pages/personalities-test/personalities-test.component').then(
-        (m) => m.PersonalitiesTestComponent
+      import('./pages/be-yourself/be-yourself.component').then(
+        (m) => m.BeYourselfComponent
       ),
     children: [
       {
@@ -88,19 +84,18 @@ export const routes: Routes = [
 
         loadComponent: () =>
           import(
-            './pages/personalities-test/calculator-relationships/calculator-relationships.component'
+            './pages/be-yourself/calculator-relationships/calculator-relationships.component'
           ).then((m) => m.CalculatorRelationshipsComponent),
       },
       {
         path: 'calculator-information',
         loadComponent: () =>
           import(
-            './pages/personalities-test/calculator-information/calculator-information.component'
+            './pages/be-yourself/calculator-information/calculator-information.component'
           ).then((m) => m.CalculatorInformationComponent),
       },
     ],
   },
-
   {
     path: 'about',
     loadComponent: () =>

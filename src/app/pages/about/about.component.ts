@@ -1,6 +1,12 @@
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, filter, switchMap, tap, throwError } from 'rxjs';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
 import { SeoService } from '../../core/services/seo.service';
@@ -9,6 +15,7 @@ import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary
 import { NotificationService } from '../../core/services/notification.service';
 import { ModalService } from '../../core/services/modal.service';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 @Component({
   selector: 'app-about',
@@ -16,6 +23,8 @@ import { GoogleSheetsService } from '../../core/services/google-sheets.service';
   imports: [SocialLinksComponent, PrimaryBtnComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
+  animations: [fadeInAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent implements OnInit {
   private seoService = inject(SeoService);

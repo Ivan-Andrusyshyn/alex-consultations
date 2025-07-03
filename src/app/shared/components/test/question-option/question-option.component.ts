@@ -7,6 +7,7 @@ import {
 import { NgClass } from '@angular/common';
 
 import { Option, TestName } from '../../../models/common-tests';
+import { MainTestNames } from '../../../../core/utils/testsNames';
 
 @Component({
   selector: 'app-question-option',
@@ -23,9 +24,11 @@ export class QuestionOptionComponent {
   @Input() testName!: TestName;
   @Input() answerIndex!: number;
   @Input() questionsId!: number;
-
   @Output() answerQuestion = new EventEmitter();
+  // Main test names
+  mainTestNames = MainTestNames;
 
+  //
   answerQuestionByClick(answer: string, questionsId: string) {
     const value = {
       answer,

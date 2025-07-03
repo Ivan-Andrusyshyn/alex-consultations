@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 
-import { PersonalitiesTestService } from '../../core/services/personalities-test.service';
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
 import {
   Question,
@@ -11,29 +10,31 @@ import {
 import { AttractivenessService } from '../../core/services/attractiveness.service';
 import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
 import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
-import { TraumaticSensitivityService } from '../../core/services/traumatic-sensitivity.service';
 import { YouCoffeeService } from '../../core/services/you-coffee.service';
 import { Validators } from '@angular/forms';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { DateTime } from 'luxon';
+import { BeYourselfTestService } from '../../core/services/be-yourself.service';
+import { TraumaticExperienceService } from '../../core/services/traumatic-experience.service';
+import { MainTestNames } from '../../core/utils/testsNames';
 
 @Injectable()
 export class QuestionsService {
-  private personalitiesService = inject(PersonalitiesTestService);
+  private beYourselfService = inject(BeYourselfTestService);
   private roleInRelationshipsService = inject(RoleInRelationshipsService);
   private attractivenessService = inject(AttractivenessService);
   private routeTracker = inject(RouteTrackerService);
   private toxicalRelationshipService = inject(ToxicalRelationshipService);
-  private traumaticSensitivityService = inject(TraumaticSensitivityService);
+  private traumaticExperienceService = inject(TraumaticExperienceService);
   private youCoffeeService = inject(YouCoffeeService);
   private googleSheetService = inject(GoogleSheetsService);
 
-  private roleInRelationships = 'role-in-relationships';
-  private toxicalRelationships = 'toxical-relationship';
-  private attractiveness = 'attractiveness';
-  private personalities = '16-personalities';
-  private traumatic = 'traumatic-sensitivity';
-  private youCoffee = 'you-coffee';
+  private roleInRelationships = MainTestNames.RoleInRelationships;
+  private toxicalRelationships = MainTestNames.ToxicalRelationships;
+  private attractiveness = MainTestNames.Attractiveness;
+  private beYourself = MainTestNames.BeYourself;
+  private traumatic = MainTestNames.Traumatic;
+  private youCoffee = MainTestNames.YouCoffee;
 
   timestamp = DateTime.now()
     .setZone('Europe/Kyiv')
@@ -132,26 +133,22 @@ export class QuestionsService {
         })
       );
     }
-    if (testName === this.personalities) {
-      return this.personalitiesService
-        .getPersonalitiesResultOfTest(request)
-        .pipe(
-          map((r) => {
-            this.setSessionStorage(testName, {
-              results: r.results.scores,
-              scorePercentages: r.results.percentages,
-            });
-            this.routeTracker.clearRouteMap();
+    if (testName === this.beYourself) {
+      return this.beYourselfService.getPersonalitiesResultOfTest(request).pipe(
+        map((r) => {
+          this.setSessionStorage(testName, {
+            results: r.results.scores,
+            scorePercentages: r.results.percentages,
+          });
+          this.routeTracker.clearRouteMap();
 
-            this.personalitiesService.scorePercentages.next(
-              r.results.percentages
-            );
-            return r.results.personType;
-          })
-        );
+          this.beYourselfService.scorePercentages.next(r.results.percentages);
+          return r.results.personType;
+        })
+      );
     }
     if (testName === this.traumatic) {
-      return this.traumaticSensitivityService
+      return this.traumaticExperienceService
         .getTraumaticSensitivityResults(request)
         .pipe(
           map((r) => {
@@ -159,11 +156,11 @@ export class QuestionsService {
               ...r.results,
             });
             this.routeTracker.clearRouteMap();
-            this.traumaticSensitivityService.scorePercentages.next(
+            this.traumaticExperienceService.scorePercentages.next(
               r.results.percentages
             );
 
-            this.traumaticSensitivityService.sensitivityResults.next({
+            this.traumaticExperienceService.sensitivityResults.next({
               results: r.results,
             });
 

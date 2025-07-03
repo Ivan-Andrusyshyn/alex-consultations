@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
 import { SocialLinksComponent } from '../../shared/components/social-links/social-links.component';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 @Component({
   selector: 'app-contacts',
@@ -16,6 +17,7 @@ import { SocialLinksComponent } from '../../shared/components/social-links/socia
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInAnimation],
 })
 export class ContactsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);

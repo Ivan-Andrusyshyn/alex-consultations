@@ -8,6 +8,7 @@ import {
   TestResults,
 } from '../../shared/models/common-tests';
 import { environment } from '../environment/environment';
+import { MainTestNames } from '../utils/testsNames';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,9 @@ export class YouCoffeeService {
   counterQuestion = new BehaviorSubject(1);
   attractivenessResults = new BehaviorSubject<string | null>(null);
   isShowSendForm = new BehaviorSubject(false);
+  testName = MainTestNames.YouCoffee;
 
+  //
   constructor(private readonly http: HttpClient) {}
 
   getQuestions(): Observable<{
@@ -28,7 +31,7 @@ export class YouCoffeeService {
     return this.http.get<{
       message: string;
       questions: Question[];
-    }>(this.testsUrl + '/you-coffee');
+    }>(this.testsUrl + '/' + this.testName);
   }
 
   youCoffeeCategory(answers: TestResultRequest): Observable<{
@@ -40,7 +43,7 @@ export class YouCoffeeService {
       message: string;
       subCategoryName: string;
       categoryName: string;
-    }>(this.testsUrl + '/you-coffee' + '/category', answers);
+    }>(this.testsUrl + '/' + this.testName + '/category', answers);
   }
   youCoffeeTestInformation(): Observable<{
     message: string;
@@ -49,7 +52,7 @@ export class YouCoffeeService {
     return this.http.get<{
       message: string;
       testInformation: any;
-    }>(this.testsUrl + '/you-coffee' + '/information');
+    }>(this.testsUrl + '/' + this.testName + '/information');
   }
 
   youCoffeeInfoByCategory(categoryName: string): Observable<{
@@ -61,7 +64,9 @@ export class YouCoffeeService {
     return this.http.get<{
       message: string;
       results: TestResults & { subCategoryName: string };
-    }>(this.testsUrl + '/you-coffee' + '/category' + '/' + encodedCategory);
+    }>(
+      this.testsUrl + '/' + this.testName + '/category' + '/' + encodedCategory
+    );
   }
   getIsShowSendForm(): Observable<boolean> {
     return this.isShowSendForm.asObservable();

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { AttractivenessResult } from '../../shared/models/attractiveness';
 import {
   Question,
   TestResultRequest,
   TestResults,
 } from '../../shared/models/common-tests';
 import { environment } from '../environment/environment';
+import { MainTestNames } from '../utils/testsNames';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,7 @@ export class AttractivenessService {
   attractivenessResults = new BehaviorSubject<string | null>(null);
   isShowSendForm = new BehaviorSubject(false);
   constructor(private readonly http: HttpClient) {}
+  testName = MainTestNames.Attractiveness;
 
   getQuestions(): Observable<{
     message: string;
@@ -28,7 +29,7 @@ export class AttractivenessService {
     return this.http.get<{
       message: string;
       questions: Question[];
-    }>(this.testsUrl + '/attractiveness');
+    }>(this.testsUrl + '/' + this.testName);
   }
 
   getAttractivenessCategory(answers: TestResultRequest): Observable<{
@@ -36,7 +37,7 @@ export class AttractivenessService {
     categoryName: string;
   }> {
     return this.http.post<{ message: string; categoryName: string }>(
-      this.testsUrl + '/attractiveness' + '/category',
+      this.testsUrl + '/' + this.testName + '/category',
       answers
     );
   }
@@ -46,7 +47,7 @@ export class AttractivenessService {
     results: TestResults;
   }> {
     return this.http.get<{ message: string; results: TestResults }>(
-      this.testsUrl + '/attractiveness' + '/category' + '/' + categoryName
+      this.testsUrl + '/' + this.testName + '/category' + '/' + categoryName
     );
   }
   getIsShowSendForm(): Observable<boolean> {

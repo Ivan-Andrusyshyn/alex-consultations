@@ -12,12 +12,12 @@ import { interval, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
-import { TEST_CARDS } from '../../../../assets/content/TEST_CARDS';
 import { SliderService } from '../../../core/services/slider.service';
 import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
 import { SliderControlsBtnComponent } from '../test/slider-controls-btn/slider-controls-btn.component';
 import { TestCardComponent } from '../test/test-card/test-card.component';
 import { SLIDER_KEYS } from '../../models/slider';
+import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 
 @Component({
   selector: 'app-hero-cards-slider',

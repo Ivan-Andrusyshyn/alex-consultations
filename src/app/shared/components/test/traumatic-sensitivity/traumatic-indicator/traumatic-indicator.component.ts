@@ -10,7 +10,7 @@ import {
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SensitivityCategory, sensitivityTest } from './sensitivity-category';
-import { TraumaticSensitivityService } from '../../../../../core/services/traumatic-sensitivity.service';
+import { TraumaticSensitivityService } from '../../../../../core/services/traumatic-experience.service';
 
 @Component({
   selector: 'app-traumatic-indicator',

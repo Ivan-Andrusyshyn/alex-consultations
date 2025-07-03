@@ -2,11 +2,11 @@ export type Answer = { point: number; text: string };
 
 export type TestName =
   | 'you-coffee'
-  | '16-personalities'
+  | 'be-yourself'
   | 'attractiveness'
-  | 'traumatic-sensitivity'
+  | 'traumatic-experience'
   | 'role-in-relationships'
-  | 'toxical-relationship';
+  | 'toxical-relationships';
 
 export interface Question {
   id: number;
