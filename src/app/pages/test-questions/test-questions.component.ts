@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { RefreshButtonComponent } from '../../shared/components/refresh-button/refresh-button.component';
@@ -105,7 +105,7 @@ export class TestQuestionsComponent
 
   // Payment
   redirectUrl = window.location.href;
-  paymentStorageKey = 'payment-tests';
+  paymentStorageKey!: string;
   storagePaymentData: {
     testName: TestName;
     invoiceId: string;
@@ -113,23 +113,6 @@ export class TestQuestionsComponent
   } | null = null;
 
   ngOnInit(): void {
-    this.storagePaymentData = JSON.parse(
-      localStorage.getItem(this.paymentStorageKey) ?? 'null'
-    );
-    //
-    if (
-      this.storagePaymentData?.status === 'pending' &&
-      this.TEST_NAME === this.storagePaymentData?.testName
-    ) {
-      this.checkPaymentStatus();
-    }
-    if (
-      this.storagePaymentData?.status === 'success' &&
-      this.TEST_NAME === this.storagePaymentData?.testName
-    ) {
-      this.accessCurrentTest.set(true);
-    }
-
     this.testQuestions$ = this.activeRoute.data.pipe(
       map((response) => {
         const data = response['data'];
@@ -143,7 +126,19 @@ export class TestQuestionsComponent
 
         this.snackBar = data['snackBar'] || this.snackBar;
         this.TEST_NAME = testName;
+        this.paymentStorageKey = this.TEST_NAME + '-payment';
+        this.storagePaymentData = JSON.parse(
+          localStorage.getItem(  this.paymentStorageKey) ??
+            'null'
+        );
+        //
 
+        if (
+          this.storagePaymentData?.status === 'success' &&
+          this.TEST_NAME === this.storagePaymentData?.testName
+        ) {
+          this.accessCurrentTest.set(true);
+        }
         this.seoService.updateMetaTags(
           data['seo'].metaTags[0],
           data['seo'].metaTags[1]
@@ -158,6 +153,32 @@ export class TestQuestionsComponent
 
         this.setStorageBoardValue();
         return data['questions'];
+      }),
+      switchMap((questions) => {
+        if (
+          this.storagePaymentData?.status === 'pending' &&
+          this.TEST_NAME === this.storagePaymentData?.testName
+        ) {
+          this.checkPaymentStatus()?.pipe(
+            tap((response) => {
+              if (response.status === 'pending') {
+                localStorage.removeItem(this.paymentStorageKey);
+                this.storagePaymentData = null;
+                this.accessCurrentTest.set(false);
+              } else {
+                this.storagePaymentData!.status = response.status;
+                localStorage.setItem(
+                  this.paymentStorageKey,
+                  JSON.stringify(this.storagePaymentData)
+                );
+                this.accessCurrentTest.set(true);
+              }
+            }),
+            map(() => questions)
+          ) ?? of(questions);
+        }
+
+        return of(questions);
       })
     );
 
@@ -195,7 +216,7 @@ export class TestQuestionsComponent
   checkPaymentStatus() {
     if (!this.storagePaymentData?.invoiceId) return;
     //
-    this.monopayService
+    return this.monopayService
       .checkStatus(this.storagePaymentData.invoiceId)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -205,21 +226,7 @@ export class TestQuestionsComponent
           this.accessCurrentTest.set(false);
           return of(error.message || 'Error checking payment status');
         })
-      )
-      .subscribe((response) => {
-        if (response.status === 'pending') {
-          localStorage.removeItem(this.paymentStorageKey);
-          this.storagePaymentData = null;
-          this.accessCurrentTest.set(false);
-        } else {
-          this.storagePaymentData!.status = response.status;
-          localStorage.setItem(
-            this.paymentStorageKey,
-            JSON.stringify(this.storagePaymentData)
-          );
-          this.accessCurrentTest.set(true);
-        }
-      });
+      );
   }
   // ============================
   ngAfterViewInit(): void {

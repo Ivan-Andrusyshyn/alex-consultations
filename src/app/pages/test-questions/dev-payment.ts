@@ -12,9 +12,9 @@ export const dataDevPayment: MonoPaymentRequest = {
   amount: 2100,
   ccy: 980,
   merchantPaymInfo: {
-    reference: '84d0070ee4e44667b31371d8f8813947',
-    destination: 'Покупка щастя',
-    comment: 'Покупка щастя',
+    reference: '',
+    destination: 'Оплата за тест на токсичні відносини',
+    comment: '',
     customerEmails: [],
     discounts: [
       {
@@ -27,8 +27,8 @@ export const dataDevPayment: MonoPaymentRequest = {
       {
         name: 'Тест на токсичні відносини',
         qty: 1,
-        sum: 2100,
-        total: 4200,
+        sum: 210000,
+        total: 420000,
         icon: null,
         unit: 'шт.',
         code: 'd21da1c47f3c45fca10a10c32518bdeb',

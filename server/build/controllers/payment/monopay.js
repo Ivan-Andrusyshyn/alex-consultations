@@ -15,7 +15,7 @@ const crypto_1 = require("crypto");
 const monopay_1 = require("../../services/monopay");
 const mono_payment_schema_1 = require("../../db/models/mono-payment-schema");
 const monoService = new monopay_1.MonoService();
-// TEST CARD NUMBER 4539148803436467
+// TEST CARD NUMBER 4444 3333 2222 1111
 function generateReference() {
     return `inv-${(0, crypto_1.randomUUID)()}`;
 }
