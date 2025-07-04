@@ -58,6 +58,12 @@ class MonoService {
             return res.data;
         });
     }
+    statusPayment(invoiceId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = yield axios_1.default.get(`${MONO_API}/api/merchant/invoice/status?invoiceId=${invoiceId}`, { headers: { 'X-Token': this.token } });
+            return res.data;
+        });
+    }
     setWebhook(webhookUrl) {
         return __awaiter(this, void 0, void 0, function* () {
             const res = yield axios_1.default.post(`${MONO_API}/personal/webhook`, { webHookUrl: webhookUrl }, { headers: { 'X-Token': this.token } });

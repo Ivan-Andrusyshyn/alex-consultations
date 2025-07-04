@@ -66,17 +66,12 @@ const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.createPayment = createPayment;
 const checkStatusPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { invoiceId } = req.query;
-        if (!invoiceId || typeof invoiceId !== 'string') {
-            return res.status(400).json({ message: 'Invoice ID is required' });
-        }
-        const payment = yield mono_payment_schema_1.PaymentModel.findOne({ invoiceId });
-        if (!payment) {
-            return res.status(404).json({ message: 'Payment not found' });
-        }
+        const invoiceId = req.query.invoiceId;
+        const result = yield monoService.statusPayment(invoiceId);
+        yield mono_payment_schema_1.PaymentModel.updateOne({ invoiceId }, { $set: { status: 'success' } });
         res.json({
-            invoiceId: payment.invoiceId,
-            status: payment.status,
+            invoiceId: result.invoiceId,
+            status: result.status,
         });
     }
     catch (error) {

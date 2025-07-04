@@ -128,8 +128,7 @@ export class TestQuestionsComponent
         this.TEST_NAME = testName;
         this.paymentStorageKey = this.TEST_NAME + '-payment';
         this.storagePaymentData = JSON.parse(
-          localStorage.getItem(  this.paymentStorageKey) ??
-            'null'
+          localStorage.getItem(this.paymentStorageKey) ?? 'null'
         );
         //
 
@@ -159,25 +158,28 @@ export class TestQuestionsComponent
           this.storagePaymentData?.status === 'pending' &&
           this.TEST_NAME === this.storagePaymentData?.testName
         ) {
-          this.checkPaymentStatus()?.pipe(
-            tap((response) => {
-              if (response.status === 'pending') {
-                localStorage.removeItem(this.paymentStorageKey);
-                this.storagePaymentData = null;
-                this.accessCurrentTest.set(false);
-              } else {
-                this.storagePaymentData!.status = response.status;
-                localStorage.setItem(
-                  this.paymentStorageKey,
-                  JSON.stringify(this.storagePaymentData)
-                );
-                this.accessCurrentTest.set(true);
-              }
-            }),
-            map(() => questions)
-          ) ?? of(questions);
-        }
+          return (
+            this.checkPaymentStatus()?.pipe(
+              tap((response) => {
+                console.log(response);
 
+                if (response.status === 'pending') {
+                  localStorage.removeItem(this.paymentStorageKey);
+                  this.storagePaymentData = null;
+                  this.accessCurrentTest.set(false);
+                } else {
+                  this.storagePaymentData!.status = response.status;
+                  localStorage.setItem(
+                    this.paymentStorageKey,
+                    JSON.stringify(this.storagePaymentData)
+                  );
+                  this.accessCurrentTest.set(true);
+                }
+              }),
+              map(() => questions)
+            ) ?? of(questions)
+          );
+        }
         return of(questions);
       })
     );
@@ -280,14 +282,7 @@ export class TestQuestionsComponent
   }
 
   onSubmit() {
-    if (
-      !this.isSubmitting() &&
-      this.storagePaymentData?.status === 'success' &&
-      this.TEST_NAME === this.storagePaymentData?.testName
-    )
-      return;
-
-    this.accessCurrentTest.set(true);
+    if (this.isSubmitting()) return;
 
     const answers = this.formGroup.value as Answer[];
     this._snackBar.dismiss();
@@ -322,6 +317,7 @@ export class TestQuestionsComponent
     }
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
+
     //
     if (this.formGroup.valid) {
       this.onSubmit();
