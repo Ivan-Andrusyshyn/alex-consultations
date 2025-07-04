@@ -49,7 +49,7 @@ export const dataDevPayment: MonoPaymentRequest = {
     ],
   },
   redirectUrl: dataPayment.redirectUrl,
-  webHookUrl: environment.apiUrl + '/api/monopay/set-webhook',
+  webHookUrl: environment.apiUrl + '/api/monopay/get-webhook',
   validity: 3600,
   paymentType: null,
   saveCardData: {

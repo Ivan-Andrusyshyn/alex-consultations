@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setWebhook = exports.clientInfo = exports.checkStatusPayment = exports.createPayment = void 0;
+exports.setWebhook = exports.getWebhook = exports.clientInfo = exports.checkStatusPayment = exports.createPayment = void 0;
 exports.generateReference = generateReference;
 const crypto_1 = require("crypto");
 const monopay_1 = require("../../services/monopay");
@@ -53,7 +53,7 @@ const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         monopaymentObject.merchantPaymInfo.reference = reference;
         const result = (yield monoService.createPayment(monopaymentObject));
         yield createDbPayment(result.invoiceId, amount, commentWithTestName);
-        res.json(Object.assign(Object.assign({}, result), { status: 'pending' }));
+        res.json(Object.assign(Object.assign({}, result), { status: 'pending', testName: commentWithTestName }));
     }
     catch (err) {
         console.error('Create Payment Error:', err);
@@ -95,15 +95,25 @@ const clientInfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.clientInfo = clientInfo;
-const setWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        const { url } = req.body;
-        const result = yield monoService.setWebhook(url);
-        const reference = (_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.reference;
+        const body = req.body;
+        const reference = (_a = body === null || body === void 0 ? void 0 : body.data) === null || _a === void 0 ? void 0 : _a.reference;
         if (!reference)
             return res.status(400).send('No reference');
         yield mono_payment_schema_1.PaymentModel.updateOne({ reference }, { $set: { status: 'success' } });
+        res.sendStatus(200);
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Mono API error', error });
+    }
+});
+exports.getWebhook = getWebhook;
+const setWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { url } = req.body;
+        const result = yield monoService.setWebhook(url);
         res.json(result);
     }
     catch (error) {

@@ -188,7 +188,6 @@ export class TestQuestionsComponent
         const currentUrl = window.location.pathname;
         window.history.pushState({}, '', currentUrl);
         window.location.href = response.pageUrl;
-        console.log(response);
       });
   }
 

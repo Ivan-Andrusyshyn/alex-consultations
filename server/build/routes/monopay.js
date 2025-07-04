@@ -10,4 +10,5 @@ monoRouter.post('/create-payment', monopay_1.createPayment);
 monoRouter.get('/check-status', monopay_1.checkStatusPayment);
 monoRouter.get('/client-info', monopay_1.clientInfo);
 monoRouter.post('/set-webhook', monopay_1.setWebhook);
+monoRouter.post('/get-webhook', monopay_1.getWebhook);
 exports.default = monoRouter;
