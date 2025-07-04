@@ -51,9 +51,11 @@ export class AppComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private iconService = inject(MatIconsService);
 
+  //
   loading$!: Observable<boolean>;
   currentReqMethod$!: Observable<string>;
   ngOnInit(): void {
+    //
     this.personalitiesPhrasesService
       .getPersonalitiesPhrases()
       .pipe(takeUntilDestroyed(this.destroyRef))

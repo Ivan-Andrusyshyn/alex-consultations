@@ -24,25 +24,31 @@
         <loc>https://vidchuttia.com.ua/tests/attractiveness/questions</loc>
         <priority>0.6</priority>
     </url>
+  
+
+
+ <url>
+        <loc>https://vidchuttia.com.ua/tests/you-coffee</loc>
+        <priority>0.7</priority>
+    </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/attractiveness/details</loc>
+        <loc>https://vidchuttia.com.ua/tests/you-coffee/questions</loc>
         <priority>0.6</priority>
     </url>
+    
+
 
 
 
        <url>
-        <loc>https://vidchuttia.com.ua/tests/toxical-relationship</loc>
+        <loc>https://vidchuttia.com.ua/tests/toxical-relationships</loc>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/toxical-relationship/questions</loc>
+        <loc>https://vidchuttia.com.ua/tests/toxical-relationships/questions</loc>
         <priority>0.6</priority>
     </url>
-    <url>
-        <loc>https://vidchuttia.com.ua/tests/toxical-relationship/details</loc>
-        <priority>0.6</priority>
-    </url>
+   
 
 
 
@@ -55,36 +61,27 @@
         <loc>https://vidchuttia.com.ua/tests/role-in-relationships/questions</loc>
         <priority>0.6</priority>
     </url>
-    <url>
-        <loc>https://vidchuttia.com.ua/tests/role-in-relationships/details</loc>
-        <priority>0.6</priority>
-    </url>
+  
 
    <url>
-        <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity</loc>
+        <loc>https://vidchuttia.com.ua/tests/traumatic-experience</loc>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity/questions</loc>
+        <loc>https://vidchuttia.com.ua/tests/traumatic-experience/questions</loc>
         <priority>0.6</priority>
     </url>
-    <url>
-        <loc>https://vidchuttia.com.ua/tests/traumatic-sensitivity/details</loc>
-        <priority>0.6</priority>
-    </url> 
+   
 
     <url>
-        <loc>https://vidchuttia.com.ua/tests/16-personalities</loc>
+        <loc>https://vidchuttia.com.ua/tests/be-yourself</loc>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://vidchuttia.com.ua/tests/16-personalities/questions</loc>
+        <loc>https://vidchuttia.com.ua/tests/be-yourself/questions</loc>
         <priority>0.6</priority>
     </url>
-    <url>
-        <loc>https://vidchuttia.com.ua/tests/16-personalities/details</loc>
-        <priority>0.6</priority>
-    </url>
+  
     
     <url>
         <loc>https://vidchuttia.com.ua/about</loc>
@@ -94,7 +91,10 @@
         <loc>https://vidchuttia.com.ua/contacts</loc>
         <priority>0.6</priority>
     </url>
-
+  <url>
+        <loc>https://vidchuttia.com.ua/consultations</loc>
+        <priority>0.6</priority>
+    </url>
 <url>
   <loc>https://vidchuttia.com.ua/privacy-policy</loc>
   <priority>0.6</priority>

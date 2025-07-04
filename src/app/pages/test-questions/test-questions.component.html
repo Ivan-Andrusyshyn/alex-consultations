@@ -85,8 +85,16 @@
 
       <div class="btn-wrapper">
         <app-primary-btn
+          *ngIf="accessCurrentTest()"
           [textBtn]="'Почати тест'"
           (onClick)="hideTextBoardOnClick()"
+        ></app-primary-btn>
+
+        <app-primary-btn
+          *ngIf="!accessCurrentTest()"
+          [textBtn]="'Придбати тест '"
+          [classColor]="'red-btn'"
+          (onClick)="createMonoPaymentByClick()"
         ></app-primary-btn>
       </div>
     </div>

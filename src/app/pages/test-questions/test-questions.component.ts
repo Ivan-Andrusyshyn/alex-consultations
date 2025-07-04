@@ -30,6 +30,8 @@ import { ModalService } from '../../core/services/modal.service';
 import { fadeInAnimation } from './fadeIn-animation';
 import { SnackBar } from './snackBar.interface';
 import { QuestionOptionComponent } from '../../shared/components/test/question-option/question-option.component';
+import { MonopayService } from '../../core/services/monopay.service';
+import { dataDevPayment } from './dev-payment';
 
 @Component({
   selector: 'app-test-questions',
@@ -68,6 +70,9 @@ export class TestQuestionsComponent
   private questionsService = inject(QuestionsService);
   private modalService = inject(ModalService);
 
+  private monopayService = inject(MonopayService);
+
+  //
   formGroup: FormGroup = this.fb.group({});
   coloredLabel: boolean = true;
 
@@ -84,6 +89,9 @@ export class TestQuestionsComponent
     secondSnackBarBtnText: 'Розкрити себе',
     secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
   };
+  //
+  accessCurrentTest = signal(false);
+  //
 
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -95,7 +103,33 @@ export class TestQuestionsComponent
     steps: string[];
   };
 
+  // Payment
+  redirectUrl = window.location.href;
+  paymentStorageKey = 'payment-tests';
+  storagePaymentData: {
+    testName: TestName;
+    invoiceId: string;
+    status: 'pending' | 'success' | 'failed';
+  } | null = null;
+
   ngOnInit(): void {
+    this.storagePaymentData = JSON.parse(
+      localStorage.getItem(this.paymentStorageKey) ?? 'null'
+    );
+    //
+    if (
+      this.storagePaymentData?.status === 'pending' &&
+      this.TEST_NAME === this.storagePaymentData?.testName
+    ) {
+      this.checkPaymentStatus();
+    }
+    if (
+      this.storagePaymentData?.status === 'success' &&
+      this.TEST_NAME === this.storagePaymentData?.testName
+    ) {
+      this.accessCurrentTest.set(true);
+    }
+
     this.testQuestions$ = this.activeRoute.data.pipe(
       map((response) => {
         const data = response['data'];
@@ -135,7 +169,60 @@ export class TestQuestionsComponent
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
   }
+  // ==============payment
+  createMonoPaymentByClick() {
+    dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
 
+    this.monopayService
+      .createPayment(dataDevPayment)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((response) => {
+        localStorage.setItem(
+          this.paymentStorageKey,
+          JSON.stringify({
+            invoiceId: response.invoiceId,
+            status: response.status,
+            testName: response.testName,
+          })
+        );
+        const currentUrl = window.location.pathname;
+        window.history.pushState({}, '', currentUrl);
+        window.location.href = response.pageUrl;
+        console.log(response);
+      });
+  }
+
+  //
+  checkPaymentStatus() {
+    if (!this.storagePaymentData?.invoiceId) return;
+    //
+    this.monopayService
+      .checkStatus(this.storagePaymentData.invoiceId)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError((error: any) => {
+          localStorage.removeItem(this.paymentStorageKey);
+          this.storagePaymentData = null;
+          this.accessCurrentTest.set(false);
+          return of(error.message || 'Error checking payment status');
+        })
+      )
+      .subscribe((response) => {
+        if (response.status === 'pending') {
+          localStorage.removeItem(this.paymentStorageKey);
+          this.storagePaymentData = null;
+          this.accessCurrentTest.set(false);
+        } else {
+          this.storagePaymentData!.status = response.status;
+          localStorage.setItem(
+            this.paymentStorageKey,
+            JSON.stringify(this.storagePaymentData)
+          );
+          this.accessCurrentTest.set(true);
+        }
+      });
+  }
+  // ============================
   ngAfterViewInit(): void {
     this.setCurrentAnswers();
   }
@@ -187,7 +274,15 @@ export class TestQuestionsComponent
   }
 
   onSubmit() {
-    if (this.isSubmitting()) return;
+    if (
+      !this.isSubmitting() &&
+      this.storagePaymentData?.status === 'success' &&
+      this.TEST_NAME === this.storagePaymentData?.testName
+    )
+      return;
+
+    this.accessCurrentTest.set(true);
+
     const answers = this.formGroup.value as Answer[];
     this._snackBar.dismiss();
     this.isSubmitting.set(true);
