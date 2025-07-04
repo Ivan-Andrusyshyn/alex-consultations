@@ -99,10 +99,10 @@ const getWebhook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     var _a;
     try {
         const body = req.body;
-        const reference = (_a = body === null || body === void 0 ? void 0 : body.data) === null || _a === void 0 ? void 0 : _a.reference;
-        if (!reference)
-            return res.status(400).send('No reference');
-        yield mono_payment_schema_1.PaymentModel.updateOne({ reference }, { $set: { status: 'success' } });
+        const invoiceId = (_a = body === null || body === void 0 ? void 0 : body.data) === null || _a === void 0 ? void 0 : _a.invoiceId;
+        if (!invoiceId)
+            return res.status(400).send('No invoiceId');
+        yield mono_payment_schema_1.PaymentModel.updateOne({ invoiceId }, { $set: { status: 'success' } });
         res.sendStatus(200);
     }
     catch (error) {
