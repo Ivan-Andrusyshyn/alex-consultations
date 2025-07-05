@@ -9,5 +9,6 @@ const corsOptions = {
     ],
     methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
 };
 exports.default = corsOptions;

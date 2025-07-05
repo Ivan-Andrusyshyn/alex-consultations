@@ -23,17 +23,23 @@ export class MonopayService {
       status: string;
       testName: TestName;
       invoiceId: string;
-    }>(`${this.testsUrl}/api/monopay/create-payment`, data);
+    }>(`${this.testsUrl}/api/monopay/create-payment`, data, {
+      withCredentials: true,
+    });
   }
 
-  checkStatus(invoiceId: string): Observable<{
-    status: 'pending' | 'success' | 'failed';
+  checkStatus(testName: TestName): Observable<{
+    status: 'success' | 'created' | 'failed';
     invoiceId: string;
+    testName: TestName;
   }> {
     return this.http.get<{
-      status: 'pending' | 'success' | 'failed';
+      status: 'created' | 'success' | 'failed';
       invoiceId: string;
-    }>(`${this.testsUrl}/api/monopay/check-status?invoiceId=${invoiceId}`);
+      testName: TestName;
+    }>(`${this.testsUrl}/api/monopay/check-status?testName=${testName}`, {
+      withCredentials: true,
+    });
   }
 
   getClientInfo() {

@@ -106,11 +106,6 @@ export class TestQuestionsComponent
   // Payment
   redirectUrl = window.location.href;
   paymentStorageKey!: string;
-  storagePaymentData: {
-    testName: TestName;
-    invoiceId: string;
-    status: 'pending' | 'success' | 'failed';
-  } | null = null;
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -125,19 +120,13 @@ export class TestQuestionsComponent
         this.testsInstruction = data['testsInstruction'];
 
         this.snackBar = data['snackBar'] || this.snackBar;
+
+        //
         this.TEST_NAME = testName;
         this.paymentStorageKey = this.TEST_NAME + '-payment';
-        this.storagePaymentData = JSON.parse(
-          localStorage.getItem(this.paymentStorageKey) ?? 'null'
-        );
+
         //
 
-        if (
-          this.storagePaymentData?.status === 'success' &&
-          this.TEST_NAME === this.storagePaymentData?.testName
-        ) {
-          this.accessCurrentTest.set(true);
-        }
         this.seoService.updateMetaTags(
           data['seo'].metaTags[0],
           data['seo'].metaTags[1]
@@ -154,33 +143,20 @@ export class TestQuestionsComponent
         return data['questions'];
       }),
       switchMap((questions) => {
-        if (
-          this.storagePaymentData?.status === 'pending' &&
-          this.TEST_NAME === this.storagePaymentData?.testName
-        ) {
-          return (
-            this.checkPaymentStatus()?.pipe(
-              tap((response) => {
-                console.log(response);
-
-                if (response.status === 'pending') {
-                  localStorage.removeItem(this.paymentStorageKey);
-                  this.storagePaymentData = null;
-                  this.accessCurrentTest.set(false);
-                } else {
-                  this.storagePaymentData!.status = response.status;
-                  localStorage.setItem(
-                    this.paymentStorageKey,
-                    JSON.stringify(this.storagePaymentData)
-                  );
-                  this.accessCurrentTest.set(true);
-                }
-              }),
-              map(() => questions)
-            ) ?? of(questions)
-          );
-        }
-        return of(questions);
+        return (
+          this.checkPaymentStatus()?.pipe(
+            tap((response) => {
+              if (response.status === 'success' && response.invoiceId) {
+                this.accessCurrentTest.set(true);
+              }
+            }),
+            map(() => questions),
+            catchError((error: any) => {
+              this.accessCurrentTest.set(false);
+              return of(error.message || 'Error checking payment status');
+            })
+          ) ?? of(questions)
+        );
       })
     );
 
@@ -200,7 +176,7 @@ export class TestQuestionsComponent
       .createPayment(dataDevPayment)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((response) => {
-        localStorage.setItem(
+        sessionStorage.setItem(
           this.paymentStorageKey,
           JSON.stringify({
             invoiceId: response.invoiceId,
@@ -216,19 +192,7 @@ export class TestQuestionsComponent
 
   //
   checkPaymentStatus() {
-    if (!this.storagePaymentData?.invoiceId) return;
-    //
-    return this.monopayService
-      .checkStatus(this.storagePaymentData.invoiceId)
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        catchError((error: any) => {
-          localStorage.removeItem(this.paymentStorageKey);
-          this.storagePaymentData = null;
-          this.accessCurrentTest.set(false);
-          return of(error.message || 'Error checking payment status');
-        })
-      );
+    return this.monopayService.checkStatus(this.TEST_NAME);
   }
   // ============================
   ngAfterViewInit(): void {

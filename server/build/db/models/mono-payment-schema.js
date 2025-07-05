@@ -6,8 +6,8 @@ const PaymentSchema = new mongoose_1.Schema({
     invoiceId: { type: String, required: true, unique: true },
     status: {
         type: String,
-        enum: ['pending', 'success', 'failed'],
-        default: 'pending',
+        enum: ['created', 'success', 'failed'],
+        default: 'created',
     },
     amount: { type: Number },
     comment: { type: String },
