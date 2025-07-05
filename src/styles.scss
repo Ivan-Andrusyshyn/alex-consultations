@@ -59,6 +59,7 @@ a {
 html,
 body {
   margin: 0;
+  scroll-behavior: smooth;
 
   font-family: var(--font-main);
   font-size: var(--font-size-md);

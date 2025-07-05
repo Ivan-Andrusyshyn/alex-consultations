@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.setWebhook = exports.getWebhook = exports.clientInfo = exports.checkStatusPayment = exports.createPayment = void 0;
 exports.generateReference = generateReference;
 const crypto_1 = require("crypto");
+//
 const monopay_1 = require("../../services/monopay");
 const mono_payment_schema_1 = require("../../db/models/mono-payment-schema");
 const monoService = new monopay_1.MonoService();
@@ -37,6 +38,18 @@ const createDbPayment = (invoiceId, amount, comment) => __awaiter(void 0, void 0
         createdAt: new Date(),
     });
 });
+const setCoockie = (res, status, testName, invoiceId) => __awaiter(void 0, void 0, void 0, function* () {
+    res.cookie(testName + '-payment', JSON.stringify({
+        invoiceId,
+        status,
+        testName,
+    }), {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+    });
+});
 // Create a payment
 const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -51,16 +64,7 @@ const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         monopaymentObject.merchantPaymInfo.reference = reference;
         const result = (yield monoService.createPayment(monopaymentObject));
         //
-        res.cookie(commentWithTestName + '-payment', JSON.stringify({
-            invoiceId: result.invoiceId,
-            status: 'created',
-            testName: commentWithTestName,
-        }), {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'strict',
-            maxAge: 1000 * 60 * 60 * 24 * 30,
-        });
+        yield setCoockie(res, 'created', commentWithTestName, result.invoiceId);
         yield createDbPayment(result.invoiceId, amount, commentWithTestName);
         res.json(Object.assign(Object.assign({}, result), { status: 'created', testName: commentWithTestName }));
     }
@@ -80,16 +84,7 @@ const checkStatusPayment = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const status = req.body.paymentData.status;
         const result = yield monoService.statusPayment(invoiceId);
         if (status === 'created' && result.status === 'success') {
-            res.cookie(testName + '-payment', JSON.stringify({
-                invoiceId: result.invoiceId,
-                status: 'success',
-                testName,
-            }), {
-                httpOnly: true,
-                secure: false,
-                sameSite: 'strict',
-                maxAge: 1000 * 60 * 60 * 24 * 30,
-            });
+            yield setCoockie(res, 'success', testName, result.invoiceId);
         }
         yield mono_payment_schema_1.PaymentModel.updateOne({ invoiceId }, { $set: { status: 'success' } });
         res.json({
