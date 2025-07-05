@@ -313,7 +313,6 @@ export class TestQuestionsComponent
   }
 
   //
-
   private setStorageBoardValue() {
     const showQuestions = JSON.parse(
       sessionStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
