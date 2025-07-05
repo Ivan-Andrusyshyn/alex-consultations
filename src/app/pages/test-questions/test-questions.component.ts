@@ -102,7 +102,7 @@ export class TestQuestionsComponent
     testTitle: string;
     steps: string[];
   };
-
+  isSuccessPayedTest = signal<boolean>(false);
   // Payment
   redirectUrl = window.location.href;
   paymentStorageKey!: string;
@@ -146,8 +146,14 @@ export class TestQuestionsComponent
         return (
           this.checkPaymentStatus()?.pipe(
             tap((response) => {
-              if (response.status === 'success' && response.invoiceId) {
-                this.accessCurrentTest.set(true);
+              this.isSuccessPayedTest.set(response.status === 'success');
+              if (
+                response.status === 'success' &&
+                response.invoiceId &&
+                this.formGroup.valid
+              ) {
+                this.onSubmit();
+                return;
               }
             }),
             map(() => questions),
@@ -283,8 +289,7 @@ export class TestQuestionsComponent
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
 
-    //
-    if (this.formGroup.valid) {
+    if (this.formGroup.valid && this.isSuccessPayedTest()) {
       this.onSubmit();
       return;
     }
@@ -321,15 +326,13 @@ export class TestQuestionsComponent
   private saveAnswersInStorage() {
     const answers = this.formGroup.value;
 
-    if (this.formGroup.invalid) {
-      sessionStorage.setItem(
-        this.TEST_NAME + '-answers',
-        JSON.stringify({
-          answers,
-          currentQuestion: this.currentQuestionNumber(),
-        })
-      );
-    }
+    sessionStorage.setItem(
+      this.TEST_NAME + '-answers',
+      JSON.stringify({
+        answers,
+        currentQuestion: this.currentQuestionNumber(),
+      })
+    );
   }
 
   // snackbar

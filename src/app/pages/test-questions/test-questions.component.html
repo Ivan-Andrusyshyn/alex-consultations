@@ -23,7 +23,8 @@
       <div class="question-container" *ngIf="questions">
         <form [formGroup]="formGroup">
           <ng-container *ngFor="let q of questions; let i = index">
-            @if (q.id===currentQuestionNumber() ) {
+            @if (q.id===currentQuestionNumber() || formGroup.valid && q.id ===
+            questions.length) {
             <div class="animated-container" @fadeIn>
               <div class="question-card">
                 <div *ngIf="q">
@@ -46,13 +47,14 @@
             </div>
             }
           </ng-container>
-          <!-- <div class="btn-wrapper" *ngIf="formGroup.valid">
+          <div class="btn-wrapper" *ngIf="formGroup.valid">
             <app-primary-btn
-              [isDisabled]="isSubmitting()"
-              [textBtn]="'Результати'"
-              (onClick)="onSubmit()"
+              *ngIf="!isSuccessPayedTest()"
+              [textBtn]="'Придбати результати'"
+              [classColor]="'red-btn'"
+              (onClick)="createMonoPaymentByClick()"
             ></app-primary-btn>
-          </div> -->
+          </div>
         </form>
       </div>
     </ng-container>
@@ -85,16 +87,8 @@
 
       <div class="btn-wrapper">
         <app-primary-btn
-          *ngIf="accessCurrentTest()"
           [textBtn]="'Почати тест'"
           (onClick)="hideTextBoardOnClick()"
-        ></app-primary-btn>
-
-        <app-primary-btn
-          *ngIf="!accessCurrentTest()"
-          [textBtn]="'Придбати тест '"
-          [classColor]="'red-btn'"
-          (onClick)="createMonoPaymentByClick()"
         ></app-primary-btn>
       </div>
     </div>

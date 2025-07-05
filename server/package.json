@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "serve": "concurrently --kill-others \"tsc --watch\" \"nodemon ./build/app.js \"",
+    "serve": "cross-env NODE_ENV=development concurrently --kill-others \"tsc --watch\" \"nodemon ./build/app.js \"",
     "start": "node build/app.js",
     "build": "tsc"
   },
@@ -45,6 +45,7 @@
     "@types/pug": "^2.0.10",
     "@types/validatorjs": "^3.15.5",
     "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.7",
     "typescript": "^5.7.2"
   }

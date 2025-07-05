@@ -16,6 +16,7 @@ const crypto_1 = require("crypto");
 const monopay_1 = require("../../services/monopay");
 const mono_payment_schema_1 = require("../../db/models/mono-payment-schema");
 const monoService = new monopay_1.MonoService();
+const isProd = process.env.NODE_ENV === 'production';
 // TEST CARD NUMBER 4444 3333 2222 1111
 function generateReference() {
     return `inv-${(0, crypto_1.randomUUID)()}`;
@@ -45,7 +46,7 @@ const setCoockie = (res, status, testName, invoiceId) => __awaiter(void 0, void 
         testName,
     }), {
         httpOnly: true,
-        secure: false,
+        secure: isProd,
         sameSite: 'strict',
         maxAge: 1000 * 60 * 60 * 24 * 30,
     });
