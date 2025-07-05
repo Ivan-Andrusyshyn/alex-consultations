@@ -2,7 +2,6 @@ import { environment } from '../../core/environment/environment';
 import { MonoPaymentRequest } from '../../shared/models/monopayment';
 
 class DataPayment {
-  redirectUrl = window.location.href;
   userId = crypto.randomUUID();
 }
 
@@ -48,7 +47,7 @@ export const dataDevPayment: MonoPaymentRequest = {
       },
     ],
   },
-  redirectUrl: dataPayment.redirectUrl,
+  redirectUrl: '',
   webHookUrl: environment.apiUrl + '/api/monopay/get-webhook',
   validity: 3600,
   paymentType: null,

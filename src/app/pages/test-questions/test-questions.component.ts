@@ -171,6 +171,7 @@ export class TestQuestionsComponent
   // ==============payment
   createMonoPaymentByClick() {
     dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
+    dataDevPayment.redirectUrl = window.location.href;
 
     this.monopayService
       .createPayment(dataDevPayment)
