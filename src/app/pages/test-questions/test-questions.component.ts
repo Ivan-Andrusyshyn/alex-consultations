@@ -163,7 +163,7 @@ export class TestQuestionsComponent
               ) {
                 this.handlePersonType(testResults);
                 this.isSubmitting.set(false);
-
+                sessionStorage.removeItem(this.TEST_NAME + '-results');
                 return;
               }
             }),
@@ -212,6 +212,7 @@ export class TestQuestionsComponent
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
 
+    sessionStorage.removeItem(this.paymentStorageKey);
     this.formGroup.reset();
     sessionStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
     sessionStorage.setItem('isStartTest', 'false');
