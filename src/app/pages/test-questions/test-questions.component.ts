@@ -301,6 +301,7 @@ export class TestQuestionsComponent
 
     if (this.formGroup.valid) {
       this.onSubmit();
+      sessionStorage.removeItem(this.TEST_NAME + '-results');
       return;
     }
 
