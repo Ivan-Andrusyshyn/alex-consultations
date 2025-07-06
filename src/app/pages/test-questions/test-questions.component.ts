@@ -105,7 +105,7 @@ export class TestQuestionsComponent
   isSuccessPayedTest = signal<boolean>(false);
   // Payment
   redirectUrl = window.location.href;
-  paymentStorageKey!: string;
+  testResultsInRouteKey!: string;
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -120,10 +120,9 @@ export class TestQuestionsComponent
         this.testsInstruction = data['testsInstruction'];
 
         this.snackBar = data['snackBar'] || this.snackBar;
-
         //
         this.TEST_NAME = testName;
-        this.paymentStorageKey = this.TEST_NAME + '-payment';
+        this.testResultsInRouteKey = this.TEST_NAME + '-results-in-route';
 
         //
 
@@ -143,36 +142,26 @@ export class TestQuestionsComponent
         return data['questions'];
       }),
       switchMap((questions) => {
-        return (
-          this.checkPaymentStatus()?.pipe(
-            tap((response) => {
-              this.isSuccessPayedTest.set(response.status === 'success');
-              const testResults =
-                sessionStorage.getItem(this.TEST_NAME + '-results') ?? '';
-              sessionStorage.setItem(
-                this.paymentStorageKey,
-                JSON.stringify({
-                  status: response.status,
-                  testName: response.testName,
-                })
-              );
-              if (
-                response.status === 'success' &&
-                response.invoiceId &&
-                testResults
-              ) {
-                this.handlePersonType(testResults);
-                this.isSubmitting.set(false);
-                sessionStorage.removeItem(this.TEST_NAME + '-results');
-                return;
-              }
-            }),
-            map(() => questions),
-            catchError((error: any) => {
-              this.accessCurrentTest.set(false);
-              return of(error.message || 'Error checking payment status');
-            })
-          ) ?? of(questions)
+        return this.checkPaymentStatus()?.pipe(
+          tap((response) => {
+            this.isSuccessPayedTest.set(response.status === 'success');
+            if (
+              response.status === 'success' &&
+              response.invoiceId &&
+              this.formGroup.valid
+            ) {
+              const results =
+                sessionStorage.getItem(this.testResultsInRouteKey) ?? '';
+
+              this.handlePersonType(results);
+              sessionStorage.removeItem(this.testResultsInRouteKey);
+            }
+          }),
+          map(() => questions),
+          catchError((error: any) => {
+            this.accessCurrentTest.set(false);
+            return of(error.message || 'Error checking payment status');
+          })
         );
       })
     );
@@ -189,10 +178,21 @@ export class TestQuestionsComponent
   createMonoPaymentByClick() {
     dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
     dataDevPayment.redirectUrl = window.location.href;
+    const answers = this.formGroup.value as Answer[];
 
-    this.monopayService
-      .createPayment(dataDevPayment)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+    const newRequest = this.questionsService.createNewRequestObject(
+      this.TEST_NAME,
+      answers
+    );
+    this.questionsService
+      .makeRequestByTestName(this.TEST_NAME, newRequest)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((results) => {
+          sessionStorage.setItem(this.testResultsInRouteKey, results);
+        }),
+        switchMap(() => this.monopayService.createPayment(dataDevPayment))
+      )
       .subscribe((response) => {
         const currentUrl = window.location.pathname;
         window.history.pushState({}, '', currentUrl);
@@ -212,7 +212,6 @@ export class TestQuestionsComponent
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
 
-    sessionStorage.removeItem(this.paymentStorageKey);
     this.formGroup.reset();
     sessionStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
     sessionStorage.setItem('isStartTest', 'false');
@@ -257,8 +256,6 @@ export class TestQuestionsComponent
   }
 
   onSubmit() {
-    if (this.isSubmitting()) return;
-
     const answers = this.formGroup.value as Answer[];
     this._snackBar.dismiss();
     this.isSubmitting.set(true);
@@ -267,7 +264,6 @@ export class TestQuestionsComponent
       this.TEST_NAME,
       answers
     );
-
     this.questionsService
       .makeRequestByTestName(this.TEST_NAME, newRequest)
       .pipe(
@@ -279,14 +275,9 @@ export class TestQuestionsComponent
         })
       )
       .subscribe((results) => {
-        const paymentData = JSON.parse(
-          sessionStorage.getItem(this.paymentStorageKey) ?? 'null'
-        );
-
-        if (paymentData.status === 'success') {
-          this.handlePersonType(results);
-        }
-        sessionStorage.setItem(this.TEST_NAME + '-results', results);
+        this.isSubmitting.set(false);
+        sessionStorage.setItem(this.testResultsInRouteKey, results);
+        this.handlePersonType(results);
       });
   }
 
@@ -299,9 +290,8 @@ export class TestQuestionsComponent
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
 
-    if (this.formGroup.valid) {
+    if (this.formGroup.valid && this.isSuccessPayedTest()) {
       this.onSubmit();
-      sessionStorage.removeItem(this.TEST_NAME + '-results');
       return;
     }
 
