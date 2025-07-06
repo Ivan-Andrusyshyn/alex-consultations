@@ -1,13 +1,12 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { AccentBtnComponent } from '../accent-btn/accent-btn.component';
 import { CountingClicksService } from '../../../core/services/counting-clicks.service';
 
 @Component({
   selector: 'app-modal-social-links',
   standalone: true,
-  imports: [AccentBtnComponent],
+  imports: [],
   templateUrl: './modal-social-links.component.html',
   styleUrl: './modal-social-links.component.scss',
 })

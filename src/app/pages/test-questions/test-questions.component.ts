@@ -147,12 +147,23 @@ export class TestQuestionsComponent
           this.checkPaymentStatus()?.pipe(
             tap((response) => {
               this.isSuccessPayedTest.set(response.status === 'success');
+              const testResults =
+                sessionStorage.getItem(this.TEST_NAME + '-results') ?? '';
+              sessionStorage.setItem(
+                this.paymentStorageKey,
+                JSON.stringify({
+                  status: response.status,
+                  testName: response.testName,
+                })
+              );
               if (
                 response.status === 'success' &&
                 response.invoiceId &&
-                this.formGroup.valid
+                testResults
               ) {
-                this.onSubmit();
+                this.handlePersonType(testResults);
+                this.isSubmitting.set(false);
+
                 return;
               }
             }),
@@ -183,14 +194,6 @@ export class TestQuestionsComponent
       .createPayment(dataDevPayment)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((response) => {
-        sessionStorage.setItem(
-          this.paymentStorageKey,
-          JSON.stringify({
-            invoiceId: response.invoiceId,
-            status: response.status,
-            testName: response.testName,
-          })
-        );
         const currentUrl = window.location.pathname;
         window.history.pushState({}, '', currentUrl);
         window.location.href = response.pageUrl;
@@ -275,8 +278,14 @@ export class TestQuestionsComponent
         })
       )
       .subscribe((results) => {
-        this.handlePersonType(results);
-        this.isSubmitting.set(false);
+        const paymentData = JSON.parse(
+          sessionStorage.getItem(this.paymentStorageKey) ?? 'null'
+        );
+
+        if (paymentData.status === 'success') {
+          this.handlePersonType(results);
+        }
+        sessionStorage.setItem(this.TEST_NAME + '-results', results);
       });
   }
 
@@ -289,7 +298,7 @@ export class TestQuestionsComponent
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
 
-    if (this.formGroup.valid && this.isSuccessPayedTest()) {
+    if (this.formGroup.valid) {
       this.onSubmit();
       return;
     }
