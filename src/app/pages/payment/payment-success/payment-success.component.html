@@ -1,0 +1,16 @@
+<div class="success-container">
+  <div class="success-card" @fadeIn>
+    <div class="icon">✅</div>
+    <h2 class="title-primary">Дякуємо! <br />Оплата пройшла успішно!</h2>
+    <div class="test-container">
+      <img
+        [src]="currentCardInfo?.imageUrl + 'card/1.svg'"
+        class="carousel-img"
+        alt="Test image"
+      />
+      <p class="subtitle">{{ currentCardInfo?.title }}</p>
+    </div>
+
+    <button (click)="goToResults()">Перейти до результатів</button>
+  </div>
+</div>

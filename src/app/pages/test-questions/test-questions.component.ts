@@ -106,6 +106,7 @@ export class TestQuestionsComponent
   // Payment
   redirectUrl = window.location.href;
   testResultsInRouteKey!: string;
+  currentTestResultsName!: string;
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -144,18 +145,8 @@ export class TestQuestionsComponent
       switchMap((questions) => {
         return this.monopayService.checkStatus(this.TEST_NAME)?.pipe(
           tap((response) => {
-            this.isSuccessPayedTest.set(response.status === 'success');
-            if (
-              response.status === 'success' &&
-              response.invoiceId &&
-              this.formGroup.valid
-            ) {
-              const results =
-                sessionStorage.getItem(this.testResultsInRouteKey) ?? '';
-
-              this.handlePersonType(results);
-              //
-              sessionStorage.removeItem(this.testResultsInRouteKey);
+            if (response.status === 'success' && response.invoiceId) {
+              this.isSuccessPayedTest.set(response.status === 'success');
             }
           }),
           map(() => questions),
@@ -177,8 +168,11 @@ export class TestQuestionsComponent
   }
   // ==============payment
   createMonoPaymentByClick() {
+    const baseUrl = window.location.origin;
+    //
     dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
-    dataDevPayment.redirectUrl = window.location.href;
+    dataDevPayment.redirectUrl =
+      baseUrl + '/tests' + '/' + this.TEST_NAME + '/payment-success';
     const answers = this.formGroup.value as Answer[];
 
     const newRequest = this.questionsService.createNewRequestObject(
@@ -275,7 +269,6 @@ export class TestQuestionsComponent
       )
       .subscribe((results) => {
         this.isSubmitting.set(false);
-        sessionStorage.setItem(this.testResultsInRouteKey, results);
         this.handlePersonType(results);
       });
   }
@@ -431,6 +424,8 @@ export class TestQuestionsComponent
     this.beYourselfService.counterQuestion.next(1);
 
     const answers = this.formGroup.value;
+    sessionStorage.removeItem(this.testResultsInRouteKey);
+
     sessionStorage.setItem(
       this.TEST_NAME + '-answers',
       JSON.stringify({

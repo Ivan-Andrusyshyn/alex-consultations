@@ -6,17 +6,18 @@
   ></app-title-card>
   <ng-container *ngIf="testQuestions$ | async as questions">
     <ng-container *ngIf="!showTextBoard(); else boardContainer">
-      <div class="refresh-btn-wrapper">
+      <div class="refresh-btn-wrapper" *ngIf="!showTextBoard()">
         <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
         <P class="subtitle"> {{ questions.length | questionWord }} </P>
       </div>
       <app-questions-stepper
+        *ngIf="!showTextBoard()"
         [formGroup]="formGroup"
         [questions]="questions"
         [currentQuestionNumber]="currentQuestionNumber()"
         (changeViewQuestion)="changeViewQuestion($event)"
       ></app-questions-stepper>
-      <h3 class="question question-mob">
+      <h3 class="question question-mob" *ngIf="!showTextBoard()">
         {{ questions[currentQuestionNumber() - 1]?.question }}
       </h3>
 
@@ -48,12 +49,9 @@
             }
           </ng-container>
           <div class="btn-wrapper" *ngIf="formGroup.valid">
-            <app-primary-btn
-              *ngIf="!isSuccessPayedTest()"
-              [textBtn]="'Придбати результати'"
-              [classColor]="'red-btn'"
-              (onClick)="createMonoPaymentByClick()"
-            ></app-primary-btn>
+            <button class="pay-button" (click)="createMonoPaymentByClick()">
+              🔓 Розблокувати результати — оплатити
+            </button>
           </div>
         </form>
       </div>

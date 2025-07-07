@@ -36,15 +36,9 @@ export class PersonalitiesPhraseService {
   }> {
     const usersType = localStorage.getItem(this.storageKEY);
 
-    const isUrlParams = usersType ? '/' + usersType : '/unknown';
-
     return this.http
       .get<PersonalitiesPhrasesResponse>(
-        this.testsUrl +
-          '/' +
-          this.testName +
-          '/personalities-phrases' +
-          isUrlParams
+        this.testsUrl + '/' + this.testName + '/personalities-phrases'
       )
       .pipe(
         map((r) => {

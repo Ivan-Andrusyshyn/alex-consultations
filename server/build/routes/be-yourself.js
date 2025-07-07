@@ -20,5 +20,5 @@ beYourselfRouter.get('/be-yourself/calculator-information', get_calculator_infor
 beYourselfRouter.get('/be-yourself/calculator-disclaimer', get_calculator_disclaimer_1.default);
 beYourselfRouter.get('/be-yourself', getQuestions_1.default);
 beYourselfRouter.get('/be-yourself/person-type/:personType', getTypeByResults_1.default);
-beYourselfRouter.get('/be-yourself/personalities-phrases/:personType', getDayPhrases_1.default);
+beYourselfRouter.get('/be-yourself/personalities-phrases', getDayPhrases_1.default);
 exports.default = beYourselfRouter;

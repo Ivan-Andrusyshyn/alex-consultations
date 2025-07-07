@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { CountingClicksResolver } from './shared/resolvers/counting-clicks.resolver';
 import { TestsResultsResolver } from './shared/resolvers/tests-results.resolver';
 import { TestsQuestionsResolver } from './shared/resolvers/test-questions.resolver';
+import { TestsPaymentResolver } from './shared/resolvers/tests-payment.resolver';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
         (m) => m.ConsultationsComponent
       ),
   },
+
   {
     path: 'tests',
     loadComponent: () =>
@@ -49,6 +51,14 @@ export const routes: Routes = [
     path: 'tests/:testName',
 
     children: [
+      {
+        path: 'payment-success',
+        loadComponent: () =>
+          import(
+            './pages/payment/payment-success/payment-success.component'
+          ).then((m) => m.PaymentSuccessComponent),
+        resolve: { data: TestsPaymentResolver },
+      },
       {
         path: 'questions',
         loadComponent: () =>
