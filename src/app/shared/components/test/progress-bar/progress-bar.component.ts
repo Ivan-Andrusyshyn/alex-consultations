@@ -4,15 +4,10 @@ import {
   Component,
   EventEmitter,
   HostListener,
-  inject,
   Input,
-  OnDestroy,
-  OnInit,
   Output,
   signal,
 } from '@angular/core';
-
-import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-progress-bar',

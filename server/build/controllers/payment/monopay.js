@@ -48,7 +48,7 @@ const setCoockie = (res, status, testName, invoiceId) => __awaiter(void 0, void 
         httpOnly: true,
         secure: isProd,
         sameSite: isProd ? 'none' : 'strict',
-        maxAge: 1000 * 60 * 60 * 24 * 30,
+        maxAge: 1000 * 60 * 60 * 3,
     });
 });
 // Create a payment

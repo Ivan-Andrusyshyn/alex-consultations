@@ -142,7 +142,7 @@ export class TestQuestionsComponent
         return data['questions'];
       }),
       switchMap((questions) => {
-        return this.checkPaymentStatus()?.pipe(
+        return this.monopayService.checkStatus(this.TEST_NAME)?.pipe(
           tap((response) => {
             this.isSuccessPayedTest.set(response.status === 'success');
             if (
@@ -154,6 +154,7 @@ export class TestQuestionsComponent
                 sessionStorage.getItem(this.testResultsInRouteKey) ?? '';
 
               this.handlePersonType(results);
+              //
               sessionStorage.removeItem(this.testResultsInRouteKey);
             }
           }),
@@ -201,9 +202,7 @@ export class TestQuestionsComponent
   }
 
   //
-  checkPaymentStatus() {
-    return this.monopayService.checkStatus(this.TEST_NAME);
-  }
+
   // ============================
   ngAfterViewInit(): void {
     this.setCurrentAnswers();

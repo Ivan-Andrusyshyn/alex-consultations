@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   DestroyRef,
   ElementRef,
@@ -9,11 +10,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { AsyncPipe, NgIf, ViewportScroller } from '@angular/common';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, of, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShareButtons } from 'ngx-sharebuttons/buttons';
 
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
@@ -30,6 +31,7 @@ import { ResponseData } from './data.interface';
 import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
+import { MonopayService } from '../../core/services/monopay.service';
 
 @Component({
   selector: 'app-test-results',
@@ -48,7 +50,7 @@ import { MainTestNames } from '../../core/utils/testsNames';
   styleUrl: './test-results.component.scss',
   providers: [ResultService],
 })
-export class TestResultsComponent implements OnInit, OnDestroy {
+export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   private dr = inject(DestroyRef);
   private googleService = inject(GoogleSheetsService);
   readonly dialog = inject(MatDialog);
@@ -57,6 +59,8 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   private notificationService = inject(NotificationService);
   private viewportScroller = inject(ViewportScroller);
   private resultsService = inject(ResultService);
+  private monopayService = inject(MonopayService);
+  private router = inject(Router);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
@@ -64,29 +68,34 @@ export class TestResultsComponent implements OnInit, OnDestroy {
   formGroup!: FormGroup;
 
   successMessage = signal(false);
-  TEST_NAME = signal<TestName | ''>('');
+  TEST_NAME = signal<TestName>(undefined as unknown as TestName);
   showCountDownTimer = signal(false);
 
   sendObject: any;
   testResults$!: Observable<TestResults & { subCategoryName?: string }>;
   benefitConsultationData$!: Observable<BenefitConsultationData>;
   fullUrl!: string;
-  timeInterval: any;
   isFirstNotification = false;
   includeShareBtn = ['copy', 'facebook', 'linkedin', 'viber', 'telegram'];
   consultationsSliderKey: SLIDER_KEYS = 'consultations';
   cardsSliderKey: SLIDER_KEYS = 'tests-results';
   mainTestNames = MainTestNames;
   //
+  timeInterval: any;
+  timeout: any;
+  //
 
   //
   ngOnDestroy(): void {
     clearInterval(this.timeInterval);
+    clearTimeout(this.timeout);
     this.timeInterval = null;
   }
 
   ngAfterViewInit(): void {
-    this.containerElement = this.scrollContainer.nativeElement;
+    this.timeout = setTimeout(() => {
+      this.containerElement = this.scrollContainer.nativeElement;
+    }, 1000);
   }
 
   ngOnInit(): void {
@@ -125,7 +134,19 @@ export class TestResultsComponent implements OnInit, OnDestroy {
           ...response.results,
           subCategoryName: response.subCategoryCoffee ?? '',
         };
-      })
+      }),
+      switchMap((testResults) =>
+        this.monopayService.checkStatus(this.TEST_NAME()).pipe(
+          tap((response) => {
+            if (response.status === 'success' && response.invoiceId) {
+              console.log('success');
+            } else {
+              this.router.navigate(['/tests']);
+            }
+          }),
+          map(() => testResults)
+        )
+      )
     );
   }
 
