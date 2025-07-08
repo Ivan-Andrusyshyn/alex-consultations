@@ -1,4 +1,4 @@
-<div class="card" [class.vip-card]="card.title.includes('Яка ти кава')">
+<div class="card vip-card">
   <div class="card-left">
     <div class="time-wrapper">
       <div>
@@ -7,7 +7,11 @@
       <p class="time">
         {{ card.time }}
       </p>
-      <span class="badge">🔥 Хіт тестів</span>
+      <!-- <span class="badge">🔥 Хіт тестів</span> -->
+      <span class="badge" *ngIf="card.testPrice"
+        >Вартість: {{ card.testPrice }}</span
+      >
+      <span class="badge" *ngIf="!card.testPrice"> {{ "Безкоштовно" }}</span>
     </div>
 
     <h2 class="title">{{ card.title }}</h2>

@@ -7,23 +7,7 @@
       !(formGroup.valid && !isSuccessPayedTest() && !isFreeTest())
     "
   ></app-title-card>
-  <div
-    class="card-payment-wrapper"
-    *ngIf="
-      !showTextBoard() &&
-      formGroup.valid &&
-      !isSuccessPayedTest() &&
-      !isFreeTest()
-    "
-  >
-    <app-card-payment
-      [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
-      [testPrice]="testPrice"
-      [testSubtitleText]="testTitleText"
-      (createMonoPaymentByClick)="createMonoPaymentByClick()"
-      [cardTitle]="currentCardInfo?.title ?? ''"
-    ></app-card-payment>
-  </div>
+
   <ng-container *ngIf="testQuestions$ | async as questions">
     <ng-container *ngIf="!showTextBoard(); else boardContainer">
       <div class="refresh-btn-wrapper" *ngIf="!showTextBoard()">
@@ -69,6 +53,24 @@
             }
           </ng-container>
         </form>
+        <div
+          @fadeIn
+          class="card-payment-wrapper"
+          *ngIf="
+            !showTextBoard() &&
+            formGroup.valid &&
+            !isSuccessPayedTest() &&
+            !isFreeTest()
+          "
+        >
+          <app-card-payment
+            [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
+            [testPrice]="testPrice"
+            [testSubtitleText]="testTitleText"
+            (createMonoPaymentByClick)="createMonoPaymentByClick()"
+            [cardTitle]="currentCardInfo?.title ?? ''"
+          ></app-card-payment>
+        </div>
       </div>
     </ng-container>
   </ng-container>

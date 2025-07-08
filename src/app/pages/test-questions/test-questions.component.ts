@@ -309,9 +309,6 @@ export class TestQuestionsComponent
     }
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
-    if (this.formGroup.valid) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
     if (
       (this.formGroup.valid && this.isSuccessPayedTest()) ||

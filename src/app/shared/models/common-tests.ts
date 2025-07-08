@@ -32,6 +32,7 @@ export type CardContent = {
   time: string;
   category: string;
   routeStart: string;
+  testPrice: string | null;
   title: string;
   imgList: Array<number>;
   subtitle: string;

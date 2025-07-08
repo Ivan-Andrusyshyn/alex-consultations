@@ -1,11 +1,13 @@
 import { CardContent } from '../../shared/models/common-tests';
 import { MainTestNames } from '../utils/testsNames';
+import { MainTestPrices } from './testPrices';
 
 export const TEST_CARDS: CardContent[] = [
   {
     time: '3 хв',
     category: 'Для особистого розвитку',
     routeStart: '/tests/' + MainTestNames.YouCoffee + '/questions',
+    testPrice: MainTestPrices['YouCoffee'],
     title: 'Яка ти кава?',
     subtitle:
       'Відповідай на 12 простих, але смачних запитань — і дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою',
@@ -17,6 +19,7 @@ export const TEST_CARDS: CardContent[] = [
     time: '5 хв',
     title: 'Бути собою',
     imgList: [1, 2, 3, 4, 5, 6, 7, 8],
+    testPrice: MainTestPrices['BeYourself'],
 
     category: 'Для особистого розвитку',
     routeStart: '/tests/' + MainTestNames.BeYourself + '/questions',
@@ -31,6 +34,7 @@ export const TEST_CARDS: CardContent[] = [
     category: 'Для особистого розвитку',
     routeStart: '/tests/' + MainTestNames.Attractiveness + '/questions',
     title: 'Який у тебе тип привабливості?',
+    testPrice: MainTestPrices['Attractiveness'],
     subtitle: 'Дізнайся, що робить тебе по-справжньому привабливим!',
     buttonText: 'Почати тест',
     imgList: [1, 2, 3, 4, 5, 6],
@@ -40,6 +44,7 @@ export const TEST_CARDS: CardContent[] = [
     time: '3 хв',
     title: 'Яка твоя роль у стосунках?',
     imgList: [1, 2, 3, 4, 5],
+    testPrice: MainTestPrices['RoleInRelationships'],
     category: 'Для стосунків',
     routeStart: '/tests/' + MainTestNames.RoleInRelationships + '/questions',
     subtitle: 'Краще зрозумій свою природну емоційність у відносинах.',
@@ -52,6 +57,7 @@ export const TEST_CARDS: CardContent[] = [
     title: 'Калькулятор сумісності',
     category: 'Для стосунків',
     routeStart: '/tests/' + MainTestNames.BeYourself + '/calculator',
+    testPrice: null,
     imgList: [1, 2, 3, 4, 5],
     subtitle: 'Дізнайтеся рівень гармонії ваших стосунків.',
     buttonText: 'Почати тест',
@@ -61,6 +67,7 @@ export const TEST_CARDS: CardContent[] = [
     time: '7 хв',
     title: 'Тест на травматичний досвід',
     imgList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    testPrice: MainTestPrices['Traumatic'],
     category: 'Для особистого розвитку',
     routeStart: '/tests/' + MainTestNames.Traumatic + '/questions',
     subtitle: 'Як сильно ти реагуєш на коментарі та зауваження?',
@@ -73,6 +80,7 @@ export const TEST_CARDS: CardContent[] = [
     imgList: [1, 2, 3, 4],
     category: 'Для стосунків',
     routeStart: '/tests/' + MainTestNames.ToxicalRelationships + '/questions',
+    testPrice: MainTestPrices['ToxicalRelationships'],
     subtitle: 'Перевір, чи твій партнер не токсичний.',
     buttonText: 'Почати тест',
     imageUrl:
