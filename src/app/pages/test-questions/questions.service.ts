@@ -1,22 +1,23 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 
+//
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
 import {
   Question,
   TestName,
   TestResultRequest,
 } from '../../shared/models/common-tests';
-import { AttractivenessService } from '../../core/services/attractiveness.service';
-import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
-import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
-import { YouCoffeeService } from '../../core/services/you-coffee.service';
+import { RoleInRelationshipsService } from '../../core/services/tests/role-in-relationships.service';
+import { ToxicalRelationshipService } from '../../core/services/tests/toxical-relationship.service';
 import { Validators } from '@angular/forms';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { DateTime } from 'luxon';
-import { BeYourselfTestService } from '../../core/services/be-yourself.service';
-import { TraumaticExperienceService } from '../../core/services/traumatic-experience.service';
+import { TraumaticExperienceService } from '../../core/services/tests/traumatic-experience.service';
 import { MainTestNames } from '../../core/utils/testsNames';
+import { AttractivenessService } from '../../core/services/tests/attractiveness.service';
+import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
+import { YouCoffeeService } from '../../core/services/tests/you-coffee.service';
 //
 
 //

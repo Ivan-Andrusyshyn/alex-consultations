@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+//
 
+//
 import {
   Answer,
   Question,
-  TestResultRequest,
   TestResults,
-} from '../../shared/models/common-tests';
-import { TestResult } from '../../shared/models/be-yourself';
-import { environment } from '../environment/environment';
-import { MainTestNames } from '../utils/testsNames';
+  TestResultRequest,
+} from '../../../shared/models/common-tests';
+import { TestResult } from '../../../shared/models/traumatic-experience';
+import { environment } from '../../environment/environment';
+import { MainTestNames } from '../../utils/testsNames';
 
 interface BeYourself {
   message: string;

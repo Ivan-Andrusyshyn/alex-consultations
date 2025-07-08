@@ -6,9 +6,9 @@ import {
   CalculatorResult,
   CalculatorInformation,
   CalculatorDisclaimer,
-} from '../../shared/models/personalities-calculator';
-import { environment } from '../environment/environment';
-import { MainTestNames } from '../utils/testsNames';
+} from '../../../shared/models/personalities-calculator';
+import { environment } from '../../environment/environment';
+import { MainTestNames } from '../../utils/testsNames';
 
 interface CalculatorResponse {
   message: string;

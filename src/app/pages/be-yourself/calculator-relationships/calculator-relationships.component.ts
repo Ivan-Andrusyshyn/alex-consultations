@@ -21,7 +21,7 @@ import { DateTime } from 'luxon';
 
 import { GoogleSheetsService } from '../../../core/services/google-sheets.service';
 import { LoadingService } from '../../../core/services/loading.service';
-import { PersonalitiesCalculatorService } from '../../../core/services/personalities-calculator.service';
+import { PersonalitiesCalculatorService } from '../../../core/services/tests/personalities-calculator.service';
 import { RouteTrackerService } from '../../../core/services/route-tracker.service';
 import { SeoService } from '../../../core/services/seo.service';
 import { TitleCardComponent } from '../../../shared/components/title-card/title-card.component';

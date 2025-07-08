@@ -7,7 +7,7 @@ import {
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { map, Observable } from 'rxjs';
 
-import { PersonalitiesCalculatorService } from '../../../core/services/personalities-calculator.service';
+import { PersonalitiesCalculatorService } from '../../../core/services/tests/personalities-calculator.service';
 import { SeoService } from '../../../core/services/seo.service';
 import { TestCardStartBtnComponent } from '../../../shared/components/test/test-card-start-btn/test-card-start-btn.component';
 import { TitleCardComponent } from '../../../shared/components/title-card/title-card.component';

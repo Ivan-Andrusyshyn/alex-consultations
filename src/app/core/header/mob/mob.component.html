@@ -1,10 +1,6 @@
 <button class="menu-btn" (click)="toggleMenu()">
   <label class="hamburger">
-    <input
-      type="checkbox"
-      (change)="toggleMenu()"
-      [checked]="isMenuOpen$ | async"
-    />
+    <input type="checkbox" (change)="toggleMenu()" [checked]="isOpenMenu()" />
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +29,11 @@
   </label>
 </button>
 
-<div class="mobile-menu" [class.open]="isMenuOpen$ | async">
+<div
+  class="mobile-menu"
+  [class.closing]="!isOpenMenu()"
+  [class.open]="isOpenMenu()"
+>
   <ul>
     <br />
     <li routerLink="/" routerLinkActive="active" (click)="toggleMenu()">
@@ -65,7 +65,7 @@
       Контакти
     </li>
   </ul>
-  @if (isMenuOpen$|async) {
+  @if (isOpenMenu()) {
 
   <div class="links-wrapper">
     <app-social-links></app-social-links>
@@ -75,6 +75,6 @@
 
 <div
   class="menu-backdrop"
-  [class.open]="isMenuOpen$ | async"
+  [class.open]="isOpenMenu()"
   (click)="toggleMenu()"
 ></div>

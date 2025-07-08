@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { environment } from '../environment/environment';
+import { environment } from '../../environment/environment';
 import {
   TestResultRequest,
   TestResults,
-} from '../../shared/models/common-tests';
+} from '../../../shared/models/common-tests';
 import {
   TestResult,
   PersonalitiesResults,
   PersonalitiesResponse,
   TestInformation,
-} from '../../shared/models/traumatic-experience';
-import { MainTestNames } from '../utils/testsNames';
+} from '../../../shared/models/traumatic-experience';
+import { MainTestNames } from '../../utils/testsNames';
 
 @Injectable({ providedIn: 'root' })
 export class TraumaticExperienceService {

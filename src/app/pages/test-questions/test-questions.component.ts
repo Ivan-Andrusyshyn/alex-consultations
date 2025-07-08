@@ -17,8 +17,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
+//
 import { RefreshButtonComponent } from '../../shared/components/refresh-button/refresh-button.component';
-import { BeYourselfTestService } from '../../core/services/be-yourself.service';
 import {
   Answer,
   CardContent,
@@ -39,6 +39,7 @@ import { MonopayService } from '../../core/services/monopay.service';
 import { dataDevPayment } from './dev-payment';
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { CardPaymentComponent } from '../../shared/components/payment/card-payment/card-payment.component';
+import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
 
 @Component({
   selector: 'app-test-questions',

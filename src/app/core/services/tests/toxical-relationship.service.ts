@@ -6,11 +6,11 @@ import {
   Question,
   TestResultRequest,
   TestResults,
-} from '../../shared/models/common-tests';
-import { CategoryName } from '../../shared/models/toxical-relationship';
-import { TestInformation } from '../../shared/models/toxical-relationship';
-import { environment } from '../environment/environment';
-import { MainTestNames } from '../utils/testsNames';
+} from '../../../shared/models/common-tests';
+import { CategoryName } from '../../../shared/models/toxical-relationship';
+import { TestInformation } from '../../../shared/models/toxical-relationship';
+import { environment } from '../../environment/environment';
+import { MainTestNames } from '../../utils/testsNames';
 
 @Injectable({
   providedIn: 'root',
