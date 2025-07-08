@@ -1,0 +1,15 @@
+<div class="payment-container">
+  <div class="test-card">
+    <img [src]="imgUrl" alt="Test image" />
+    <div class="test-info">
+      <h2>{{ cardTitle }}</h2>
+      <p class="price">💸 Вартість: {{ testPrice }}</p>
+
+      <p class="price">{{ testSubtitleText }}</p>
+
+      <button class="pay-button" (click)="createMonoPayment()">
+        🔓 Розблокувати результати
+      </button>
+    </div>
+  </div>
+</div>

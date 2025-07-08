@@ -1,16 +1,14 @@
-<div class="success-container">
-  <div class="success-card" @fadeIn>
-    <div class="icon">✅</div>
-    <h2 class="title-primary">Дякуємо! <br />Оплата пройшла успішно!</h2>
-    <div class="test-container">
-      <img
-        [src]="currentCardInfo?.imageUrl + 'card/1.svg'"
-        class="carousel-img"
-        alt="Test image"
-      />
-      <p class="subtitle">Тест:{{ currentCardInfo?.title }}</p>
+<section class="payment-container">
+  <div class="payment-wrapper">
+    <div class="test-card">
+      <img [src]="currentCardInfo?.imageUrl + 'card/1.svg'" alt="Test image" />
+      <div class="test-info">
+        <h2>{{ currentCardInfo?.title }}</h2>
+        <div class="price">Оплата {{ priceTests }} пройшла успішно!</div>
+        <button class="pay-button" (click)="goToResults()">
+          Перейти до результатів
+        </button>
+      </div>
     </div>
-
-    <button (click)="goToResults()">Перейти до результатів</button>
   </div>
-</div>
+</section>

@@ -26,6 +26,9 @@ export class TestsPaymentResolver implements Resolve<any> {
     urlResults: string;
   }> {
     const testName = route.parent?.paramMap.get('testName') as TestName;
+    const price = route.paramMap.get('price') as string;
+    console.log(price);
+
     const testResultsInRouteKey = testName + '-results-in-route';
     const baseUrl = window.location.origin;
 
@@ -47,6 +50,7 @@ export class TestsPaymentResolver implements Resolve<any> {
           return {
             testResults,
             testName,
+            price,
             urlResults,
           };
         } else {

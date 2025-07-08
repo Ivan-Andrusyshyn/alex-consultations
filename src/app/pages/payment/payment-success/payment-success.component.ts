@@ -34,6 +34,7 @@ export class PaymentSuccessComponent implements OnInit {
   urlResults!: string;
   testsCards = TEST_CARDS;
   currentCardInfo!: CardContent | null;
+  priceTests: null | string = null;
 
   ngOnInit(): void {
     this.activeRoute.data
@@ -45,10 +46,11 @@ export class PaymentSuccessComponent implements OnInit {
 
           this.testName = data['testName'];
           this.urlResults = data['urlResults'];
-
+          this.priceTests = data['price'];
           const foundCard = this.testsCards.find((card) =>
             card.imageUrl.endsWith(this.testName + '/')
           );
+
           this.currentCardInfo = foundCard ?? null;
         })
       )

@@ -22,6 +22,7 @@ interface ResolveData {
   testName: TestName | null;
   testTitleText: string;
   testSubtitleText: string;
+  testPrice: string | null;
   testInstruction?: {
     testTitle: string;
     instructionsTitle: string;
@@ -134,6 +135,7 @@ export class TestsQuestionsResolver implements Resolve<any> {
     return of({
       message: null,
       testName: null,
+      testPrice: null,
       testTitleText: '',
       testSubtitleText: '',
       questions: null,

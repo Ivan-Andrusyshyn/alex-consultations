@@ -19,7 +19,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { RefreshButtonComponent } from '../../shared/components/refresh-button/refresh-button.component';
 import { BeYourselfTestService } from '../../core/services/be-yourself.service';
-import { Answer, Question, TestName } from '../../shared/models/common-tests';
+import {
+  Answer,
+  CardContent,
+  Question,
+  TestName,
+} from '../../shared/models/common-tests';
 import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
 import { SeoService } from '../../core/services/seo.service';
@@ -32,6 +37,8 @@ import { SnackBar } from './snackBar.interface';
 import { QuestionOptionComponent } from '../../shared/components/test/question-option/question-option.component';
 import { MonopayService } from '../../core/services/monopay.service';
 import { dataDevPayment } from './dev-payment';
+import { TEST_CARDS } from '../../core/content/TEST_CARDS';
+import { CardPaymentComponent } from '../../shared/components/payment/card-payment/card-payment.component';
 
 @Component({
   selector: 'app-test-questions',
@@ -48,6 +55,7 @@ import { dataDevPayment } from './dev-payment';
     TitleCardComponent,
     QuestionWordPipe,
     QuestionOptionComponent,
+    CardPaymentComponent,
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
@@ -82,6 +90,7 @@ export class TestQuestionsComponent
   TEST_NAME!: TestName;
   testTitleText = '';
   testSubtitleText = '';
+  testPrice: string | null = null;
   testQuestionsLength!: number;
   snackBar: SnackBar = {
     firstSnackBarBtnText: 'Йду далі',
@@ -92,6 +101,7 @@ export class TestQuestionsComponent
   //
   accessCurrentTest = signal(false);
   //
+  currentCardInfo!: CardContent | null;
 
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -103,10 +113,13 @@ export class TestQuestionsComponent
     steps: string[];
   };
   isSuccessPayedTest = signal<boolean>(false);
+  isFreeTest = signal<boolean>(false);
+
   // Payment
   redirectUrl = window.location.href;
   testResultsInRouteKey!: string;
   currentTestResultsName!: string;
+  testsCards = TEST_CARDS;
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -117,14 +130,20 @@ export class TestQuestionsComponent
         const testName: TestName = data['testName'];
         this.testTitleText = data['testTitleText'];
         this.testSubtitleText = data['testSubtitleText'];
+        // price
+        this.testPrice = data['testPrice'];
 
+        //
         this.testsInstruction = data['testsInstruction'];
 
         this.snackBar = data['snackBar'] || this.snackBar;
         //
         this.TEST_NAME = testName;
         this.testResultsInRouteKey = this.TEST_NAME + '-results-in-route';
-
+        const foundCard = this.testsCards.find((card) =>
+          card.imageUrl.endsWith(testName + '/')
+        );
+        this.currentCardInfo = foundCard ?? null;
         //
 
         this.seoService.updateMetaTags(
@@ -147,6 +166,9 @@ export class TestQuestionsComponent
           tap((response) => {
             if (response.status === 'success' && response.invoiceId) {
               this.isSuccessPayedTest.set(response.status === 'success');
+            } else if (this.testPrice === null) {
+              this.isFreeTest.set(true);
+              sessionStorage.setItem(this.TEST_NAME + '-isFreeTest', 'true');
             }
           }),
           map(() => questions),
@@ -172,7 +194,13 @@ export class TestQuestionsComponent
     //
     dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
     dataDevPayment.redirectUrl =
-      baseUrl + '/tests' + '/' + this.TEST_NAME + '/payment-success';
+      baseUrl +
+      '/tests' +
+      '/' +
+      this.TEST_NAME +
+      '/payment-success' +
+      '/' +
+      this.testPrice;
     const answers = this.formGroup.value as Answer[];
 
     const newRequest = this.questionsService.createNewRequestObject(
@@ -281,8 +309,14 @@ export class TestQuestionsComponent
     }
     this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
+    if (this.formGroup.valid) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    if (this.formGroup.valid && this.isSuccessPayedTest()) {
+    if (
+      (this.formGroup.valid && this.isSuccessPayedTest()) ||
+      (this.formGroup.valid && this.isFreeTest())
+    ) {
       this.onSubmit();
       return;
     }
