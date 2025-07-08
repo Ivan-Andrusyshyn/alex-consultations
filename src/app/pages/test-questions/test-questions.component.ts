@@ -99,7 +99,6 @@ export class TestQuestionsComponent
     secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
   };
   //
-  accessCurrentTest = signal(false);
   //
   currentCardInfo!: CardContent | null;
 
@@ -130,6 +129,8 @@ export class TestQuestionsComponent
         const testName: TestName = data['testName'];
         this.testTitleText = data['testTitleText'];
         this.testSubtitleText = data['testSubtitleText'];
+        this.isSuccessPayedTest.set(data['isSuccessPayedTest']);
+        this.isFreeTest.set(data['isFreeTest']);
         // price
         this.testPrice = data['testPrice'];
 
@@ -160,23 +161,6 @@ export class TestQuestionsComponent
 
         this.setStorageBoardValue();
         return data['questions'];
-      }),
-      switchMap((questions) => {
-        return this.monopayService.checkStatus(this.TEST_NAME)?.pipe(
-          tap((response) => {
-            if (response.status === 'success' && response.invoiceId) {
-              this.isSuccessPayedTest.set(response.status === 'success');
-            } else if (this.testPrice === null) {
-              this.isFreeTest.set(true);
-              sessionStorage.setItem(this.TEST_NAME + '-isFreeTest', 'true');
-            }
-          }),
-          map(() => questions),
-          catchError((error: any) => {
-            this.accessCurrentTest.set(false);
-            return of(error.message || 'Error checking payment status');
-          })
-        );
       })
     );
 

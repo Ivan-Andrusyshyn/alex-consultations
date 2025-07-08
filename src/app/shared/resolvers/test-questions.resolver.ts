@@ -4,17 +4,11 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
 } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 
-import { RoleInRelationshipsService } from '../../core/services/role-in-relationships.service';
 import { Question, TestName } from '../models/common-tests';
-import { BeYourselfTestService } from '../../core/services/be-yourself.service';
-import { AttractivenessService } from '../../core/services/attractiveness.service';
-import { ToxicalRelationshipService } from '../../core/services/toxical-relationship.service';
-import { YouCoffeeService } from '../../core/services/you-coffee.service';
-import { TraumaticExperienceService } from '../../core/services/traumatic-experience.service';
-import { MainTestNames } from '../../core/utils/testsNames';
-import { QuestionsPageContent } from '../../core/content/QuestionsPageContent';
+import { MonopayService } from '../../core/services/monopay.service';
+import { TestQuestionsProvider } from './test-questions-provider.service';
 
 interface ResolveData {
   message: string | null;
@@ -23,6 +17,8 @@ interface ResolveData {
   testTitleText: string;
   testSubtitleText: string;
   testPrice: string | null;
+  isSuccessPayedTest: boolean;
+  isFreeTest: boolean;
   testInstruction?: {
     testTitle: string;
     instructionsTitle: string;
@@ -45,12 +41,8 @@ interface ResolveData {
 })
 export class TestsQuestionsResolver implements Resolve<any> {
   constructor(
-    private youcoffeeService: YouCoffeeService,
-    private roleInRelationshipsService: RoleInRelationshipsService,
-    private attractivenessService: AttractivenessService,
-    private beYourselfService: BeYourselfTestService,
-    private traumaticExperienceService: TraumaticExperienceService,
-    private toxicalRelationshipsService: ToxicalRelationshipService
+    private testQuestionsProvider: TestQuestionsProvider,
+    private monopayService: MonopayService
   ) {}
 
   resolve(
@@ -58,88 +50,37 @@ export class TestsQuestionsResolver implements Resolve<any> {
     state: RouterStateSnapshot
   ): Observable<ResolveData> {
     const testName = route.parent?.paramMap.get('testName') as TestName;
+    let chooseTest$ = this.testQuestionsProvider.provideByTestName(testName);
 
-    if (testName === 'role-in-relationships') {
-      return this.roleInRelationshipsService.getQuestions().pipe(
-        map((r) => {
-          return {
-            ...r,
-            testName,
-            ...QuestionsPageContent[testName],
-          };
-        })
-      );
-    }
-
-    if (testName === MainTestNames.YouCoffee) {
-      return this.youcoffeeService.getQuestions().pipe(
-        map((r) => {
-          return {
-            ...r,
-            testName,
-            snackBar: {
-              firstSnackBarBtnText: 'Розкриваю аромат',
-              secondSnackBarBtnText: 'Розкрити повний букет',
-              secondSnackBar: '☕ Твоя кава майже заварена. Який у тебе аромат',
-              firstSnackBar: '☕ Твій смак уже починає відкриватись',
-            },
-            ...QuestionsPageContent[testName],
-          };
-        })
-      );
-    }
-    if (testName === MainTestNames.BeYourself) {
-      return this.beYourselfService.getQuestions().pipe(
-        map((r) => {
-          return {
-            ...r,
-            testName,
-            ...QuestionsPageContent[testName],
-          };
-        })
-      );
-    }
-    if (testName === MainTestNames.Attractiveness) {
-      return this.attractivenessService.getQuestions().pipe(
-        map((r) => {
-          return {
-            ...r,
-            testName,
-            ...QuestionsPageContent[testName],
-          };
-        })
-      );
-    }
-    if (testName === MainTestNames.ToxicalRelationships) {
-      return this.toxicalRelationshipsService.getQuestions().pipe(
-        map((r) => {
-          return {
-            ...r,
-            testName,
-            ...QuestionsPageContent[testName],
-          };
-        })
-      );
-    }
-    if (testName === MainTestNames.Traumatic) {
-      return this.traumaticExperienceService.getQuestions().pipe(
-        map((r) => {
-          return {
-            ...r,
-            testName,
-            ...QuestionsPageContent[testName],
-          };
-        })
-      );
-    }
-    return of({
-      message: null,
-      testName: null,
-      testPrice: null,
-      testTitleText: '',
-      testSubtitleText: '',
-      questions: null,
-      seo: undefined,
-    });
+    return chooseTest$?.pipe(
+      switchMap((data) => {
+        return this.monopayService.checkStatus(testName)?.pipe(
+          map((response) => {
+            let isSuccessPayedTest = false;
+            let isFreeTest = false;
+            let testPrice = data.testPrice;
+            if (response.status === 'success' && response.invoiceId) {
+              isSuccessPayedTest = response.status === 'success';
+            } else if (testPrice === null) {
+              isFreeTest = true;
+              sessionStorage.setItem(testName + '-isFreeTest', 'true');
+            }
+            return {
+              isSuccessPayedTest,
+              isFreeTest,
+              ...data,
+            };
+          }),
+          catchError((error: any) =>
+            of({
+              ...data,
+              isSuccessPayedTest: false,
+              isFreeTest: false,
+              message: error.message || 'Error checking payment status',
+            })
+          )
+        );
+      })
+    );
   }
 }
