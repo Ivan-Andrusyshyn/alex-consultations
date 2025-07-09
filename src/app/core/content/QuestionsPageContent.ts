@@ -1,5 +1,6 @@
 import { TestName } from '../../shared/models/common-tests';
 import { MainTestNames } from '../utils/testsNames';
+import { MainTestPrices } from './testPrices';
 
 export const QuestionsPageContent: Record<
   TestName,
@@ -29,7 +30,7 @@ export const QuestionsPageContent: Record<
         'Після результатів не зволікайте — запишіться на безкоштовну консультацію. Дізнайтесь, як вам будувати стосунки.',
       ],
     },
-    testPrice: '200грн',
+    testPrice: MainTestPrices['RoleInRelationships'],
     testTitleText: 'Ти — опора, натхнення чи дзеркало для партнера?',
     testSubtitleText:
       'Цей тест покаже, як ти поводишся у близьких зв’язках і що несеш у життя іншої людини. Це дає глибоке усвідомлення себе у парі.',
@@ -52,8 +53,7 @@ export const QuestionsPageContent: Record<
         'Прочитавши опис залишайте заявку на безкоштовну консультацію. Розкрийте свою силу на повну',
       ],
     },
-    testPrice: '150грн',
-
+    testPrice: MainTestPrices['YouCoffee'],
     testTitleText:
       'Твій смак особистості — як кава: глибокий, іноді з гірчинкою, але завжди унікальний.',
     testSubtitleText:
@@ -77,8 +77,7 @@ export const QuestionsPageContent: Record<
         'Після результатів не зволікайте — запишіться на безкоштовну 60-хвилинну консультацію. Отримайте цілісне та унікальне розуміння себе',
       ],
     },
-    testPrice: '350грн',
-
+    testPrice: MainTestPrices['BeYourself'],
     testTitleText: 'Пройшовши цей тест, ти відкриєш основу своєї особистості.',
     testSubtitleText:
       'Ці знання залишаться з тобою, навіть якщо ти вирішиш не записуватись на консультацію.',
@@ -101,7 +100,7 @@ export const QuestionsPageContent: Record<
         'Після результатів не зволікайте — запишіться на безкоштовну консультацію. Дізнайтесь, як стати максимлаьно привабливим у своєму типі',
       ],
     },
-    testPrice: null,
+    testPrice: MainTestPrices['Attractiveness'],
 
     testTitleText:
       'Зрозумій, що саме в тобі найбільше притягує людей — емоційність, впевненість чи глибина?',
@@ -127,8 +126,7 @@ export const QuestionsPageContent: Record<
         'Після результатів натисніть на кнопку Записатися на безкоштовну консультацію. Ви дізнаєтесь більше про ваш звʼязок та усі його особливості.',
       ],
     },
-    testPrice: '250грн',
-
+    testPrice: MainTestPrices['ToxicalRelationships'],
     testTitleText:
       'Чи не виснажують тебе стосунки? А може, щось давно сигналить про проблему?',
     testSubtitleText:
@@ -154,7 +152,7 @@ export const QuestionsPageContent: Record<
         'Потім натискайте Записатися на безкоштовну консультацію. Ви дізнаєтесь, як зробити ваше життя більш щасливим.',
       ],
     },
-    testPrice: null,
+    testPrice: MainTestPrices['Traumatic'],
 
     testTitleText:
       'Як ти реагуєш на критику, непорозуміння чи образливі слова?',

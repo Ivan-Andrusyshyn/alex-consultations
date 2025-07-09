@@ -9,7 +9,7 @@
       </p>
       <!-- <span class="badge">🔥 Хіт тестів</span> -->
       <span class="badge" *ngIf="card.testPrice"
-        >Вартість: {{ card.testPrice }}</span
+        >Вартість: {{ card.testPrice + "грн" }}</span
       >
       <span class="badge" *ngIf="!card.testPrice"> {{ "Безкоштовно" }}</span>
     </div>

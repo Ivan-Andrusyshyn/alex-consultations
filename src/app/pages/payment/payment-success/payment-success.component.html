@@ -4,7 +4,9 @@
       <img [src]="currentCardInfo?.imageUrl + 'card/1.svg'" alt="Test image" />
       <div class="test-info">
         <h2>{{ currentCardInfo?.title }}</h2>
-        <div class="price">Оплата {{ priceTests }} пройшла успішно!</div>
+        <div class="price">
+          Оплата {{ priceTests + "грн" }} пройшла успішно!
+        </div>
         <button class="pay-button" (click)="navigateByClick()">
           Перейти до результатів
         </button>
