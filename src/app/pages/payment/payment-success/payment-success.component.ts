@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 //
 
@@ -18,7 +18,7 @@ import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 @Component({
   selector: 'app-payment-success',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './payment-success.component.html',
   styleUrl: './payment-success.component.scss',
   animations: [fadeInAnimation],
@@ -28,7 +28,7 @@ export class PaymentSuccessComponent implements OnInit {
   //
   private activeRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
-  private router = inject(Router);
+  // private router = inject(Router);
 
   testName!: TestName;
   urlResults!: string;
@@ -61,6 +61,12 @@ export class PaymentSuccessComponent implements OnInit {
       .subscribe();
   }
   navigateByClick() {
-    this.router.navigate(['tests', this.testName, 'details', this.testResults]);
+    if (this.testName && this.testResults) {
+      const url = `/tests/${this.testName}/details/${this.testResults}`;
+      window.location.href = url;
+    } else {
+      alert('problem with navigation data.');
+    }
+    // this.router.navigate(['tests', this.testName, 'details', this.testResults]);
   }
 }
