@@ -1,6 +1,10 @@
 <section class="payment-container">
-  <div class="payment-wrapper">
-    <div class="test-card" @fadeIn *ngIf="cardInfo$ | async as cardInfo">
+  <div
+    class="payment-wrapper"
+    @fadeIn
+    *ngIf="cardInfo$ | async as cardInfo; else loading"
+  >
+    <div class="test-card">
       <img [src]="currentCardInfo?.imageUrl + 'card/1.svg'" alt="Test image" />
       <div class="test-info">
         <h2>{{ currentCardInfo?.title }}</h2>
@@ -15,4 +19,7 @@
       </div>
     </div>
   </div>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </section>
