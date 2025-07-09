@@ -1,14 +1,14 @@
 <section class="payment-container">
   <div class="payment-wrapper">
-    <div class="test-card">
+    <div class="test-card" @fadeIn *ngIf="cardInfo$ | async as cardInfo">
       <img [src]="currentCardInfo?.imageUrl + 'card/1.svg'" alt="Test image" />
-      <div class="test-info" *ngIf="cardInfo$ | async as cardInfo">
+      <div class="test-info">
         <h2>{{ currentCardInfo?.title }}</h2>
         <div class="price">Оплата {{ cardInfo.price }} пройшла успішно!</div>
         <button
           type="button"
           class="pay-button"
-          (click)="navigateByClick(cardInfo.testName, cardInfo.testResults)"
+          (click)="navigateByClick(cardInfo.testName, cardInfo.results)"
         >
           Перейти до результатів
         </button>

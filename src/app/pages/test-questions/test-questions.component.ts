@@ -176,33 +176,21 @@ export class TestQuestionsComponent
     const baseUrl = window.location.origin;
     //
 
-    const answers = this.formGroup.value as Answer[];
+    //
+    dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
+    dataDevPayment.redirectUrl =
+      baseUrl +
+      '/tests/' +
+      this.TEST_NAME +
+      '/payment-success/' +
+      this.testPrice +
+      '?testName=' +
+      encodeURIComponent(this.TEST_NAME);
 
-    const newRequest = this.questionsService.createNewRequestObject(
-      this.TEST_NAME,
-      answers
-    );
-    this.questionsService
-      .makeRequestByTestName(this.TEST_NAME, newRequest)
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        tap((results) => {
-          dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
-          dataDevPayment.redirectUrl =
-            baseUrl +
-            '/tests' +
-            '/' +
-            this.TEST_NAME +
-            '/payment-success' +
-            '/' +
-            this.testPrice +
-            '?results=' +
-            encodeURIComponent(results) +
-            '&testName=' +
-            encodeURIComponent(this.TEST_NAME);
-        }),
-        switchMap(() => this.monopayService.createPayment(dataDevPayment))
-      )
+    //
+    this.monopayService
+      .createPayment(dataDevPayment)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((response) => {
         const currentUrl = window.location.pathname;
         window.history.pushState({}, '', currentUrl);

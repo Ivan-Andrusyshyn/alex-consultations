@@ -111,6 +111,7 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.testResults$ = this.activeRoute.data.pipe(
       map((data) => {
+        //
         const response = data['data'] as ResponseData;
         this.showCountDownTimer.set(true);
         this.fullUrl = window.location.href;
@@ -124,6 +125,7 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         const testName = response.testName as TestName;
 
+        //
         this.TEST_NAME.set(testName);
 
         this.sendObject = {
