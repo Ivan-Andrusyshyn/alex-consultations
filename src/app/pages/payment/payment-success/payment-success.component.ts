@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { tap } from 'rxjs';
 //
 
@@ -18,7 +18,7 @@ import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 @Component({
   selector: 'app-payment-success',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './payment-success.component.html',
   styleUrl: './payment-success.component.scss',
   animations: [fadeInAnimation],
@@ -57,7 +57,4 @@ export class PaymentSuccessComponent implements OnInit {
       .subscribe();
   }
   //
-  goToResults() {
-    this.router.navigateByUrl(this.urlResults);
-  }
 }

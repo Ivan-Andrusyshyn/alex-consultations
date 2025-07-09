@@ -5,7 +5,7 @@
       <div class="test-info">
         <h2>{{ currentCardInfo?.title }}</h2>
         <div class="price">Оплата {{ priceTests }} пройшла успішно!</div>
-        <button class="pay-button" (click)="goToResults()">
+        <button class="pay-button" [routerLink]="urlResults">
           Перейти до результатів
         </button>
       </div>
