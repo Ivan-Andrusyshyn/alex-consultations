@@ -117,7 +117,6 @@ export class TestQuestionsComponent
 
   // Payment
   redirectUrl = window.location.href;
-  testResultsInRouteKey!: string;
   currentTestResultsName!: string;
   testsCards = TEST_CARDS;
 
@@ -141,7 +140,6 @@ export class TestQuestionsComponent
         this.snackBar = data['snackBar'] || this.snackBar;
         //
         this.TEST_NAME = testName;
-        this.testResultsInRouteKey = this.TEST_NAME + '-results-in-route';
         const foundCard = this.testsCards.find((card) =>
           card.imageUrl.endsWith(testName + '/')
         );
@@ -177,15 +175,7 @@ export class TestQuestionsComponent
   createMonoPaymentByClick() {
     const baseUrl = window.location.origin;
     //
-    dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
-    dataDevPayment.redirectUrl =
-      baseUrl +
-      '/tests' +
-      '/' +
-      this.TEST_NAME +
-      '/payment-success' +
-      '/' +
-      this.testPrice;
+
     const answers = this.formGroup.value as Answer[];
 
     const newRequest = this.questionsService.createNewRequestObject(
@@ -197,7 +187,17 @@ export class TestQuestionsComponent
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         tap((results) => {
-          sessionStorage.setItem(this.testResultsInRouteKey, results);
+          dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
+          dataDevPayment.redirectUrl =
+            baseUrl +
+            '/tests' +
+            '/' +
+            this.TEST_NAME +
+            '/payment-success' +
+            '/' +
+            this.testPrice +
+            '?results=' +
+            encodeURIComponent(results);
         }),
         switchMap(() => this.monopayService.createPayment(dataDevPayment))
       )
@@ -440,7 +440,6 @@ export class TestQuestionsComponent
     this.beYourselfService.counterQuestion.next(1);
 
     const answers = this.formGroup.value;
-    sessionStorage.removeItem(this.testResultsInRouteKey);
 
     sessionStorage.setItem(
       this.TEST_NAME + '-answers',

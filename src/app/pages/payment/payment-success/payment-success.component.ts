@@ -28,7 +28,7 @@ export class PaymentSuccessComponent implements OnInit {
   //
   private activeRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
-  // private router = inject(Router);
+  private router = inject(Router);
 
   testName!: TestName;
   urlResults!: string;
@@ -62,11 +62,16 @@ export class PaymentSuccessComponent implements OnInit {
   }
   navigateByClick() {
     if (this.testName && this.testResults) {
-      const url = `/tests/${this.testName}/details/${this.testResults}`;
-      window.location.href = url;
+      // const url = `/tests/${this.testName}/details/${this.testResults}`;
+      // window.location.href = url;
+      this.router.navigate([
+        'tests',
+        this.testName,
+        'details',
+        this.testResults,
+      ]);
     } else {
       alert('problem with navigation data.');
     }
-    // this.router.navigate(['tests', this.testName, 'details', this.testResults]);
   }
 }

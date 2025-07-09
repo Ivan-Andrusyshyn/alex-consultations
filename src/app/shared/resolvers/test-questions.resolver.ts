@@ -8,7 +8,7 @@ import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 
 import { Question, TestName } from '../models/common-tests';
 import { MonopayService } from '../../core/services/monopay.service';
-import { TestQuestionsProvider } from './test-questions-provider.service';
+import { TestQuestionsProvider } from '../../core/services/test-questions-provider.service';
 
 interface ResolveData {
   message: string | null;
