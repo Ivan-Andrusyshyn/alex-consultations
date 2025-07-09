@@ -197,7 +197,9 @@ export class TestQuestionsComponent
             '/' +
             this.testPrice +
             '?results=' +
-            encodeURIComponent(results);
+            encodeURIComponent(results) +
+            '&testName=' +
+            encodeURIComponent(this.TEST_NAME);
         }),
         switchMap(() => this.monopayService.createPayment(dataDevPayment))
       )

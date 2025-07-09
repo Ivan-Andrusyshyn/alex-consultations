@@ -61,6 +61,8 @@ export class PaymentSuccessComponent implements OnInit {
       .subscribe();
   }
   navigateByClick() {
+    console.log(this.testName, this.testResults);
+
     if (this.testName && this.testResults) {
       // const url = `/tests/${this.testName}/details/${this.testResults}`;
       // window.location.href = url;

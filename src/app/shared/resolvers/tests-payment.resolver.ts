@@ -25,9 +25,12 @@ export class TestsPaymentResolver implements Resolve<any> {
     testName: TestName;
     urlResults: string;
   }> {
-    const testName = route.parent?.paramMap.get('testName') as TestName;
     const price = route.paramMap.get('price') as string;
+    const urlSearchParams = new URLSearchParams(state.url.split('?')[1]);
+    const testResults = urlSearchParams.get('results') ?? '';
+    const testName = urlSearchParams.get('testName') as TestName;
 
+    //
     return this.monopayService.checkStatus(testName)?.pipe(
       map((response) => {
         if (response.status === 'success' && response.invoiceId && testName) {
@@ -36,8 +39,6 @@ export class TestsPaymentResolver implements Resolve<any> {
           sessionStorage.removeItem(testName + '-showQuestions');
           //
 
-          const urlSearchParams = new URLSearchParams(state.url.split('?')[1]);
-          const testResults = urlSearchParams.get('results') ?? '';
           const urlResults =
             '/tests' + '/' + testName + '/details' + '/' + testResults;
 
