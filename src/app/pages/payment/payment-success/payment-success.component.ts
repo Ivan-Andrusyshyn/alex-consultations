@@ -68,7 +68,7 @@ export class PaymentSuccessComponent implements OnInit {
 
   ngOnInit(): void {
     const testInfo = JSON.parse(
-      sessionStorage.getItem('paid-testInfo') ?? 'null'
+      localStorage.getItem('paid-testInfo') ?? 'null'
     ) as TestInfo;
     if (!testInfo) {
       this.router.navigateByUrl('/tests');

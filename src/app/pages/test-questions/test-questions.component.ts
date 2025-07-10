@@ -182,7 +182,7 @@ export class TestQuestionsComponent
       baseUrl + '/tests/' + this.TEST_NAME + '/payment-success';
     dataDevPayment.merchantPaymInfo.basketOrder[0].name =
       this.currentCardInfo?.title ?? 'test';
-    sessionStorage.setItem(
+    localStorage.setItem(
       'paid-testInfo',
       JSON.stringify({
         testName: this.TEST_NAME,
