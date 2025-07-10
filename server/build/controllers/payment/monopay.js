@@ -64,6 +64,7 @@ const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         //
         monopaymentObject.merchantPaymInfo.reference = reference;
         const result = (yield monoService.createPayment(monopaymentObject));
+        console.log(result);
         //
         yield setCoockie(res, 'created', commentWithTestName, result.invoiceId);
         yield createDbPayment(result.invoiceId, amount, commentWithTestName);

@@ -16,16 +16,16 @@ export interface MonoPaymentRequest {
       qty: number;
       sum: number;
       total: number;
-      icon: string | null;
-      unit: string;
-      code: string;
-      barcode: string | null;
-      header: string | null;
-      footer: string | null;
-      tax: any[];
-      uktzed: string | null;
+      icon?: string | null;
+      unit?: string;
+      code?: string;
+      barcode?: string | null;
+      header?: string | null;
+      footer?: string | null;
+      tax?: any[];
+      uktzed?: string | null;
       splitReceiverId: string;
-      discounts: Array<{
+      discounts?: Array<{
         type: string | null;
         mode: string | null;
         value: number | null;
@@ -38,7 +38,7 @@ export interface MonoPaymentRequest {
   paymentType: string | null;
   qrId?: string;
   code?: string;
-  saveCardData: {
+  saveCardData?: {
     saveCard: boolean | null;
     walletId: string;
   };

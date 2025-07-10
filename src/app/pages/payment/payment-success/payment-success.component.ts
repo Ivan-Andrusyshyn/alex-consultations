@@ -60,8 +60,17 @@ export class PaymentSuccessComponent implements OnInit {
   }>;
 
   ngOnInit(): void {
-    const testName = this.route.snapshot.paramMap.get('testName') as TestName;
-    const price = this.route.snapshot.paramMap.get('price') as string;
+    const testInfo = JSON.parse(
+      sessionStorage.getItem('paid-testInfo') ?? 'null'
+    ) as {
+      testName: TestName;
+      imgUrl: string;
+      title: string;
+      price: string | number;
+    };
+    const testName = testInfo.testName;
+    const price = testInfo.price;
+
     const storageResult = JSON.parse(
       sessionStorage.getItem(testName + '-results') ?? 'null'
     );
@@ -113,9 +122,11 @@ export class PaymentSuccessComponent implements OnInit {
     response: { status: string; invoiceId: string },
     testName: TestName,
     result: any,
-    price: string | null
+    price: string | number
   ) {
-    if (response.status === 'success' && response.invoiceId && testName) {
+    const isSuccessPayed =
+      response.status === 'success' && response.invoiceId && testName;
+    if (isSuccessPayed) {
       return {
         results: result,
         testName,

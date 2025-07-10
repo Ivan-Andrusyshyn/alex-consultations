@@ -179,14 +179,18 @@ export class TestQuestionsComponent
     //
     dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
     dataDevPayment.redirectUrl =
-      baseUrl +
-      '/tests/' +
-      this.TEST_NAME +
-      '/payment-success/' +
-      this.testPrice +
-      '?testName=' +
-      encodeURIComponent(this.TEST_NAME);
-
+      baseUrl + '/tests/' + this.TEST_NAME + '/payment-success';
+    dataDevPayment.merchantPaymInfo.basketOrder[0].name =
+      this.currentCardInfo?.title ?? 'test';
+    sessionStorage.setItem(
+      'paid-testInfo',
+      JSON.stringify({
+        testName: this.TEST_NAME,
+        imgUrl: this.currentCardInfo?.imageUrl,
+        title: this.currentCardInfo?.title,
+        price: this.testPrice,
+      })
+    );
     //
     this.monopayService
       .createPayment(dataDevPayment)

@@ -51,7 +51,7 @@ export const routes: Routes = [
 
     children: [
       {
-        path: 'payment-success/:price',
+        path: 'payment-success',
         loadComponent: () =>
           import(
             './pages/payment/payment-success/payment-success.component'
