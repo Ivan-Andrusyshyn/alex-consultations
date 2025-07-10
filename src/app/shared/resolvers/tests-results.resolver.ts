@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 
 //
 import { RoleInRelationshipsService } from '../../core/services/tests/role-in-relationships.service';
@@ -16,6 +16,7 @@ import { MainTestNames } from '../../core/utils/testsNames';
 import { AttractivenessService } from '../../core/services/tests/attractiveness.service';
 import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
 import { YouCoffeeService } from '../../core/services/tests/you-coffee.service';
+import { MonopayService } from '../../core/services/monopay.service';
 
 interface ResultsResolver {
   message: string | null;
@@ -27,7 +28,14 @@ interface ResultsResolver {
     metaTags: Array<string>;
   };
 }
-
+interface TestInfo {
+  testName: TestName;
+  imgUrl: string;
+  title: string;
+  price: string | number;
+  invoiceId: string;
+}
+//
 @Injectable({
   providedIn: 'root',
 })
@@ -38,7 +46,8 @@ export class TestsResultsResolver implements Resolve<any> {
     private beYourselfService: BeYourselfTestService,
     private traumaticExperienceService: TraumaticExperienceService,
     private toxicalRelationshipsService: ToxicalRelationshipService,
-    private youCoffeeService: YouCoffeeService
+    private youCoffeeService: YouCoffeeService,
+    private monopayService: MonopayService
   ) {}
 
   private router = inject(Router);
@@ -50,9 +59,14 @@ export class TestsResultsResolver implements Resolve<any> {
     const personalityName = route.paramMap.get('categoryName') as string;
 
     const testName = route.parent?.paramMap.get('testName') as TestName;
+    let observableReq: Observable<ResultsResolver> = of({
+      message: '',
+      results: null,
+      testName: null,
+    });
 
     if (testName === MainTestNames.RoleInRelationships) {
-      return this.roleInRelationshipsService
+      observableReq = this.roleInRelationshipsService
         .getRoleInRelationshipsInfoByCategory(personalityName!)
         .pipe(
           map((r) => {
@@ -77,7 +91,7 @@ export class TestsResultsResolver implements Resolve<any> {
         );
     }
     if (testName === MainTestNames.YouCoffee) {
-      return this.youCoffeeService
+      observableReq = this.youCoffeeService
         .youCoffeeInfoByCategory(personalityName)
         .pipe(
           map((r) => {
@@ -106,7 +120,7 @@ export class TestsResultsResolver implements Resolve<any> {
     }
 
     if (testName === MainTestNames.BeYourself) {
-      return this.beYourselfService
+      observableReq = this.beYourselfService
         .getPersonTypeByResults(personalityName!)
         .pipe(
           map((response) => ({
@@ -139,7 +153,7 @@ export class TestsResultsResolver implements Resolve<any> {
         );
     }
     if (testName === MainTestNames.Attractiveness) {
-      return this.attractivenessService
+      observableReq = this.attractivenessService
         .getAttractivenessInfoByCategory(personalityName)
         .pipe(
           map((r) => {
@@ -165,7 +179,7 @@ export class TestsResultsResolver implements Resolve<any> {
         );
     }
     if (testName === MainTestNames.ToxicalRelationships) {
-      return this.toxicalRelationshipsService
+      observableReq = this.toxicalRelationshipsService
         .getToxicalRelationshipInfoByCategory(personalityName!)
         .pipe(
           map((r) => {
@@ -189,7 +203,7 @@ export class TestsResultsResolver implements Resolve<any> {
         );
     }
     if (testName === MainTestNames.Traumatic) {
-      return this.traumaticExperienceService
+      observableReq = this.traumaticExperienceService
         .getEmotionsTypeInfoByResults(personalityName!)
         .pipe(
           map((r) => {
@@ -213,10 +227,32 @@ export class TestsResultsResolver implements Resolve<any> {
           })
         );
     }
-    return of({
-      message: null,
-      testName: null,
-      results: null,
-    });
+    return observableReq.pipe(
+      switchMap((testResults) => {
+        const isFreeTest = JSON.parse(
+          localStorage.getItem(testName + '-isFreeTest') ?? 'null'
+        ) as null | boolean;
+        const testInfo = JSON.parse(
+          localStorage.getItem(testName + '-paid-testInfo') ?? 'null'
+        ) as TestInfo;
+        //
+        if (!isFreeTest) {
+          return this.monopayService
+            .checkStatus(testName, testInfo.invoiceId)
+            .pipe(
+              map((response) => {
+                if (response.status === 'success' && response.invoiceId) {
+                  console.log('success');
+                } else {
+                  this.router.navigateByUrl('/tests');
+                }
+                return testResults;
+              })
+            );
+        } else {
+          return of(testResults);
+        }
+      })
+    );
   }
 }

@@ -3,21 +3,11 @@ import {
   Component,
   inject,
   OnInit,
-  signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {
-  catchError,
-  finalize,
-  map,
-  Observable,
-  of,
-  startWith,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 //
 
 //
@@ -36,6 +26,7 @@ interface TestInfo {
   imgUrl: string;
   title: string;
   price: string | number;
+  invoiceId: string;
 }
 
 @Component({
@@ -51,7 +42,8 @@ interface TestInfo {
 export class PaymentSuccessComponent implements OnInit {
   //
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private routeActive = inject(ActivatedRoute);
+
   private monopayService = inject(MonopayService);
   private questionsService = inject(QuestionsService);
   //
@@ -67,23 +59,40 @@ export class PaymentSuccessComponent implements OnInit {
   }>;
 
   ngOnInit(): void {
+    const testName = this.routeActive.parent?.snapshot.paramMap.get(
+      'testName'
+    ) as TestName;
     const testInfo = JSON.parse(
-      localStorage.getItem('paid-testInfo') ?? 'null'
+      localStorage.getItem(testName + '-paid-testInfo') ?? 'null'
     ) as TestInfo;
     if (!testInfo) {
       this.router.navigateByUrl('/tests');
     }
 
-    const testName = testInfo.testName;
     const price = testInfo.price;
+    const invoiceId = testInfo.invoiceId;
 
     const storageResult = JSON.parse(
       localStorage.getItem(testName + '-results') ?? 'null'
     );
     //
+    this.cardInfo$ = this.getInfoByCheckSuccess(
+      testName,
+      invoiceId,
+      storageResult,
+      price
+    );
+  }
+  //
 
-    //
-    this.cardInfo$ = this.monopayService.checkStatus(testName)?.pipe(
+  //
+  private getInfoByCheckSuccess(
+    testName: TestName,
+    invoiceId: string,
+    storageResult: null | { categoryName: string },
+    price: number | string
+  ) {
+    return this.monopayService.checkStatus(testName, invoiceId)?.pipe(
       map((response) => {
         const foundCard = this.testsCards.find((card) =>
           card.imageUrl.endsWith(testName + '/')
@@ -97,6 +106,8 @@ export class PaymentSuccessComponent implements OnInit {
         const testAnswers = JSON.parse(
           localStorage.getItem(testName + '-answers') ?? 'null'
         ) as { answers: Answer[]; currentQuestion: string | number } | null;
+        //
+
         if (storageResult === null && testAnswers) {
           const newRequest = this.questionsService.createNewRequestObject(
             testName,
@@ -106,7 +117,7 @@ export class PaymentSuccessComponent implements OnInit {
         } else {
           this.cleanStorage(testName);
           //
-          return of({ ...response, results: storageResult.categoryName });
+          return of({ ...response, results: storageResult?.categoryName });
         }
       }),
 
@@ -114,11 +125,6 @@ export class PaymentSuccessComponent implements OnInit {
         return of(error.message);
       })
     );
-  }
-
-  private cleanStorage(testName: TestName) {
-    localStorage.removeItem(testName + '-answers');
-    localStorage.removeItem(testName + '-showQuestions');
   }
 
   private getDataByStatus(
@@ -147,11 +153,15 @@ export class PaymentSuccessComponent implements OnInit {
       .makeRequestByTestName(testName, newRequest)
       .pipe(
         map((results) => {
-          //
           this.cleanStorage(testName);
           return { ...data, results };
         })
       );
+  }
+
+  private cleanStorage(testName: TestName) {
+    localStorage.removeItem(testName + '-answers');
+    localStorage.removeItem(testName + '-showQuestions');
   }
 
   navigateByClick(testName: string, testResults: string | null) {

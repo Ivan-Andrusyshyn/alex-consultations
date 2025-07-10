@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { environment } from '../environment/environment';
@@ -28,18 +28,32 @@ export class MonopayService {
     });
   }
 
-  checkStatus(testName: TestName): Observable<{
+  checkStatus(
+    testName: TestName,
+    invoiceId: string = 'unknown'
+  ): Observable<{
     status: 'success' | 'created' | 'failed';
     invoiceId: string;
     testName: TestName;
   }> {
-    return this.http.get<{
-      status: 'created' | 'success' | 'failed';
-      invoiceId: string;
-      testName: TestName;
-    }>(`${this.testsUrl}/api/monopay/check-status?testName=${testName}`, {
-      withCredentials: true,
-    });
+    return this.http
+      .get<{
+        status: 'created' | 'success' | 'failed';
+        invoiceId: string;
+        testName: TestName;
+      }>(
+        `${this.testsUrl}/api/monopay/check-status?testName=${testName}&invoiceId=${invoiceId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        tap((response) => {
+          if (response.status === 'failed') {
+            localStorage.removeItem(response.testName + '-paid-testInfo');
+          }
+        })
+      );
   }
 
   getClientInfo() {

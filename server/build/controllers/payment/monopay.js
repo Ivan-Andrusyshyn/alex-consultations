@@ -30,27 +30,27 @@ const checkProperty = (res, monopaymentObject) => __awaiter(void 0, void 0, void
         return res.status(400).json({ message: 'Invalid payment data' });
     }
 });
-const createDbPayment = (invoiceId, amount, comment) => __awaiter(void 0, void 0, void 0, function* () {
-    yield mono_payment_schema_1.PaymentModel.create({
-        invoiceId,
-        status: 'created',
-        amount,
-        comment,
-        createdAt: new Date(),
-    });
-});
-const setCoockie = (res, status, testName, invoiceId) => __awaiter(void 0, void 0, void 0, function* () {
-    res.cookie(testName + '-payment', JSON.stringify({
-        invoiceId,
-        status,
-        testName,
-    }), {
-        httpOnly: true,
-        secure: isProd,
-        sameSite: isProd ? 'none' : 'strict',
-        maxAge: 1000 * 60 * 60 * 3,
-    });
-});
+// const setCoockie = async (
+//   res: Response,
+//   status: string,
+//   testName: TestName,
+//   invoiceId: string
+// ) => {
+//   res.cookie(
+//     testName + '-payment',
+//     JSON.stringify({
+//       invoiceId,
+//       status,
+//       testName,
+//     }),
+//     {
+//       httpOnly: true,
+//       secure: isProd,
+//       sameSite: isProd ? 'none' : 'strict',
+//       maxAge: 1000 * 60 * 60 * 3,
+//     }
+//   );
+// };
 // Create a payment
 const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -64,10 +64,8 @@ const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         //
         monopaymentObject.merchantPaymInfo.reference = reference;
         const result = (yield monoService.createPayment(monopaymentObject));
-        console.log(result);
         //
-        yield setCoockie(res, 'created', commentWithTestName, result.invoiceId);
-        yield createDbPayment(result.invoiceId, amount, commentWithTestName);
+        // await setCoockie(res, 'created', commentWithTestName, result.invoiceId);
         res.json(Object.assign(Object.assign({}, result), { status: 'created', testName: commentWithTestName }));
     }
     catch (err) {
@@ -79,24 +77,62 @@ const createPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.createPayment = createPayment;
+//
 const checkStatusPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const invoiceId = req.body.paymentData.invoiceId;
-        const testName = req.body.paymentData.testName;
-        const status = req.body.paymentData.status;
+        const { invoiceId, testName } = req.body.paymentData;
+        const paymentDoc = yield mono_payment_schema_1.PaymentModel.findOne({ invoiceId });
         const result = yield monoService.statusPayment(invoiceId);
-        if (status === 'created' && result.status === 'success') {
-            yield setCoockie(res, 'success', testName, result.invoiceId);
+        if (result.status === 'success') {
+            const now = new Date();
+            if (!paymentDoc) {
+                yield mono_payment_schema_1.PaymentModel.create({
+                    invoiceId,
+                    testName,
+                    status: 'success',
+                    paidAt: now,
+                });
+            }
+            else if (paymentDoc.status !== 'success') {
+                yield mono_payment_schema_1.PaymentModel.updateOne({ invoiceId }, {
+                    $set: {
+                        status: 'success',
+                        paidAt: now,
+                    },
+                });
+            }
         }
-        yield mono_payment_schema_1.PaymentModel.updateOne({ invoiceId }, { $set: { status: 'success' } });
-        res.json({
-            invoiceId: result.invoiceId,
+        const updatedDoc = yield mono_payment_schema_1.PaymentModel.findOne({ invoiceId });
+        if ((updatedDoc === null || updatedDoc === void 0 ? void 0 : updatedDoc.status) === 'success') {
+            const now = Date.now();
+            const paidAt = updatedDoc.paidAt
+                ? new Date(updatedDoc.paidAt).getTime()
+                : 0;
+            const TWO_HOURS = 1000 * 60 * 60 * 2;
+            if (now - paidAt > TWO_HOURS) {
+                return res.json({
+                    invoiceId,
+                    status: 'failed',
+                    reason: 'Access expired',
+                });
+            }
+            return res.json({
+                invoiceId,
+                status: 'success',
+                testName,
+            });
+        }
+        return res.json({
+            invoiceId,
             status: result.status,
+            testName,
         });
     }
     catch (error) {
         console.error('Check Status Payment Error:', error);
-        res.status(500).json({ message: 'Error checking payment status', error });
+        return res
+            .status(500)
+            .json({ message: 'Error checking payment status', error });
     }
 });
 exports.checkStatusPayment = checkStatusPayment;

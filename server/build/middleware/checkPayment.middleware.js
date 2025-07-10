@@ -10,30 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkPaymentCookie = void 0;
+//
 const checkPaymentCookie = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     const testName = req.query.testName;
-    const cookieKey = `${testName}-payment`;
-    const rawData = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a[cookieKey];
+    const invoiceId = req.query.invoiceId;
     try {
-        let parsedData;
-        if (rawData) {
-            parsedData = JSON.parse(rawData !== null && rawData !== void 0 ? rawData : 'null');
-        }
-        else {
+        if (invoiceId === 'unknown' || !testName) {
             return res.status(200).json({
-                message: 'Payment is not created.',
-                status: 'failed',
-            });
-        }
-        console.log(parsedData);
-        if (!parsedData.invoiceId) {
-            res.status(200).json({
                 message: 'Error checking payment status. InvoiceId is not exist',
                 status: 'failed',
             });
         }
-        req.body.paymentData = parsedData;
+        req.body.paymentData = {
+            testName,
+            invoiceId,
+        };
         next();
     }
     catch (error) {

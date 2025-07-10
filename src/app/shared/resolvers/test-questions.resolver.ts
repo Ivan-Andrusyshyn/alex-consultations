@@ -9,6 +9,14 @@ import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { Question, TestName } from '../models/common-tests';
 import { MonopayService } from '../../core/services/monopay.service';
 import { TestQuestionsProvider } from '../../core/services/test-questions-provider.service';
+//
+interface TestInfo {
+  testName: TestName;
+  imgUrl: string;
+  title: string;
+  price: string | number;
+  invoiceId: string;
+}
 
 interface ResolveData {
   message: string | null;
@@ -54,7 +62,11 @@ export class TestsQuestionsResolver implements Resolve<any> {
 
     return chooseTest$?.pipe(
       switchMap((data) => {
-        return this.monopayService.checkStatus(testName)?.pipe(
+        const testInfo = JSON.parse(
+          localStorage.getItem(testName + '-paid-testInfo') ?? 'null'
+        ) as TestInfo;
+        const invoiceId = testInfo?.invoiceId ?? undefined;
+        return this.monopayService.checkStatus(testName, invoiceId)?.pipe(
           map((response) => {
             let isSuccessPayedTest = false;
             let isFreeTest = false;

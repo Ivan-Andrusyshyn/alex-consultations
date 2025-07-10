@@ -9,9 +9,8 @@ const PaymentSchema = new mongoose_1.Schema({
         enum: ['created', 'success', 'failed'],
         default: 'created',
     },
-    amount: { type: Number },
-    comment: { type: String },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date },
+    paidAt: { type: Date },
 });
 exports.PaymentModel = (0, mongoose_1.model)('Payment', PaymentSchema);

@@ -10,11 +10,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { AsyncPipe, NgIf, ViewportScroller } from '@angular/common';
-import { map, Observable, of, switchMap, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ShareButtons } from 'ngx-sharebuttons/buttons';
 
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
@@ -31,7 +31,6 @@ import { ResponseData } from './data.interface';
 import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
-import { MonopayService } from '../../core/services/monopay.service';
 
 @Component({
   selector: 'app-test-results',
@@ -59,8 +58,6 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   private notificationService = inject(NotificationService);
   private viewportScroller = inject(ViewportScroller);
   private resultsService = inject(ResultService);
-  private monopayService = inject(MonopayService);
-  private router = inject(Router);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
@@ -136,26 +133,6 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
           ...response.results,
           subCategoryName: response.subCategoryCoffee ?? '',
         };
-      }),
-      switchMap((testResults) => {
-        const isFreeTest = JSON.parse(
-          localStorage.getItem(this.TEST_NAME() + '-isFreeTest') ?? 'null'
-        ) as null | boolean;
-
-        if (!isFreeTest) {
-          return this.monopayService.checkStatus(this.TEST_NAME()).pipe(
-            tap((response) => {
-              if (response.status === 'success' && response.invoiceId) {
-                console.log('success');
-              } else {
-                this.router.navigateByUrl('/tests');
-              }
-            }),
-            map(() => testResults)
-          );
-        } else {
-          return of(testResults);
-        }
       })
     );
   }

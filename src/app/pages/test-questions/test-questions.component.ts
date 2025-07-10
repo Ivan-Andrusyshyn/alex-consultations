@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 //
@@ -191,15 +191,6 @@ export class TestQuestionsComponent
       this.currentCardInfo?.title ?? 'test';
     //
 
-    localStorage.setItem(
-      'paid-testInfo',
-      JSON.stringify({
-        testName: this.TEST_NAME,
-        imgUrl: this.currentCardInfo?.imageUrl,
-        title: this.currentCardInfo?.title,
-        price: this.testPrice,
-      })
-    );
     //
     this.monopayService
       .createPayment(dataDevPayment)
@@ -208,6 +199,16 @@ export class TestQuestionsComponent
         const currentUrl = window.location.pathname;
         window.history.pushState({}, '', currentUrl);
         window.location.href = response.pageUrl;
+        localStorage.setItem(
+          this.TEST_NAME + '-paid-testInfo',
+          JSON.stringify({
+            invoiceId: response.invoiceId,
+            testName: this.TEST_NAME,
+            imgUrl: this.currentCardInfo?.imageUrl,
+            title: this.currentCardInfo?.title,
+            price: this.testPrice,
+          })
+        );
       });
   }
 
