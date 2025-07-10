@@ -52,16 +52,19 @@ export class PaymentSuccessComponent implements OnInit {
   currentCardInfo!: CardContent | null;
   //
   cardInfo$!: Observable<{
-    results?: string;
+    results: string | null;
     price?: string;
     testName: TestName;
     redirectUrl: string;
+    paymentStatus: 'success' | 'created';
   }>;
 
   ngOnInit(): void {
     const testName = this.route.snapshot.paramMap.get('testName') as TestName;
     const price = this.route.snapshot.paramMap.get('price') as string;
-    const storageResult = sessionStorage.getItem(testName + '-result') ?? null;
+    const storageResult = JSON.parse(
+      sessionStorage.getItem(testName + '-results') ?? 'null'
+    );
     //
 
     //
@@ -70,51 +73,28 @@ export class PaymentSuccessComponent implements OnInit {
         const foundCard = this.testsCards.find((card) =>
           card.imageUrl.endsWith(testName + '/')
         );
-
+        let result = storageResult ? storageResult.categoryName : null;
         this.currentCardInfo = foundCard ?? null;
-        if (response.status === 'success' && response.invoiceId && testName) {
-          const redirectUrl =
-            '/tests' + '/' + testName + '/details' + '/' + storageResult;
-
-          return {
-            results: storageResult,
-            testName,
-            price,
-            redirectUrl,
-          };
-        } else {
-          const redirectUrl = '/tests' + testName + '/questions';
-          return {
-            redirectUrl,
-            testName,
-          };
-        }
+        return this.getDataByStatus(response, testName, result, price);
       }),
       switchMap((data) => {
-        let testResults;
-
-        if (storageResult === null) {
-          testResults = JSON.parse(
-            sessionStorage.getItem(testName + '-answers') ?? 'null'
-          ) as { answers: Answer[]; currentQuestion: string | number } | null;
-          //
+        const testAnswers = JSON.parse(
+          sessionStorage.getItem(testName + '-answers') ?? 'null'
+        ) as { answers: Answer[]; currentQuestion: string | number } | null;
+        if (
+          storageResult === null &&
+          testAnswers &&
+          data.paymentStatus === 'success'
+        ) {
           const newRequest = this.questionsService.createNewRequestObject(
             testName,
-            testResults?.answers
+            testAnswers?.answers
           );
-          return this.questionsService
-            .makeRequestByTestName(testName, newRequest)
-            .pipe(
-              map((results) => {
-                sessionStorage.setItem(testName + '-result', results);
-                //
-                sessionStorage.removeItem(testName + '-answers');
-                sessionStorage.removeItem(testName + '-showQuestions');
-                return { ...data, results };
-              })
-            );
+          return this.makeReqByTestName(testName, newRequest, data);
         } else {
-          return of({ ...data, results: storageResult });
+          this.cleanStorage(testName);
+          //
+          return of({ ...data, results: storageResult.categoryName });
         }
       }),
 
@@ -124,10 +104,47 @@ export class PaymentSuccessComponent implements OnInit {
     );
   }
 
-  navigateByClick(testName: string, testResults: string | undefined) {
+  private cleanStorage(testName: TestName) {
+    sessionStorage.removeItem(testName + '-answers');
+    sessionStorage.removeItem(testName + '-showQuestions');
+  }
+
+  private getDataByStatus(
+    response: { status: string; invoiceId: string },
+    testName: TestName,
+    result: any,
+    price: string | null
+  ) {
+    if (response.status === 'success' && response.invoiceId && testName) {
+      return {
+        results: result,
+        testName,
+        price,
+        paymentStatus: response.status,
+      };
+    } else {
+      this.router.navigateByUrl('/tests');
+      return {
+        paymentStatus: response.status,
+        testName,
+      };
+    }
+  }
+
+  private makeReqByTestName(testName: TestName, newRequest: any, data: any) {
+    return this.questionsService
+      .makeRequestByTestName(testName, newRequest)
+      .pipe(
+        map((results) => {
+          //
+          this.cleanStorage(testName);
+          return { ...data, results };
+        })
+      );
+  }
+
+  navigateByClick(testName: string, testResults: string | null) {
     if (testName && testResults) {
-      // const url = `/tests/${this.testName}/details/${this.testResults}`;
-      // window.location.href = url;
       this.router.navigate(['tests', testName, 'details', testResults]);
     } else {
       alert('problem with navigation data.');
