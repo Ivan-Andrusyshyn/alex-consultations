@@ -127,20 +127,19 @@ export class PaymentSuccessComponent implements OnInit {
   private getDataByStatus(
     response: { status: string; invoiceId: string },
     testName: TestName,
-    result: any,
+    results: any,
     price: string | number
   ) {
     const isSuccessPayed =
       response.status === 'success' && response.invoiceId && testName;
     if (isSuccessPayed) {
       return {
-        results: result,
+        results,
         testName,
         price,
         paymentStatus: response.status,
       };
     } else {
-      this.router.navigateByUrl('/tests');
       return {
         paymentStatus: response.status,
         testName,
