@@ -31,6 +31,13 @@ import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 import { MonopayService } from '../../../core/services/monopay.service';
 import { QuestionsService } from '../../test-questions/questions.service';
 
+interface TestInfo {
+  testName: TestName;
+  imgUrl: string;
+  title: string;
+  price: string | number;
+}
+
 @Component({
   selector: 'app-payment-success',
   standalone: true,
@@ -62,12 +69,11 @@ export class PaymentSuccessComponent implements OnInit {
   ngOnInit(): void {
     const testInfo = JSON.parse(
       sessionStorage.getItem('paid-testInfo') ?? 'null'
-    ) as {
-      testName: TestName;
-      imgUrl: string;
-      title: string;
-      price: string | number;
-    };
+    ) as TestInfo;
+    if (!testInfo) {
+      this.router.navigateByUrl('/tests');
+    }
+
     const testName = testInfo.testName;
     const price = testInfo.price;
 
