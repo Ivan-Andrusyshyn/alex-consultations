@@ -78,7 +78,7 @@ export class PaymentSuccessComponent implements OnInit {
     const price = testInfo.price;
 
     const storageResult = JSON.parse(
-      sessionStorage.getItem(testName + '-results') ?? 'null'
+      localStorage.getItem(testName + '-results') ?? 'null'
     );
     //
 
@@ -89,27 +89,24 @@ export class PaymentSuccessComponent implements OnInit {
           card.imageUrl.endsWith(testName + '/')
         );
         let result = storageResult ? storageResult.categoryName : null;
+        //
         this.currentCardInfo = foundCard ?? null;
         return this.getDataByStatus(response, testName, result, price);
       }),
-      switchMap((data) => {
+      switchMap((response) => {
         const testAnswers = JSON.parse(
-          sessionStorage.getItem(testName + '-answers') ?? 'null'
+          localStorage.getItem(testName + '-answers') ?? 'null'
         ) as { answers: Answer[]; currentQuestion: string | number } | null;
-        if (
-          storageResult === null &&
-          testAnswers &&
-          data.paymentStatus === 'success'
-        ) {
+        if (storageResult === null && testAnswers) {
           const newRequest = this.questionsService.createNewRequestObject(
             testName,
             testAnswers?.answers
           );
-          return this.makeReqByTestName(testName, newRequest, data);
+          return this.makeReqByTestName(testName, newRequest, response);
         } else {
           this.cleanStorage(testName);
           //
-          return of({ ...data, results: storageResult.categoryName });
+          return of({ ...response, results: storageResult.categoryName });
         }
       }),
 
@@ -120,8 +117,8 @@ export class PaymentSuccessComponent implements OnInit {
   }
 
   private cleanStorage(testName: TestName) {
-    sessionStorage.removeItem(testName + '-answers');
-    sessionStorage.removeItem(testName + '-showQuestions');
+    localStorage.removeItem(testName + '-answers');
+    localStorage.removeItem(testName + '-showQuestions');
   }
 
   private getDataByStatus(
@@ -137,11 +134,9 @@ export class PaymentSuccessComponent implements OnInit {
         results,
         testName,
         price,
-        paymentStatus: response.status,
       };
     } else {
       return {
-        paymentStatus: response.status,
         testName,
       };
     }

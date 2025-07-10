@@ -130,7 +130,14 @@ export class TestQuestionsComponent
         this.testTitleText = data['testTitleText'];
         this.testSubtitleText = data['testSubtitleText'];
         this.isSuccessPayedTest.set(data['isSuccessPayedTest']);
+        //is it free test
         this.isFreeTest.set(data['isFreeTest']);
+
+        localStorage.setItem(
+          testName + '-isFreeTest',
+          JSON.stringify(data['isFreeTest'])
+        );
+
         // price
         this.testPrice = data['testPrice'];
 
@@ -182,6 +189,8 @@ export class TestQuestionsComponent
       baseUrl + '/tests/' + this.TEST_NAME + '/payment-success';
     dataDevPayment.merchantPaymInfo.basketOrder[0].name =
       this.currentCardInfo?.title ?? 'test';
+    //
+
     localStorage.setItem(
       'paid-testInfo',
       JSON.stringify({
@@ -213,7 +222,7 @@ export class TestQuestionsComponent
     this.setSnackBar(false, 'false');
 
     this.formGroup.reset();
-    sessionStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
+    localStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
     sessionStorage.setItem('isStartTest', 'false');
   }
 
@@ -276,6 +285,8 @@ export class TestQuestionsComponent
       )
       .subscribe((results) => {
         this.isSubmitting.set(false);
+        localStorage.removeItem(this.TEST_NAME + '-answers');
+        //
         this.handlePersonType(results);
       });
   }
@@ -304,7 +315,7 @@ export class TestQuestionsComponent
 
   hideTextBoardOnClick() {
     this.showTextBoard.set(false);
-    sessionStorage.setItem(
+    localStorage.setItem(
       this.TEST_NAME + '-showQuestions',
       JSON.stringify(false)
     );
@@ -318,7 +329,7 @@ export class TestQuestionsComponent
   //
   private setStorageBoardValue() {
     const showQuestions = JSON.parse(
-      sessionStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
+      localStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
     );
     this.showTextBoard.set(showQuestions);
   }
@@ -328,7 +339,7 @@ export class TestQuestionsComponent
   private saveAnswersInStorage() {
     const answers = this.formGroup.value;
 
-    sessionStorage.setItem(
+    localStorage.setItem(
       this.TEST_NAME + '-answers',
       JSON.stringify({
         answers,
@@ -386,8 +397,8 @@ export class TestQuestionsComponent
           this.cdr.markForCheck();
 
           this.currentQuestionNumber.set(1);
-          sessionStorage.removeItem(this.TEST_NAME + '-results');
-          sessionStorage.setItem(
+          localStorage.removeItem(this.TEST_NAME + '-results');
+          localStorage.setItem(
             this.TEST_NAME + '-answers',
             JSON.stringify({
               answers: this.formGroup.value,
@@ -432,15 +443,5 @@ export class TestQuestionsComponent
 
     this.formGroup.reset();
     this.beYourselfService.counterQuestion.next(1);
-
-    const answers = this.formGroup.value;
-
-    sessionStorage.setItem(
-      this.TEST_NAME + '-answers',
-      JSON.stringify({
-        answers,
-        currentQuestion: 1,
-      })
-    );
   }
 }

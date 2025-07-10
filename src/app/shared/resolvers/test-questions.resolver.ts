@@ -63,7 +63,6 @@ export class TestsQuestionsResolver implements Resolve<any> {
               isSuccessPayedTest = response.status === 'success';
             } else if (testPrice === null) {
               isFreeTest = true;
-              sessionStorage.setItem(testName + '-isFreeTest', 'true');
             }
             return {
               isSuccessPayedTest,

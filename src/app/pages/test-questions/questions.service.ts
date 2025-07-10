@@ -75,8 +75,7 @@ export class QuestionsService {
     return formControls;
   }
   parseAnswers(testName: string) {
-    const stringAnswers =
-      sessionStorage.getItem(testName + '-answers') ?? 'null';
+    const stringAnswers = localStorage.getItem(testName + '-answers') ?? 'null';
     return JSON.parse(stringAnswers);
   }
   makeRequestByTestName(
@@ -86,7 +85,7 @@ export class QuestionsService {
     if (testName === this.youCoffee) {
       return this.youCoffeeService.youCoffeeCategory(request).pipe(
         map((r) => {
-          this.setSessionStorage(testName, {
+          this.setLocalStorage(testName, {
             categoryName: r.categoryName,
           });
           sessionStorage.setItem('subCategoryCoffee', r.subCategoryName);
@@ -100,7 +99,7 @@ export class QuestionsService {
         .getRoleInRelationshipsCategory(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(testName, {
+            this.setLocalStorage(testName, {
               categoryName: r.categoryName,
             });
             this.routeTracker.clearRouteMap();
@@ -114,7 +113,7 @@ export class QuestionsService {
         .getToxicalRelationshipCategory(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(testName, {
+            this.setLocalStorage(testName, {
               categoryName: r.categoryName,
             });
             this.routeTracker.clearRouteMap();
@@ -130,7 +129,7 @@ export class QuestionsService {
     if (testName === this.attractiveness) {
       return this.attractivenessService.getAttractivenessCategory(request).pipe(
         map((r) => {
-          this.setSessionStorage(testName, {
+          this.setLocalStorage(testName, {
             categoryName: r.categoryName,
           });
           this.routeTracker.clearRouteMap();
@@ -142,7 +141,7 @@ export class QuestionsService {
     if (testName === this.beYourself) {
       return this.beYourselfService.getPersonalitiesResultOfTest(request).pipe(
         map((r) => {
-          this.setSessionStorage(testName, {
+          this.setLocalStorage(testName, {
             results: r.results.scores,
             scorePercentages: r.results.percentages,
           });
@@ -158,7 +157,7 @@ export class QuestionsService {
         .getTraumaticSensitivityResults(request)
         .pipe(
           map((r) => {
-            this.setSessionStorage(testName, {
+            this.setLocalStorage(testName, {
               ...r.results,
             });
             this.routeTracker.clearRouteMap();
@@ -178,8 +177,8 @@ export class QuestionsService {
     }
   }
 
-  private setSessionStorage(key: string, value: any) {
+  private setLocalStorage(key: string, value: any) {
     const fullKey = key + '-results';
-    sessionStorage.setItem(fullKey, JSON.stringify(value));
+    localStorage.setItem(fullKey, JSON.stringify(value));
   }
 }

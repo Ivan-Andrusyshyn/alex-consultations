@@ -12,7 +12,7 @@ export const dataDevPayment: MonoPaymentRequest = {
   ccy: 980,
   merchantPaymInfo: {
     reference: '',
-    destination: 'Оплата за тест на токсичні відносини',
+    destination: 'Оплата за тест',
     comment: '',
     customerEmails: [],
     basketOrder: [

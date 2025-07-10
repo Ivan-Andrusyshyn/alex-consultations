@@ -137,22 +137,26 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
           subCategoryName: response.subCategoryCoffee ?? '',
         };
       }),
-      switchMap((testResults) =>
-        this.monopayService.checkStatus(this.TEST_NAME()).pipe(
-          tap((response) => {
-            const data = JSON.parse(
-              sessionStorage.getItem(this.TEST_NAME + '-isFreeTest') ?? 'null'
-            ) as null | boolean;
+      switchMap((testResults) => {
+        const isFreeTest = JSON.parse(
+          localStorage.getItem(this.TEST_NAME() + '-isFreeTest') ?? 'null'
+        ) as null | boolean;
 
-            if (response.status === 'success' && response.invoiceId) {
-              console.log('success');
-            } else if (data !== null) {
-              this.router.navigate(['/tests']);
-            }
-          }),
-          map(() => testResults)
-        )
-      )
+        if (!isFreeTest) {
+          return this.monopayService.checkStatus(this.TEST_NAME()).pipe(
+            tap((response) => {
+              if (response.status === 'success' && response.invoiceId) {
+                console.log('success');
+              } else {
+                this.router.navigateByUrl('/tests');
+              }
+            }),
+            map(() => testResults)
+          );
+        } else {
+          return of(testResults);
+        }
+      })
     );
   }
 
