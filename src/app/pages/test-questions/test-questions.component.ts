@@ -82,17 +82,19 @@ export class TestQuestionsComponent
   private monopayService = inject(MonopayService);
 
   //
+  // ─── Reactive Form & Data ────────────────
   formGroup: FormGroup = this.fb.group({});
+  testQuestions$!: Observable<Question[]>;
+  TEST_NAME!: TestName;
+  testQuestionsLength!: number;
   coloredLabel: boolean = true;
 
   private isSnackBarOpened = false;
 
-  testQuestions$!: Observable<Question[]>;
-  TEST_NAME!: TestName;
+  // ─── UI Labels & Text
   testTitleText = '';
   testSubtitleText = '';
   testPrice: string | null = null;
-  testQuestionsLength!: number;
   snackBar: SnackBar = {
     firstSnackBarBtnText: 'Йду далі',
     firstSnackBar: 'Ще трохи – і ти дізнаєшся щось, що може тебе здивувати! 😉',
@@ -100,25 +102,25 @@ export class TestQuestionsComponent
     secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
   };
   //
-  //
-  currentCardInfo!: CardContent | null;
-
+  // ─── Signals
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   currentQuestionNumber = signal<number>(1);
   showTextBoard = signal(true);
+  isSuccessPayedTest = signal<boolean>(false);
+  isFreeTest = signal<boolean>(false);
+  //
   testsInstruction!: {
     instructionsTitle: string;
     testTitle: string;
     steps: string[];
   };
-  isSuccessPayedTest = signal<boolean>(false);
-  isFreeTest = signal<boolean>(false);
 
   // Payment
   redirectUrl = window.location.href;
   currentTestResultsName!: string;
   testsCards = TEST_CARDS;
+  currentCardInfo!: CardContent | null;
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -178,7 +180,22 @@ export class TestQuestionsComponent
       sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
   }
-  // ==============payment
+  //
+
+  // ============================
+  ngAfterViewInit(): void {
+    this.setCurrentAnswers();
+  }
+
+  ngOnDestroy(): void {
+    this.setSnackBar(false, 'false');
+
+    this.formGroup.reset();
+    localStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
+    sessionStorage.setItem('isStartTest', 'false');
+  }
+
+  // ─── Payment
   createMonoPaymentByClick() {
     const baseUrl = window.location.origin;
     //
@@ -199,72 +216,24 @@ export class TestQuestionsComponent
         const currentUrl = window.location.pathname;
         window.history.pushState({}, '', currentUrl);
         window.location.href = response.pageUrl;
-        localStorage.setItem(
-          this.TEST_NAME + '-paid-testInfo',
-          JSON.stringify({
-            invoiceId: response.invoiceId,
-            testName: this.TEST_NAME,
-            imgUrl: this.currentCardInfo?.imageUrl,
-            title: this.currentCardInfo?.title,
-            price: this.testPrice,
-          })
-        );
+        this.setInStorageTestInfo(response.invoiceId);
       });
   }
-
+  private setInStorageTestInfo(invoiceId: string) {
+    localStorage.setItem(
+      this.TEST_NAME + '-paid-testInfo',
+      JSON.stringify({
+        invoiceId,
+        testName: this.TEST_NAME,
+        imgUrl: this.currentCardInfo?.imageUrl,
+        title: this.currentCardInfo?.title,
+        price: this.testPrice,
+      })
+    );
+  }
   //
 
-  // ============================
-  ngAfterViewInit(): void {
-    this.setCurrentAnswers();
-  }
-
-  ngOnDestroy(): void {
-    this.setSnackBar(false, 'false');
-
-    this.formGroup.reset();
-    localStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
-    sessionStorage.setItem('isStartTest', 'false');
-  }
-
-  isValid(index: number) {
-    return this.formGroup.get(index.toString())?.valid || index == 0;
-  }
-
-  private setCurrentAnswers() {
-    const parsedAnswers = this.questionsService.parseAnswers(this.TEST_NAME);
-
-    if (parsedAnswers) {
-      this.currentQuestionNumber.set(parsedAnswers.currentQuestion);
-      this.formGroup.setValue(parsedAnswers.answers);
-    }
-  }
-  openSnackBar(text: string, textBtn: string) {
-    const snackBarRef = this._snackBar.open(text, textBtn, {
-      verticalPosition: 'bottom',
-      panelClass: ['custom-snackbar'],
-      horizontalPosition: 'center',
-    });
-
-    snackBarRef.onAction().subscribe(() => {});
-  }
-
-  changeViewQuestion(currentQuNumber: number) {
-    this.currentQuestionNumber.set(currentQuNumber);
-  }
-
-  isAnswered(questionId: number): boolean | null {
-    const control = this.formGroup.get(questionId.toString());
-    return control && control.value != null;
-  }
-
-  startTestOnClick() {
-    sessionStorage.setItem('isStartTest', JSON.stringify(true));
-
-    this.currentQuestionNumber.set(1);
-    this.isStartTest.set(true);
-  }
-
+  // ─── Submission & Result
   onSubmit() {
     const answers = this.formGroup.value as Answer[];
     this._snackBar.dismiss();
@@ -291,7 +260,15 @@ export class TestQuestionsComponent
         this.handlePersonType(results);
       });
   }
+  private handlePersonType(personType: string) {
+    this.router.navigate(['tests', this.TEST_NAME, 'details', personType]);
 
+    this.formGroup.reset();
+    this.beYourselfService.counterQuestion.next(1);
+  }
+  // ===
+
+  // ─── Form & Question Logic
   answerQuestionByClick(value: { questionsId: string; answer: string }) {
     const control = this.formGroup.get(value.questionsId);
 
@@ -311,9 +288,16 @@ export class TestQuestionsComponent
 
     //
     this.currentQuestionNumber.update((prev) => prev + 1);
-    this.saveAnswersInStorage();
+    this.setInStorageAnswers();
   }
 
+  changeViewQuestion(currentQuNumber: number) {
+    this.currentQuestionNumber.set(currentQuNumber);
+  }
+
+  // ====
+
+  // ─── UI Helpers
   hideTextBoardOnClick() {
     this.showTextBoard.set(false);
     localStorage.setItem(
@@ -321,35 +305,75 @@ export class TestQuestionsComponent
       JSON.stringify(false)
     );
   }
-  //
 
-  getInstructionsImgUrl(): string {
+  getBoardsImgUrl(): string {
     return '/assets/new/core/tests/' + this.TEST_NAME + '/card/' + 1 + '.svg';
   }
-
   //
+
+  // ─── Navigation & Reset
+  refreshTest() {
+    this.openDialog();
+  }
+
+  private openDialog(): void {
+    const settings = this.questionsService.dialogSettings;
+
+    this.modalService
+      .openModal(settings)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result) => {
+        if (result !== undefined) {
+          this.formGroup.reset();
+
+          this.setSnackBar(false, 'false');
+          this.cdr.markForCheck();
+
+          this.currentQuestionNumber.set(1);
+          localStorage.removeItem(this.TEST_NAME + '-results');
+          this.setInStorageAnswers();
+        }
+      });
+  }
+  //
+
+  // ─── LocalStorage Helpers
+  private setInStorageAnswers() {
+    localStorage.setItem(
+      this.TEST_NAME + '-answers',
+      JSON.stringify({
+        answers: this.formGroup.value,
+        currentQuestion: this.currentQuestionNumber(),
+      })
+    );
+  }
   private setStorageBoardValue() {
     const showQuestions = JSON.parse(
       localStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
     );
     this.showTextBoard.set(showQuestions);
   }
+  private setCurrentAnswers() {
+    const parsedAnswers = this.questionsService.parseAnswers(this.TEST_NAME);
+
+    if (parsedAnswers) {
+      this.currentQuestionNumber.set(parsedAnswers.currentQuestion);
+      this.formGroup.setValue(parsedAnswers.answers);
+    }
+  }
 
   //
 
-  private saveAnswersInStorage() {
-    const answers = this.formGroup.value;
+  // ─── Snackbar & Progress
+  openSnackBar(text: string, textBtn: string) {
+    const snackBarRef = this._snackBar.open(text, textBtn, {
+      verticalPosition: 'bottom',
+      panelClass: ['custom-snackbar'],
+      horizontalPosition: 'center',
+    });
 
-    localStorage.setItem(
-      this.TEST_NAME + '-answers',
-      JSON.stringify({
-        answers,
-        currentQuestion: this.currentQuestionNumber(),
-      })
-    );
+    snackBarRef.onAction().subscribe(() => {});
   }
-
-  // snackbar
 
   private handlePercentageWithSnackBar(): number {
     const totalQuestions = this.testQuestionsLength;
@@ -377,72 +401,15 @@ export class TestQuestionsComponent
       this.setSnackBar(false, 'false');
     }
   }
-  //
   private answeredQuestions(): number {
     return Object.values(this.formGroup.value).filter(
       (value) => value !== null && value !== undefined && value !== ''
     ).length;
   }
-
-  private openDialog(): void {
-    const settings = this.questionsService.dialogSettings;
-
-    this.modalService
-      .openModal(settings)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        if (result !== undefined) {
-          this.formGroup.reset();
-
-          this.setSnackBar(false, 'false');
-          this.cdr.markForCheck();
-
-          this.currentQuestionNumber.set(1);
-          localStorage.removeItem(this.TEST_NAME + '-results');
-          localStorage.setItem(
-            this.TEST_NAME + '-answers',
-            JSON.stringify({
-              answers: this.formGroup.value,
-              currentQuestion: this.currentQuestionNumber(),
-            })
-          );
-        }
-      });
-  }
+  //
 
   private setSnackBar(isSnack: boolean, storage: string) {
     this.isSnackBarOpened = isSnack;
     sessionStorage.setItem('isSnackBarOpened', storage);
-  }
-
-  refreshTest() {
-    this.openDialog();
-  }
-
-  navigateToQuestion(errorKey: string) {
-    const questionId = parseInt(errorKey, 10);
-    this.currentQuestionNumber.set(questionId);
-    window.scrollTo(0, 0);
-  }
-
-  parseIntProc(proc: number) {
-    return parseInt(proc.toString());
-  }
-
-  getInvalidControls(): string[] | [] {
-    if (!this.formGroup) {
-      return [];
-    }
-
-    return Object.keys(this.formGroup.controls).filter(
-      (key) => this.formGroup.controls[key].invalid
-    );
-  }
-
-  private handlePersonType(personType: string) {
-    this.router.navigate(['tests', this.TEST_NAME, 'details', personType]);
-
-    this.formGroup.reset();
-    this.beYourselfService.counterQuestion.next(1);
   }
 }

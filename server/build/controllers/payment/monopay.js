@@ -112,6 +112,7 @@ const checkStatusPayment = (req, res) => __awaiter(void 0, void 0, void 0, funct
             if (now - paidAt > TWO_HOURS) {
                 return res.json({
                     invoiceId,
+                    testName,
                     status: 'failed',
                     reason: 'Access expired',
                 });

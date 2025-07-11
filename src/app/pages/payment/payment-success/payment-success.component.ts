@@ -116,6 +116,7 @@ export class PaymentSuccessComponent implements OnInit {
           return this.makeReqByTestName(testName, newRequest, response);
         } else {
           this.cleanStorage(testName);
+
           //
           return of({ ...response, results: storageResult?.categoryName });
         }

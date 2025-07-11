@@ -141,9 +141,10 @@ export class QuestionsService {
     if (testName === this.beYourself) {
       return this.beYourselfService.getPersonalitiesResultOfTest(request).pipe(
         map((r) => {
+          console.log(r);
+
           this.setLocalStorage(testName, {
-            results: r.results.scores,
-            scorePercentages: r.results.percentages,
+            categoryName: r.results.personType,
           });
           this.routeTracker.clearRouteMap();
 
