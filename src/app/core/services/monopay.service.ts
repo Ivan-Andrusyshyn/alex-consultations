@@ -51,6 +51,7 @@ export class MonopayService {
         tap((response) => {
           if (response.status === 'failed') {
             localStorage.removeItem(response.testName + '-paid-testInfo');
+            localStorage.removeItem(response.testName + '-results');
           }
         })
       );
