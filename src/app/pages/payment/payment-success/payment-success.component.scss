@@ -62,10 +62,13 @@
 
     .price {
       font-size: 1rem;
+      font-weight: 500;
+      color: #0e596d;
       color: #444;
+      text-decoration: underline;
 
       @media screen and (min-width: 764px) {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
     }
   }

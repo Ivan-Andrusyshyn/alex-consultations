@@ -5,6 +5,7 @@
       [subtitleText]="''"
     ></app-title-card>
   </div>
+  @defer (on viewport) {
 
   <section class="my-help section-container" @fadeIn>
     <h3 class="my-help-title title-primary">
@@ -34,11 +35,19 @@
       }
     </ul>
   </section>
-  <app-consultations-cards></app-consultations-cards>
-  <div class="main-icon section-container">
+  }@placeholder {
+  <div style="height: 400px"></div>
+  } @defer (on viewport) {
+
+  <app-consultations-cards @fadeIn></app-consultations-cards>
+  }@placeholder {
+  <div style="height: 400px"></div>
+  } @defer (on viewport) {
+
+  <div class="main-icon section-container" @fadeIn>
     <img src="/assets/new/core/consultation/icon-1.svg" alt="" />
   </div>
-  <section class="about-consultation section-container">
+  <section class="about-consultation section-container" @fadeIn>
     <h3 class="my-help-title title-primary">
       {{ consultationContent.aboutConsultation.sectionTitle }}
     </h3>
@@ -59,8 +68,11 @@
       }
     </ul>
   </section>
+  }@placeholder {
+  <div style="height: 400px"></div>
+  } @defer (on viewport) {
 
-  <section class="it-works section-container">
+  <section class="it-works section-container" @fadeIn>
     <h3 class="it-works-title title-primary">Чому це працює?</h3>
     <p class="it-works-subtitle subtitle">
       Ви дізнаєтеся свій унікальний когнітивний профіль: свої сильні сторони,
@@ -92,8 +104,11 @@
       ясність, підтримка і новий погляд на себе.
     </p>
   </section>
+  }@placeholder {
+  <div style="height: 400px"></div>
+  } @defer (on viewport) {
 
-  <section class="registration section-container">
+  <section class="registration section-container" @fadeIn>
     <h3 class="registration-title title-primary">Запишіться на консультацію</h3>
 
     <ul class="registration-cards">
@@ -117,4 +132,7 @@
       <app-primary-btn (onClick)="openDialog()"></app-primary-btn>
     </div>
   </section>
+  }@placeholder {
+  <div style="height: 350px"></div>
+  }
 </div>

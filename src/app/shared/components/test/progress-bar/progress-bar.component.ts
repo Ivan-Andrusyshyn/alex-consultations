@@ -41,7 +41,11 @@ export class ProgressBarComponent implements AfterViewInit {
       this.scrollContainerNumber.set(this.scrollContainer.offsetTop);
     }
   }
-
+  get currentTranslateX(): string {
+    return (
+      'translateX(' + Math.max(0, 100 - this.scrollPercentage * 100) + '%)'
+    );
+  }
   onWindowScroll() {
     const docHeight = document.documentElement.scrollTop;
 

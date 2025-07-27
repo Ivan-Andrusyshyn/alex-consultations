@@ -23,8 +23,8 @@
         </p>
       </div>
     </div>
-
-    <div class="container-text">
+    @defer (on viewport) {
+    <div class="container-text" @fadeIn>
       <p class="text subtitle">
         Через рік її батьки надіслали мені фото: усміхнена Анастасія у білому
         халаті, щаслива студентка першого курсу Богомольця. Так усе почалося.
@@ -47,5 +47,8 @@
         ></app-primary-btn>
       </div>
     </div>
+    }@placeholder {
+    <div style="height: 200px"></div>
+    }
   </div>
 </section>

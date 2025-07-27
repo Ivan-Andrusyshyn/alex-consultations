@@ -1,11 +1,17 @@
 <section class="home">
   <div class="hero">
     <app-hero-animation></app-hero-animation>
+
     <div class="relative-wrapper">
+      @defer (on viewport) {
       <div class="card-tests-container">
         <app-hero-cards-slider [sliderKey]="'home'"></app-hero-cards-slider>
         <br />
       </div>
+      } @placeholder {
+      <div style="height: 400px; background-color: #057988"></div>
+      } @defer (on viewport) {
+
       <div class="absolute-wrapper">
         <div class="card-container">
           <div class="main-card hover-container">
@@ -27,13 +33,39 @@
           </div>
         </div>
       </div>
+      } @placeholder {
+      <div style="height: 400px; background-color: #057988"></div>
+      }
     </div>
+    @defer (on viewport) {
+    <app-information @fadeIn></app-information>
+    } @placeholder {
+    <div style="height: 400px"></div>
+    } @defer (on viewport) {
+    <app-my-help @fadeIn></app-my-help>
+    } @placeholder {
+    <div style="height: 400px"></div>
+    } @defer (on viewport) {
 
-    <app-information></app-information>
-    <app-my-help></app-my-help>
-    <app-benefits></app-benefits>
-    <app-video-benefits></app-video-benefits>
-    <app-goals></app-goals>
-    <app-our-service-cards></app-our-service-cards>
+    <app-benefits @fadeIn></app-benefits>
+    }@placeholder {
+    <div style="height: 400px"></div>
+
+    } @defer (on viewport) {
+
+    <app-video-benefits @fadeIn></app-video-benefits>
+    } @placeholder {
+    <div style="height: 400px"></div>
+    } @defer (on viewport) {
+
+    <app-goals @fadeIn></app-goals>
+
+    }@placeholder {
+    <div style="height: 400px"></div>
+    } @defer (on viewport) {
+    <app-our-service-cards @fadeIn> </app-our-service-cards>
+    } @placeholder {
+    <div style="height: 400px"></div>
+    }
   </div>
 </section>

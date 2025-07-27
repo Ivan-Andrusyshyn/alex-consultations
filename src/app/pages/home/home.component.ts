@@ -17,7 +17,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DateTime } from 'luxon';
 
@@ -41,6 +41,7 @@ import { HeroAnimationComponent } from '../../shared/components/home/hero-animat
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 import { ModalService } from '../../core/services/modal.service';
 import { NotificationService } from '../../core/services/notification.service';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 @Component({
   selector: 'app-home',
@@ -61,6 +62,7 @@ import { NotificationService } from '../../core/services/notification.service';
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  animations: [fadeInAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {

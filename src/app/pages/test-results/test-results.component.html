@@ -4,7 +4,7 @@
     [isFirstNotification]="isFirstNotification"
     [scrollContainer]="containerElement"
   ></app-progress-bar>
-  <section class="results-container">
+  <section class="results-container" @fadeIn>
     <div class="results-content">
       <h2 class="title-mob title-primary">
         {{ testResults.title }} @if (TEST_NAME()===mainTestNames.BeYourself) {
@@ -68,7 +68,7 @@
     </ul>
     <br />
 
-    <h3 class="shared-title subtitle">Поділись результатами</h3>
+    <!-- <h3 class="shared-title subtitle">Поділись результатами</h3>
     <br />
     <share-buttons
       [title]="testResults.title"
@@ -76,20 +76,34 @@
       [include]="includeShareBtn"
       [showText]="true"
       [url]="fullUrl"
-    ></share-buttons>
+    ></share-buttons> -->
     <br />
 
     <app-star-rating [testName]="TEST_NAME()"></app-star-rating>
   </section>
 
   <div #scrollContainer></div>
+  @defer (on viewport; ) {
+
   <div class="countdown-wrapper" *ngIf="showCountDownTimer()">
     <app-countdown-timer [testName]="TEST_NAME()"></app-countdown-timer>
   </div>
+  }@placeholder {
+  <div style="height: 350px"></div>
+  } @defer (on viewport; ) {
+
   <app-consultations-cards [sliderKey]="consultationsSliderKey">
   </app-consultations-cards>
+  }@placeholder {
+  <div style="height: 350px"></div>
+  } @defer (on viewport; ) {
+
   <app-hero-cards-slider
     [sliderKey]="cardsSliderKey"
     [bigCards]="false"
   ></app-hero-cards-slider>
+  }@placeholder {
+  <div style="height: 350px"></div>
+  }
+  <br />
 </section>

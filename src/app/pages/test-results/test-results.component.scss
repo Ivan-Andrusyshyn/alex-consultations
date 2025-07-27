@@ -1,11 +1,15 @@
 .test-results {
   max-width: 1290px;
   margin: 0 auto;
+  padding: 24px 8px;
+  @media screen and (min-width: 764px) {
+    padding: 24px 16px;
+  }
 }
 .results-container {
   box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
   gap: 10px;
-  padding: 40px 24px;
+  padding: 40px 8px;
   margin: 0 auto;
 
   background: #fff;
@@ -14,7 +18,7 @@
 
   @media screen and (min-width: 764px) {
     margin-bottom: 30px;
-    padding: 40px 32px;
+    padding: 40px 16px;
   }
   @media screen and (min-width: 1320px) {
     border-radius: 20px;

@@ -16,7 +16,7 @@ import { interval, takeWhile, Subscription } from 'rxjs';
   standalone: true,
 })
 export class CountDownTimerDirective implements OnInit, OnDestroy {
-  @Input() testName!: string;
+  @Input('countdown') testName!: string;
   @Output() timerFinished = new EventEmitter<void>();
 
   private chr = inject(ChangeDetectorRef);
@@ -24,11 +24,13 @@ export class CountDownTimerDirective implements OnInit, OnDestroy {
 
   countdownTime = 15 * 60;
   remainingTime = this.countdownTime;
-  storageKey = `countdown-${this.testName}`;
+  storageKey!: string;
 
   constructor(private el: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
+    this.storageKey = `countdown-${this.testName}`;
+
     this.restoreTime();
     this.startCountdown();
 
@@ -61,7 +63,6 @@ export class CountDownTimerDirective implements OnInit, OnDestroy {
     const formatted = this.formatTime(this.remainingTime);
     this.el.nativeElement.innerText = formatted;
     this.chr.markForCheck();
-    this.saveTime();
   }
 
   saveTime = () => {

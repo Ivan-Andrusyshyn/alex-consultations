@@ -30,10 +30,17 @@
     </div>
   </div>
 </section>
+
 <ng-template #cardList let-group>
   <ul class="test-list">
     <ng-container *ngFor="let card of group.cards">
-      <app-test-card [card]="card"></app-test-card>
+      <li>
+        @defer (on viewport; ) {
+        <app-test-card [card]="card" @fadeIn></app-test-card>
+        }@placeholder {
+        <div style="height: 300px"></div>
+        }
+      </li>
     </ng-container>
   </ul>
 </ng-template>

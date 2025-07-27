@@ -6,11 +6,19 @@ type PricesValidNames =
   | 'BeYourself'
   | 'Attractiveness';
 
+// export const MainTestPrices: Record<PricesValidNames, string | null> = {
+//   RoleInRelationships: '200',
+//   ToxicalRelationships: '250',
+//   Attractiveness: null,
+//   BeYourself: '300',
+//   Traumatic: null,
+//   YouCoffee: '150',
+// };
 export const MainTestPrices: Record<PricesValidNames, string | null> = {
-  RoleInRelationships: '200',
-  ToxicalRelationships: '250',
+  RoleInRelationships: '10',
+  ToxicalRelationships: '10',
   Attractiveness: null,
-  BeYourself: '300',
+  BeYourself: '10',
   Traumatic: null,
-  YouCoffee: '150',
+  YouCoffee: '10',
 };

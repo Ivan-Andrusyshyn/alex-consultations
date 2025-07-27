@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -15,7 +16,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ShareButtons } from 'ngx-sharebuttons/buttons';
 
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { TestName, TestResults } from '../../shared/models/common-tests';
@@ -31,6 +31,7 @@ import { ResponseData } from './data.interface';
 import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 @Component({
   selector: 'app-test-results',
@@ -42,12 +43,13 @@ import { MainTestNames } from '../../core/utils/testsNames';
     StarRatingComponent,
     ProgressBarComponent,
     HeroCardsSliderComponent,
-    ShareButtons,
     CountdownTimerComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
   providers: [ResultService],
+  animations: [fadeInAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   private dr = inject(DestroyRef);

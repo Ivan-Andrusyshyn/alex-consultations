@@ -9,7 +9,7 @@
     <div
       class="progress-fill"
       [class.progress-fill-red]="scrollPercentage * 100 > 70"
-      [style.transform]="'translateX(' + (100 - scrollPercentage * 100) + '%)'"
+      [style.transform]="currentTranslateX"
     ></div>
   </div>
   <p

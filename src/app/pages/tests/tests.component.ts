@@ -16,6 +16,7 @@ import titleCardContent from './titleCard-content';
 import { CardContent } from '../../shared/models/common-tests';
 import { TestCardComponent } from '../../shared/components/test/test-card/test-card.component';
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
+import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 
 @Component({
   selector: 'app-tests',
@@ -30,6 +31,7 @@ import { TEST_CARDS } from '../../core/content/TEST_CARDS';
   ],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
+  animations: [fadeInAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestsComponent implements OnInit {

@@ -24,7 +24,7 @@ export interface MonoPaymentRequest {
       footer?: string | null;
       tax?: any[];
       uktzed?: string | null;
-      splitReceiverId: string;
+      splitReceiverId?: string;
       discounts?: Array<{
         type: string | null;
         mode: string | null;
@@ -35,7 +35,7 @@ export interface MonoPaymentRequest {
   redirectUrl: string;
   webHookUrl: string;
   validity: number;
-  paymentType: string | null;
+  paymentType?: string | null;
   qrId?: string;
   code?: string;
   saveCardData?: {
@@ -43,6 +43,6 @@ export interface MonoPaymentRequest {
     walletId: string;
   };
   agentFeePercent: number;
-  tipsEmployeeId: string | null;
-  displayType: string | null;
+  tipsEmployeeId?: string | null;
+  displayType?: string | null;
 }

@@ -9,10 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//
 class CacheService {
     constructor() {
         this.cache = {};
-        this.cacheTTL = 24 * 60 * 60 * 1000;
+        this.cacheTTL = 8 * 60 * 60 * 1000;
     }
     getCache(key, fetchDataFn) {
         return __awaiter(this, void 0, void 0, function* () {

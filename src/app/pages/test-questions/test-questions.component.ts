@@ -36,10 +36,12 @@ import { fadeInAnimation } from './fadeIn-animation';
 import { SnackBar } from './snackBar.interface';
 import { QuestionOptionComponent } from '../../shared/components/test/question-option/question-option.component';
 import { MonopayService } from '../../core/services/monopay.service';
-import { dataDevPayment } from './dev-payment';
+
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { CardPaymentComponent } from '../../shared/components/payment/card-payment/card-payment.component';
 import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
+import { environment } from '../../core/environment/environment';
+import { MonoPaymentRequest } from '../../shared/models/monopayment';
 
 @Component({
   selector: 'app-test-questions',
@@ -153,6 +155,7 @@ export class TestQuestionsComponent
           card.imageUrl.endsWith(testName + '/')
         );
         this.currentCardInfo = foundCard ?? null;
+
         //
 
         this.seoService.updateMetaTags(
@@ -196,21 +199,48 @@ export class TestQuestionsComponent
   }
 
   // ─── Payment
-  createMonoPaymentByClick() {
+
+  createPaymentObj(): MonoPaymentRequest {
     const baseUrl = window.location.origin;
+    const convertPrice = parseInt(this.testPrice as string, 10) * 100;
+    const createBasketOrder = {
+      name: this.currentCardInfo?.title ?? 'test',
+      qty: 1,
+      sum: convertPrice,
+      total: convertPrice,
+      icon: this.currentCardInfo?.imgWebUrl ?? null,
+      unit: 'шт.',
+      code: this.TEST_NAME + '-' + Date.now().toString().slice(-5), // Unique code for the basket order
+    };
     //
 
-    //
-    dataDevPayment.merchantPaymInfo.comment = this.TEST_NAME;
-    dataDevPayment.redirectUrl =
-      baseUrl + '/tests/' + this.TEST_NAME + '/payment-success';
-    dataDevPayment.merchantPaymInfo.basketOrder[0].name =
-      this.currentCardInfo?.title ?? 'test';
-    //
+    const paymentObj = {
+      amount: convertPrice,
+      ccy: 980,
+      merchantPaymInfo: {
+        reference: '',
+        destination: 'Оплата за тест',
+        comment: this.TEST_NAME,
+        customerEmails: [],
+        basketOrder: [createBasketOrder],
+      },
+      redirectUrl: baseUrl + '/tests/' + this.TEST_NAME + '/payment-success',
+      webHookUrl: environment.apiUrl + '/api/monopay/get-webhook',
+      validity: 3600,
 
+      agentFeePercent: 1.42,
+    };
+    console.log(paymentObj);
+
+    return paymentObj;
+  }
+
+  createMonoPaymentByClick() {
+    //obj
+    const paymentObj = Object.freeze(this.createPaymentObj());
     //
     this.monopayService
-      .createPayment(dataDevPayment)
+      .createPayment(paymentObj)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((response) => {
         const currentUrl = window.location.pathname;

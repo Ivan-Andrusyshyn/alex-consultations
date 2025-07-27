@@ -34,6 +34,7 @@ export type CardContent = {
   routeStart: string;
   testPrice: string | null;
   title: string;
+  imgWebUrl?: string;
   imgList: Array<number>;
   subtitle: string;
   buttonText: string;

@@ -130,10 +130,20 @@ const checkStatusPayment = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
     catch (error) {
-        console.error('Check Status Payment Error:', error);
-        return res
-            .status(500)
-            .json({ message: 'Error checking payment status', error });
+        if (typeof error === 'object' &&
+            error !== null &&
+            'code' in error &&
+            error.code === 'ERR_BAD_REQUEST') {
+            return res.status(203).json({
+                status: 'failed',
+                message: 'Bad request',
+            });
+        }
+        else {
+            return res
+                .status(500)
+                .json({ message: 'Error checking payment status', error });
+        }
     }
 });
 exports.checkStatusPayment = checkStatusPayment;
