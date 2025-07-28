@@ -63,6 +63,7 @@
             !isFreeTest()
           "
         >
+          @if (!isPendingPayment()) {
           <app-card-payment
             [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
             [testPrice]="testPrice"
@@ -70,6 +71,10 @@
             (createMonoPaymentByClick)="createMonoPaymentByClick()"
             [cardTitle]="currentCardInfo?.title ?? ''"
           ></app-card-payment>
+
+          }@else {
+          <app-pending-payment></app-pending-payment>
+          }
         </div>
       </div>
     </ng-container>

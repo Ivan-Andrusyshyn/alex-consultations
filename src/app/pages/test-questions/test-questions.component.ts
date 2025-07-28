@@ -14,7 +14,15 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, map, Observable, of } from 'rxjs';
+import {
+  catchError,
+  interval,
+  map,
+  Observable,
+  of,
+  switchMap,
+  takeWhile,
+} from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 //
@@ -42,6 +50,7 @@ import { CardPaymentComponent } from '../../shared/components/payment/card-payme
 import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
 import { environment } from '../../core/environment/environment';
 import { MonoPaymentRequest } from '../../shared/models/monopayment';
+import { PendingPaymentComponent } from '../../shared/components/payment/pending-payment/pending-payment.component';
 
 @Component({
   selector: 'app-test-questions',
@@ -59,6 +68,7 @@ import { MonoPaymentRequest } from '../../shared/models/monopayment';
     QuestionWordPipe,
     QuestionOptionComponent,
     CardPaymentComponent,
+    PendingPaymentComponent,
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
@@ -111,6 +121,7 @@ export class TestQuestionsComponent
   showTextBoard = signal(true);
   isSuccessPayedTest = signal<boolean>(false);
   isFreeTest = signal<boolean>(false);
+  isPendingPayment = signal<boolean>(false);
   //
   testsInstruction!: {
     instructionsTitle: string;
@@ -155,9 +166,9 @@ export class TestQuestionsComponent
           card.imageUrl.endsWith(testName + '/')
         );
         this.currentCardInfo = foundCard ?? null;
-
         //
 
+        //
         this.seoService.updateMetaTags(
           data['seo'].metaTags[0],
           data['seo'].metaTags[1]
@@ -172,6 +183,23 @@ export class TestQuestionsComponent
 
         this.setStorageBoardValue();
         return data['questions'];
+      }),
+      switchMap((questions) => {
+        const isPending = JSON.parse(
+          sessionStorage.getItem(this.TEST_NAME + '-isPendingPayment') ??
+            'false'
+        );
+        const invoiceId = JSON.parse(
+          localStorage.getItem(this.TEST_NAME + '-paid-testInfo') ?? 'null'
+        )?.invoiceId;
+        this.isPendingPayment.set(isPending);
+
+        if (isPending && invoiceId) {
+          return this.startIntervalChecking(invoiceId).pipe(
+            map(() => questions)
+          );
+        }
+        return of(questions);
       })
     );
 
@@ -230,7 +258,6 @@ export class TestQuestionsComponent
 
       agentFeePercent: 1.42,
     };
-    console.log(paymentObj);
 
     return paymentObj;
   }
@@ -239,15 +266,41 @@ export class TestQuestionsComponent
     //obj
     const paymentObj = Object.freeze(this.createPaymentObj());
     //
+    //
     this.monopayService
       .createPayment(paymentObj)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((response) => {
-        const currentUrl = window.location.pathname;
-        window.history.pushState({}, '', currentUrl);
-        window.location.href = response.pageUrl;
-        this.setInStorageTestInfo(response.invoiceId);
-      });
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap((response) => {
+          const currentUrl = window.location.pathname;
+          window.history.pushState({}, '', currentUrl);
+          window.open(response.pageUrl, '_blank');
+
+          this.setInStorageTestInfo(response.invoiceId);
+          sessionStorage.setItem(this.TEST_NAME + '-isPendingPayment', 'true');
+          this.isPendingPayment.set(true);
+          return this.startIntervalChecking(response.invoiceId);
+        })
+      )
+      .subscribe((response) => {});
+  }
+
+  private startIntervalChecking(invoiceId: string): Observable<any> {
+    return interval(3000).pipe(
+      switchMap(() =>
+        this.monopayService.checkStatus(this.TEST_NAME, invoiceId)
+      ),
+      takeWhile((response) => response.status !== 'success', true),
+      map((response) => {
+        if (response.status === 'success') {
+          sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
+          this.isPendingPayment.set(false);
+          const url = '/tests/' + this.TEST_NAME + '/payment-success';
+          this.router.navigateByUrl(url);
+        }
+        return response;
+      })
+    );
   }
   private setInStorageTestInfo(invoiceId: string) {
     localStorage.setItem(
@@ -358,8 +411,9 @@ export class TestQuestionsComponent
 
           this.setSnackBar(false, 'false');
           this.cdr.markForCheck();
-
+          sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
           this.currentQuestionNumber.set(1);
+          this.isPendingPayment.set(false);
           localStorage.removeItem(this.TEST_NAME + '-results');
           this.setInStorageAnswers();
         }
