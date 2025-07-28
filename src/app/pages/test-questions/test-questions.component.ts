@@ -210,7 +210,7 @@ export class TestQuestionsComponent
       total: convertPrice,
       icon: this.currentCardInfo?.imgWebUrl ?? null,
       unit: 'шт.',
-      code: this.TEST_NAME + '-' + Date.now().toString().slice(-5), // Unique code for the basket order
+      code: this.TEST_NAME + '-' + Date.now().toString().slice(-5),
     };
     //
 
