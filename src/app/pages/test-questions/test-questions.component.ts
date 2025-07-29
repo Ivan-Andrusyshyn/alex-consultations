@@ -261,7 +261,18 @@ export class TestQuestionsComponent
 
     return paymentObj;
   }
+  // close payment
+  closePaymentByClick() {
+    const confirmed = confirm('Ви впевнені, що хочете скасувати платіж?');
 
+    if (confirmed) {
+      this.isPendingPayment.set(false);
+      sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
+      localStorage.removeItem(this.TEST_NAME + '-paid-testInfo');
+    }
+  }
+
+  // create payment
   createMonoPaymentByClick() {
     //obj
     const paymentObj = Object.freeze(this.createPaymentObj());
@@ -277,7 +288,6 @@ export class TestQuestionsComponent
           window.open(response.pageUrl, '_blank');
 
           this.setInStorageTestInfo(response.invoiceId);
-          sessionStorage.setItem(this.TEST_NAME + '-isPendingPayment', 'true');
           this.isPendingPayment.set(true);
           return this.startIntervalChecking(response.invoiceId);
         })
@@ -303,6 +313,9 @@ export class TestQuestionsComponent
     );
   }
   private setInStorageTestInfo(invoiceId: string) {
+    // session
+    sessionStorage.setItem(this.TEST_NAME + '-isPendingPayment', 'true');
+    // local
     localStorage.setItem(
       this.TEST_NAME + '-paid-testInfo',
       JSON.stringify({

@@ -73,7 +73,9 @@
           ></app-card-payment>
 
           }@else {
-          <app-pending-payment (close)="refreshTest()"></app-pending-payment>
+          <app-pending-payment
+            (close)="closePaymentByClick()"
+          ></app-pending-payment>
           }
         </div>
       </div>
