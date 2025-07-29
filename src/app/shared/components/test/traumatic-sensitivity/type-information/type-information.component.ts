@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { TypeInformation } from '../../../../models/traumatic-experience';
+import { TypeInformation } from '../../../../models/tests/traumatic-experience';
 
 @Component({
   selector: 'app-type-information',

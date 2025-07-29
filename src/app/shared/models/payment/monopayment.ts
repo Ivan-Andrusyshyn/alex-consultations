@@ -1,3 +1,5 @@
+import { TestName } from '../tests/common-tests';
+
 export interface MonoPaymentRequest {
   amount: number;
   ccy: number;
@@ -45,4 +47,18 @@ export interface MonoPaymentRequest {
   agentFeePercent: number;
   tipsEmployeeId?: string | null;
   displayType?: string | null;
+}
+
+export type StatusPayment = 'created' | 'success' | 'failed';
+
+export interface MonoPaymentCreateResponse {
+  pageUrl: string;
+  status: StatusPayment;
+  testName: TestName;
+  invoiceId: string;
+}
+export interface MonoPaymentCheckStatusResponse {
+  status: StatusPayment;
+  invoiceId: string;
+  testName: TestName;
 }

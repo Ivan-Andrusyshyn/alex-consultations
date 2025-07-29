@@ -1,4 +1,4 @@
-import { CardContent } from '../../shared/models/common-tests';
+import { CardContent } from '../../shared/models/tests/common-tests';
 import { MainTestNames } from '../utils/testsNames';
 import { MainTestPrices } from './testPrices';
 

@@ -9,8 +9,8 @@ import {
   Question,
   TestResults,
   TestResultRequest,
-} from '../../../shared/models/common-tests';
-import { TestResult } from '../../../shared/models/traumatic-experience';
+} from '../../../shared/models/tests/common-tests';
+import { TestResult } from '../../../shared/models/tests/traumatic-experience';
 import { environment } from '../../environment/environment';
 import { MainTestNames } from '../../utils/testsNames';
 

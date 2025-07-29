@@ -5,13 +5,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {
   RoleInRelationshipsInformation,
   RoleInRelationshipsResult,
-} from '../../../shared/models/role-in-relationships';
+} from '../../../shared/models/tests/role-in-relationships';
 import { environment } from '../../environment/environment';
 import {
   Question,
   TestResultRequest,
   TestResults,
-} from '../../../shared/models/common-tests';
+} from '../../../shared/models/tests/common-tests';
 import { MainTestNames } from '../../utils/testsNames';
 
 @Injectable({

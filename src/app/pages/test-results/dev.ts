@@ -1,4 +1,4 @@
-import { TestResults } from '../../shared/models/common-tests';
+import { TestResults } from '../../shared/models/tests/common-tests';
 
 export const testResultExample: Partial<TestResults> = {
   type: 'ENFJ',

@@ -10,7 +10,7 @@ import { ToxicalRelationshipService } from './tests/toxical-relationship.service
 import { TraumaticExperienceService } from './tests/traumatic-experience.service';
 import { YouCoffeeService } from './tests/you-coffee.service';
 import { MainTestNames } from '../utils/testsNames';
-import { TestName, TestResults } from '../../shared/models/common-tests';
+import { TestName, TestResults } from '../../shared/models/tests/common-tests';
 //
 
 interface ResultsResolver {

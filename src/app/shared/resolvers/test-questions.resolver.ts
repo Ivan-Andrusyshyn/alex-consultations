@@ -6,43 +6,11 @@ import {
 } from '@angular/router';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 
-import { Question, TestName } from '../models/common-tests';
+import { TestName } from '../models/tests/common-tests';
 import { MonopayService } from '../../core/services/monopay.service';
 import { TestQuestionsProvider } from '../../core/services/test-questions-provider.service';
+import { ResolveData, TestInfo } from '../models/tests/resolvers.interface';
 //
-interface TestInfo {
-  testName: TestName;
-  imgUrl: string;
-  title: string;
-  price: string | number;
-  invoiceId: string;
-}
-
-interface ResolveData {
-  message: string | null;
-  questions: Question[] | null;
-  testName: TestName | null;
-  testTitleText: string;
-  testSubtitleText: string;
-  testPrice: string | null;
-  isSuccessPayedTest: boolean;
-  isFreeTest: boolean;
-  testInstruction?: {
-    testTitle: string;
-    instructionsTitle: string;
-    steps: string[];
-  };
-  snackBar?: {
-    firstSnackBarBtnText: string;
-    secondSnackBarBtnText: string;
-    secondSnackBar: string;
-    firstSnackBar: string;
-  };
-  seo?: {
-    title: string;
-    metaTags: Array<string>;
-  };
-}
 
 @Injectable({
   providedIn: 'root',

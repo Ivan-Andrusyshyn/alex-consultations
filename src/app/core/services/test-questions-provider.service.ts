@@ -5,7 +5,7 @@ import { QuestionsPageContent } from '../content/QuestionsPageContent';
 import { RoleInRelationshipsService } from './tests/role-in-relationships.service';
 import { ToxicalRelationshipService } from './tests/toxical-relationship.service';
 import { MainTestNames } from '../utils/testsNames';
-import { TestName } from '../../shared/models/common-tests';
+import { TestName } from '../../shared/models/tests/common-tests';
 import { AttractivenessService } from './tests/attractiveness.service';
 import { BeYourselfTestService } from './tests/be-yourself.service';
 import { YouCoffeeService } from './tests/you-coffee.service';

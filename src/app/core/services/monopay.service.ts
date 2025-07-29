@@ -3,7 +3,12 @@ import { Observable, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { environment } from '../environment/environment';
-import { TestName } from '../../shared/models/common-tests';
+import { TestName } from '../../shared/models/tests/common-tests';
+import {
+  MonoPaymentCheckStatusResponse,
+  MonoPaymentCreateResponse,
+  MonoPaymentRequest,
+} from '../../shared/models/payment/monopayment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,36 +17,24 @@ export class MonopayService {
   constructor(private http: HttpClient) {}
   private readonly testsUrl = environment.apiUrl;
 
-  createPayment(data: any): Observable<{
-    pageUrl: string;
-    status: string;
-    testName: TestName;
-    invoiceId: string;
-  }> {
-    return this.http.post<{
-      pageUrl: string;
-      status: string;
-      testName: TestName;
-      invoiceId: string;
-    }>(`${this.testsUrl}/api/monopay/create-payment`, data, {
-      withCredentials: true,
-    });
+  createPayment(
+    data: MonoPaymentRequest
+  ): Observable<MonoPaymentCreateResponse> {
+    return this.http.post<MonoPaymentCreateResponse>(
+      `${this.testsUrl}/api/monopay/create-payment`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   checkStatus(
     testName: TestName,
     invoiceId: string = 'unknown'
-  ): Observable<{
-    status: 'success' | 'created' | 'failed';
-    invoiceId: string;
-    testName: TestName;
-  }> {
+  ): Observable<MonoPaymentCheckStatusResponse> {
     return this.http
-      .get<{
-        status: 'created' | 'success' | 'failed';
-        invoiceId: string;
-        testName: TestName;
-      }>(
+      .get<MonoPaymentCheckStatusResponse>(
         `${this.testsUrl}/api/monopay/check-status?testName=${testName}&invoiceId=${invoiceId}`,
         {
           withCredentials: true,

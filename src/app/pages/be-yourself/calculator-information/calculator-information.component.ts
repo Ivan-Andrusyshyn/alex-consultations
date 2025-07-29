@@ -11,7 +11,7 @@ import { PersonalitiesCalculatorService } from '../../../core/services/tests/per
 import { SeoService } from '../../../core/services/seo.service';
 import { TestCardStartBtnComponent } from '../../../shared/components/test/test-card-start-btn/test-card-start-btn.component';
 import { TitleCardComponent } from '../../../shared/components/title-card/title-card.component';
-import { CalculatorInformation } from '../../../shared/models/personalities-calculator';
+import { CalculatorInformation } from '../../../shared/models/tests/personalities-calculator';
 
 @Component({
   selector: 'app-calculator-information',

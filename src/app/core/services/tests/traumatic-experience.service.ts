@@ -6,13 +6,13 @@ import { environment } from '../../environment/environment';
 import {
   TestResultRequest,
   TestResults,
-} from '../../../shared/models/common-tests';
+} from '../../../shared/models/tests/common-tests';
 import {
   TestResult,
   PersonalitiesResults,
   PersonalitiesResponse,
   TestInformation,
-} from '../../../shared/models/traumatic-experience';
+} from '../../../shared/models/tests/traumatic-experience';
 import { MainTestNames } from '../../utils/testsNames';
 
 @Injectable({ providedIn: 'root' })

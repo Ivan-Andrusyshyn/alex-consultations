@@ -1,4 +1,4 @@
-import { TestName } from '../../shared/models/common-tests';
+import { TestName } from '../../shared/models/tests/common-tests';
 import { MainTestNames } from '../utils/testsNames';
 import { MainTestPrices } from './testPrices';
 

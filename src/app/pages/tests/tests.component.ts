@@ -13,7 +13,7 @@ import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { SeoService } from '../../core/services/seo.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import titleCardContent from './titleCard-content';
-import { CardContent } from '../../shared/models/common-tests';
+import { CardContent } from '../../shared/models/tests/common-tests';
 import { TestCardComponent } from '../../shared/components/test/test-card/test-card.component';
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { fadeInAnimation } from '../test-questions/fadeIn-animation';

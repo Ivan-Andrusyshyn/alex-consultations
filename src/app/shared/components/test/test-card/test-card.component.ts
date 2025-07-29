@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 
 import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
-import { CardContent } from '../../../models/common-tests';
+import { CardContent } from '../../../models/tests/common-tests';
 
 @Component({
   selector: 'app-test-card',

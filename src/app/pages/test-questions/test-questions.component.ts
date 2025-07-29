@@ -32,7 +32,7 @@ import {
   CardContent,
   Question,
   TestName,
-} from '../../shared/models/common-tests';
+} from '../../shared/models/tests/common-tests';
 import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
 import { SeoService } from '../../core/services/seo.service';
@@ -49,8 +49,8 @@ import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { CardPaymentComponent } from '../../shared/components/payment/card-payment/card-payment.component';
 import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
 import { environment } from '../../core/environment/environment';
-import { MonoPaymentRequest } from '../../shared/models/monopayment';
 import { PendingPaymentComponent } from '../../shared/components/payment/pending-payment/pending-payment.component';
+import { MonoPaymentRequest } from '../../shared/models/payment/monopayment';
 
 @Component({
   selector: 'app-test-questions',
@@ -338,7 +338,7 @@ export class TestQuestionsComponent
       )
       .subscribe((results) => {
         this.isSubmitting.set(false);
-        localStorage.removeItem(this.TEST_NAME + '-answers');
+        sessionStorage.removeItem(this.TEST_NAME + '-answers');
         //
         this.handlePersonType(results);
       });
@@ -423,7 +423,7 @@ export class TestQuestionsComponent
 
   // ─── LocalStorage Helpers
   private setInStorageAnswers() {
-    localStorage.setItem(
+    sessionStorage.setItem(
       this.TEST_NAME + '-answers',
       JSON.stringify({
         answers: this.formGroup.value,

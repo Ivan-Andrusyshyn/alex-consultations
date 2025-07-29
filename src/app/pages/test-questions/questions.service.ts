@@ -7,7 +7,7 @@ import {
   Question,
   TestName,
   TestResultRequest,
-} from '../../shared/models/common-tests';
+} from '../../shared/models/tests/common-tests';
 import { RoleInRelationshipsService } from '../../core/services/tests/role-in-relationships.service';
 import { ToxicalRelationshipService } from '../../core/services/tests/toxical-relationship.service';
 import { Validators } from '@angular/forms';
@@ -45,7 +45,7 @@ export class QuestionsService {
     .toFormat('yyyy-MM-dd HH:mm:ss');
   dialogSettings = {
     width: '300px',
-    height: '170px',
+    height: '150px',
     isForm: false,
     isConfirm: true,
   };
@@ -75,7 +75,8 @@ export class QuestionsService {
     return formControls;
   }
   parseAnswers(testName: string) {
-    const stringAnswers = localStorage.getItem(testName + '-answers') ?? 'null';
+    const stringAnswers =
+      sessionStorage.getItem(testName + '-answers') ?? 'null';
     return JSON.parse(stringAnswers);
   }
   makeRequestByTestName(

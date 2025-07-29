@@ -25,11 +25,11 @@ import { PersonalitiesCalculatorService } from '../../../core/services/tests/per
 import { RouteTrackerService } from '../../../core/services/route-tracker.service';
 import { SeoService } from '../../../core/services/seo.service';
 import { TitleCardComponent } from '../../../shared/components/title-card/title-card.component';
-import { PersonalityTypes } from '../../../shared/models/be-yourself';
+import { PersonalityTypes } from '../../../shared/models/tests/be-yourself';
 import {
   CalculatorResult,
   CalculatorDisclaimer,
-} from '../../../shared/models/personalities-calculator';
+} from '../../../shared/models/tests/personalities-calculator';
 import { PrimaryBtnComponent } from '../../../shared/components/primary-btn/primary-btn.component';
 import { HeroCardsSliderComponent } from '../../../shared/components/hero-cards-slider/hero-cards-slider.component';
 import { personalityTypesContent } from '../../../core/content/be-yourself/personalityTypes';

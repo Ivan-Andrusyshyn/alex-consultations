@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
-import { Option, TestName } from '../../../models/common-tests';
+import { Option, TestName } from '../../../models/tests/common-tests';
 import { MainTestNames } from '../../../../core/utils/testsNames';
 
 @Component({

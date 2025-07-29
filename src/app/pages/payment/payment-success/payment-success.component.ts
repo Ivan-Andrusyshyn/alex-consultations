@@ -15,7 +15,7 @@ import {
   Answer,
   CardContent,
   TestName,
-} from '../../../shared/models/common-tests';
+} from '../../../shared/models/tests/common-tests';
 import { fadeInAnimation } from '../../test-questions/fadeIn-animation';
 import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 import { MonopayService } from '../../../core/services/monopay.service';
@@ -104,7 +104,7 @@ export class PaymentSuccessComponent implements OnInit {
       }),
       switchMap((response) => {
         const testAnswers = JSON.parse(
-          localStorage.getItem(testName + '-answers') ?? 'null'
+          sessionStorage.getItem(testName + '-answers') ?? 'null'
         ) as { answers: Answer[]; currentQuestion: string | number } | null;
         //
 

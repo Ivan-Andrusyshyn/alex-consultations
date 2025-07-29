@@ -14,7 +14,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { StarRatingService } from '../../../core/services/star-rating.service';
-import { TestName } from '../../models/common-tests';
+import { TestName } from '../../models/tests/common-tests';
 
 @Component({
   selector: 'app-star-rating',

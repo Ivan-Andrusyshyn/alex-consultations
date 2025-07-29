@@ -8,7 +8,7 @@ import {
   Question,
   TestResultRequest,
   TestResults,
-} from '../../../shared/models/common-tests';
+} from '../../../shared/models/tests/common-tests';
 import { environment } from '../../environment/environment';
 import { MainTestNames } from '../../utils/testsNames';
 

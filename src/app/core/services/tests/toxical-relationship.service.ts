@@ -6,9 +6,9 @@ import {
   Question,
   TestResultRequest,
   TestResults,
-} from '../../../shared/models/common-tests';
-import { CategoryName } from '../../../shared/models/toxical-relationship';
-import { TestInformation } from '../../../shared/models/toxical-relationship';
+} from '../../../shared/models/tests/common-tests';
+import { CategoryName } from '../../../shared/models/tests/toxical-relationship';
+import { TestInformation } from '../../../shared/models/tests/toxical-relationship';
 import { environment } from '../../environment/environment';
 import { MainTestNames } from '../../utils/testsNames';
 

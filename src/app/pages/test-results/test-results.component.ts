@@ -18,7 +18,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
-import { TestName, TestResults } from '../../shared/models/common-tests';
+import { TestName, TestResults } from '../../shared/models/tests/common-tests';
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
 import { ConsultationService } from '../../core/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/models/benefit-consultation';

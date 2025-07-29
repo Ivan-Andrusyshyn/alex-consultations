@@ -1,15 +1,3 @@
-type RelationshipResult = {
-  scoreRange: string;
-  category: string;
-  subtitle: string;
-  description: string;
-  recommendations: string[];
-  conclusion: string;
-  consultation: {
-    text: string;
-    buttonText: string;
-  };
-};
 type CategoryName =
   | 'healthy-relationship'
   | 'toxic-relationship'
@@ -29,4 +17,4 @@ interface TestInformation {
   };
 }
 
-export { CategoryName, TestInformation, RelationshipResult };
+export { CategoryName, TestInformation };

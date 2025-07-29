@@ -8,27 +8,11 @@ import {
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 
 //
-import { TestName, TestResults } from '../models/common-tests';
+import { TestName } from '../models/tests/common-tests';
 import { MonopayService } from '../../core/services/monopay.service';
 import { TestResultsProviderService } from '../../core/services/test-results-provider.service';
+import { ResultsResolver, TestInfo } from '../models/tests/resolvers.interface';
 
-interface ResultsResolver {
-  message: string | null;
-  results: TestResults | null;
-  personType?: string;
-  testName: TestName | null;
-  seo?: {
-    title: string;
-    metaTags: Array<string>;
-  };
-}
-interface TestInfo {
-  testName: TestName;
-  imgUrl: string;
-  title: string;
-  price: string | number;
-  invoiceId: string;
-}
 //
 @Injectable({
   providedIn: 'root',

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../environment/environment';
-import { TestName } from '../../shared/models/common-tests';
+import { TestName } from '../../shared/models/tests/common-tests';
 
 interface RatingStarResponse {
   rating: string | number;

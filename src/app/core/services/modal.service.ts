@@ -28,7 +28,7 @@ export class ModalService {
       data: {
         isForm,
         isConfirm,
-        title: 'Ви впевнені що хочете почати з початку ?',
+        title: 'Почати тест спочатку?',
         btn: {
           cancel: 'Ні',
           confirm: 'Так',

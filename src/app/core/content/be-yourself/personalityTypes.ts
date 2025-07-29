@@ -1,4 +1,4 @@
-import { PersonalityTypes } from '../../../shared/models/be-yourself';
+import { PersonalityTypes } from '../../../shared/models/tests/be-yourself';
 
 export const personalityTypesContent: PersonalityTypes[] = [
   {

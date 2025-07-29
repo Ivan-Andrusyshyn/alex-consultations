@@ -6,7 +6,7 @@ import {
   CalculatorResult,
   CalculatorInformation,
   CalculatorDisclaimer,
-} from '../../../shared/models/personalities-calculator';
+} from '../../../shared/models/tests/personalities-calculator';
 import { environment } from '../../environment/environment';
 import { MainTestNames } from '../../utils/testsNames';
 
