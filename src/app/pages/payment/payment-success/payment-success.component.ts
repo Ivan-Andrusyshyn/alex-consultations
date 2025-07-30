@@ -72,16 +72,8 @@ export class PaymentSuccessComponent implements OnInit {
     const price = testInfo.price;
     const invoiceId = testInfo.invoiceId;
 
-    const storageResult = JSON.parse(
-      localStorage.getItem(testName + '-results') ?? 'null'
-    );
     //
-    this.cardInfo$ = this.getInfoByCheckSuccess(
-      testName,
-      invoiceId,
-      storageResult,
-      price
-    );
+    this.cardInfo$ = this.getInfoByCheckSuccess(testName, invoiceId, price);
   }
   //
 
@@ -89,7 +81,6 @@ export class PaymentSuccessComponent implements OnInit {
   private getInfoByCheckSuccess(
     testName: TestName,
     invoiceId: string,
-    storageResult: null | { categoryName: string },
     price: number | string
   ) {
     return this.monopayService.checkStatus(testName, invoiceId)?.pipe(
@@ -97,10 +88,9 @@ export class PaymentSuccessComponent implements OnInit {
         const foundCard = this.testsCards.find((card) =>
           card.imageUrl.endsWith(testName + '/')
         );
-        let result = storageResult ? storageResult.categoryName : null;
         //
         this.currentCardInfo = foundCard ?? null;
-        return this.getDataByStatus(response, testName, result, price);
+        return this.getDataByStatus(response, testName, price);
       }),
       switchMap((response) => {
         const testAnswers = JSON.parse(
@@ -124,14 +114,12 @@ export class PaymentSuccessComponent implements OnInit {
   private getDataByStatus(
     response: { status: string; invoiceId: string },
     testName: TestName,
-    results: any,
     price: string | number
   ) {
     const isSuccessPayed =
       response.status === 'success' && response.invoiceId && testName;
     if (isSuccessPayed) {
       return {
-        results,
         testName,
         price,
       };
