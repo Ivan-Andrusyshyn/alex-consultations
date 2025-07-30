@@ -1,7 +1,13 @@
 <div class="pending-payment">
   <button (click)="closeButtonClick()">❌</button>
   <h3>Очікування платежу...</h3>
-  <p class="subtitle">Будь ласка, дочекайтеся підтвердження платежу.</p>
+  <p class="subtitle">
+    Після успішного платежу поверніться на цю сторінку — ваш результат буде
+    сформовано автоматично.
+  </p>
+
   <br />
-  <mat-spinner [diameter]="40"></mat-spinner>
+
+  <app-dots-loader></app-dots-loader>
+  <!-- <mat-spinner [diameter]="40"></mat-spinner> -->
 </div>

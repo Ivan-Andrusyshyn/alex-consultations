@@ -99,6 +99,7 @@
     visibility: visible;
     transform: translateY(0);
     z-index: 99;
+    pointer-events: all;
 
     li {
       opacity: 1;
@@ -109,6 +110,8 @@
     opacity: 0;
     transform: translateY(-30px);
     visibility: visible;
+    z-index: -99;
+    pointer-events: none;
 
     li {
       opacity: 0;

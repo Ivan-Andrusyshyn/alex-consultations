@@ -39,6 +39,9 @@
 .pending-payment p {
   color: #777;
   margin: 0.5rem 0 0;
+  @media screen and (max-width: 600px) {
+    font-size: 0.9rem;
+  }
 }
 //
 @keyframes pulse {

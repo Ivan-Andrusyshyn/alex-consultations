@@ -277,16 +277,18 @@ export class TestQuestionsComponent
     //obj
     const paymentObj = Object.freeze(this.createPaymentObj());
     //
+    const newTab = window.open('', '_blank');
     //
     this.monopayService
       .createPayment(paymentObj)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((response) => {
-          const currentUrl = window.location.pathname;
-          window.history.pushState({}, '', currentUrl);
-          window.open(response.pageUrl, '_blank');
-
+          if (newTab) {
+            const currentUrl = window.location.href;
+            window.history.pushState({}, '', currentUrl);
+            newTab.location.href = response.pageUrl;
+          }
           this.setInStorageTestInfo(response.invoiceId);
           this.isPendingPayment.set(true);
           return this.startIntervalChecking(response.invoiceId);
