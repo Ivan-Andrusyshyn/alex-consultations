@@ -193,14 +193,14 @@ export class TestQuestionsComponent
           localStorage.getItem(this.TEST_NAME + '-paid-testInfo') ?? 'null'
         )?.invoiceId;
         this.isPendingPayment.set(isPending);
-
         if (isPending && invoiceId) {
           return this.startIntervalChecking(invoiceId).pipe(
             map(() => questions)
           );
         }
         return of(questions);
-      })
+      }),
+      takeUntilDestroyed(this.destroyRef)
     );
 
     //
@@ -282,7 +282,6 @@ export class TestQuestionsComponent
     this.monopayService
       .createPayment(paymentObj)
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         switchMap((response) => {
           if (newTab) {
             const currentUrl = window.location.href;
@@ -292,7 +291,8 @@ export class TestQuestionsComponent
           this.setInStorageTestInfo(response.invoiceId);
           this.isPendingPayment.set(true);
           return this.startIntervalChecking(response.invoiceId);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((response) => {});
   }
