@@ -108,18 +108,11 @@ export class PaymentSuccessComponent implements OnInit {
         ) as { answers: Answer[]; currentQuestion: string | number } | null;
         //
 
-        if (storageResult === null && testAnswers) {
-          const newRequest = this.questionsService.createNewRequestObject(
-            testName,
-            testAnswers?.answers
-          );
-          return this.makeReqByTestName(testName, newRequest, response);
-        } else {
-          this.cleanStorage(testName);
-
-          //
-          return of({ ...response, results: storageResult?.categoryName });
-        }
+        const newRequest = this.questionsService.createNewRequestObject(
+          testName,
+          testAnswers?.answers
+        );
+        return this.makeReqByTestName(testName, newRequest, response);
       }),
 
       catchError((error: any) => {
@@ -167,6 +160,7 @@ export class PaymentSuccessComponent implements OnInit {
 
   navigateByClick(testName: string, testResults: string | null) {
     if (testName && testResults) {
+      localStorage.removeItem(testName + '-results');
       this.router.navigate(['tests', testName, 'details', testResults]);
     } else {
       alert('problem with navigation data.');

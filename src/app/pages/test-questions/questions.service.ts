@@ -179,8 +179,8 @@ export class QuestionsService {
     }
   }
 
-  private setLocalStorage(key: string, value: any) {
-    const fullKey = key + '-results';
+  private setLocalStorage(testName: string, value: any) {
+    const fullKey = testName + '-results';
     localStorage.setItem(fullKey, JSON.stringify(value));
   }
 }
