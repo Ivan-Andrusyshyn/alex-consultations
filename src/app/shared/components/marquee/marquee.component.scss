@@ -1,16 +1,16 @@
 .marquee {
-  padding: 10px 0;
-  font-size: 1rem;
+  padding: 8px 0;
+  font-size: 0.8rem;
   width: 100%;
 
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  background-color: #ffeb3b;
+  background-color: #cebe30;
   font-weight: bold;
   position: relative;
   @media screen and (min-width: 764px) {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 16px;
   }
 }

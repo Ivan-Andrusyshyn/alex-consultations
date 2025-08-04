@@ -50,6 +50,7 @@ export class TestResultsProviderService {
             return {
               ...r,
               testName,
+              breadcrumb: 'Роль у стосунках',
 
               seo: {
                 title:
@@ -74,6 +75,8 @@ export class TestResultsProviderService {
               ...r,
               testName,
               subCategoryCoffee,
+              breadcrumb: 'Яка ти кава?',
+
               seo: {
                 title:
                   'Результати тесту Яка ти кава | Дізнайся, наскільки ти смачна, гірка чи ароматна кава',
@@ -103,6 +106,7 @@ export class TestResultsProviderService {
             return {
               ...r,
               testName,
+              breadcrumb: 'Будь собою',
 
               seo: {
                 title:
@@ -125,6 +129,7 @@ export class TestResultsProviderService {
             return {
               ...r,
               testName,
+              breadcrumb: 'Тип привабливості',
 
               seo: {
                 title:
@@ -147,6 +152,7 @@ export class TestResultsProviderService {
             return {
               ...r,
               testName,
+              breadcrumb: 'Токсичні стосунки',
 
               seo: {
                 title: 'Результати тесту на травматичну чутливість',
@@ -167,6 +173,7 @@ export class TestResultsProviderService {
             return {
               ...r,
               testName,
+              breadcrumb: 'Травматичний досвід',
 
               seo: {
                 title:

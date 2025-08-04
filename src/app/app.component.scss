@@ -10,8 +10,13 @@ main {
   @media (max-width: 768px) {
     min-height: calc(100vh - 120px);
   }
+  .bread-crumb {
+    margin: 0 auto;
+    max-width: 1320px;
+  }
 }
 
+//
 .backdrop {
   top: 0;
   left: 0;

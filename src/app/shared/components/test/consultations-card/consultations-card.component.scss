@@ -24,7 +24,7 @@
 }
 .consultations-card {
   gap: 10px;
-  padding: 15px;
+  padding: 12px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -56,15 +56,24 @@
     flex-direction: column;
     display: flex;
     li {
-      gap: 38px;
+      gap: 8px;
 
       display: flex;
+      @media screen and (min-width: 764px) {
+        gap: 38px;
+      }
+
       .dot {
-        width: 15px;
-        height: 15px;
+        width: 8px;
+        height: 8px;
         flex-shrink: 0;
         border-radius: 50%;
         background-color: #057988;
+
+        @media screen and (min-width: 764px) {
+          width: 15px;
+          height: 15px;
+        }
       }
     }
   }
@@ -81,6 +90,10 @@ p {
 }
 .icons-container {
   margin: 30px 0;
+
+  @media screen and (min-width: 764px) {
+    margin: 50px 0;
+  }
 }
 .icons-list {
   gap: 16px;

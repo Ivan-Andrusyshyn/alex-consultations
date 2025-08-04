@@ -52,11 +52,7 @@ export class ConsultationsCardsComponent {
 
   next() {
     if (!this.isNextDisabled()) {
-      const cardIndex = this.sliderService.next(
-        this.sliderKey,
-        true,
-        this.cards
-      );
+      const cardIndex = this.sliderService.next(this.sliderKey, this.cards);
 
       this.currentIndex.set(cardIndex);
     }
@@ -64,11 +60,7 @@ export class ConsultationsCardsComponent {
 
   prev() {
     if (!this.isPrevDisabled()) {
-      const cardIndex = this.sliderService.prev(
-        this.sliderKey,
-        true,
-        this.cards
-      );
+      const cardIndex = this.sliderService.prev(this.sliderKey, this.cards);
 
       this.currentIndex.set(cardIndex);
     }
@@ -83,7 +75,6 @@ export class ConsultationsCardsComponent {
 
     const cardIndex = this.sliderService.onTouchEnd(
       this.sliderKey,
-      true,
       this.cards,
       event
     );

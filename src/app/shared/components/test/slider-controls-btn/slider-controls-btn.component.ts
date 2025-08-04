@@ -22,8 +22,6 @@ export class SliderControlsBtnComponent {
   @Input() disableNext?: boolean = false;
   @Input() disablePrev?: boolean = false;
 
-  @Input() controlsInside: boolean = false;
-
   nextSlide() {
     this.next.emit();
   }

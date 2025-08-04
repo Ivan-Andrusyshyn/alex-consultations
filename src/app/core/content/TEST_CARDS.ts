@@ -10,7 +10,7 @@ export const TEST_CARDS: CardContent[] = [
     testPrice: MainTestPrices['YouCoffee'],
     title: 'Яка ти кава?',
     subtitle:
-      'Відповідай на 12 простих, але смачних запитань — і дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою',
+      'Дізнайся, яка кава ти всередині. Міцна? Кисленька? Чи, може, рідкісний сорт із власною легендою',
     buttonText: 'Почати тест',
     imgList: [1, 2, 3, 4, 5, 6],
     imgWebUrl:
@@ -23,7 +23,7 @@ export const TEST_CARDS: CardContent[] = [
     imgList: [1, 2, 3, 4, 5, 6, 7, 8],
     testPrice: MainTestPrices['BeYourself'],
 
-    category: 'Для особистого розвитку',
+    category: ['Для особистого розвитку', 'Для стосунків'],
     routeStart: '/tests/' + MainTestNames.BeYourself + '/questions',
     subtitle:
       'Дізнайся свій унікальний тип особистості та розкрий свої сильні сторони!',

@@ -1,45 +1,42 @@
 <section class="tests">
-  <div>
-    <app-title-card
-      [titleText]="titleCardContent.titleText"
-      [subtitleText]="titleCardContent.subtitleText"
-    ></app-title-card>
+  <app-title-card
+    [subtitleText]="''"
+    [titleText]="titleCardContent.subtitleText"
+  ></app-title-card>
+  <!--  -->
 
-    <div class="tests-container">
-      <div class="mob-container">
-        <mat-tab-group>
-          <ng-container *ngFor="let group of groupedCards">
-            <mat-tab [label]="group.tabsLabel">
-              <ng-container
-                *ngTemplateOutlet="cardList; context: { $implicit: group }"
-              ></ng-container>
-            </mat-tab>
-          </ng-container>
-        </mat-tab-group>
-      </div>
-      <div class="desk-container">
-        <ng-container *ngFor="let group of groupedCards">
-          <div class="category-wrapper" *ngIf="group.cards.length > 0">
-            <p class="category-title subtitle">{{ group.category }}</p>
-            <ng-container
-              *ngTemplateOutlet="cardList; context: { $implicit: group }"
-            ></ng-container>
-          </div>
-        </ng-container>
+  <div class="container">
+    <div class="tags">
+      <button
+        *ngFor="let tag of categoryList"
+        (click)="toggleTag(tag)"
+        [class.active]="isTagSelected(tag)"
+      >
+        #{{ tag }}
+      </button>
+    </div>
+
+    <div>
+      <div class="tests-container" @fadeIn>
+        <div class="tabs-container">
+          <ng-container
+            *ngTemplateOutlet="
+              cardList;
+              context: { $implicit: filteredItems() }
+            "
+          ></ng-container>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<ng-template #cardList let-group>
+<ng-template #cardList let-cards>
   <ul class="test-list">
-    <ng-container *ngFor="let card of group.cards">
-      <li>
-        @defer (on viewport; ) {
-        <app-test-card [card]="card" @fadeIn></app-test-card>
-        }@placeholder {
-        <div style="height: 300px"></div>
-        }
+    <ng-container *ngFor="let card of cards">
+      <li @fadeIn>
+        <app-small-card [card]="card"></app-small-card>
+        <!-- <app-test-card [smallCard]="true" [card]="card" @fadeIn></app-test-card> -->
       </li>
     </ng-container>
   </ul>

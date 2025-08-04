@@ -54,9 +54,8 @@
       font-weight: 600;
       line-height: normal;
       letter-spacing: 1.2px;
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 764px) {
         text-align: center;
-        font-size: 56px;
       }
       @media screen and (min-width: 1920px) {
         text-align: center;
@@ -64,13 +63,14 @@
       }
     }
     .text-wrapper p {
-      color: #fff;
-      text-align: center;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
       letter-spacing: 1.2px;
+      font-size: 16px;
+      font-weight: 400;
+      //
+      color: #fff;
+      font-style: normal;
+      line-height: normal;
+      text-align: center;
       @media screen and (min-width: 1440px) {
         font-size: 28px;
       }
@@ -146,16 +146,18 @@
     }
   }
   .delay-4 {
-    background: url("/assets/new/core/main/hero/camping.svg");
+    background-image: url("/assets/new/core/main/hero/camping.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
+    background-color: transparent;
     animation-delay: 3s;
     width: 180px;
     height: 180px;
     left: 6%;
     bottom: 59%;
     z-index: -1;
+    //
     @media screen and (min-width: 460px) {
       bottom: 50%;
       width: 200px;

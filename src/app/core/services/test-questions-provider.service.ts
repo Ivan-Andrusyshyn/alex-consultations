@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { map, of } from 'rxjs';
 
 import { QuestionsPageContent } from '../content/QuestionsPageContent';
 import { RoleInRelationshipsService } from './tests/role-in-relationships.service';
@@ -29,6 +29,7 @@ export class TestQuestionsProvider {
           return {
             ...r,
             testName,
+            breadcrumb: 'Роль у стосунках',
             ...QuestionsPageContent[testName],
           };
         })
@@ -41,6 +42,8 @@ export class TestQuestionsProvider {
           return {
             ...r,
             testName,
+            breadcrumb: 'Яка ти кава?',
+
             snackBar: {
               firstSnackBarBtnText: 'Розкриваю аромат',
               secondSnackBarBtnText: 'Розкрити повний букет',
@@ -58,6 +61,8 @@ export class TestQuestionsProvider {
           return {
             ...r,
             testName,
+            breadcrumb: 'Будь собою',
+
             ...QuestionsPageContent[testName],
           };
         })
@@ -69,6 +74,8 @@ export class TestQuestionsProvider {
           return {
             ...r,
             testName,
+            breadcrumb: 'Тип привабливості',
+
             ...QuestionsPageContent[testName],
           };
         })
@@ -80,6 +87,8 @@ export class TestQuestionsProvider {
           return {
             ...r,
             testName,
+            breadcrumb: 'Токсичні стосунки',
+
             ...QuestionsPageContent[testName],
           };
         })
@@ -91,6 +100,8 @@ export class TestQuestionsProvider {
           return {
             ...r,
             testName,
+            breadcrumb: 'Травматичний досвід',
+
             ...QuestionsPageContent[testName],
           };
         })
@@ -98,6 +109,7 @@ export class TestQuestionsProvider {
     } else {
       return of({
         message: 'Тест не знайдено',
+        breadcrumb: 'Тест не знайдено',
         questions: null,
         testName: null,
         testTitleText: '',

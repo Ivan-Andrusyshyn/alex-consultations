@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   OnInit,
   signal,
@@ -9,6 +10,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+//
+
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { SeoService } from '../../core/services/seo.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
@@ -17,17 +21,19 @@ import { CardContent } from '../../shared/models/tests/common-tests';
 import { TestCardComponent } from '../../shared/components/test/test-card/test-card.component';
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { SmallCardComponent } from '../../shared/components/test/small-card/small-card.component';
 
 @Component({
   selector: 'app-tests',
   standalone: true,
   imports: [
-    TitleCardComponent,
     NgTemplateOutlet,
     MatTabsModule,
     TestCardComponent,
+    SmallCardComponent,
+    TitleCardComponent,
+    MatFormFieldModule,
     NgFor,
-    NgIf,
   ],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
@@ -35,16 +41,37 @@ import { fadeInAnimation } from '../test-questions/fadeIn-animation';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestsComponent implements OnInit {
-  readonly testCards: CardContent[] = TEST_CARDS;
-  readonly titleCardContent = titleCardContent;
   readonly dialog = inject(MatDialog);
   private readonly route = inject(Router);
   private seoService = inject(SeoService);
-  focusedCardIndex = signal<number | null>(null);
+  //
+  // Signals for state management
   isMobDevice = signal<boolean>(window.innerWidth < 764);
+  focusedCardIndex = signal<number | null>(null);
+  selectedTags = signal<string[]>([]);
 
-  readonly categoryList = ['Для стосунків', 'Для особистого розвитку'];
+  // Static content
+  readonly testCards: CardContent[] = TEST_CARDS;
+  readonly titleCardContent = titleCardContent;
+  readonly categoryList: string[] = [
+    'Для стосунків',
+    'Безкоштовні',
+    'Для особистого розвитку',
+  ];
   currentTopic: string = '';
+
+  filteredItems = computed(() => {
+    const selected = this.selectedTags();
+    if (selected.length === 0) return this.testCards;
+    return this.testCards.filter((item) => {
+      if (selected.includes('Безкоштовні') && item.testPrice === null) {
+        return true;
+      }
+      return selected.every((tag) => item.category.includes(tag)) ?? false;
+    });
+  });
+
+  //
   groupedCards = [
     {
       tabsLabel: 'Особистість',
@@ -73,5 +100,19 @@ export class TestsComponent implements OnInit {
   }
   startTestOnClick(testUrl: string) {
     this.route.navigateByUrl(testUrl);
+  }
+
+  toggleTag(tag: string) {
+    const current = this.selectedTags();
+    if (current.includes(tag)) {
+      this.selectedTags.set(current.filter((t) => t !== tag));
+    } else {
+      this.selectedTags.set([...current, tag]);
+    }
+  }
+
+  // Перевірка, чи активний тег
+  isTagSelected(tag: string): boolean {
+    return this.selectedTags().includes(tag);
   }
 }

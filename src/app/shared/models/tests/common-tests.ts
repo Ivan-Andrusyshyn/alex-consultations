@@ -30,7 +30,7 @@ export type TestResultRequest = {
 };
 export type CardContent = {
   time: string;
-  category: string;
+  category: string[] | string;
   routeStart: string;
   testPrice: string | null;
   title: string;

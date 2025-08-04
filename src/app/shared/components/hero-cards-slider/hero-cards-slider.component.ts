@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   DestroyRef,
   inject,
   Input,
@@ -33,45 +34,40 @@ export class HeroCardsSliderComponent implements OnInit {
   private router = inject(Router);
   private sliderService = inject(SliderService);
 
-  @Input() bigCards: boolean = true;
   @Input() sliderKey!: SLIDER_KEYS;
 
   currentIndex = signal(0);
   slideCards = TEST_CARDS;
   isMobCardType = window.innerWidth < 1320;
+  isPrevDisabled = computed(() => this.currentIndex() === 0);
+  isNextDisabled = computed(
+    () => this.currentIndex() >= this.slideCards.length - 1
+  );
 
   ngOnInit(): void {
     this.currentIndex.set(
       this.sliderService.currentIndex.get(this.sliderKey) ?? 0
     );
 
-    interval(7000)
-      .pipe(
-        takeUntilDestroyed(this.dr),
-        tap(() => {
-          this.next();
-          this.chr.markForCheck();
-        })
-      )
-      .subscribe();
+    // interval(7000)
+    //   .pipe(
+    //     tap(() => {
+    //       this.next();
+    //       this.chr.markForCheck();
+    //     }),
+    //     takeUntilDestroyed(this.dr)
+    //   )
+    //   .subscribe();
   }
 
   next() {
-    const cardIndex = this.sliderService.next(
-      this.sliderKey,
-      this.bigCards,
-      this.slideCards
-    );
+    const cardIndex = this.sliderService.next(this.sliderKey, this.slideCards);
 
     this.currentIndex.set(cardIndex);
   }
 
   prev() {
-    const cardIndex = this.sliderService.prev(
-      this.sliderKey,
-      this.bigCards,
-      this.slideCards
-    );
+    const cardIndex = this.sliderService.prev(this.sliderKey, this.slideCards);
     this.currentIndex.set(cardIndex);
   }
   startTest(testUrl: string): void {
@@ -85,7 +81,6 @@ export class HeroCardsSliderComponent implements OnInit {
   onTouchEnd(event: TouchEvent) {
     const cardIndex = this.sliderService.onTouchEnd(
       this.sliderKey,
-      this.bigCards,
       this.slideCards,
       event
     );

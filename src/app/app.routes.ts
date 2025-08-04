@@ -9,6 +9,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomeComponent),
+    data: { breadcrumb: 'Головна' },
   },
   {
     path: 'privacy-policy',
@@ -16,6 +17,7 @@ export const routes: Routes = [
       import('./pages/privacy-policy/privacy-policy.component').then(
         (m) => m.PrivacyPolicyComponent
       ),
+    data: { breadcrumb: 'Політика конфіденційності' },
   },
   {
     path: 'counting-clicks',
@@ -24,6 +26,7 @@ export const routes: Routes = [
       import('./pages/counting-clicks/counting-clicks.component').then(
         (m) => m.CountingClicksComponent
       ),
+    data: { breadcrumb: 'Тест кліків' },
   },
   {
     path: 'courses',
@@ -31,6 +34,7 @@ export const routes: Routes = [
       import('./pages/courses/courses.component').then(
         (m) => m.CoursesComponent
       ),
+    data: { breadcrumb: 'Курси' },
   },
   {
     path: 'consultations',
@@ -38,16 +42,19 @@ export const routes: Routes = [
       import('./pages/consultations/consultations.component').then(
         (m) => m.ConsultationsComponent
       ),
+    data: { breadcrumb: 'Консультації' },
   },
 
   {
     path: 'tests',
     loadComponent: () =>
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),
+    data: { breadcrumb: 'Тести' },
   },
 
   {
     path: 'tests/:testName',
+    data: { breadcrumb: 'Тести' },
 
     children: [
       {
@@ -56,6 +63,7 @@ export const routes: Routes = [
           import(
             './pages/payment/payment-success/payment-success.component'
           ).then((m) => m.PaymentSuccessComponent),
+        data: { breadcrumb: 'hidden' },
       },
       {
         path: 'questions',
@@ -64,7 +72,7 @@ export const routes: Routes = [
             (r) => r.TestQuestionsComponent
           ),
         resolve: { data: TestsQuestionsResolver },
-        data: { scrollToTop: true },
+        data: { scrollToTop: true, breadcrumb: 'dynamic' },
       },
       {
         path: 'details/:categoryName',
@@ -75,6 +83,7 @@ export const routes: Routes = [
         resolve: { data: TestsResultsResolver },
         data: {
           scrollToTop: true,
+          breadcrumb: 'dynamic',
         },
       },
     ],
@@ -88,7 +97,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'calculator',
-        data: { scrollToTop: false },
+        data: {
+          scrollToTop: false,
+          breadcrumb: 'Калькулятор відносин',
+        },
 
         loadComponent: () =>
           import(
@@ -106,11 +118,19 @@ export const routes: Routes = [
   },
   {
     path: 'about',
+    data: {
+      scrollToTop: false,
+      breadcrumb: 'Про нас',
+    },
     loadComponent: () =>
       import('./pages/about/about.component').then((m) => m.AboutComponent),
   },
   {
     path: 'contacts',
+    data: {
+      scrollToTop: false,
+      breadcrumb: 'Контакти',
+    },
     loadComponent: () =>
       import('./pages/contacts/contacts.component').then(
         (m) => m.ContactsComponent

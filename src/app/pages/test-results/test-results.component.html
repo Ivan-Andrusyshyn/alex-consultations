@@ -96,14 +96,12 @@
   </app-consultations-cards>
   }@placeholder {
   <div style="height: 350px"></div>
-  } @defer (on viewport; ) {
-
-  <app-hero-cards-slider
-    [sliderKey]="cardsSliderKey"
-    [bigCards]="false"
-  ></app-hero-cards-slider>
-  }@placeholder {
-  <div style="height: 350px"></div>
   }
   <br />
 </section>
+
+@defer (on viewport; ) {
+<app-hero-cards-slider [sliderKey]="cardsSliderKey"></app-hero-cards-slider>
+}@placeholder {
+<div style="height: 350px"></div>
+}

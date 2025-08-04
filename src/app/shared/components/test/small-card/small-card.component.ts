@@ -3,28 +3,28 @@ import {
   Component,
   inject,
   Input,
-  OnDestroy,
-  OnInit,
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
+//
 
-import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
+//
 import { CardContent } from '../../../models/tests/common-tests';
+import { NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
 
 @Component({
-  selector: 'app-test-card',
+  selector: 'app-small-card',
   standalone: true,
   imports: [PrimaryBtnComponent, NgIf, MatIconModule],
-  templateUrl: './test-card.component.html',
-  styleUrl: './test-card.component.scss',
+
+  templateUrl: './small-card.component.html',
+  styleUrl: './small-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TestCardComponent implements OnInit, OnDestroy {
+export class SmallCardComponent {
   @Input() card!: CardContent;
-  @Input() smallCard?: boolean = false;
 
   private router = inject(Router);
   currentIndex = signal(0);

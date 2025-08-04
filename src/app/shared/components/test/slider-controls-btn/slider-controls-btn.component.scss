@@ -2,6 +2,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 999;
 
   position: absolute;
   display: flex;
@@ -9,18 +10,28 @@
   align-items: center;
 
   button {
-    border: none;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
+
+    border: 2px solid #057988;
+    background-color: #f5f5f5;
     box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     pointer-events: all;
     transition: transform 0.3s ease;
+    &.disable {
+      border-color: gray;
+    }
     &:hover {
       transform: scale(1.1);
     }
     .btns-icon {
-      width: 45px;
-      height: 45px;
+      width: 24px;
+      height: 24px;
       stroke: #057988;
     }
   }
@@ -43,5 +54,5 @@
   }
 }
 .controls-outside {
-  width: 100%;
+  width: 90%;
 }

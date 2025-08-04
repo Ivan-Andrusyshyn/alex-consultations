@@ -13,36 +13,36 @@ export class SliderService {
   private touchEndX = 0;
 
   constructor() {}
-  next(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
+  next(sliderKey: SLIDER_KEYS, slideCards: any[]): number {
     if (slideCards.length === 0) return 0;
 
     const current = this.currentIndex.get(sliderKey) ?? 0;
-    const step = bigCards || this.isMobCardType ? 1 : 3;
+    const stepNumber = 1;
 
     const numberIteration = this.getNumberIteration(
-      step,
+      stepNumber,
       sliderKey,
       slideCards.length
     );
 
-    const newIndex = (current + step) % numberIteration;
+    const newIndex = (current + stepNumber) % numberIteration;
 
     this.currentIndex.set(sliderKey, newIndex);
     return newIndex;
   }
 
-  prev(sliderKey: SLIDER_KEYS, bigCards: boolean, slideCards: any[]): number {
+  prev(sliderKey: SLIDER_KEYS, slideCards: any[]): number {
     if (slideCards.length === 0) return 0;
     const current = this.currentIndex.get(sliderKey) ?? 0;
-    const step = bigCards || this.isMobCardType ? 1 : 3;
+    const stepNumber = 1;
 
     const numberIteration = this.getNumberIteration(
-      step,
+      stepNumber,
       sliderKey,
       slideCards.length
     );
 
-    const newIndex = (current - step + numberIteration) % numberIteration;
+    const newIndex = (current - stepNumber + numberIteration) % numberIteration;
     this.currentIndex.set(sliderKey, newIndex);
     return newIndex;
   }
@@ -63,28 +63,23 @@ export class SliderService {
 
   onTouchEnd(
     sliderKey: SLIDER_KEYS,
-    bigCards: boolean,
     slideCards: any[],
     event: TouchEvent
   ): number {
     this.touchEndX = event.changedTouches[0].screenX;
-    this.handleSwipeGesture(sliderKey, bigCards, slideCards);
+    this.handleSwipeGesture(sliderKey, slideCards);
     return this.currentIndex.get(sliderKey) ?? 0;
   }
 
-  private handleSwipeGesture(
-    sliderKey: SLIDER_KEYS,
-    bigCards: boolean,
-    slideCards: any[]
-  ) {
+  private handleSwipeGesture(sliderKey: SLIDER_KEYS, slideCards: any[]) {
     const deltaX = this.touchEndX - this.touchStartX;
 
     if (Math.abs(deltaX) < 50) return;
 
     if (deltaX > 0) {
-      this.prev(sliderKey, bigCards, slideCards);
+      this.prev(sliderKey, slideCards);
     } else {
-      this.next(sliderKey, bigCards, slideCards);
+      this.next(sliderKey, slideCards);
     }
   }
 
