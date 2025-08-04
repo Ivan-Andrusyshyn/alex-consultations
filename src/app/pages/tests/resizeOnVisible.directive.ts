@@ -30,7 +30,7 @@ export class ResizeOnVisibleDirective {
       Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
     const percentVisible = visibleHeight / rect.height;
 
-    const isVisible = percentVisible > 0.4;
+    const isVisible = percentVisible > 0.5;
 
     if (this.visibleCards && typeof this.index === 'number') {
       this.visibleCards[this.index] = isVisible;
