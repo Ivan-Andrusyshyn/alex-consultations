@@ -1,6 +1,11 @@
 <div class="primary-title-card hover-container">
+  @if (titleText) {
+
   <h2 class="title-primary">{{ titleText }}</h2>
+  } @if (subtitleText) {
+
   <p class="subtitle">{{ subtitleText }}</p>
+  }
 
   <app-primary-btn (onClick)="openDialog()"></app-primary-btn>
 </div>

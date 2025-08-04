@@ -2,9 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
+  HostListener,
   inject,
   OnInit,
+  QueryList,
   signal,
+  ViewChildren,
 } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +26,7 @@ import { TestCardComponent } from '../../shared/components/test/test-card/test-c
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 import { SmallCardComponent } from '../../shared/components/test/small-card/small-card.component';
+import { ResizeOnVisibleDirective } from './resizeOnVisible.directive';
 
 @Component({
   selector: 'app-tests',
@@ -34,6 +39,7 @@ import { SmallCardComponent } from '../../shared/components/test/small-card/smal
     TitleCardComponent,
     MatFormFieldModule,
     NgFor,
+    ResizeOnVisibleDirective,
   ],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
@@ -46,7 +52,7 @@ export class TestsComponent implements OnInit {
   private seoService = inject(SeoService);
   //
   // Signals for state management
-  isMobDevice = signal<boolean>(window.innerWidth < 764);
+  isMobDevice = signal<boolean>(window.innerWidth < 480);
   focusedCardIndex = signal<number | null>(null);
   selectedTags = signal<string[]>([]);
 
@@ -58,7 +64,17 @@ export class TestsComponent implements OnInit {
     'Безкоштовні',
     'Для особистого розвитку',
   ];
+  //
+
+  //
   currentTopic: string = '';
+  visibleCards: boolean[] = [];
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    const width = (event.target as Window).innerWidth;
+    this.isMobDevice.set(width < 480);
+  }
 
   filteredItems = computed(() => {
     const selected = this.selectedTags();

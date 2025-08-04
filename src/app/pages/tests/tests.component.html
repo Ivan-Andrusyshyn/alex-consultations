@@ -1,7 +1,7 @@
 <section class="tests">
   <app-title-card
     [subtitleText]="''"
-    [titleText]="titleCardContent.subtitleText"
+    [titleText]="isMobDevice() ? '' : titleCardContent.subtitleText"
   ></app-title-card>
   <!--  -->
 
@@ -33,8 +33,12 @@
 
 <ng-template #cardList let-cards>
   <ul class="test-list">
-    <ng-container *ngFor="let card of cards">
-      <li @fadeIn>
+    <ng-container *ngFor="let card of cards; let i = index">
+      <li
+        [appResizeOnVisible]="i"
+        [isMobile]="isMobDevice()"
+        [visibleCards]="visibleCards"
+      >
         <app-small-card [card]="card"></app-small-card>
         <!-- <app-test-card [smallCard]="true" [card]="card" @fadeIn></app-test-card> -->
       </li>
