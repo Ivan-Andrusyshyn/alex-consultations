@@ -84,36 +84,10 @@
   </ng-container>
 
   <ng-template #boardContainer>
-    <div class="question-container instructions-container" @fadeIn>
-      <div class="instructions-header" @fadeIn>
-        <img [src]="getBoardsImgUrl()" alt="" />
-        <h3 class="title-primary">
-          {{ testsInstruction.testTitle }}
-        </h3>
-      </div>
-
-      <br />
-      <h3 class="subtitle">
-        <strong>
-          {{ testsInstruction.instructionsTitle }}
-        </strong>
-      </h3>
-      <ul class="instructions-list">
-        <li
-          class="subtitle"
-          *ngFor="let instructionItem of testsInstruction?.steps; let i = index"
-        >
-          {{ i + 1 }}. {{ instructionItem }}
-        </li>
-      </ul>
-      <br />
-
-      <div class="btn-wrapper">
-        <app-primary-btn
-          [textBtn]="'Почати тест'"
-          (onClick)="hideTextBoardOnClick()"
-        ></app-primary-btn>
-      </div>
-    </div>
+    <app-questions-board
+      [testsInstruction]="testsInstruction"
+      [testName]="TEST_NAME"
+      (hideTextBoard)="hideTextBoardOnClick()"
+    ></app-questions-board>
   </ng-template>
 </div>

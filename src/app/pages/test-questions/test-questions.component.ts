@@ -34,7 +34,6 @@ import {
   TestName,
 } from '../../shared/models/tests/common-tests';
 import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
-import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
 import { SeoService } from '../../core/services/seo.service';
 import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
@@ -51,6 +50,7 @@ import { BeYourselfTestService } from '../../core/services/tests/be-yourself.ser
 import { environment } from '../../core/environment/environment';
 import { PendingPaymentComponent } from '../../shared/components/payment/pending-payment/pending-payment.component';
 import { MonoPaymentRequest } from '../../shared/models/payment/monopayment';
+import { QuestionsBoardComponent } from '../../shared/components/test/questions/questions-board/questions-board.component';
 
 @Component({
   selector: 'app-test-questions',
@@ -63,12 +63,12 @@ import { MonoPaymentRequest } from '../../shared/models/payment/monopayment';
     ReactiveFormsModule,
     AsyncPipe,
     QuestionsStepperComponent,
-    PrimaryBtnComponent,
     TitleCardComponent,
     QuestionWordPipe,
     QuestionOptionComponent,
     CardPaymentComponent,
     PendingPaymentComponent,
+    QuestionsBoardComponent,
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
@@ -114,6 +114,7 @@ export class TestQuestionsComponent
     secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
   };
   //
+
   // ─── Signals
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);

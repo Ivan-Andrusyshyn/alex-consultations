@@ -15,10 +15,14 @@ export class ResizeOnVisibleDirective {
 
   @HostListener('window:scroll')
   onScroll(): void {
-    if (!this.isMobile) return;
-
     const element = this.el.nativeElement;
     const rect = element.getBoundingClientRect();
+
+    if (!this.isMobile) {
+      element.style.transform = 'scale(1)';
+      element.style.opacity = '1';
+      return;
+    }
     const windowHeight =
       window.innerHeight || document.documentElement.clientHeight;
 

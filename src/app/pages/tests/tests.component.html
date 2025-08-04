@@ -1,8 +1,20 @@
 <section class="tests">
+  @if (!isMobDevice()) {
+
   <app-title-card
     [subtitleText]="''"
-    [titleText]="isMobDevice() ? '' : titleCardContent.subtitleText"
+    [titleText]="titleCardContent.subtitleText"
   ></app-title-card>
+  }@else {
+
+  <div style="display: flex; justify-content: center; align-items: center">
+    <ng-lottie
+      [options]="options"
+      [styles]="{ width: '300px', height: '300px' }"
+    ></ng-lottie>
+  </div>
+  }
+
   <!--  -->
 
   <div class="container">

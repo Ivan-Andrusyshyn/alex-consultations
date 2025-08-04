@@ -27,6 +27,7 @@ import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 import { SmallCardComponent } from '../../shared/components/test/small-card/small-card.component';
 import { ResizeOnVisibleDirective } from './resizeOnVisible.directive';
+import { LottieComponent } from 'ngx-lottie';
 
 @Component({
   selector: 'app-tests',
@@ -40,6 +41,7 @@ import { ResizeOnVisibleDirective } from './resizeOnVisible.directive';
     MatFormFieldModule,
     NgFor,
     ResizeOnVisibleDirective,
+    LottieComponent,
   ],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss',
@@ -64,8 +66,14 @@ export class TestsComponent implements OnInit {
     'Безкоштовні',
     'Для особистого розвитку',
   ];
-  //
+  readonly baseAssetUrl = 'assets/new/core/animations/pages/';
 
+  //
+  options = {
+    path: '',
+    loop: true,
+    autoplay: true,
+  };
   //
   currentTopic: string = '';
   visibleCards: boolean[] = [];
@@ -105,7 +113,9 @@ export class TestsComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
+    //
+    this.options.path = `${this.baseAssetUrl}tests-page.json`;
+    //
     this.seoService.updateTitle(
       'Список тестів | Оцініть свої можливості та особистість'
     );
