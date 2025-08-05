@@ -16,6 +16,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogContent,
   MatDialogRef,
+  MatDialogActions,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -40,6 +41,7 @@ export interface DialogData {
     NgIf,
     PrimaryBtnComponent,
     VideoBenefitsComponent,
+    MatDialogActions,
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
@@ -74,6 +76,17 @@ export class ModalComponent implements OnInit {
       ],
     });
   }
+  //
+
+  onDeactivateConfirm(): void {
+    this.dialogRef.close(true);
+  }
+
+  onDeactivateCancel(): void {
+    this.dialogRef.close(false);
+  }
+
+  //
 
   cancel(): void {
     this.dialogRef.close();

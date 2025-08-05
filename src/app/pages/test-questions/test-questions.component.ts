@@ -221,10 +221,16 @@ export class TestQuestionsComponent
 
   ngOnDestroy(): void {
     this.setSnackBar(false, 'false');
-
-    this.formGroup.reset();
     localStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
     sessionStorage.setItem('isStartTest', 'false');
+    //
+  }
+  //onExitTest
+  onExitTest(): void {
+    this.isPendingPayment.set(false);
+    sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
+    localStorage.removeItem(this.TEST_NAME + '-paid-testInfo');
+    sessionStorage.removeItem(this.TEST_NAME + '-answers');
   }
 
   // ─── Payment

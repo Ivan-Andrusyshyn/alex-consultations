@@ -52,12 +52,33 @@
 .confirm-button {
   min-width: 100px;
 }
+.deactivate-container {
+  p {
+    margin-bottom: 20px;
+
+    text-align: center;
+  }
+  .btns-wrapper {
+    flex-wrap: nowrap;
+    button {
+      font-size: 11px;
+
+      @media screen and (min-width: 764px) {
+        font-size: 16px;
+      }
+    }
+  }
+}
 .btns-wrapper {
-  gap: 16px;
+  gap: 8px;
 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  @media screen and (min-width: 764px) {
+    gap: 16px;
+  }
 }
 .emoji-pointer {
   font-size: 24px;

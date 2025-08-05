@@ -118,17 +118,18 @@
       </div>
     </div>
 
-    } @else{
-    <div class="video-container">
-      <app-video-benefits></app-video-benefits>
-      <br />
-      <div style="display: flex; justify-content: center">
-        <app-primary-btn
-          [textBtn]="'Пройти тести'"
-          (onClick)="cancel()"
-        ></app-primary-btn>
+    } @else if (data.isDeactivateConfirm) {
+    <div class="deactivate-container">
+      <p class="confirm-title subtitle">{{ data.message }}</p>
+
+      <div class="btns-wrapper">
+        <button mat-button (click)="onDeactivateCancel()">
+          {{ data.cancelText || "Скасувати" }}
+        </button>
+        <button mat-button color="warn" (click)="onDeactivateConfirm()">
+          {{ data.confirmText || "Так" }}
+        </button>
       </div>
-      <br />
     </div>
     }
   </div>

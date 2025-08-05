@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { CountingClicksResolver } from './shared/resolvers/counting-clicks.resolver';
 import { TestsResultsResolver } from './shared/resolvers/tests-results.resolver';
 import { TestsQuestionsResolver } from './shared/resolvers/test-questions.resolver';
+import { ConfirmExitGuard } from './shared/guards/confirm-exit.guard';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,7 @@ export const routes: Routes = [
             (r) => r.TestQuestionsComponent
           ),
         resolve: { data: TestsQuestionsResolver },
+        canDeactivate: [ConfirmExitGuard],
         data: { scrollToTop: true, breadcrumb: 'dynamic' },
       },
       {
