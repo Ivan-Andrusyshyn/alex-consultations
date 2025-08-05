@@ -68,6 +68,7 @@
           <app-card-payment
             [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
             [testPrice]="testPrice"
+            [testName]="TEST_NAME"
             [testSubtitleText]="testTitleText"
             (createMonoPaymentByClick)="createMonoPaymentByClick()"
             [cardTitle]="currentCardInfo?.title ?? ''"

@@ -49,7 +49,10 @@ import { CardPaymentComponent } from '../../shared/components/payment/card-payme
 import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
 import { environment } from '../../core/environment/environment';
 import { PendingPaymentComponent } from '../../shared/components/payment/pending-payment/pending-payment.component';
-import { MonoPaymentRequest } from '../../shared/models/payment/monopayment';
+import {
+  MonoPaymentRequest,
+  StatusPayment,
+} from '../../shared/models/payment/monopayment';
 import { QuestionsBoardComponent } from '../../shared/components/test/questions/questions-board/questions-board.component';
 
 @Component({
@@ -135,6 +138,8 @@ export class TestQuestionsComponent
   currentTestResultsName!: string;
   testsCards = TEST_CARDS;
   currentCardInfo!: CardContent | null;
+  paymentStatus: StatusPayment | null = null;
+  //
 
   ngOnInit(): void {
     this.testQuestions$ = this.activeRoute.data.pipe(
@@ -312,6 +317,7 @@ export class TestQuestionsComponent
       takeWhile((response) => response.status !== 'success', true),
       map((response) => {
         if (response.status === 'success') {
+          this.paymentStatus = 'success';
           sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
           this.isPendingPayment.set(false);
           const url = '/tests/' + this.TEST_NAME + '/payment-success';

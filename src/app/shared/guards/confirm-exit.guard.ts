@@ -6,6 +6,7 @@ import { Observable, of, tap } from 'rxjs';
 
 import { TestQuestionsComponent } from '../../pages/test-questions/test-questions.component';
 import { ModalComponent } from '../components/modal/modal.component';
+import { StatusPayment } from '../models/payment/monopayment';
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmExitGuard implements CanDeactivate<TestQuestionsComponent> {
@@ -22,8 +23,9 @@ export class ConfirmExitGuard implements CanDeactivate<TestQuestionsComponent> {
       answers &&
       answers.answers &&
       Object.values(answers.answers).some((value) => value !== null);
+    const status: StatusPayment | null = 'success' as const;
 
-    if (!hasAnyAnswer) {
+    if (!hasAnyAnswer || component.paymentStatus === status) {
       return of(true);
     } else {
       const dialogRef = this.dialog.open(ModalComponent, {

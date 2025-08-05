@@ -16,7 +16,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+//
 
+import { LottieComponent } from 'ngx-lottie';
+//
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
 import { TestName, TestResults } from '../../shared/models/tests/common-tests';
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
@@ -44,6 +47,7 @@ import { fadeInAnimation } from '../test-questions/fadeIn-animation';
     ProgressBarComponent,
     HeroCardsSliderComponent,
     CountdownTimerComponent,
+    LottieComponent,
   ],
   templateUrl: './test-results.component.html',
   styleUrl: './test-results.component.scss',
@@ -84,6 +88,14 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   timeout: any;
   //
 
+  options = {
+    path: '',
+    loop: true,
+    autoplay: true,
+  };
+  readonly baseAssetUrl = 'assets/new/core/animations/tests/';
+  //
+
   //
   ngOnDestroy(): void {
     clearInterval(this.timeInterval);
@@ -98,6 +110,7 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //
     this.timeInterval = setInterval(() => {
       this.isFirstNotification = false;
     }, 25000);
@@ -122,10 +135,10 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.viewportScroller.scrollToPosition([0, 0]);
         }
 
+        //testName
         const testName = response.testName as TestName;
-
-        //
         this.TEST_NAME.set(testName);
+        this.options.path = `${this.baseAssetUrl}${this.TEST_NAME()}-1.json`;
 
         this.sendObject = {
           category: response.results.type,
@@ -139,7 +152,7 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  showNotification(isFirst: boolean) {
+  private showNotification(isFirst: boolean) {
     this.isFirstNotification = isFirst;
     this.notificationService.setNotification(
       'Запишись на безкоштовну консультацію прямо зараз! Тисни кнопку "Безкоштовна консультація".'

@@ -19,7 +19,6 @@ import {
 export class ProgressBarComponent implements AfterViewInit {
   @Input() scrollContainer!: HTMLElement;
   @Input() isFirstNotification: boolean = false;
-  @Output() showSuccess = new EventEmitter<boolean>();
 
   scrollPercentage: number = 0;
   private scrollContainerNumber = signal<number>(0);
@@ -55,9 +54,5 @@ export class ProgressBarComponent implements AfterViewInit {
     this.isShow.update((prev) => docHeight > 70);
 
     this.scrollPercentage = scrollOffset / this.scrollContainerNumber();
-
-    if (this.scrollPercentage >= 1 && !this.isFirstNotification) {
-      this.showSuccess.emit(true);
-    }
   }
 }

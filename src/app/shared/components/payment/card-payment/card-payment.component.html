@@ -1,10 +1,16 @@
 <div class="payment-container">
   <div class="test-card">
-    <img [src]="imgUrl" alt="Test image" />
+    <!-- <img [src]="imgUrl" alt="Test image" />
+      -->
+    <ng-lottie
+      [options]="options"
+      [styles]="{ width: '300px', height: '300px' }"
+    ></ng-lottie>
+
     <div class="test-info">
       <h2>{{ cardTitle }}</h2>
       <p class="price">💸 Вартість: {{ testPrice + "грн" }}</p>
-      <p class="subtitle price">{{ testSubtitleText }}</p>
+      <!-- <p class="subtitle price">{{ testSubtitleText }}</p> -->
       <p class="price small-subtitle">
         (Результати тесту будуть доступні протягом двох годин після оплати )
       </p>

@@ -1,6 +1,5 @@
 <section class="test-results" *ngIf="testResults$ | async as testResults">
   <app-progress-bar
-    (showSuccess)="showNotification($event)"
     [isFirstNotification]="isFirstNotification"
     [scrollContainer]="containerElement"
   ></app-progress-bar>
@@ -67,8 +66,12 @@
       }
     </ul>
     <br />
-
-    <!-- <h3 class="shared-title subtitle">Поділись результатами</h3>
+    <div class="rating-wrapper">
+      <ng-lottie
+        [options]="options"
+        [styles]="{ width: '250px', height: '250px' }"
+      ></ng-lottie>
+      <!-- <h3 class="shared-title subtitle">Поділись результатами</h3>
     <br />
     <share-buttons
       [title]="testResults.title"
@@ -77,20 +80,14 @@
       [showText]="true"
       [url]="fullUrl"
     ></share-buttons> -->
-    <br />
+      <br />
 
-    <app-star-rating [testName]="TEST_NAME()"></app-star-rating>
+      <app-star-rating [testName]="TEST_NAME()"></app-star-rating>
+    </div>
   </section>
 
   <div #scrollContainer></div>
   @defer (on viewport; ) {
-
-  <div class="countdown-wrapper" *ngIf="showCountDownTimer()">
-    <app-countdown-timer [testName]="TEST_NAME()"></app-countdown-timer>
-  </div>
-  }@placeholder {
-  <div style="height: 350px"></div>
-  } @defer (on viewport; ) {
 
   <app-consultations-cards [sliderKey]="consultationsSliderKey">
   </app-consultations-cards>
