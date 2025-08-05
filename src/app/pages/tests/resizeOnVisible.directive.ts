@@ -12,9 +12,17 @@ export class ResizeOnVisibleDirective {
   private wasVisible = false;
 
   constructor(private el: ElementRef<HTMLElement>) {}
+  private scrollTimeout: any;
 
   @HostListener('window:scroll')
   onScroll(): void {
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.handleScrollLogic();
+    }, 50);
+  }
+
+  private handleScrollLogic() {
     const element = this.el.nativeElement;
     const rect = element.getBoundingClientRect();
 
@@ -23,6 +31,7 @@ export class ResizeOnVisibleDirective {
       element.style.opacity = '1';
       return;
     }
+
     const windowHeight =
       window.innerHeight || document.documentElement.clientHeight;
 
@@ -42,7 +51,25 @@ export class ResizeOnVisibleDirective {
 
     if (isVisible && !this.wasVisible) {
       this.wasVisible = true;
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      const centerY = window.innerHeight / 2;
+      const elementCenter = rect.top + rect.height / 2;
+      const distanceToCenter = Math.abs(centerY - elementCenter);
+
+      if (distanceToCenter > 40) {
+        requestAnimationFrame(() => {
+          const scrollTop =
+            window.scrollY +
+            rect.top +
+            rect.height / 2 -
+            window.innerHeight / 2;
+
+          window.scrollTo({
+            top: scrollTop,
+            behavior: 'smooth',
+          });
+        });
+      }
     }
 
     if (!isVisible && this.wasVisible) {
