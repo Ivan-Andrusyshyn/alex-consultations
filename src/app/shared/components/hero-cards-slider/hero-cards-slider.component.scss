@@ -1,6 +1,6 @@
 .carousel-wrapper {
   width: 100%;
-  padding: 20px 0 0 0;
+  padding: 0 0 20px 0;
 
   //
   margin: auto;
@@ -46,7 +46,7 @@
     align-items: center;
     flex-shrink: 0;
     will-change: transform;
-    padding: 20px;
+    padding: 8px 20px;
     transition: all 0.4s ease-in-out;
   }
 }
