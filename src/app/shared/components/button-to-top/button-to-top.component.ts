@@ -14,7 +14,15 @@ export class ButtonToTopComponent {
 
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.isVisible = window.scrollY > 700;
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    const scrolledFromTop = scrollTop > 700;
+    const scrolledFromBottom =
+      documentHeight - (scrollTop + windowHeight) > 300;
+
+    this.isVisible = scrolledFromTop && scrolledFromBottom;
   }
 
   scrollToTop() {
