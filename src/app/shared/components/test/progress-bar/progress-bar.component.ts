@@ -2,17 +2,16 @@ import { PercentPipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
-  EventEmitter,
   HostListener,
   Input,
-  Output,
   signal,
 } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-progress-bar',
   standalone: true,
-  imports: [PercentPipe],
+  imports: [PercentPipe, MatIconModule],
   templateUrl: './progress-bar.component.html',
   styleUrl: './progress-bar.component.scss',
 })
@@ -55,4 +54,5 @@ export class ProgressBarComponent implements AfterViewInit {
 
     this.scrollPercentage = scrollOffset / this.scrollContainerNumber();
   }
+  //
 }

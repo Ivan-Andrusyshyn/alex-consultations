@@ -12,11 +12,8 @@
       [style.transform]="currentTranslateX"
     ></div>
   </div>
-  <p
-    [class.pulsation]="scrollPercentage * 100 >= 100"
-    [class.white-text]="scrollPercentage * 100 > 70"
-    class="progress-bar-text"
-  >
+  <p [class.white-text]="scrollPercentage * 100 > 70" class="progress-bar-text">
+    <mat-icon svgIcon="human-body" class="human-body-icon"></mat-icon>
     {{ (scrollPercentage > 1 ? 1 : scrollPercentage) | percent : "1.0-0" }}
   </p>
 </div>

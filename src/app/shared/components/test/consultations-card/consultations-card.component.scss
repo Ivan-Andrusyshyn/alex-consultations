@@ -2,6 +2,7 @@
   width: 100%;
   height: 600px;
   flex: 1;
+  z-index: 999;
 
   @media screen and (min-width: 764px) {
     width: 100%;
@@ -12,7 +13,10 @@
     width: 1120px;
   }
 }
-
+.card:hover {
+  background-image: linear-gradient(180deg, #fff 44.23%, #a5cfd4 100%);
+  box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
+}
 .card {
   border-radius: 15px;
   max-width: 1280px;
@@ -20,8 +24,10 @@
   box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
   gap: 10px;
   margin-bottom: 8px;
+  z-index: 999;
   padding: 18px;
-  pointer-events: none;
+
+  //
   will-change: transform;
   transition: all 0.5s ease-in-out;
 
@@ -186,6 +192,7 @@ p {
   }
 }
 .consultations-btn-wrapper {
+  //
   display: flex;
   justify-content: center;
   @media screen and (min-width: 764px) {
@@ -195,6 +202,8 @@ p {
 }
 
 ::ng-deep .consultations-btn-wrapper app-primary-btn .primary-btn {
+  z-index: 99;
+
   @media screen and (max-width: 764px) {
     min-width: 300px;
   }

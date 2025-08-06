@@ -386,7 +386,7 @@ export class TestQuestionsComponent
     if (control?.value === value.answer) {
       control.setValue(null, { emitEvent: false });
     }
-    this.handlePercentageWithSnackBar();
+    // this.handlePercentageWithSnackBar();
     control?.setValue(value.answer, { emitEvent: true });
 
     if (
@@ -505,12 +505,6 @@ export class TestQuestionsComponent
       const textBtn = this.snackBar.firstSnackBarBtnText;
       this.openSnackBar(text, textBtn);
       this.setSnackBar(true, 'true');
-    } else if (this.isSnackBarOpened && progress > 80) {
-      const text = this.snackBar.secondSnackBar;
-      const textBtn = this.snackBar.secondSnackBarBtnText;
-
-      this.openSnackBar(text, textBtn);
-      this.setSnackBar(false, 'false');
     }
   }
   private answeredQuestions(): number {
