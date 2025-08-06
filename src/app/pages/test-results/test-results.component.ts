@@ -35,6 +35,7 @@ import { CountdownTimerComponent } from '../../shared/components/countdown-timer
 import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
 import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisible.directive';
 
 @Component({
   selector: 'app-test-results',
@@ -47,6 +48,7 @@ import { fadeInAnimation } from '../test-questions/fadeIn-animation';
     ProgressBarComponent,
     HeroCardsSliderComponent,
     CountdownTimerComponent,
+    ResizeOnVisibleDirective,
     LottieComponent,
   ],
   templateUrl: './test-results.component.html',
@@ -73,6 +75,9 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   successMessage = signal(false);
   TEST_NAME = signal<TestName>(undefined as unknown as TestName);
   showCountDownTimer = signal(false);
+
+  //
+  visibleCards: boolean[] = [];
 
   sendObject: any;
   testResults$!: Observable<TestResults & { subCategoryName?: string }>;
@@ -151,7 +156,9 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
   }
+  //
 
+  //
   private showNotification(isFirst: boolean) {
     this.isFirstNotification = isFirst;
     this.notificationService.setNotification(

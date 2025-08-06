@@ -10,9 +10,7 @@
       [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'"
       [class.active]="$index === currentIndex()"
     >
-      <div class="card">
-        <app-consultations-card [card]="card"></app-consultations-card>
-      </div>
+      <app-consultations-card [card]="card"></app-consultations-card>
     </div>
     }
   </div>

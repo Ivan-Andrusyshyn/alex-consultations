@@ -23,6 +23,7 @@ import { LoaderSquareComponent } from './shared/components/loader-square/loader-
 import { MatIconsService } from './core/services/mat-icons.service';
 import { MarqueeComponent } from './shared/components/marquee/marquee.component';
 import { BreadCrumbComponent } from './shared/components/bread-crumb/bread-crumb.component';
+import { ButtonToTopComponent } from './shared/components/button-to-top/button-to-top.component';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,7 @@ import { BreadCrumbComponent } from './shared/components/bread-crumb/bread-crumb
     AsyncPipe,
     FooterComponent,
     MarqueeComponent,
+    ButtonToTopComponent,
     BreadCrumbComponent,
   ],
   templateUrl: './app.component.html',

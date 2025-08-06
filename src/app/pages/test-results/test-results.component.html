@@ -88,17 +88,16 @@
 
   <div #scrollContainer></div>
   @defer (on viewport; ) {
-
-  <app-consultations-cards [sliderKey]="consultationsSliderKey">
-  </app-consultations-cards>
+  <div [appResizeOnVisible]="2" [visibleCards]="visibleCards">
+    <app-consultations-cards [sliderKey]="consultationsSliderKey">
+    </app-consultations-cards>
+  </div>
   }@placeholder {
   <div style="height: 350px"></div>
   }
   <br />
 </section>
 
-@defer (on viewport; ) {
-<app-hero-cards-slider [sliderKey]="cardsSliderKey"></app-hero-cards-slider>
-}@placeholder {
-<div style="height: 350px"></div>
-}
+<div [appResizeOnVisible]="3" [visibleCards]="visibleCards">
+  <app-hero-cards-slider [sliderKey]="cardsSliderKey"></app-hero-cards-slider>
+</div>

@@ -26,7 +26,7 @@ import { TestCardComponent } from '../../shared/components/test/test-card/test-c
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { fadeInAnimation } from '../test-questions/fadeIn-animation';
 import { SmallCardComponent } from '../../shared/components/test/small-card/small-card.component';
-import { ResizeOnVisibleDirective } from './resizeOnVisible.directive';
+import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisible.directive';
 import { LottieComponent } from 'ngx-lottie';
 
 @Component({

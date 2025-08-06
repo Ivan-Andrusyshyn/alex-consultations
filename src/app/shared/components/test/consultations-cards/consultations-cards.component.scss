@@ -19,33 +19,12 @@
     border-radius: 20px;
   }
 }
-
+::ng-deep .container app-consultations-card {
+  width: 100%;
+}
 .slide-card:hover .card {
   background-image: linear-gradient(180deg, #fff 44.23%, #a5cfd4 100%);
   box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.15);
-}
-.card {
-  border-radius: 15px;
-  max-width: 1280px;
-  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
-  gap: 10px;
-  margin-bottom: 8px;
-  padding: 18px;
-  pointer-events: none;
-  will-change: transform;
-  transition: all 0.5s ease-in-out;
-
-  position: relative;
-
-  @media screen and (min-width: 764px) {
-    height: 880px;
-    margin-bottom: 30px;
-    padding: 40px 32px;
-    border-radius: 20px;
-  }
-  @media screen and (min-width: 1320px) {
-    padding: 81px 65px;
-  }
 }
 
 // ==

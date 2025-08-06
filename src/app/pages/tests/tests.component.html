@@ -46,11 +46,7 @@
 <ng-template #cardList let-cards>
   <ul class="test-list">
     <ng-container *ngFor="let card of cards; let i = index">
-      <li
-        [appResizeOnVisible]="i"
-        [isMobile]="isMobDevice()"
-        [visibleCards]="visibleCards"
-      >
+      <li [appResizeOnVisible]="i" [visibleCards]="visibleCards">
         <app-small-card [card]="card"></app-small-card>
         <!-- <app-test-card [smallCard]="true" [card]="card" @fadeIn></app-test-card> -->
       </li>

@@ -1,4 +1,10 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  signal,
+} from '@angular/core';
 
 @Directive({
   selector: '[appResizeOnVisible]',
@@ -7,13 +13,15 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 export class ResizeOnVisibleDirective {
   @Input() visibleCards!: boolean[];
   @Input('appResizeOnVisible') index!: number;
-  @Input() isMobile: boolean = false;
 
   private wasVisible = false;
 
   constructor(private el: ElementRef<HTMLElement>) {}
   private scrollTimeout: any;
+  //
 
+  isMobDevice = signal<boolean>(window.innerWidth < 480);
+  //
   @HostListener('window:scroll')
   onScroll(): void {
     clearTimeout(this.scrollTimeout);
@@ -21,12 +29,18 @@ export class ResizeOnVisibleDirective {
       this.handleScrollLogic();
     }, 50);
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    const width = (event.target as Window).innerWidth;
+    this.isMobDevice.set(width < 480);
+  }
 
+  //
   private handleScrollLogic() {
     const element = this.el.nativeElement;
     const rect = element.getBoundingClientRect();
 
-    if (!this.isMobile) {
+    if (!this.isMobDevice()) {
       element.style.transform = 'scale(1)';
       element.style.opacity = '1';
       return;

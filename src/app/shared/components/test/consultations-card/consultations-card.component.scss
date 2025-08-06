@@ -1,5 +1,8 @@
 .card-content {
-  height: 680px;
+  width: 100%;
+  height: 600px;
+  flex: 1;
+
   @media screen and (min-width: 764px) {
     width: 100%;
     height: auto;
@@ -9,6 +12,31 @@
     width: 1120px;
   }
 }
+
+.card {
+  border-radius: 15px;
+  max-width: 1280px;
+  width: 100%;
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.15);
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 18px;
+  pointer-events: none;
+  will-change: transform;
+  transition: all 0.5s ease-in-out;
+
+  position: relative;
+  flex: 1;
+
+  @media screen and (min-width: 764px) {
+    height: 600px;
+    border-radius: 20px;
+  }
+  @media screen and (min-width: 1320px) {
+    padding: 44px 32px;
+  }
+}
+//
 .card-title {
   max-width: 90%;
   text-align: left;
@@ -19,7 +47,7 @@
     font-size: 24px;
   }
   @media screen and (min-width: 1320px) {
-    font-size: 50px;
+    font-size: 36px;
   }
 }
 .consultations-card {
@@ -37,7 +65,7 @@
     height: auto;
   }
   @media screen and (min-width: 764px) {
-    padding: 55px 78px;
+    padding: 24px 78px;
   }
   @media screen and (min-width: 1320px) {
   }
@@ -83,9 +111,6 @@ p {
 
   @media screen and (min-width: 764px) {
     font-size: 16px;
-  }
-  @media screen and (min-width: 1320px) {
-    font-size: 20px;
   }
 }
 .icons-container {
