@@ -6,34 +6,66 @@
   justify-content: center;
 }
 .payment-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 1.5rem;
+  max-width: 1290px;
+  flex: 1;
+  //
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+//
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  color: #0e596d;
+  @media screen and (min-width: 764px) {
+    font-size: 2rem;
+  }
+}
+.test-title {
+  text-align: center;
+}
+//
 .test-card {
+  width: 100%;
+  gap: 1rem;
+  max-width: 800px;
+  padding: 24px 8px;
+  //
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  //
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  gap: 1rem;
   @media screen and (min-width: 480px) {
+    padding: 24px;
     gap: 2rem;
     flex-direction: row;
+    justify-content: center;
   }
-  img {
-    width: 150px;
-    height: 150px;
-    border-radius: 1rem;
-    object-fit: cover;
+  .title-wrapper {
+    gap: 8px;
 
-    @media screen and (min-width: 764px) {
-      width: 280px;
-      height: 280px;
+    //
+    align-items: center;
+    display: flex;
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 1rem;
+      object-fit: cover;
+
+      @media screen and (min-width: 764px) {
+      }
     }
   }
-
+  //
   .test-info {
     gap: 12px;
 
@@ -43,15 +75,6 @@
     @media screen and (min-width: 480px) {
       gap: 24px;
       align-items: flex-start;
-    }
-    h2 {
-      margin: 0;
-      font-size: 1.25rem;
-      color: #0e596d;
-      font-weight: 600;
-      @media screen and (min-width: 764px) {
-        font-size: 2rem;
-      }
     }
 
     .price {

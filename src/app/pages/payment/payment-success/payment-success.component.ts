@@ -9,6 +9,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 //
+import { LottieComponent } from 'ngx-lottie';
 
 //
 import {
@@ -20,6 +21,7 @@ import { fadeInAnimation } from '../../test-questions/fadeIn-animation';
 import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 import { MonopayService } from '../../../core/services/monopay.service';
 import { QuestionsService } from '../../test-questions/questions.service';
+import { PrimaryBtnComponent } from '../../../shared/components/primary-btn/primary-btn.component';
 
 interface TestInfo {
   testName: TestName;
@@ -32,7 +34,13 @@ interface TestInfo {
 @Component({
   selector: 'app-payment-success',
   standalone: true,
-  imports: [AsyncPipe, NgIf, MatProgressSpinnerModule],
+  imports: [
+    AsyncPipe,
+    NgIf,
+    LottieComponent,
+    MatProgressSpinnerModule,
+    PrimaryBtnComponent,
+  ],
   templateUrl: './payment-success.component.html',
   styleUrl: './payment-success.component.scss',
   animations: [fadeInAnimation],
@@ -57,8 +65,20 @@ export class PaymentSuccessComponent implements OnInit {
     redirectUrl: string;
     paymentStatus: 'success' | 'created';
   }>;
+  //
+  visibleCards: boolean[] = [];
+  //
+  options = {
+    path: '',
+    loop: true,
+    autoplay: true,
+  };
+  readonly baseAssetUrl = 'assets/new/core/animations/tests/';
+  //
 
+  //
   ngOnInit(): void {
+    //
     const testName = this.routeActive.parent?.snapshot.paramMap.get(
       'testName'
     ) as TestName;
@@ -71,6 +91,8 @@ export class PaymentSuccessComponent implements OnInit {
 
     const price = testInfo.price;
     const invoiceId = testInfo.invoiceId;
+    //
+    this.options.path = `${this.baseAssetUrl}${testName}-1.json`;
 
     //
     this.cardInfo$ = this.getInfoByCheckSuccess(testName, invoiceId, price);
@@ -110,7 +132,11 @@ export class PaymentSuccessComponent implements OnInit {
       })
     );
   }
+  startTest(card: CardContent): void {
+    this.router.navigateByUrl(card.routeStart);
+  }
 
+  //
   private getDataByStatus(
     response: { status: string; invoiceId: string },
     testName: TestName,
