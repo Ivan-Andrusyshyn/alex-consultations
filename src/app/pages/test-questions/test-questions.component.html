@@ -1,13 +1,13 @@
 <div class="main-container">
   <!--  -->
-  <app-title-card
+  <!-- <app-title-card
     [titleText]="testTitleText"
     [subtitleText]="testSubtitleText"
     *ngIf="
       !showTextBoard() &&
       !(formGroup.valid && !isSuccessPayedTest() && !isFreeTest())
     "
-  ></app-title-card>
+  ></app-title-card> -->
 
   <ng-container *ngIf="testQuestions$ | async as questions">
     <ng-container *ngIf="!showTextBoard(); else boardContainer">

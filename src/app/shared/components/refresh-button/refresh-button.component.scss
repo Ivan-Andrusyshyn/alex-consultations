@@ -14,7 +14,14 @@
   cursor: pointer;
   svg {
     stroke: var(--color-text-secondary);
-    width: 36px;
+    width: 24px;
+
+    @media screen and (min-width: 764px) {
+      width: 28px;
+    }
+    @media screen and (min-width: 1320px) {
+      width: 36px;
+    }
   }
   p {
     margin: 0;

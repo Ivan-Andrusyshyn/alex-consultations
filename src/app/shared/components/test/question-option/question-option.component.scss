@@ -17,6 +17,7 @@
   font-size: var(--font-size-md);
   transition: all 0.3s linear;
   border: 1px solid #000;
+  color: var(--color-text-secondary);
   @media screen and (min-width: 764px) {
     height: 103px;
     font-size: var(--font-size-lg);
@@ -33,8 +34,9 @@
     height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
-    background: #000;
     display: none;
+    background: var(--dot-color, #000);
+
     @media screen and (min-width: 764px) {
       display: block;
 
@@ -51,10 +53,13 @@
 .label-1:has(input:checked) {
   border: 3px solid #000;
   background-color: #a7cbff;
+  --dot-color: #7fb2fb;
+
   box-shadow: 0px 0px 6px 0px rgba(127, 178, 251, 0.3);
 }
 .label-2:has(input:checked) {
   border: 3px solid #000;
+  --dot-color: #0bb4ca;
 
   background-color: #7ee6f3;
   box-shadow: 0px 0px 6px 0px rgba(11, 180, 202, 0.3);
@@ -62,26 +67,36 @@
 .label-3:has(input:checked) {
   border: 3px solid #000;
   background-color: #81f7d3;
+  --dot-color: #67b59d;
+
   box-shadow: 0px 0px 6px 0px rgba(103, 181, 157, 0.3);
 }
 .label-4:has(input:checked) {
   border: 3px solid #000;
+  --dot-color: #f2d270;
+
   background-color: #ffeaab;
   box-shadow: 0px 0px 6px 0px rgba(242, 210, 112, 0.3);
 }
 .label-:has(input:checked) {
   border: 3px solid #000;
   background-color: #ffb29a;
+  --dot-color: #f99170;
+
   box-shadow: 0px 0px 6px 0px #f99170;
 }
 .label-6:has(input:checked) {
   border: 3px solid #000;
   background-color: #ff97ad;
+  --dot-color: #fc7e99;
+
   box-shadow: 0px 0px 6px 0px rgba(252, 126, 153, 0.3);
 }
 
 .label-1 {
   background-color: #d1e4ff;
+  --dot-color: #7fb2fb;
+
   &:hover {
     border: 3px solid #000;
     background-color: #a7cbff;
@@ -90,6 +105,8 @@
 }
 .label-2 {
   background-color: #b4f2fa;
+  --dot-color: #0bb4ca;
+
   &:hover {
     border: 3px solid #000;
 
@@ -99,6 +116,8 @@
 }
 .label-3 {
   background-color: #b6ffe9;
+  --dot-color: #67b59d;
+
   &:hover {
     border: 3px solid #000;
 
@@ -108,6 +127,8 @@
 }
 .label-4 {
   background-color: #fff5d7;
+  --dot-color: #f2d270;
+
   &:hover {
     border: 3px solid #000;
 
@@ -117,6 +138,8 @@
 }
 .label-5 {
   background-color: #ffccbc;
+  --dot-color: #f99170;
+
   &:hover {
     border: 3px solid #000;
 
@@ -126,6 +149,7 @@
 }
 .label-6 {
   background-color: #ffb4c4;
+  --dot-color: #fc7e99;
 
   &:hover {
     border: 3px solid #000;

@@ -54,6 +54,7 @@ import {
   StatusPayment,
 } from '../../shared/models/payment/monopayment';
 import { QuestionsBoardComponent } from '../../shared/components/test/questions/questions-board/questions-board.component';
+import { LottieComponent } from 'ngx-lottie';
 
 @Component({
   selector: 'app-test-questions',
@@ -105,6 +106,7 @@ export class TestQuestionsComponent
   coloredLabel: boolean = true;
 
   private isSnackBarOpened = false;
+  //
 
   // ─── UI Labels & Text
   testTitleText = '';
@@ -158,6 +160,7 @@ export class TestQuestionsComponent
           testName + '-isFreeTest',
           JSON.stringify(data['isFreeTest'])
         );
+        //
 
         // price
         this.testPrice = data['testPrice'];
