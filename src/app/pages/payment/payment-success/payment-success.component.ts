@@ -17,7 +17,7 @@ import {
   CardContent,
   TestName,
 } from '../../../shared/models/tests/common-tests';
-import { fadeInAnimation } from '../../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../../core/animations/fadeIn-animation';
 import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
 import { MonopayService } from '../../../core/services/monopay.service';
 import { QuestionsService } from '../../test-questions/questions.service';

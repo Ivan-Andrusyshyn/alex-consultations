@@ -11,7 +11,7 @@ import { NgFor } from '@angular/common';
 
 import { LottieComponent } from 'ngx-lottie';
 //
-import { fadeInAnimation } from '../../../../../pages/test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../../../../core/animations/fadeIn-animation';
 import { PrimaryBtnComponent } from '../../../primary-btn/primary-btn.component';
 import { TestName } from '../../../../models/tests/common-tests';
 

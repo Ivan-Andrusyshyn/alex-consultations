@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { RouteTrackerService } from '../../core/services/route-tracker.service';
 import { SocialLinksComponent } from '../../shared/components/social-links/social-links.component';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 
 @Component({
   selector: 'app-contacts',

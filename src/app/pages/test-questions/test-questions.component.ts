@@ -39,7 +39,6 @@ import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { QuestionWordPipe } from './test-questions.pipe';
 import { ModalService } from '../../core/services/modal.service';
-import { fadeInAnimation } from './fadeIn-animation';
 import { SnackBar } from './snackBar.interface';
 import { QuestionOptionComponent } from '../../shared/components/test/question-option/question-option.component';
 import { MonopayService } from '../../core/services/monopay.service';
@@ -54,7 +53,8 @@ import {
   StatusPayment,
 } from '../../shared/models/payment/monopayment';
 import { QuestionsBoardComponent } from '../../shared/components/test/questions/questions-board/questions-board.component';
-import { LottieComponent } from 'ngx-lottie';
+import { fadeInQuestionAnimation } from './question-animations';
+import { TypingAnimationDirective } from '../../shared/directives/typing-animation.directive';
 
 @Component({
   selector: 'app-test-questions',
@@ -69,6 +69,7 @@ import { LottieComponent } from 'ngx-lottie';
     QuestionsStepperComponent,
     TitleCardComponent,
     QuestionWordPipe,
+    TypingAnimationDirective,
     QuestionOptionComponent,
     CardPaymentComponent,
     PendingPaymentComponent,
@@ -76,7 +77,7 @@ import { LottieComponent } from 'ngx-lottie';
   ],
   templateUrl: './test-questions.component.html',
   styleUrl: './test-questions.component.scss',
-  animations: [fadeInAnimation],
+  animations: [fadeInQuestionAnimation],
   providers: [QuestionsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -236,6 +237,7 @@ export class TestQuestionsComponent
   //onExitTest
   onExitTest(): void {
     this.isPendingPayment.set(false);
+    this.formGroup.reset();
     sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
     localStorage.removeItem(this.TEST_NAME + '-paid-testInfo');
     sessionStorage.removeItem(this.TEST_NAME + '-answers');
@@ -298,13 +300,14 @@ export class TestQuestionsComponent
       .createPayment(paymentObj)
       .pipe(
         switchMap((response) => {
+          const currentUrl = window.location.href;
+
+          this.setInStorageTestInfo(response.invoiceId);
+          this.isPendingPayment.set(true);
           if (newTab) {
-            const currentUrl = window.location.href;
             window.history.pushState({}, '', currentUrl);
             newTab.location.href = response.pageUrl;
           }
-          this.setInStorageTestInfo(response.invoiceId);
-          this.isPendingPayment.set(true);
           return this.startIntervalChecking(response.invoiceId);
         }),
         takeUntilDestroyed(this.destroyRef)

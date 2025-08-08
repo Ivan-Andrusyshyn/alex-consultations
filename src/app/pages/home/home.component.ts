@@ -41,7 +41,7 @@ import { HeroAnimationComponent } from '../../shared/components/home/hero-animat
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
 import { ModalService } from '../../core/services/modal.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 
 @Component({
   selector: 'app-home',

@@ -15,7 +15,7 @@ import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary
 import { NotificationService } from '../../core/services/notification.service';
 import { ModalService } from '../../core/services/modal.service';
 import { GoogleSheetsService } from '../../core/services/google-sheets.service';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 
 @Component({
   selector: 'app-about',

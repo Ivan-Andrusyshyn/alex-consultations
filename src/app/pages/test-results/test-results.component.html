@@ -44,21 +44,29 @@
         </h3>
 
         }
-        <p class="subtitle">{{ testResults.subtitle }}</p>
+        <p class="subtitle">
+          {{ testResults.subtitle }}
+        </p>
       </div>
     </div>
     <ul class="results-text-list">
       @for (item of testResults.sections; track $index) {
 
       <li class="results-text-card">
-        <h3 class="subtitle">{{ item.sectionsName }}</h3>
-        <p class="subtitle">{{ item.sectionsDescription }}</p>
+        <h3 class="subtitle">
+          {{ item.sectionsName }}
+        </h3>
+        <p class="subtitle">
+          {{ item.sectionsDescription }}
+        </p>
 
         <ul>
           @for (sectionItem of item.sectionsList; track $index) {
 
           <li>
-            <p class="subtitle">{{ sectionItem }}</p>
+            <p class="subtitle">
+              {{ sectionItem }}
+            </p>
           </li>
           }
         </ul>

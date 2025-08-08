@@ -34,7 +34,13 @@
             <div class="animated-container" @fadeIn>
               <div class="question-card">
                 <div *ngIf="q">
-                  <h3 class="question">{{ q.question }}</h3>
+                  <h3
+                    class="question"
+                    [appTypingAnimation]="q.question"
+                    [typingSpeed]="20"
+                  >
+                    {{ q.question }}
+                  </h3>
                   <div class="answers">
                     <ng-container
                       *ngFor="let answer of q.answers; let answerIndex = index"

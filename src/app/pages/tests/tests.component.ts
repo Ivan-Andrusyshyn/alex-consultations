@@ -24,7 +24,7 @@ import titleCardContent from './titleCard-content';
 import { CardContent } from '../../shared/models/tests/common-tests';
 import { TestCardComponent } from '../../shared/components/test/test-card/test-card.component';
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 import { SmallCardComponent } from '../../shared/components/test/small-card/small-card.component';
 import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisible.directive';
 import { LottieComponent } from 'ngx-lottie';

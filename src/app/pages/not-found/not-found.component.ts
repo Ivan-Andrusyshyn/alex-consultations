@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary-btn.component';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 
 @Component({
   selector: 'app-not-found',

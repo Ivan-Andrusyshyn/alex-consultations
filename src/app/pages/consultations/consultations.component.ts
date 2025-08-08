@@ -20,7 +20,7 @@ import { PrimaryBtnComponent } from '../../shared/components/primary-btn/primary
 import { ConsultationsCardsComponent } from '../../shared/components/test/consultations-cards/consultations-cards.component';
 import { ModalService } from '../../core/services/modal.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 
 type SectionType = {
   sectionTitle: string;

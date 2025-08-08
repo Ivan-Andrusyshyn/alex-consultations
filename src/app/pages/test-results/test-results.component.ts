@@ -34,7 +34,7 @@ import { ResponseData } from './data.interface';
 import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
-import { fadeInAnimation } from '../test-questions/fadeIn-animation';
+import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisible.directive';
 
 @Component({

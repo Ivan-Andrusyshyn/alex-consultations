@@ -15,7 +15,10 @@
     [value]="answer.point + (answer.type ? '-' + answer.type : '')"
   />
 
-  <span>
+  <span
+    [appTypingAnimation]="answer.text"
+    [typingSpeed]="20 * (answerIndex + 1)"
+  >
     {{ answer.text }}
   </span>
 </label>
