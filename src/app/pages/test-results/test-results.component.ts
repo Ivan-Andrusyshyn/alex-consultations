@@ -36,6 +36,7 @@ import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
 import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisible.directive';
+import { PrettyTextDirective } from './pretty-text.directive';
 
 @Component({
   selector: 'app-test-results',
@@ -48,6 +49,7 @@ import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisibl
     ProgressBarComponent,
     HeroCardsSliderComponent,
     CountdownTimerComponent,
+    PrettyTextDirective,
     ResizeOnVisibleDirective,
     LottieComponent,
   ],
