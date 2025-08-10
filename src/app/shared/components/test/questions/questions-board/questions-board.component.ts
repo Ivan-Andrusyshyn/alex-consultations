@@ -35,6 +35,7 @@ import { HeightOnVisibleDirective } from './height-on-visible.directive';
 export class QuestionsBoardComponent implements OnInit {
   @Input() testsInstruction: any;
   @Input() testName!: TestName;
+  @Input() testPrice!: string | null;
   @Output() hideTextBoard = new EventEmitter<void>();
   //
 
