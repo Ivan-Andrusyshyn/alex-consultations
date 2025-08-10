@@ -17,7 +17,9 @@ import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 //
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LottieComponent } from 'ngx-lottie';
 
+//
 import { SeoService } from '../../core/services/seo.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import titleCardContent from './titleCard-content';
@@ -27,7 +29,6 @@ import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
 import { SmallCardComponent } from '../../shared/components/test/small-card/small-card.component';
 import { ResizeOnVisibleDirective } from '../../shared/directives/resizeOnVisible.directive';
-import { LottieComponent } from 'ngx-lottie';
 
 @Component({
   selector: 'app-tests',

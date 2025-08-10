@@ -1,18 +1,19 @@
 <div class="card vip-card">
   <div class="card-content">
-    <div class="time-wrapper">
+    <div class="card-content-header">
       <div class="time-container">
         <mat-icon class="items-icon" svgIcon="clock"></mat-icon>
         <p class="time">
           {{ card.time }}
         </p>
-
-        <!-- <span class="badge">🔥 Хіт тестів</span> -->
-        <span class="badge" *ngIf="card.testPrice"
-          >Вартість: {{ card.testPrice + "грн" }}</span
-        >
-        <span class="badge" *ngIf="!card.testPrice"> {{ "Безкоштовно" }}</span>
       </div>
+
+      <!-- <span class="badge">🔥 Хіт тестів</span> -->
+      <span class="badge">
+        {{
+          card.testPrice ? "Вартість: " + card.testPrice + "грн" : "Безкоштовно"
+        }}</span
+      >
     </div>
 
     <h2 class="title">{{ card.title }}</h2>
@@ -39,9 +40,10 @@
       </div>
     </div>
     <!--  -->
-    <app-primary-btn
-      (onClick)="startTest()"
-      [textBtn]="card.buttonText"
-    ></app-primary-btn>
+
+    <div class="fixed-btn-wrapper">
+      <button (click)="startTest()">Почати тест</button>
+    </div>
+    <!--  -->
   </div>
 </div>
