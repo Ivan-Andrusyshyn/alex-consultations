@@ -40,7 +40,7 @@ import { TitleCardComponent } from '../../shared/components/title-card/title-car
 import { QuestionWordPipe } from './test-questions.pipe';
 import { ModalService } from '../../core/services/modal.service';
 import { SnackBar } from './snackBar.interface';
-import { QuestionOptionComponent } from '../../shared/components/test/question-option/question-option.component';
+import { QuestionOptionComponent } from '../../shared/components/test/questions/question-option/question-option.component';
 import { MonopayService } from '../../core/services/monopay.service';
 
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
@@ -349,6 +349,14 @@ export class TestQuestionsComponent
     );
   }
   //
+
+  next() {
+    this.currentQuestionNumber.update((prev) => prev + 1);
+  }
+
+  prev() {
+    this.currentQuestionNumber.update((prev) => prev - 1);
+  }
 
   // ─── Submission & Result
   onSubmit() {

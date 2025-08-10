@@ -7,9 +7,9 @@ import {
 import { NgClass } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
-import { Option, TestName } from '../../../models/tests/common-tests';
-import { MainTestNames } from '../../../../core/utils/testsNames';
-import { TypingAnimationDirective } from '../../../directives/typing-animation.directive';
+import { Option, TestName } from '../../../../models/tests/common-tests';
+import { MainTestNames } from '../../../../../core/utils/testsNames';
+import { TypingAnimationDirective } from '../../../../directives/typing-animation.directive';
 //
 
 @Component({
