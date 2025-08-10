@@ -60,12 +60,12 @@
   font-size: var(--font-size-md);
   font-family: var(--font-main);
 
-  letter-spacing: 1.2px;
+  letter-spacing: 0.03em;
   line-height: normal;
   font-style: normal;
   text-align: left;
   @media screen and (min-width: 480px) {
-    letter-spacing: 1.1px;
+    letter-spacing: 0.03em;
   }
   @media screen and (min-width: 1320px) {
     font-size: var(--font-size-lg);

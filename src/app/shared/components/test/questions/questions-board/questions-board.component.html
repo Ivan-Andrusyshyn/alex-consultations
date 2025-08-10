@@ -2,7 +2,7 @@
   <div class="instructions-header" @fadeIn>
     <ng-lottie
       [options]="options"
-      [styles]="{ width: '300px', height: '300px' }"
+      [styles]="{ width: '200px', height: '200px' }"
     ></ng-lottie>
     <h3 class="title-primary">
       {{ testsInstruction.testTitle }}
@@ -20,7 +20,7 @@
       class="subtitle"
       *ngFor="let instructionItem of testsInstruction?.steps; let i = index"
     >
-      {{ i + 1 }}. {{ instructionItem }}
+      {{ instructionItem }}
     </li>
   </ul>
   <br />
@@ -30,5 +30,9 @@
       [textBtn]="'Почати тест'"
       (onClick)="hideTextBoardOnClick()"
     ></app-primary-btn>
+  </div>
+
+  <div class="fixed-btn-wrapper" [class.hidden]="false">
+    <button (click)="hideTextBoardOnClick()">Почати тест</button>
   </div>
 </div>

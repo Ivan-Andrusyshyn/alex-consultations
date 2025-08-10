@@ -11,14 +11,22 @@ import { NgFor } from '@angular/common';
 
 import { LottieComponent } from 'ngx-lottie';
 //
+
+//
 import { fadeInAnimation } from '../../../../../core/animations/fadeIn-animation';
 import { PrimaryBtnComponent } from '../../../primary-btn/primary-btn.component';
 import { TestName } from '../../../../models/tests/common-tests';
+import { HeightOnVisibleDirective } from './height-on-visible.directive';
 
 @Component({
   selector: 'app-questions-board',
   standalone: true,
-  imports: [PrimaryBtnComponent, LottieComponent, NgFor],
+  imports: [
+    PrimaryBtnComponent,
+    HeightOnVisibleDirective,
+    LottieComponent,
+    NgFor,
+  ],
   templateUrl: './questions-board.component.html',
   styleUrl: './questions-board.component.scss',
   animations: [fadeInAnimation],
