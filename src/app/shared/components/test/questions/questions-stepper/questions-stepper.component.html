@@ -8,9 +8,9 @@
         mat-tab-link
         [active]="currentQuestionNumber === $index"
         (click)="changeQuestion(question.id)"
-        [class.active]="isValid($index)"
-        [class.currentQuestion]="
-          isChooseQuestion() && currentQuestionNumber === $index + 1
+        [class.active]="
+          isValid($index) ||
+          (isChooseQuestion() && currentQuestionNumber === $index + 1)
         "
         class="step"
       >

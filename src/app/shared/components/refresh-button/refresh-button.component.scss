@@ -8,12 +8,12 @@
   box-sizing: border-box;
   background-color: transparent;
   display: flex;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 
   align-items: center;
   cursor: pointer;
   svg {
-    stroke: var(--color-text-secondary);
+    stroke: var(--color-text-primary);
     width: 24px;
 
     @media screen and (min-width: 764px) {

@@ -11,7 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { Question } from '../../../models/tests/common-tests';
+import { Question } from '../../../../models/tests/common-tests';
 
 @Component({
   selector: 'app-questions-stepper',

@@ -20,7 +20,7 @@ export class CardPaymentComponent {
   @Input() testSubtitleText!: string;
   @Input() testName!: TestName;
 
-  @Output() createMonoPaymentByClick = new EventEmitter();
+  @Output() pendingPaymentOnClick = new EventEmitter();
   //
 
   options = {
@@ -36,6 +36,6 @@ export class CardPaymentComponent {
   }
   //
   createMonoPayment() {
-    this.createMonoPaymentByClick.emit();
+    this.pendingPaymentOnClick.emit();
   }
 }

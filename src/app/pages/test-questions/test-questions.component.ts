@@ -33,7 +33,7 @@ import {
   Question,
   TestName,
 } from '../../shared/models/tests/common-tests';
-import { QuestionsStepperComponent } from '../../shared/components/test/questions-stepper/questions-stepper.component';
+import { QuestionsStepperComponent } from '../../shared/components/test/questions/questions-stepper/questions-stepper.component';
 import { SeoService } from '../../core/services/seo.service';
 import { QuestionsService } from './questions.service';
 import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
@@ -288,7 +288,11 @@ export class TestQuestionsComponent
       localStorage.removeItem(this.TEST_NAME + '-paid-testInfo');
     }
   }
-
+  //
+  pendingPaymentOnClick() {
+    sessionStorage.setItem(this.TEST_NAME + '-isPendingPayment', 'true');
+    this.isPendingPayment.set(true);
+  }
   // create payment
   createMonoPaymentByClick() {
     //obj
@@ -350,14 +354,6 @@ export class TestQuestionsComponent
   }
   //
 
-  next() {
-    this.currentQuestionNumber.update((prev) => prev + 1);
-  }
-
-  prev() {
-    this.currentQuestionNumber.update((prev) => prev - 1);
-  }
-
   // ─── Submission & Result
   onSubmit() {
     const answers = this.formGroup.value as Answer[];
@@ -412,7 +408,12 @@ export class TestQuestionsComponent
     }
 
     //
-    this.currentQuestionNumber.update((prev) => prev + 1);
+    this.currentQuestionNumber.update((prev) => {
+      if (this.currentQuestionNumber() === this.testQuestionsLength) {
+        return prev;
+      }
+      return prev + 1;
+    });
     this.setInStorageAnswers();
   }
 

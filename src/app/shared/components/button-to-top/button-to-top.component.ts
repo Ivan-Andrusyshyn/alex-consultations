@@ -18,7 +18,7 @@ export class ButtonToTopComponent {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    const scrolledFromTop = scrollTop > 700;
+    const scrolledFromTop = scrollTop > 1200;
     const scrolledFromBottom =
       documentHeight - (scrollTop + windowHeight) > 300;
 

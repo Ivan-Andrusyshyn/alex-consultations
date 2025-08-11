@@ -24,10 +24,13 @@
           [currentQuestionNumber]="currentQuestionNumber()"
           (changeViewQuestion)="changeViewQuestion($event)"
         ></app-questions-stepper>
-        <h3 class="question-title question-title-mob" *ngIf="!showTextBoard()">
-          {{ questions[currentQuestionNumber() - 1]?.question }}
-        </h3>
+        <div class="mob-title-wrapper" *ngIf="!showTextBoard()">
+          <div class="question-number">{{ currentQuestionNumber() }}</div>
 
+          <h3 class="question-title question-title-mob">
+            {{ questions[currentQuestionNumber() - 1]?.question }}
+          </h3>
+        </div>
         <div class="question-container" *ngIf="questions">
           <!--  -->
           <form [formGroup]="formGroup">
@@ -82,12 +85,13 @@
               [testPrice]="testPrice"
               [testName]="TEST_NAME"
               [testSubtitleText]="testTitleText"
-              (createMonoPaymentByClick)="createMonoPaymentByClick()"
+              (pendingPaymentOnClick)="pendingPaymentOnClick()"
               [cardTitle]="currentCardInfo?.title ?? ''"
             ></app-card-payment>
 
             }@else {
             <app-pending-payment
+              (createMonoPaymentByClick)="createMonoPaymentByClick()"
               (close)="closePaymentByClick()"
             ></app-pending-payment>
             }

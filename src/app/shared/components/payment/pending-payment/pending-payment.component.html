@@ -1,13 +1,19 @@
 <div class="pending-payment">
-  <button (click)="closeButtonClick()">❌</button>
-  <h3>Очікування платежу...</h3>
+  <button class="close-btn" (click)="closeButtonClick()">❌</button>
+  <h3>Будь ласка оплатіть результати</h3>
   <p class="subtitle">
-    Після успішного платежу поверніться на цю сторінку — ваш результат буде
-    сформовано автоматично.
+    *(Перейдіть по кліку на кнопку на офіційну сторінку Монобанку)
+  </p>
+  <p class="subtitle">
+    *(Після успішного платежу — ваш результат буде сформовано автоматично)
   </p>
 
   <br />
-
-  <app-dots-loader></app-dots-loader>
-  <!-- <mat-spinner [diameter]="40"></mat-spinner> -->
+  <!-- <app-dots-loader></app-dots-loader> -->
+  <!-- <br /> -->
+  <div class="fixed-btn-wrapper">
+    <button class="pay-button" (click)="createMonoPayment()">
+      Перейти для оплати
+    </button>
+  </div>
 </div>

@@ -133,7 +133,7 @@
   @media screen and (min-width: 764px) {
   }
   .line {
-    background-color: #057988;
+    background-color: var(--color-text-primary);
     position: absolute;
     z-index: 0;
     height: 100%;
@@ -152,7 +152,7 @@
   position: relative;
   padding: 4px;
   cursor: pointer;
-  transition: background 0.3s linear;
+  transition: all 0.3s ease;
 
   &:hover .number {
     color: #ff8a9e;
@@ -167,7 +167,7 @@
   font-weight: 400 !important;
   color: #007b8a;
   font-weight: bold;
-  transition: background 0.3s linear;
+  transition: all 0.3s ease;
   @media screen and (min-width: 764px) {
     font-size: var(--font-size-lg);
   }
@@ -178,14 +178,13 @@
   height: 6px;
   z-index: 999;
   border-radius: 50%;
-  background-color: #007b8a;
-  transition: background 0.3s linear;
+  background-color: var(--color-text-primary);
+  transition: all 0.3s ease;
   @media screen and (min-width: 764px) {
     width: 10px;
     height: 10px;
   }
 }
-
 .step.active .number {
   color: #ff8a9e;
 }

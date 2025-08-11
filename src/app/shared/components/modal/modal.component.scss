@@ -45,6 +45,10 @@
 // ====================
 .confirm-title {
   font-size: 16px;
+  //
+  color: #444444;
+  //
+  text-align: center;
 }
 .cancel-button {
   min-width: 100px;
@@ -52,6 +56,8 @@
 .confirm-button {
   min-width: 100px;
 }
+
+//
 .deactivate-container {
   p {
     margin-bottom: 20px;

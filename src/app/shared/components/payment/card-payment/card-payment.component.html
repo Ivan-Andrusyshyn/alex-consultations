@@ -4,20 +4,23 @@
       -->
     <ng-lottie
       [options]="options"
-      [styles]="{ width: '300px', height: '250px' }"
+      [styles]="{ width: '250px', height: '250px' }"
     ></ng-lottie>
 
     <div class="test-info">
       <h2>{{ cardTitle }}</h2>
       <p class="price">💸 Вартість: {{ testPrice + "грн" }}</p>
+
       <!-- <p class="subtitle price">{{ testSubtitleText }}</p> -->
       <p class="price small-subtitle">
-        (Результати тесту будуть доступні протягом двох годин після оплати )
+        *(Результати тесту будуть доступні протягом двох годин після оплати )
       </p>
 
-      <button class="pay-button" (click)="createMonoPayment()">
-        🔓 Розблокувати результати
-      </button>
+      <div class="fixed-btn-wrapper">
+        <button class="pay-button" (click)="createMonoPayment()">
+          🔓 Розблокувати результати
+        </button>
+      </div>
     </div>
   </div>
 </div>
