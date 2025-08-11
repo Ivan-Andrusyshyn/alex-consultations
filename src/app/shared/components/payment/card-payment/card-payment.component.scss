@@ -1,16 +1,20 @@
 .payment-container {
   width: 100%;
-  padding: 8px;
-
+  padding: 8px 16px 16px 8px;
+  max-width: 550px;
+  margin: 0 auto;
+  gap: 1.5rem;
+  border-radius: 4px;
+  //
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  border-radius: 4px;
-  box-shadow: var(--container-shadow);
 
+  @media screen and (min-width: 480px) {
+    box-shadow: var(--container-shadow);
+  }
   @media screen and (min-width: 764px) {
-    padding: 16px;
+    padding: 32px;
     // padding: 54px 86px;
   }
 }
@@ -19,11 +23,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  //
+
   width: 100%;
   gap: 1rem;
   @media screen and (min-width: 480px) {
     gap: 2rem;
-    flex-direction: row;
   }
   img {
     width: 150px;
@@ -42,13 +47,15 @@
 
   .test-info {
     gap: 8px;
+    max-width: 500px;
 
+    //
     display: flex;
     flex-direction: column;
     align-items: center;
     @media screen and (min-width: 480px) {
       gap: 16px;
-      align-items: flex-start;
+      // align-items: flex-start;
     }
     h2 {
       margin: 0;
@@ -56,6 +63,7 @@
       font-weight: 600;
 
       text-transform: uppercase;
+      text-align: center;
       color: #0e596d;
       @media screen and (min-width: 764px) {
         font-size: 2rem;
@@ -67,6 +75,7 @@
       font-weight: 300;
 
       //
+      text-align: center;
       text-transform: uppercase;
       color: #444;
       @media screen and (min-width: 764px) {
@@ -81,6 +90,7 @@
 
       //
       text-align: left;
+      text-align: center;
       text-transform: lowercase;
       @media screen and (min-width: 764px) {
         font-size: 1rem;
@@ -117,7 +127,7 @@
   button {
     padding: 18px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     //
     text-transform: uppercase;
     //

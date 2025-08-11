@@ -81,6 +81,7 @@
           >
             @if (!isPendingPayment()) {
             <app-card-payment
+              @fadeIn
               [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
               [testPrice]="testPrice"
               [testName]="TEST_NAME"
@@ -91,6 +92,7 @@
 
             }@else {
             <app-pending-payment
+              @fadeIn
               (createMonoPaymentByClick)="createMonoPaymentByClick()"
               (close)="closePaymentByClick()"
             ></app-pending-payment>

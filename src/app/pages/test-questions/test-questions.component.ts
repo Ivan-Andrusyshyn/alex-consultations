@@ -203,6 +203,8 @@ export class TestQuestionsComponent
           localStorage.getItem(this.TEST_NAME + '-paid-testInfo') ?? 'null'
         )?.invoiceId;
         this.isPendingPayment.set(isPending);
+
+        //
         if (isPending && invoiceId) {
           return this.startIntervalChecking(invoiceId).pipe(
             map(() => questions)

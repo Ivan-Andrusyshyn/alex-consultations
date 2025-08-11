@@ -1,127 +1,147 @@
 .payment-container {
   width: 100%;
-  padding: 33px 24px;
-
-  display: flex;
-  justify-content: center;
-}
-.payment-wrapper {
+  padding: 8px 16px 16px 8px;
+  max-width: 550px;
+  min-height: 350px;
+  margin: 20px auto;
   gap: 1.5rem;
-  max-width: 1290px;
-  flex: 1;
+  border-radius: 4px;
   //
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-}
 
-//
-.title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-
-  color: #0e596d;
+  @media screen and (min-width: 480px) {
+    box-shadow: var(--container-shadow);
+  }
   @media screen and (min-width: 764px) {
-    font-size: 2rem;
+    padding: 32px;
+    // padding: 54px 86px;
   }
 }
-.test-title {
-  text-align: center;
-}
-//
+
 .test-card {
-  width: 100%;
-  gap: 1rem;
-  max-width: 800px;
-  padding: 24px 8px;
-  //
-  border-radius: 15px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
-  background-color: #fff;
-  //
   display: flex;
   align-items: center;
   flex-direction: column;
+  //
+
+  width: 100%;
+  gap: 1rem;
   @media screen and (min-width: 480px) {
-    padding: 24px;
     gap: 2rem;
-    flex-direction: row;
-    justify-content: center;
   }
-  .title-wrapper {
-    gap: 8px;
-
-    //
-    align-items: center;
-    display: flex;
-    img {
-      width: 60px;
-      height: 60px;
-      border-radius: 1rem;
-      object-fit: cover;
-
-      @media screen and (min-width: 764px) {
-      }
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 1rem;
+    object-fit: cover;
+    @media screen and (min-width: 764px) {
+      width: 180px;
+      height: 180px;
+    }
+    @media screen and (min-width: 1320px) {
+      width: 280px;
+      height: 280px;
     }
   }
-  //
-  .test-info {
-    gap: 12px;
 
+  .test-info {
+    gap: 8px;
+    max-width: 500px;
+
+    //
     display: flex;
     flex-direction: column;
     align-items: center;
     @media screen and (min-width: 480px) {
-      gap: 24px;
-      align-items: flex-start;
+      gap: 16px;
+      // align-items: flex-start;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+
+      text-transform: uppercase;
+      text-align: center;
+      color: #0e596d;
+      @media screen and (min-width: 764px) {
+        font-size: 2rem;
+      }
     }
 
     .price {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #0e596d;
-      color: #444;
-      text-decoration: underline;
+      font-size: 0.8rem;
+      font-weight: 300;
 
+      //
+      text-align: center;
+      text-transform: uppercase;
+      color: #444;
       @media screen and (min-width: 764px) {
         font-size: 1.3rem;
+        margin-bottom: 0;
       }
+    }
+    .price.small-subtitle {
+      font-size: 0.8rem;
+      font-weight: 200;
+      margin-bottom: 16px;
+
+      //
+      text-align: left;
+      text-align: center;
+      text-transform: lowercase;
+      @media screen and (min-width: 764px) {
+        font-size: 1rem;
+
+        text-align: left;
+      }
+    }
+    .successful-message {
+      font-weight: 600;
+      //
+      color: green;
     }
   }
 }
-
-.pay-button {
-  border-radius: 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 1rem 1.5rem;
-  gap: 0.6rem;
+//
+.fixed-btn-wrapper {
+  position: sticky;
+  bottom: 0px;
+  z-index: 1000;
   width: 100%;
-  max-width: 500px;
-
-  background: linear-gradient(135deg, #0f913a, #048b0f);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(15, 145, 58, 0.3);
-  transition: all 0.3s ease;
+  flex: 1;
+  border-radius: 4px;
+  //
   display: flex;
   justify-content: center;
-  align-items: center;
-  @media screen and (min-width: 764px) {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-  }
-  &:hover {
-    background: linear-gradient(135deg, #0f913ad7, #048b0ff1);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(15, 145, 58, 0.35);
+
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0.4s ease, background 0.4 ease,
+    transform 0.4s ease;
+  background: var(--accent-color, #0e596d);
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(20px);
   }
 
-  &:active {
-    transform: scale(0.98);
-    box-shadow: 0 4px 16px rgba(15, 145, 58, 0.25);
+  button {
+    padding: 18px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    //
+    text-transform: uppercase;
+    //
+    font-weight: bold;
+    color: #fff;
+    background: var(--accent-color, #0e596d);
+    border: none;
+    cursor: pointer;
+    transition: background 0.4s ease;
   }
 }
-//

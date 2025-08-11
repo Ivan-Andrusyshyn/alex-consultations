@@ -11,26 +11,30 @@
       ></ng-lottie>
       <div class="test-info">
         <div class="title-wrapper">
-          <img
+          <!-- <img
             [src]="currentCardInfo?.imageUrl + 'card/1.svg'"
             alt="Test image"
-          />
+          /> -->
           <h2 class="title">{{ currentCardInfo?.title }}</h2>
         </div>
-        <div class="price">Оплата пройшла успішно!</div>
-        <button
-          type="button"
-          class="pay-button"
-          (click)="navigateByClick(cardInfo.testName, cardInfo.results)"
-        >
-          Перейти до результатів
-        </button>
+        <div class="price successful-message">Оплата пройшла успішно!</div>
+        <p class="price small-subtitle">
+          *( Дякуємо за оплату, ваші результати чекають на вас )
+        </p>
+        <div class="fixed-btn-wrapper">
+          <button
+            class="pay-button"
+            (click)="navigateByClick(cardInfo.testName, cardInfo.results)"
+          >
+            Перейти до результатів
+          </button>
+        </div>
       </div>
     </div>
 
     <!--  -->
   </div>
   <ng-template #loading>
-    <mat-spinner [diameter]="60"></mat-spinner>
+    <mat-spinner style="margin: auto auto" [diameter]="60"></mat-spinner>
   </ng-template>
 </section>
