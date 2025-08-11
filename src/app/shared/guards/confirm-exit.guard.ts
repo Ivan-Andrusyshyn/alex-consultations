@@ -31,7 +31,6 @@ export class ConfirmExitGuard implements CanDeactivate<TestQuestionsComponent> {
 
     if (component.paymentStatus === status) {
       component.formGroup.reset();
-      sessionStorage.removeItem(component.TEST_NAME + '-answers');
       return of(true);
     } else {
       const dialogRef = this.dialog.open(ModalComponent, {
