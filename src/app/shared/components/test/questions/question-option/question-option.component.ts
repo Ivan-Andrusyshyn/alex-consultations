@@ -32,6 +32,8 @@ export class QuestionOptionComponent {
   @Input() testName!: TestName;
   @Input() answerIndex!: number;
   @Input() questionsId!: number;
+  @Input() isValidForm: boolean = false;
+  //
   @Output() answerQuestion = new EventEmitter();
   // Main test names
   mainTestNames = MainTestNames;

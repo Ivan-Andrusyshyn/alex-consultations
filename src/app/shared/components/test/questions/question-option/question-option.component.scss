@@ -20,7 +20,7 @@
   font-weight: var(--font-weight-regular);
 
   text-transform: uppercase;
-  transition: all 0.3s linear;
+  transition: all 0.3s ease;
   border: 1px solid #000;
   color: var(--color-text-secondary);
   @media screen and (min-width: 764px) {
@@ -38,7 +38,10 @@
     animation-delay: 0.3s;
   }
 }
-
+.label.isValidForm {
+  min-height: 50px;
+  padding: 8px 15px;
+}
 .label:has(input:checked)::before {
   content: "";
   position: absolute;

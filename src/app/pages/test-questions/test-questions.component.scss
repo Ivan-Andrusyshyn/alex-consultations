@@ -176,5 +176,6 @@ form {
   }
 }
 .answers.full-answered {
-  gap: 4px;
+  transition: all 0.4s ease;
+  gap: 6px;
 }

@@ -52,6 +52,7 @@
 
                 <app-question-option
                   [answerIndex]="i"
+                  [isValidForm]="formGroup.valid"
                   [questionsId]="q.id"
                   [answer]="answer"
                   [testName]="TEST_NAME"
@@ -90,15 +91,14 @@
       </div>
       }
     </div>
-    } }@else {
+    } @else {
     <app-questions-board
       [testsInstruction]="testsInstruction"
       [testPrice]="testPrice"
       [testName]="TEST_NAME"
       (hideTextBoard)="hideTextBoardOnClick()"
     ></app-questions-board>
-    }
-
+    } }
     <!--  -->
 
     <!--  -->
