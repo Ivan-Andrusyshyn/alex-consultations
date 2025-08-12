@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -60,10 +60,8 @@ import { TypingAnimationDirective } from '../../shared/directives/typing-animati
   selector: 'app-test-questions',
   standalone: true,
   imports: [
-    NgIf,
     RefreshButtonComponent,
     MatTabsModule,
-    NgFor,
     ReactiveFormsModule,
     AsyncPipe,
     QuestionsStepperComponent,

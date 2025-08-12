@@ -64,6 +64,7 @@
 
 //
 
+//
 .progressbar-container {
   position: absolute;
   bottom: 0;
@@ -173,4 +174,7 @@ form {
   flex-direction: column;
   @media screen and (min-width: 764px) {
   }
+}
+.answers.full-answered {
+  gap: 4px;
 }

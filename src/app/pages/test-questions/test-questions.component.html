@@ -9,108 +9,98 @@
     "
   ></app-title-card> -->
   <div class="shadow-wrapper">
-    <ng-container *ngIf="testQuestions$ | async as questions">
-      <ng-container *ngIf="!showTextBoard(); else boardContainer">
-        <div class="refresh-btn-wrapper" *ngIf="!showTextBoard()">
-          <app-refresh-button
-            (refreshTest)="refreshTest()"
-          ></app-refresh-button>
-          <p class="subtitle">{{ questions.length | questionWord }}</p>
-        </div>
-        <app-questions-stepper
-          *ngIf="!showTextBoard()"
-          [formGroup]="formGroup"
-          [questions]="questions"
-          [currentQuestionNumber]="currentQuestionNumber()"
-          (changeViewQuestion)="changeViewQuestion($event)"
-        ></app-questions-stepper>
-        <div class="mob-title-wrapper" *ngIf="!showTextBoard()">
-          <div class="question-number">{{ currentQuestionNumber() }}</div>
+    @if (testQuestions$ | async; as questions) { @if(!showTextBoard()){
 
-          <h3 class="question-title question-title-mob">
-            {{ questions[currentQuestionNumber() - 1]?.question }}
-          </h3>
-        </div>
-        <div class="question-container" *ngIf="questions">
-          <!--  -->
-          <form [formGroup]="formGroup">
-            <ng-container *ngFor="let q of questions; let i = index">
-              @if (q.id===currentQuestionNumber() || formGroup.valid && q.id ===
-              questions.length) {
-              <div class="animated-container" @fadeIn>
-                <div class="question-card">
-                  <div *ngIf="q">
-                    <h3
-                      class="question-title"
-                      [appTypingAnimation]="q.question"
-                      [typingSpeed]="20"
-                    >
-                      {{ q.question }}
-                    </h3>
-                    <div class="answers">
-                      <ng-container
-                        *ngFor="
-                          let answer of q.answers;
-                          let answerIndex = index
-                        "
-                      >
-                        <app-question-option
-                          [answerIndex]="answerIndex"
-                          [questionsId]="q.id"
-                          [answer]="answer"
-                          [testName]="TEST_NAME"
-                          (answerQuestion)="answerQuestionByClick($event)"
-                        ></app-question-option>
-                      </ng-container>
-                    </div>
-                  </div>
-                </div>
+    <div class="refresh-btn-wrapper">
+      <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+      <p class="subtitle">{{ questions.length | questionWord }}</p>
+    </div>
+    <app-questions-stepper
+      [formGroup]="formGroup"
+      [questions]="questions"
+      [currentQuestionNumber]="currentQuestionNumber()"
+      (changeViewQuestion)="changeViewQuestion($event)"
+    ></app-questions-stepper>
+
+    <div class="mob-title-wrapper">
+      <div class="question-number">{{ currentQuestionNumber() }}</div>
+
+      <h3 class="question-title question-title-mob">
+        {{ questions[currentQuestionNumber() - 1]?.question }}
+      </h3>
+    </div>
+
+    <div class="question-container">
+      <!--  -->
+      <form [formGroup]="formGroup">
+        @for (q of questions; track $index) { @if
+        (q.id===currentQuestionNumber() ) {
+        <div class="animated-container" @fadeIn>
+          <div class="question-card">
+            @if (q) {
+
+            <div>
+              <h3
+                class="question-title"
+                [appTypingAnimation]="q.question"
+                [typingSpeed]="20"
+              >
+                {{ q.question }}
+              </h3>
+              <div class="answers" [class.full-answered]="formGroup.valid">
+                @for (answer of q.answers;let i = $index; track i) {
+
+                <app-question-option
+                  [answerIndex]="i"
+                  [questionsId]="q.id"
+                  [answer]="answer"
+                  [testName]="TEST_NAME"
+                  (answerQuestion)="answerQuestionByClick($event)"
+                ></app-question-option>
+                }
               </div>
-              }
-            </ng-container>
-          </form>
-          <div
-            @fadeIn
-            class="card-payment-wrapper"
-            *ngIf="
-              !showTextBoard() &&
-              formGroup.valid &&
-              !isSuccessPayedTest() &&
-              !isFreeTest()
-            "
-          >
-            @if (!isPendingPayment()) {
-            <app-card-payment
-              @fadeIn
-              [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
-              [testPrice]="testPrice"
-              [testName]="TEST_NAME"
-              [testSubtitleText]="testTitleText"
-              (pendingPaymentOnClick)="pendingPaymentOnClick()"
-              [cardTitle]="currentCardInfo?.title ?? ''"
-            ></app-card-payment>
-
-            }@else {
-            <app-pending-payment
-              @fadeIn
-              (createMonoPaymentByClick)="createMonoPaymentByClick()"
-              (close)="closePaymentByClick()"
-            ></app-pending-payment>
+            </div>
             }
           </div>
         </div>
-      </ng-container>
-    </ng-container>
+        } }
+      </form>
+      @if ( formGroup.valid && !isSuccessPayedTest() && !isFreeTest()) {
+
+      <div @fadeIn class="card-payment-wrapper">
+        @if (!isPendingPayment()) {
+
+        <app-card-payment
+          @fadeIn
+          [imgUrl]="currentCardInfo?.imageUrl + 'card/1.svg'"
+          [testPrice]="testPrice"
+          [testName]="TEST_NAME"
+          [testSubtitleText]="testTitleText"
+          (pendingPaymentOnClick)="pendingPaymentOnClick()"
+          [cardTitle]="currentCardInfo?.title ?? ''"
+        ></app-card-payment>
+
+        }@else {
+        <app-pending-payment
+          @fadeIn
+          (createMonoPaymentByClick)="createMonoPaymentByClick()"
+          (close)="closePaymentByClick()"
+        ></app-pending-payment>
+        }
+      </div>
+      }
+    </div>
+    } }@else {
+    <app-questions-board
+      [testsInstruction]="testsInstruction"
+      [testPrice]="testPrice"
+      [testName]="TEST_NAME"
+      (hideTextBoard)="hideTextBoardOnClick()"
+    ></app-questions-board>
+    }
+
     <!--  -->
 
     <!--  -->
-    <ng-template #boardContainer>
-      <app-questions-board
-        [testsInstruction]="testsInstruction"
-        [testPrice]="testPrice"
-        [testName]="TEST_NAME"
-        (hideTextBoard)="hideTextBoardOnClick()"
-      ></app-questions-board>
-    </ng-template>
   </div>
 </div>
