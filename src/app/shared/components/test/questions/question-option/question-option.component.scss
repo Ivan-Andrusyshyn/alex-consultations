@@ -41,6 +41,11 @@
 .label.isValidForm {
   min-height: 50px;
   padding: 8px 15px;
+
+  @media screen and (min-width: 764px) {
+    max-height: 80px;
+    height: 80px;
+  }
 }
 .label:has(input:checked)::before {
   content: "";
