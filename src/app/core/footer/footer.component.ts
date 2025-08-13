@@ -10,4 +10,7 @@ import { SocialLinksComponent } from '../../shared/components/social-links/socia
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
-export class FooterComponent {}
+export class FooterComponent {
+  ofertaUrl = 'assets/new/core/footer/oferta.pdf';
+  conditionsServiceUrl = 'assets/new/core/footer/conditions-service.pdf';
+}
