@@ -41,7 +41,6 @@ import { QuestionWordPipe } from './test-questions.pipe';
 import { ModalService } from '../../core/services/modal.service';
 import { SnackBar } from './snackBar.interface';
 import { QuestionOptionComponent } from '../../shared/components/test/questions/question-option/question-option.component';
-import { MonopayService } from '../../core/services/monopay.service';
 
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { CardPaymentComponent } from '../../shared/components/payment/card-payment/card-payment.component';
@@ -55,6 +54,8 @@ import {
 import { QuestionsBoardComponent } from '../../shared/components/test/questions/questions-board/questions-board.component';
 import { fadeInQuestionAnimation } from './question-animations';
 import { TypingAnimationDirective } from '../../shared/directives/typing-animation.directive';
+import { MonopayService } from '../../core/services/payment/monopay.service';
+import { CreateMonopayService } from '../../core/services/payment/create-monopay.service';
 
 @Component({
   selector: 'app-test-questions',
@@ -95,7 +96,7 @@ export class TestQuestionsComponent
   private modalService = inject(ModalService);
 
   private monopayService = inject(MonopayService);
-
+  private createMonopayService = inject(CreateMonopayService);
   //
   // ─── Reactive Form & Data ────────────────
   formGroup: FormGroup = this.fb.group({});
@@ -245,39 +246,6 @@ export class TestQuestionsComponent
 
   // ─── Payment
 
-  createPaymentObj(): MonoPaymentRequest {
-    const baseUrl = window.location.origin;
-    const convertPrice = parseInt(this.testPrice as string, 10) * 100;
-    const createBasketOrder = {
-      name: this.currentCardInfo?.title ?? 'test',
-      qty: 1,
-      sum: convertPrice,
-      total: convertPrice,
-      icon: this.currentCardInfo?.imgWebUrl ?? null,
-      unit: 'шт.',
-      code: this.TEST_NAME + '-' + Date.now().toString().slice(-5),
-    };
-    //
-
-    const paymentObj = {
-      amount: convertPrice,
-      ccy: 980,
-      merchantPaymInfo: {
-        reference: '',
-        destination: 'Оплата за тест',
-        comment: this.TEST_NAME,
-        customerEmails: [],
-        basketOrder: [createBasketOrder],
-      },
-      redirectUrl: baseUrl + '/tests/' + this.TEST_NAME + '/payment-success',
-      webHookUrl: environment.apiUrl + '/api/monopay/get-webhook',
-      validity: 3600,
-
-      agentFeePercent: 1.42,
-    };
-
-    return paymentObj;
-  }
   // close payment
   closePaymentByClick() {
     const confirmed = confirm('Ви впевнені, що хочете скасувати платіж?');
@@ -296,7 +264,13 @@ export class TestQuestionsComponent
   // create payment
   createMonoPaymentByClick() {
     //obj
-    const paymentObj = Object.freeze(this.createPaymentObj());
+    const paymentObj = Object.freeze(
+      this.createMonopayService.createPaymentObj(
+        this.TEST_NAME,
+        this.testPrice,
+        this.currentCardInfo
+      )
+    );
     //
     const newTab = window.open('', '_blank');
     //

@@ -19,9 +19,9 @@ import {
 } from '../../../shared/models/tests/common-tests';
 import { fadeInAnimation } from '../../../core/animations/fadeIn-animation';
 import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
-import { MonopayService } from '../../../core/services/monopay.service';
 import { QuestionsService } from '../../test-questions/questions.service';
 import { PrimaryBtnComponent } from '../../../shared/components/primary-btn/primary-btn.component';
+import { MonopayService } from '../../../core/services/payment/monopay.service';
 
 interface TestInfo {
   testName: TestName;

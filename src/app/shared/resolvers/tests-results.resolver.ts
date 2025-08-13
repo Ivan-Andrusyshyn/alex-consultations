@@ -9,7 +9,7 @@ import { catchError, map, Observable, of, switchMap } from 'rxjs';
 
 //
 import { TestName } from '../models/tests/common-tests';
-import { MonopayService } from '../../core/services/monopay.service';
+import { MonopayService } from '../../core/services/payment/monopay.service';
 import { TestResultsProviderService } from '../../core/services/test-results-provider.service';
 import { ResultsResolver, TestInfo } from '../models/tests/resolvers.interface';
 

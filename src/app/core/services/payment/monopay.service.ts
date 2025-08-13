@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../environment/environment';
-import { TestName } from '../../shared/models/tests/common-tests';
+import { environment } from '../../environment/environment';
+import { TestName } from '../../../shared/models/tests/common-tests';
 import {
   MonoPaymentCheckStatusResponse,
   MonoPaymentCreateResponse,
   MonoPaymentRequest,
-} from '../../shared/models/payment/monopayment';
+} from '../../../shared/models/payment/monopayment';
 
 @Injectable({
   providedIn: 'root',

@@ -1,0 +1,57 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+//
+
+//
+import { environment } from '../../environment/environment';
+import { MonoPaymentRequest } from '../../../shared/models/payment/monopayment';
+import {
+  CardContent,
+  TestName,
+} from '../../../shared/models/tests/common-tests';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CreateMonopayService {
+  constructor(private http: HttpClient) {}
+  private readonly testsUrl = environment.apiUrl;
+
+  createPaymentObj(
+    testName: TestName,
+    testPrice: string | null,
+    currentCardInfo: CardContent | null
+  ): MonoPaymentRequest {
+    const baseUrl = window.location.origin;
+    const convertPrice = parseInt(testPrice as string, 10) * 100;
+    const createBasketOrder = {
+      name: currentCardInfo?.title ?? 'test',
+      qty: 1,
+      sum: convertPrice,
+      total: convertPrice,
+      icon: currentCardInfo?.imgWebUrl ?? null,
+      unit: 'шт.',
+      code: testName + '-' + Date.now().toString().slice(-5),
+    };
+    //
+
+    const paymentObj = {
+      amount: convertPrice,
+      ccy: 980,
+      merchantPaymInfo: {
+        reference: '',
+        destination: 'Оплата за тест',
+        comment: testName,
+        customerEmails: [],
+        basketOrder: [createBasketOrder],
+      },
+      redirectUrl: baseUrl + '/tests/' + testName + '/payment-success',
+      webHookUrl: environment.apiUrl + '/api/monopay/get-webhook',
+      validity: 3600,
+
+      agentFeePercent: 1.42,
+    };
+
+    return paymentObj;
+  }
+}
