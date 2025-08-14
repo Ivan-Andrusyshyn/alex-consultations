@@ -20,6 +20,7 @@ import {
   map,
   Observable,
   of,
+  retry,
   switchMap,
   takeWhile,
 } from 'rxjs';
@@ -335,9 +336,9 @@ export class TestQuestionsComponent
       .makeRequestByTestName(this.TEST_NAME, newRequest)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
+        retry(1),
         catchError((error) => {
           this.isSubmitting.set(false);
-          this.openSnackBar(error.message, 'Закрити');
           return of(error);
         })
       )
