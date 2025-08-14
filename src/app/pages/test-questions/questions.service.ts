@@ -132,12 +132,10 @@ export class QuestionsService {
     if (testName === this.beYourself) {
       return this.beYourselfService.getPersonalitiesResultOfTest(request).pipe(
         map((r) => {
-          console.log(r);
-
           this.routeTracker.clearRouteMap();
 
           this.beYourselfService.scorePercentages.next(r.results.percentages);
-          return r.results.personType;
+          return r.categoryName;
         })
       );
     }
@@ -147,15 +145,8 @@ export class QuestionsService {
         .pipe(
           map((r) => {
             this.routeTracker.clearRouteMap();
-            this.traumaticExperienceService.scorePercentages.next(
-              r.results.percentages
-            );
 
-            this.traumaticExperienceService.sensitivityResults.next({
-              results: r.results,
-            });
-
-            return r.results;
+            return r.categoryName;
           })
         );
     } else {

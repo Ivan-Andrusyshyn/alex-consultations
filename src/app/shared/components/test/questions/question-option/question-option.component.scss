@@ -69,11 +69,7 @@
   }
 }
 //
-.label.higher-options {
-  min-height: 135px;
-  @media screen and (min-width: 764px) {
-  }
-}
+
 .label-1:has(input:checked) {
   border: 1px solid #a7cbff;
   background-color: #a7cbff;

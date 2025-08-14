@@ -18,25 +18,12 @@ import { MainTestNames } from '../../utils/testsNames';
 @Injectable({ providedIn: 'root' })
 export class TraumaticExperienceService {
   private readonly testsUrl = environment.apiUrl + '/tests';
-  scorePercentages = new BehaviorSubject<TestResult | null>(null);
-  sensitivityResults = new BehaviorSubject<PersonalitiesResults | null>(null);
   counterQuestion = new BehaviorSubject(1);
   isShowSendForm = new BehaviorSubject(false);
 
   testName = MainTestNames.Traumatic;
 
-  constructor(private http: HttpClient) {
-    const results = JSON.parse(
-      sessionStorage.getItem(this.testName + '-results') ?? 'null'
-    );
-
-    if (results) {
-      this.scorePercentages.next(results.scorePercentages);
-      this.sensitivityResults.next({
-        results: { ...results },
-      });
-    }
-  }
+  constructor(private http: HttpClient) {}
 
   getQuestions(): Observable<any> {
     return this.http.get<any>(this.testsUrl + '/' + this.testName).pipe(
@@ -79,15 +66,11 @@ export class TraumaticExperienceService {
       testInformation: TestInformation;
     }>(this.testsUrl + '/' + this.testName + '/information');
   }
-  getObservableScorePercentages(): Observable<TestResult | null> {
-    return this.scorePercentages.asObservable();
-  }
+
   getIsShowSendForm(): Observable<boolean> {
     return this.isShowSendForm.asObservable();
   }
-  getObservableSensitivityResults(): Observable<PersonalitiesResults | null> {
-    return this.sensitivityResults.asObservable();
-  }
+
   getObservableCurrentQuestion(): Observable<number> {
     return this.counterQuestion.asObservable();
   }

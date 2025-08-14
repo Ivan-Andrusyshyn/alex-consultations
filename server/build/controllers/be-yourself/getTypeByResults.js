@@ -20,6 +20,7 @@ const tests_1 = require("../../validators/valid-categoryName/tests");
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
+        //
         if (!tests_1.personalitites.includes(personType)) {
             return res.status(400).send({
                 message: 'Error invalid params',

@@ -51,7 +51,7 @@ export class TestsResultsResolver implements Resolve<any> {
               .pipe(
                 map((response) => {
                   if (response.status === 'success' && response.invoiceId) {
-                    console.log('success');
+                    // console.log('success');
                   } else {
                     this.router.navigateByUrl('/tests');
                   }

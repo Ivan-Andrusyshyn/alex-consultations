@@ -28,11 +28,9 @@ import { ConsultationService } from '../../core/services/consultation.service';
 import { BenefitConsultationData } from '../../shared/models/benefit-consultation';
 import { ProgressBarComponent } from '../../shared/components/test/progress-bar/progress-bar.component';
 import { HeroCardsSliderComponent } from '../../shared/components/hero-cards-slider/hero-cards-slider.component';
-import { NotificationService } from '../../core/services/notification.service';
 import { StarRatingComponent } from '../../shared/components/star-rating/star-rating.component';
 import { ResultService } from './results.service';
 import { ResponseData } from './data.interface';
-import { CountdownTimerComponent } from '../../shared/components/countdown-timer/countdown-timer.component';
 import { SLIDER_KEYS } from '../../shared/models/slider';
 import { MainTestNames } from '../../core/utils/testsNames';
 import { fadeInAnimation } from '../../core/animations/fadeIn-animation';
@@ -49,7 +47,6 @@ import { PrettyTextDirective } from './pretty-text.directive';
     StarRatingComponent,
     ProgressBarComponent,
     HeroCardsSliderComponent,
-    CountdownTimerComponent,
     PrettyTextDirective,
     ResizeOnVisibleDirective,
     LottieComponent,
@@ -66,10 +63,8 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly dialog = inject(MatDialog);
   private activeRoute = inject(ActivatedRoute);
   private consultationService = inject(ConsultationService);
-  private notificationService = inject(NotificationService);
   private viewportScroller = inject(ViewportScroller);
   private resultsService = inject(ResultService);
-  private route = inject(Router);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 

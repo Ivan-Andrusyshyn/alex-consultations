@@ -7,7 +7,7 @@ interface TestResult {
   B: number;
 }
 interface PersonalitiesResults {
-  results: {
+  results?: {
     scores: TestResult;
     percentages: TestResult;
     sensitivityType: string;
@@ -16,6 +16,8 @@ interface PersonalitiesResults {
     matchResults: string;
     originMatchResults: string;
   };
+  message: string;
+  categoryName: string;
 }
 
 interface PersonalitiesResponse extends PersonalitiesResults {

@@ -27,6 +27,7 @@ const postPercentagesAndType = (req, res) => __awaiter(void 0, void 0, void 0, f
         const personType = be_yourself_1.default.getCodedTypeName(scores);
         yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: personType }));
         res.status(200).send({
+            categoryName: personType,
             results: { scores, percentages, personType },
             message: 'Success post scores operation.',
         });

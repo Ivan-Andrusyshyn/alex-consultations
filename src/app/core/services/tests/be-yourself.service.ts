@@ -22,6 +22,7 @@ interface BeYourself {
 interface BeYourselfResults {
   results: { scores: TestResult; percentages: TestResult; personType: string };
   message: string;
+  categoryName: string;
 }
 
 @Injectable({
