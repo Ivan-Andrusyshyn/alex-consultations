@@ -280,7 +280,14 @@ export class TestQuestionsComponent
         switchMap((response) => {
           const currentUrl = window.location.href;
 
-          this.setInStorageTestInfo(response.invoiceId);
+          this.createMonopayService.setInStorageTestInfo(
+            response.invoiceId,
+            this.TEST_NAME,
+            this.testPrice,
+            this.currentCardInfo
+          );
+
+          //
           this.isPendingPayment.set(true);
           if (newTab) {
             window.history.pushState({}, '', currentUrl);
@@ -311,21 +318,7 @@ export class TestQuestionsComponent
       })
     );
   }
-  private setInStorageTestInfo(invoiceId: string) {
-    // session
-    sessionStorage.setItem(this.TEST_NAME + '-isPendingPayment', 'true');
-    // local
-    localStorage.setItem(
-      this.TEST_NAME + '-paid-testInfo',
-      JSON.stringify({
-        invoiceId,
-        testName: this.TEST_NAME,
-        imgUrl: this.currentCardInfo?.imageUrl,
-        title: this.currentCardInfo?.title,
-        price: this.testPrice,
-      })
-    );
-  }
+
   //
 
   // ─── Submission & Result

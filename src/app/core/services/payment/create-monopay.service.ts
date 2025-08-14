@@ -54,4 +54,25 @@ export class CreateMonopayService {
 
     return paymentObj;
   }
+
+  setInStorageTestInfo(
+    invoiceId: string,
+    testName: TestName,
+    testPrice: string | null,
+    currentCardInfo: CardContent | null
+  ) {
+    // session
+    sessionStorage.setItem(testName + '-isPendingPayment', 'true');
+    // local
+    localStorage.setItem(
+      testName + '-paid-testInfo',
+      JSON.stringify({
+        invoiceId,
+        testName: testName,
+        imgUrl: currentCardInfo?.imageUrl,
+        title: currentCardInfo?.title,
+        price: testPrice,
+      })
+    );
+  }
 }

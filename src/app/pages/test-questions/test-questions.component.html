@@ -1,13 +1,4 @@
 <div class="main-container">
-  <!--  -->
-  <!-- <app-title-card
-    [titleText]="testTitleText"
-    [subtitleText]="testSubtitleText"
-    *ngIf="
-      !showTextBoard() &&
-      !(formGroup.valid && !isSuccessPayedTest() && !isFreeTest())
-    "
-  ></app-title-card> -->
   <div class="shadow-wrapper">
     @if (testQuestions$ | async; as questions) { @if(!showTextBoard()){
 
