@@ -19,6 +19,7 @@ import { SliderControlsBtnComponent } from '../test/slider-controls-btn/slider-c
 import { TestCardComponent } from '../test/test-card/test-card.component';
 import { SLIDER_KEYS } from '../../models/slider';
 import { TEST_CARDS } from '../../../core/content/TEST_CARDS';
+import { CardContent, TestName } from '../../models/tests/common-tests';
 
 @Component({
   selector: 'app-hero-cards-slider',
@@ -35,9 +36,10 @@ export class HeroCardsSliderComponent implements OnInit {
   private sliderService = inject(SliderService);
 
   @Input() sliderKey!: SLIDER_KEYS;
+  @Input() hiddenTestName: TestName | null = null;
 
   currentIndex = signal(0);
-  slideCards = TEST_CARDS;
+  slideCards!: CardContent[];
   isMobCardType = window.innerWidth < 1320;
   isPrevDisabled = computed(() => this.currentIndex() === 0);
   isNextDisabled = computed(
@@ -45,21 +47,21 @@ export class HeroCardsSliderComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.slideCards = this.getSlideCards();
+    //
     this.currentIndex.set(
       this.sliderService.currentIndex.get(this.sliderKey) ?? 0
     );
-
-    // interval(7000)
-    //   .pipe(
-    //     tap(() => {
-    //       this.next();
-    //       this.chr.markForCheck();
-    //     }),
-    //     takeUntilDestroyed(this.dr)
-    //   )
-    //   .subscribe();
   }
 
+  private getSlideCards = () =>
+    this.hiddenTestName
+      ? TEST_CARDS.filter(
+          (item) => !item.routeStart.includes(this.hiddenTestName ?? '')
+        )
+      : TEST_CARDS;
+
+  //
   next() {
     const cardIndex = this.sliderService.next(this.sliderKey, this.slideCards);
 

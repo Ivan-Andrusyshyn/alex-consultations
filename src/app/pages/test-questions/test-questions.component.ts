@@ -105,9 +105,6 @@ export class TestQuestionsComponent
   testQuestionsLength!: number;
   coloredLabel: boolean = true;
 
-  private isSnackBarOpened = false;
-  //
-
   // ─── UI Labels & Text
   testTitleText = '';
   testSubtitleText = '';
@@ -124,7 +121,7 @@ export class TestQuestionsComponent
   isStartTest = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   currentQuestionNumber = signal<number>(1);
-  showTextBoard = signal(true);
+  showInitBoard = signal(true);
   isSuccessPayedTest = signal<boolean>(false);
   isFreeTest = signal<boolean>(false);
   isPendingPayment = signal<boolean>(false);
@@ -209,7 +206,15 @@ export class TestQuestionsComponent
             map(() => questions)
           );
         }
-        return of(questions);
+        return this.monopayService.checkStatus(this.TEST_NAME, invoiceId).pipe(
+          map((response) => {
+            if (response.status === 'success') {
+              this.paymentStatus = 'success';
+            }
+
+            return questions;
+          })
+        );
       }),
       takeUntilDestroyed(this.destroyRef)
     );
@@ -217,9 +222,6 @@ export class TestQuestionsComponent
     //
     this.isStartTest.set(
       JSON.parse(sessionStorage.getItem('isStartTest') ?? 'false')
-    );
-    this.isSnackBarOpened = JSON.parse(
-      sessionStorage.getItem('isSnackBarOpened') ?? 'null'
     );
   }
   //
@@ -230,7 +232,6 @@ export class TestQuestionsComponent
   }
 
   ngOnDestroy(): void {
-    this.setSnackBar(false, 'false');
     localStorage.setItem(this.TEST_NAME + '-showQuestions', 'true');
     sessionStorage.setItem('isStartTest', 'false');
     //
@@ -240,7 +241,6 @@ export class TestQuestionsComponent
     this.isPendingPayment.set(false);
     this.formGroup.reset();
     sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
-    localStorage.removeItem(this.TEST_NAME + '-paid-testInfo');
     sessionStorage.removeItem(this.TEST_NAME + '-answers');
   }
 
@@ -343,7 +343,6 @@ export class TestQuestionsComponent
       )
       .subscribe((results) => {
         this.isSubmitting.set(false);
-        sessionStorage.removeItem(this.TEST_NAME + '-answers');
         //
         this.handlePersonType(results);
       });
@@ -351,7 +350,6 @@ export class TestQuestionsComponent
   private handlePersonType(personType: string) {
     this.router.navigate(['tests', this.TEST_NAME, 'details', personType]);
 
-    this.formGroup.reset();
     this.beYourselfService.counterQuestion.next(1);
   }
   // ===
@@ -371,6 +369,7 @@ export class TestQuestionsComponent
       (this.formGroup.valid && this.isFreeTest())
     ) {
       this.onSubmit();
+      this.setInStorageAnswers();
       return;
     }
 
@@ -392,11 +391,12 @@ export class TestQuestionsComponent
 
   // ─── UI Helpers
   hideTextBoardOnClick() {
-    this.showTextBoard.set(false);
+    this.showInitBoard.set(false);
     localStorage.setItem(
-      this.TEST_NAME + '-showQuestions',
+      this.TEST_NAME + '-showInitBoard',
       JSON.stringify(false)
     );
+    sessionStorage.removeItem(this.TEST_NAME + '-answers');
   }
 
   getBoardsImgUrl(): string {
@@ -419,12 +419,10 @@ export class TestQuestionsComponent
         if (result !== undefined) {
           this.formGroup.reset();
 
-          this.setSnackBar(false, 'false');
           this.cdr.markForCheck();
           sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
           this.currentQuestionNumber.set(1);
           this.isPendingPayment.set(false);
-          localStorage.removeItem(this.TEST_NAME + '-results');
           this.setInStorageAnswers();
         }
       });
@@ -443,9 +441,9 @@ export class TestQuestionsComponent
   }
   private setStorageBoardValue() {
     const showQuestions = JSON.parse(
-      localStorage.getItem(this.TEST_NAME + '-showQuestions') ?? 'true'
+      localStorage.getItem(this.TEST_NAME + '-showInitBoard') ?? 'true'
     );
-    this.showTextBoard.set(showQuestions);
+    this.showInitBoard.set(showQuestions);
   }
   private setCurrentAnswers() {
     const parsedAnswers = this.questionsService.parseAnswers(this.TEST_NAME);
@@ -469,35 +467,5 @@ export class TestQuestionsComponent
     snackBarRef.onAction().subscribe(() => {});
   }
 
-  private handlePercentageWithSnackBar(): number {
-    const totalQuestions = this.testQuestionsLength;
-    const answeredQuestions = this.answeredQuestions();
-    const progress = totalQuestions
-      ? (answeredQuestions / totalQuestions) * 100
-      : 0;
-
-    this.handleSnackBarByProgress(progress);
-
-    return progress;
-  }
-
-  private handleSnackBarByProgress(progress: number) {
-    if (!this.isSnackBarOpened && progress > 50 && progress < 80) {
-      const text = this.snackBar.firstSnackBar;
-      const textBtn = this.snackBar.firstSnackBarBtnText;
-      this.openSnackBar(text, textBtn);
-      this.setSnackBar(true, 'true');
-    }
-  }
-  private answeredQuestions(): number {
-    return Object.values(this.formGroup.value).filter(
-      (value) => value !== null && value !== undefined && value !== ''
-    ).length;
-  }
   //
-
-  private setSnackBar(isSnack: boolean, storage: string) {
-    this.isSnackBarOpened = isSnack;
-    sessionStorage.setItem('isSnackBarOpened', storage);
-  }
 }

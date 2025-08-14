@@ -1,4 +1,9 @@
-<div (click)="refresh()" class="reset-btn" title="Почати з початку">
+<div
+  (click)="refresh()"
+  class="reset-btn"
+  [class.active]="isValidForm"
+  title="Почати з початку"
+>
   <svg
     class="refresh-icon"
     viewBox="0 0 24 24"

@@ -4,6 +4,7 @@ import {
   Component,
   DestroyRef,
   ElementRef,
+  HostListener,
   inject,
   OnDestroy,
   OnInit,
@@ -15,7 +16,7 @@ import { map, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 //
 
 import { LottieComponent } from 'ngx-lottie';
@@ -68,6 +69,7 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   private notificationService = inject(NotificationService);
   private viewportScroller = inject(ViewportScroller);
   private resultsService = inject(ResultService);
+  private route = inject(Router);
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
@@ -75,6 +77,7 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   formGroup!: FormGroup;
 
   successMessage = signal(false);
+
   TEST_NAME = signal<TestName>(undefined as unknown as TestName);
   showCountDownTimer = signal(false);
 
@@ -118,9 +121,6 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     //
-    this.timeInterval = setInterval(() => {
-      this.isFirstNotification = false;
-    }, 25000);
 
     this.benefitConsultationData$ = this.consultationService
       .getBenefitConsultation()
@@ -147,9 +147,14 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.TEST_NAME.set(testName);
         this.options.path = `${this.baseAssetUrl}${this.TEST_NAME()}-1.json`;
 
+        //
+        sessionStorage.removeItem(this.TEST_NAME() + '-showInitBoard');
+        //
+
         this.sendObject = {
           category: response.results.type,
         };
+        // remove answers
 
         return {
           ...response.results,
@@ -161,12 +166,6 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   //
 
   //
-  private showNotification(isFirst: boolean) {
-    this.isFirstNotification = isFirst;
-    this.notificationService.setNotification(
-      'Запишись на безкоштовну консультацію прямо зараз! Тисни кнопку "Безкоштовна консультація".'
-    );
-  }
 
   registration(): void {
     if (this.formGroup.valid) {

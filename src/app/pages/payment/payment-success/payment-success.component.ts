@@ -82,9 +82,11 @@ export class PaymentSuccessComponent implements OnInit {
     const testName = this.routeActive.parent?.snapshot.paramMap.get(
       'testName'
     ) as TestName;
+    //
     const testInfo = JSON.parse(
       localStorage.getItem(testName + '-paid-testInfo') ?? 'null'
     ) as TestInfo;
+    //
     if (!testInfo) {
       this.router.navigateByUrl('/tests');
     }
@@ -118,6 +120,9 @@ export class PaymentSuccessComponent implements OnInit {
         const testAnswers = JSON.parse(
           sessionStorage.getItem(testName + '-answers') ?? 'null'
         ) as { answers: Answer[]; currentQuestion: string | number } | null;
+        if (!testAnswers) {
+          this.router.navigateByUrl('/tests/' + testName + '/questions');
+        }
         //
 
         const newRequest = this.questionsService.createNewRequestObject(
@@ -174,7 +179,6 @@ export class PaymentSuccessComponent implements OnInit {
 
   navigateByClick(testName: string, testResults: string | null) {
     if (testName && testResults) {
-      localStorage.removeItem(testName + '-results');
       this.router.navigate(['tests', testName, 'details', testResults]);
     } else {
       alert('problem with navigation data.');

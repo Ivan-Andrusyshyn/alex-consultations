@@ -107,5 +107,8 @@
 </section>
 
 <div [appResizeOnVisible]="3" [visibleCards]="visibleCards">
-  <app-hero-cards-slider [sliderKey]="cardsSliderKey"></app-hero-cards-slider>
+  <app-hero-cards-slider
+    [hiddenTestName]="TEST_NAME()"
+    [sliderKey]="cardsSliderKey"
+  ></app-hero-cards-slider>
 </div>

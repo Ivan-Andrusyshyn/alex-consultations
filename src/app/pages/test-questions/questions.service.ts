@@ -79,6 +79,8 @@ export class QuestionsService {
       sessionStorage.getItem(testName + '-answers') ?? 'null';
     return JSON.parse(stringAnswers);
   }
+
+  //
   makeRequestByTestName(
     testName: TestName,
     request: TestResultRequest
@@ -86,9 +88,6 @@ export class QuestionsService {
     if (testName === this.youCoffee) {
       return this.youCoffeeService.youCoffeeCategory(request).pipe(
         map((r) => {
-          this.setLocalStorage(testName, {
-            categoryName: r.categoryName,
-          });
           sessionStorage.setItem('subCategoryCoffee', r.subCategoryName);
           this.routeTracker.clearRouteMap();
           return r.categoryName;
@@ -100,9 +99,6 @@ export class QuestionsService {
         .getRoleInRelationshipsCategory(request)
         .pipe(
           map((r) => {
-            this.setLocalStorage(testName, {
-              categoryName: r.categoryName,
-            });
             this.routeTracker.clearRouteMap();
 
             return r.categoryName;
@@ -114,9 +110,6 @@ export class QuestionsService {
         .getToxicalRelationshipCategory(request)
         .pipe(
           map((r) => {
-            this.setLocalStorage(testName, {
-              categoryName: r.categoryName,
-            });
             this.routeTracker.clearRouteMap();
 
             this.toxicalRelationshipService.toxicalRelationshipResults.next(
@@ -130,9 +123,6 @@ export class QuestionsService {
     if (testName === this.attractiveness) {
       return this.attractivenessService.getAttractivenessCategory(request).pipe(
         map((r) => {
-          this.setLocalStorage(testName, {
-            categoryName: r.categoryName,
-          });
           this.routeTracker.clearRouteMap();
 
           return r.categoryName;
@@ -144,9 +134,6 @@ export class QuestionsService {
         map((r) => {
           console.log(r);
 
-          this.setLocalStorage(testName, {
-            categoryName: r.results.personType,
-          });
           this.routeTracker.clearRouteMap();
 
           this.beYourselfService.scorePercentages.next(r.results.percentages);
@@ -159,9 +146,6 @@ export class QuestionsService {
         .getTraumaticSensitivityResults(request)
         .pipe(
           map((r) => {
-            this.setLocalStorage(testName, {
-              ...r.results,
-            });
             this.routeTracker.clearRouteMap();
             this.traumaticExperienceService.scorePercentages.next(
               r.results.percentages
@@ -177,10 +161,5 @@ export class QuestionsService {
     } else {
       return of('');
     }
-  }
-
-  private setLocalStorage(testName: string, value: any) {
-    const fullKey = testName + '-results';
-    localStorage.setItem(fullKey, JSON.stringify(value));
   }
 }

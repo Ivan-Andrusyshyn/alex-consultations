@@ -1,9 +1,12 @@
 <div class="main-container">
   <div class="shadow-wrapper">
-    @if (testQuestions$ | async; as questions) { @if(!showTextBoard()){
+    @if (testQuestions$ | async; as questions) { @if(!showInitBoard()){
 
     <div class="refresh-btn-wrapper">
-      <app-refresh-button (refreshTest)="refreshTest()"></app-refresh-button>
+      <app-refresh-button
+        (refreshTest)="refreshTest()"
+        [isValidForm]="formGroup.valid"
+      ></app-refresh-button>
       <p class="subtitle">{{ questions.length | questionWord }}</p>
     </div>
     <app-questions-stepper

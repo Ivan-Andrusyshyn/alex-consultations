@@ -15,22 +15,12 @@ export class ConfirmExitGuard implements CanDeactivate<TestQuestionsComponent> {
   canDeactivate(
     component: TestQuestionsComponent
   ): Observable<boolean> | boolean {
-    const answers = JSON.parse(
-      sessionStorage.getItem(component.TEST_NAME + '-answers') ?? 'null'
-    );
-
-    const hasAnyAnswer =
-      answers &&
-      answers.answers &&
-      Object.values(answers.answers).some((value) => value !== null);
     const status: StatusPayment | null = 'success' as const;
 
-    if (!hasAnyAnswer) {
-      return of(true);
-    }
-
-    if (component.paymentStatus === status) {
-      component.formGroup.reset();
+    if (
+      (component.formGroup.valid && !component.testPrice) ||
+      (component.formGroup.valid && component.paymentStatus === status)
+    ) {
       return of(true);
     } else {
       const dialogRef = this.dialog.open(ModalComponent, {
