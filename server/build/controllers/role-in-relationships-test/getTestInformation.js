@@ -12,24 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const getTestInformation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const fileId = google_file_ids_env_1.ROLE_IN_RELATIONSHIPS.INFORMATION;
-        const testInformation = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
-        if (testInformation) {
-            res.status(200).send({
-                message: 'Success get relationship-sensitivity information!',
-                testInformation,
-            });
-        }
-        else {
-            res.status(400).send({
-                message: 'Something wrong with data.',
-            });
-        }
+        const testInformation = yield google_sheets_1.default.getDataGoogle(fileId);
+        res.status(200).send({
+            message: 'Success get relationship-sensitivity information!',
+            testInformation,
+        });
     }
     catch (error) {
         console.log(error);

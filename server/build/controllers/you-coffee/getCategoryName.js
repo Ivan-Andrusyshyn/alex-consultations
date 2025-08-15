@@ -22,6 +22,7 @@ const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function
             : req.socket.remoteAddress || 'Unknown';
         const { categoryName, subCategoryName } = youcoffeeService_1.default.getNameCategoryByScore(answers);
         yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: categoryName }));
+        //
         res.status(200).send({
             message: 'Success get relationship-sensitivity category!',
             categoryName,

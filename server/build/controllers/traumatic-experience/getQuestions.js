@@ -12,25 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
+const tests_data_schema_1 = require("../../db/models/tests-data-schema");
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // const questionsWithAnswers: Question[] = createTraumaticSensitivityTest();
         const fileId = google_file_ids_env_1.TRAUMATIC_EXPERIENCE.QUESTIONS;
-        const questionsWithAnswers = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
-        if (questionsWithAnswers) {
-            res.status(200).send({
-                questions: questionsWithAnswers,
-                message: 'Succesfull get all questions!',
-            });
+        //
+        const traumeticExpModel = (0, tests_data_schema_1.getUniversalModel)('traumatic-experience-questions');
+        let data = yield traumeticExpModel.find();
+        if (!data || data.length === 0) {
+            const questions = (yield google_sheets_1.default.getDataGoogle(fileId));
+            yield traumeticExpModel.create(questions);
+            data = yield traumeticExpModel.find();
         }
-        else {
-            res.status(400).send({
-                message: 'Something wrong with data.',
-            });
-        }
+        //
+        const normalizeId = data.map((i, index) => (Object.assign({ id: index + 1 }, i._doc)));
+        //
+        res.status(200).send({
+            questions: normalizeId,
+            message: 'Succesfull get all questions!',
+        });
     }
     catch (error) {
         console.log(error);

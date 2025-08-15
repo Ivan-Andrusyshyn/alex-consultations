@@ -12,24 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
+const tests_data_schema_1 = require("../../db/models/tests-data-schema");
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const fileId = google_file_ids_env_1.ROLE_IN_RELATIONSHIPS.QUESTIONS;
-        const questions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
-        if (questions) {
-            res.status(200).send({
-                message: 'Success get relationship-sensitivity questions!',
-                questions,
-            });
+        const roleInRelationshipsModel = (0, tests_data_schema_1.getUniversalModel)('role-in-relationships-questions');
+        let data = yield roleInRelationshipsModel.find();
+        if (!data || data.length === 0) {
+            const questions = (yield google_sheets_1.default.getDataGoogle(fileId));
+            yield roleInRelationshipsModel.create(questions);
+            data = yield roleInRelationshipsModel.find();
         }
-        else {
-            res.status(400).send({
-                message: 'Something wrong with data.',
-            });
-        }
+        //
+        const normalizeId = data.map((i, index) => (Object.assign({ id: index + 1 }, i._doc)));
+        res.status(200).send({
+            message: 'Success get relationship-sensitivity questions!',
+            questions: normalizeId,
+        });
     }
     catch (error) {
         console.log(error);

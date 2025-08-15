@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const tests_1 = require("../../validators/valid-categoryName/tests");
+const tests_data_schema_1 = require("../../db/models/tests-data-schema");
 const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const categoryName = req.params.categoryName;
@@ -25,19 +25,19 @@ const getInfoByCategory = (req, res) => __awaiter(void 0, void 0, void 0, functi
             });
         }
         const fileId = google_file_ids_env_1.ROLE_IN_RELATIONSHIPS.RESULTS;
-        const googlefileData = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        if (googlefileData) {
-            const results = googlefileData[categoryName];
-            res.status(200).send({
-                message: 'Successfully get information by categoryName.',
-                results,
-            });
+        const roleInRelationshipsModel = (0, tests_data_schema_1.getUniversalModel)('role-in-relationships-results');
+        let data = yield roleInRelationshipsModel.find();
+        if (!data || data.length === 0) {
+            const googlefileData = yield google_sheets_1.default.getDataGoogle(fileId);
+            yield roleInRelationshipsModel.create(googlefileData);
+            data = yield roleInRelationshipsModel.find();
         }
-        else {
-            res.status(400).send({
-                message: 'Error google file is undefinde or null!',
-            });
-        }
+        //
+        const results = data[0][categoryName];
+        res.status(200).send({
+            message: 'Successfully get information by categoryName.',
+            results,
+        });
     }
     catch (error) {
         console.log(error);

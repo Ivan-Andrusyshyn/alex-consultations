@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const be_yourself_1 = __importDefault(require("../../services/be-yourself"));
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
 const tests_1 = require("../../validators/valid-categoryName/tests");
+const tests_data_schema_1 = require("../../db/models/tests-data-schema");
 const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const personType = req.params.personType;
@@ -27,12 +27,17 @@ const getTypeByResults = (req, res) => __awaiter(void 0, void 0, void 0, functio
             });
         }
         const personNameByType = be_yourself_1.default.getPersonNameByType(personType);
-        // const personInformation =
-        //   personalitiesService.getInformationByType(personNameByType);
         const fileId = google_file_ids_env_1.PERSONALITIES.RESULTS;
-        const results = yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId));
-        const personInformation = results[personType];
-        personInformation.title = personNameByType;
+        const beYourSelfModel = (0, tests_data_schema_1.getUniversalModel)('be-yourself-results');
+        let data = yield beYourSelfModel.find();
+        if (!data || data.length === 0) {
+            const googleResults = yield google_sheets_1.default.getDataGoogle(fileId);
+            yield beYourSelfModel.create(googleResults);
+            data = yield beYourSelfModel.find();
+        }
+        const results = data[0][personType];
+        const personInformation = Object.assign({ title: personNameByType }, results);
+        //
         res.status(200).send({
             personInformation,
             message: 'Success post person type .',

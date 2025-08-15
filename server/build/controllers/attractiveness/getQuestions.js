@@ -12,25 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cache_1 = __importDefault(require("../../services/cache"));
 const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../utils/google-file-ids-env");
+const tests_data_schema_1 = require("../../db/models/tests-data-schema");
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // const attractivenessQuestions: Question[] = createQuestionsAttractiveness();
         const fileId = google_file_ids_env_1.ATTRACTIVENESS.QUESTIONS;
-        const attractivenessQuestions = (yield cache_1.default.getCache(fileId, () => google_sheets_1.default.getDataGoogle(fileId)));
-        if (attractivenessQuestions) {
-            res.status(200).send({
-                questions: attractivenessQuestions,
-                message: 'Succesfull get all questions!',
-            });
+        //
+        const attractivenessModel = (0, tests_data_schema_1.getUniversalModel)('attractiveness-questions');
+        let data = yield attractivenessModel.find();
+        if (!data || data.length === 0) {
+            const attractivenessQuestions = (yield google_sheets_1.default.getDataGoogle(fileId));
+            yield attractivenessModel.create(attractivenessQuestions);
+            data = yield attractivenessModel.find();
         }
-        else {
-            res.status(400).send({
-                message: 'Something wrong wuth data.',
-            });
-        }
+        const normalizeId = data.map((i, index) => (Object.assign({ id: index + 1 }, i._doc)));
+        //
+        res.status(200).send({
+            questions: normalizeId,
+            message: 'Succesfull get questions!',
+        });
     }
     catch (error) {
         console.log(error);

@@ -17,8 +17,8 @@ type PricesValidNames =
 export const MainTestPrices: Record<PricesValidNames, string | null> = {
   RoleInRelationships: '10',
   ToxicalRelationships: '10',
-  Attractiveness: null,
+  Attractiveness: '10',
   BeYourself: '10',
-  Traumatic: null,
+  Traumatic: '10',
   YouCoffee: '10',
 };
