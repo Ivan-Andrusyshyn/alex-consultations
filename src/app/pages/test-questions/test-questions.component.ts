@@ -37,7 +37,6 @@ import {
 import { QuestionsStepperComponent } from '../../shared/components/test/questions/questions-stepper/questions-stepper.component';
 import { SeoService } from '../../core/services/seo.service';
 import { QuestionsService } from './questions.service';
-import { TitleCardComponent } from '../../shared/components/title-card/title-card.component';
 import { QuestionWordPipe } from './test-questions.pipe';
 import { ModalService } from '../../core/services/modal.service';
 import { SnackBar } from './snackBar.interface';
@@ -46,12 +45,8 @@ import { QuestionOptionComponent } from '../../shared/components/test/questions/
 import { TEST_CARDS } from '../../core/content/TEST_CARDS';
 import { CardPaymentComponent } from '../../shared/components/payment/card-payment/card-payment.component';
 import { BeYourselfTestService } from '../../core/services/tests/be-yourself.service';
-import { environment } from '../../core/environment/environment';
 import { PendingPaymentComponent } from '../../shared/components/payment/pending-payment/pending-payment.component';
-import {
-  MonoPaymentRequest,
-  StatusPayment,
-} from '../../shared/models/payment/monopayment';
+import { StatusPayment } from '../../shared/models/payment/monopayment';
 import { QuestionsBoardComponent } from '../../shared/components/test/questions/questions-board/questions-board.component';
 import { fadeInQuestionAnimation } from './question-animations';
 import { TypingAnimationDirective } from '../../shared/directives/typing-animation.directive';
@@ -67,7 +62,6 @@ import { CreateMonopayService } from '../../core/services/payment/create-monopay
     ReactiveFormsModule,
     AsyncPipe,
     QuestionsStepperComponent,
-    TitleCardComponent,
     QuestionWordPipe,
     TypingAnimationDirective,
     QuestionOptionComponent,

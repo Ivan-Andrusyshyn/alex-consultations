@@ -25,7 +25,8 @@ export class QuestionsStepperComponent {
   @Input() questions!: Question[];
   @Input() formGroup!: FormGroup;
   @Input() currentQuestionNumber = 1;
-  @Output() changeViewQuestion = new EventEmitter();
+  //
+  @Output() changeCurrentQuestion = new EventEmitter();
 
   isChooseQuestion = signal(false);
 
@@ -33,7 +34,7 @@ export class QuestionsStepperComponent {
 
   changeQuestion(currentQuNumber: number) {
     this.isChooseQuestion.set(true);
-    this.changeViewQuestion.emit(currentQuNumber);
+    this.changeCurrentQuestion.emit(currentQuNumber);
   }
 
   isValid(indexQ: number) {
