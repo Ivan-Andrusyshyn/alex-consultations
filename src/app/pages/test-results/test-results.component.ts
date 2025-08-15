@@ -143,8 +143,6 @@ export class TestResultsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.options.path = `${this.baseAssetUrl}${this.TEST_NAME()}-1.json`;
 
         //
-        sessionStorage.removeItem(this.TEST_NAME() + '-showInitBoard');
-        //
 
         this.sendObject = {
           category: response.results.type,

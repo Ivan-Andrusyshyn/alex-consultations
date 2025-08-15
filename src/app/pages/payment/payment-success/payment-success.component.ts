@@ -30,7 +30,13 @@ interface TestInfo {
   price: string | number;
   invoiceId: string;
 }
+interface TestAnswers {
+  answers: Answer[];
+  currentQuestion: string | number;
+}
+//
 
+//
 @Component({
   selector: 'app-payment-success',
   standalone: true,
@@ -119,7 +125,9 @@ export class PaymentSuccessComponent implements OnInit {
       switchMap((response) => {
         const testAnswers = JSON.parse(
           sessionStorage.getItem(testName + '-answers') ?? 'null'
-        ) as { answers: Answer[]; currentQuestion: string | number } | null;
+        ) as TestAnswers | null;
+
+        //
         if (!testAnswers) {
           this.router.navigateByUrl('/tests/' + testName + '/questions');
         }
@@ -166,15 +174,9 @@ export class PaymentSuccessComponent implements OnInit {
       .makeRequestByTestName(testName, newRequest)
       .pipe(
         map((results) => {
-          this.cleanStorage(testName);
           return { ...data, results };
         })
       );
-  }
-
-  private cleanStorage(testName: TestName) {
-    localStorage.removeItem(testName + '-answers');
-    localStorage.removeItem(testName + '-showQuestions');
   }
 
   navigateByClick(testName: string, testResults: string | null) {
@@ -183,5 +185,11 @@ export class PaymentSuccessComponent implements OnInit {
     } else {
       alert('problem with navigation data.');
     }
+  }
+  //
+
+  private cleanStorage(testName: TestName) {
+    sessionStorage.removeItem(testName + '-answers');
+    localStorage.removeItem(testName + '-showInitBoard');
   }
 }

@@ -387,11 +387,10 @@ export class TestQuestionsComponent
   // ─── UI Helpers
   hideTextBoardOnClick() {
     this.showInitBoard.set(false);
-    localStorage.setItem(
+    sessionStorage.setItem(
       this.TEST_NAME + '-showInitBoard',
       JSON.stringify(false)
     );
-    sessionStorage.removeItem(this.TEST_NAME + '-answers');
   }
 
   getBoardsImgUrl(): string {
@@ -436,7 +435,7 @@ export class TestQuestionsComponent
   }
   private setStorageBoardValue() {
     const showQuestions = JSON.parse(
-      localStorage.getItem(this.TEST_NAME + '-showInitBoard') ?? 'true'
+      sessionStorage.getItem(this.TEST_NAME + '-showInitBoard') ?? 'true'
     );
     this.showInitBoard.set(showQuestions);
   }
