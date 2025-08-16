@@ -29,6 +29,7 @@ export type TestResultRequest = {
   };
 };
 export type CardContent = {
+  testName: TestName;
   time: string;
   category: string[] | string;
   routeStart: string;

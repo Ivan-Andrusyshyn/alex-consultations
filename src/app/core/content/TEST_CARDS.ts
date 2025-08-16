@@ -5,6 +5,7 @@ import { MainTestPrices } from './testPrices';
 export const TEST_CARDS: CardContent[] = [
   {
     time: '3 хв',
+    testName: MainTestNames.YouCoffee,
     category: 'Для особистого розвитку',
     routeStart: '/tests/' + MainTestNames.YouCoffee + '/questions',
     testPrice: MainTestPrices['YouCoffee'],
@@ -19,10 +20,10 @@ export const TEST_CARDS: CardContent[] = [
   },
   {
     time: '5 хв',
+    testName: MainTestNames.BeYourself,
     title: 'Бути собою',
     imgList: [1, 2, 3, 4, 5, 6, 7, 8],
     testPrice: MainTestPrices['BeYourself'],
-
     category: ['Для особистого розвитку', 'Для стосунків'],
     routeStart: '/tests/' + MainTestNames.BeYourself + '/questions',
     subtitle:
@@ -35,6 +36,7 @@ export const TEST_CARDS: CardContent[] = [
 
   {
     time: '3 хв',
+    testName: MainTestNames.Attractiveness,
     category: 'Для особистого розвитку',
     routeStart: '/tests/' + MainTestNames.Attractiveness + '/questions',
     title: 'Який у тебе тип привабливості?',
@@ -48,6 +50,7 @@ export const TEST_CARDS: CardContent[] = [
   },
   {
     time: '3 хв',
+    testName: MainTestNames.RoleInRelationships,
     title: 'Яка твоя роль у стосунках?',
     imgList: [1, 2, 3, 4, 5],
     testPrice: MainTestPrices['RoleInRelationships'],
@@ -62,6 +65,7 @@ export const TEST_CARDS: CardContent[] = [
   },
   {
     time: '1 хв',
+    testName: MainTestNames.BeYourself,
     title: 'Калькулятор сумісності',
     category: 'Для стосунків',
     routeStart: '/tests/' + MainTestNames.BeYourself + '/calculator',
@@ -73,6 +77,7 @@ export const TEST_CARDS: CardContent[] = [
   },
   {
     time: '7 хв',
+    testName: MainTestNames.Traumatic,
     title: 'Тест на травматичний досвід',
     imgList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     testPrice: MainTestPrices['Traumatic'],
@@ -86,6 +91,7 @@ export const TEST_CARDS: CardContent[] = [
   },
   {
     time: '3 хв',
+    testName: MainTestNames.ToxicalRelationships,
     title: 'На токсичність стосунків ',
     imgList: [1, 2, 3, 4],
     category: 'Для стосунків',

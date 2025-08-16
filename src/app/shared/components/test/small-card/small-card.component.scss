@@ -107,6 +107,11 @@
     display: block;
     text-transform: uppercase;
     color: #444444;
+    //
+
+    &.paid-badge {
+      color: #64991f;
+    }
   }
 
   h2 {

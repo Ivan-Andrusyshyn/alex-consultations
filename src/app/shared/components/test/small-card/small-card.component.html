@@ -8,12 +8,11 @@
         </p>
       </div>
 
-      <!-- <span class="badge">🔥 Хіт тестів</span> -->
-      <span class="badge">
-        {{
-          card.testPrice ? "Вартість: " + card.testPrice + "грн" : "Безкоштовно"
-        }}</span
+      @if(testPrice$|async; as testPrice){
+      <span class="badge" [class.paid-badge]="testPrice === paidPriceName">
+        {{ testPrice }}</span
       >
+      }
     </div>
 
     <h2 class="title">{{ card.title }}</h2>
