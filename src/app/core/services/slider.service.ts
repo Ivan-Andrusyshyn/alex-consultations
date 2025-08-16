@@ -51,8 +51,8 @@ export class SliderService {
     sliderKey: SLIDER_KEYS,
     cardsLength: number
   ) {
+    return cardsLength;
     if (sliderKey === 'home') {
-      return cardsLength;
     } else {
       return this.isMobCardType ? cardsLength : step * 3;
     }

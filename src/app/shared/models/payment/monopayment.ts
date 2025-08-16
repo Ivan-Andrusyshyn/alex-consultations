@@ -62,3 +62,11 @@ export interface MonoPaymentCheckStatusResponse {
   invoiceId: string;
   testName: TestName;
 }
+export interface PaidStorageData {
+  invoiceId: string;
+  testName: TestName;
+  imgUrl: string;
+  title: string;
+  price: string;
+  testPriceText: string;
+}

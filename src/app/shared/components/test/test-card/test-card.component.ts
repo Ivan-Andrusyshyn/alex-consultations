@@ -13,6 +13,7 @@ import { NgIf } from '@angular/common';
 
 import { PrimaryBtnComponent } from '../../primary-btn/primary-btn.component';
 import { CardContent } from '../../../models/tests/common-tests';
+import { PaidStorageData } from '../../../models/payment/monopayment';
 
 @Component({
   selector: 'app-test-card',
@@ -27,11 +28,17 @@ export class TestCardComponent implements OnInit, OnDestroy {
   @Input() smallCard?: boolean = false;
 
   private router = inject(Router);
-  currentIndex = signal(0);
+  //
   private intervalId: ReturnType<typeof setInterval> | null = null;
+  //
+  currentIndex = signal(0);
   isMobile: boolean = window.innerWidth < 764;
+  paidPriceText = 'Ваша покупка';
+  testPriceText!: string;
 
+  //
   ngOnInit(): void {
+    this.changePriceState();
     this.startCarousel();
   }
 
@@ -56,5 +63,20 @@ export class TestCardComponent implements OnInit, OnDestroy {
 
   startTest(): void {
     this.router.navigateByUrl(this.card.routeStart);
+  }
+
+  private changePriceState() {
+    const paidData = JSON.parse(
+      localStorage.getItem(this.card.testName + '-paid-testInfo') ?? 'null'
+    ) as PaidStorageData;
+    //
+    if (paidData && paidData.testPriceText) {
+      this.testPriceText = paidData.testPriceText;
+    } else {
+      this.testPriceText = this.card.testPrice
+        ? 'Вартість: ' + this.card.testPrice + 'грн'
+        : 'Безкоштовно';
+    }
+    //
   }
 }
