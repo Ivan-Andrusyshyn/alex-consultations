@@ -1,6 +1,10 @@
-<div class="question-container instructions-container" @fadeIn>
-  <div class="price">
-    {{ testPrice ? "Вартість: " + testPrice + " грн" : "Безкоштовно" }}
+<div
+  class="question-container instructions-container"
+  [class.paid-container]="isTestPrice()"
+  @fadeIn
+>
+  <div class="price" [class.paid-test]="isTestPrice()">
+    {{ testPriceState }}
   </div>
   <div class="instructions-header" @fadeIn>
     <ng-lottie

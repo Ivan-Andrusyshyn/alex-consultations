@@ -110,6 +110,7 @@ export class TestQuestionsComponent
     secondSnackBarBtnText: 'Розкрити себе',
     secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
   };
+  testPriceState: string | null = null;
   //
 
   // ─── Signals
@@ -156,7 +157,6 @@ export class TestQuestionsComponent
 
         // price
         this.testPrice = data['testPrice'];
-
         //
         this.testsInstruction = data['testsInstruction'];
 
@@ -205,6 +205,12 @@ export class TestQuestionsComponent
           map((response) => {
             if (response.status === 'success') {
               this.paymentStatus = 'success';
+              this.testPriceState = 'Ваша покупка';
+              //
+            } else {
+              this.testPriceState = this.testPrice
+                ? 'Вартість: ' + this.testPrice + 'грн'
+                : 'Безкоштовно';
             }
 
             return questions;

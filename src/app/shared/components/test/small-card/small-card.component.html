@@ -9,7 +9,7 @@
       </div>
 
       @if(testPrice$|async; as testPrice){
-      <span class="badge" [class.paid-badge]="testPrice === paidPriceName">
+      <span class="badge" [class.paid-badge]="testPrice === paidPriceText">
         {{ testPrice }}</span
       >
       }

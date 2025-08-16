@@ -47,7 +47,7 @@ export class SmallCardComponent {
   currentIndex = signal(0);
   isMobile: boolean = window.innerWidth < 764;
   testPrice$!: Observable<MonoPaymentCheckStatusResponse | string>;
-  paidPriceName = 'Ваша покупка';
+  paidPriceText = 'Ваша покупка';
 
   //
   ngOnInit(): void {
@@ -66,21 +66,20 @@ export class SmallCardComponent {
       localStorage.getItem(this.card.testName + '-paid-testInfo') ?? 'null'
     ) as PaidData;
     //
-    const testPrice = this.card.testPrice
+    const testPriceState = this.card.testPrice
       ? 'Вартість: ' + this.card.testPrice + 'грн'
       : 'Безкоштовно';
-
     //
     if (paidData) {
       this.testPrice$ = this.monopayService
         .checkStatus(paidData.testName, paidData.invoiceId)
         .pipe(
           map((response) =>
-            response.status === 'success' ? this.paidPriceName : testPrice
+            response.status === 'success' ? this.paidPriceText : testPriceState
           )
         );
     } else {
-      this.testPrice$ = of(testPrice);
+      this.testPrice$ = of(testPriceState);
     }
   }
   //
