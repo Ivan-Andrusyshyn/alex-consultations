@@ -8,11 +8,9 @@
         </p>
       </div>
 
-      @if(testPrice$|async; as testPrice){
-      <span class="badge" [class.paid-badge]="testPrice === paidPriceText">
-        {{ testPrice }}</span
+      <span class="badge" [class.paid-badge]="testPriceText === paidPriceText">
+        {{ testPriceText }}</span
       >
-      }
     </div>
 
     <h2 class="title">{{ card.title }}</h2>

@@ -52,7 +52,9 @@ import { fadeInQuestionAnimation } from './question-animations';
 import { TypingAnimationDirective } from '../../shared/directives/typing-animation.directive';
 import { MonopayService } from '../../core/services/payment/monopay.service';
 import { CreateMonopayService } from '../../core/services/payment/create-monopay.service';
+//
 
+//
 @Component({
   selector: 'app-test-questions',
   standalone: true,
@@ -110,7 +112,7 @@ export class TestQuestionsComponent
     secondSnackBarBtnText: 'Розкрити себе',
     secondSnackBar: 'Ти молодець. Залишилось зовсім трішки до відкриття себе!',
   };
-  testPriceState: string | null = null;
+  testPriceText: string | null = null;
   //
 
   // ─── Signals
@@ -157,6 +159,10 @@ export class TestQuestionsComponent
 
         // price
         this.testPrice = data['testPrice'];
+        this.testPriceText = data['testPrice']
+          ? 'Вартість: ' + data['testPrice'] + 'грн'
+          : 'Безкоштовно';
+
         //
         this.testsInstruction = data['testsInstruction'];
 
@@ -205,12 +211,7 @@ export class TestQuestionsComponent
           map((response) => {
             if (response.status === 'success') {
               this.paymentStatus = 'success';
-              this.testPriceState = 'Ваша покупка';
-              //
-            } else {
-              this.testPriceState = this.testPrice
-                ? 'Вартість: ' + this.testPrice + 'грн'
-                : 'Безкоштовно';
+              this.testPriceText = 'Ваша покупка';
             }
 
             return questions;

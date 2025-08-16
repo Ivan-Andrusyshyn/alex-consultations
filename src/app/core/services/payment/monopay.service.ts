@@ -9,7 +9,17 @@ import {
   MonoPaymentCreateResponse,
   MonoPaymentRequest,
 } from '../../../shared/models/payment/monopayment';
+//
 
+interface PaidData {
+  invoiceId: string;
+  testName: TestName;
+  imgUrl: string;
+  title: string;
+  price: string;
+  testPriceText: string;
+}
+//
 @Injectable({
   providedIn: 'root',
 })
@@ -42,6 +52,12 @@ export class MonopayService {
       )
       .pipe(
         tap((response) => {
+          const paidData = JSON.parse(
+            localStorage.getItem(testName + '-paid-testInfo') ?? 'null'
+          ) as PaidData;
+          if (response.status === 'success' && paidData?.testPriceText) {
+            this.setStorageTestInfo(paidData, testName);
+          }
           if (response.status === 'failed') {
             localStorage.removeItem(response.testName + '-paid-testInfo');
           }
@@ -55,5 +71,20 @@ export class MonopayService {
 
   setWebhook(url: string) {
     return this.http.post(`${this.testsUrl}/api/monopay/set-webhook`, { url });
+  }
+
+  //
+  private setStorageTestInfo(paidData: PaidData, testName: TestName) {
+    localStorage.setItem(
+      testName + '-paid-testInfo',
+      JSON.stringify({
+        invoiceId: paidData.invoiceId,
+        testName: paidData.testName,
+        imgUrl: paidData.imgUrl,
+        title: paidData.title,
+        price: paidData.price,
+        testPriceText: 'Ваша покупка',
+      })
+    );
   }
 }

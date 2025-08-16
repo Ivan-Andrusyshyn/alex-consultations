@@ -61,6 +61,10 @@ export class CreateMonopayService {
     testPrice: string | null,
     currentCardInfo: CardContent | null
   ) {
+    const testPriceText = testPrice
+      ? 'Вартість: ' + testPrice + 'грн'
+      : 'Безкоштовно';
+
     // session
     sessionStorage.setItem(testName + '-isPendingPayment', 'true');
     // local
@@ -68,6 +72,7 @@ export class CreateMonopayService {
       testName + '-paid-testInfo',
       JSON.stringify({
         invoiceId,
+        testPriceText,
         testName: testName,
         imgUrl: currentCardInfo?.imageUrl,
         title: currentCardInfo?.title,

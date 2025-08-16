@@ -37,11 +37,11 @@ export class QuestionsBoardComponent implements OnInit {
   @Input() testsInstruction: any;
   @Input() testName!: TestName;
   @Input() testPrice!: string | null;
-  @Input() testPriceState!: string | null;
+  @Input() testPriceText!: string | null;
   @Output() hideTextBoard = new EventEmitter<void>();
   //
 
-  isTestPrice = signal(false);
+  isTestPaid = signal(false);
   //
   options = {
     path: '',
@@ -51,7 +51,7 @@ export class QuestionsBoardComponent implements OnInit {
   readonly baseAssetUrl = 'assets/new/core/animations/tests/';
   //
   ngOnInit(): void {
-    this.isTestPrice.set(this.testPriceState === 'Ваша покупка');
+    this.isTestPaid.set(this.testPriceText === 'Ваша покупка');
 
     //
     this.options.path = `${this.baseAssetUrl}${this.testName}-1.json`;

@@ -1,10 +1,10 @@
 <div
   class="question-container instructions-container"
-  [class.paid-container]="isTestPrice()"
+  [class.paid-container]="isTestPaid()"
   @fadeIn
 >
-  <div class="price" [class.paid-test]="isTestPrice()">
-    {{ testPriceState }}
+  <div class="price" [class.paid-test]="isTestPaid()">
+    {{ testPriceText }}
   </div>
   <div class="instructions-header" @fadeIn>
     <ng-lottie

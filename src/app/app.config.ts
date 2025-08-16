@@ -13,6 +13,7 @@ import { provideShareButtonsOptions } from 'ngx-sharebuttons';
 import { shareIcons } from 'ngx-sharebuttons/icons';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 import { provideLottieOptions } from 'ngx-lottie';
+import { paymentInterceptor } from './core/interceptors/payment.interceptor';
 
 export function playerFactory() {
   return player;
@@ -22,7 +23,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideLottieOptions({ player: () => player }),
-    provideHttpClient(withInterceptors([loadingInterceptor, errorInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        loadingInterceptor,
+        paymentInterceptor,
+        errorInterceptor,
+      ])
+    ),
     provideAnimationsAsync(),
     provideShareButtonsOptions(shareIcons()),
   ],

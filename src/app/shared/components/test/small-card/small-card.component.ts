@@ -23,6 +23,7 @@ interface PaidData {
   imgUrl: string;
   title: string;
   price: string;
+  testPriceText: string;
 }
 
 @Component({
@@ -48,7 +49,7 @@ export class SmallCardComponent {
   isMobile: boolean = window.innerWidth < 764;
   testPrice$!: Observable<MonoPaymentCheckStatusResponse | string>;
   paidPriceText = 'Ваша покупка';
-
+  testPriceText!: string;
   //
   ngOnInit(): void {
     this.changePriceState();
@@ -66,21 +67,14 @@ export class SmallCardComponent {
       localStorage.getItem(this.card.testName + '-paid-testInfo') ?? 'null'
     ) as PaidData;
     //
-    const testPriceState = this.card.testPrice
-      ? 'Вартість: ' + this.card.testPrice + 'грн'
-      : 'Безкоштовно';
-    //
-    if (paidData) {
-      this.testPrice$ = this.monopayService
-        .checkStatus(paidData.testName, paidData.invoiceId)
-        .pipe(
-          map((response) =>
-            response.status === 'success' ? this.paidPriceText : testPriceState
-          )
-        );
+    if (paidData && paidData.testPriceText) {
+      this.testPriceText = paidData.testPriceText;
     } else {
-      this.testPrice$ = of(testPriceState);
+      this.testPriceText = this.card.testPrice
+        ? 'Вартість: ' + this.card.testPrice + 'грн'
+        : 'Безкоштовно';
     }
+    //
   }
   //
   startCarousel(): void {
