@@ -20,7 +20,7 @@ export class ResizeOnVisibleDirective {
   private scrollTimeout: any;
   //
 
-  isMobDevice = signal<boolean>(window.innerWidth < 480);
+  isMobDevice = signal<boolean>(window.innerWidth < 764);
   //
   @HostListener('window:scroll')
   onScroll(): void {
@@ -32,7 +32,7 @@ export class ResizeOnVisibleDirective {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
-    this.isMobDevice.set(width < 480);
+    this.isMobDevice.set(width < 764);
   }
 
   //

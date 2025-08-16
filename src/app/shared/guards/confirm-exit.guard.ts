@@ -16,10 +16,14 @@ export class ConfirmExitGuard implements CanDeactivate<TestQuestionsComponent> {
     component: TestQuestionsComponent
   ): Observable<boolean> | boolean {
     const status: StatusPayment | null = 'success' as const;
+    const hasAnswers = Object.values(component.formGroup.value).find(
+      (item) => item !== null || item !== ''
+    );
 
     if (
       (component.formGroup.valid && !component.testPrice) ||
-      (component.formGroup.valid && component.paymentStatus === status)
+      (component.formGroup.valid && component.paymentStatus === status) ||
+      !!!hasAnswers
     ) {
       return of(true);
     } else {

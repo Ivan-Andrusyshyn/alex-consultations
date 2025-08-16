@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 //
 import { catchError, map, Observable, of } from 'rxjs';
+//
 
 //
-import { AttractivenessService } from './tests/attractiveness.service';
-import { BeYourselfTestService } from './tests/be-yourself.service';
-import { RoleInRelationshipsService } from './tests/role-in-relationships.service';
-import { ToxicalRelationshipService } from './tests/toxical-relationship.service';
-import { TraumaticExperienceService } from './tests/traumatic-experience.service';
-import { YouCoffeeService } from './tests/you-coffee.service';
-import { MainTestNames } from '../utils/testsNames';
-import { TestName, TestResults } from '../../shared/models/tests/common-tests';
+import {
+  TestResults,
+  TestName,
+} from '../../../shared/models/tests/common-tests';
+import { MainTestNames } from '../../utils/testsNames';
+import { AttractivenessService } from '../tests/attractiveness.service';
+import { BeYourselfTestService } from '../tests/be-yourself.service';
+import { RoleInRelationshipsService } from '../tests/role-in-relationships.service';
+import { ToxicalRelationshipService } from '../tests/toxical-relationship.service';
+import { TraumaticExperienceService } from '../tests/traumatic-experience.service';
+import { YouCoffeeService } from '../tests/you-coffee.service';
+
 //
 
 interface ResultsResolver {

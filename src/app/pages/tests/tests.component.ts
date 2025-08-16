@@ -55,7 +55,7 @@ export class TestsComponent implements OnInit {
   private seoService = inject(SeoService);
   //
   // Signals for state management
-  isMobDevice = signal<boolean>(window.innerWidth < 480);
+  isMobDevice = signal<boolean>(window.innerWidth < 764);
   focusedCardIndex = signal<number | null>(null);
   selectedTags = signal<string[]>([]);
 
@@ -82,7 +82,7 @@ export class TestsComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     const width = (event.target as Window).innerWidth;
-    this.isMobDevice.set(width < 480);
+    this.isMobDevice.set(width < 764);
   }
 
   filteredItems = computed(() => {

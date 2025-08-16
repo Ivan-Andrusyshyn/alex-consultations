@@ -8,8 +8,8 @@ import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 
 import { TestName } from '../models/tests/common-tests';
 import { MonopayService } from '../../core/services/payment/monopay.service';
-import { TestQuestionsProvider } from '../../core/services/test-questions-provider.service';
 import { ResolveData, TestInfo } from '../models/tests/resolvers.interface';
+import { TestQuestionsProvider } from '../../core/services/resolvers/test-questions-provider.service';
 //
 
 @Injectable({

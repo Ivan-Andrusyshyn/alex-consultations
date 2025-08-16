@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { map, of } from 'rxjs';
+//
 
-import { QuestionsPageContent } from '../content/QuestionsPageContent';
-import { RoleInRelationshipsService } from './tests/role-in-relationships.service';
-import { ToxicalRelationshipService } from './tests/toxical-relationship.service';
-import { MainTestNames } from '../utils/testsNames';
-import { TestName } from '../../shared/models/tests/common-tests';
-import { AttractivenessService } from './tests/attractiveness.service';
-import { BeYourselfTestService } from './tests/be-yourself.service';
-import { YouCoffeeService } from './tests/you-coffee.service';
-import { TraumaticExperienceService } from './tests/traumatic-experience.service';
+import { TestName } from '../../../shared/models/tests/common-tests';
+import { QuestionsPageContent } from '../../content/QuestionsPageContent';
+import { MainTestNames } from '../../utils/testsNames';
+import { AttractivenessService } from '../tests/attractiveness.service';
+import { BeYourselfTestService } from '../tests/be-yourself.service';
+import { RoleInRelationshipsService } from '../tests/role-in-relationships.service';
+import { ToxicalRelationshipService } from '../tests/toxical-relationship.service';
+import { TraumaticExperienceService } from '../tests/traumatic-experience.service';
+import { YouCoffeeService } from '../tests/you-coffee.service';
 
+//
 @Injectable({ providedIn: 'root' })
 export class TestQuestionsProvider {
   constructor(
