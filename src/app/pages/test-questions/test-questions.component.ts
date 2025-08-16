@@ -233,10 +233,12 @@ export class TestQuestionsComponent
   }
   //onExitTest
   onExitTest(): void {
+    this.showInitBoard.set(true);
     this.isPendingPayment.set(false);
     this.formGroup.reset();
     sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
     sessionStorage.removeItem(this.TEST_NAME + '-answers');
+    sessionStorage.removeItem(this.TEST_NAME + '-showInitBoard');
   }
 
   // ─── Payment
@@ -415,6 +417,8 @@ export class TestQuestionsComponent
 
           this.cdr.markForCheck();
           sessionStorage.removeItem(this.TEST_NAME + '-isPendingPayment');
+          sessionStorage.removeItem(this.TEST_NAME + '-showInitBoard');
+          this.showInitBoard.set(true);
           this.currentQuestionNumber.set(1);
           this.isPendingPayment.set(false);
           this.setInStorageAnswers();
