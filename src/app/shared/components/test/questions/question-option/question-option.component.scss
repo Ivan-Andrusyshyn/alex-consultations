@@ -40,6 +40,14 @@
   }
 }
 
+.label {
+  // opacity: 0;
+  transition: all 0.4s ease;
+  &:has(input:checked) {
+    opacity: 0.7;
+    transform: translateX(4px);
+  }
+}
 //
 .label.isValidForm {
   min-height: 50px;
@@ -168,39 +176,6 @@
     box-shadow: 0px 0px 6px 0px rgba(252, 126, 153, 0.3);
   }
 }
+//
+
 // ANIMATION
-/* Анимация появления */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.label {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease forwards;
-}
-
-.label:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.label:nth-child(2) {
-  animation-delay: 0.25s;
-}
-.label:nth-child(3) {
-  animation-delay: 0.4s;
-}
-.label:nth-child(4) {
-  animation-delay: 0.55s;
-}
-.label:nth-child(5) {
-  animation-delay: 0.7s;
-}
-.label:nth-child(6) {
-  animation-delay: 0.85s;
-}
