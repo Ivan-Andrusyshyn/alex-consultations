@@ -4,7 +4,12 @@
   [class.bg-container]="successRespMessage()"
   [class.border-top]="showForm() || successRespMessage()"
 >
-  @if (showForm() ) {
+  @if (showForm() ) { @if (!showFeedBack()) {
+
+  <button class="toggle-btn" (click)="toggleFeedback()">
+    Хочете допомогти нам стати краще ? Залиште відгук🧡
+  </button>
+  } @if (showFeedBack()) {
 
   <h2>Шкода, що ви йдете 😞</h2>
 
@@ -38,7 +43,7 @@
   >
     Надіслати
   </button>
-  }@else if(successRespMessage()){
+  } }@else if(successRespMessage()){
   <h2 class="success-title">Дякуємо, що допомагаєте стати краще 😊</h2>
   }
 </div>

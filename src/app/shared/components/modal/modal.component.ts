@@ -4,6 +4,7 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -87,6 +88,7 @@ export class ModalComponent implements OnInit {
   onDeactivateCancel(): void {
     this.dialogRef.close(false);
   }
+  //
 
   //
 

@@ -114,18 +114,29 @@ button {
     padding: 14px 28px;
   }
 }
+
+//
+.toggle-btn {
+  animation: none;
+  background-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: #333;
+  //
+  font-size: 12px;
+}
 .valid-btn {
   background: linear-gradient(135deg, #0b6839, #1dce34);
   animation: none;
 }
+
+//
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 button:active {
   transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes pulse {

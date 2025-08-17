@@ -27,6 +27,8 @@ export class FeedbackFormComponent implements OnInit {
   @Input() testName!: TestName;
   private dr = inject(DestroyRef);
   //
+
+  //
   feedback = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
@@ -34,6 +36,7 @@ export class FeedbackFormComponent implements OnInit {
 
   showForm = signal(true);
   successRespMessage = signal(false);
+  showFeedBack = signal(false);
 
   ngOnInit(): void {
     const stored = localStorage.getItem('tests-feedback');
@@ -42,6 +45,11 @@ export class FeedbackFormComponent implements OnInit {
       this.showForm.set(false);
     }
   }
+  //
+  toggleFeedback() {
+    this.showFeedBack.update((prev) => !prev);
+  }
+
   //
   onSubmit() {
     if (this.feedback.valid) {
