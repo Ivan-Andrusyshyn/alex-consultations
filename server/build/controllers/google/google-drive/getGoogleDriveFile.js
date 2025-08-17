@@ -18,7 +18,6 @@ const getGoogleDriveFile = (req, res) => __awaiter(void 0, void 0, void 0, funct
             throw new Error('Failed to fetch the file');
         }
         const jsonData = yield response.json();
-        console.log(jsonData);
         return res.status(200).json(jsonData);
     }
     catch (error) {

@@ -45,7 +45,14 @@ export const routes: Routes = [
       ),
     data: { breadcrumb: 'Консультації' },
   },
-
+  {
+    path: 'alex/feedbacks',
+    loadComponent: () =>
+      import('./pages/feedbacks/feedbacks.component').then(
+        (m) => m.FeedbacksComponent
+      ),
+    data: { breadcrumb: 'Головна' },
+  },
   {
     path: 'tests',
     loadComponent: () =>

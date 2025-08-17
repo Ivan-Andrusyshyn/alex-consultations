@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
 import { VideoBenefitsComponent } from '../home/video-benefits/video-benefits.component';
+import { FeedbackFormComponent } from '../feedback-form/feedback-form.component';
 
 export interface DialogData {
   animal: string;
@@ -40,6 +41,7 @@ export interface DialogData {
     MatButtonModule,
     NgIf,
     PrimaryBtnComponent,
+    FeedbackFormComponent,
     VideoBenefitsComponent,
     MatDialogActions,
   ],

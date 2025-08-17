@@ -1,0 +1,14 @@
+<div class="sections">
+  @if(feedbacksList$|async;as feedbacksList){
+  <ul>
+    @for (feedback of feedbacksList; track $index) {
+
+    <li>
+      <h3>{{ feedback.testName }}</h3>
+      <p>{{ feedback.message }}</p>
+      <span>{{ feedback.createdAt | date }}</span>
+    </li>
+    }
+  </ul>
+  }
+</div>

@@ -33,6 +33,7 @@ export class ConfirmExitGuard implements CanDeactivate<TestQuestionsComponent> {
           title: 'Підтвердження виходу',
           message: 'Закрити сторінку та видалити ваші відповіді?',
           confirmText: 'Так, видалити',
+          testName: component.TEST_NAME,
           cancelText: 'Залишитися',
         },
         disableClose: true,

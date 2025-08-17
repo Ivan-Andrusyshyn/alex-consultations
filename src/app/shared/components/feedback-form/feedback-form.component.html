@@ -1,0 +1,44 @@
+<div
+  class="feedback-container"
+  [class.desk-container]="showForm()"
+  [class.bg-container]="successRespMessage()"
+  [class.border-top]="showForm() || successRespMessage()"
+>
+  @if (showForm() ) {
+
+  <h2>Шкода, що ви йдете 😞</h2>
+
+  <textarea
+    type="text"
+    [formControl]="feedback"
+    placeholder="Будемо вдячні, якщо поділитесь чому вирішили не дізнаватись свої результати?"
+  ></textarea>
+
+  @if (feedback.touched && feedback.invalid) {
+
+  <div class="error">
+    @if (feedback.errors?.['required']) {
+
+    <span>Щоб надіслати відгук заповніть поле.</span>
+    }@else if (feedback.errors?.['minlength']) {
+
+    <span>
+      Мінімальна довжина —
+      {{ feedback.errors?.['minlength'].requiredLength }} символів (ви ввели
+      {{ feedback.errors?.['minlength'].actualLength }}).
+    </span>
+    }
+  </div>
+  }
+
+  <button
+    (click)="onSubmit()"
+    [class.valid-btn]="feedback.valid"
+    [disabled]="feedback.invalid"
+  >
+    Надіслати
+  </button>
+  }@else if(successRespMessage()){
+  <h2 class="success-title">Дякуємо, що допомагаєте стати краще 😊</h2>
+  }
+</div>
