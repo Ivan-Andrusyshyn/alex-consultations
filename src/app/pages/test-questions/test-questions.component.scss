@@ -1,16 +1,13 @@
 .main-container {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 18px 18px 18px 18px;
+  padding: 18px;
 
   @media screen and (min-width: 764px) {
     padding: 64px 18px;
   }
 }
 .shadow-wrapper {
-  box-shadow: var(--container-shadow);
-  border-radius: var(--border-radius-primary);
-  padding: 18px;
   @media screen and (min-width: 764px) {
     box-shadow: none;
     padding: 0;
@@ -154,6 +151,7 @@ form {
     //
     display: block;
     text-transform: uppercase;
+    text-align: center;
   }
 }
 
@@ -167,7 +165,6 @@ form {
 }
 .answers {
   gap: 24px;
-  padding-left: 20px;
   box-sizing: border-box;
 
   display: flex;

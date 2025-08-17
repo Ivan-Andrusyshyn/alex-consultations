@@ -1,7 +1,7 @@
 .label {
   gap: 24px;
   min-width: 100%;
-  padding: 15px;
+  padding: 15px 24px 15px 15px;
   min-height: 70px;
   max-height: 90px;
   font-size: 12px;
@@ -29,6 +29,7 @@
     gap: 34px;
     padding: 0 65px;
   }
+
   input {
     display: none;
   }
@@ -38,6 +39,8 @@
     animation-delay: 0.3s;
   }
 }
+
+//
 .label.isValidForm {
   min-height: 50px;
   padding: 8px 15px;
@@ -48,20 +51,7 @@
     height: 80px;
   }
 }
-.label:has(input:checked)::before {
-  content: "";
-  position: absolute;
-  left: -14px;
-  transform: translateX(-50%) rotate(-90deg);
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 16px solid var(--dot-color, #4f46e5);
-  opacity: 0;
-  animation: arrowFade 0.6s ease forwards;
-  animation-delay: 0.3s;
-}
+
 //
 @keyframes arrowFade {
   to {
@@ -98,7 +88,7 @@
   background-color: #ffeaab;
   box-shadow: 0px 0px 6px 0px rgba(242, 210, 112, 0.3);
 }
-.label-:has(input:checked) {
+.label-5:has(input:checked) {
   border: 1px solid #f99170;
   background-color: #ffb29a;
   --dot-color: #f99170;

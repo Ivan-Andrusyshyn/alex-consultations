@@ -10,6 +10,10 @@ export class MatIconsService {
       url: '/assets/new/shared/pin.svg',
     },
     {
+      name: 'checkmark',
+      url: '/assets/new/shared/check-mark.svg',
+    },
+    {
       name: 'human-body',
       url: '/assets/new/core/main/human-body.svg',
     },
