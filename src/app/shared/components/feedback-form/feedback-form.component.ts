@@ -36,7 +36,6 @@ export class FeedbackFormComponent implements OnInit {
 
   showForm = signal(true);
   successRespMessage = signal(false);
-  showFeedBack = signal(false);
 
   ngOnInit(): void {
     const stored = localStorage.getItem('tests-feedback');
@@ -46,9 +45,7 @@ export class FeedbackFormComponent implements OnInit {
     }
   }
   //
-  toggleFeedback() {
-    this.showFeedBack.update((prev) => !prev);
-  }
+ 
 
   //
   onSubmit() {
