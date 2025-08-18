@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
 const roleInRelationshipService_1 = __importDefault(require("../../services/roleInRelationshipService"));
+const tests_user_data_1 = require("../../db/models/tests-user-data");
 const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { answers, userInformation } = req.body;
@@ -21,7 +21,13 @@ const getCategoryName = (req, res) => __awaiter(void 0, void 0, void 0, function
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
         const categoryName = roleInRelationshipService_1.default.getNameCategoryByScore(answers);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: categoryName }));
+        // await googleSheetsService.postTestResultsOnSheet({
+        //   ...userInformation,
+        //   ip,
+        //   results: categoryName,
+        // });
+        yield tests_user_data_1.TestsUserDataModel.create(Object.assign(Object.assign({}, userInformation), { ip, results: categoryName }));
+        //
         res.status(200).send({
             message: 'Success get relationship-sensitivity category!',
             categoryName,

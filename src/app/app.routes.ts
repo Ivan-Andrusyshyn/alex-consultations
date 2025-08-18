@@ -54,6 +54,14 @@ export const routes: Routes = [
     data: { breadcrumb: 'Головна' },
   },
   {
+    path: 'alex/data',
+    loadComponent: () =>
+      import('./pages/tests-user-data/tests-user-data.component').then(
+        (m) => m.TestsUserDataComponent
+      ),
+    data: { breadcrumb: 'Головна' },
+  },
+  {
     path: 'tests',
     loadComponent: () =>
       import('./pages/tests/tests.component').then((m) => m.TestsComponent),

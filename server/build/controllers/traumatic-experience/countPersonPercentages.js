@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const traumatic_experience_1 = __importDefault(require("../../services/traumatic-experience"));
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
+const tests_user_data_1 = require("../../db/models/tests-user-data");
 const countPersonPercentages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
@@ -22,7 +22,13 @@ const countPersonPercentages = (req, res) => __awaiter(void 0, void 0, void 0, f
         const ip = req.headers['x-forwarded-for']
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: sensitivityType }));
+        // await googleSheetsService.postTestResultsOnSheet({
+        //   ...userInformation,
+        //   ip,
+        //   results: sensitivityType,
+        // });
+        yield tests_user_data_1.TestsUserDataModel.create(Object.assign(Object.assign({}, userInformation), { ip, results: sensitivityType }));
+        //
         res.status(200).send({
             categoryName: matchResults,
             message: 'Success post scores operation.',

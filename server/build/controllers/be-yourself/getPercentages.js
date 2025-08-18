@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = __importDefault(require("../../utils/16-personalities/test"));
 const be_yourself_1 = __importDefault(require("../../services/be-yourself"));
-const google_sheets_1 = __importDefault(require("../../services/google-sheets"));
+const tests_user_data_1 = require("../../db/models/tests-user-data");
 const postPercentagesAndType = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const answers = req.body.answers;
@@ -25,7 +25,13 @@ const postPercentagesAndType = (req, res) => __awaiter(void 0, void 0, void 0, f
             ? req.headers['x-forwarded-for'].split(',')[0].trim()
             : req.socket.remoteAddress || 'Unknown';
         const personType = be_yourself_1.default.getCodedTypeName(scores);
-        yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: personType }));
+        // await googleSheetsService.postTestResultsOnSheet({
+        //   ...userInformation,
+        //   ip,
+        //   results: personType,
+        // });
+        yield tests_user_data_1.TestsUserDataModel.create(Object.assign(Object.assign({}, userInformation), { ip, results: personType }));
+        //
         res.status(200).send({
             categoryName: personType,
             results: { scores, percentages, personType },

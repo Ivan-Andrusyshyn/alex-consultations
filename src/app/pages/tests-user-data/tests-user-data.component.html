@@ -1,0 +1,32 @@
+<section class="table-wrapper">
+  <button (click)="scrollToBottomByClick()" class="button-nav">В кінець</button>
+
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Test name</th>
+        <th>Result</th>
+        <th>Timestamp</th>
+        <th>Device</th>
+        <th>Route</th>
+        <th>Referrer</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+    @if (testsUserData$|async; as testsUserData) {
+    <tbody>
+      @for (userData of testsUserData; track $index) {
+      <tr>
+        <td data-label="Test name:">{{ userData.testName }}</td>
+        <td data-label="Result:">{{ userData.results }}</td>
+        <td data-label="Timestamp:">{{ userData.timestamp }}</td>
+        <td data-label="Device:">{{ userData.device }}</td>
+        <td data-label="Route:">{{ userData.routeTracker }}</td>
+        <td data-label="Referrer:">{{ userData.referrer }}</td>
+        <td data-label="IP:">{{ userData.ip }}</td>
+      </tr>
+      }
+    </tbody>
+    }
+  </table>
+</section>

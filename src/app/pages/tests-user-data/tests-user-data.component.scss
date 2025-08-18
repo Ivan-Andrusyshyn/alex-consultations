@@ -1,0 +1,107 @@
+.table-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+
+// btn
+.button-nav {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: linear-gradient(135deg, #0f6324, #00f2fe);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 16px;
+
+  color: #ffff;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.button-nav:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.button-nav:active {
+  transform: scale(0.95);
+}
+
+//
+@media (max-width: 764px) {
+  .responsive-table,
+  .responsive-table thead,
+  .responsive-table tbody,
+  .responsive-table th,
+  .responsive-table td,
+  .responsive-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .responsive-table thead {
+    display: none;
+  }
+
+  .responsive-table tr {
+    margin-bottom: 16px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+  }
+
+  .responsive-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    border: none;
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 10px;
+
+    //
+    color: #555;
+  }
+}
+
+@media (min-width: 764px) {
+  .responsive-table {
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+
+  .responsive-table th {
+    background: #f7f7f7;
+    font-weight: 600;
+  }
+
+  .responsive-table tr:hover {
+    background: #fafafa;
+    transition: background 0.3s ease;
+  }
+}
