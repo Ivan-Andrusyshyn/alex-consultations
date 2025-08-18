@@ -1,32 +1,48 @@
 <section class="table-wrapper">
   <button (click)="scrollToBottomByClick()" class="button-nav">В кінець</button>
+  @if (testsUserData$ | async; as groups) { @for (group of groups; track $index)
+  {
 
-  <table class="responsive-table">
-    <thead>
-      <tr>
-        <th>Test name</th>
-        <th>Result</th>
-        <th>Timestamp</th>
-        <th>Device</th>
-        <th>Route</th>
-        <th>Referrer</th>
-        <th>IP</th>
-      </tr>
-    </thead>
-    @if (testsUserData$|async; as testsUserData) {
-    <tbody>
-      @for (userData of testsUserData; track $index) {
-      <tr>
-        <td data-label="Test name:">{{ userData.testName }}</td>
-        <td data-label="Result:">{{ userData.results }}</td>
-        <td data-label="Timestamp:">{{ userData.timestamp }}</td>
-        <td data-label="Device:">{{ userData.device }}</td>
-        <td data-label="Route:">{{ userData.routeTracker }}</td>
-        <td data-label="Referrer:">{{ userData.referrer }}</td>
-        <td data-label="IP:">{{ userData.ip }}</td>
-      </tr>
-      }
-    </tbody>
-    }
-  </table>
+  <div class="date-group" [attr.data-date]="group.date">
+    <button class="date-title" (click)="toggleGroup(group.date)" type="button">
+      <span class="date-text">{{ group.date }}</span>
+      <span class="date-meta"
+        >— {{ group.count }} item{{ group.count > 1 ? "s" : "" }}</span
+      >
+      <span class="chev" [class.open]="isOpen(group.date)">▾</span>
+    </button>
+
+    <div class="table-wrap" [class.collapsed]="!isOpen(group.date)">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>Test name</th>
+            <th>Result</th>
+            <th>Timestamp</th>
+            <th>Device</th>
+            <th>Route</th>
+            <th>Referrer</th>
+            <th>IP</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of group.records; track $index) {
+
+          <tr>
+            <td data-label="Test name:">{{ row.testName }}</td>
+            <td data-label="Result:">{{ row.results }}</td>
+            <td data-label="Timestamp:">
+              {{ row.timestamp ?? row.createdAt | date : "short" }}
+            </td>
+            <td data-label="Device:">{{ row.device }}</td>
+            <td data-label="Route:">{{ row.routeTracker }}</td>
+            <td data-label="Referrer:">{{ row.referrer }}</td>
+            <td data-label="IP:">{{ row.ip }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  } }
 </section>
