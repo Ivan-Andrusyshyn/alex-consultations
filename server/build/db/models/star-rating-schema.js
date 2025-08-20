@@ -14,7 +14,7 @@ const starRatingSchema = new mongoose_1.default.Schema({
             'attractiveness',
             'traumatic-experience',
             'role-in-relationships',
-            'toxical-relationship',
+            'toxical-relationships',
         ],
         required: true,
     },

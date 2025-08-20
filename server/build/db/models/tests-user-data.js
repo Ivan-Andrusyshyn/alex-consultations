@@ -44,7 +44,7 @@ const testsUserDataSchema = new mongoose_1.Schema({
             'attractiveness',
             'traumatic-experience',
             'role-in-relationships',
-            'toxical-relationship',
+            'toxical-relationships',
         ],
         required: true,
     },
