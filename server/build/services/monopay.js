@@ -18,8 +18,8 @@ const axios_1 = __importDefault(require("axios"));
 const MONO_API = 'https://api.monobank.ua';
 class MonoService {
     constructor() {
-        // this.token = process.env['MONO_TOKEN'] || '';
-        this.token = process.env['DEV_MONO_TOKEN'] || '';
+        this.token = process.env['MONO_TOKEN'] || '';
+        // this.token = process.env['DEV_MONO_TOKEN'] || '';
         if (!this.token) {
             throw new Error('MONO_TOKEN is not set in environment variables');
         }
