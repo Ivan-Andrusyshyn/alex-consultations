@@ -31,10 +31,15 @@ interface BeYourselfResults {
 export class BeYourselfTestService {
   isShowSendForm = new BehaviorSubject(false);
   counterQuestion = new BehaviorSubject(1);
+
   errors$!: Observable<any[] | null>;
+
   readonly testsUrl = environment.apiUrl + '/tests';
+
   questions!: Question[];
+
   scorePercentages = new BehaviorSubject<TestResult | null>(null);
+
   testName = MainTestNames.BeYourself;
 
   constructor(private http: HttpClient) {}

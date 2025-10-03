@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const _16_personalities_calculator_1 = __importDefault(require("../../../services/16-personalities-calculator"));
-const google_sheets_1 = __importDefault(require("../../../services/google-sheets"));
 const google_file_ids_env_1 = require("../../../utils/google-file-ids-env");
 const tests_data_schema_1 = require("../../../db/models/tests-data-schema");
 const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -40,7 +39,6 @@ const getPersonalitiesCalculatorResults = (req, res) => __awaiter(void 0, void 0
         const scoreResult = matchesDoc[typesOfPair];
         if (scoreResult) {
             const relationshipsType = _16_personalities_calculator_1.default.getTypeRelationshipByScore(scoreResult);
-            yield google_sheets_1.default.postTestResultsOnSheet(Object.assign(Object.assign({}, userInformation), { ip, results: relationshipsType.title }));
             const calculatorResults = resultsDoc[relationshipsType.title];
             res.status(200).send({
                 message: 'Successful calculate!',
